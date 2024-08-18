@@ -29,9 +29,4 @@ __Definition:__ Extensibility in OOP is about adding new functionality to an exi
 __Benefit:__ Extensibility allows for the expansion of applications over time, accommodating new requirements or technologies seamlessly. It supports the evolution of software systems, making them more adaptable and sustainable.
 
 
-### Class
-class is a Blueprint/Plan to create objects which encapsulates both data(Attributes) and methods(functions).  
-From the class we can create multiple objects  
 
-__Naming convention for classes__ : Pascal case or upper camel case   
-Ex :  `C`amel, `L`owe`C`ase, `B`ack`P`ack
