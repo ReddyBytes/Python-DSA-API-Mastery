@@ -29,3 +29,5 @@ __Definition:__ Extensibility in OOP is about adding new functionality to an exi
 __Benefit:__ Extensibility allows for the expansion of applications over time, accommodating new requirements or technologies seamlessly. It supports the evolution of software systems, making them more adaptable and sustainable.
 
 
+
+
