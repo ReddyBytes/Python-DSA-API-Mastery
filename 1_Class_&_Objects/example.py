@@ -121,7 +121,7 @@ class Car:
 
 #####################################################################################
 
-# Deleting an attibute
+# Deleting an instance attibute
 
 class Dog:
 
@@ -135,3 +135,31 @@ my_dog=Dog("Snoopy", "Russian")
 #del my_dog.name
 
 #print(my_dog.name)
+
+
+####################################################################################
+
+# CLASS Attribute
+
+####################################################################################
+class Human:
+
+    species="Homo sapiens"   # class attribute "outside of all methods "
+    id=1
+
+    def __init__(self, name, age):
+        self.id=Human.id          # Accessing Class attribute inside the method 
+        self.name=name
+        self.age=age
+
+        Human.id+=1             # incrementing the class attribute
+
+# print(Human.species)    # Accessing class attributes <classname>.<variable name>
+
+human1=Human("saran",22)
+# human2=Human("rahul",25)
+
+# print(Human.id) 
+# print(human2.id)
+print(human1.species)  # we can access class attributes using object/instance name also outside of the class
+                        # bcz every method can access class attributes
