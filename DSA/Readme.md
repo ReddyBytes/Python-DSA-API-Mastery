@@ -26,7 +26,7 @@ Examples of Data Structures:
 6. `Graph`: A set of connected points (like a road map)
 ̨̌
 
-### *What is an Algorithm?*  
+### Algorithmn means ?  
 An Algorithm is a step-by-step process/method/guide to solve a problem.
 
 `Example`:  
@@ -354,67 +354,67 @@ To tackle complex problems effectively, follow these steps:
 
 To understand and solve DSA problems join with me 
 
-1. **Arrays**  
+1. [**Arrays**](/DSA/01-Arrays/Readme.md)  
    - **What**: A list of items (e.g., user IDs) stored in order, accessed by index.
    - **Use**: Store and retrieve data fast (O(1) for access, O(n) for searching).
    - **Example**: An array of `n` orders in an e-commerce app, where linear search takes O(n) in the worst case, as we saw with time complexity.
 
-2. **Linked Lists**  
+2. [**Linked Lists**](/DSA/02-Linked%20Lists/Readme.md)  
    - **What**: Nodes linked by pointers, each holding data (e.g., playlist songs) and a link to the next node.
    - **Use**: Easy to insert/delete (O(1) if at head), but slow to search (O(n)).
    - **Example**: A playlist app where adding a song is fast, but finding one takes O(n).
 
-3. **Stacks**  
+3. [**Stacks**](/DSA/03-Stacks/Readme.md)  
    - **What**: A last-in, first-out (LIFO) structure, like a stack of browser tabs.
    - **Use**: Undo features or backtracking (O(1) push/pop).
    - **Example**: A text editor’s undo history, popping the last change in O(1).
 
-4. **Queues**  
+4. [**Queues**](/DSA/04-Queues/Readme.md)  
    - **What**: A first-in, first-out (FIFO) structure, like a task queue.
    - **Use**: Process tasks in order (O(1) enqueue/dequeue).
    - **Example**: A print queue in an office app, handling jobs sequentially.
 
-5. **Hash Tables**  
+5. [**Hash Tables**](/DSA/05-Hash%20Tables/Readme.md)  
    - **What**: Key-value pairs (e.g., usernames to profiles) stored for fast lookup.
    - **Use**: Quick searches/inserts (average O(1), worst O(n)).
    - **Example**: A login system mapping usernames to data, with O(1) lookups.
 
-6. **Trees**  
+6. [**Trees**](/DSA/06-Trees/Readme.md)  
    - **What**: Hierarchical nodes (e.g., file systems), with a root and children.
    - **Use**: Organize data for fast searches (O(log n) in balanced trees).
    - **Example**: A file explorer app, where folders are nodes, searched efficiently.
 
-7. **Graphs**  
+7. [**Graphs**](/DSA/07-Graphs/Readme.md)  
    - **What**: Nodes connected by edges (e.g., social networks).
    - **Use**: Model relationships (e.g., O(V + E) for traversal, where V is nodes, E is edges).
    - **Example**: A friend recommendation system, analyzing connections.
 
-### Algorithms
+### [Algorithms](#algorithmn-means)
 Algorithms are step-by-step processes to solve problems, like searching or sorting data in an app.
 
-8. **Searching**  
+8. [**Searching**](/DSA/08-Searching%20Algorithms/Readme.md)  
    - **What**: Find an item in a data structure (e.g., a user in a database).
    - **Types**:
      - **Linear Search**: Check each item (O(n)), like our triplet example’s O(n³) loops.
      - **Binary Search**: Divide and conquer on sorted data (O(log n)).
   
-9. **Sorting**  
+9. [**Sorting**](/DSA/09-Sorting%20Algorithms/Readme.md)  
    - **What**: Arrange data in order (e.g., sort users by joining date).
    - **Types**:
      - **Bubble Sort**: Swap pairs (O(n²)).
      - **Quick Sort**: Divide and sort (average O(n log n)).
    
-10. **Recursion**  
+10. [**Recursion**](/DSA/10-Recursion/Readme.md)  
     - **What**: A function calls itself to solve smaller problems (e.g., tree traversal).
     - **Use**: Simplify complex tasks (O(n) for simple recursion, varies for others).
     - **Example**: Calculating folder sizes in a file system by recursively summing subfolders.
 
-11. **Dynamic Programming**  
+11. [**Dynamic Programming**](/DSA/11-Dynamic%20Programming/Readme.md)  
     - **What**: Break problems into overlapping subproblems, store results (e.g., shortest path).
     - **Use**: Optimize repeated work (e.g., O(n²) for some problems).
     - **Example**: Finding the fastest route in a navigation app, reusing calculations.
 
-12. **Graph Algorithms**  
+12. [**Graph Algorithms**](/DSA/12-Graph%20Algorithms/Readme.md)  
     - **What**: Solve problems on graphs (e.g., shortest path, connectivity).
     - **Types**:
         - **DFS/BFS**: Explore nodes (O(V + E)).
