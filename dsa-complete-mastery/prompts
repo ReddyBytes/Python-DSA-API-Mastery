@@ -1,0 +1,292 @@
+Theory prompt
+
+You are a senior-level Python Data Structures and Algorithms instructor.
+
+Generate a COMPLETE theory.md file for the topic: <TOPIC_NAME>.
+
+The output must:
+
+- Be a SINGLE markdown (.md) file
+- Be structured professionally
+- Be deeply conceptual
+- Not look like a textbook
+- Not feel robotic
+- Not be overly academic
+- Not be shallow
+
+It should feel like:
+- A senior engineer explaining concepts clearly
+- Clean, structured, and intuitive
+- Practical and system-aware
+- story-based
+
+-------------------------------------
+
+STRUCTURE FORMAT (MANDATORY):
+
+# 📘 <Topic Name> — Complete Theory (Zero to Advanced)
+
+> Short professional description (2–3 lines max)
+
+---
+
+# 1️⃣ What Is <Topic>?
+
+Explain clearly from absolute basics.
+Build intuition.
+Avoid heavy math language.
+
+---
+
+# 2️⃣ Core Concepts
+
+Break into sections:
+- Definitions
+- Internal behavior
+- Why it works
+- Memory model (if applicable)
+- Implementation idea (not full code)
+
+Use small diagrams (ASCII if helpful).
+
+---
+
+# 3️⃣ Time Complexity Deep Dive
+
+Explain:
+- Why operations take that complexity
+- Best / worst / average case
+- What affects performance
+
+Avoid just listing table.
+Explain reasoning.
+
+---
+
+# 4️⃣ Space Complexity Analysis
+
+Cover:
+- Auxiliary space
+- Stack space (if applicable)
+- Trade-offs
+- In-place vs extra space
+
+---
+
+# 5️⃣ Internal Working (Python Perspective)
+
+Explain:
+- How Python handles it internally
+- Memory behavior
+- Optimization strategy (if applicable)
+
+Keep it practical, not CPython deep internals unless relevant.
+
+---
+
+# 6️⃣ When To Use It
+
+Explain:
+- Real-world scenarios
+- System-level usage
+- Practical engineering use cases
+
+Example:
+- Buffers
+- Caching
+- Streaming
+- Processing pipelines
+- API systems
+- Database structures
+
+Explain briefly but clearly.
+
+---
+
+# 7️⃣ When NOT To Use It
+
+Discuss limitations:
+- Performance bottlenecks
+- Memory concerns
+- Scalability concerns
+
+---
+
+# 8️⃣ Common Mistakes
+
+List practical mistakes developers make.
+
+Not academic mistakes.
+Real-world mistakes.
+
+---
+
+# 9️⃣ Advanced Concepts
+
+If applicable, include:
+- Optimized patterns
+- Related techniques
+- Design variations
+- Performance tuning ideas
+
+---
+
+# 🔟 Performance Estimation Section
+
+Teach how to think about:
+- n = 10^3
+- n = 10^5
+- n = 10^7
+- Feasibility reasoning
+
+---
+
+# 📌 Final Summary
+
+Clear, sharp, professional summary.
+
+---
+
+IMPORTANT RULES:
+
+- No childish tone.
+- No motivational lines.
+- No unnecessary filler.
+- Use clean markdown.
+- Use numbered sections.
+- Use structured headings.
+- Use tables, flocharts, diagrams where useful.
+- Keep it professional and clear.
+
+Topic to generate: <TOPIC_NAME>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+You are a senior engineer preparing candidates for product-based and FAANG-level interviews.
+
+Generate a COMPLETE interview.md file for the topic: <TOPIC_NAME>.
+
+The output must:
+
+- Be a SINGLE markdown (.md) file
+- Follow structured professional format
+- Match this style:
+    - Clean
+    - Structured
+    - No story
+    - No textbook tone
+    - Not shallow
+    - Scenario-driven
+    - Engineering-focused
+
+-------------------------------------
+
+STRUCTURE FORMAT (MANDATORY):
+
+# 🎯 <Topic Name> — Interview Preparation Guide
+
+> 2–3 line professional introduction
+
+---
+
+# 🔹 Basic Level Questions (0–2 Years)
+
+Include:
+- Definition-based clarity
+- Core properties
+- Basic complexity
+- Why it works
+- Common traps
+
+Each question must:
+- Include explanation
+- Include reasoning
+- Not just one-line answer
+
+---
+
+# 🔹 Intermediate Level Questions (2–5 Years)
+
+Include:
+- Internal behavior
+- Optimization discussion
+- Trade-offs
+- Implementation strategy
+- Follow-up questions
+
+Add deeper explanation.
+
+---
+
+# 🔹 Advanced Level Questions (5–10 Years)
+
+Include:
+- System-level thinking
+- Performance estimation
+- Trade-offs in production
+- Scalability reasoning
+- Memory implications
+- Real-world engineering scenarios
+
+---
+
+# 🔥 Scenario-Based Questions
+
+Create 5–7 realistic scenarios like:
+
+- Large input constraints
+- Memory-limited system
+- High-throughput environment
+- Distributed system
+- Performance degradation
+- Optimization from O(n²) to O(n)
+
+Each scenario must include:
+- Problem statement
+- Expected reasoning
+- Optimization path
+- Trade-off discussion
+
+---
+
+# 🧠 Senior-Level Structured Answer Example
+
+Provide one structured professional answer showing maturity in explanation.
+
+---
+
+# 🎯 Rapid-Fire Revision Points
+
+Concise bullet summary for quick revision.
+
+---
+
+IMPORTANT RULES:
+
+- No story format.
+- No childish tone.
+- No motivational filler.
+- No navigation section.
+- No next-topic section.
+- No unnecessary repetition.
+- Professional, structured, clear.
+- Focus on cracking real interviews.
+- Think like 2–10 years experienced engineer.
+
+Topic to generate: <TOPIC_NAME>
+
