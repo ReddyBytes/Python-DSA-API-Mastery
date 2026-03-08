@@ -1,415 +1,546 @@
-# 🎯 Logging & Debugging — Interview Preparation Guide  
-From Developer to Production-Ready Engineer
+# 🎯 Logging & Debugging — Interview Questions
+
+> *"Logging questions reveal whether you've worked on real production systems.*
+> *Debugging questions reveal how you think when things break."*
 
 ---
 
-# 🧠 What Interviewers Actually Test
+## 📊 Question Map
 
-Logging & debugging questions test:
+```
+LEVEL 1 — Junior (0–2 years)
+  • print vs logging
+  • Log levels and when to use each
+  • basicConfig setup
+  • logging.exception()
 
-- Can you handle production failures?
-- Do you understand observability?
-- Can you diagnose issues systematically?
-- Do you know how to design logging properly?
-- Can you avoid leaking sensitive data?
-- Do you understand performance impact?
+LEVEL 2 — Mid-Level (2–5 years)
+  • Logger/Handler/Formatter architecture
+  • Log rotation
+  • Structured logging
+  • Performance considerations
+  • pdb debugging
 
-This topic reflects real-world maturity.
-
----
-
-# 🔹 Level 1: 0–2 Years Experience
-
-Basic logging and debugging awareness.
-
----
-
-## 1️⃣ What is logging and why is it important?
-
-Strong answer:
-
-> Logging records system events, errors, and operational information so that issues can be diagnosed and system behavior can be monitored.
-
-Avoid saying:
-“It prints messages.”
-
-Mention monitoring and debugging.
-
----
-
-## 2️⃣ Difference between print() and logging?
-
-print():
-- Simple output
-- No log levels
-- Not configurable
-
-logging:
-- Has levels
-- Can write to file
-- Can write to external systems
-- Includes timestamps
-
-Strong answer mentions flexibility.
-
----
-
-## 3️⃣ What are logging levels?
-
-- DEBUG
-- INFO
-- WARNING
-- ERROR
-- CRITICAL
-
-Be able to explain use case for each.
-
----
-
-## 4️⃣ How do you log exceptions?
-
-Best practice:
-
-```python
-logging.exception("Error occurred")
+LEVEL 3 — Senior (5+ years)
+  • Correlation IDs / distributed tracing
+  • Observability (logs + metrics + traces)
+  • dictConfig / production config
+  • Security: PII in logs
+  • Incident investigation approach
 ```
 
-This logs stack trace.
+---
 
-Better than print(e).
+## 🟢 Level 1 — Junior Questions
 
 ---
 
-# 🔹 Level 2: 2–5 Years Experience
+### Q1: Why is `logging` better than `print()` for production code?
 
-Now interviewer expects:
+**Weak answer:** "Logging is more professional."
 
-- Structured logging awareness
-- Performance understanding
-- Debugging strategy
-- Log configuration knowledge
+**Strong answer:**
 
----
+> `print()` always outputs to stdout with no context. `logging` gives you:
+> - **Levels** — filter out DEBUG noise in production with one config change
+> - **Timestamps** — know exactly when each event happened
+> - **Context** — module name, line number, process ID built-in
+> - **Multiple destinations** — console, file, remote server simultaneously
+> - **Deferred formatting** — `%s` style is only evaluated if the level is enabled
 
-## 5️⃣ What is structured logging?
+```python
+# print in production:
+print(f"Error: {e}")   # no timestamp, no level, goes to stdout, mixed with all output
 
-Instead of plain text logs,
-logs are formatted as structured data (JSON).
-
-Why?
-
-- Easier to search
-- Easier to filter
-- Used in centralized systems
-
-Shows modern backend awareness.
+# logging in production:
+logger.error("Payment failed for order %s: %s", order_id, e)
+# 2025-03-08 14:30:00 | ERROR | myapp.payment:47 | Payment failed for order 4892: timeout
+```
 
 ---
 
-## 6️⃣ How do you prevent logs from filling disk?
+### Q2: What are the 5 logging levels? What does each mean?
 
-Solutions:
+**Strong answer:**
 
-- Log rotation
-- Max file size limit
-- Backup count
-- Centralized logging
-- Compression
+```
+DEBUG    (10)  Detailed diagnostic. Development only. Variable values, cache hits/misses.
+INFO     (20)  Normal operation events. "User logged in", "Order placed", "Server started".
+WARNING  (30)  Unexpected but non-fatal. Retry attempts, deprecated usage, slow responses.
+ERROR    (40)  An operation failed. DB connection lost, payment failed, file not found.
+CRITICAL (50)  System cannot function. Immediate alert required. Service down.
+```
 
-Strong answer mentions RotatingFileHandler.
-
----
-
-## 7️⃣ How would you debug a production error?
-
-Structured approach:
-
-1. Check logs.
-2. Identify error level.
-3. Read full stack trace.
-4. Trace request context.
-5. Check recent deployments.
-6. Reproduce locally.
-7. Isolate root cause.
-8. Fix and test.
-
-Systematic thinking matters.
+> The default level is WARNING — DEBUG and INFO are **silent by default**.
+> In production, use INFO (always-on) or WARNING (alert-only).
+> Never run DEBUG in high-traffic production — the I/O volume is massive.
 
 ---
 
-## 8️⃣ Why should we avoid logging sensitive data?
+### Q3: How do you log exceptions with the full traceback?
 
-Logs may be stored externally.
+**Weak answer:** `logger.error(str(e))`
 
-Sensitive data:
+**Strong answer:**
 
-- Passwords
-- Tokens
-- Credit card numbers
-- Personal information
+```python
+# ✅ logging.exception() — use INSIDE except blocks:
+try:
+    process_payment(order_id)
+except Exception:
+    logger.exception("Payment failed for order %s", order_id)
+    # Automatically logs: ERROR level + message + FULL TRACEBACK
 
-Security risk and compliance violation.
+# ✅ Equivalent:
+except Exception:
+    logger.error("Payment failed", exc_info=True)   # same result
 
----
-
-## 9️⃣ How can excessive logging impact performance?
-
-- I/O overhead
-- Disk usage growth
-- Slower application
-- Increased cloud cost
-
-Never log inside tight loops unnecessarily.
-
----
-
-# 🔹 Level 3: 5–10 Years Experience
-
-Now discussion moves to:
-
-- Observability
-- Monitoring
-- Incident management
-- Root cause analysis
-- Distributed systems
+# ❌ WRONG — loses the traceback:
+except Exception as e:
+    logger.error(f"Payment failed: {e}")  # only the error message, no traceback!
+    logger.error(str(e))                  # same problem
+```
 
 ---
 
-## 🔟 What is observability?
+### Q4: What is `basicConfig()` and what are its limitations?
 
-Observability = ability to understand system state using:
+**Strong answer:**
 
-- Logs
-- Metrics
-- Traces
+> `basicConfig()` is a quick one-line setup for the root logger. It configures level, format, and output destination.
 
-Senior-level concept.
+```python
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    filename="app.log",
+    encoding="utf-8",
+)
+```
 
----
-
-## 1️⃣1️⃣ Difference between logging and monitoring?
-
-Logging:
-Records events.
-
-Monitoring:
-Tracks metrics and alerts on thresholds.
-
-Monitoring systems include:
-
-- Prometheus
-- Datadog
-- CloudWatch
-
-Shows production awareness.
+> **Limitations:**
+> 1. Only configures the **root logger** — not named loggers
+> 2. Only works **once** — subsequent calls are no-ops if root already has handlers
+> 3. If a third-party library called `basicConfig()` first, your call is silently ignored
+> 4. No support for multiple handlers, rotation, or per-module levels
+>
+> For production: use `getLogger(__name__)` + manual `addHandler()` or `dictConfig()`.
 
 ---
 
-## 1️⃣2️⃣ How do you design logging for a microservices architecture?
-
-Strong answer:
-
-- Use structured logs
-- Include correlation IDs
-- Centralize logs
-- Use log aggregation
-- Tag logs by service
-- Maintain consistent format
-
-Correlation IDs are key concept.
+## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-## 1️⃣3️⃣ What is correlation ID and why important?
+### Q5: Explain the Logger → Handler → Formatter architecture.
 
-When request flows across multiple services,
-you assign unique ID.
+**Strong answer:**
 
-Each service logs with same ID.
+```
+Logger   = decides IF to emit (based on level). Created with getLogger(__name__).
+Handler  = decides WHERE to send (console, file, HTTP endpoint, email...).
+           Multiple handlers can be attached to one logger.
+Formatter= decides WHAT the output looks like (timestamp, level, message format).
 
-Helps trace request across system.
+FLOW:
+  logger.error("Payment failed")
+    → Logger checks: is ERROR >= my level? Yes
+    → Logger passes to each Handler
+      → Handler checks: is ERROR >= my level? Yes
+        → Handler applies Formatter
+          → Handler emits to destination
+```
 
-Critical in distributed systems.
+```python
+import logging
 
----
+logger = logging.getLogger("myapp")
+logger.setLevel(logging.DEBUG)          # Logger level
 
-## 1️⃣4️⃣ What is post-mortem analysis?
+handler = logging.StreamHandler()
+handler.setLevel(logging.WARNING)       # Handler level (can differ from logger!)
+handler.setFormatter(logging.Formatter(
+    "%(asctime)s | %(levelname)s | %(message)s"
+))
 
-After incident:
-
-- Identify root cause
-- Document timeline
-- Add missing logs if needed
-- Improve monitoring
-- Prevent recurrence
-
-Shows reliability culture.
-
----
-
-## 1️⃣5️⃣ How do you debug memory leak in production?
-
-Steps:
-
-- Monitor memory usage
-- Check logs for growth patterns
-- Use profiling tools
-- Analyze long-running processes
-- Review object retention
-
-Structured approach expected.
+logger.addHandler(handler)
+# Only WARNING and above actually reaches the console (handler filters below WARNING)
+```
 
 ---
 
-# 🔥 Scenario-Based Questions
+### Q6: What is log rotation and why is it critical?
+
+**Strong answer:**
+
+> Without rotation, log files grow forever and eventually fill the disk, crashing the server. Log rotation automatically limits file size and keeps a configurable number of backup files.
+
+```python
+from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
+
+# By size:
+handler = RotatingFileHandler(
+    "app.log",
+    maxBytes=10 * 1024 * 1024,   # 10MB per file
+    backupCount=5,               # app.log.1 ... app.log.5
+)
+
+# By time:
+handler = TimedRotatingFileHandler(
+    "app.log",
+    when="midnight",    # rotate daily at midnight
+    backupCount=30,     # keep 30 days
+    utc=True,
+)
+```
+
+> In production, combine local rotation with a **log shipper** (Fluentd, Filebeat, CloudWatch agent) that sends logs to a centralized system. Don't rely on local files alone in distributed systems.
 
 ---
 
-## Scenario 1:
-Production API returning 500 errors intermittently.
+### Q7: What is structured logging and when would you use it?
 
-What do you do?
+**Weak answer:** "Logging in JSON format."
 
-Strong answer:
+**Strong answer:**
 
-1. Check logs for ERROR entries.
-2. Identify common failure pattern.
-3. Check request payload.
-4. Check database connectivity.
-5. Correlate timestamps with load.
-6. Check recent code changes.
-7. Add temporary debug logs if needed.
+> Structured logging produces machine-readable records (JSON) instead of free-form text. This makes logs directly searchable and filterable in tools like Elasticsearch, Splunk, Datadog, and CloudWatch.
 
-Avoid saying:
-“I will restart server.”
+```python
+# Plain text log (hard to filter):
+# 2025-03-08 14:30:00 ERROR Payment failed for order 4892 amount=499.00
 
----
+# Structured log (searchable by any field):
+{
+  "timestamp": "2025-03-08T14:30:00Z",
+  "level": "ERROR",
+  "service": "payment-service",
+  "event": "payment_failed",
+  "order_id": 4892,
+  "amount": 499.00,
+  "error": "ConnectionTimeout",
+  "user_id": 1023
+}
+# Query: level=ERROR AND order_id=4892 → instant result
+```
 
-## Scenario 2:
-Logs show errors but no stack trace.
-
-Problem?
-
-Maybe:
-
-- Not using logging.exception()
-- Using print instead
-- Logging error message without exception context
-
-Fix logging configuration.
+> Use structured logging for any system that needs to be monitored, alerted on, or has multiple services.
 
 ---
 
-## Scenario 3:
-System performance dropped after enabling debug logs.
+### Q8: What is the performance impact of logging? How do you mitigate it?
 
-Cause?
+**Strong answer:**
 
-- Excessive DEBUG logging
-- Logging inside tight loops
-- Logging heavy data objects
+> Logging involves string formatting, I/O operations, and potentially network calls — all expensive in hot paths.
 
-Solution:
-Reduce log level in production.
+```python
+# ❌ BAD: f-string evaluated EVERY time, even if DEBUG is disabled:
+logger.debug(f"Processing {len(large_list)} items: {large_list}")
 
----
+# ✅ GOOD: % style deferred — only formatted IF the level is enabled:
+logger.debug("Processing %d items: %s", len(large_list), large_list)
 
-## Scenario 4:
-Multiple services failing but unclear where issue started.
+# ✅ BEST for expensive operations:
+if logger.isEnabledFor(logging.DEBUG):
+    debug_info = compute_expensive_debug_repr(large_list)
+    logger.debug("Processing: %s", debug_info)
 
-Solution:
-
-- Use correlation ID
-- Centralized logging
-- Distributed tracing
-
-Mention tracing tools like Jaeger (optional advanced).
+# Rule: use % style in ALL logger.XXX() calls, not f-strings or + concatenation.
+```
 
 ---
 
-## Scenario 5:
-Security team reports logs contain user passwords.
+### Q9: How would you use pdb to debug a production issue locally?
 
-What happened?
+**Strong answer:**
 
-- Sensitive data logged accidentally
-- No log filtering
-- No redaction
+```python
+# 1. Add breakpoint at suspicious location:
+def process_payment(order_id, amount):
+    breakpoint()   # execution pauses here
+    ...
 
-Fix:
-Mask sensitive fields.
+# 2. Key pdb commands in the debugger:
+# (Pdb) l           ← show current code context
+# (Pdb) p order_id  ← print variable value
+# (Pdb) pp vars()   ← pretty-print all local variables
+# (Pdb) n           ← next line (step over)
+# (Pdb) s           ← step into function call
+# (Pdb) w           ← show call stack
+# (Pdb) u           ← move up the call stack
+# (Pdb) b 47        ← set breakpoint at line 47
+# (Pdb) c           ← continue until next breakpoint
+# (Pdb) q           ← quit debugger
 
----
-
-# 🧠 How to Answer Like a Strong Candidate
-
-Weak:
-
-“I check logs.”
-
-Strong:
-
-> “I would analyze error-level logs around the failure window, correlate request IDs, review stack traces, check system metrics like CPU and memory usage, and attempt to reproduce the issue locally. If logs are insufficient, I would improve logging to capture more context.”
-
-Structured and professional.
-
----
-
-# ⚠️ Common Weak Candidate Mistakes
-
-- Over-reliance on print
-- Not understanding log levels
-- No structured debugging process
-- Ignoring performance impact
-- Ignoring centralized logging
-- Not mentioning correlation ID
+# 3. Post-mortem — debug after crash:
+import pdb
+try:
+    run_the_thing()
+except Exception:
+    pdb.post_mortem()   # drops into debugger at the crash frame
+```
 
 ---
 
-# 🎯 Rapid-Fire Revision
+### Q10: What logging data should you NEVER include? Why?
 
-- Use logging, not print
-- Use appropriate log levels
-- Log exceptions properly
-- Avoid logging sensitive data
-- Use structured logs
-- Implement log rotation
-- Understand observability
-- Use correlation IDs
-- Debug systematically
+**Strong answer:**
 
----
+> Logs are often stored in centralized systems, archived, and accessible to ops teams. Including sensitive data violates:
+> - **Security**: token leakage enables account takeover
+> - **Compliance**: GDPR, PCI-DSS, HIPAA require PII protection
 
-# 🏆 Final Interview Mindset
+```python
+# ❌ NEVER LOG:
+logger.info("Login: user=%s password=%s", username, password)
+logger.debug("JWT: %s", token)
+logger.info("Card: %s CVV: %s", card_number, cvv)
+logger.info("Patient: %s diagnosis=%s", name, medical_data)
 
-Logging & debugging questions test:
-
-- Production readiness
-- Reliability thinking
-- Investigation skills
-- Observability understanding
-- Incident response maturity
-
-If you show:
-
-- Structured debugging approach
-- Understanding of log architecture
-- Security awareness
-- Performance awareness
-- Distributed tracing knowledge
-
-You stand out as production-capable engineer.
-
-Logging is not about printing.
-It is about system visibility.
+# ✅ LOG IDENTIFIERS AND EVENTS, NOT VALUES:
+logger.info("User %s authenticated", user_id)          # ID not email/password
+logger.info("Payment processed, ref=%s", payment_ref)  # reference not card
+logger.debug("API call authenticated, key_id=%s", key_id[:8] + "***")
+```
 
 ---
 
-# 🔁 Navigation
+## 🔴 Level 3 — Senior Questions
 
-Previous:  
-[09_logging_debugging/theory.md](./theory.md)
+---
 
-Next:  
-[10_decorators/theory.md](../10_decorators/theory.md)
+### Q11: What is a correlation ID and how do you implement it?
 
+**Strong answer:**
+
+> A correlation ID is a unique identifier assigned to each incoming request and propagated through every service that request touches. Every log entry includes it, so you can trace a single user's request across 10 microservices.
+
+```python
+from contextvars import ContextVar
+import uuid
+import logging
+
+correlation_id: ContextVar[str] = ContextVar("correlation_id", default="")
+
+class CorrelationFilter(logging.Filter):
+    def filter(self, record):
+        record.correlation_id = correlation_id.get() or "no-id"
+        return True
+
+# Middleware: set at request entry
+def middleware(request, next_handler):
+    cid = request.headers.get("X-Correlation-ID") or str(uuid.uuid4())
+    token = correlation_id.set(cid)
+    try:
+        return next_handler(request)
+    finally:
+        correlation_id.reset(token)
+
+# Now all logs in this request chain show [cid]:
+# [abc123] api.routes:45 | Request: GET /orders/4892
+# [abc123] service.order:88 | Fetching order 4892
+# [abc123] service.payment:23 | Charging card for order 4892
+```
+
+---
+
+### Q12: What is observability? How is it different from logging?
+
+**Strong answer:**
+
+> Observability is the ability to understand the **internal state** of a system purely from its external outputs. It has three pillars:
+
+```
+LOGS      → "What happened?"       Text/JSON records of discrete events
+METRICS   → "How is the system?"   Numeric measurements over time (latency p99, error rate)
+TRACES    → "Where did time go?"   Distributed call graph across services (OpenTelemetry)
+
+Logging alone is not observability.
+Observability is the COMBINATION of all three + the ability to ask arbitrary questions.
+
+Tools:
+  Logs:    ELK Stack, CloudWatch Logs, Datadog Logs
+  Metrics: Prometheus + Grafana, Datadog Metrics, CloudWatch Metrics
+  Traces:  Jaeger, Zipkin, AWS X-Ray, Datadog APM (OpenTelemetry standard)
+```
+
+---
+
+### Q13: How would you design logging for a microservices architecture?
+
+**Strong answer:**
+
+> My approach focuses on four principles: **consistency**, **correlation**, **centralization**, and **context**.
+
+```
+1. CONSISTENT FORMAT
+   All services emit structured JSON logs with the same schema:
+   {timestamp, level, service, version, correlation_id, user_id, message, ...}
+
+2. CORRELATION IDs
+   Every request gets a UUID at the entry point (API gateway).
+   Passed via headers (X-Correlation-ID) to every downstream service.
+   Every log includes it → full request trace in one query.
+
+3. CENTRALIZED AGGREGATION
+   Log shipper (Fluentd/Filebeat) on each node sends to Elasticsearch/Splunk.
+   Never rely on SSHing to individual servers to read logs.
+
+4. CONTEXT ENRICHMENT
+   Middleware auto-adds: service_name, environment, host, deployment_version.
+   Developers only write the business-level message.
+
+5. SAMPLING FOR DEBUG LOGS
+   DEBUG logs are expensive. Sample 1% of requests for detailed debug logging.
+   Log all ERROR/WARNING, sample DEBUG.
+```
+
+---
+
+### Q14: Walk me through how you'd investigate a 500 error in production.
+
+**Strong answer:**
+
+```
+STEP 1: Find the incident window
+  → Check monitoring dashboard for error rate spike
+  → Note exact start time
+
+STEP 2: Filter logs to the error window
+  → Query: level=ERROR AND timestamp >= start AND service=affected
+  → Look for patterns: what % are the same error? different users? one endpoint?
+
+STEP 3: Read the full traceback
+  → Find the root cause (bottom of traceback)
+  → Check surrounding INFO logs for request context
+
+STEP 4: Correlate with deployments
+  → Did a deployment happen before the incident?
+  → git log --since="30 minutes ago"
+
+STEP 5: Check system state
+  → DB connection pool metrics
+  → Memory/CPU at time of incident
+  → Third-party API status pages
+
+STEP 6: Reproduce locally
+  → Use the request data from logs to recreate locally
+  → Run with DEBUG level
+
+STEP 7: Fix → test → deploy → verify
+  → Add regression test for the specific case
+  → Add better logging so next incident is 10x faster to diagnose
+```
+
+---
+
+## ⚠️ Trap Questions
+
+---
+
+### Trap 1 — basicConfig Called by Library
+
+```python
+import requests   # internally calls basicConfig!
+
+import logging
+logging.basicConfig(level=logging.DEBUG)   # ← DOES NOTHING — root already has handler!
+
+# FIX: configure your own named logger:
+logger = logging.getLogger("myapp")
+logger.setLevel(logging.DEBUG)
+handler = logging.StreamHandler()
+handler.setLevel(logging.DEBUG)
+logger.addHandler(handler)
+logger.propagate = False   # don't send to root logger
+```
+
+---
+
+### Trap 2 — f-string in logger.debug()
+
+```python
+# Looks harmless but is a performance trap:
+logger.debug(f"User data: {serialize_user(user)}")
+# ← serialize_user() is called EVERY TIME this line runs,
+#   even when DEBUG is disabled and the message is never emitted!
+
+# Fix:
+logger.debug("User data: %s", serialize_user(user))
+# ← serialize_user() is only called if DEBUG is actually enabled
+```
+
+---
+
+### Trap 3 — Double Logging
+
+```python
+# myapp/__init__.py
+logging.basicConfig(level=logging.INFO)   # ← adds handler to root
+
+# myapp/payment.py
+logger = logging.getLogger("myapp.payment")
+handler = logging.StreamHandler()         # ← adds handler to myapp.payment
+logger.addHandler(handler)
+
+# Result: every log appears TWICE
+# Because myapp.payment's handler emits it,
+# AND propagation sends it to root's handler too.
+
+# FIX: set propagate=False on the child logger,
+# OR only configure the root logger (not both).
+logger.propagate = False
+```
+
+---
+
+## 🔥 Rapid-Fire Revision
+
+```
+Q: What's the numeric value of each log level?
+A: DEBUG=10, INFO=20, WARNING=30, ERROR=40, CRITICAL=50
+
+Q: What does logging.exception() do differently from logging.error()?
+A: exception() also logs the current traceback. Equivalent to error(..., exc_info=True).
+   Use exception() INSIDE except blocks only.
+
+Q: What is propagate?
+A: If True (default), log records are also sent to parent logger's handlers.
+   Set propagate=False to stop a logger from sending to the root logger.
+
+Q: What is NullHandler?
+A: A handler that does nothing. Library authors add it so their logs
+   go nowhere unless the user explicitly configures them.
+   import logging; logging.getLogger("mylib").addHandler(logging.NullHandler())
+
+Q: What does disable_existing_loggers=False do in dictConfig?
+A: Keeps existing loggers (from imported libraries) alive.
+   Setting True (dangerous default!) silences all previously created loggers.
+
+Q: What is the difference between logger.warning() and warnings.warn()?
+A: logger.warning() = logging module, for operational events.
+   warnings.warn() = warnings module, for code-level notices (DeprecationWarning etc.)
+
+Q: What is faulthandler.enable()?
+A: Prints a traceback even on segfault (SIGSEGV) or deadlock.
+   Call at startup in any production C-extension heavy program.
+
+Q: How do you get pdb post-mortem?
+A: pdb.post_mortem() in except block, or python -m pdb script.py on the CLI.
+
+Q: What's the difference between n and s in pdb?
+A: n (next) = execute line, step OVER function calls.
+   s (step) = execute line, step INTO function calls.
+```
+
+---
+
+## 🔁 Navigation
+
+| | |
+|---|---|
+| 📖 Theory | [theory.md](./theory.md) |
+| ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
+| 🐛 PDB Guide | [pdb_guide.md](./pdb_guide.md) |
+| ➡️ Next | [10 — Decorators](../10_decorators/theory.md) |

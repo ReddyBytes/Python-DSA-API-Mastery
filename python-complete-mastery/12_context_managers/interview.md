@@ -1,373 +1,600 @@
-# 🎯 Context Managers — Interview Preparation Guide  
-From `with open()` to Safe Transaction Design
+# 🎯 Context Managers — Interview Questions
+
+> *"Context manager questions reveal whether you understand resource safety,*
+> *exception flow, and whether you've built systems that must be reliable."*
 
 ---
 
-# 🧠 What Interviewers Actually Test
+## 📊 Question Map
 
-Context manager questions test:
+```
+LEVEL 1 — Junior (0–2 years)
+  • What is a context manager?
+  • What does 'with' do internally?
+  • __enter__ and __exit__ roles
+  • Why not just use try/finally?
 
-- Do you understand resource safety?
-- Do you understand exception flow?
-- Do you know what happens internally with `with`?
-- Can you design safe transactional code?
-- Can you prevent resource leaks?
+LEVEL 2 — Mid-Level (2–5 years)
+  • __exit__ parameters and suppression
+  • @contextmanager generator approach
+  • Multiple context managers in one with
+  • contextlib tools (suppress, ExitStack, nullcontext)
 
-This topic shows engineering maturity.
-
----
-
-# 🔹 Level 1: 0–2 Years Experience
-
-Basic clarity expected.
-
----
-
-## 1️⃣ What is a context manager?
-
-Strong answer:
-
-> A context manager is an object that manages setup and cleanup around a block of code, typically used with the `with` statement to ensure resources are released properly.
-
-Avoid saying:
-“It is used for files.”
-
-It is more than that.
+LEVEL 3 — Senior (5+ years)
+  • ExitStack for dynamic composition
+  • Async context managers
+  • Designing transactional patterns
+  • Gotchas: __enter__ raising, accidental suppression
+  • Class-based vs generator-based trade-offs
+```
 
 ---
 
-## 2️⃣ What is the purpose of the `with` statement?
-
-It ensures:
-
-- Resource setup happens
-- Cleanup happens automatically
-- Even if exception occurs
-
-This guarantees safe execution.
+## 🟢 Level 1 — Junior Questions
 
 ---
 
-## 3️⃣ What methods must a context manager implement?
+### Q1: What is a context manager and why do we need it?
 
-- `__enter__()`
-- `__exit__()`
+**Weak answer:** "It's used with `with open()` to close files."
 
-This shows internal knowledge.
+**Strong answer:**
+
+> A context manager is any object that implements `__enter__` and `__exit__`. It guarantees that cleanup code runs **unconditionally** — even if an exception occurs, even if you `return` early, even if the process receives a signal.
+>
+> Without context managers, resource management is fragile:
+
+```python
+# ❌ Fragile — exception in validate() leaks the file handle:
+def load_config(path):
+    f = open(path)
+    data = json.load(f)
+    validate(data)    # ← if this raises, f.close() never runs
+    f.close()
+    return data
+
+# ✅ Safe — file closes no matter what:
+def load_config(path):
+    with open(path) as f:
+        data = json.load(f)
+    validate(data)   # exception here is fine — file already closed
+    return data
+```
+
+> The value is in the **guarantee**, not just the convenience.
 
 ---
 
-## 4️⃣ What does `__enter__()` do?
+### Q2: What does `with EXPR as VAR` actually do under the hood?
 
-- Runs at start of with block
-- Returns object assigned to variable
+**Strong answer:**
 
-Example:
+> Python translates `with` into a precise sequence:
 
 ```python
 with open("file.txt") as f:
+    data = f.read()
+
+# ↓ Equivalent to:
+_cm = open("file.txt")
+f   = _cm.__enter__()        # setup; returns the file handle
+try:
+    data = f.read()          # your block
+except:
+    if not _cm.__exit__(*sys.exc_info()):
+        raise                # re-raise if __exit__ returns falsy
+else:
+    _cm.__exit__(None, None, None)  # no exception
 ```
 
-`f` is returned by `__enter__()`.
+> Key: `__exit__` is **always** called, with or without an exception. The `as f` variable receives whatever `__enter__()` returns.
 
 ---
 
-## 5️⃣ What does `__exit__()` do?
+### Q3: What are `__enter__` and `__exit__`?
 
-- Runs after block finishes
-- Receives exception information
-- Handles cleanup
+**Strong answer:**
 
-Important:
-It runs even if error occurs.
+```python
+class ManagedResource:
+    def __enter__(self):
+        """
+        Called at the TOP of the with block.
+        - Perform setup (open connection, acquire lock, start timer)
+        - Return value goes to the 'as' variable
+        - If this raises, __exit__ is NOT called
+        """
+        self.resource = acquire()
+        return self.resource   # ← 'as' variable
 
----
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """
+        Called at the BOTTOM of the with block — always.
 
-# 🔹 Level 2: 2–5 Years Experience
+        exc_type: exception class, or None
+        exc_val:  exception instance, or None
+        exc_tb:   traceback, or None
 
-Now interviewer expects:
-
-- Exception handling understanding
-- Suppression logic clarity
-- Custom context manager design
-- contextlib awareness
-
----
-
-## 6️⃣ What happens if exception occurs inside with block?
-
-Flow:
-
-1. Block execution stops.
-2. `__exit__()` is called.
-3. Exception details passed to `__exit__()`.
-4. If `__exit__()` returns True → exception suppressed.
-5. If returns False → exception propagates.
-
-Very important concept.
+        Return True  → suppress the exception
+        Return False → let it propagate
+        """
+        release(self.resource)
+        return False   # don't suppress
+```
 
 ---
 
-## 7️⃣ When should you suppress exceptions?
+### Q4: Why use context managers instead of `try/finally`?
 
-Only when:
+**Strong answer:**
 
-- You handled error intentionally.
-- You want to prevent crash.
-- You logged error properly.
+> `try/finally` works but is verbose and error-prone at scale. Context managers encapsulate the pattern so it can be **reused**, **composed**, and **named**.
 
-Suppressing blindly is bad practice.
+```python
+# try/finally — must repeat for every use:
+conn = db.connect()
+try:
+    conn.execute(query)
+    conn.commit()
+except Exception:
+    conn.rollback()
+    raise
+finally:
+    conn.close()   # must remember this every time
+
+# Context manager — define once, reuse everywhere:
+with db_transaction() as conn:
+    conn.execute(query)
+# commit/rollback/close handled by the context manager
+
+# Additional advantages:
+# - Composable (with A() as a, B() as b:)
+# - Testable (can mock __enter__/__exit__)
+# - Readable (named abstractions)
+# - Prevents forgetting cleanup
+```
 
 ---
 
-## 8️⃣ What is contextlib.contextmanager?
+## 🔵 Level 2 — Mid-Level Questions
 
-It allows writing context manager using generator.
+---
 
-Example:
+### Q5: What are the three parameters of `__exit__` and what do they mean?
+
+**Strong answer:**
+
+```python
+def __exit__(self, exc_type, exc_val, exc_tb):
+    #              │          │        │
+    #              │          │        └── traceback.TracebackType or None
+    #              │          └── the exception instance (e.g., ValueError("bad"))
+    #              └── the exception class (e.g., ValueError)
+    ...
+```
+
+> All three are `None` when no exception occurred. If an exception did occur, all three carry the full exception info (same as `sys.exc_info()`).
+
+```python
+def __exit__(self, exc_type, exc_val, exc_tb):
+    self.cleanup()
+
+    # Suppress only specific exceptions:
+    if exc_type is not None and issubclass(exc_type, (KeyError, ValueError)):
+        logging.warning("Suppressed %s: %s", exc_type.__name__, exc_val)
+        return True   # suppress
+
+    return False   # let everything else propagate
+
+# Check if any exception occurred:
+if exc_type is not None:
+    log_error(exc_val)
+
+# Inspect the traceback:
+if exc_tb is not None:
+    import traceback
+    traceback.print_tb(exc_tb)
+```
+
+---
+
+### Q6: How do you write a context manager using `@contextmanager`?
+
+**Weak answer:** "Use yield instead of `__enter__`/`__exit__`."
+
+**Strong answer:**
+
+> `@contextmanager` turns a generator function into a context manager. Code before `yield` = `__enter__`. Code after `yield` = `__exit__`. You **must** use `try/finally` to guarantee cleanup.
 
 ```python
 from contextlib import contextmanager
 
 @contextmanager
-def my_context():
-    print("Enter")
-    yield
-    print("Exit")
+def db_transaction(conn):
+    """Begin/commit/rollback a transaction."""
+    conn.execute("BEGIN")
+    try:
+        yield conn           # ← body of 'with' runs here
+        conn.execute("COMMIT")   # only if no exception
+    except Exception:
+        conn.execute("ROLLBACK")
+        raise               # ← re-raise after cleanup
+
+    # Note: finally always runs, but commit/rollback logic requires try/except
+
+# Usage:
+with db_transaction(db) as conn:
+    conn.execute("INSERT ...")
+    conn.execute("UPDATE ...")
+# Commits if both succeed, rolls back if either fails
 ```
 
-Cleaner than writing class.
+> **Common mistake:** forgetting `try/finally` — if an exception occurs at `yield`, code after `yield` never runs.
 
-Shows modern Python knowledge.
+```python
+@contextmanager
+def leaky():
+    resource = acquire()
+    yield resource
+    release(resource)   # ← NOT called if exception in with-block!
+
+@contextmanager
+def safe():
+    resource = acquire()
+    try:
+        yield resource
+    finally:
+        release(resource)   # ← guaranteed
+```
 
 ---
 
-## 9️⃣ How is `with` internally implemented?
+### Q7: What does `contextlib.suppress()` do and when would you use it?
 
-Equivalent to:
+**Strong answer:**
+
+> `suppress(*exceptions)` is a context manager that silently absorbs specific exception types. It's clean and expressive for "best-effort" operations.
 
 ```python
-manager = resource
-value = manager.__enter__()
+from contextlib import suppress
+
+# Without suppress:
 try:
-    block
-finally:
-    manager.__exit__()
+    os.remove("temp.txt")
+except FileNotFoundError:
+    pass
+
+# With suppress — cleaner:
+with suppress(FileNotFoundError):
+    os.remove("temp.txt")
+
+# Multiple exception types:
+with suppress(KeyError, AttributeError):
+    value = data["key"]["nested"]["deep"]
+
+# Use when:
+# - Cleanup operations that might fail non-fatally
+# - Cache invalidation that might already be clear
+# - Optional file deletion
+# DON'T use when failure should be logged or handled
 ```
 
-Strong internal understanding.
-
 ---
 
-# 🔹 Level 3: 5–10 Years Experience
+### Q8: How do multiple context managers in one `with` work?
 
-Now questions become architectural.
+**Strong answer:**
 
----
-
-## 🔟 How would you design transaction management using context managers?
-
-Strong answer:
-
-> I would wrap database transaction logic inside a context manager so that commit happens if block succeeds and rollback happens if exception occurs. This ensures atomic operations.
-
-Example pattern:
+> Multiple context managers in a single `with` are entered left-to-right and exited right-to-left (LIFO). Each is independent — an exception in one's `__exit__` doesn't prevent others from running.
 
 ```python
-with transaction():
-    update_a()
-    update_b()
+with open("a.txt") as a, open("b.txt", "w") as b:
+    b.write(a.read())
+# Exit order: b.__exit__() first, then a.__exit__()
+
+# Parenthesized form (Python 3.10+) for readability:
+with (
+    get_db_connection() as conn,
+    acquire_lock(resource_lock) as _,
+    timer("operation") as _,
+):
+    perform_operation(conn)
+# Exits in reverse: timer → lock → conn
 ```
 
-Shows real backend thinking.
+> **If one `__exit__` raises:** Python still calls the remaining `__exit__` methods before propagating the exception.
 
 ---
 
-## 1️⃣1️⃣ How do context managers improve thread safety?
+## 🔴 Level 3 — Senior Questions
 
-Example:
+---
+
+### Q9: What is `ExitStack` and when do you need it?
+
+**Weak answer:** "It lets you use multiple context managers."
+
+**Strong answer:**
+
+> `ExitStack` manages a **dynamic** number of context managers determined at runtime. It's essential when you can't write a fixed number of `with` statements at code-writing time.
 
 ```python
-with lock:
-    critical_section()
+from contextlib import ExitStack
+
+# Open N files dynamically:
+def merge_csv_files(input_paths, output_path):
+    with ExitStack() as stack:
+        # Number of files not known at write time:
+        readers = [stack.enter_context(open(p)) for p in input_paths]
+        writer  = stack.enter_context(open(output_path, "w"))
+        for reader in readers:
+            writer.write(reader.read())
+    # All files closed here, even if an exception occurred
+
+# Register arbitrary cleanup callbacks:
+def process(data):
+    with ExitStack() as stack:
+        conn = db.connect()
+        stack.callback(conn.close)            # always close
+        stack.callback(metrics.record, "op")  # always record
+
+        if data.needs_lock:
+            stack.enter_context(acquire_lock(data.id))
+
+        return transform(data)
+
+# Transfer ownership out of the stack:
+def open_resources(paths):
+    stack = ExitStack()
+    files = [stack.enter_context(open(p)) for p in paths]
+    return files, stack   # caller is responsible for stack.close()
 ```
 
-Ensures:
-
-- Lock acquired
-- Always released
-- Even if exception occurs
-
-Without context manager:
-Risk of deadlock.
-
 ---
 
-## 1️⃣2️⃣ What is a re-entrant context manager?
+### Q10: How do you implement an async context manager?
 
-A context manager that can be entered multiple times safely.
+**Strong answer:**
 
-Important in nested lock scenarios.
-
-Shows advanced awareness.
-
----
-
-## 1️⃣3️⃣ When should you avoid writing complex logic inside context manager?
-
-Avoid when:
-
-- It hides business logic
-- It becomes too abstract
-- Debugging becomes difficult
-
-Balance abstraction and clarity.
-
----
-
-# 🔥 Scenario-Based Questions
-
----
-
-## Scenario 1:
-File remains open after exception.
-
-Why?
-
-Because file.close() was not called.
-Not using context manager.
-
-Solution:
-Use `with open()`.
-
----
-
-## Scenario 2:
-Database transaction partially committed after error.
-
-Cause?
-
-Commit logic not inside safe block.
-
-Solution:
-Use transaction context manager with rollback in `__exit__()`.
-
----
-
-## Scenario 3:
-Thread deadlock occurs occasionally.
-
-Possible issue:
-
-Lock acquired but not released.
-
-Solution:
-Use:
+> Implement `__aenter__` and `__aexit__` (both `async def`), or use `@asynccontextmanager` with an async generator:
 
 ```python
-with lock:
+from contextlib import asynccontextmanager
+import asyncpg
+
+# Class-based:
+class AsyncTransaction:
+    def __init__(self, dsn):
+        self.dsn  = dsn
+        self.conn = None
+
+    async def __aenter__(self):
+        self.conn = await asyncpg.connect(self.dsn)
+        await self.conn.execute("BEGIN")
+        return self.conn
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        if exc_type:
+            await self.conn.execute("ROLLBACK")
+        else:
+            await self.conn.execute("COMMIT")
+        await self.conn.close()
+        return False
+
+# Generator-based (simpler):
+@asynccontextmanager
+async def async_transaction(dsn):
+    conn = await asyncpg.connect(dsn)
+    await conn.execute("BEGIN")
+    try:
+        yield conn
+        await conn.execute("COMMIT")
+    except Exception:
+        await conn.execute("ROLLBACK")
+        raise
+    finally:
+        await conn.close()
+
+# Usage:
+async def main():
+    async with async_transaction("postgres://...") as conn:
+        await conn.execute("INSERT INTO orders ...")
 ```
 
-Ensures release.
+---
+
+### Q11: Design a context manager for a distributed lock.
+
+**Strong answer:**
+
+```python
+import uuid, time, logging
+from contextlib import contextmanager
+
+logger = logging.getLogger(__name__)
+
+class DistributedLock:
+    """
+    Acquire a lock in Redis. Guaranteed release on exit.
+    Uses SET NX EX (atomic acquire with TTL).
+    """
+    def __init__(self, redis_client, key: str, ttl: int = 30):
+        self.redis  = redis_client
+        self.key    = f"lock:{key}"
+        self.ttl    = ttl
+        self.token  = str(uuid.uuid4())   # unique token prevents release by others
+
+    def __enter__(self):
+        acquired = self.redis.set(
+            self.key, self.token,
+            nx=True,     # only set if NOT exists
+            ex=self.ttl  # expire after ttl seconds
+        )
+        if not acquired:
+            raise RuntimeError(f"Could not acquire lock: {self.key}")
+        logger.debug("Acquired lock: %s", self.key)
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # Lua script ensures atomic check-and-delete (only release OUR lock):
+        script = """
+        if redis.call("get", KEYS[1]) == ARGV[1] then
+            return redis.call("del", KEYS[1])
+        else
+            return 0
+        end
+        """
+        self.redis.eval(script, 1, self.key, self.token)
+        logger.debug("Released lock: %s", self.key)
+        return False
+
+# Usage:
+with DistributedLock(redis, "order-4892", ttl=60):
+    process_order(4892)
+```
 
 ---
 
-## Scenario 4:
-Exception inside context manager not visible.
-
-Why?
-
-`__exit__()` returned True.
-Exception suppressed unintentionally.
-
-Fix:
-Return False or None.
+## ⚠️ Trap Questions
 
 ---
 
-## Scenario 5:
-Need to temporarily modify global setting and restore later.
+### Trap 1 — Returning `True` from `__exit__` accidentally
 
-Solution:
-Write context manager:
+```python
+class BadManager:
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.cleanup()
+        return True   # ← SWALLOWS ALL EXCEPTIONS silently!
 
-- Save original value
-- Change setting
-- Restore in `__exit__()`
+# Any bug in the with-block is hidden:
+with BadManager():
+    raise ValueError("critical bug")   # silently disappeared!
 
-Used in testing frameworks.
-
----
-
-# 🧠 How to Answer Like a Strong Candidate
-
-Weak:
-
-“It closes file.”
-
-Strong:
-
-> “A context manager guarantees deterministic resource cleanup by leveraging `__enter__()` and `__exit__()` methods. It ensures that even if an exception occurs, cleanup logic executes reliably.”
-
-Clear.
-Professional.
-Precise.
+# Fix: only suppress exceptions you intend to suppress:
+def __exit__(self, exc_type, exc_val, exc_tb):
+    self.cleanup()
+    # Only suppress expected non-critical errors:
+    if exc_type is not None and issubclass(exc_type, ExpectedTransientError):
+        logger.warning("Suppressed transient error: %s", exc_val)
+        return True
+    return False  # everything else propagates
+```
 
 ---
 
-# ⚠️ Common Weak Candidate Mistakes
+### Trap 2 — `__exit__` NOT called if `__enter__` raises
 
-- Not understanding exception suppression
-- Not knowing `__exit__()` parameters
-- Confusing context manager with decorator
-- Ignoring transaction use cases
-- Overcomplicating custom context managers
+```python
+class Resource:
+    def __enter__(self):
+        self.conn = db.connect()   # step 1
+        self.lock = lock.acquire() # step 2 ← if THIS raises, __exit__ NOT called
+        return self
 
----
+    def __exit__(self, *args):
+        self.conn.close()   # ← never runs if __enter__ raised at step 2!
+        self.lock.release()
 
-# 🎯 Rapid-Fire Revision
-
-- Context manager manages setup & cleanup
-- Uses `__enter__()` and `__exit__()`
-- `with` ensures guaranteed cleanup
-- `__exit__()` receives exception details
-- Returning True suppresses exception
-- Used for files, DB, locks, transactions
-- contextlib simplifies creation
-
----
-
-# 🏆 Final Interview Mindset
-
-Context manager questions test:
-
-- Resource management discipline
-- Exception safety awareness
-- Concurrency understanding
-- Transaction design skill
-- Clean abstraction ability
-
-If you demonstrate:
-
-- Internal knowledge of `with`
-- Proper exception flow understanding
-- Transaction-safe thinking
-- Thread-safety awareness
-- Production examples
-
-You stand out as strong Python engineer.
-
-Context managers are not syntax sugar.
-
-They are safety guarantees.
+# Fix: protect setup inside __enter__:
+def __enter__(self):
+    self.conn = db.connect()
+    try:
+        self.lock = lock.acquire()
+    except Exception:
+        self.conn.close()   # clean up what we already acquired
+        raise
+    return self
+```
 
 ---
 
-# 🔁 Navigation
+### Trap 3 — Missing `try/finally` in `@contextmanager`
 
-Previous:  
-[12_context_managers/theory.md](./theory.md)
+```python
+@contextmanager
+def connects(dsn):
+    conn = db.connect(dsn)
+    yield conn
+    conn.close()   # ← NOT called if with-block raises!
 
-Next:  
-[13_concurrency/theory.md](../13_concurrency/theory.md)
+# Fix:
+@contextmanager
+def connects(dsn):
+    conn = db.connect(dsn)
+    try:
+        yield conn
+    finally:
+        conn.close()   # guaranteed
+```
 
+---
+
+### Trap 4 — Reusing an exhausted `@contextmanager`
+
+```python
+@contextmanager
+def my_cm():
+    yield 42
+
+cm = my_cm()   # create generator-based context manager
+
+with cm as val:
+    print(val)   # 42
+
+with cm as val:  # ← reusing same generator object!
+    print(val)   # RuntimeError: generator already exhausted
+
+# Fix: always call the function (create fresh generator) each time:
+with my_cm() as val:   # ← fresh generator each time
+    print(val)
+```
+
+---
+
+## 🔥 Rapid-Fire Revision
+
+```
+Q: What does __enter__ return?
+A: The value assigned to the 'as' variable. Can be self, a new object, or None.
+
+Q: When is __exit__ NOT called?
+A: If __enter__ itself raises. Always called if __enter__ succeeds.
+
+Q: What does returning True from __exit__ do?
+A: Suppresses the exception — it does not propagate.
+
+Q: @contextmanager — where is setup code? cleanup code?
+A: Setup: before yield. Cleanup: after yield (in finally block).
+
+Q: What does ExitStack do?
+A: Manages a dynamic number of context managers decided at runtime.
+   Registers them with enter_context(); exits all in LIFO order.
+
+Q: contextlib.suppress() equivalent in try/except?
+A: try: ... except ExceptionType: pass
+
+Q: Async context manager protocol?
+A: __aenter__ (async) and __aexit__ (async). Use 'async with'.
+
+Q: What does contextlib.nullcontext() do?
+A: No-op context manager. Used when a context manager is optional.
+
+Q: Multiple context managers in one with — exit order?
+A: LIFO (last entered, first exited).
+
+Q: What is contextlib.closing() for?
+A: Wraps any object with .close() as a context manager.
+   with closing(urlopen(url)) as response: ...
+```
+
+---
+
+## 🔁 Navigation
+
+| | |
+|---|---|
+| 📖 Theory | [theory.md](./theory.md) |
+| ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
+| 🛠️ contextlib Guide | [contextlib_guide.md](./contextlib_guide.md) |
+| ➡️ Next | [13 — Concurrency](../13_concurrency/theory.md) |
