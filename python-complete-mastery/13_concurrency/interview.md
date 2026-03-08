@@ -1,379 +1,606 @@
-# 🎯 Concurrency — Interview Preparation Guide  
-From GIL Awareness to Scalable System Design
+# 🎯 Concurrency — Interview Questions
+
+> *"Concurrency questions reveal whether you understand Python's execution model,*
+> *can design thread-safe systems, and know when to use which tool."*
 
 ---
 
-# 🧠 What Interviewers Actually Test
+## 📊 Question Map
 
-Concurrency questions test:
+```
+LEVEL 1 — Junior (0–2 years)
+  • Concurrency vs Parallelism
+  • What is the GIL?
+  • When to use threads vs multiprocessing vs asyncio
+  • What is a race condition?
 
-- Do you understand Python internals?
-- Do you understand GIL?
-- Can you choose between threading, multiprocessing, async?
-- Do you understand race conditions?
-- Can you debug deadlocks?
-- Can you design scalable systems?
+LEVEL 2 — Mid-Level (2–5 years)
+  • Thread synchronization primitives
+  • ThreadPoolExecutor / ProcessPoolExecutor
+  • asyncio event loop and await
+  • Deadlock — causes and prevention
+  • queue.Queue for thread communication
 
-This is senior-level territory.
-
----
-
-# 🔹 Level 1: 0–2 Years Experience
-
-Basic conceptual clarity expected.
-
----
-
-## 1️⃣ What is concurrency?
-
-Strong answer:
-
-> Concurrency is the ability of a program to manage multiple tasks that make progress during overlapping time periods.
-
-Avoid saying:
-“It runs things at same time.”
-
-Be precise:
-Overlapping progress.
+LEVEL 3 — Senior (5+ years)
+  • GIL internals and release conditions
+  • Designing producer/consumer systems
+  • asyncio vs threading for I/O — when each wins
+  • Shared memory in multiprocessing
+  • Diagnosing and fixing race conditions
+```
 
 ---
 
-## 2️⃣ What is the difference between concurrency and parallelism?
-
-Concurrency:
-Multiple tasks managed at same time.
-
-Parallelism:
-Multiple tasks executed simultaneously on multiple CPU cores.
-
-This distinction is important.
+## 🟢 Level 1 — Junior Questions
 
 ---
 
-## 3️⃣ What is GIL?
+### Q1: What is the difference between concurrency and parallelism?
 
-Strong answer:
+**Weak answer:** "They're basically the same — running things at the same time."
 
-> GIL (Global Interpreter Lock) is a mutex in CPython that ensures only one thread executes Python bytecode at a time.
+**Strong answer:**
 
-Important implication:
-Threads do not provide true parallelism for CPU-bound tasks.
+> **Concurrency** means multiple tasks make progress during overlapping time periods. Only one runs at a given instant on a single CPU — tasks interleave by taking turns.
+>
+> **Parallelism** means multiple tasks execute at the exact same moment, requiring multiple CPU cores.
 
----
+```
+CONCURRENCY (single core):
+  Task A: ████░░░░████░░░░████
+  Task B: ░░░░████░░░░████░░░░
+  Time:   ──────────────────→
+  Tasks interleave. Total wall time < sum of task times.
 
-## 4️⃣ What are CPU-bound and I/O-bound tasks?
+PARALLELISM (multi-core):
+  Core 1: Task A: ████████████
+  Core 2: Task B: ████████████
+  Time:   ──────────────────→
+  True simultaneous execution.
+```
 
-CPU-bound:
-Heavy computations (image processing, ML, encryption).
-
-I/O-bound:
-Waiting tasks (API calls, file reading, DB queries).
-
-Correct classification matters.
-
----
-
-# 🔹 Level 2: 2–5 Years Experience
-
-Now interviewer expects:
-
-- Model selection reasoning
-- Thread safety awareness
-- Basic async knowledge
-- Performance reasoning
+> Python's `threading` is concurrent (GIL allows only one at a time). Python's `multiprocessing` is parallel (separate GILs, truly simultaneous).
 
 ---
 
-## 5️⃣ When should you use multithreading?
+### Q2: What is the GIL and why does it exist?
 
-Use for:
+**Weak answer:** "It prevents multiple threads from running Python at the same time."
 
-- I/O-bound tasks
-- Network operations
-- Blocking calls
+**Strong answer:**
 
-Because while one thread waits,
-another can execute.
+> The **Global Interpreter Lock (GIL)** is a mutex in CPython that ensures only one thread executes Python bytecode at a time, even on multi-core machines.
+>
+> **Why it exists:** CPython's memory management (reference counting) is not thread-safe. Without the GIL, two threads could simultaneously modify an object's reference count, corrupting memory and causing crashes. The GIL was the simplest solution.
+>
+> **What it means in practice:**
 
----
+```python
+# ❌ Threading does NOT parallelize pure Python CPU work:
+def cpu_work(n):
+    return sum(i**2 for i in range(n))
 
-## 6️⃣ When should you use multiprocessing?
+# Running 4 threads → still ~1x speed (GIL serializes execution)
 
-Use for:
+# ✅ Threading DOES help with I/O-bound work:
+def api_call(url):
+    return requests.get(url).json()
 
-- CPU-bound tasks
-- Heavy computations
-- Parallel data processing
+# Running 10 threads → ~10x speed (GIL released during network wait)
 
-Because each process has its own GIL.
+# ✅ Multiprocessing bypasses GIL entirely:
+# Each process has its own GIL — true parallel execution
+```
 
----
-
-## 7️⃣ What is a race condition?
-
-Strong answer:
-
-> A race condition occurs when multiple threads access shared data simultaneously and at least one modifies it, causing unpredictable results.
-
-Example:
-
-Two threads increment same counter.
-
-Without lock:
-Incorrect result.
+> **GIL is released during:** I/O operations, `time.sleep()`, most NumPy/C extension calls.
 
 ---
 
-## 8️⃣ How do you prevent race conditions?
+### Q3: When would you use threading vs multiprocessing vs asyncio?
 
-Use:
+**Strong answer:**
 
-- Locks
-- Semaphores
-- RLocks
-- Queues
-- Avoid shared mutable state
+```
+I/O-bound (waiting for network, disk, DB):
+  asyncio   → best for very high concurrency (1000s of connections)
+  threading → simpler, works well for moderate concurrency
 
-Explain locking clearly.
+CPU-bound (computing, parsing, math):
+  multiprocessing → only option that gives true speedup
+  (threading is not faster for CPU work due to GIL)
 
----
+Rule of thumb:
+  Waiting for external systems → asyncio or threads
+  Number crunching            → multiprocessing
+```
 
-## 9️⃣ What is deadlock?
+```python
+# asyncio: 1000 HTTP requests concurrently:
+async def main():
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch(session, url) for url in urls]
+        return await asyncio.gather(*tasks)
 
-Deadlock occurs when:
-
-Two or more threads wait on each other’s locks indefinitely.
-
-System freezes.
-
-Mention:
-
-Avoid nested locks or enforce consistent locking order.
-
----
-
-## 🔟 What is async programming?
-
-Strong answer:
-
-> Async programming uses cooperative multitasking where tasks voluntarily yield control using await, allowing efficient handling of many I/O-bound operations within a single thread.
-
-Key phrase:
-Cooperative multitasking.
+# multiprocessing: compress 8 large files in parallel:
+with ProcessPoolExecutor(max_workers=8) as exc:
+    list(exc.map(compress_file, file_paths))
+```
 
 ---
 
-# 🔹 Level 3: 5–10 Years Experience
+### Q4: What is a race condition? Give an example.
 
-Now interview moves to architecture and debugging.
+**Strong answer:**
 
----
+> A race condition is when the correctness of a program depends on the relative timing of operations in multiple threads — and that timing is unpredictable.
 
-## 1️⃣1️⃣ How does GIL impact multithreading performance?
+```python
+import threading
 
-Strong answer:
+balance = 1000
 
-> Due to the GIL, only one thread executes Python bytecode at a time. This limits CPU-bound performance gains from threading but still allows concurrency for I/O-bound tasks because threads release the GIL during blocking I/O operations.
+def withdraw(amount):
+    global balance
+    # NOT ATOMIC: read + check + write can be interrupted between steps
+    if balance >= amount:
+        balance -= amount   # another thread may modify balance between check and write
 
-This shows internal clarity.
+t1 = threading.Thread(target=withdraw, args=(800,))
+t2 = threading.Thread(target=withdraw, args=(800,))
+t1.start(); t2.start()
+t1.join();  t2.join()
 
----
+# If both threads pass the 'if' check before either withdraws:
+# Final balance could be 1000 - 800 - 800 = -600  ← impossible without race
 
-## 1️⃣2️⃣ How do you decide between threading, multiprocessing, and async?
-
-Strong answer:
-
-> I classify the workload first. For CPU-bound tasks, I use multiprocessing. For I/O-bound blocking tasks, I use threading. For high-concurrency I/O tasks like web servers, I use async to avoid thread overhead.
-
-Structured decision-making is important.
-
----
-
-## 1️⃣3️⃣ What are common async mistakes?
-
-- Calling blocking functions inside async code
-- Forgetting await
-- Mixing threads and async incorrectly
-- Not handling event loop properly
-- Blocking event loop with heavy computation
-
-Shows practical experience.
+# Fix: use a lock
+lock = threading.Lock()
+def safe_withdraw(amount):
+    with lock:
+        if balance >= amount:
+            balance -= amount
+```
 
 ---
 
-## 1️⃣4️⃣ How would you debug a deadlock?
-
-Steps:
-
-1. Identify which threads are waiting.
-2. Check lock acquisition order.
-3. Inspect stack traces.
-4. Use logging for lock acquisition.
-5. Simplify locking strategy.
-
-Structured debugging approach wins.
+## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-## 1️⃣5️⃣ How do you share data safely between processes?
+### Q5: What synchronization primitives does Python provide and when do you use each?
 
-Use:
+**Strong answer:**
 
-- multiprocessing.Queue
-- Pipe
-- Manager
-- Shared memory (carefully)
+```python
+import threading
 
-Mention that processes do not share memory by default.
+# Lock — mutual exclusion (one thread at a time):
+lock = threading.Lock()
+with lock:
+    shared_data.modify()
 
----
+# RLock — re-entrant (same thread can acquire multiple times):
+rlock = threading.RLock()
+with rlock:
+    with rlock:   # doesn't deadlock — same thread
 
-# 🔥 Scenario-Based Questions
+# Semaphore — limit N concurrent accesses:
+db_sem = threading.Semaphore(5)   # max 5 concurrent DB queries
+with db_sem:
+    result = db.query(sql)
 
----
+# Event — signal between threads:
+data_ready = threading.Event()
+data_ready.set()      # signal
+data_ready.wait()     # block until signalled
 
-## Scenario 1:
-Threaded program runs slower than sequential version.
-
-Possible reasons:
-
-- CPU-bound workload
-- GIL limitation
-- Thread overhead
-- Context switching cost
-
-Strong answer explains GIL impact.
-
----
-
-## Scenario 2:
-High CPU usage even when app is idle.
-
-Possible cause:
-
-- Busy-wait loop
-- Improper async blocking
-- Infinite loop without sleep
-
-Check event loop behavior.
+# Queue — thread-safe producer/consumer (most common):
+q = queue.Queue()
+q.put(item)           # blocks if maxsize reached
+item = q.get()        # blocks until item available
+q.task_done()
+q.join()              # wait for all task_done() calls
+```
 
 ---
 
-## Scenario 3:
-Async API server becomes unresponsive under load.
+### Q6: How does `ThreadPoolExecutor` work and what are its advantages?
 
-Possible causes:
+**Strong answer:**
 
-- Blocking call inside async function
-- CPU-heavy task in coroutine
-- Not using await properly
-- Event loop blocked
+> `ThreadPoolExecutor` maintains a pool of reusable worker threads, avoiding the overhead of creating/destroying threads for each task. It provides a clean `Future`-based API:
 
-Solution:
-Move CPU-heavy tasks to thread pool or process pool.
+```python
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
----
+urls = [f"http://api.com/{i}" for i in range(50)]
 
-## Scenario 4:
-Counter value inconsistent after multithreaded increment.
+# Submit tasks, get results in completion order:
+with ThreadPoolExecutor(max_workers=10) as executor:
+    futures = {executor.submit(fetch, url): url for url in urls}
 
-Cause:
-Race condition.
+    for future in as_completed(futures):
+        url = futures[future]
+        try:
+            data = future.result()
+            process(data)
+        except Exception as e:
+            logger.error("%s failed: %s", url, e)
 
-Solution:
-Use lock or atomic operations.
+# Or with map (preserves order, raises on first failure):
+with ThreadPoolExecutor(max_workers=10) as executor:
+    results = list(executor.map(fetch, urls, timeout=30))
+```
 
----
-
-## Scenario 5:
-Multiprocessing code fails on Windows but works on Linux.
-
-Cause:
-Missing `if __name__ == "__main__"` guard.
-
-Important platform-specific knowledge.
+> **Advantages vs manual threads:** automatic pool management, `Future` API with exception propagation, works as context manager, `as_completed` for processing in completion order.
 
 ---
 
-# 🧠 How to Answer Like a Strong Candidate
+### Q7: Explain the asyncio event loop and what `await` does.
 
-Weak:
+**Weak answer:** "asyncio runs async functions. await pauses them."
 
-“I will use threads.”
+**Strong answer:**
 
-Strong:
+> The **event loop** is a single-threaded scheduler that runs coroutines cooperatively. It maintains a queue of ready tasks and runs them one at a time. When a task hits `await`, it **voluntarily yields** control back to the event loop, which then runs other ready tasks.
 
-> “First, I classify whether the task is CPU-bound or I/O-bound. For CPU-heavy computations, I use multiprocessing to bypass the GIL. For I/O-bound tasks, I use threading or async depending on scalability requirements. I also ensure thread safety by avoiding shared mutable state or using locks.”
+```python
+import asyncio
 
-Clear.
-Structured.
-Mature.
+async def fetch(url):
+    # 'await' means: "I'm waiting for I/O — run other tasks until it's ready"
+    async with aiohttp.ClientSession() as s:
+        async with s.get(url) as resp:
+            return await resp.json()   # yields here → event loop runs other tasks
 
----
+async def main():
+    # gather schedules all 3 coroutines as tasks — they run concurrently:
+    results = await asyncio.gather(
+        fetch("http://api1.com"),   # starts, immediately hits await
+        fetch("http://api2.com"),   # starts, immediately hits await
+        fetch("http://api3.com"),   # starts, immediately hits await
+    )
+    # All three I/O requests are in-flight simultaneously
+    # Event loop processes responses as they arrive
+```
 
-# ⚠️ Common Weak Candidate Mistakes
-
-- Ignoring GIL
-- Using threads for CPU-bound tasks
-- Not understanding async event loop
-- Forgetting about race conditions
-- Overcomplicating concurrency
-- Not mentioning thread safety
-
----
-
-# 🎯 Rapid-Fire Revision
-
-- Concurrency ≠ parallelism
-- GIL limits CPU-bound threading
-- Use multiprocessing for CPU tasks
-- Use threading for I/O-bound
-- Use async for high-concurrency I/O
-- Race condition = unsafe shared state
-- Deadlock = circular waiting
-- Event loop manages async tasks
-- Blocking calls break async
+> **Key:** `await` only suspends the current coroutine, not the whole thread. Other coroutines continue running.
 
 ---
 
-# 🏆 Final Interview Mindset
+### Q8: What is a deadlock and how do you prevent it?
 
-Concurrency questions test:
+**Strong answer:**
 
-- Runtime understanding
-- Performance reasoning
-- Thread safety awareness
-- Architectural decision-making
-- Debugging maturity
+> A deadlock occurs when Thread A holds Lock 1 and waits for Lock 2, while Thread B holds Lock 2 and waits for Lock 1. Both block forever.
 
-If you demonstrate:
+```python
+lock_a = threading.Lock()
+lock_b = threading.Lock()
 
-- Clear GIL explanation
-- Structured model selection
-- Race condition awareness
-- Deadlock debugging strategy
-- Async pitfalls understanding
+def thread1():
+    with lock_a:
+        time.sleep(0.01)
+        with lock_b:   # ← waiting for lock_b held by thread2 → DEADLOCK
+            pass
 
-You stand out as strong backend Python engineer.
+def thread2():
+    with lock_b:
+        time.sleep(0.01)
+        with lock_a:   # ← waiting for lock_a held by thread1 → DEADLOCK
+            pass
+```
 
-Concurrency is powerful.
+> **Prevention strategies:**
+> 1. **Lock ordering**: always acquire locks in the same global order
+> 2. **Lock timeout**: `lock.acquire(timeout=5)` — give up if can't acquire
+> 3. **Minimize lock scope**: hold locks for as short a time as possible
+> 4. **Use higher-level primitives**: `queue.Queue` often eliminates need for manual locks
 
-But wrong decisions cause:
+```python
+# Fix 1: consistent ordering (both acquire A before B):
+def thread1():
+    with lock_a:
+        with lock_b:
+            pass
 
-- Crashes
-- Performance loss
-- Deadlocks
-- Production incidents
-
-Understanding concurrency deeply makes you senior-level.
+def thread2():
+    with lock_a:   # same order
+        with lock_b:
+            pass
+```
 
 ---
 
-# 🔁 Navigation
+## 🔴 Level 3 — Senior Questions
 
-Previous:  
-[13_concurrency/theory.md](./theory.md)
+---
 
-Next:  
-[14_memory_management/theory.md](../14_memory_management/theory.md)
+### Q9: When does the GIL get released? How does this affect your threading strategy?
 
+**Strong answer:**
+
+> The GIL is released in three scenarios:
+
+```python
+# 1. I/O operations (file, network, socket, pipe):
+with open("file.txt") as f:
+    data = f.read()   # GIL released during the actual read syscall
+
+# 2. time.sleep():
+time.sleep(1)   # GIL released for the full second — other threads run
+
+# 3. C extensions that explicitly release it:
+import numpy as np
+np.dot(a, b)   # NumPy releases GIL → true parallel execution with threads!
+
+# 4. Periodic forced switch (~5ms):
+# Even without explicit release, Python forces a context switch
+# every sys.getswitchinterval() seconds (default 0.005)
+
+# Strategic implications:
+# If your "CPU work" is mostly NumPy/Pandas → threading works fine
+# If your "CPU work" is pure Python loops → need multiprocessing
+# If your work is mixed → profile first, then decide
+```
+
+---
+
+### Q10: How do you share data between processes safely?
+
+**Strong answer:**
+
+> Processes have separate memory spaces — sharing requires explicit IPC mechanisms:
+
+```python
+from multiprocessing import Queue, Pipe, Value, Array, Manager
+
+# 1. Queue — safe, general-purpose:
+q = multiprocessing.Queue()
+p = Process(target=worker, args=(q,))
+p.start()
+q.put("message")           # serialized via pickle
+result = q.get()
+
+# 2. Pipe — faster, two-process point-to-point:
+parent_conn, child_conn = Pipe()
+p = Process(target=worker, args=(child_conn,))
+parent_conn.send("data")
+result = parent_conn.recv()
+
+# 3. Shared memory (fast, C types only):
+counter = Value('i', 0)     # 'i'=int, 'd'=double, 'c'=char
+with counter.get_lock():
+    counter.value += 1
+
+arr = Array('d', [1.0, 2.0, 3.0])
+
+# 4. Manager (flexible, any Python type, slower):
+with Manager() as manager:
+    shared_dict = manager.dict()
+    shared_list = manager.list()
+    p = Process(target=worker, args=(shared_dict,))
+    p.start()
+    p.join()
+    print(shared_dict)   # sees changes made by child process
+```
+
+---
+
+### Q11: Design a concurrent web scraper with rate limiting.
+
+**Strong answer:**
+
+```python
+import asyncio, aiohttp, time
+from collections import deque
+
+class RateLimiter:
+    def __init__(self, calls_per_second: int):
+        self.rate   = calls_per_second
+        self.times  = deque()
+        self._lock  = asyncio.Lock()
+
+    async def acquire(self):
+        async with self._lock:
+            now = time.monotonic()
+            # Remove calls older than 1 second
+            while self.times and now - self.times[0] > 1.0:
+                self.times.popleft()
+            if len(self.times) >= self.rate:
+                wait_time = 1.0 - (now - self.times[0])
+                await asyncio.sleep(wait_time)
+            self.times.append(time.monotonic())
+
+async def scrape_url(session, url, limiter, semaphore):
+    await limiter.acquire()
+    async with semaphore:   # also limit concurrent connections
+        try:
+            async with session.get(url, timeout=aiohttp.ClientTimeout(total=10)) as r:
+                return {"url": url, "status": r.status, "body": await r.text()}
+        except Exception as e:
+            return {"url": url, "error": str(e)}
+
+async def scrape_all(urls, max_rps=10, max_concurrent=20):
+    limiter   = RateLimiter(max_rps)
+    semaphore = asyncio.Semaphore(max_concurrent)
+
+    async with aiohttp.ClientSession() as session:
+        tasks = [scrape_url(session, url, limiter, semaphore) for url in urls]
+        return await asyncio.gather(*tasks, return_exceptions=True)
+
+results = asyncio.run(scrape_all(urls, max_rps=10))
+```
+
+---
+
+### Q12: What is `asyncio.run_in_executor` and when do you need it?
+
+**Strong answer:**
+
+> Any blocking (synchronous) call inside an async function freezes the entire event loop. `run_in_executor` offloads blocking work to a thread pool, keeping the event loop responsive:
+
+```python
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+
+thread_pool = ThreadPoolExecutor(max_workers=10)
+
+async def process_image(image_bytes):
+    loop = asyncio.get_event_loop()
+
+    # ❌ Blocks event loop for the duration of compression:
+    # compressed = compress(image_bytes)
+
+    # ✅ Runs compression in a thread, event loop stays responsive:
+    compressed = await loop.run_in_executor(
+        thread_pool,
+        compress,          # blocking function
+        image_bytes        # arguments
+    )
+    return compressed
+
+# asyncio.to_thread (Python 3.9+) — cleaner syntax:
+async def process_image(image_bytes):
+    compressed = await asyncio.to_thread(compress, image_bytes)
+    return compressed
+```
+
+> **Use for:** legacy blocking I/O, CPU-bound operations in async code, calling synchronous libraries (PIL, pandas) from async functions.
+
+---
+
+## ⚠️ Trap Questions
+
+---
+
+### Trap 1 — Using threading for CPU work expecting speedup
+
+```python
+# ❌ Will be as slow as sequential (GIL serializes Python execution):
+threads = [Thread(target=compute, args=(chunk,)) for chunk in chunks]
+for t in threads: t.start()
+for t in threads: t.join()
+
+# ✅ For CPU work, use processes:
+with ProcessPoolExecutor(max_workers=cpu_count()) as exc:
+    results = list(exc.map(compute, chunks))
+```
+
+---
+
+### Trap 2 — Blocking call inside async function
+
+```python
+# ❌ Freezes entire event loop for 5 seconds:
+async def handler():
+    time.sleep(5)          # synchronous! blocks everything
+    data = requests.get(url).json()  # synchronous! blocks everything
+
+# ✅ Use async equivalents:
+async def handler():
+    await asyncio.sleep(5)
+    async with aiohttp.ClientSession() as s:
+        async with s.get(url) as r:
+            data = await r.json()
+```
+
+---
+
+### Trap 3 — Forgetting that `counter += 1` is not atomic
+
+```python
+counter = 0
+
+def increment():
+    global counter
+    for _ in range(100_000):
+        counter += 1   # NOT atomic — read + add + write can be interrupted
+
+threads = [Thread(target=increment) for _ in range(10)]
+# Expected: 1,000,000 — Actual: somewhere between 100,000 and 1,000,000
+
+# Fix:
+lock = threading.Lock()
+def safe_increment():
+    global counter
+    with lock:
+        counter += 1
+
+# Or use: collections.Counter is thread-safe for some operations
+# Or use: queue.Queue to accumulate and sum later
+```
+
+---
+
+### Trap 4 — asyncio.run() inside an existing event loop
+
+```python
+# ❌ RuntimeError: this event loop is already running
+async def outer():
+    asyncio.run(inner())   # can't create nested event loop
+
+# ✅ Use await:
+async def outer():
+    await inner()
+
+# ✅ Or create task:
+async def outer():
+    task = asyncio.create_task(inner())
+    await task
+```
+
+---
+
+## 🔥 Rapid-Fire Revision
+
+```
+Q: GIL: what is it?
+A: CPython mutex allowing only one thread to run Python bytecode at a time.
+   Released during I/O, sleep, and most C extensions.
+
+Q: Threading for CPU-bound → speedup?
+A: No. GIL prevents true parallelism for pure Python code.
+   Use multiprocessing for CPU-bound work.
+
+Q: asyncio is multi-threaded?
+A: No. Single-threaded, cooperative multitasking.
+   Tasks yield at 'await' points.
+
+Q: Difference between Lock and RLock?
+A: Lock: one acquire per thread. RLock: same thread can acquire multiple times.
+
+Q: What does queue.Queue.join() do?
+A: Blocks until every item has had task_done() called.
+
+Q: gather vs create_task?
+A: gather: run N coroutines, wait for all, return list of results.
+   create_task: schedule one coroutine, returns a Task you await later.
+
+Q: run_in_executor / asyncio.to_thread use?
+A: Run blocking (synchronous) code without freezing the event loop.
+
+Q: How to detect deadlock?
+A: Program hangs indefinitely. Use threading module's deadlock detection
+   or add lock acquire timeouts.
+
+Q: ProcessPoolExecutor vs Pool?
+A: Both work. ProcessPoolExecutor has Future API, works as context manager.
+   Pool.map/starmap/apply_async — older API, slightly more options.
+
+Q: Default max_workers for ThreadPoolExecutor?
+A: min(32, os.cpu_count() + 4) — Python 3.8+
+```
+
+---
+
+## 🔁 Navigation
+
+| | |
+|---|---|
+| 📖 Theory | [theory.md](./theory.md) |
+| ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
+| 🧵 Threading Guide | [threading_guide.md](./threading_guide.md) |
+| 🔥 Multiprocessing Guide | [multiprocessing_guide.md](./multiprocessing_guide.md) |
+| ⚡ Async Guide | [async_guide.md](./async_guide.md) |
+| ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
