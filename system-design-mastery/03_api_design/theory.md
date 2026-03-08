@@ -1,0 +1,33 @@
+# 🔌 API Design — Theory
+> Design APIs that are intuitive, versioned, efficient, and production-ready for consumers at any scale.
+
+---
+
+## 📋 Contents
+
+```
+1.  REST principles — resources, statelessness, uniform interface
+2.  GraphQL — flexible queries, schema, N+1 problem
+3.  gRPC — protocol buffers, streaming, performance
+4.  API versioning — URL, header, and content-type strategies
+5.  Pagination — offset vs cursor-based
+6.  Idempotency — safe retries in APIs
+7.  Rate limiting — protecting your API from abuse
+8.  OpenAPI / Swagger — documenting and contracting APIs
+```
+
+---
+
+## 📖 **Main content**: [overview.md](./overview.md)
+
+---
+
+## 🔁 Navigation
+
+| | |
+|---|---|
+| 🎯 Interview | [interview.md](./interview.md) |
+| ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
+| ⬅️ Previous | [02 — System Fundamentals](../02_system_fundamentals/theory.md) |
+| ➡️ Next | [04 — Backend Architecture](../04_backend_architecture/intro.md) |
+| 🏠 Home | [README.md](../README.md) |
