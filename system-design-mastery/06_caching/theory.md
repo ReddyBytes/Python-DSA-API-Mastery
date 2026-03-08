@@ -1,0 +1,34 @@
+# 🗃️ Caching — Theory
+> Speed up reads and reduce database load by storing frequently accessed data closer to the application.
+
+---
+
+## 📋 Contents
+
+```
+1.  Why caching? — the read amplification problem
+2.  Cache-aside — lazy loading pattern
+3.  Write-through — synchronous cache population
+4.  Write-behind — asynchronous write buffering
+5.  Redis data structures — strings, hashes, sorted sets, lists, sets
+6.  TTL and expiry — keeping caches fresh
+7.  Eviction policies — LRU, LFU, and choosing wisely
+8.  CDN caching — pushing content to the edge
+9.  Cache stampede — thundering herd at the cache layer
+```
+
+---
+
+## 📖 **Main content**: [the_art_of_caching.md](./the_art_of_caching.md)
+
+---
+
+## 🔁 Navigation
+
+| | |
+|---|---|
+| 🎯 Interview | [interview.md](./interview.md) |
+| ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
+| ⬅️ Previous | [05 — Databases](../05_databases/theory.md) |
+| ➡️ Next | [07 — Storage & CDN](../07_storage_cdn/theory.md) |
+| 🏠 Home | [README.md](../README.md) |
