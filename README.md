@@ -1,9 +1,30 @@
-# 🚀 Python, DSA, API & System Design — Complete Mastery
+# Python, DSA, API & System Design — Complete Mastery
 Your End-to-End Engineering Preparation Hub
 
 ---
 
-# 🎯 Purpose of This Repository
+## Start Here
+
+| Guide | What It Does |
+|-------|-------------|
+| [QUICK_START.md](./QUICK_START.md) | Pick your situation and get the exact files to read first |
+| [LEARNING_PATH.md](./LEARNING_PATH.md) | Full structured 11-stage learning roadmap with milestones and time plans |
+| [DAILY_JOB_GUIDE.md](./DAILY_JOB_GUIDE.md) | What software engineers use daily vs interview-only topics — tiered guide |
+
+---
+
+## The Four Masteries
+
+| Mastery | What You Learn | Folder |
+|---------|----------------|--------|
+| [Python Complete Mastery](./python-complete-mastery/README.md) | Language internals, advanced patterns, production engineering | `python-complete-mastery/` |
+| [DSA Complete Mastery](./dsa-complete-mastery/README.md) | Every data structure and algorithm, with patterns, mistakes, real-world use | `dsa-complete-mastery/` |
+| [API Mastery](./api-mastery/README.md) | REST, FastAPI, auth, databases, versioning, security, deployment | `api-mastery/` |
+| [System Design Mastery](./system-design-mastery/README.md) | Networking, databases, caching, distributed systems, HLD, LLD | `system-design-mastery/` |
+
+---
+
+# Purpose of This Repository
 
 This repository is designed to take you from:
 
@@ -81,7 +102,7 @@ Base Path:
 - [22_bit_manipulation/theory.md](/dsa-complete-mastery/22_bit_manipulation/theory.md)
 - [23_segment_tree/theory.md](/dsa-complete-mastery/23_segment_tree/theory.md)
 - [24_disjoint_set_union/theory.md](/dsa-complete-mastery/24_disjoint_set_union/theory.md)
-- [25_advanced_graphs/theory.md](/dsa-complete-mastery/25_advanced_graphs/topological_sort.py)
+- [25_advanced_graphs/theory.md](/dsa-complete-mastery/25_advanced_graphs/theory.md)
 
 ---
 
@@ -106,9 +127,9 @@ Base Path:
 
 - [01_python_fundamentals/theory.md](/python-complete-mastery/01_python_fundamentals/theory.md)
 - [02_control_flow/theory.md](/python-complete-mastery/02_control_flow/theory.md)
-- [03_functions/theory.md](/python-complete-mastery/03_functions/theory.md)
-- [04_data_structures/theory.md](/python-complete-mastery/04_data_structures/theory.md)
-- [05_oops/theory.md](/python-complete-mastery/05_oops/theory.md)
+- [03_data_types/theory.md](/python-complete-mastery/03_data_types/theory.md)
+- [04_functions/theory.md](/python-complete-mastery/04_functions/theory.md)
+- [05_oops/theory_part1.md](/python-complete-mastery/05_oops/theory_part1.md)
 - [06_exceptions_error_handling/theory.md](/python-complete-mastery/06_exceptions_error_handling/theory.md)
 
 ---
@@ -122,7 +143,7 @@ Base Path:
 - [11_generators_iterators/theory.md](/python-complete-mastery/11_generators_iterators/theory.md)
 - [12_context_managers/theory.md](/python-complete-mastery/12_context_managers/theory.md)
 - [13_concurrency/theory.md](/python-complete-mastery/13_concurrency/theory.md)
-- [14_memory_management/theory.md](/python-complete-mastery/14_memory_management/theory.md)
+- [01.1_memory_management/theory.md](/python-complete-mastery/01.1_memory_management/theory.md)
 - [15_advanced_python/theory.md](/python-complete-mastery/15_advanced_python/theory.md)
 
 ---
@@ -131,8 +152,8 @@ Base Path:
 
 - [16_design_patterns/theory.md](/python-complete-mastery/16_design_patterns/theory.md)
 - [17_testing/theory.md](/python-complete-mastery/17_testing/theory.md)
-- [18_performance_optimization/theory.md](/python-complete-mastery/18_performance_optimization/theory.md)
-- [19_production_best_practices/theory.md](/python-complete-mastery/19_production_best_practices/theory.md)
+- [18_performance_optimization/profiling.md](/python-complete-mastery/18_performance_optimization/profiling.md)
+- [19_production_best_practices/project_structure.md](/python-complete-mastery/19_production_best_practices/project_structure.md)
 - [20_system_design_with_python/theory.md](/python-complete-mastery/20_system_design_with_python/theory.md)
 - [21_data_engineering_applications/theory.md](/python-complete-mastery/21_data_engineering_applications/theory.md)
 
@@ -154,22 +175,29 @@ Base Path:
 /api-mastery/
 ```
 
-Full README: [api-mastery/README.md](/api-mastery/README.md)
+Full README: [api-mastery/README.md](./api-mastery/README.md)
 
 | # | Topic | Core Concept |
 |---|-------|-------------|
 | 01 | [What is an API?](./api-mastery/01_what_is_an_api/story.md) | HTTP, request-response, status codes, headers |
-| 02 | [REST Fundamentals](./api-mastery/02_rest_fundamentals/rest_explained.md) | Resources, HTTP verbs, statelessness |
-| 03 | [REST Best Practices](./api-mastery/03_rest_best_practices/patterns.md) | URL design, versioning, pagination, errors |
-| 04 | [GraphQL](./api-mastery/04_graphql/graphql_story.md) | Schema, queries, mutations, N+1 problem |
-| 05 | [gRPC](./api-mastery/05_grpc/grpc_guide.md) | Protocol Buffers, streaming, internal services |
-| 06 | [WebSockets](./api-mastery/06_websockets/realtime_apis.md) | Full-duplex real-time communication |
-| 07 | [API Security](./api-mastery/07_api_security/securing_apis.md) | OAuth2, JWT, rate limiting, CORS |
-| 08 | [API Gateway](./api-mastery/08_api_gateway/gateway_patterns.md) | Routing, middleware, BFF pattern |
-| 09 | [API Design Patterns](./api-mastery/09_api_design_patterns/design_guide.md) | Idempotency, bulk ops, long-running ops |
-| 10 | [API Testing](./api-mastery/10_api_testing/testing_apis.md) | Contract testing, Postman, integration |
-| 11 | [Documentation](./api-mastery/11_api_documentation/docs_that_work.md) | OpenAPI 3.0, Swagger, developer experience |
-| 12 | [Versioning](./api-mastery/12_api_versioning/versioning_strategy.md) | URL vs header, deprecation strategy |
+| 02 | [REST Fundamentals](./api-mastery/02_rest_fundamentals/rest_explained.md) | Resources, HTTP verbs, statelessness, idempotency |
+| 03 | [REST Best Practices](./api-mastery/03_rest_best_practices/patterns.md) | URL design, versioning, pagination, error formats |
+| 04 | [Data Formats](./api-mastery/04_data_formats/serialization_guide.md) | JSON types, Pydantic validation, XML, binary formats |
+| 05 | [Authentication](./api-mastery/05_authentication/securing_apis.md) | OAuth2, JWT, API keys, sessions, rate limiting, CORS |
+| 06 | [Error Handling](./api-mastery/06_error_handling_standards/error_guide.md) | Error formats, pagination, filtering, sorting |
+| 07 | [FastAPI Mastery](./api-mastery/07_fastapi/README.md) | ASGI, Pydantic, Depends, middleware, routers, databases |
+| 08 | [API Versioning](./api-mastery/08_versioning_standards/versioning_strategy.md) | Breaking vs non-breaking changes, URL vs header versioning |
+| 09 | [API Performance](./api-mastery/09_api_performance_scaling/performance_guide.md) | Caching, N+1, connection pools, horizontal scaling |
+| 10 | [Testing & Docs](./api-mastery/10_testing_documentation/testing_apis.md) | TestClient, contract testing, OpenAPI docs |
+| 11 | [Security in Production](./api-mastery/11_api_security_production/security_hardening.md) | HTTPS, input validation, token security, audit logs |
+| 12 | [Production Deployment](./api-mastery/12_production_deployment/deployment_guide.md) | Docker, Gunicorn/Uvicorn, Kubernetes, CI/CD |
+| 13 | [GraphQL](./api-mastery/13_graphql/graphql_story.md) | Schema, queries, mutations, subscriptions, N+1, DataLoader |
+| 14 | [gRPC](./api-mastery/14_grpc/grpc_guide.md) | Protocol Buffers, 4 streaming modes, Python client/server |
+| 15 | [API Gateway](./api-mastery/15_api_gateway/gateway_patterns.md) | Routing, auth offload, rate limiting, BFF pattern |
+| 16 | [API Design Patterns](./api-mastery/16_api_design_patterns/design_guide.md) | Idempotency keys, bulk ops, long-running operations |
+| 17 | [WebSockets](./api-mastery/17_websockets/realtime_apis.md) | Full-duplex, handshake, use cases, scaling |
+| 18 | [Real-World APIs](./api-mastery/18_real_world_apis/architectures.md) | Payment, social media, ride-sharing, SaaS API design |
+| 99 | [Interview Master](./api-mastery/99_interview_master/api_questions.md) | Junior → Senior Q&A, API design problems |
 
 ---
 
@@ -180,62 +208,71 @@ Base Path:
 /system-design-mastery/
 ```
 
-Full README: [system-design-mastery/README.md](/system-design-mastery/README.md)
+Full README: [system-design-mastery/README.md](./system-design-mastery/README.md)
 
 ---
 
-## 🔹 Foundations
+## 🔹 Stage 1: Foundations
 
 | # | Topic | Core Concept |
 |---|-------|-------------|
-| 01 | [Fundamentals](./system-design-mastery/01_fundamentals/theory.md) | CAP, latency, availability, reliability, SLOs |
-| 02 | [Databases](./system-design-mastery/02_databases/theory.md) | SQL vs NoSQL, ACID, indexing, sharding |
-| 03 | [Caching](./system-design-mastery/03_caching/theory.md) | Redis, cache patterns, eviction, CDN |
-| 04 | [Message Queues](./system-design-mastery/04_message_queues/theory.md) | Kafka, RabbitMQ, at-least-once, fan-out |
-| 05 | [API Design](./system-design-mastery/05_api_design/theory.md) | REST, GraphQL, gRPC, versioning, idempotency |
+| 00 | [Computer Fundamentals](./system-design-mastery/00_computer_fundamentals/story.md) | CPU, RAM, disk, processes, threads, I/O |
+| 01 | [Networking Basics](./system-design-mastery/01_networking_basics/theory.md) | TCP/IP, HTTP/1–3, TLS, DNS, WebSockets, gRPC |
+| 02 | [System Fundamentals](./system-design-mastery/02_system_fundamentals/theory.md) | CAP, latency, throughput, availability, SLOs |
+| 03 | [API Design](./system-design-mastery/03_api_design/theory.md) | REST, GraphQL, gRPC, versioning, idempotency |
+| 04 | [Backend Architecture](./system-design-mastery/04_backend_architecture/intro.md) | Client-server, monolith, stateless services |
 
 ---
 
-## 🔹 Infrastructure
+## 🔹 Stage 2: Data Layer
 
 | # | Topic | Core Concept |
 |---|-------|-------------|
-| 06 | [Load Balancing](./system-design-mastery/06_load_balancing/theory.md) | L4 vs L7, algorithms, health checks |
-| 07 | [Storage & CDN](./system-design-mastery/07_storage_cdn/theory.md) | Object storage, CDN, static assets |
-| 08 | [Microservices](./system-design-mastery/08_microservices/theory.md) | Monolith vs micro, service mesh, communication |
-| 09 | [Scalability Patterns](./system-design-mastery/09_scalability_patterns/theory.md) | CQRS, event sourcing, fan-out, saga |
-| 10 | [Security](./system-design-mastery/10_security/theory.md) | Auth, OAuth2, JWT, rate limiting, DDoS |
-| 11 | [Observability](./system-design-mastery/11_observability/theory.md) | Metrics, tracing, logging, SLOs, alerting |
+| 05 | [Databases](./system-design-mastery/05_databases/theory.md) | SQL vs NoSQL, ACID, indexing, replication, sharding |
+| 06 | [Caching](./system-design-mastery/06_caching/theory.md) | Redis, cache patterns, eviction, CDN |
+| 07 | [Storage & CDN](./system-design-mastery/07_storage_cdn/theory.md) | Object storage, block storage, CDN strategy |
 
 ---
 
-## 🔹 Distributed Systems & Networking
+## 🔹 Stage 3: Scale & Async
 
 | # | Topic | Core Concept |
 |---|-------|-------------|
-| 14 | [Distributed Systems](./system-design-mastery/14_distributed_systems/theory.md) | Raft, consensus, vector clocks, quorum, split-brain |
-| 15 | [Networking Fundamentals](./system-design-mastery/15_networking_fundamentals/theory.md) | TCP/IP, HTTP/2/3, TLS, WebSockets, DNS, gRPC |
+| 08 | [Load Balancing](./system-design-mastery/08_load_balancing/theory.md) | L4 vs L7, algorithms, health checks, sticky sessions |
+| 09 | [Message Queues](./system-design-mastery/09_message_queues/theory.md) | Kafka, RabbitMQ, SQS, at-least-once, fan-out |
+| 10 | [Distributed Systems](./system-design-mastery/10_distributed_systems/theory.md) | Raft, consensus, replication, partitioning, quorum |
 
 ---
 
-## 🔹 Architecture & Design (HLD + LLD)
+## 🔹 Stage 4: Advanced Architecture
 
 | # | Topic | Core Concept |
 |---|-------|-------------|
-| 16 | [High Level Design (HLD)](./system-design-mastery/16_high_level_design/theory.md) | System architecture, capacity estimation, full walkthroughs |
+| 11 | [Scalability Patterns](./system-design-mastery/11_scalability_patterns/theory.md) | CQRS, event sourcing, saga, write amplification |
+| 12 | [Microservices](./system-design-mastery/12_microservices/theory.md) | Monolith → microservices, service mesh, communication |
+| 13 | [Security](./system-design-mastery/13_security/theory.md) | Auth, OAuth2, JWT, rate limiting, DDoS protection |
+| 14 | [Observability](./system-design-mastery/14_observability/theory.md) | Metrics, logs, traces, SLOs, alerting |
+| 15 | [Cloud Architecture](./system-design-mastery/15_cloud_architecture/theory.md) | AWS/GCP/Azure, serverless, containers, Kubernetes |
+
+---
+
+## 🔹 Stage 5: Design Practice (HLD + LLD)
+
+| # | Topic | Core Concept |
+|---|-------|-------------|
+| 16 | [High Level Design (HLD)](./system-design-mastery/16_high_level_design/theory.md) | System architecture, capacity estimation, trade-offs |
 | 17 | [Low Level Design (LLD)](./system-design-mastery/17_low_level_design/theory.md) | SOLID, OOP, design patterns, class modeling |
 | 18 | [Design Patterns](./system-design-mastery/18_design_patterns/theory.md) | GoF patterns: Factory, Observer, Strategy, State, Command |
 | 19 | [Clean Architecture](./system-design-mastery/19_clean_architecture/theory.md) | Hexagonal, DDD, bounded contexts, repositories |
 
 ---
 
-## 🔹 Cloud & Data
+## 🔹 Stage 6: Data at Scale & Real-Time
 
 | # | Topic | Core Concept |
 |---|-------|-------------|
-| 20 | [Cloud Architecture](./system-design-mastery/20_cloud_architecture/theory.md) | AWS/GCP/Azure, serverless, containers, Kubernetes |
-| 21 | [Data Systems at Scale](./system-design-mastery/21_data_systems/theory.md) | Data warehouses, lakes, ETL/ELT, Spark, pipelines |
-| 22 | [Real-Time Systems](./system-design-mastery/22_real_time_systems/theory.md) | Event-driven, streaming, WebRTC, live systems |
+| 20 | [Data Systems at Scale](./system-design-mastery/20_data_systems/theory.md) | Data warehouses, lakes, ETL/ELT, Spark, pipelines |
+| 21 | [Real-Time Systems](./system-design-mastery/21_real_time_systems/theory.md) | Stream processing, event-driven, WebRTC, live systems |
 
 ---
 
@@ -243,8 +280,8 @@ Full README: [system-design-mastery/README.md](/system-design-mastery/README.md)
 
 | # | Topic | Content |
 |---|-------|---------|
-| 12 | [Case Studies](./system-design-mastery/12_case_studies/theory.md) | URL Shortener, Twitter, Netflix, Uber, WhatsApp |
-| 13 | [Interview Framework](./system-design-mastery/13_interview_framework/theory.md) | 45-minute structured approach |
+| 22 | [Case Studies](./system-design-mastery/22_case_studies/theory.md) | URL Shortener, Twitter, Netflix, Uber, WhatsApp |
+| 23 | [Interview Framework](./system-design-mastery/23_interview_framework/theory.md) | 45-minute structured approach |
 | 99 | [Interview Master](./system-design-mastery/99_interview_master/) | Rapid-fire, scenarios, company patterns |
 
 ---
