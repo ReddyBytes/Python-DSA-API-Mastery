@@ -1,0 +1,91 @@
+<svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   style="stop-color:#0d1117"/>
+      <stop offset="50%"  style="stop-color:#161b22"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   style="stop-color:#06B6D4"/>
+      <stop offset="33%"  style="stop-color:#EC4899"/>
+      <stop offset="66%"  style="stop-color:#06B6D4"/>
+      <stop offset="100%" style="stop-color:#EC4899"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   style="stop-color:#06B6D4;stop-opacity:0"/>
+      <stop offset="50%"  style="stop-color:#EC4899"/>
+      <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color:#0e2030"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="240" fill="url(#bg)"/>
+
+  <g opacity="0.04" stroke="#EC4899" stroke-width="0.5">
+    <line x1="0" y1="60"  x2="900" y2="60"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/>
+    <line x1="150" y1="0" x2="150" y2="240"/>
+    <line x1="300" y1="0" x2="300" y2="240"/>
+    <line x1="450" y1="0" x2="450" y2="240"/>
+    <line x1="600" y1="0" x2="600" y2="240"/>
+    <line x1="750" y1="0" x2="750" y2="240"/>
+  </g>
+
+  <!-- 4 Mastery nodes -->
+  <rect x="50"  y="168" width="140" height="36" rx="6" fill="url(#nodeGrad)" stroke="#06B6D4" stroke-width="1.5"/>
+  <text x="120" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#06B6D4" letter-spacing="1">🐍 Python</text>
+
+  <line x1="190" y1="186" x2="220" y2="186" stroke="#06B6D4" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.6s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="220,182 228,186 220,190" fill="#06B6D4" opacity="0.8"/>
+
+  <rect x="228" y="168" width="130" height="36" rx="6" fill="url(#nodeGrad)" stroke="#EC4899" stroke-width="1.5"/>
+  <text x="293" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#EC4899" letter-spacing="1">📊 DSA</text>
+
+  <line x1="358" y1="186" x2="388" y2="186" stroke="#EC4899" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.6s" begin="0.4s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="388,182 396,186 388,190" fill="#EC4899" opacity="0.8"/>
+
+  <rect x="396" y="168" width="130" height="36" rx="6" fill="url(#nodeGrad)" stroke="#06B6D4" stroke-width="1.5"/>
+  <text x="461" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#06B6D4" letter-spacing="1">🔌 API</text>
+
+  <line x1="526" y1="186" x2="556" y2="186" stroke="#06B6D4" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.6s" begin="0.8s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="556,182 564,186 556,190" fill="#06B6D4" opacity="0.8"/>
+
+  <rect x="564" y="168" width="160" height="36" rx="6" fill="url(#nodeGrad)" stroke="#EC4899" stroke-width="1.5"/>
+  <text x="644" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#EC4899" letter-spacing="1">🏗️ System Design</text>
+
+  <rect x="200" y="42" width="500" height="1.5" fill="url(#arrowGrad)" rx="1">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <text x="450" y="96" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="13" font-weight="bold"
+        fill="#4a5568" letter-spacing="10">COMPLETE ENGINEERING MASTERY</text>
+
+  <text x="450" y="152" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="52" font-weight="bold"
+        fill="url(#titleGrad)" filter="url(#glow)" letter-spacing="4">PYTHON · DSA</text>
+
+  <rect x="200" y="158" width="500" height="1.5" fill="url(#arrowGrad)" rx="1">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <text x="450" y="222" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="10" fill="#4a5568" letter-spacing="4">API · SYSTEM DESIGN  ·  ZERO TO PRODUCTION</text>
+</svg>
