@@ -1,407 +1,276 @@
-# DSA Complete Mastery
+<div align="center">
 
-> From Zero to FAANG-Level Algorithmic Thinking
-> A Structured, Deep, Practical Journey
+<img src="./assets/banner.svg" width="100%"/>
 
-This repository is not just notes.
+</div>
 
-It is:
+<div align="center">
 
-- A complete Data Structures & Algorithms curriculum
-- A pattern-recognition training system
-- An interview preparation framework
-- A bridge between coding and real engineering
+[![Topics](https://img.shields.io/badge/Topics-26-F43F5E?style=for-the-badge)](#full-curriculum)
+[![Patterns](https://img.shields.io/badge/Patterns-15%2B-FB923C?style=for-the-badge)](#pattern-recognition-guide)
+[![Level](https://img.shields.io/badge/Level-Zero%20to%20FAANG-F43F5E?style=for-the-badge)](#choose-your-path)
+[![Problems](https://img.shields.io/badge/Problems-500%2B-FB923C?style=for-the-badge)](#full-curriculum)
+[![License](https://img.shields.io/badge/License-MIT-94a3b8?style=for-the-badge)](../LICENSE)
 
-If you follow this properly,
-you will not just solve problems.
+**Zero to FAANG · Data Structures & Algorithms · Pattern-Based · Interview Ready**
 
-You will think like a problem solver.
+</div>
 
----
+<img src="./assets/divider.svg" width="100%"/>
 
-# Who Is This For?
+## 🔥 What Is This?
 
-This repository is for:
+A complete, structured DSA mastery system — from your first array problem all the way to FAANG-level graphs, dynamic programming, and advanced algorithms. Every topic has theory, implementation, pattern recognition, common mistakes, and interview Q&A.
 
-- Beginners starting DSA
-- Engineers preparing for product companies
-- Developers targeting FAANG
-- Backend engineers improving algorithm depth
-- Anyone serious about mastering problem-solving
+> Pattern thinking beats memorization. This repository trains your brain to recognize which algorithm applies — not just how to implement one you've seen before.
 
----
+<img src="./assets/divider.svg" width="100%"/>
 
-# How To Use Each File Type
+<div align="center">
 
-Every topic folder contains multiple file types. Each serves a specific purpose.
-Read them in this order:
+## 🗺️ Section Overview
 
-| File | Purpose | When To Read |
-|---|---|---|
-| `theory.md` | Core concepts, definitions, complexity analysis | Read first. Build your mental model. |
-| `visual_explanation.md` | Diagrams, step-by-step traces, memory layouts | After theory. Especially for visual learners. |
-| `cheatsheet.md` | Condensed reference — syntax, templates, complexity | Before interviews and coding sessions. |
-| `patterns.md` | Pattern recognition — how to identify which technique to use | After theory. Trains problem-identification. |
-| `common_mistakes.md` | Off-by-one errors, edge cases, wrong assumptions | Before submitting any solution. |
-| `real_world_usage.md` | How the structure is used in production systems | Read for motivation and engineering context. |
-| `interview.md` | Question and answer pairs, how to explain in interviews | Drill after understanding theory. |
-| `*.py` files | Hands-on implementation and practice problems | Code along with theory. Re-implement from scratch for revision. |
+</div>
 
-Suggested method for each topic:
+<div align="center">
 
-1. Read `theory.md` deeply.
-2. Trace through `visual_explanation.md`.
-3. Implement the data structure or algorithm from scratch in Python.
-4. Read `patterns.md` to learn how to recognize this problem type.
-5. Read `real_world_usage.md` to see where this lives in production.
-6. Solve 20–30 practice problems.
-7. Check `common_mistakes.md` before finalizing any solution.
-8. Read `interview.md` and practice explaining aloud.
-9. Use `cheatsheet.md` for fast review before interviews.
-10. Revisit after 1 week without looking at solutions.
+| # | Phase | Topics | Level | Time |
+|---|-------|--------|-------|------|
+| 🟢 **01–06** | [Foundations](#phase-1-foundations) | Complexity, Arrays, Strings, Recursion, Sorting, Searching | Beginner | 15–18 hrs |
+| 🟡 **07–13** | [Core Structures + Patterns](#phase-2-core-structures--patterns) | Linked List, Stack, Queue, Hashing, Two Pointers, Sliding Window, Binary Search | Intermediate | 20–25 hrs |
+| 🔴 **14–18** | [Trees, Heaps & Graphs](#phase-3-trees-heaps--graphs) | BST, Trees, Heaps, Trie, Graphs (BFS/DFS) | Intermediate–Advanced | 20–25 hrs |
+| 🟣 **19–25** | [Advanced Problem Solving](#phase-4-advanced-problem-solving) | Greedy, Backtracking, Dynamic Programming, Bit Manipulation, Advanced Graphs | Advanced–Expert | 25–30 hrs |
+| 🎯 **99** | [Interview Master](#interview-master) | 0–2 yrs, 3–5 yrs, FAANG-level Q&A | All levels | 10–15 hrs |
 
-Repeat.
+**Total: ~90–115 hours of structured learning**
 
----
+</div>
 
-# Complete Learning Roadmap
+<img src="./assets/divider.svg" width="100%"/>
 
+<div align="center">
 
-## Phase 1 — Foundations
+## 🛤️ Choose Your Path
 
-1. [01_complexity_analysis/theory.md](./01_complexity_analysis/theory.md)
-   [01_complexity_analysis/interview.md](./01_complexity_analysis/interview.md)
+</div>
 
-2. [02_arrays/theory.md](./02_arrays/theory.md)
-   [02_arrays/interview.md](./02_arrays/interview.md)
-   [02_arrays/real_world_usage.md](./02_arrays/real_world_usage.md)
+<details>
+<summary><strong>🟢 Beginner Path — I'm starting DSA from scratch (Start here!)</strong></summary>
 
-3. [03_strings/theory.md](./03_strings/theory.md)
-   [03_strings/interview.md](./03_strings/interview.md)
-   [03_strings/real_world_usage.md](./03_strings/real_world_usage.md)
+> Goal: Build solid fundamentals and solve easy problems confidently.
 
-4. [04_recursion/theory.md](./04_recursion/theory.md)
-   [04_recursion/interview.md](./04_recursion/interview.md)
+| Step | Module | What You'll Learn |
+|------|--------|-------------------|
+| 1 | [Complexity Analysis](./01_complexity_analysis/theory.md) | Big O, space complexity, amortized analysis — the language of algorithms |
+| 2 | [Arrays](./02_arrays/theory.md) | Core operations, two-pointer basics, sliding window intro |
+| 3 | [Strings](./03_strings/theory.md) | Manipulation, anagrams, palindromes, string matching |
+| 4 | [Recursion](./04_recursion/theory.md) | Base case, call stack, recursion tree, backtracking intro |
+| 5 | [Sorting](./05_sorting/theory.md) | Bubble → Merge → Quick — why each matters |
+| 6 | [Searching](./06_searching/theory.md) | Linear search, binary search and its many variants |
 
-5. [05_sorting/theory.md](./05_sorting/theory.md)
-   [05_sorting/interview.md](./05_sorting/interview.md)
+**Prerequisite:** Basic Python syntax.
 
-6. [06_searching/theory.md](./06_searching/theory.md)
-   [06_searching/interview.md](./06_searching/interview.md)
+</details>
 
----
+<details>
+<summary><strong>🟡 Intermediate Path — I know basics, want to solve medium problems</strong></summary>
 
-## Phase 2 — Core Data Structures
+> Goal: Master the core patterns that appear in 70% of interview questions.
 
-7. [07_linked_list/theory.md](./07_linked_list/theory.md)
-   [07_linked_list/interview.md](./07_linked_list/interview.md)
+| Step | Module | What You'll Learn |
+|------|--------|-------------------|
+| 7 | [Linked List](./07_linked_list/theory.md) | Singly/doubly linked, fast-slow pointers, cycle detection |
+| 8 | [Stack](./08_stack/theory.md) | Monotonic stack, bracket matching, next greater element |
+| 9 | [Queue](./09_queue/theory.md) | Circular queue, deque, BFS using queue |
+| 10 | [Hashing](./10_hashing/theory.md) | Hash maps in algorithms, frequency counting, group anagrams |
+| 11 | [Two Pointers](./11_two_pointers/theory.md) | Sorted arrays, container problems, 3Sum, partition patterns |
+| 12 | [Sliding Window](./12_sliding_window/theory.md) | Fixed and variable windows, substring problems |
+| 13 | [Binary Search](./13_binary_search/theory.md) | Search in rotated array, binary search on answer |
 
-8. [08_stack/theory.md](./08_stack/theory.md)
-   [08_stack/interview.md](./08_stack/interview.md)
+</details>
 
-9. [09_queue/theory.md](./09_queue/theory.md)
-   [09_queue/interview.md](./09_queue/interview.md)
+<details>
+<summary><strong>🔴 Advanced Path — Trees, graphs, and complex data structures</strong></summary>
 
-10. [10_hashing/theory.md](./10_hashing/theory.md)
-    [10_hashing/interview.md](./10_hashing/interview.md)
-    [10_hashing/real_world_usage.md](./10_hashing/real_world_usage.md)
+> Goal: Handle tree and graph questions with confidence.
 
-11. [11_two_pointers/theory.md](./11_two_pointers/theory.md)
-    [11_two_pointers/interview.md](./11_two_pointers/interview.md)
+| Step | Module | What You'll Learn |
+|------|--------|-------------------|
+| 14 | [Trees](./14_trees/theory.md) | BFS, DFS, preorder/inorder/postorder, LCA, path problems |
+| 15 | [Binary Search Trees](./15_binary_search_trees/theory.md) | Validation, kth element, BST iterator |
+| 16 | [Heaps](./16_heaps/theory.md) | Min/max heap, top-K problems, merge K sorted lists |
+| 17 | [Trie](./17_trie/theory.md) | Insert/search, prefix matching, autocomplete |
+| 18 | [Graphs](./18_graphs/theory.md) | BFS/DFS, topological sort, union-find, cycle detection |
 
-12. [12_sliding_window/theory.md](./12_sliding_window/theory.md)
-    [12_sliding_window/interview.md](./12_sliding_window/interview.md)
+</details>
 
-13. [13_binary_search/theory.md](./13_binary_search/theory.md)
-    [13_binary_search/interview.md](./13_binary_search/interview.md)
+<details>
+<summary><strong>🟣 FAANG Path — Hard problems and advanced algorithms</strong></summary>
 
----
+> Goal: Solve hard problems, handle DP confidently, optimize to O(n).
 
-## Phase 3 — Trees and Graph Thinking
+| Step | Module | What You'll Learn |
+|------|--------|-------------------|
+| 19 | [Greedy](./19_greedy/theory.md) | Interval scheduling, activity selection, when greedy is safe |
+| 20 | [Backtracking](./20_backtracking/theory.md) | Subsets, permutations, N-Queens, Sudoku solver |
+| 21 | [Dynamic Programming](./21_dynamic_programming/theory.md) | Memoization, tabulation, 10 core DP patterns |
+| 22 | [Bit Manipulation](./22_bit_manipulation/theory.md) | XOR tricks, bit masks, Brian Kernighan's algorithm |
+| 23 | [Segment Tree](./23_segment_tree/theory.md) | Range queries, lazy propagation |
+| 24 | [Disjoint Set Union](./24_disjoint_set_union/theory.md) | Union-find with path compression, Kruskal's MST |
+| 25 | [Advanced Graphs](./25_advanced_graphs/theory.md) | Dijkstra, Bellman-Ford, Floyd-Warshall, Tarjan |
 
-14. [14_trees/theory.md](./14_trees/theory.md)
-    [14_trees/interview.md](./14_trees/interview.md)
+</details>
 
-15. [15_binary_search_trees/theory.md](./15_binary_search_trees/theory.md)
-    [15_binary_search_trees/interview.md](./15_binary_search_trees/interview.md)
+<img src="./assets/divider.svg" width="100%"/>
 
-16. [16_heaps/theory.md](./16_heaps/theory.md)
-    [16_heaps/interview.md](./16_heaps/interview.md)
+<div align="center">
 
-17. [17_trie/theory.md](./17_trie/theory.md)
-    [17_trie/interview.md](./17_trie/interview.md)
+## 📚 Full Curriculum
 
-18. [18_graphs/theory.md](./18_graphs/theory.md)
-    [18_graphs/interview.md](./18_graphs/interview.md)
+</div>
 
----
+<details>
+<summary><strong>🟢 Phase 1 — Foundations (Topics 01–06)</strong></summary>
 
-## Phase 4 — Advanced Problem Solving
+| Topic | Theory | Interview | Cheatsheet | Visual | Mistakes | Real World |
+|-------|--------|-----------|------------|--------|----------|------------|
+| 01 · Complexity Analysis | [📖](./01_complexity_analysis/theory.md) | [🎯](./01_complexity_analysis/interview.md) | [⚡](./01_complexity_analysis/cheatsheet.md) | [👁️](./01_complexity_analysis/visual_explanation.md) | — | [🌍](./01_complexity_analysis/real_world_usage.md) |
+| 02 · Arrays | [📖](./02_arrays/theory.md) | [🎯](./02_arrays/interview.md) | [⚡](./02_arrays/cheatsheet.md) | [👁️](./02_arrays/visual_explanation.md) | [⚠️](./02_arrays/common_mistakes.md) | [🌍](./02_arrays/real_world_usage.md) |
+| 03 · Strings | [📖](./03_strings/theory.md) | [🎯](./03_strings/interview.md) | [⚡](./03_strings/cheatsheet.md) | [👁️](./03_strings/visual_explanation.md) | [⚠️](./03_strings/common_mistakes.md) | [🌍](./03_strings/real_world_usage.md) |
+| 04 · Recursion | [📖](./04_recursion/theory.md) | [🎯](./04_recursion/interview.md) | [⚡](./04_recursion/cheatsheet.md) | [👁️](./04_recursion/visual_explanation.md) | [⚠️](./04_recursion/common_mistakes.md) | [🌍](./04_recursion/real_world_usage.md) |
+| 05 · Sorting | [📖](./05_sorting/theory.md) | [🎯](./05_sorting/interview.md) | [⚡](./05_sorting/cheatsheet.md) | [👁️](./05_sorting/visual_explanation.md) | [⚠️](./05_sorting/common_mistakes.md) | [🌍](./05_sorting/real_world_usage.md) |
+| 06 · Searching | [📖](./06_searching/theory.md) | [🎯](./06_searching/interview.md) | [⚡](./06_searching/cheatsheet.md) | [👁️](./06_searching/visual_explanation.md) | [⚠️](./06_searching/common_mistakes.md) | [🌍](./06_searching/real_world_usage.md) |
 
-19. [19_greedy/theory.md](./19_greedy/theory.md)
-    [19_greedy/interview.md](./19_greedy/interview.md)
+</details>
 
-20. [20_backtracking/theory.md](./20_backtracking/theory.md)
-    [20_backtracking/interview.md](./20_backtracking/interview.md)
+<details>
+<summary><strong>🟡 Phase 2 — Core Structures + Patterns (Topics 07–13)</strong></summary>
 
-21. [21_dynamic_programming/theory.md](./21_dynamic_programming/theory.md)
-    [21_dynamic_programming/interview.md](./21_dynamic_programming/interview.md)
+| Topic | Theory | Interview | Cheatsheet | Patterns | Mistakes |
+|-------|--------|-----------|------------|---------|----------|
+| 07 · Linked List | [📖](./07_linked_list/theory.md) | [🎯](./07_linked_list/interview.md) | [⚡](./07_linked_list/cheatsheet.md) | — | [⚠️](./07_linked_list/common_mistakes.md) |
+| 08 · Stack | [📖](./08_stack/theory.md) | [🎯](./08_stack/interview.md) | [⚡](./08_stack/cheatsheet.md) | — | [⚠️](./08_stack/common_mistakes.md) |
+| 09 · Queue | [📖](./09_queue/theory.md) | [🎯](./09_queue/interview.md) | [⚡](./09_queue/cheatsheet.md) | — | [⚠️](./09_queue/common_mistakes.md) |
+| 10 · Hashing | [📖](./10_hashing/theory.md) | [🎯](./10_hashing/interview.md) | [⚡](./10_hashing/cheatsheet.md) | — | [⚠️](./10_hashing/common_mistakes.md) |
+| 11 · Two Pointers | [📖](./11_two_pointers/theory.md) | [🎯](./11_two_pointers/interview.md) | [⚡](./11_two_pointers/cheatsheet.md) | [🔍](./11_two_pointers/patterns.md) | [⚠️](./11_two_pointers/common_mistakes.md) |
+| 12 · Sliding Window | [📖](./12_sliding_window/theory.md) | [🎯](./12_sliding_window/interview.md) | [⚡](./12_sliding_window/cheatsheet.md) | [🔍](./12_sliding_window/patterns.md) | [⚠️](./12_sliding_window/common_mistakes.md) |
+| 13 · Binary Search | [📖](./13_binary_search/theory.md) | [🎯](./13_binary_search/interview.md) | [⚡](./13_binary_search/cheatsheet.md) | [🔍](./13_binary_search/patterns.md) | [⚠️](./13_binary_search/common_mistakes.md) |
 
-22. [22_bit_manipulation/theory.md](./22_bit_manipulation/theory.md)
-    [22_bit_manipulation/interview.md](./22_bit_manipulation/interview.md)
+</details>
 
-23. [23_segment_tree/theory.md](./23_segment_tree/theory.md)
-    [23_segment_tree/interview.md](./23_segment_tree/interview.md)
+<details>
+<summary><strong>🔴 Phase 3 — Trees, Heaps & Graphs (Topics 14–18)</strong></summary>
 
-24. [24_disjoint_set_union/theory.md](./24_disjoint_set_union/theory.md)
-    [24_disjoint_set_union/interview.md](./24_disjoint_set_union/interview.md)
+| Topic | Theory | Interview | Cheatsheet | Patterns | Mistakes |
+|-------|--------|-----------|------------|---------|----------|
+| 14 · Trees | [📖](./14_trees/theory.md) | [🎯](./14_trees/interview.md) | [⚡](./14_trees/cheatsheet.md) | [🔍](./14_trees/patterns.md) | [⚠️](./14_trees/common_mistakes.md) |
+| 15 · Binary Search Trees | [📖](./15_binary_search_trees/theory.md) | [🎯](./15_binary_search_trees/interview.md) | [⚡](./15_binary_search_trees/cheatsheet.md) | [🔍](./15_binary_search_trees/patterns.md) | [⚠️](./15_binary_search_trees/common_mistakes.md) |
+| 16 · Heaps | [📖](./16_heaps/theory.md) | [🎯](./16_heaps/interview.md) | [⚡](./16_heaps/cheatsheet.md) | [🔍](./16_heaps/patterns.md) | [⚠️](./16_heaps/common_mistakes.md) |
+| 17 · Trie | [📖](./17_trie/theory.md) | [🎯](./17_trie/interview.md) | [⚡](./17_trie/cheatsheet.md) | [🔍](./17_trie/patterns.md) | [⚠️](./17_trie/common_mistakes.md) |
+| 18 · Graphs | [📖](./18_graphs/theory.md) | [🎯](./18_graphs/interview.md) | [⚡](./18_graphs/cheatsheet.md) | [🔍](./18_graphs/patterns.md) | [⚠️](./18_graphs/common_mistakes.md) |
 
-25. [25_advanced_graphs/theory.md](./25_advanced_graphs/theory.md)
-    [25_advanced_graphs/interview.md](./25_advanced_graphs/interview.md)
+</details>
 
----
+<details>
+<summary><strong>🟣 Phase 4 — Advanced Problem Solving (Topics 19–25)</strong></summary>
 
-## Phase 5 — Real Engineering Thinking
+| Topic | Theory | Interview | Cheatsheet | Patterns | Mistakes |
+|-------|--------|-----------|------------|---------|----------|
+| 19 · Greedy | [📖](./19_greedy/theory.md) | [🎯](./19_greedy/interview.md) | [⚡](./19_greedy/cheatsheet.md) | [🔍](./19_greedy/patterns.md) | [⚠️](./19_greedy/common_mistakes.md) |
+| 20 · Backtracking | [📖](./20_backtracking/theory.md) | [🎯](./20_backtracking/interview.md) | [⚡](./20_backtracking/cheatsheet.md) | [🔍](./20_backtracking/patterns.md) | [⚠️](./20_backtracking/common_mistakes.md) |
+| 21 · Dynamic Programming | [📖](./21_dynamic_programming/theory.md) | [🎯](./21_dynamic_programming/interview.md) | [⚡](./21_dynamic_programming/cheatsheet.md) | [🔍](./21_dynamic_programming/patterns.md) | [⚠️](./21_dynamic_programming/common_mistakes.md) |
+| 22 · Bit Manipulation | [📖](./22_bit_manipulation/theory.md) | [🎯](./22_bit_manipulation/interview.md) | [⚡](./22_bit_manipulation/cheatsheet.md) | [🔍](./22_bit_manipulation/patterns.md) | [⚠️](./22_bit_manipulation/common_mistakes.md) |
+| 23 · Segment Tree | [📖](./23_segment_tree/theory.md) | [🎯](./23_segment_tree/interview.md) | [⚡](./23_segment_tree/cheatsheet.md) | — | [⚠️](./23_segment_tree/common_mistakes.md) |
+| 24 · Disjoint Set Union | [📖](./24_disjoint_set_union/theory.md) | [🎯](./24_disjoint_set_union/interview.md) | [⚡](./24_disjoint_set_union/cheatsheet.md) | [🔍](./24_disjoint_set_union/patterns.md) | [⚠️](./24_disjoint_set_union/common_mistakes.md) |
+| 25 · Advanced Graphs | [📖](./25_advanced_graphs/theory.md) | [🎯](./25_advanced_graphs/interview.md) | [⚡](./25_advanced_graphs/cheatsheet.md) | [🔍](./25_advanced_graphs/patterns.md) | [⚠️](./25_advanced_graphs/common_mistakes.md) |
 
-26. [26_system_design_patterns/theory.md](./26_system_design_patterns/theory.md)
-    [26_system_design_patterns/interview.md](./26_system_design_patterns/interview.md)
+</details>
 
----
+<details>
+<summary><strong>🎯 Interview Master</strong></summary>
 
-## Interview Master Roadmap
+| File | Level | Focus |
+|------|-------|-------|
+| [0_2_years.md](./99_interview_master/0_2_years.md) | Junior (0–2 yrs) | Arrays, strings, basic trees, sorting, simple DP |
+| [3_5_years.md](./99_interview_master/3_5_years.md) | Senior (3–5 yrs) | System design + DSA, graphs, advanced DP, optimization |
+| [faang_level_questions.md](./99_interview_master/faang_level_questions.md) | FAANG | Hard problems, pattern analysis, optimal solutions |
 
-- [99_interview_master/0_2_years.md](./99_interview_master/0_2_years.md)
-- [99_interview_master/3_5_years.md](./99_interview_master/3_5_years.md)
-- [99_interview_master/faang_level_questions.md](./99_interview_master/faang_level_questions.md)
+</details>
 
----
+<img src="./assets/divider.svg" width="100%"/>
 
-# Curriculum File Coverage
+<div align="center">
 
-| Topic | theory | interview | cheatsheet | visual | patterns | mistakes | real_world |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 01_complexity_analysis | ✅ | ✅ | ✅ | ✅ | | | ✅ |
-| 02_arrays | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 03_strings | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 04_recursion | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 05_sorting | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 06_searching | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 07_linked_list | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 08_stack | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 09_queue | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 10_hashing | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 11_two_pointers | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 12_sliding_window | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 13_binary_search | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 14_trees | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 15_binary_search_trees | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 16_heaps | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 17_trie | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 18_graphs | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 19_greedy | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 20_backtracking | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 21_dynamic_programming | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 22_bit_manipulation | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 23_segment_tree | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 24_disjoint_set_union | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 25_advanced_graphs | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 26_system_design_patterns | ✅ | ✅ | ✅ | ✅ | | ✅ | ✅ |
-| 99_interview_master | | ✅ | ✅ | ✅ | ✅ | | |
+## 🔍 Pattern Recognition Guide
 
----
+</div>
 
-# Master Revision Strategy
+Ask this for every problem before writing code:
 
-Revision is where mastery happens.
+<div align="center">
 
----
+| If the problem has... | Think... |
+|-----------------------|---------|
+| Sorted array, find pair/target | Two Pointers |
+| Subarray of size k, max/min/sum | Sliding Window |
+| "Find in sorted array" | Binary Search |
+| Tree traversal, path sum | DFS / BFS |
+| Shortest path, level order | BFS |
+| "Is there a cycle?" | Union-Find or DFS |
+| Top K elements | Heap |
+| Prefix matching, word search | Trie |
+| Overlapping subproblems | Dynamic Programming |
+| Build all combinations/permutations | Backtracking |
+| Make a local best choice each step | Greedy |
+| Parity, XOR, power of 2 | Bit Manipulation |
 
-## Step 1: Pattern Grouping
+</div>
 
-Do NOT revise topic-by-topic.
+<img src="./assets/divider.svg" width="100%"/>
 
-Revise by pattern:
+<div align="center">
 
-- Sliding window problems together
-- Two pointers together
-- Binary search variations together
-- Tree DFS problems together
-- DP problems together
+## 📦 What Every Topic Includes
 
-This builds pattern recognition speed.
+</div>
 
----
+<div align="center">
 
-## Step 2: Spaced Repetition
+| File | Purpose |
+|------|---------|
+| 📖 `theory.md` | Concept · complexity · internals · real-world context |
+| 👁️ `visual_explanation.md` | Diagrams · step-by-step traces · memory layouts |
+| ⚡ `cheatsheet.md` | Quick-reference · syntax · templates · complexity table |
+| 🔍 `patterns.md` | How to recognize this problem type — pattern training |
+| ⚠️ `common_mistakes.md` | Off-by-one errors · edge cases · wrong assumptions |
+| 🌍 `real_world_usage.md` | Where this structure lives in production systems |
+| 🎯 `interview.md` | Q&A pairs · how to explain in an interview |
+| 💻 `*.py` | Implementations + practice problems — code along, re-implement |
 
-Revisit:
+</div>
 
-- After 1 week
-- After 1 month
-- After 3 months
+<img src="./assets/divider.svg" width="100%"/>
 
-Without looking at solutions.
+<div align="center">
 
----
+## 🚀 Start Here
 
-## Step 3: Re-solve From Scratch
+</div>
 
-Never just re-read.
+**New to DSA?** → [Complexity Analysis](./01_complexity_analysis/theory.md) → [Arrays](./02_arrays/theory.md)
 
-Re-code fully.
+**Know basics, stuck on medium?** → [Two Pointers](./11_two_pointers/patterns.md) → [Sliding Window](./12_sliding_window/patterns.md) → [Trees](./14_trees/patterns.md)
 
-If stuck, re-think logic.
+**Preparing for interviews?** → [Interview Master 0–2 yrs](./99_interview_master/0_2_years.md)
 
----
+**Targeting FAANG?** → [Dynamic Programming](./21_dynamic_programming/theory.md) → [Advanced Graphs](./25_advanced_graphs/theory.md) → [FAANG Questions](./99_interview_master/faang_level_questions.md)
 
-## Step 4: Maintain Mistake Journal
+**Back to root** → [../README.md](../README.md)
 
-Track:
+<img src="./assets/divider.svg" width="100%"/>
 
-- Wrong logic patterns
-- Edge case misses
-- Complexity mistakes
-- Common DP state errors
+<div align="center">
 
-Review weekly.
+*DSA Complete Mastery · Zero to FAANG · Pattern-Based Learning*
 
----
-
-# Pattern Recognition Strategy
-
-Ask for every problem:
-
-1. Is this array manipulation?
-2. Does sorting help?
-3. Can two pointers reduce complexity?
-4. Is this sliding window?
-5. Is this binary search on answer?
-6. Is this graph modeling?
-7. Is this DP with overlapping subproblems?
-8. Is this greedy?
-9. Is this subset generation?
-10. Can I optimize space?
-
-Pattern thinking > memorization.
-
----
-
-# 3-Month Focus Plan
-
-Month 1:
-Foundations + Core structures.
-
-Month 2:
-Trees + Graphs + Greedy + Backtracking.
-
-Month 3:
-Dynamic Programming + Advanced topics.
-
-Practice:
-5–6 problems daily.
-
-Mock:
-2 per week.
-
----
-
-# 6-Month Deep Mastery Plan
-
-Months 1–2:
-Foundations + Core.
-
-Months 3–4:
-Trees + Graphs + DP mastery.
-
-Months 5–6:
-Advanced topics + System design patterns + Mock interviews.
-
-Solve:
-400–500 curated problems.
-
----
-
-# Interview Readiness Checklist
-
-You are ready when:
-
-- You can solve medium problems in 20–25 minutes.
-- You explain time complexity clearly.
-- You define DP states confidently.
-- You handle tree + graph problems calmly.
-- You optimize brute force naturally.
-- You recognize patterns quickly.
-- You communicate clearly.
-
----
-
-# How to Think Like a Problem Solver
-
-1. Clarify problem.
-2. Think brute force.
-3. Improve gradually.
-4. Choose correct data structure.
-5. Analyze time and space.
-6. Handle edge cases.
-7. Refactor cleanly.
-
-Never jump straight to code.
-
----
-
-# What NOT To Do
-
-- Don't memorize solutions.
-- Don't solve randomly.
-- Don't ignore complexity.
-- Don't skip revision.
-- Don't rush advanced topics without mastering basics.
-
----
-
-# Final Mindset
-
-This repository is not for quick tricks.
-
-It is for:
-
-- Long-term mastery
-- Deep understanding
-- Strong foundations
-- Confident interviews
-- Engineering-level thinking
-
-From:
-
-Arrays
-To
-Advanced Graphs
-To
-System Design
-To
-FAANG-Level Strategy
-
-This is a complete transformation journey.
-
----
-
-# You Now Have
-
-A complete:
-
-- DSA curriculum
-- Interview framework
-- Pattern recognition guide
-- Revision system
-- Career roadmap
-
-If followed seriously,
-this can change your trajectory.
-
-Mastery is not speed.
-
-Mastery is depth.
-
----
-
-Welcome to DSA Complete Mastery.
+</div>

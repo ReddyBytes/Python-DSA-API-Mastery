@@ -1,0 +1,98 @@
+<svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   style="stop-color:#1a0520"/>
+      <stop offset="50%"  style="stop-color:#20082a"/>
+      <stop offset="100%" style="stop-color:#120318"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   style="stop-color:#F43F5E"/>
+      <stop offset="50%"  style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#F43F5E"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   style="stop-color:#F43F5E;stop-opacity:0"/>
+      <stop offset="50%"  style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#F43F5E;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color:#2a0830"/>
+      <stop offset="100%" style="stop-color:#1a0520"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="240" fill="url(#bg)"/>
+
+  <g opacity="0.05" stroke="#F43F5E" stroke-width="0.5">
+    <line x1="0" y1="60"  x2="900" y2="60"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/>
+    <line x1="150" y1="0" x2="150" y2="240"/>
+    <line x1="300" y1="0" x2="300" y2="240"/>
+    <line x1="450" y1="0" x2="450" y2="240"/>
+    <line x1="600" y1="0" x2="600" y2="240"/>
+    <line x1="750" y1="0" x2="750" y2="240"/>
+  </g>
+
+  <!-- Algorithm nodes -->
+  <rect x="40"  y="168" width="110" height="36" rx="6" fill="url(#nodeGrad)" stroke="#F43F5E" stroke-width="1.5"/>
+  <text x="95"  y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#F43F5E" letter-spacing="1">📈 Foundations</text>
+
+  <line x1="150" y1="186" x2="180" y2="186" stroke="#F43F5E" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="180,182 188,186 180,190" fill="#F43F5E" opacity="0.8"/>
+
+  <rect x="188" y="168" width="110" height="36" rx="6" fill="url(#nodeGrad)" stroke="#FB923C" stroke-width="1.5"/>
+  <text x="243" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#FB923C" letter-spacing="1">🔗 Structures</text>
+
+  <line x1="298" y1="186" x2="328" y2="186" stroke="#FB923C" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="328,182 336,186 328,190" fill="#FB923C" opacity="0.8"/>
+
+  <rect x="336" y="168" width="100" height="36" rx="6" fill="url(#nodeGrad)" stroke="#F43F5E" stroke-width="1.5"/>
+  <text x="386" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#F43F5E" letter-spacing="1">🌳 Trees</text>
+
+  <line x1="436" y1="186" x2="466" y2="186" stroke="#F43F5E" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="466,182 474,186 466,190" fill="#F43F5E" opacity="0.8"/>
+
+  <rect x="474" y="168" width="100" height="36" rx="6" fill="url(#nodeGrad)" stroke="#FB923C" stroke-width="1.5"/>
+  <text x="524" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#FB923C" letter-spacing="1">🕸️ Graphs</text>
+
+  <line x1="574" y1="186" x2="604" y2="186" stroke="#FB923C" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.9s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="604,182 612,186 604,190" fill="#FB923C" opacity="0.8"/>
+
+  <rect x="612" y="168" width="110" height="36" rx="6" fill="url(#nodeGrad)" stroke="#F43F5E" stroke-width="1.5"/>
+  <text x="667" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#F43F5E" letter-spacing="1">⚡ DP + FAANG</text>
+
+  <rect x="200" y="42" width="500" height="1.5" fill="url(#arrowGrad)" rx="1">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <text x="450" y="96" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="14" font-weight="bold"
+        fill="#4a5568" letter-spacing="10">COMPLETE MASTERY</text>
+
+  <text x="450" y="155" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="72" font-weight="bold"
+        fill="url(#titleGrad)" filter="url(#glow)" letter-spacing="6">DSA</text>
+
+  <rect x="200" y="160" width="500" height="1.5" fill="url(#arrowGrad)" rx="1">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <text x="450" y="222" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="11" fill="#4a5568" letter-spacing="4">DATA STRUCTURES · ALGORITHMS · FAANG</text>
+</svg>
