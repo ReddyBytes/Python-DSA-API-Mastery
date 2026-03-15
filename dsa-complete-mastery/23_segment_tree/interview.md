@@ -361,3 +361,10 @@ Previous:
 Next:  
 [24_disjoint_set_union/theory.md](/dsa-complete-mastery/24_disjoint_set_union/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Disjoint Set Union — Theory →](../24_disjoint_set_union/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

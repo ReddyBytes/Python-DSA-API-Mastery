@@ -348,3 +348,11 @@ Next:
 [26_system_design_patterns/theory.md](/dsa-complete-mastery/26_system_design_patterns/theory.md)
 
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [System Design Patterns — Visual Explanation →](../26_system_design_patterns/visual_explanation.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

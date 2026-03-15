@@ -417,3 +417,11 @@ and union by rank means the chain of command never gets unreasonably long.
 
 When a problem involves groups merging, connectivity queries, or cycle detection —
 DSU gives you near-O(1) per operation with almost no code.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

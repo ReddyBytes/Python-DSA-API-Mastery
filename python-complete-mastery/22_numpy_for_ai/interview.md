@@ -341,3 +341,11 @@ np.argpartition(scores, -k)[-k:]
 
 Previous: `21_typing_and_pydantic/interview.md`
 Next: `23_pandas_for_ai/interview.md`
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Pandas For Ai — Theory →](../23_pandas_for_ai/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

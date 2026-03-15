@@ -14,3 +14,11 @@
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Caching — Theory →](../06_caching/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [The Story of Data](./the_story_of_data.md) · [Cheat Sheet](./cheatsheet.md)

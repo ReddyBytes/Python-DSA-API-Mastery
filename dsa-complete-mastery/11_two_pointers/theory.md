@@ -334,3 +334,10 @@ Next:
 [11_two_pointers/interview.md](/dsa-complete-mastery/11_two_pointers/interview.md)  
 [12_sliding_window/theory.md](/dsa-complete-mastery/12_sliding_window/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Hashing — Interview Q&A](../10_hashing/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

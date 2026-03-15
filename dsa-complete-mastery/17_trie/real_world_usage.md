@@ -550,3 +550,11 @@ The fundamental advantage of a trie over a hash map for string problems: **prefi
 natural**. A hash map gives you O(1) exact lookup but O(n) prefix search; a trie gives O(m)
 for both, where m is the string length. When your application is prefix-heavy — autocomplete,
 routing, spell checking — the trie is the right tool.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

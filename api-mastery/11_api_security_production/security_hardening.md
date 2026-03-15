@@ -836,8 +836,8 @@ Security is a continuous process, not a deployment step. Run this checklist on e
 
 ---
 
-| Navigation | |
-|---|---|
-| Previous | [10 — Testing & Docs](../10_testing_documentation/testing_apis.md) |
-| Next | [12 — Production Deployment](../12_production_deployment/deployment_guide.md) |
-| Home | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← API Documentation](../10_testing_documentation/docs_that_work.md) &nbsp;|&nbsp; **Next:** [Production Deployment →](../12_production_deployment/deployment_guide.md)
+
+**Related Topics:** [Authentication & Authorization](../05_authentication/securing_apis.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [API Gateway Patterns](../15_api_gateway/gateway_patterns.md)

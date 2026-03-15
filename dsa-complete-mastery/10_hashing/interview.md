@@ -426,3 +426,10 @@ Previous:
 Next:  
 [11_two_pointers/theory.md](/dsa-complete-mastery/11_two_pointers/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Two Pointers — Theory →](../11_two_pointers/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Collision Handling](./collision_handling.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

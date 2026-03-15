@@ -432,3 +432,11 @@ The universal backtracking template is: **choose -> explore -> unchoose**. The p
 pruning: the sooner you detect a dead end, the fewer branches you explore. In production, this
 is often paired with constraint propagation (Sudoku arc consistency) or memoization to avoid
 re-exploring equivalent states.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

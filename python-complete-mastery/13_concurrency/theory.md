@@ -841,3 +841,11 @@ PATTERNS:
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🔧 Async Guide | [async_guide.md](./async_guide.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Context Managers — Interview Q&A](../12_context_managers/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Async Guide](./async_guide.md) · [Threading Guide](./threading_guide.md) · [Multiprocessing Guide](./multiprocessing_guide.md) · [Interview Q&A](./interview.md)

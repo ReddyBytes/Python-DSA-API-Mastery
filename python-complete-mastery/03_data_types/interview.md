@@ -978,3 +978,11 @@ revisit theory.
 
 
 ---
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Complexity Analysis Interview](./complexity_analysis_interview.md) &nbsp;|&nbsp; **Next:** [Functions — Theory →](../04_functions/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Complete Guide](./complete_guide.md) · [Complexity Analysis](./complexity_analysis.md) · [Cheat Sheet](./cheetsheet.md) · [Complexity Analysis Interview](./complexity_analysis_interview.md)

@@ -328,3 +328,11 @@ A: Generator: O(1). List: O(n). For 1M ints: ~200B vs ~8.5MB.
 | 🎯 Interview | [interview.md](./interview.md) |
 | 🔧 Pipeline Patterns | [generator_patterns.md](./generator_patterns.md) |
 | ➡️ Next | [12 — Context Managers](../12_context_managers/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Generator Patterns →](./generator_patterns.md)
+
+**Related Topics:** [Theory](./theory.md) · [Generator Patterns](./generator_patterns.md) · [Interview Q&A](./interview.md)

@@ -841,3 +841,11 @@ For maximum: pop the back when `nums[back] < nums[i]` (strictly less). The front
 | 3 | `formed += 1` when `have >= need` | Multiple increments per character | `formed += 1` only when `have == need` |
 | 4 | `set(t)` ignores duplicate chars | Set tracks presence, not quantity | `Counter(t)` tracks required counts |
 | 5 | Wrong deque pop direction | `>=` produces minimum instead of maximum | Pop back when `nums[back] < nums[i]` |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

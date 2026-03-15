@@ -712,3 +712,11 @@ Under what conditions would you recommend it vs a simpler approach?
 | Previous | [14 — Observability](../14_observability/seeing_your_system.md) |
 | Next | [16 — High Level Design](../16_high_level_design/theory.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

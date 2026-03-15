@@ -1751,3 +1751,11 @@ Monotonic Stack:   ┃▊▊▊▊      (stack with decreasing/increasing height
 Each of these shapes represents a computational movement. When you encounter a problem, ask: which movement makes sense here? Does information need to flow inward (two pointers)? Does it need to spread outward (BFS)? Does it need to aggregate upward (bottom-up DFS)?
 
 The answer tells you the pattern. The pattern tells you the code.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← 3-5 Years Experience](./3_5_years.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [0-2 Years Experience](./0_2_years.md) · [3-5 Years Experience](./3_5_years.md) · [Cheat Sheet](./cheatsheet.md) · [FAANG Level Questions](./faang_level_questions.md) · [Patterns](./patterns.md)

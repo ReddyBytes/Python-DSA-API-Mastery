@@ -1495,3 +1495,11 @@ print("DAG as undirected (Union-Find):", has_cycle_undirected_correct(3, dag_edg
 ---
 
 *Graph algorithms are tricky precisely because the bugs are often silent. The algorithm runs to completion, produces a result, and only a test case you carefully designed reveals the error. Every mistake above has burned programmers in real interviews. Keep this list close.*
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

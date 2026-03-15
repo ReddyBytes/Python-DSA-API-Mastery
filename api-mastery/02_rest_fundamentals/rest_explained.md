@@ -1,12 +1,5 @@
 # REST Fundamentals
 
-| Previous | [01 - What is an API?](../01_what_is_an_api/story.md)            |
-|----------|------------------------------------------------------------------|
-| Next     | [03 - REST Best Practices](../03_rest_best_practices/patterns.md)|
-| Home     | [README.md](../README.md)                                        |
-
----
-
 ## A Guy Wrote a Dissertation and Changed How We Build Software
 
 In the year 2000, Roy Fielding — one of the principal authors of the HTTP specification
@@ -806,7 +799,8 @@ Idempotency:
 
 ---
 
-| Previous | [01 - What is an API?](../01_what_is_an_api/story.md)            |
-|----------|------------------------------------------------------------------|
-| Next     | [03 - REST Best Practices](../03_rest_best_practices/patterns.md)|
-| Home     | [README.md](../README.md)                                        |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← What is an API?](../01_what_is_an_api/story.md) &nbsp;|&nbsp; **Next:** [REST Best Practices →](../03_rest_best_practices/patterns.md)
+
+**Related Topics:** [REST Best Practices](../03_rest_best_practices/patterns.md) · [What is an API?](../01_what_is_an_api/story.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [API Versioning](../08_versioning_standards/versioning_strategy.md)

@@ -358,3 +358,11 @@ Explicit stack (DFS without recursion):
 7. Forgetting to undo state in backtracking (the un-choose step):
    current.pop()  MUST be called after every recursive call that appended
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

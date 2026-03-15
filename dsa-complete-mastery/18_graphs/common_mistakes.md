@@ -671,3 +671,11 @@ print("Undirected graph construction test passed")
 | No stale-entry skip in Dijkstra | Old heap entries processed with wrong distance | `if d > dist[u]: continue` at top of loop |
 | BFS from single source only | Misses disconnected components | Loop over all nodes, start from unvisited ones |
 | One-directional adjacency list | Undirected graph becomes directed | Add both `adj[u].append(v)` and `adj[v].append(u)` |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

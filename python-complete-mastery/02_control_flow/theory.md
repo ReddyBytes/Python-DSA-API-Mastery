@@ -536,3 +536,10 @@ you understand how programs think.
 [Memory Management](/python-complete-mastery/memory_management/theory.md)  
 [Data Types](/python-complete-mastery/03_data_types/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Python Fundamentals — Interview Q&A](../01_python_fundamentals/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

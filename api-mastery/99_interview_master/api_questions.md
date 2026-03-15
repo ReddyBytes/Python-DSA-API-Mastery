@@ -430,13 +430,8 @@ oasdiff breaking openapi-v1.yaml openapi-proposed.yaml --fail-on ERR
 
 ---
 
-| Navigation | |
-|---|---|
-| Back | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
 
----
+**Prev:** [← OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md) &nbsp;|&nbsp; **Next:** —
 
-| Navigation | |
-|---|---|
-| Previous | [19 — OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md) |
-| Home     | [README.md](../README.md) |
+**Related Topics:** [REST Best Practices](../03_rest_best_practices/patterns.md) · [Authentication & Authorization](../05_authentication/securing_apis.md) · [GraphQL](../13_graphql/graphql_story.md) · [Real-World Architectures](../18_real_world_apis/architectures.md)

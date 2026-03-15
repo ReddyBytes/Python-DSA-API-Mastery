@@ -341,3 +341,10 @@ Previous:
 Next:  
 [99_interview_master/python_3_5_years.md](./python_3_5_years.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Python Ai Ecosystem — Interview Q&A](../25_python_ai_ecosystem/interview.md) &nbsp;|&nbsp; **Next:** [Python 3-5 Years →](./python_3_5_years.md)
+
+**Related Topics:** [Python 3-5 Years](./python_3_5_years.md) · [Scenario Based Questions](./scenario_based_questions.md) · [Tricky Edge Cases](./tricky_edge_cases.md)

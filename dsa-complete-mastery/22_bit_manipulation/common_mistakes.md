@@ -1023,3 +1023,11 @@ if __name__ == "__main__":
 | 3 | `1 << 32` with no validation | Python allows it, but 32-bit logic breaks silently | Validate `0 <= pos < bits`; apply `& 0xFFFFFFFF` after operations |
 | 4 | XOR only array elements for missing number | Forgets to XOR the expected range `[0..n]` | `for i in range(n+1): result ^= i`, then XOR array elements |
 | 5 | Naive loop over all bit positions | O(log n) loop — iterates zero bits too | Brian Kernighan `n &= (n-1)` for O(k); Python 3.10 `int.bit_count()` |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

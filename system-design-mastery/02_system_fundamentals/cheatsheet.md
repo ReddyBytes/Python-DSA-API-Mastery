@@ -124,3 +124,11 @@ At 99.9%: 43 min/month budget to spend on deployments/incidents
 1M–10M:        Microservices, multi-region, specialized DBs
 10M+:          Global distribution, custom everything
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Fundamentals](./fundamentals.md) · [Theory](./theory.md) · [Interview Q&A](./interview.md)

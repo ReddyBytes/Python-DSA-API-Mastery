@@ -781,3 +781,11 @@ if __name__ == "__main__":
 | 4 | `sorted(word)` as key | `sorted()` returns unhashable list | `"".join(sorted(word))` or `tuple(sorted(word))` |
 | 5 | `Counter(a) - Counter(b)` drops info | Operator silently removes zero/negative | Use `.subtract()` for full arithmetic |
 | 6 | Delete during iteration | Dict view becomes invalid mid-loop | Collect keys first or use `list(d.items())` |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Collision Handling](./collision_handling.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

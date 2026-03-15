@@ -1626,3 +1626,11 @@ The answer to those questions is the real pattern — not the name of the algori
 That is what this guide is really teaching: not "use sliding window here" but "sliding window works when the problem has the property that you can maintain a valid state by expanding right and shrinking left, and this is true because..."
 
 Build that understanding, and no interview problem will catch you completely off guard again.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← FAANG Level Questions](./faang_level_questions.md) &nbsp;|&nbsp; **Next:** —
+
+**Related Topics:** [0-2 Years Experience](./0_2_years.md) · [3-5 Years Experience](./3_5_years.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [FAANG Level Questions](./faang_level_questions.md)

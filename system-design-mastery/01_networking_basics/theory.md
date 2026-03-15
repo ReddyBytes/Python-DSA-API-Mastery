@@ -587,3 +587,11 @@ RTT math:
 | ← Previous | [00 — Computer Fundamentals](../00_computer_fundamentals/story.md) |
 | ➡️ Next | [02 — System Fundamentals](../02_system_fundamentals/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Computer Fundamentals — Story](../00_computer_fundamentals/story.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

@@ -789,3 +789,11 @@ A: It tests implementation details — breaks on internal refactors even when
 | 🧪 pytest Guide | [pytest_guide.md](./pytest_guide.md) |
 | ⬅️ Previous | [16 — Design Patterns](../16_design_patterns/theory.md) |
 | ➡️ Next | [18 — Performance Optimization](../18_performance_optimization/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Performance Optimization — Profiling →](../18_performance_optimization/profiling.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

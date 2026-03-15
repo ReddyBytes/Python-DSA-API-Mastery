@@ -388,3 +388,11 @@ LSMT (Log-Structured Merge Trees) in RocksDB/LevelDB use the same idea.
 
 Arrays are not just a beginner data structure.
 They are the foundation of numerical computing, databases, operating systems, and machine learning.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

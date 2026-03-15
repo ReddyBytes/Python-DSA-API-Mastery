@@ -31,3 +31,11 @@
 | ⬅️ Previous | [11 — Scalability Patterns](../11_scalability_patterns/theory.md) |
 | ➡️ Next | [13 — Security](../13_security/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Scalability Patterns — Interview Q&A](../11_scalability_patterns/interview.md) &nbsp;|&nbsp; **Next:** [Monolith to Microservices →](./monolith_to_micro.md)
+
+**Related Topics:** [Monolith to Microservices](./monolith_to_micro.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

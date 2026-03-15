@@ -689,3 +689,11 @@ A: Bottom to top for root cause. The LAST entry is where the error originated.
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🏠 Home | [python-complete-mastery](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Modules Packages — Theory →](../07_modules_packages/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

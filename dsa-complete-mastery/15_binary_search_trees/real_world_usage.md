@@ -492,3 +492,11 @@ if __name__ == "__main__":
 The unifying theme: **whenever you need both fast lookup AND sorted/range access, a
 BST is the answer**. Hash maps give O(1) lookup but cannot answer "give me everything
 between X and Y". BSTs give O(log n) for all three: insert, delete, and range query.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

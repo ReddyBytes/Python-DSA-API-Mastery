@@ -600,3 +600,11 @@ if __name__ == "__main__":
 
 The common thread: **whenever data has a natural parent-child hierarchy, a tree is
 the right structure**, and DFS / BFS gives you a systematic way to process every node.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

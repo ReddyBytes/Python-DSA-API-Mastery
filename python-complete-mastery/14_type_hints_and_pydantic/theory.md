@@ -806,3 +806,11 @@ AI ENGINEERING USE CASES:
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [13 — Concurrency](../13_concurrency/theory.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Concurrency — Interview Q&A](../13_concurrency/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

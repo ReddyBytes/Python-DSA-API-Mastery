@@ -413,3 +413,10 @@ Previous:
 Next:  
 [21_data_engineering_applications/interview.md](./interview.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← System Design With Python — Interview Q&A](../20_system_design_with_python/interview.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Interview Q&A](./interview.md)

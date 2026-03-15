@@ -954,3 +954,11 @@ With             __slots__           optimizes memory layout (class-level)
 | 🏭 Metaclasses & Descriptors | [metaclasses_descriptors_guide.md](./metaclasses_descriptors_guide.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Metaclasses & Descriptors →](./metaclasses_descriptors_guide.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Metaclasses & Descriptors](./metaclasses_descriptors_guide.md) · [Interview Q&A](./interview.md)

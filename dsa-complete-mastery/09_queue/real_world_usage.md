@@ -562,3 +562,11 @@ bus.publish("orders", {"order_id": 1004, "product": "iPhone 15", "qty": 1, "stat
 print("\n=== inventory-service polls again (only gets new message) ===")
 for msg in bus.poll("inventory-service", "orders", max_messages=10):
     print(f"  Reserve stock for order {msg.payload['order_id']}: {msg.payload['product']}")
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

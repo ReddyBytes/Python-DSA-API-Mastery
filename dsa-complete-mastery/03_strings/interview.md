@@ -369,3 +369,10 @@ This shows clarity and system awareness.
 
 If you can confidently explain these topics with optimization reasoning and trade-offs, you are well-prepared for string discussions in product-based and senior-level interviews.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Recursion — Theory →](../04_recursion/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

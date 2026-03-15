@@ -624,3 +624,11 @@ A: Coroutines are implemented on top of generators.
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🔧 Pipeline Patterns | [generator_patterns.md](./generator_patterns.md) |
 | ➡️ Next | [12 — Context Managers](../12_context_managers/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Generator Patterns](./generator_patterns.md) &nbsp;|&nbsp; **Next:** [Context Managers — Theory →](../12_context_managers/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Generator Patterns](./generator_patterns.md)

@@ -1018,3 +1018,11 @@ Both achieve O(log n) height. Choose based on what extra information you need:
 - **Union by size**: stores component sizes → use when you need `component_size(x)`
 
 They can even be combined (track both), though in practice one suffices.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

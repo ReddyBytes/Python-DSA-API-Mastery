@@ -438,3 +438,10 @@ Previous:
 Next:  
 [99_interview_master/tricky_edge_cases.md](./tricky_edge_cases.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Python 3-5 Years](./python_3_5_years.md) &nbsp;|&nbsp; **Next:** [Tricky Edge Cases →](./tricky_edge_cases.md)
+
+**Related Topics:** [Python 0-2 Years](./python_0_2_years.md) · [Python 3-5 Years](./python_3_5_years.md) · [Tricky Edge Cases](./tricky_edge_cases.md)

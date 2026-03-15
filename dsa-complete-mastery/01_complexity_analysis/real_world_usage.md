@@ -1538,3 +1538,11 @@ Every recursive call is a stack frame. For tree problems with depth O(log n), th
 `list.insert(0, x)` is O(n). `'x' in list` is O(n). String concatenation in a loop is O(n²). These are not rare edge cases — they are things developers write every day without realizing the cost.
 
 The goal of Big-O analysis is not to pass algorithm interviews. It is to write software that still works when the number of users multiplies by a thousand.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

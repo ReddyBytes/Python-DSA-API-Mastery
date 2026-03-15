@@ -390,3 +390,10 @@ Next time you stack plates,
 remember —
 you are using a data structure.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Linked List — Interview Q&A](../07_linked_list/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

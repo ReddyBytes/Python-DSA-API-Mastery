@@ -803,3 +803,11 @@ would be wrong here (retry on conflict during "start trip" is not acceptable UX)
 | ← Previous | [Netflix Streaming](./netflix.md) |
 | ➡️ Next | [WhatsApp Messaging](./whatsapp.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Twitter Case Study](./twitter.md) &nbsp;|&nbsp; **Next:** [URL Shortener Case Study →](./url_shortener.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Netflix Case Study](./netflix.md) · [Twitter Case Study](./twitter.md) · [URL Shortener Case Study](./url_shortener.md) · [WhatsApp Case Study](./whatsapp.md) · [Interview Q&A](./interview.md)

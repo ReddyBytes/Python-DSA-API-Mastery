@@ -1274,3 +1274,11 @@ None   → intentional emptiness, always check with 'is'
 | 🎤 Interview Prep | [interview.md](./interview.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ➡️ Next | [04 — Functions](../04_functions/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Complexity Analysis →](./complexity_analysis.md)
+
+**Related Topics:** [Theory](./theory.md) · [Complexity Analysis](./complexity_analysis.md) · [Cheat Sheet](./cheetsheet.md) · [Complexity Analysis Interview](./complexity_analysis_interview.md) · [Interview Q&A](./interview.md)

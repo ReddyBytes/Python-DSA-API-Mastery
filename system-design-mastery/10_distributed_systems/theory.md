@@ -644,3 +644,11 @@ Sidecar              Add cross-cutting concerns        Extra process overhead
 | ← Previous | [09 — Message Queues](../09_message_queues/theory.md) |
 | ➡️ Next | [11 — Scalability Patterns](../11_scalability_patterns/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Message Queues — Interview Q&A](../09_message_queues/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

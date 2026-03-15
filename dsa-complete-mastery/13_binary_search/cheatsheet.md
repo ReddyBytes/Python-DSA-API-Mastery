@@ -292,3 +292,11 @@ def binary_search_real(lo, hi, condition, eps=1e-9):
 | Search on answer           | O(log(hi-lo) * T(condition)) | O(1) |
 | bisect.bisect_left/right   | O(log n)   | O(1)   |
 | bisect.insort              | O(n)       | O(1)   |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Patterns →](./patterns.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

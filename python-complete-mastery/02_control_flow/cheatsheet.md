@@ -128,3 +128,11 @@ Single loop:   O(n)
 Nested loops:  O(n²)
 Binary search: O(log n)
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

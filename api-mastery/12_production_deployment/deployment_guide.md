@@ -1,12 +1,5 @@
 # Production Deployment for FastAPI
 
-| Previous | [15 — Security Production](../11_api_security_production/security_hardening.md) |
-|----------|---------------------------------------------------------------------------------|
-| Next     | [13 — GraphQL](../13_graphql/graphql_story.md)                                  |
-| Home     | [README.md](../README.md)                                                        |
-
----
-
 ## From "It Works on My Machine" to Production
 
 Your FastAPI app runs perfectly with `uvicorn main:app --reload`. One worker, your
@@ -788,7 +781,8 @@ Monitoring:
 
 ---
 
-| Previous | [15 — Security Production](../11_api_security_production/security_hardening.md) |
-|----------|---------------------------------------------------------------------------------|
-| Next     | [13 — GraphQL](../13_graphql/graphql_story.md)                                  |
-| Home     | [README.md](../README.md)                                                        |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Security in Production](../11_api_security_production/security_hardening.md) &nbsp;|&nbsp; **Next:** [GraphQL →](../13_graphql/graphql_story.md)
+
+**Related Topics:** [Security in Production](../11_api_security_production/security_hardening.md) · [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md) · [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md) · [GraphQL](../13_graphql/graphql_story.md)

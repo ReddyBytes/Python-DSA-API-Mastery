@@ -651,3 +651,11 @@ Dynamic API responses are generally not CDN-cached (they vary per user).
 | Previous | [05 — Databases](../05_databases/the_story_of_data.md) |
 | Next | [07 — Storage & CDN](../07_storage_cdn/theory.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

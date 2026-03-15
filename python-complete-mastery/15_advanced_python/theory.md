@@ -946,3 +946,11 @@ Introspection      Runtime object inspection         Debug, frameworks, serializ
 | 🔮 Dunder Methods Guide | [dunder_guide.md](./dunder_guide.md) |
 | 🏭 Metaclasses & Descriptors | [metaclasses_descriptors_guide.md](./metaclasses_descriptors_guide.md) |
 | ➡️ Next | [16 — Design Patterns](../16_design_patterns/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Type Hints And Pydantic — Interview Q&A](../14_type_hints_and_pydantic/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Dunder Methods Guide](./dunder_guide.md) · [Metaclasses & Descriptors](./metaclasses_descriptors_guide.md) · [Interview Q&A](./interview.md)

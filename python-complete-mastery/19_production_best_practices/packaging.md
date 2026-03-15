@@ -418,3 +418,10 @@ Previous:
 Next:  
 [19_production_best_practices/interview.md](./interview.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Environment Management](./environment_management.md) &nbsp;|&nbsp; **Next:** [Project Structure →](./project_structure.md)
+
+**Related Topics:** [Coding Standards](./coding_standards.md) · [Environment Management](./environment_management.md) · [Project Structure](./project_structure.md) · [Interview Q&A](./interview.md)

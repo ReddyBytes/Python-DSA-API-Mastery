@@ -216,3 +216,11 @@ Amortized vs worst-case — always clarify:
 - sorted() on dict returns sorted keys, not items
 - Nested list comprehension complexity: [x for row in matrix for x in row] = O(n*m)
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

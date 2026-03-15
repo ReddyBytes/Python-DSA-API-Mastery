@@ -320,3 +320,10 @@ Next:
 [10_hashing/interview.md](/dsa-complete-mastery/10_hashing/interview.md)  
 [11_two_pointers/theory.md](/dsa-complete-mastery/11_two_pointers/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Queue — Interview Q&A](../09_queue/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Collision Handling](./collision_handling.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

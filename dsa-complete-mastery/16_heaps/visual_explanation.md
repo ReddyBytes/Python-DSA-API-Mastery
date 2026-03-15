@@ -415,3 +415,11 @@ It only guarantees the min (or max) is instantly accessible. That constraint is 
 what makes it so fast. You're not doing more work than the problem requires.
 
 When someone asks "what's the best/worst/most/least right now?" — that's a heap problem.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

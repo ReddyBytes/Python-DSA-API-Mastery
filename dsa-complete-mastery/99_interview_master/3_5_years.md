@@ -251,3 +251,11 @@ Next:
 [99_interview_master/faang_level_questions.md](/dsa-complete-mastery/99_interview_master/faang_level_questions.md)
 
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← 0-2 Years Experience](./0_2_years.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [0-2 Years Experience](./0_2_years.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [FAANG Level Questions](./faang_level_questions.md) · [Patterns](./patterns.md)

@@ -552,3 +552,9 @@ from blocking I/O to async I/O? (Think about what's holding it back)
 |---|---|
 | ➡️ Next | [01 — Networking Basics](../01_networking_basics/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** — &nbsp;|&nbsp; **Next:** [Networking Basics — Theory →](../01_networking_basics/theory.md)

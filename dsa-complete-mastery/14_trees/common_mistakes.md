@@ -770,3 +770,11 @@ When your tree function returns a wrong answer, run through this checklist:
 7. BOTH SIDES: Does the problem ask about paths through a node using
                BOTH subtrees? If so, you need a global max variable.
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

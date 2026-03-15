@@ -622,3 +622,11 @@ lock.release()    # never reached → deadlock
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🔥 Multiprocessing Guide | [multiprocessing_guide.md](./multiprocessing_guide.md) |
 | ⚡ Async Guide | [async_guide.md](./async_guide.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Async Guide](./async_guide.md) &nbsp;|&nbsp; **Next:** [Multiprocessing Guide →](./multiprocessing_guide.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Async Guide](./async_guide.md) · [Multiprocessing Guide](./multiprocessing_guide.md) · [Interview Q&A](./interview.md)

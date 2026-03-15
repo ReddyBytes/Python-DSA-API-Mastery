@@ -644,3 +644,11 @@ A: Hundreds — limited by open file descriptors and memory, not thread count.
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🔧 Practice | [practice.py](./practice.py) |
 | ⬅️ Prev | [13 — Concurrency](../13_concurrency/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Python Ai Ecosystem — Theory →](../25_python_ai_ecosystem/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

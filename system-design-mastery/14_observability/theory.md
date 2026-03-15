@@ -31,3 +31,11 @@
 | ⬅️ Previous | [13 — Security](../13_security/theory.md) |
 | ➡️ Next | [15 — Cloud Architecture](../15_cloud_architecture/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Security — Interview Q&A](../13_security/interview.md) &nbsp;|&nbsp; **Next:** [Seeing Your System →](./seeing_your_system.md)
+
+**Related Topics:** [Seeing Your System](./seeing_your_system.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

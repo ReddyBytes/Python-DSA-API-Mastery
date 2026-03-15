@@ -512,3 +512,11 @@ Start simple. Add patterns only when you have concrete evidence that you need th
 | Previous  | [10 — Distributed Systems](../10_distributed_systems/theory.md) |
 | Next      | [12 — Microservices](../12_microservices/monolith_to_micro.md) |
 | Home      | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

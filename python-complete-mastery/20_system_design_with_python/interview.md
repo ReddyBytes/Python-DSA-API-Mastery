@@ -380,3 +380,10 @@ Previous:
 Next:  
 [21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Scalable App Design](./scalable_app_design.md) &nbsp;|&nbsp; **Next:** [Data Engineering Applications — Theory →](../21_data_engineering_applications/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [API Design Principles](./api_design_principles.md) · [Scalable App Design](./scalable_app_design.md)

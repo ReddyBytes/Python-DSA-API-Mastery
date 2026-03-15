@@ -1448,3 +1448,11 @@ Any new element larger than heap[0] earns its place in top-K.
 ---
 
 *System design data structures are often first implemented "correctly enough" — they pass basic tests, produce reasonable outputs, but hide catastrophic performance cliffs. An LRU that does O(n) work per access will feel fine with 100 entries and fail at 100,000. A consistent hash ring with 1 node per server will feel fine with 5 servers and cause outages when one of them goes down. Test your implementations under scale, and know the failure modes before they bite you in production.*
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Caching Strategies](./caching_strategies.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

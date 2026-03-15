@@ -769,3 +769,11 @@ Know them like you know your own name.
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ➡️ Next Topic | [05 — OOP](../05_oops/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Oops — Why Oop →](../05_oops/01_why_oop.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

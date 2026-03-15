@@ -448,3 +448,10 @@ Previous:
 Next:  
 [02_control_flow/theory.md](../02_control_flow/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Control Flow — Theory →](../02_control_flow/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

@@ -1344,3 +1344,11 @@ For Meetings: "most important" = the earliest-ending active meeting (first to fr
 For Dijkstra: "most important" = the node with the known shortest current distance
 
 Master the concept of "what am I optimizing for at each step?" and the heap implementation follows naturally.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

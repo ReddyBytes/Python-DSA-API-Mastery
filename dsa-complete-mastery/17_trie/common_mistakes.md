@@ -958,3 +958,11 @@ if __name__ == "__main__":
 | 3 | Delete only clears `is_end` | Dead nodes never freed | Recursive delete that prunes empty branches |
 | 4 | `return True` instead of `return node.is_end` | `search()` accidentally implements `starts_with()` | `return node.is_end` |
 | 5 | DFS skips `is_end` at starting node | Prefix word omitted from autocomplete results | Check `is_end` at every visited node before recursing |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

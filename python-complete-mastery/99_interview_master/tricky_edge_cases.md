@@ -498,3 +498,10 @@ Previous:
 Next:  
 [README.md — Master Revision Strategy](../README.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Scenario Based Questions](./scenario_based_questions.md) &nbsp;|&nbsp; **Next:** —
+
+**Related Topics:** [Python 0-2 Years](./python_0_2_years.md) · [Python 3-5 Years](./python_3_5_years.md) · [Scenario Based Questions](./scenario_based_questions.md)

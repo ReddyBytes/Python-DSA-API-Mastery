@@ -1,12 +1,5 @@
 # Your First FastAPI
 
-| Previous | [FastAPI Fundamentals](../07_fastapi/why_fastapi.md) |
-|----------|------------------------------------------------------------------------|
-| Next     | [FastAPI Core Concepts](../07_fastapi/core_guide.md)|
-| Home     | [README.md](../README.md)                                              |
-
----
-
 ## Before We Write a Line of Code
 
 You are going to build a real, working API in this module. Every code snippet runs.
@@ -899,7 +892,8 @@ middleware, background tasks, and async database access.
 
 ---
 
-| Previous | [FastAPI Fundamentals](../07_fastapi/why_fastapi.md) |
-|----------|------------------------------------------------------------------------|
-| Next     | [FastAPI Core Concepts](../07_fastapi/core_guide.md)|
-| Home     | [README.md](../README.md)                                              |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Why FastAPI](../07_fastapi/why_fastapi.md) &nbsp;|&nbsp; **Next:** [FastAPI Core Guide →](../07_fastapi/core_guide.md)
+
+**Related Topics:** [FastAPI Core Guide](../07_fastapi/core_guide.md) · [REST Best Practices](../03_rest_best_practices/patterns.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md)

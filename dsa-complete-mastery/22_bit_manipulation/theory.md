@@ -371,3 +371,10 @@ Next:
 [22_bit_manipulation/interview.md](/dsa-complete-mastery/22_bit_manipulation/interview.md)  
 [23_segment_tree/theory.md](/dsa-complete-mastery/23_segment_tree/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Dynamic Programming — Interview Q&A](../21_dynamic_programming/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

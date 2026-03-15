@@ -1017,3 +1017,11 @@ DECISION GUIDE:
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🔧 Practice | [practice.py](./practice.py) |
 | ⬅️ Prev | [13 — Concurrency](../13_concurrency/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Pandas For Ai — Interview Q&A](../23_pandas_for_ai/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

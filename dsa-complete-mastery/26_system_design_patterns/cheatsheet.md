@@ -317,3 +317,11 @@ Levels: ~log(n) expected levels, each node has a tower of forward pointers.
 - Bloom filter false positive rate increases as more elements are added — size upfront
 - Consistent hashing without virtual nodes causes hotspots when server counts are small
 - Priority queue with lazy deletion: heap size can grow — periodically rebuild if needed
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Caching Strategies →](./caching_strategies.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Caching Strategies](./caching_strategies.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

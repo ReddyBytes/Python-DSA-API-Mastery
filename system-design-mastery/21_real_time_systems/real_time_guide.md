@@ -649,3 +649,11 @@ Draw the data flow.
 | Previous | [20 — Data Systems](../20_data_systems/data_at_scale.md) |
 | Next | [22 — Case Studies](../22_case_studies/theory.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

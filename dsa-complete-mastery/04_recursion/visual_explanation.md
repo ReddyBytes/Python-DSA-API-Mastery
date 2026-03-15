@@ -401,3 +401,11 @@ The diagram to keep in mind:
 Recursion is nothing more than **trusting your past self**: assume the smaller
 problem is already solved, write the one step that connects size n to size n-1,
 and define what "done" looks like. The call stack handles the rest.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

@@ -482,3 +482,11 @@ Binary search problem? Ask yourself:
 > Binary search works whenever you can look at the middle of a sorted space and say
 > "the answer is definitely not in this half." Each step, you eliminate half the possibilities.
 > 1 billion elements. 30 steps. That's the magic of O(log n).
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

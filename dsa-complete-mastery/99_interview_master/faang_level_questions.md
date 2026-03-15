@@ -343,3 +343,10 @@ Previous:
 Next:  
 🎉 End of DSA Complete Mastery Roadmap 🎉
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Patterns →](./patterns.md)
+
+**Related Topics:** [0-2 Years Experience](./0_2_years.md) · [3-5 Years Experience](./3_5_years.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md)

@@ -508,3 +508,11 @@ A: Python buffer → OS buffer (flush()) → hardware (fsync()).
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [09 — Logging & Debugging](../09_logging_debugging/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Pathlib Guide](./pathlib_guide.md) &nbsp;|&nbsp; **Next:** [Logging Debugging — Theory →](../09_logging_debugging/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Pathlib Guide](./pathlib_guide.md)

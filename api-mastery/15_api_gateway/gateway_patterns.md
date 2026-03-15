@@ -1,12 +1,5 @@
 # API Gateway Patterns
 
-| Previous | [07 — API Security](../07_api_security/securing_apis.md) |
-|----------|----------------------------------------------------------|
-| Next     | [09 — API Design Patterns](../09_api_design_patterns/design_guide.md) |
-| Home     | [README.md](../README.md) |
-
----
-
 ## The Copy-Paste Problem
 
 You've just shipped your first microservice — a user service. Auth logic, rate
@@ -432,7 +425,8 @@ What does NOT belong in the gateway:
 
 ---
 
-| Previous | [07 — API Security](../07_api_security/securing_apis.md) |
-|----------|----------------------------------------------------------|
-| Next     | [09 — API Design Patterns](../09_api_design_patterns/design_guide.md) |
-| Home     | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← gRPC](../14_grpc/grpc_guide.md) &nbsp;|&nbsp; **Next:** [API Design Patterns →](../16_api_design_patterns/design_guide.md)
+
+**Related Topics:** [GraphQL](../13_graphql/graphql_story.md) · [gRPC](../14_grpc/grpc_guide.md) · [Security in Production](../11_api_security_production/security_hardening.md) · [API Design Patterns](../16_api_design_patterns/design_guide.md)

@@ -32,3 +32,11 @@
 | ⬅️ Previous | [05 — Databases](../05_databases/theory.md) |
 | ➡️ Next | [07 — Storage & CDN](../07_storage_cdn/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Databases — Interview Q&A](../05_databases/interview.md) &nbsp;|&nbsp; **Next:** [The Art of Caching →](./the_art_of_caching.md)
+
+**Related Topics:** [The Art of Caching](./the_art_of_caching.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

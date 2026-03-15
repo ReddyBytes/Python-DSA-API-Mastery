@@ -379,3 +379,11 @@ Divide by 2^k                n >> k            13 >> 2 = 3
 Bit manipulation treats numbers as rows of switches: AND requires both on, OR needs one on,
 XOR detects differences, and shifts multiply or divide by powers of 2 — giving you
 direct hardware-speed control over data at the binary level.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

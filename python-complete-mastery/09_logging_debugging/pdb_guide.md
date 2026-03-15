@@ -607,3 +607,11 @@ A: Prints Python traceback on fatal errors (segfault, SIGABRT, deadlock).
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [10 — Decorators](../10_decorators/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

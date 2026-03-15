@@ -291,3 +291,11 @@ Layer rule: api → services → repositories → models → utils
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ➡️ Next | [08 — File Handling](../08_file_handling/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

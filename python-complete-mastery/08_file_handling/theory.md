@@ -802,3 +802,11 @@ shutil.unpack_archive("backup_2025.zip", "restored/")
 | 📖 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [09 — Logging & Debugging](../09_logging_debugging/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Modules Packages — Interview Q&A](../07_modules_packages/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Pathlib Guide](./pathlib_guide.md) · [Interview Q&A](./interview.md)

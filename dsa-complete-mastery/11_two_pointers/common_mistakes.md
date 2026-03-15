@@ -581,3 +581,11 @@ If you check only fast.next.next:
 | 3 | Off-by-one: `<` vs `<=` in palindrome loop        | Unclear invariant about when pointers meet    | Use `<` for palindrome check; expand-around-center for counting |
 | 4 | Dutch Flag: advancing `mid` after swap with `hi`  | Swapped-in element from `hi` is unclassified  | Only advance `mid` when it sees a 0 or 1, not a 2        |
 | 5 | Checking `fast.next.next` without checking `fast.next` | `None.next` raises AttributeError         | Always guard with `while fast and fast.next`             |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

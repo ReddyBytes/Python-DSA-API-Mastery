@@ -419,3 +419,10 @@ Previous:
 Next:  
 [99_interview_master/python_0_2_years.md](../99_interview_master/python_0_2_years.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Numpy For Ai — Theory →](../22_numpy_for_ai/theory.md)
+
+**Related Topics:** [Theory](./theory.md)

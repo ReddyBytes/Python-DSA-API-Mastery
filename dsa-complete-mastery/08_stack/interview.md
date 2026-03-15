@@ -384,3 +384,10 @@ If you can:
 
 You are well-prepared to crack stack-based interviews at product and senior levels.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Queue — Theory →](../09_queue/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

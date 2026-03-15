@@ -497,3 +497,11 @@ The goal isn't a perfect system. It's making attacks expensive enough that attac
 | Previous  | [12 — Microservices](../12_microservices/monolith_to_micro.md) |
 | Next      | [14 — Observability](../14_observability/seeing_your_system.md) |
 | Home      | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

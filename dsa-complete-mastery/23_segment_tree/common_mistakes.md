@@ -1516,3 +1516,11 @@ print("After update, Max [4,7]:", st.range_max(4, 7))  # 6 ✓
 ---
 
 *Segment trees reward precision. Every node in the tree is a tiny contract: "I represent the aggregate of my range." Break the contract once — wrong index formula, missing push-down, wrong size — and the whole edifice of guarantees collapses. Keep these 8 mistakes on your mental checklist and your segment trees will be bulletproof.*
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

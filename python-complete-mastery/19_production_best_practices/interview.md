@@ -373,3 +373,10 @@ Previous:
 Next:  
 [20_system_design_with_python/theory.md](../20_system_design_with_python/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Project Structure](./project_structure.md) &nbsp;|&nbsp; **Next:** [System Design With Python — Theory →](../20_system_design_with_python/theory.md)
+
+**Related Topics:** [Coding Standards](./coding_standards.md) · [Environment Management](./environment_management.md) · [Packaging](./packaging.md) · [Project Structure](./project_structure.md)

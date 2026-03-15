@@ -311,3 +311,11 @@ API/Controller     Catch domain errors → map to HTTP status codes
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ➡️ Next | [07 — Modules & Packages](../07_modules_packages/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

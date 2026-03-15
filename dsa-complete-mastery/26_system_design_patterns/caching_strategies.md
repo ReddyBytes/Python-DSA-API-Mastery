@@ -317,3 +317,10 @@ Next:
 [26_system_design_patterns/interview.md](/dsa-complete-mastery/26_system_design_patterns/interview.md)  
 [99_interview_master/0_2_years.md](/dsa-complete-mastery/99_interview_master/0_2_years.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

@@ -604,3 +604,11 @@ A: min(32, os.cpu_count() + 4) — Python 3.8+
 | 🔥 Multiprocessing Guide | [multiprocessing_guide.md](./multiprocessing_guide.md) |
 | ⚡ Async Guide | [async_guide.md](./async_guide.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Multiprocessing Guide](./multiprocessing_guide.md) &nbsp;|&nbsp; **Next:** [Type Hints And Pydantic — Theory →](../14_type_hints_and_pydantic/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Async Guide](./async_guide.md) · [Threading Guide](./threading_guide.md) · [Multiprocessing Guide](./multiprocessing_guide.md)

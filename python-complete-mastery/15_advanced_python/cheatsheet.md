@@ -402,3 +402,11 @@ A: Python 3.10+ — generates __slots__ automatically
 | 🔮 Dunder Guide | [dunder_guide.md](./dunder_guide.md) |
 | 🏭 Metaclasses & Descriptors | [metaclasses_descriptors_guide.md](./metaclasses_descriptors_guide.md) |
 | ➡️ Next | [16 — Design Patterns](../16_design_patterns/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Dunder Methods Guide →](./dunder_guide.md)
+
+**Related Topics:** [Theory](./theory.md) · [Dunder Methods Guide](./dunder_guide.md) · [Metaclasses & Descriptors](./metaclasses_descriptors_guide.md) · [Interview Q&A](./interview.md)

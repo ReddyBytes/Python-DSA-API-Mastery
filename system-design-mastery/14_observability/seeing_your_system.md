@@ -442,3 +442,11 @@ No amount of good architecture saves you when you're debugging a production inci
 | Previous  | [13 — Security](../13_security/security_fundamentals.md) |
 | Next      | [15 — Cloud Architecture](../15_cloud_architecture/theory.md) |
 | Home      | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

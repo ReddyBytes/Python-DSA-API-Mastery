@@ -449,3 +449,11 @@ Neither is universally better. The right answer depends on your team size, domai
 | Previous  | [11 — Scalability Patterns](../11_scalability_patterns/patterns_playbook.md) |
 | Next      | [13 — Security](../13_security/security_fundamentals.md) |
 | Home      | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

@@ -289,3 +289,11 @@ Delete file                 os.unlink(p)                p.unlink()
 Read text                   open(p).read()              p.read_text()
 Write text                  open(p,"w").write(s)        p.write_text(s)
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

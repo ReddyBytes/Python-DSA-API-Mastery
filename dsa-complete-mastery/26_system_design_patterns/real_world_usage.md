@@ -1284,3 +1284,11 @@ In a real system, multiple patterns work together:
 
 Understanding how these pieces fit together — not just each in isolation — is what makes a
 senior engineer's system design answer compelling.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Caching Strategies](./caching_strategies.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Caching Strategies](./caching_strategies.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

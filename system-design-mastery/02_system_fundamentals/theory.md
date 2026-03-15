@@ -521,3 +521,11 @@ Read amplification    One logical read requires many physical reads
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [03 — API Design](../03_api_design/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Fundamentals](./fundamentals.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Fundamentals](./fundamentals.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

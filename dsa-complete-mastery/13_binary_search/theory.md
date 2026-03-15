@@ -336,3 +336,10 @@ Next:
 [13_binary_search/interview.md](/dsa-complete-mastery/13_binary_search/interview.md)  
 [14_trees/theory.md](/dsa-complete-mastery/14_trees/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Sliding Window — Interview Q&A](../12_sliding_window/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

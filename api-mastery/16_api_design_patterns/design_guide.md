@@ -1,12 +1,5 @@
 # API Design Patterns
 
-| Previous | [08 — API Gateway](../08_api_gateway/gateway_patterns.md) |
-|----------|-----------------------------------------------------------|
-| Next     | [10 — API Testing](../10_api_testing/testing_apis.md) |
-| Home     | [README.md](../README.md) |
-
----
-
 ## The Patterns That Separate Good APIs from Great Ones
 
 You've learned HTTP. You know REST. You understand auth, gateways, all of it.
@@ -817,7 +810,8 @@ Versioning
 
 ---
 
-| Previous | [08 — API Gateway](../08_api_gateway/gateway_patterns.md) |
-|----------|-----------------------------------------------------------|
-| Next     | [10 — API Testing](../10_api_testing/testing_apis.md) |
-| Home     | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← API Gateway Patterns](../15_api_gateway/gateway_patterns.md) &nbsp;|&nbsp; **Next:** [WebSockets & Real-Time APIs →](../17_websockets/realtime_apis.md)
+
+**Related Topics:** [API Gateway Patterns](../15_api_gateway/gateway_patterns.md) · [Real-World Architectures](../18_real_world_apis/architectures.md) · [API Versioning](../08_versioning_standards/versioning_strategy.md) · [REST Best Practices](../03_rest_best_practices/patterns.md)

@@ -802,3 +802,11 @@ Reliability:
 | ← Previous | [15 — Cloud Architecture](../15_cloud_architecture/theory.md) |
 | ➡️ Next | [17 — Low Level Design](../17_low_level_design/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cloud Architecture — Interview Q&A](../15_cloud_architecture/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

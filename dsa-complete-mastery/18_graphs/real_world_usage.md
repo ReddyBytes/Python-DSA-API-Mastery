@@ -488,3 +488,11 @@ Circuit board design     Critical path (DAG)     DAG
 Graphs are the universal language of relationships. When you find yourself
 thinking "things depend on other things" or "entities are connected", you are
 already looking at a graph problem — the question is just which algorithm fits.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

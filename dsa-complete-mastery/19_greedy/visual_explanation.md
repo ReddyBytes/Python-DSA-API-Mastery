@@ -357,3 +357,11 @@ def can_jump(nums):
 Greedy algorithms make the locally best choice at every step — blindingly fast and elegant when
 the local optimum leads to a global optimum, but dangerously wrong when it doesn't.
 Always test greedy on a few examples before trusting it.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

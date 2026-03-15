@@ -905,3 +905,11 @@ prefix sums can be decomposed into at most `O(log n)` such blocks.
 - You need range updates (lazy propagation)
 - You need more complex operations like "find first element in range > X"
 - You need to support multiple aggregate types simultaneously (see RangeAggregator)
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

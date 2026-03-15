@@ -327,3 +327,10 @@ Next:
 [24_disjoint_set_union/interview.md](/dsa-complete-mastery/24_disjoint_set_union/interview.md)  
 [25_advanced_graphs/theory.md](/dsa-complete-mastery/25_advanced_graphs/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Segment Tree — Interview Q&A](../23_segment_tree/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

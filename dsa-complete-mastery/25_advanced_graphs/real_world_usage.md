@@ -607,3 +607,11 @@ Dijkstra runs on pre-processed contraction hierarchies (Google Maps), SCCs are c
 distributed graph engines (Facebook's Giraph), and topological sort happens incrementally as
 packages are added. The algorithms here are the foundations — understanding them is how you
 reason about, optimize, and debug the systems built on top of them.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

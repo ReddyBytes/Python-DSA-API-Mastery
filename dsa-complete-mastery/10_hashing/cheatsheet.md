@@ -248,3 +248,11 @@ Space optimization: sometimes XOR or math (Gauss sum) can replace hash map.
   Missing number:  n*(n+1)//2 - sum(nums)  → O(1) space
   Single number:   reduce(xor, nums)        → O(1) space
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Collision Handling →](./collision_handling.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Collision Handling](./collision_handling.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

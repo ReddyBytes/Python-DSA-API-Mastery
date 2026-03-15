@@ -582,3 +582,11 @@ Min platforms                  Mixed event sort       Separate sorted arrivals/d
 | Mixed event sort for platforms | Simultaneous events ordered wrong | Use two separate sorted arrays with two pointers |
 | Jump Game off-by-one | Updating max_reach for unreachable index | Check `if i > max_reach: return False` FIRST |
 | Activity selection by duration | Shortest duration is not greedy-safe | Sort by FINISH TIME, not duration or start time |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

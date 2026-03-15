@@ -396,3 +396,11 @@ A: field_validator: validates one field in isolation.
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [13 — Concurrency](../13_concurrency/theory.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

@@ -861,3 +861,11 @@ Elo-based convergence rather than brute-force ranking.
 All six examples exploit the same invariant: **a sorted sequence with a
 monotonic predicate can be searched in O(log n)**. Master this pattern and you
 will recognise it in every domain.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

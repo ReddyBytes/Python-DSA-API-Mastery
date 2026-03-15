@@ -597,3 +597,11 @@ Decision matrix:
 | ← Previous | [18 — Design Patterns](../18_design_patterns/theory.md) |
 | ➡️ Next | [20 — Data Systems](../20_data_systems/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Design Patterns — Interview Q&A](../18_design_patterns/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

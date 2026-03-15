@@ -354,3 +354,10 @@ If you can confidently explain and defend these topics with examples and trade-o
 [Examples & Implementation](/dsa-complete-mastery/01_complexity_analysis/examples.py)  
 [Next: Arrays Interview Guide](/dsa-complete-mastery/02_arrays/interview.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Arrays — Theory →](../02_arrays/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md)

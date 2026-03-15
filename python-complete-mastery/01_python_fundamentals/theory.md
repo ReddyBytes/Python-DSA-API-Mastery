@@ -470,3 +470,10 @@ That one sentence separates beginners from professionals.
 ⬅ Previous: `01_python_fundamentals/theory.md`  
 ➡ Next: `03_data_types/theory.md`
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Memory Management — Interview Q&A](../01.1_memory_management/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

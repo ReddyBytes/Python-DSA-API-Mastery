@@ -1040,3 +1040,11 @@ READING STRATEGY:
 | 📖 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [07 — Modules & Packages](../07_modules_packages/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Oops — Interview Q&A](../05_oops/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

@@ -356,3 +356,11 @@ A: A Distributed Denial of Service attack floods a system with traffic from many
 | Interview Framework | [23 — Interview Framework](../23_interview_framework/the_45_minute_playbook.md) |
 | Scenario Questions | [scenario_questions.md](./scenario_questions.md) |
 | Company Patterns | [company_patterns.md](./company_patterns.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Company Patterns](./company_patterns.md) &nbsp;|&nbsp; **Next:** [Scenario Questions →](./scenario_questions.md)
+
+**Related Topics:** [Company Patterns](./company_patterns.md) · [Scenario Questions](./scenario_questions.md)

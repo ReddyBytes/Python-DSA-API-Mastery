@@ -880,3 +880,11 @@ then handle groups as a scaling problem on top of that foundation.
 | ← Previous | [Uber Ride-Sharing](./uber.md) |
 | ➡️ Next | [23 — Interview Framework](../23_interview_framework/the_45_minute_playbook.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← URL Shortener Case Study](./url_shortener.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Netflix Case Study](./netflix.md) · [Twitter Case Study](./twitter.md) · [Uber Case Study](./uber.md) · [URL Shortener Case Study](./url_shortener.md) · [Interview Q&A](./interview.md)

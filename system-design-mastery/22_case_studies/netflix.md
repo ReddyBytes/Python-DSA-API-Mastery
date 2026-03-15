@@ -1017,3 +1017,11 @@ A: WebRTC is optimized for interactive real-time communication (video calls),
 | ← Previous | [Twitter Feed](./twitter.md) |
 | ➡️ Next | [Uber Ride-Sharing](./uber.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Twitter Case Study →](./twitter.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Twitter Case Study](./twitter.md) · [Uber Case Study](./uber.md) · [URL Shortener Case Study](./url_shortener.md) · [WhatsApp Case Study](./whatsapp.md) · [Interview Q&A](./interview.md)

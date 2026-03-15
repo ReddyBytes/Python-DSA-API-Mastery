@@ -271,3 +271,11 @@ TRAP 5: heapq.heapreplace vs heappushpop
   heapreplace: pop then push (heap must be non-empty)
   heappushpop: push then pop (slightly different semantics)
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

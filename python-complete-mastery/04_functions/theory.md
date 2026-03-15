@@ -1758,3 +1758,11 @@ f = lambda x: (x**2 if x>0 else abs(x)*3 + x/2)  # USE def for clarity
 | 💻 Practice | [practice.py](./practice.py) |
 | ➡️ Next | [05 — OOP](../05_oops/theory.md) |
 | 🏠 Home | [README](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Data Types — Interview Q&A](../03_data_types/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

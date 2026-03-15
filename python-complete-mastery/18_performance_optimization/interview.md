@@ -370,3 +370,10 @@ Previous:
 Next:  
 [19_production_best_practices/theory.md](../19_production_best_practices/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Profiling](./profiling.md) &nbsp;|&nbsp; **Next:** [Production Best Practices — Coding Standards →](../19_production_best_practices/coding_standards.md)
+
+**Related Topics:** [Profiling](./profiling.md)

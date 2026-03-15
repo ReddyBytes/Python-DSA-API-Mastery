@@ -333,3 +333,10 @@ you are ready for array discussions in product-based and senior interviews.
 [Arrays Implementation](/dsa-complete-mastery/02_arrays/implementation.py)  
 [Strings Theory](/dsa-complete-mastery/03_strings/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Strings — Theory →](../03_strings/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

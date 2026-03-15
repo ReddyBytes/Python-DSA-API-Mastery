@@ -452,3 +452,11 @@ Before submitting any DP solution, answer these 7 questions:
 
 - [ ] **7. Are all states computed in the correct order?**
   Each `dp[i]` must be computed only after every state it depends on. Bottom-up iteration (small to large `i`) satisfies this for most problems. For 2D, ensure both `i` and `j` iterate in the right direction.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

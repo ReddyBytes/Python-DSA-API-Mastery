@@ -610,3 +610,11 @@ counter.value += 1   # NOT atomic! use with counter.get_lock()
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🧵 Threading Guide | [threading_guide.md](./threading_guide.md) |
 | ⚡ Async Guide | [async_guide.md](./async_guide.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Threading Guide](./threading_guide.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Async Guide](./async_guide.md) · [Threading Guide](./threading_guide.md) · [Interview Q&A](./interview.md)

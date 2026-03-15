@@ -357,3 +357,11 @@ Next:
 [25_advanced_graphs/theory.md](/dsa-complete-mastery/25_advanced_graphs/theory.md)
 
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Advanced Graphs — Theory →](../25_advanced_graphs/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

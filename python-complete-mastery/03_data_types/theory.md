@@ -1197,3 +1197,11 @@ You now know all of Python's core data types:
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [04 — Functions](../04_functions/README.md) |
 | 🏠 Home | [python-complete-mastery](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Control Flow — Interview Q&A](../02_control_flow/interview.md) &nbsp;|&nbsp; **Next:** [Complete Guide →](./complete_guide.md)
+
+**Related Topics:** [Complete Guide](./complete_guide.md) · [Complexity Analysis](./complexity_analysis.md) · [Cheat Sheet](./cheetsheet.md) · [Complexity Analysis Interview](./complexity_analysis_interview.md) · [Interview Q&A](./interview.md)

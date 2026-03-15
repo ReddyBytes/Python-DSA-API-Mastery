@@ -906,3 +906,11 @@ The core invariant of DSU: **with path compression and union by rank, the
 amortized cost of m operations on n elements is O(m * α(n)), where α(n) ≤ 4
 for any n that can exist in the physical universe.** This is as close to O(1)
 as any data structure ever gets.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

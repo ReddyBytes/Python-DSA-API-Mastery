@@ -14,3 +14,11 @@
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Interview Master — Company Patterns →](../99_interview_master/company_patterns.md)
+
+**Related Topics:** [Theory](./theory.md) · [45-Minute Interview Playbook](./the_45_minute_playbook.md) · [Cheat Sheet](./cheatsheet.md)

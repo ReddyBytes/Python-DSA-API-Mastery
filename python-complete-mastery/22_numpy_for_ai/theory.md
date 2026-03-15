@@ -808,3 +808,11 @@ You can implement any AI algorithm from scratch, and you can understand what lib
 
 Previous: `21_typing_and_pydantic/theory.md`
 Next: `23_pandas_for_ai/theory.md`
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Data Engineering Applications — Interview Q&A](../21_data_engineering_applications/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

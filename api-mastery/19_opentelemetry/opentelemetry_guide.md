@@ -776,7 +776,8 @@ You could export spans directly from your app to Jaeger or Datadog. The Collecto
 
 ---
 
-| Previous | [← 18 — Real World APIs](../18_real_world_apis/real_world_apis.md) |
-|----------|--------------------------------------------------------------------|
-| Next     | [99 — Interview Master →](../99_interview_master/README.md)        |
-| Home     | [README.md](../README.md)                                          |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real-World Architectures](../18_real_world_apis/architectures.md) &nbsp;|&nbsp; **Next:** [API Interview Master →](../99_interview_master/api_questions.md)
+
+**Related Topics:** [Production Deployment](../12_production_deployment/deployment_guide.md) · [FastAPI Advanced](../07_fastapi/advanced_guide.md) · [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md) · [Real-World Architectures](../18_real_world_apis/architectures.md)

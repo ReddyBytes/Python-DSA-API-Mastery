@@ -983,3 +983,11 @@ if __name__ == "__main__":
 | 3 | `range(start, n)` for permutations | Generates combinations (ordered subsets) not permutations | `used[]` array + `range(0, n)` |
 | 4 | No pruning in combination sum | Recurses past impossible candidates | Sort + `if candidates[i] > remaining: break` |
 | 5 | O(n) board scan in N-Queens | Rescanning placed queens each time | `cols`, `diag1` (`row-col`), `diag2` (`row+col`) sets for O(1) check |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

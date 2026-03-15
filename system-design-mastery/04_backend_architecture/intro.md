@@ -306,3 +306,9 @@ You understand the basic building blocks. Now we go deeper:
 | ← Previous | [03 — API Design](../03_api_design/theory.md) |
 | ➡️ Next | [05 — Databases](../05_databases/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Api Design — Interview Q&A](../03_api_design/interview.md) &nbsp;|&nbsp; **Next:** [Databases — Theory →](../05_databases/theory.md)

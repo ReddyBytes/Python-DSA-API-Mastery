@@ -38,3 +38,11 @@
 | ← Previous | [19 — Clean Architecture](../19_clean_architecture/theory.md) |
 | ➡️ Next | [20 — Data Systems](../20_data_systems/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Observability — Interview Q&A](../14_observability/interview.md) &nbsp;|&nbsp; **Next:** [Cloud Overview →](./cloud_overview.md)
+
+**Related Topics:** [Cloud Overview](./cloud_overview.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

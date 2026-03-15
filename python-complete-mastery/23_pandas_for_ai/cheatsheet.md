@@ -305,3 +305,11 @@ df.memory_usage(deep=True).sum() / 1e6    # total in MB
 | 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

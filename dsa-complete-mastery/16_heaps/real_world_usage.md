@@ -620,3 +620,11 @@ if __name__ == "__main__":
 The heap's superpower: **O(1) access to the extremum (min or max) with O(log n)
 insert/delete**. Whenever a problem says "always process the best/cheapest/closest
 item next", reach for a heap.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

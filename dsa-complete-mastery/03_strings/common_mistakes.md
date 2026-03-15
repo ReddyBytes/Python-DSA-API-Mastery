@@ -1674,3 +1674,11 @@ print("f-strings are fastest and most readable -- prefer them in new code.")
 [ ] Did I use key=int when sorting number-strings?
 [ ] Am I using f-strings for clarity and performance?
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

@@ -226,3 +226,11 @@ the internals they hide.**
 | Previous | [02 — System Fundamentals](../02_system_fundamentals/fundamentals.md) |
 | Next | [04 — Backend Architecture](../04_backend_architecture/intro.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← System Fundamentals — Interview Q&A](../02_system_fundamentals/interview.md) &nbsp;|&nbsp; **Next:** [Theory →](./theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

@@ -569,3 +569,11 @@ for i in range(6):
 | 3 | Incrementing level per node, not per level     | Level counter advances inside the node loop     | Snapshot `len(queue)` at level start; process that many |
 | 4 | Pushing raw values to min-heap for max problems | `heapq` is always a min-heap                   | Negate values before push; negate again after pop       |
 | 5 | Using `deque(maxlen=k)` without realising drops | `maxlen` silently evicts oldest element        | Omit `maxlen` unless sliding-window truncation is intended |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

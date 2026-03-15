@@ -58,3 +58,11 @@ Background workers         Netflix (transcoding), URL analytics aggregation
 | ← Previous | [21 — Real-Time Systems](../21_real_time_systems/real_time_guide.md) |
 | ➡️ Next | [23 — Interview Framework](../23_interview_framework/the_45_minute_playbook.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real Time Systems — Interview Q&A](../21_real_time_systems/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Netflix Case Study](./netflix.md) · [Twitter Case Study](./twitter.md) · [Uber Case Study](./uber.md) · [URL Shortener Case Study](./url_shortener.md) · [WhatsApp Case Study](./whatsapp.md) · [Interview Q&A](./interview.md)

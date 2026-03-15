@@ -429,3 +429,10 @@ Previous:
 Next:  
 [20_system_design_with_python/interview.md](./interview.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Production Best Practices — Interview Q&A](../19_production_best_practices/interview.md) &nbsp;|&nbsp; **Next:** [API Design Principles →](./api_design_principles.md)
+
+**Related Topics:** [API Design Principles](./api_design_principles.md) · [Scalable App Design](./scalable_app_design.md) · [Interview Q&A](./interview.md)

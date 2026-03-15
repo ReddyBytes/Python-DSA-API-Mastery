@@ -218,3 +218,11 @@ v.shape             # (3,)  — 1D, not a row or column
 v.reshape(1, 3)     # (1, 3) — explicitly a row vector
 v.reshape(3, 1)     # (3, 1) — explicitly a column vector
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

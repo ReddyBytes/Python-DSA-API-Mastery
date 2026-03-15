@@ -339,3 +339,11 @@ Traffic spike preparation           Load test first, progressive rollout, cache 
 | Interview Framework | [23 — Interview Framework](../23_interview_framework/the_45_minute_playbook.md) |
 | Rapid Fire Q&A | [rapid_fire.md](./rapid_fire.md) |
 | Company Patterns | [company_patterns.md](./company_patterns.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Rapid Fire Q&A](./rapid_fire.md) &nbsp;|&nbsp; **Next:** —
+
+**Related Topics:** [Company Patterns](./company_patterns.md) · [Rapid Fire Q&A](./rapid_fire.md)

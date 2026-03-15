@@ -1429,3 +1429,11 @@ create a cycle — skip it. Adding an edge between two DIFFERENT groups merges t
                    │ components              │              │
   Kruskal's MST    │ Minimum spanning tree   │ O(E log E)   │ Undirected, weighted
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

@@ -1654,3 +1654,11 @@ if not root or root == p or root == q:
 Here's the beautiful truth about tree problems: they all follow one of these eight patterns. Once you've internalized each pattern — not just memorized the code, but understood the *story* of information flowing up or down or across — you'll be able to look at any tree problem and know within 30 seconds which pattern applies.
 
 The trees are all the same. It's the direction of information that changes everything.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

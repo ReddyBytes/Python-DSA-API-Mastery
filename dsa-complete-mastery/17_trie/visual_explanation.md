@@ -352,3 +352,11 @@ asks "does this exact key exist?", a trie asks "does anything *start with* this 
 
 When your problem involves prefixes, autocomplete, or shared structure between strings —
 reach for the trie. The library that organizes itself by sound.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

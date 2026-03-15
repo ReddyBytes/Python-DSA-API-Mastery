@@ -529,3 +529,11 @@ stream1, stream2 = fan_out(read_lines("events.log"), n_consumers=2)
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [12 — Context Managers](../12_context_managers/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

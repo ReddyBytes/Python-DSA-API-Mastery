@@ -403,3 +403,11 @@ If it is in the wrong tier, no amount of micro-optimization will save it.
 ---
 
 *Next up: Arrays — where memory layout makes everything O(1) or O(n).*
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

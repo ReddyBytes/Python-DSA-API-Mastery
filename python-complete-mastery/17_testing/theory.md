@@ -1131,3 +1131,11 @@ markers =
 | 🧪 pytest Guide | [pytest_guide.md](./pytest_guide.md) |
 | ⬅️ Previous | [16 — Design Patterns](../16_design_patterns/theory.md) |
 | ➡️ Next | [18 — Performance Optimization](../18_performance_optimization/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Design Patterns — Interview Q&A](../16_design_patterns/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

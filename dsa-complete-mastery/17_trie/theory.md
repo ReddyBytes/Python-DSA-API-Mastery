@@ -297,3 +297,10 @@ Next:
 [17_trie/interview.md](/dsa-complete-mastery/17_trie/interview.md)  
 [18_graphs/theory.md](/dsa-complete-mastery/18_graphs/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Heaps — Interview Q&A](../16_heaps/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

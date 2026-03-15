@@ -820,3 +820,11 @@ REGULAR PACKAGES vs NAMESPACE PACKAGES:
 | 📖 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [08 — File Handling](../08_file_handling/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Exceptions Error Handling — Interview Q&A](../06_exceptions_error_handling/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

@@ -203,3 +203,11 @@ A: Financial transactions, inventory, distributed locks — where stale data cau
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [02 — Databases](../05_databases/interview.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Api Design — Overview →](../03_api_design/overview.md)
+
+**Related Topics:** [Fundamentals](./fundamentals.md) · [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

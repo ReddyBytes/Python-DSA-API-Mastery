@@ -897,3 +897,11 @@ print(f"Computed in: {elapsed_ms:.1f} ms  (O(n) — single pass)")
 The unifying idea: **two pointers eliminate the need to consider all pairs by
 exploiting a structural property** — sorted order, symmetry, or monotonicity —
 to prune invalid candidates at each step.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

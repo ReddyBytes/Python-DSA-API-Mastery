@@ -452,3 +452,11 @@ Be ready to walk through the entire pipeline end-to-end.
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Async Python For Ai — Theory →](../24_async_python_for_ai/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

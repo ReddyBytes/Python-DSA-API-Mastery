@@ -416,3 +416,10 @@ memory behavior,
 and algorithmic patterns
 is essential for mastering string problems.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Arrays — Interview Q&A](../02_arrays/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

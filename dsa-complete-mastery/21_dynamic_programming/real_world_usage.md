@@ -437,3 +437,11 @@ Video streaming           Buffer-state DP            dp[t][buf] = max reward
 
 The common thread: **every problem decomposes into overlapping subproblems
 with optimal substructure**. Once you recognise that shape, DP is the tool.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

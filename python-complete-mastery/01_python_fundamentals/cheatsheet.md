@@ -150,3 +150,11 @@ __dunder__        # double underscore both sides = special
 Falsy:  0, 0.0, 0j, "", [], {}, set(), None, False
 Truthy: everything else (including "0", [False], -1)
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

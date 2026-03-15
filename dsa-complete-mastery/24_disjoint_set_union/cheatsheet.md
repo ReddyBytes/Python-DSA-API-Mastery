@@ -242,3 +242,11 @@ def smallest_string_with_swaps(s, pairs):
 - Weighted DSU (for relative relationships): store weight/offset in parent edge
 - After path compression, `parent[x]` points directly to root — intermediate parents may be stale
 - DSU does not support splitting (unioning is permanent)
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Patterns →](./patterns.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

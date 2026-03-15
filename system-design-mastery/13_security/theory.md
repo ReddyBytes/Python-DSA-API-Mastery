@@ -31,3 +31,11 @@
 | ⬅️ Previous | [12 — Microservices](../12_microservices/theory.md) |
 | ➡️ Next | [14 — Observability](../14_observability/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Microservices — Interview Q&A](../12_microservices/interview.md) &nbsp;|&nbsp; **Next:** [Security Fundamentals →](./security_fundamentals.md)
+
+**Related Topics:** [Security Fundamentals](./security_fundamentals.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

@@ -263,3 +263,11 @@ chr(ord('a') + k)                    # k-th letter from 'a'
 - 0-indexed vs 1-indexed DP: dp[i] = result for arr[i-1] — common source of bugs
 - Mutable default args: def fn(memo={}): — BUG: shared across calls; use None+init
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [FAANG Level Questions →](./faang_level_questions.md)
+
+**Related Topics:** [0-2 Years Experience](./0_2_years.md) · [3-5 Years Experience](./3_5_years.md) · [Visual Explanation](./visual_explanation.md) · [FAANG Level Questions](./faang_level_questions.md) · [Patterns](./patterns.md)

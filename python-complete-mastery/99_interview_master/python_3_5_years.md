@@ -438,3 +438,10 @@ Previous:
 Next:  
 [99_interview_master/scenario_based_questions.md](./scenario_based_questions.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Python 0-2 Years](./python_0_2_years.md) &nbsp;|&nbsp; **Next:** [Scenario Based Questions →](./scenario_based_questions.md)
+
+**Related Topics:** [Python 0-2 Years](./python_0_2_years.md) · [Scenario Based Questions](./scenario_based_questions.md) · [Tricky Edge Cases](./tricky_edge_cases.md)

@@ -345,3 +345,11 @@ A: Added by @functools.wraps. Points to the original function.
 | 🎯 Interview | [interview.md](./interview.md) |
 | 🏭 Pattern Library | [decorator_patterns.md](./decorator_patterns.md) |
 | ➡️ Next | [11 — Iterators & Generators](../11_iterators_generators/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Decorator Patterns →](./decorator_patterns.md)
+
+**Related Topics:** [Theory](./theory.md) · [Decorator Patterns](./decorator_patterns.md) · [Interview Q&A](./interview.md)

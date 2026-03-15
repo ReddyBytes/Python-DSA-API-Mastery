@@ -1,12 +1,5 @@
 # GraphQL — When the Client Gets to Drive
 
-| Previous | [03 — REST Best Practices](../03_rest_best_practices/patterns.md) |
-|----------|-------------------------------------------------------------------|
-| Next     | [05 — gRPC](../05_grpc/grpc_guide.md)                             |
-| Home     | [README.md](../README.md)                                         |
-
----
-
 ## The Monday Morning Problem
 
 It's Monday morning. You're building the mobile app for an e-commerce startup.
@@ -804,7 +797,8 @@ context, with this team."
 
 ---
 
-| Previous | [03 — REST Best Practices](../03_rest_best_practices/patterns.md) |
-|----------|-------------------------------------------------------------------|
-| Next     | [05 — gRPC](../05_grpc/grpc_guide.md)                             |
-| Home     | [README.md](../README.md)                                         |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Production Deployment](../12_production_deployment/deployment_guide.md) &nbsp;|&nbsp; **Next:** [gRPC →](../14_grpc/grpc_guide.md)
+
+**Related Topics:** [gRPC](../14_grpc/grpc_guide.md) · [API Gateway Patterns](../15_api_gateway/gateway_patterns.md) · [REST Fundamentals](../02_rest_fundamentals/rest_explained.md) · [WebSockets & Real-Time APIs](../17_websockets/realtime_apis.md)

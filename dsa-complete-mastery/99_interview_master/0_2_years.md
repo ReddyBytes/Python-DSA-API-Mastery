@@ -181,3 +181,10 @@ Previous:
 Next:  
 [99_interview_master/3_5_years.md](/dsa-complete-mastery/99_interview_master/3_5_years.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← System Design Patterns — Interview Q&A](../26_system_design_patterns/interview.md) &nbsp;|&nbsp; **Next:** [3-5 Years Experience →](./3_5_years.md)
+
+**Related Topics:** [3-5 Years Experience](./3_5_years.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [FAANG Level Questions](./faang_level_questions.md) · [Patterns](./patterns.md)

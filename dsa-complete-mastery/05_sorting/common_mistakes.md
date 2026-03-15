@@ -405,3 +405,11 @@ print("Deduplication tests passed.")
 | 4 | Sorting numeric strings lexicographically      | String `<` is character-by-character    | `key=int` to convert before comparison         |
 | 5 | Largest number: sorting by integer value       | Magnitude does not reflect concatenation| Custom comparator on `str(a)+str(b)`           |
 | 6 | Modifying a list while iterating over it       | Index shifting corrupts traversal       | Collect to new list; never mutate mid-iteration|
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

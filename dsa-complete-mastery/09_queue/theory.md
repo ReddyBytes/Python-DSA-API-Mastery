@@ -321,3 +321,10 @@ Next:
 [09_queue/interview.md]  
 [10_hashing/theory.md]
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Stack — Interview Q&A](../08_stack/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

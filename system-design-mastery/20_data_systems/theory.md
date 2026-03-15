@@ -38,3 +38,11 @@
 | ← Previous | [15 — Cloud Architecture](../15_cloud_architecture/theory.md) |
 | ➡️ Next | [21 — Real-Time Systems](../21_real_time_systems/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Clean Architecture — Interview Q&A](../19_clean_architecture/interview.md) &nbsp;|&nbsp; **Next:** [Data at Scale →](./data_at_scale.md)
+
+**Related Topics:** [Data at Scale](./data_at_scale.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

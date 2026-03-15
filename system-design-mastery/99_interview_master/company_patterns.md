@@ -300,3 +300,11 @@ These phrases, used correctly in context, signal that you think at a senior engi
 | Interview Framework | [23 — Interview Framework](../23_interview_framework/the_45_minute_playbook.md) |
 | Rapid Fire Q&A | [rapid_fire.md](./rapid_fire.md) |
 | Scenario Questions | [scenario_questions.md](./scenario_questions.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Interview Framework — Interview Q&A](../23_interview_framework/interview.md) &nbsp;|&nbsp; **Next:** [Rapid Fire Q&A →](./rapid_fire.md)
+
+**Related Topics:** [Rapid Fire Q&A](./rapid_fire.md) · [Scenario Questions](./scenario_questions.md)

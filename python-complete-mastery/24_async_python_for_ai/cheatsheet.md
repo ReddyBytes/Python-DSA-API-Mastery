@@ -362,3 +362,11 @@ A: It's ASGI/async-native. async def handlers let one process handle hundreds of
 | 🎯 Interview | [interview.md](./interview.md) |
 | 🔧 Practice | [practice.py](./practice.py) |
 | ⬅️ Prev | [13 — Concurrency](../13_concurrency/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

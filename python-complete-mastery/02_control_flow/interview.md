@@ -414,3 +414,10 @@ you’re thinking beyond beginner level.
 [Control Flow Theory](/python-complete-mastery/02_control_flow/theory.md)  
 [Data Types](/python-complete-mastery/03_data_types/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Data Types — Theory →](../03_data_types/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

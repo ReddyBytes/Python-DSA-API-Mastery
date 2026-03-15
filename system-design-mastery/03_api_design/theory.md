@@ -31,3 +31,11 @@
 | ⬅️ Previous | [02 — System Fundamentals](../02_system_fundamentals/theory.md) |
 | ➡️ Next | [04 — Backend Architecture](../04_backend_architecture/intro.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Overview](./overview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Overview](./overview.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

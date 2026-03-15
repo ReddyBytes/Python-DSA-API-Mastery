@@ -342,3 +342,10 @@ Mastering searching prepares you for:
 
 Searching is where logic precision matters most.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Sorting — Interview Q&A](../05_sorting/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

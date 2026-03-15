@@ -373,3 +373,11 @@ MISTAKE 4: Forgetting to handle directed vs undirected
 MISTAKE 5: Topological sort on graph with cycle
   Kahn's: len(order) < V → cycle; always validate output size
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Patterns →](./patterns.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

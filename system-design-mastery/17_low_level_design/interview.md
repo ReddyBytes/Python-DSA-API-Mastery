@@ -594,3 +594,11 @@ A: Singleton pattern via __new__. But prefer dependency injection.
 | ← Previous | [16 — High Level Design](../16_high_level_design/theory.md) |
 | ➡️ Next | [18 — Design Patterns](../18_design_patterns/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Design Patterns — Theory →](../18_design_patterns/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

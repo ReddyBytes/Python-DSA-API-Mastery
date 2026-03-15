@@ -302,3 +302,10 @@ Next:
 [20_backtracking/interview.md](/dsa-complete-mastery/20_backtracking/interview.md)  
 [21_dynamic_programming/theory.md](/dsa-complete-mastery/21_dynamic_programming/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Greedy — Interview Q&A](../19_greedy/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

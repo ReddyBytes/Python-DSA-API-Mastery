@@ -609,3 +609,11 @@ AVOID lazy deletion when:
 | heappop when only peeking | Destroys element unintentionally | Use `heap[0]` for O(1) peek |
 | Max-heap for top-K streaming | Stores all n elements | Min-heap of size K: O(n log k), O(k) space |
 | Lazy deletion with wrong size | Virtual size not tracked | Maintain separate `_size` counter |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

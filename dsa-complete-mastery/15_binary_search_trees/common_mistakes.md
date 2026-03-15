@@ -666,3 +666,11 @@ did not recognise or leverage the BST ordering property.
 | 3 | Insert returns `None` or discards return value        | Local rebinding does not affect caller         | Always `return root`; always assign `root.left = insert(...)` |
 | 4 | Range query visits entire tree                       | Misses BST pruning on out-of-range branches    | Skip left if `node.val <= low`; skip right if `node.val >= high` |
 | 5 | LCA uses general O(n) algorithm on a BST             | Does not exploit BST ordering property         | Use BST LCA: both < root → go left; both > root → go right; else → root is LCA |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

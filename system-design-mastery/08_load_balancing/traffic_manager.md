@@ -645,3 +645,11 @@ failover." What's the tradeoff they're ignoring?
 | Previous | [07 — Storage & CDN](../07_storage_cdn/theory.md) |
 | Next | [09 — Message Queues](../09_message_queues/why_queues_exist.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

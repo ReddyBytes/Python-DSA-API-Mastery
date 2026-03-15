@@ -892,3 +892,11 @@ A: Simpler hook run when class is subclassed; composes cleanly; no metaclass con
 | 🏭 Metaclasses & Descriptors | [metaclasses_descriptors_guide.md](./metaclasses_descriptors_guide.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | ➡️ Next | [16 — Design Patterns](../16_design_patterns/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Metaclasses & Descriptors](./metaclasses_descriptors_guide.md) &nbsp;|&nbsp; **Next:** [Design Patterns — Theory →](../16_design_patterns/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Dunder Methods Guide](./dunder_guide.md) · [Metaclasses & Descriptors](./metaclasses_descriptors_guide.md)

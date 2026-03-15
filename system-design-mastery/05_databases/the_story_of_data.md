@@ -794,3 +794,11 @@ Migrate to NoSQL when you have a specific, proven problem it solves.
 | Previous | [04 — Backend Architecture](../04_backend_architecture/intro.md) |
 | Next | [06 — Caching](../06_caching/the_art_of_caching.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

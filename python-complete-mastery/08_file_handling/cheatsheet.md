@@ -350,3 +350,11 @@ open("file.txt", encoding="utf-8")       # always explicit
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ➡️ Next | [09 — Logging & Debugging](../09_logging_debugging/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Pathlib Guide →](./pathlib_guide.md)
+
+**Related Topics:** [Theory](./theory.md) · [Pathlib Guide](./pathlib_guide.md) · [Interview Q&A](./interview.md)

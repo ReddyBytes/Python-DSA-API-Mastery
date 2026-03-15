@@ -598,3 +598,11 @@ A: Wraps any object with .close() as a context manager.
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🛠️ contextlib Guide | [contextlib_guide.md](./contextlib_guide.md) |
 | ➡️ Next | [13 — Concurrency](../13_concurrency/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Contextlib Guide](./contextlib_guide.md) &nbsp;|&nbsp; **Next:** [Concurrency — Theory →](../13_concurrency/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Contextlib Guide](./contextlib_guide.md)

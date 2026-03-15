@@ -1324,3 +1324,11 @@ Step 5 — Edge Cases & Extensions (5 min)
 | ← Previous | [16 — High Level Design](../16_high_level_design/theory.md) |
 | ➡️ Next | [18 — Design Patterns](../18_design_patterns/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← High Level Design — Interview Q&A](../16_high_level_design/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

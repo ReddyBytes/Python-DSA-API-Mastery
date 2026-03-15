@@ -821,10 +821,8 @@ These six features are what separate "a FastAPI script" from "a FastAPI applicat
 
 ---
 
-## Navigation
+**[🏠 Back to README](../README.md)**
 
-| | |
-|---|---|
-| Previous | [FastAPI Basics](../07_fastapi/first_api.md) |
-| Next | [FastAPI & Databases](../07_fastapi/database_guide.md) |
-| Home | [README.md](../README.md) |
+**Prev:** [← FastAPI First Steps](../07_fastapi/first_api.md) &nbsp;|&nbsp; **Next:** [FastAPI & Databases →](../07_fastapi/database_guide.md)
+
+**Related Topics:** [FastAPI First Steps](../07_fastapi/first_api.md) · [FastAPI & Databases](../07_fastapi/database_guide.md) · [FastAPI Advanced](../07_fastapi/advanced_guide.md) · [Authentication & Authorization](../05_authentication/securing_apis.md)

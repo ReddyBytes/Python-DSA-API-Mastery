@@ -14,3 +14,11 @@
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Storage Guide](./storage_guide.md) &nbsp;|&nbsp; **Next:** [Load Balancing — Theory →](../08_load_balancing/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Storage Guide](./storage_guide.md)

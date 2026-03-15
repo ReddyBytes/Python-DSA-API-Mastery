@@ -312,3 +312,10 @@ Next:
 [25_advanced_graphs/interview.md](/dsa-complete-mastery/25_advanced_graphs/interview.md)  
 [26_system_design_patterns/theory.md](/dsa-complete-mastery/26_system_design_patterns/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Disjoint Set Union — Interview Q&A](../24_disjoint_set_union/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

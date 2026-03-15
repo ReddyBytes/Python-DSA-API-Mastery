@@ -475,3 +475,10 @@ not index arithmetic.
 Once pointer manipulation becomes intuitive,
 advanced data structures become much easier.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Searching — Interview Q&A](../06_searching/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

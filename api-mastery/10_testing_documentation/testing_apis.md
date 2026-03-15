@@ -470,8 +470,8 @@ Error handling
 
 ---
 
-| Navigation | |
-|---|---|
-| Previous | [09 — API Design Patterns](../09_api_design_patterns/design_guide.md) |
-| Next | [11 — API Documentation](../11_api_documentation/docs_that_work.md) |
-| Home | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← API Performance & Scaling](../09_api_performance_scaling/performance_guide.md) &nbsp;|&nbsp; **Next:** [API Documentation →](../10_testing_documentation/docs_that_work.md)
+
+**Related Topics:** [FastAPI Core Guide](../07_fastapi/core_guide.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [API Documentation](../10_testing_documentation/docs_that_work.md)

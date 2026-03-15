@@ -193,3 +193,11 @@ Lookup in dict   → O(1)  — instant via hash
 | 🎤 Interview | [interview.md](./interview.md) |
 | ➡️ Next | [04 — Functions](../04_functions/README.md) |
 | 🏠 Home | [python-complete-mastery](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Complexity Analysis](./complexity_analysis.md) &nbsp;|&nbsp; **Next:** [Complexity Analysis Interview →](./complexity_analysis_interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Complete Guide](./complete_guide.md) · [Complexity Analysis](./complexity_analysis.md) · [Complexity Analysis Interview](./complexity_analysis_interview.md) · [Interview Q&A](./interview.md)

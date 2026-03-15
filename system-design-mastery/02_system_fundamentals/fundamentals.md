@@ -545,3 +545,11 @@ involves latency, consistency, and availability tradeoffs.
 | Previous | [01 — Networking Basics](../01_networking_basics/theory.md) |
 | Next | [03 — API Design](../03_api_design/theory.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Networking Basics — Interview Q&A](../01_networking_basics/interview.md) &nbsp;|&nbsp; **Next:** [Theory →](./theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

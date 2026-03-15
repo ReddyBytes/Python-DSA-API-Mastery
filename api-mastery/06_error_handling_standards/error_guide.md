@@ -1,12 +1,5 @@
 # Error Handling, Pagination, Filtering & Sorting
 
-| Previous | [05 — Authentication](../05_authentication/securing_apis.md)           |
-|----------|------------------------------------------------------------------------|
-| Next     | [FastAPI Fundamentals](../07_fastapi/why_fastapi.md) |
-| Home     | [README.md](../README.md)                                              |
-
----
-
 ## The Error That Told Me Nothing
 
 It was a Friday afternoon. A mobile developer on another team filed a bug:
@@ -613,7 +606,8 @@ Sorting:
 
 ---
 
-| Previous | [05 — Authentication](../05_authentication/securing_apis.md)           |
-|----------|------------------------------------------------------------------------|
-| Next     | [FastAPI Fundamentals](../07_fastapi/why_fastapi.md) |
-| Home     | [README.md](../README.md)                                              |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Authentication & Authorization](../05_authentication/securing_apis.md) &nbsp;|&nbsp; **Next:** [Why FastAPI →](../07_fastapi/why_fastapi.md)
+
+**Related Topics:** [REST Best Practices](../03_rest_best_practices/patterns.md) · [Authentication & Authorization](../05_authentication/securing_apis.md) · [Testing APIs](../10_testing_documentation/testing_apis.md)

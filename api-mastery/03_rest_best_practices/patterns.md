@@ -1,12 +1,5 @@
 # REST Best Practices
 
-| Previous | [02 - REST Fundamentals](../02_rest_fundamentals/rest_explained.md) |
-|----------|---------------------------------------------------------------------|
-| Next     | [04 - GraphQL](../04_graphql/graphql_story.md)                      |
-| Home     | [README.md](../README.md)                                           |
-
----
-
 ## The Gap Between "Works" and "Good"
 
 You can build an API that works while breaking every rule in this document. Requests
@@ -919,7 +912,8 @@ Rate Limiting:
 
 ---
 
-| Previous | [02 - REST Fundamentals](../02_rest_fundamentals/rest_explained.md) |
-|----------|---------------------------------------------------------------------|
-| Next     | [04 - GraphQL](../04_graphql/graphql_story.md)                      |
-| Home     | [README.md](../README.md)                                           |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← REST Fundamentals](../02_rest_fundamentals/rest_explained.md) &nbsp;|&nbsp; **Next:** [Data Formats & Serialization →](../04_data_formats/serialization_guide.md)
+
+**Related Topics:** [REST Fundamentals](../02_rest_fundamentals/rest_explained.md) · [API Versioning](../08_versioning_standards/versioning_strategy.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [API Design Patterns](../16_api_design_patterns/design_guide.md)

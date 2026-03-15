@@ -784,8 +784,8 @@ Metrics that matter:
 
 ---
 
-| Navigation | |
-|---|---|
-| Previous | [08 — Versioning](../08_versioning_standards/versioning_strategy.md) |
-| Next | [10 — Testing & Docs](../10_testing_documentation/testing_apis.md) |
-| Home | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← API Versioning](../08_versioning_standards/versioning_strategy.md) &nbsp;|&nbsp; **Next:** [Testing APIs →](../10_testing_documentation/testing_apis.md)
+
+**Related Topics:** [FastAPI & Databases](../07_fastapi/database_guide.md) · [Testing APIs](../10_testing_documentation/testing_apis.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md)

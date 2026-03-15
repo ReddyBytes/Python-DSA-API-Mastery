@@ -583,3 +583,11 @@ Async notifications              Core path unblocked           Notification may 
 | Previous | [22 — URL Shortener](./url_shortener.md) |
 | Next | [22 — Netflix Design](./netflix.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Netflix Case Study](./netflix.md) &nbsp;|&nbsp; **Next:** [Uber Case Study →](./uber.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Netflix Case Study](./netflix.md) · [Uber Case Study](./uber.md) · [URL Shortener Case Study](./url_shortener.md) · [WhatsApp Case Study](./whatsapp.md) · [Interview Q&A](./interview.md)

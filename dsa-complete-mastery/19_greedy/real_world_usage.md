@@ -425,3 +425,11 @@ for src, dst, km in mst_edges:
 Greedy works when the **greedy-choice property** holds: a globally optimal solution can always
 be constructed by making locally optimal choices. When it does not hold, switch to dynamic
 programming (0/1 knapsack, sequence alignment) or exhaustive backtracking.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

@@ -380,3 +380,10 @@ If you can implement binary search without boundary mistakes
 and explain when NOT to use it,
 you are ready for mid-level and senior search discussions.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Linked List — Theory →](../07_linked_list/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

@@ -988,3 +988,11 @@ Async decorators        wrapper must be async if func is async
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🏭 Pattern Library | [decorator_patterns.md](./decorator_patterns.md) |
 | ➡️ Next | [11 — Iterators & Generators](../11_iterators_generators/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Logging Debugging — Interview Q&A](../09_logging_debugging/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Decorator Patterns](./decorator_patterns.md) · [Interview Q&A](./interview.md)

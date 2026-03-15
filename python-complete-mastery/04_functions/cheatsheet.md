@@ -427,3 +427,11 @@ keyword-only (*)   → force explicit, self-documenting calls
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Data Types | [../03_data_types/cheetsheet.md](../03_data_types/cheetsheet.md) |
 | ➡️ OOP | [../05_oops/theory.md](../05_oops/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

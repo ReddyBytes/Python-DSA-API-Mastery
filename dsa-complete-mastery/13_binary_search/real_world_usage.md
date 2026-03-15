@@ -469,3 +469,11 @@ The key insight: **binary search works on any monotonic condition**, not just so
 If you can express your problem as "find the smallest X where condition(X) is true" and the
 condition is monotonically non-decreasing, binary search applies. This "binary search on the
 answer" pattern solves a vast range of optimization problems in O(log n) time.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

@@ -30,3 +30,11 @@
 | ⬅️ Previous | [22 — Case Studies](../22_case_studies/theory.md) |
 | ➡️ Next | [99 — Interview Master](../99_interview_master/) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Case Studies — Interview Q&A](../22_case_studies/interview.md) &nbsp;|&nbsp; **Next:** [45-Minute Interview Playbook →](./the_45_minute_playbook.md)
+
+**Related Topics:** [45-Minute Interview Playbook](./the_45_minute_playbook.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

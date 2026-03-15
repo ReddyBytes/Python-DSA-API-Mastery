@@ -346,3 +346,10 @@ This reflects decision-based reasoning rather than memorization.
 If you can reason about sorting from constraints and trade-offs,
 you are prepared for mid-level and senior sorting discussions.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Searching — Theory →](../06_searching/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

@@ -426,3 +426,10 @@ Previous:
 Next:  
 [16_design_patterns/interview.md](./interview.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Advanced Python — Interview Q&A](../15_advanced_python/interview.md) &nbsp;|&nbsp; **Next:** [Dependency Injection →](./dependency_injection.md)
+
+**Related Topics:** [Dependency Injection](./dependency_injection.md) · [Interview Q&A](./interview.md)

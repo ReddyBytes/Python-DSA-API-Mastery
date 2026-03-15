@@ -506,3 +506,11 @@ print("Split test passed — halves are independent")
 | Deleting head returns garbage | No stable return reference | Always use a `dummy` node |
 | Shallow copy shares nodes | `.next` copied by reference | Create new `ListNode` for every node |
 | Split list stays connected | Tail of first half not cut | Set `prev.next = None` after finding midpoint |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

@@ -38,3 +38,11 @@
 | ← Previous | [21 — Data Systems](../20_data_systems/theory.md) |
 | ➡️ Next | [99 — Interview Master](../99_interview_master/) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Data Systems — Interview Q&A](../20_data_systems/interview.md) &nbsp;|&nbsp; **Next:** [Real-Time Systems Guide →](./real_time_guide.md)
+
+**Related Topics:** [Real-Time Systems Guide](./real_time_guide.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

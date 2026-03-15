@@ -341,3 +341,10 @@ Previous:
 Next:  
 [17_testing/theory.md](../17_testing/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Dependency Injection](./dependency_injection.md) &nbsp;|&nbsp; **Next:** [Testing — Theory →](../17_testing/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Dependency Injection](./dependency_injection.md)

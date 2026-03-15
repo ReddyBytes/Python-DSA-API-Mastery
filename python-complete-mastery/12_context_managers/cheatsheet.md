@@ -304,3 +304,11 @@ A: When a context manager is optional (conditional usage).
 | 🎯 Interview | [interview.md](./interview.md) |
 | 🛠️ contextlib Guide | [contextlib_guide.md](./contextlib_guide.md) |
 | ➡️ Next | [13 — Concurrency](../13_concurrency/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Contextlib Guide →](./contextlib_guide.md)
+
+**Related Topics:** [Theory](./theory.md) · [Contextlib Guide](./contextlib_guide.md) · [Interview Q&A](./interview.md)

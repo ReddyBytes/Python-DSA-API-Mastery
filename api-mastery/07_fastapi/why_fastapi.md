@@ -1,12 +1,5 @@
 # Why FastAPI?
 
-| Previous | [06 — Error Handling](../06_error_handling_standards/error_guide.md) |
-|----------|-----------------------------------------------------------------------|
-| Next     | [FastAPI Basics](../07_fastapi/first_api.md)              |
-| Home     | [README.md](../README.md)                                             |
-
----
-
 ## The Problem You Are Going to Hit
 
 You decide to build a Python API. You're smart. You've heard of Flask. You read the
@@ -585,7 +578,8 @@ nothing surprises you.
 
 ---
 
-| Previous | [06 — Error Handling](../06_error_handling_standards/error_guide.md) |
-|----------|-----------------------------------------------------------------------|
-| Next     | [FastAPI Basics](../07_fastapi/first_api.md)              |
-| Home     | [README.md](../README.md)                                             |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Error Handling Standards](../06_error_handling_standards/error_guide.md) &nbsp;|&nbsp; **Next:** [FastAPI First Steps →](../07_fastapi/first_api.md)
+
+**Related Topics:** [FastAPI First Steps](../07_fastapi/first_api.md) · [FastAPI Core Guide](../07_fastapi/core_guide.md) · [REST Fundamentals](../02_rest_fundamentals/rest_explained.md)

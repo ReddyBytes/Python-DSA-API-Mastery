@@ -764,3 +764,11 @@ Pandas is how you get it there.
 | 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Numpy For Ai — Interview Q&A](../22_numpy_for_ai/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

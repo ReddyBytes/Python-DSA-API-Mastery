@@ -807,3 +807,11 @@ Async generator    async def with yield — for async iteration
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🔧 Pipeline Patterns | [generator_patterns.md](./generator_patterns.md) |
 | ➡️ Next | [12 — Context Managers](../12_context_managers/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Decorators — Interview Q&A](../10_decorators/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Generator Patterns](./generator_patterns.md) · [Interview Q&A](./interview.md)

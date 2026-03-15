@@ -692,3 +692,11 @@ A: Yes — Pydantic auto-coerces {"prompt_tokens": 5} into a TokenUsage instance
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [13 — Concurrency](../13_concurrency/theory.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Advanced Python — Theory →](../15_advanced_python/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

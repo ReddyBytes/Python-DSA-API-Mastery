@@ -411,3 +411,10 @@ Next:
 [21_dynamic_programming/interview.md](/dsa-complete-mastery/21_dynamic_programming/interview.md)  
 [22_bit_manipulation/theory.md](/dsa-complete-mastery/22_bit_manipulation/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Backtracking — Interview Q&A](../20_backtracking/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

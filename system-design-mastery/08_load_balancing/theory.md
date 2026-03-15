@@ -29,3 +29,11 @@
 | ⬅️ Previous | [07 — Storage & CDN](../07_storage_cdn/theory.md) |
 | ➡️ Next | [09 — Message Queues](../09_message_queues/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Storage Cdn — Interview Q&A](../07_storage_cdn/interview.md) &nbsp;|&nbsp; **Next:** [Traffic Manager →](./traffic_manager.md)
+
+**Related Topics:** [Traffic Manager](./traffic_manager.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

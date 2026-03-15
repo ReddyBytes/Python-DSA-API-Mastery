@@ -907,3 +907,10 @@ Previous:
 Next:  
 [14_memory_management/interview.md](./interview.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** — &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

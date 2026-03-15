@@ -413,6 +413,10 @@ It is production survival skill.
 
 ---
 
+---
 
+**[🏠 Back to README](../README.md)**
 
+**Prev:** [← Complete Guide](./complete_guide.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
+**Related Topics:** [Theory](./theory.md) · [Complete Guide](./complete_guide.md) · [Cheat Sheet](./cheetsheet.md) · [Complexity Analysis Interview](./complexity_analysis_interview.md) · [Interview Q&A](./interview.md)

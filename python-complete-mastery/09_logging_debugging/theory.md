@@ -903,3 +903,11 @@ DEBUGGING:
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🐛 PDB Guide | [pdb_guide.md](./pdb_guide.md) |
 | ➡️ Next | [10 — Decorators](../10_decorators/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← File Handling — Interview Q&A](../08_file_handling/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [PDB Debugging Guide](./pdb_guide.md) · [Interview Q&A](./interview.md)

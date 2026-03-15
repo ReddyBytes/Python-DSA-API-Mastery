@@ -687,3 +687,11 @@ At 10,000 reads/second with <100ms SLA:
 | Previous | [19 — Clean Architecture](../19_clean_architecture/theory.md) |
 | Next | [22 — Twitter Design](./twitter.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Uber Case Study](./uber.md) &nbsp;|&nbsp; **Next:** [WhatsApp Case Study →](./whatsapp.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Netflix Case Study](./netflix.md) · [Twitter Case Study](./twitter.md) · [Uber Case Study](./uber.md) · [WhatsApp Case Study](./whatsapp.md) · [Interview Q&A](./interview.md)

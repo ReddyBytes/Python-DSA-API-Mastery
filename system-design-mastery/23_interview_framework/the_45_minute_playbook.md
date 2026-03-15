@@ -691,3 +691,11 @@ Wrap up, check for questions, be done on time.
 | Previous | [22 — Case Studies](../22_case_studies/url_shortener.md) |
 | Next | [99 — Interview Master](../99_interview_master/) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

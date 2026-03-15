@@ -360,3 +360,10 @@ Next:
 [12_sliding_window/interview.md](/dsa-complete-mastery/12_sliding_window/interview.md)  
 [13_binary_search/theory.md](/dsa-complete-mastery/13_binary_search/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Two Pointers — Interview Q&A](../11_two_pointers/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

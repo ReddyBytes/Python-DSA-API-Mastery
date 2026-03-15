@@ -1,11 +1,5 @@
 # What is an API?
 
-| Next | [02 - REST Fundamentals](../02_rest_fundamentals/rest_explained.md) |
-|------|----------------------------------------------------------------------|
-| Home | [README.md](../README.md)                                            |
-
----
-
 ## It's Friday Afternoon
 
 It's 4:47 PM on a Friday. You're done with work, you grab your phone, open Spotify, and
@@ -739,6 +733,8 @@ common API style you'll encounter.
 
 ---
 
-| Next | [02 - REST Fundamentals](../02_rest_fundamentals/rest_explained.md) |
-|------|----------------------------------------------------------------------|
-| Home | [README.md](../README.md)                                            |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** — &nbsp;|&nbsp; **Next:** [REST Fundamentals →](../02_rest_fundamentals/rest_explained.md)
+
+**Related Topics:** [REST Fundamentals](../02_rest_fundamentals/rest_explained.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [Authentication & Authorization](../05_authentication/securing_apis.md)

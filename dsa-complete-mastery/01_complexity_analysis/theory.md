@@ -515,3 +515,10 @@ Next level:
 
 **End of 01_complexity_analysis/theory.md**
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** — &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

@@ -544,3 +544,11 @@ A: n (next) = execute line, step OVER function calls.
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🐛 PDB Guide | [pdb_guide.md](./pdb_guide.md) |
 | ➡️ Next | [10 — Decorators](../10_decorators/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← PDB Debugging Guide](./pdb_guide.md) &nbsp;|&nbsp; **Next:** [Decorators — Theory →](../10_decorators/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [PDB Debugging Guide](./pdb_guide.md)

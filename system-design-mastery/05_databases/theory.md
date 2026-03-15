@@ -30,3 +30,11 @@
 | ⬅️ Previous | [04 — Backend Architecture](../04_backend_architecture/intro.md) |
 | ➡️ Next | [06 — Caching](../06_caching/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Backend Architecture — Introduction](../04_backend_architecture/intro.md) &nbsp;|&nbsp; **Next:** [The Story of Data →](./the_story_of_data.md)
+
+**Related Topics:** [The Story of Data](./the_story_of_data.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

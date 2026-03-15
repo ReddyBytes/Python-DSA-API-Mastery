@@ -1187,3 +1187,11 @@ class BloomFilter:
   Bloom Filter         │ k hash functions, bit array  │ O(k)   │ O(m) bits
                        │ "probably yes/definitely no" │        │ (very small!)
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Advanced Graphs — Interview Q&A](../25_advanced_graphs/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Caching Strategies](./caching_strategies.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

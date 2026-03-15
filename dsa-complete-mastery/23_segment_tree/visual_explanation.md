@@ -332,3 +332,11 @@ print(st.range_sum(2, 5))    # 7+9+5+3 = 24
 A segment tree is a tournament bracket that stores every intermediate result, letting you
 answer range queries and process updates in O(log n) — the sweet spot when your data
 changes and you need both fast queries and fast updates.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

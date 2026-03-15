@@ -685,3 +685,11 @@ A: Decorator code runs at IMPORT TIME (when @decorator is processed).
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🏭 Pattern Library | [decorator_patterns.md](./decorator_patterns.md) |
 | ➡️ Next | [11 — Iterators & Generators](../11_iterators_generators/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Decorator Patterns](./decorator_patterns.md) &nbsp;|&nbsp; **Next:** [Generators Iterators — Theory →](../11_generators_iterators/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Decorator Patterns](./decorator_patterns.md)

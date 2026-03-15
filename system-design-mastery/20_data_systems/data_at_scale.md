@@ -513,3 +513,11 @@ What is the modern alternative? What are the trade-offs of each?
 | Previous | [19 — Clean Architecture](../19_clean_architecture/theory.md) |
 | Next | [21 — Real-Time Systems](../21_real_time_systems/theory.md) |
 | Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

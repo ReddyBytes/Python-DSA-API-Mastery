@@ -1,12 +1,5 @@
 # WebSockets — When the Server Needs to Talk First
 
-| Previous | [05 — gRPC](../05_grpc/grpc_guide.md)                        |
-|----------|--------------------------------------------------------------|
-| Next     | [07 — API Security](../07_api_security/securing_apis.md)     |
-| Home     | [README.md](../README.md)                                    |
-
----
-
 ## The Fundamental Limitation of HTTP
 
 Everything you've learned so far — REST, GraphQL, gRPC — shares one characteristic:
@@ -558,7 +551,8 @@ infrastructure yourself.
 
 ---
 
-| Previous | [05 — gRPC](../05_grpc/grpc_guide.md)                        |
-|----------|--------------------------------------------------------------|
-| Next     | [07 — API Security](../07_api_security/securing_apis.md)     |
-| Home     | [README.md](../README.md)                                    |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← API Design Patterns](../16_api_design_patterns/design_guide.md) &nbsp;|&nbsp; **Next:** [Real-World Architectures →](../18_real_world_apis/architectures.md)
+
+**Related Topics:** [GraphQL](../13_graphql/graphql_story.md) · [FastAPI Advanced](../07_fastapi/advanced_guide.md) · [API Design Patterns](../16_api_design_patterns/design_guide.md)

@@ -410,3 +410,11 @@ Maximum water found = 49 (at lo=1, hi=8)
 > Two pointers work because at each step, you can logically eliminate part of the search space.
 > You're not guessing — you're using the sorted order (or structure) to prove certain options
 > can't be the answer.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

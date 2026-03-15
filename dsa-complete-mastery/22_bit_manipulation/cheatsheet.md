@@ -239,3 +239,11 @@ bin(255).count('1')     # 8
 - XOR swap fails if `a` and `b` point to the same variable (`a is b`)
 - `n & (n-1) == 0` returns True for n=0 — always check `n > 0` separately
 - Left shift on large n creates very large integers in Python (no overflow)
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Patterns →](./patterns.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

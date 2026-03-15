@@ -116,3 +116,11 @@ True     28 bytes    |   [1]     64 bytes
 0        24 bytes    |   {}      64 bytes
 "a"      50 bytes    |   set()   216 bytes
 ```
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)

@@ -729,3 +729,11 @@ await q.put(item); item = await q.get(); q.task_done()
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🧵 Threading Guide | [threading_guide.md](./threading_guide.md) |
 | 🔥 Multiprocessing Guide | [multiprocessing_guide.md](./multiprocessing_guide.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Threading Guide →](./threading_guide.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Threading Guide](./threading_guide.md) · [Multiprocessing Guide](./multiprocessing_guide.md) · [Interview Q&A](./interview.md)

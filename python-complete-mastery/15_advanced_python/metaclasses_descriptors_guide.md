@@ -828,3 +828,11 @@ class C(A, B): pass   # Both A and B's __init_subclass__ are called correctly
 | 🔮 Dunder Methods Guide | [dunder_guide.md](./dunder_guide.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Dunder Methods Guide](./dunder_guide.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md) · [Dunder Methods Guide](./dunder_guide.md) · [Interview Q&A](./interview.md)

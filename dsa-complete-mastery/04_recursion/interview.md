@@ -354,3 +354,10 @@ This reflects engineering maturity.
 If you can clearly explain stack behavior, complexity growth, and optimization strategies,
 you are well-prepared for recursion discussions in mid-level and senior interviews.
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Common Mistakes](./common_mistakes.md) &nbsp;|&nbsp; **Next:** [Sorting — Theory →](../05_sorting/theory.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md)

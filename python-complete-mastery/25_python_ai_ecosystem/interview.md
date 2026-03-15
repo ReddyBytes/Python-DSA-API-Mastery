@@ -417,3 +417,11 @@ Structured. Tool-aware. Production-minded.
 | 📖 Theory | [theory.md](./theory.md) |
 | 📋 Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 💻 Practice | [practice.py](./practice.py) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Interview Master — Python 0-2 Years →](../99_interview_master/python_0_2_years.md)
+
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)

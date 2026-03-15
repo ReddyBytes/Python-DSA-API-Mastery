@@ -969,3 +969,11 @@ print(f"  Matches   : {text == dec}")
 Every case exploits the same fundamental truth: **a single integer holds N
 independent boolean values, and bitwise operations process all N simultaneously
 in one CPU instruction**. This is why low-level systems think in bits.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Patterns](./patterns.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

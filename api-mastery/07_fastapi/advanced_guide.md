@@ -931,8 +931,8 @@ Async vs Sync
 
 ---
 
-| Navigation | |
-|---|---|
-| Previous | [FastAPI & Databases](../07_fastapi/database_guide.md) |
-| Next | [08 — Versioning Standards](../08_versioning_standards/versioning_strategy.md) |
-| Home | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← FastAPI & Databases](../07_fastapi/database_guide.md) &nbsp;|&nbsp; **Next:** [API Versioning →](../08_versioning_standards/versioning_strategy.md)
+
+**Related Topics:** [FastAPI Core Guide](../07_fastapi/core_guide.md) · [WebSockets & Real-Time APIs](../17_websockets/realtime_apis.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md)

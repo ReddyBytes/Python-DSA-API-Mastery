@@ -29,3 +29,11 @@
 | ⬅️ Previous | [06 — Caching](../06_caching/theory.md) |
 | ➡️ Next | [08 — Load Balancing](../08_load_balancing/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Caching — Interview Q&A](../06_caching/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Storage Guide](./storage_guide.md) · [Interview Q&A](./interview.md)

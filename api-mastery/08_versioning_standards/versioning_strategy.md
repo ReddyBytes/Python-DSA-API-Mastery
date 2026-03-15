@@ -220,8 +220,8 @@ A migration guide that is honest about the changes (including breaking ones) bui
 
 ---
 
-| Navigation | |
-|---|---|
-| ← Previous | [FastAPI Advanced](../07_fastapi/advanced_guide.md) |
-| ➡️ Next | [09 — API Performance & Scaling](../09_api_performance_scaling/performance_guide.md) |
-| 🏠 Home | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← FastAPI Advanced](../07_fastapi/advanced_guide.md) &nbsp;|&nbsp; **Next:** [API Performance & Scaling →](../09_api_performance_scaling/performance_guide.md)
+
+**Related Topics:** [REST Best Practices](../03_rest_best_practices/patterns.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [API Design Patterns](../16_api_design_patterns/design_guide.md)

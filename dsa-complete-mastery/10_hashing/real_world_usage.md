@@ -364,3 +364,11 @@ Why Python dicts are fast in practice:
 
 Hashing is not just an interview topic.
 It is the mechanism that makes O(1) lookup possible across every layer of the stack.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Collision Handling](./collision_handling.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Collision Handling](./collision_handling.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

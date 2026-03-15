@@ -669,3 +669,11 @@ Multiple with               with A() as a, B() as b — exits in reverse order
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 🛠️ contextlib Guide | [contextlib_guide.md](./contextlib_guide.md) |
 | ➡️ Next | [13 — Concurrency](../13_concurrency/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Generators Iterators — Interview Q&A](../11_generators_iterators/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Contextlib Guide](./contextlib_guide.md) · [Interview Q&A](./interview.md)

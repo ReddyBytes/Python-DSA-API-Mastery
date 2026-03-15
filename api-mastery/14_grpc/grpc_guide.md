@@ -1,12 +1,5 @@
 # gRPC — When JSON Is Too Slow
 
-| Previous | [04 — GraphQL](../04_graphql/graphql_story.md)      |
-|----------|-----------------------------------------------------|
-| Next     | [06 — WebSockets](../06_websockets/realtime_apis.md) |
-| Home     | [README.md](../README.md)                           |
-
----
-
 ## The 100,000 Calls Per Second Problem
 
 You're working at a company with a microservices architecture. Dozens of services.
@@ -572,7 +565,8 @@ cargo-cult technology from those who choose it deliberately.
 
 ---
 
-| Previous | [04 — GraphQL](../04_graphql/graphql_story.md)      |
-|----------|-----------------------------------------------------|
-| Next     | [06 — WebSockets](../06_websockets/realtime_apis.md) |
-| Home     | [README.md](../README.md)                           |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← GraphQL](../13_graphql/graphql_story.md) &nbsp;|&nbsp; **Next:** [API Gateway Patterns →](../15_api_gateway/gateway_patterns.md)
+
+**Related Topics:** [GraphQL](../13_graphql/graphql_story.md) · [API Gateway Patterns](../15_api_gateway/gateway_patterns.md) · [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md)

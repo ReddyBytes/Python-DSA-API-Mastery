@@ -383,3 +383,11 @@ Before submitting any recursive solution, answer these 5 questions:
 
 **Bonus — mutable state check:**
   If you pass a list or dict as a parameter, confirm you are not using it as a default argument value. Use `None` as the default and initialize inside the function.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

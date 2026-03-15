@@ -31,3 +31,11 @@
 | ⬅️ Previous | [08 — Load Balancing](../08_load_balancing/theory.md) |
 | ➡️ Next | [10 — Distributed Systems](../10_distributed_systems/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Load Balancing — Interview Q&A](../08_load_balancing/interview.md) &nbsp;|&nbsp; **Next:** [Why Queues Exist →](./why_queues_exist.md)
+
+**Related Topics:** [Why Queues Exist](./why_queues_exist.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

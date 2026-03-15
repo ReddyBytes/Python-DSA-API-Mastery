@@ -1022,8 +1022,8 @@ These are not advanced patterns. They are the minimum bar for a production API i
 
 ---
 
-| Navigation | |
-|---|---|
-| Previous | [12 — Production Deployment](../12_production_deployment/deployment_guide.md) |
-| Next     | [19 — OpenTelemetry →](../19_opentelemetry/opentelemetry_guide.md)             |
-| Home     | [README.md](../README.md)                                                    |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← WebSockets & Real-Time APIs](../17_websockets/realtime_apis.md) &nbsp;|&nbsp; **Next:** [OpenTelemetry →](../19_opentelemetry/opentelemetry_guide.md)
+
+**Related Topics:** [API Design Patterns](../16_api_design_patterns/design_guide.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md) · [API Interview Master](../99_interview_master/api_questions.md)

@@ -253,3 +253,11 @@ arr_compressed = [compress[x] for x in arr]
 - Identity element depends on operation — wrong identity breaks queries outside range
 - BIT is 1-indexed; off-by-one errors are common when converting from 0-indexed input
 - Range update with lazy: track both the cumulative add AND update the tree value immediately
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Visual Explanation](./visual_explanation.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

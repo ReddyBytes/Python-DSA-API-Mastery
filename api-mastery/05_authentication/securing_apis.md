@@ -1,12 +1,5 @@
 # API Security
 
-| Previous | [06 — WebSockets](../06_websockets/realtime_apis.md) |
-|----------|------------------------------------------------------|
-| Next     | [08 — API Gateway](../08_api_gateway/gateway_patterns.md) |
-| Home     | [README.md](../README.md) |
-
----
-
 ## The Coffee Shop Scenario
 
 Picture this. You're a senior engineer at a fintech startup. A junior dev on your team
@@ -1036,7 +1029,8 @@ CORS:
 
 ---
 
-| Previous | [06 — WebSockets](../06_websockets/realtime_apis.md) |
-|----------|------------------------------------------------------|
-| Next     | [08 — API Gateway](../08_api_gateway/gateway_patterns.md) |
-| Home     | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Data Formats & Serialization](../04_data_formats/serialization_guide.md) &nbsp;|&nbsp; **Next:** [Error Handling Standards →](../06_error_handling_standards/error_guide.md)
+
+**Related Topics:** [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [FastAPI Core Guide](../07_fastapi/core_guide.md) · [Security in Production](../11_api_security_production/security_hardening.md) · [API Gateway Patterns](../15_api_gateway/gateway_patterns.md)

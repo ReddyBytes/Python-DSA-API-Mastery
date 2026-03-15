@@ -448,3 +448,11 @@ Before submitting any binary search solution, answer these 6 questions:
   `bisect_left` gives the index of the first element `>= target`.
   `bisect_right` gives the index of the first element `> target` (one past the last occurrence).
   The count of a target is always `bisect_right - bisect_left`.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

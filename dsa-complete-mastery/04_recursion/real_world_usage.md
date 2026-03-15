@@ -773,3 +773,11 @@ The pattern that unifies all six: **a problem is recursive when its solution can
 expressed in terms of the same problem on smaller inputs**. When you see a tree, a
 nested document, a divide-and-conquer split, or a self-similar structure — that is
 the signal to reach for recursion.
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Common Mistakes →](./common_mistakes.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

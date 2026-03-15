@@ -413,8 +413,8 @@ You don't need Stripe's team to apply these principles. Even a single-developer 
 
 ---
 
-| Navigation | |
-|---|---|
-| Previous | [10 — API Testing](../10_api_testing/testing_apis.md) |
-| Next | [12 — API Versioning](../12_api_versioning/versioning_strategy.md) |
-| Home | [README.md](../README.md) |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Testing APIs](../10_testing_documentation/testing_apis.md) &nbsp;|&nbsp; **Next:** [Security in Production →](../11_api_security_production/security_hardening.md)
+
+**Related Topics:** [Testing APIs](../10_testing_documentation/testing_apis.md) · [REST Best Practices](../03_rest_best_practices/patterns.md) · [FastAPI Core Guide](../07_fastapi/core_guide.md)

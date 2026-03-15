@@ -699,3 +699,11 @@ Magic Numbers:
 | ← Previous | [17 — Low Level Design](../17_low_level_design/theory.md) |
 | ➡️ Next | [19 — Clean Architecture](../19_clean_architecture/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Low Level Design — Interview Q&A](../17_low_level_design/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
+
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

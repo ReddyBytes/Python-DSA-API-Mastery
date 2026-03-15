@@ -349,3 +349,10 @@ Next:
 [18_graphs/interview.md](/dsa-complete-mastery/18_graphs/interview.md)  
 [19_greedy/theory.md](/dsa-complete-mastery/19_greedy/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Trie — Interview Q&A](../17_trie/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)

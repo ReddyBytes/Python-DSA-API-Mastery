@@ -1,12 +1,5 @@
 # Data Formats & Serialization
 
-| Previous | [03 — REST Best Practices](../03_rest_best_practices/patterns.md) |
-|----------|-------------------------------------------------------------------|
-| Next     | [05 — Authentication](../05_authentication/securing_apis.md)      |
-| Home     | [README.md](../README.md)                                         |
-
----
-
 ## The Language Problem
 
 Your Python backend just built a `Product` object. It has a `price` field holding a
@@ -594,7 +587,8 @@ File formats:
 
 ---
 
-| Previous | [03 — REST Best Practices](../03_rest_best_practices/patterns.md) |
-|----------|-------------------------------------------------------------------|
-| Next     | [05 — Authentication](../05_authentication/securing_apis.md)      |
-| Home     | [README.md](../README.md)                                         |
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← REST Best Practices](../03_rest_best_practices/patterns.md) &nbsp;|&nbsp; **Next:** [Authentication & Authorization →](../05_authentication/securing_apis.md)
+
+**Related Topics:** [REST Best Practices](../03_rest_best_practices/patterns.md) · [FastAPI Core Guide](../07_fastapi/core_guide.md) · [Testing APIs](../10_testing_documentation/testing_apis.md)

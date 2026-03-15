@@ -455,3 +455,11 @@ CORRECT (mark on push):
 | 3 | Ignoring leftover stack after loop             | Remaining elements have no "next greater"   | Process remaining stack or initialise with defaults |
 | 4 | `return True` without checking stack is empty  | Unmatched opening brackets go undetected    | `return len(stack) == 0`                         |
 | 5 | Mark visited on pop instead of push            | Same node pushed multiple times by neighbours | Mark visited immediately when pushing            |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Real World Usage](./real_world_usage.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

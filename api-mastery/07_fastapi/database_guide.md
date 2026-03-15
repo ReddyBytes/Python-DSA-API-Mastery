@@ -705,10 +705,8 @@ The clean separation between layers is the entire point. `crud.py` doesn't know 
 
 ---
 
-## Navigation
+**[🏠 Back to README](../README.md)**
 
-| | |
-|---|---|
-| Previous | [FastAPI Core Concepts](../07_fastapi/core_guide.md) |
-| Next | [FastAPI Advanced](../07_fastapi/advanced_guide.md) |
-| Home | [README.md](../README.md) |
+**Prev:** [← FastAPI Core Guide](../07_fastapi/core_guide.md) &nbsp;|&nbsp; **Next:** [FastAPI Advanced →](../07_fastapi/advanced_guide.md)
+
+**Related Topics:** [FastAPI Core Guide](../07_fastapi/core_guide.md) · [Testing APIs](../10_testing_documentation/testing_apis.md) · [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md)

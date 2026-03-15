@@ -30,3 +30,11 @@
 | ⬅️ Previous | [10 — Distributed Systems](../10_distributed_systems/theory.md) |
 | ➡️ Next | [12 — Microservices](../12_microservices/theory.md) |
 | 🏠 Home | [README.md](../README.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Distributed Systems — Interview Q&A](../10_distributed_systems/interview.md) &nbsp;|&nbsp; **Next:** [Patterns Playbook →](./patterns_playbook.md)
+
+**Related Topics:** [Patterns Playbook](./patterns_playbook.md) · [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)

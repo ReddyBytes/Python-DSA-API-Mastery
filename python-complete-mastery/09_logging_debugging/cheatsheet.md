@@ -467,3 +467,11 @@ A: Set logger.propagate = False on the child logger,
 | 🎯 Interview | [interview.md](./interview.md) |
 | 🐛 PDB Guide | [pdb_guide.md](./pdb_guide.md) |
 | ➡️ Next | [10 — Decorators](../10_decorators/theory.md) |
+
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [PDB Debugging Guide →](./pdb_guide.md)
+
+**Related Topics:** [Theory](./theory.md) · [PDB Debugging Guide](./pdb_guide.md) · [Interview Q&A](./interview.md)

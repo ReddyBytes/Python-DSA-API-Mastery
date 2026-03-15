@@ -377,3 +377,10 @@ Next:
 [16_heaps/interview.md](/dsa-complete-mastery/16_heaps/interview.md)  
 [17_trie/theory.md](/dsa-complete-mastery/17_trie/theory.md)
 
+---
+
+**[🏠 Back to README](../README.md)**
+
+**Prev:** [← Binary Search Trees — Interview Q&A](../15_binary_search_trees/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+
+**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheatsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)
