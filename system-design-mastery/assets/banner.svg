@@ -1,0 +1,106 @@
+<svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   style="stop-color:#08101e"/>
+      <stop offset="50%"  style="stop-color:#0e1a2e"/>
+      <stop offset="100%" style="stop-color:#060c18"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   style="stop-color:#38BDF8"/>
+      <stop offset="50%"  style="stop-color:#6366F1"/>
+      <stop offset="100%" style="stop-color:#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   style="stop-color:#38BDF8;stop-opacity:0"/>
+      <stop offset="50%"  style="stop-color:#6366F1"/>
+      <stop offset="100%" style="stop-color:#38BDF8;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   style="stop-color:#0e1e35"/>
+      <stop offset="100%" style="stop-color:#08101e"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="240" fill="url(#bg)"/>
+
+  <g opacity="0.05" stroke="#38BDF8" stroke-width="0.5">
+    <line x1="0" y1="60"  x2="900" y2="60"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/>
+    <line x1="150" y1="0" x2="150" y2="240"/>
+    <line x1="300" y1="0" x2="300" y2="240"/>
+    <line x1="450" y1="0" x2="450" y2="240"/>
+    <line x1="600" y1="0" x2="600" y2="240"/>
+    <line x1="750" y1="0" x2="750" y2="240"/>
+  </g>
+
+  <!-- Architecture nodes -->
+  <rect x="30"  y="168" width="80" height="36" rx="6" fill="url(#nodeGrad)" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="70"  y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#38BDF8" letter-spacing="1">Client</text>
+
+  <line x1="110" y1="186" x2="140" y2="186" stroke="#38BDF8" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="140,182 148,186 140,190" fill="#38BDF8" opacity="0.8"/>
+
+  <rect x="148" y="168" width="80" height="36" rx="6" fill="url(#nodeGrad)" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="188" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#6366F1" letter-spacing="1">LB</text>
+
+  <line x1="228" y1="186" x2="258" y2="186" stroke="#6366F1" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="258,182 266,186 258,190" fill="#6366F1" opacity="0.8"/>
+
+  <rect x="266" y="168" width="90" height="36" rx="6" fill="url(#nodeGrad)" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="311" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#38BDF8" letter-spacing="1">Service</text>
+
+  <line x1="356" y1="186" x2="386" y2="186" stroke="#38BDF8" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="386,182 394,186 386,190" fill="#38BDF8" opacity="0.8"/>
+
+  <rect x="394" y="168" width="80" height="36" rx="6" fill="url(#nodeGrad)" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="434" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#6366F1" letter-spacing="1">Cache</text>
+
+  <line x1="474" y1="186" x2="504" y2="186" stroke="#6366F1" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.9s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="504,182 512,186 504,190" fill="#6366F1" opacity="0.8"/>
+
+  <rect x="512" y="168" width="80" height="36" rx="6" fill="url(#nodeGrad)" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="552" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#38BDF8" letter-spacing="1">Queue</text>
+
+  <line x1="592" y1="186" x2="622" y2="186" stroke="#38BDF8" stroke-width="1.5" opacity="0.7">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="1.2s" repeatCount="indefinite"/>
+  </line>
+  <polygon points="622,182 630,186 622,190" fill="#38BDF8" opacity="0.8"/>
+
+  <rect x="630" y="168" width="80" height="36" rx="6" fill="url(#nodeGrad)" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="670" y="191" text-anchor="middle" font-family="'Courier New', monospace" font-size="10" fill="#6366F1" letter-spacing="1">DB</text>
+
+  <rect x="200" y="42" width="500" height="1.5" fill="url(#arrowGrad)" rx="1">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+  </rect>
+
+  <text x="450" y="96" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="14" font-weight="bold"
+        fill="#4a5568" letter-spacing="10">COMPLETE MASTERY</text>
+
+  <text x="450" y="155" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="44" font-weight="bold"
+        fill="url(#titleGrad)" filter="url(#glow)" letter-spacing="4">SYSTEM DESIGN</text>
+
+  <rect x="200" y="160" width="500" height="1.5" fill="url(#arrowGrad)" rx="1">
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <text x="450" y="222" text-anchor="middle"
+        font-family="'Courier New', Courier, monospace"
+        font-size="11" fill="#4a5568" letter-spacing="4">HLD · LLD · DISTRIBUTED · PRODUCTION · FAANG</text>
+</svg>
