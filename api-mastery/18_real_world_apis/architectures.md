@@ -1025,4 +1025,5 @@ These are not advanced patterns. They are the minimum bar for a production API i
 | Navigation | |
 |---|---|
 | Previous | [12 — Production Deployment](../12_production_deployment/deployment_guide.md) |
-| Home | [README.md](../README.md) |
+| Next     | [19 — OpenTelemetry →](../19_opentelemetry/opentelemetry_guide.md)             |
+| Home     | [README.md](../README.md)                                                    |

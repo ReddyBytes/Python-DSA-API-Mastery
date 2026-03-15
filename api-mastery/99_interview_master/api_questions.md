@@ -433,3 +433,10 @@ oasdiff breaking openapi-v1.yaml openapi-proposed.yaml --fail-on ERR
 | Navigation | |
 |---|---|
 | Back | [README.md](../README.md) |
+
+---
+
+| Navigation | |
+|---|---|
+| Previous | [19 — OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md) |
+| Home     | [README.md](../README.md) |

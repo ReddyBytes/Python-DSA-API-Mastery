@@ -10,10 +10,11 @@
 [![REST](https://img.shields.io/badge/REST-Full%20Coverage-7C3AED?style=for-the-badge)](#rest-fundamentals)
 [![GraphQL](https://img.shields.io/badge/GraphQL-Deep%20Dive-A855F7?style=for-the-badge&logo=graphql&logoColor=white)](./13_graphql/)
 [![gRPC](https://img.shields.io/badge/gRPC-Protobuf-7C3AED?style=for-the-badge)](#grpc)
-[![Topics](https://img.shields.io/badge/Topics-19-A855F7?style=for-the-badge)](#full-curriculum)
+[![OTEL](https://img.shields.io/badge/OpenTelemetry-Observability-527FFF?style=for-the-badge&logo=opentelemetry)](./19_opentelemetry/)
+[![Topics](https://img.shields.io/badge/Topics-20-A855F7?style=for-the-badge)](#full-curriculum)
 [![License](https://img.shields.io/badge/License-MIT-94a3b8?style=for-the-badge)](../LICENSE)
 
-**Beginner to Production · REST · FastAPI · GraphQL · gRPC · Auth · Deployment**
+**Beginner to Production · REST · FastAPI · GraphQL · gRPC · Auth · Deployment · Observability**
 
 </div>
 
@@ -40,7 +41,7 @@ A complete API mastery system — from understanding what an API is, through bui
 | 🟢 **01–06** | [API Fundamentals](#stage-1-api-fundamentals) | HTTP, REST, data formats, auth, error handling | Beginner | 10–12 hrs |
 | ⚡ **07** | [FastAPI Mastery](#stage-2-fastapi-mastery) | ASGI, Pydantic, DI, middleware, routers, databases, WebSockets | Intermediate | 15–18 hrs |
 | 🔵 **08–12** | [Production APIs](#stage-3-production-apis) | Versioning, performance, testing, security, deployment | Intermediate–Advanced | 12–15 hrs |
-| 🟣 **13–18** | [Advanced Protocols](#stage-4-advanced-protocols) | GraphQL, gRPC, API Gateway, WebSockets, real-world architectures | Advanced | 12–15 hrs |
+| 🟣 **13–19** | [Advanced Protocols](#stage-4-advanced-protocols) | GraphQL, gRPC, API Gateway, WebSockets, real-world architectures, OpenTelemetry | Advanced | 14–17 hrs |
 | 🎯 **99** | [Interview Master](#interview-master) | Junior → Senior Q&A, design problems | All levels | 5–8 hrs |
 
 **Total: ~55–70 hours of structured learning**
@@ -112,14 +113,15 @@ A complete API mastery system — from understanding what an API is, through bui
 <details>
 <summary><strong>🟣 Expert Path — Real-world API architectures and design patterns</strong></summary>
 
-> Goal: Design APIs like the ones powering Stripe, Twitter, and Uber.
+> Goal: Design APIs like the ones powering Stripe, Twitter, and Uber — and observe them in production.
 
 | Step | Module | What You'll Learn |
 |------|--------|-------------------|
 | 1 | [API Design Patterns](./16_api_design_patterns/design_guide.md) | Idempotency keys, long-running operations, bulk APIs, partial updates |
 | 2 | [WebSockets](./17_websockets/realtime_apis.md) | Full-duplex communication, scaling WebSocket connections |
 | 3 | [Real-World Architectures](./18_real_world_apis/architectures.md) | Payment API, social feed, ride-sharing, multi-tenant SaaS |
-| 4 | [Interview Master](./99_interview_master/api_questions.md) | Design a URL shortener, design a rate limiter, senior-level Q&A |
+| 4 | [OpenTelemetry](./19_opentelemetry/opentelemetry_guide.md) | Traces, metrics, logs — instrument your FastAPI app, OTEL Collector, Jaeger |
+| 5 | [Interview Master](./99_interview_master/api_questions.md) | Design a URL shortener, design a rate limiter, senior-level Q&A |
 
 </details>
 
@@ -174,7 +176,7 @@ All FastAPI topics are in `07_fastapi/` for focused navigation:
 </details>
 
 <details>
-<summary><strong>🟣 Stage 4 — Advanced Protocols & Architecture (13–18)</strong></summary>
+<summary><strong>🟣 Stage 4 — Advanced Protocols & Architecture (13–19)</strong></summary>
 
 | Module | Topic | Files |
 |--------|-------|-------|
@@ -184,6 +186,7 @@ All FastAPI topics are in `07_fastapi/` for focused navigation:
 | 16 | [API Design Patterns](./16_api_design_patterns/design_guide.md) | design_guide.md |
 | 17 | [WebSockets](./17_websockets/realtime_apis.md) | realtime_apis.md |
 | 18 | [Real-World Architectures](./18_real_world_apis/architectures.md) | architectures.md |
+| 19 | [OpenTelemetry](./19_opentelemetry/opentelemetry_guide.md) | opentelemetry_guide.md |
 
 </details>
 
@@ -245,6 +248,34 @@ Browser native: Yes         Yes         No (gRPC-web)
 Best for:       Public APIs Complex UIs Internal services
 ```
 
+**OTEL Observability Signals**
+
+```
+Signal      What it answers                  OTEL type
+──────────────────────────────────────────────────────
+Traces      Where did the 2 seconds go?      Span / Trace
+Metrics     How is the system behaving?      Counter / Histogram / Gauge
+Logs        What exactly happened?           Structured log + trace_id
+
+Key: all three share the same trace_id → click metric spike → see trace → see logs
+```
+
+**Telemetry Quick Setup (FastAPI)**
+
+```python
+# 1. Install
+pip install opentelemetry-sdk opentelemetry-instrumentation-fastapi
+
+# 2. One-line auto-instrumentation
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+FastAPIInstrumentor.instrument_app(app)
+
+# 3. Manual span for business logic
+tracer = trace.get_tracer(__name__)
+with tracer.start_as_current_span("checkout.process") as span:
+    span.set_attribute("order.id", order_id)
+```
+
 </div>
 
 <img src="./assets/divider.svg" width="100%"/>
@@ -264,6 +295,8 @@ Best for:       Public APIs Complex UIs Internal services
 **Deploy to production?** → [Production Deployment](./12_production_deployment/deployment_guide.md)
 
 **Interview prep?** → [API Interview Master](./99_interview_master/api_questions.md)
+
+**Add observability?** → [OpenTelemetry Guide](./19_opentelemetry/opentelemetry_guide.md)
 
 **Back to root** → [../README.md](../README.md)
 
