@@ -14,6 +14,22 @@ but through life.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+LIFO principle · push/pop/peek · monotonic stack pattern
+
+**Should Learn** — Important for real projects, comes up regularly:
+next greater/smaller element · parentheses validation · stock span
+
+**Good to Know** — Useful in specific situations, not always tested:
+stack-based DFS · undo/redo pattern
+
+**Reference** — Know it exists, look up syntax when needed:
+expression evaluation · reverse Polish notation parsing
+
+---
+
 # 1️⃣ Plates in Your Kitchen
 
 Imagine you wash 5 plates.

@@ -6,6 +6,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+latency hierarchy (CPU cache/RAM/SSD/network) · CPU cores and cache levels · memory layout (stack vs heap)
+
+**Should Learn** — Important for real projects, comes up regularly:
+process vs thread · context switching cost · I/O blocking vs async models
+
+**Good to Know** — Useful in specific situations, not always tested:
+serialization format trade-offs · L1/L2/L3 cache behavior
+
+**Reference** — Know it exists, look up syntax when needed:
+specific nanosecond/microsecond latency numbers · NUMA architecture
+
+---
+
 ## The Story Begins: You Click "Send"
 
 Imagine you're chatting with a friend on WhatsApp. You type "Hey!" and tap Send.

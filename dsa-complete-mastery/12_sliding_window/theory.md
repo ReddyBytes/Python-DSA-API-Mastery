@@ -17,6 +17,22 @@ into fast O(n) solutions.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+fixed-size window · variable-size window · window expansion and contraction
+
+**Should Learn** — Important for real projects, comes up regularly:
+state maintenance in window · longest substring without repeating chars · minimum window substring
+
+**Good to Know** — Useful in specific situations, not always tested:
+sliding window maximum (deque optimization) · window vs two pointers distinction
+
+**Reference** — Know it exists, look up syntax when needed:
+categorical sliding window · multi-pointer variants
+
+---
+
 # 🏠 1️⃣ Real Life Story — Watching Through a Window
 
 Imagine you are inside a train.

@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+HTTPS/TLS enforcement · token security (short-lived/rotation/revocation) · input validation · security headers (HSTS/CSP/X-Frame-Options)
+
+**Should Learn** — Important for real projects, comes up regularly:
+CORS origin validation · advanced rate limiting (per-user/per-endpoint) · audit logging · file upload validation
+
+**Good to Know** — Useful in specific situations, not always tested:
+bot detection · httpOnly cookies · CSRF protection
+
+**Reference** — Know it exists, look up syntax when needed:
+WAF configuration · secrets rotation · DDoS patterns vs business logic rate limits
+
+---
+
 ## The Threat Model Has Changed
 
 In staging, the only people calling your API are you and your teammates. In production, the audience is everyone on the internet.

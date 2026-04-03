@@ -23,6 +23,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+dependency rule · layered vs hexagonal vs Clean Architecture · domain-centric design
+
+**Should Learn** — Important for real projects, comes up regularly:
+DDD tactical patterns (Aggregates/Value Objects/Entities) · bounded contexts · repository pattern
+
+**Good to Know** — Useful in specific situations, not always tested:
+architecture selection criteria · anti-corruption layer · CQRS as architectural pattern
+
+**Reference** — Know it exists, look up syntax when needed:
+cyclic dependency detection · DTO mapping · legacy integration patterns
+
+---
+
 ## 1. Why Architecture Matters
 
 ```

@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+unit tests (business logic) · integration tests (TestClient) · auth testing · error path testing
+
+**Should Learn** — Important for real projects, comes up regularly:
+load testing (Locust/k6) · mocking external APIs · endpoint testing checklist
+
+**Good to Know** — Useful in specific situations, not always tested:
+Pact contract testing · fixture strategies
+
+**Reference** — Know it exists, look up syntax when needed:
+property-based testing (Hypothesis) · chaos testing · SLA/latency testing
+
+---
+
 ## 1. Why API Tests Are Different
 
 Testing a web API is not the same as testing a pure function. A few things make it distinct:

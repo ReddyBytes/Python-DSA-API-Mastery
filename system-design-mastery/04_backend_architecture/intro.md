@@ -6,6 +6,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+stateless design · connection pooling · synchronous vs asynchronous processing decision
+
+**Should Learn** — Important for real projects, comes up regularly:
+request lifecycle · monolith scaling limits · client-server model fundamentals
+
+**Good to Know** — Useful in specific situations, not always tested:
+key numbers per server (2-10K req/s typical) · request processing pipeline
+
+**Reference** — Know it exists, look up syntax when needed:
+graceful shutdown patterns · health check endpoints · throttling vs rate limiting
+
+---
+
 ## The Simplest Backend That Could Possibly Work
 
 You open your laptop. You write:

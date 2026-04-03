@@ -9,6 +9,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+pointer manipulation · insertion and deletion · cycle detection (Floyd's) · reverse
+
+**Should Learn** — Important for real projects, comes up regularly:
+doubly linked list · find middle · merge sorted lists · LRU cache pattern
+
+**Good to Know** — Useful in specific situations, not always tested:
+sentinel nodes · copy list with random pointer
+
+**Reference** — Know it exists, look up syntax when needed:
+XOR linked list · skip list
+
+---
+
 # 1️⃣ The Core Problem Linked Lists Solve
 
 Before understanding linked lists, understand what arrays struggle with.

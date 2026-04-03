@@ -28,6 +28,22 @@ it creates silent suffering.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+error envelope structure (code/message/details) · HTTP status code selection · pagination patterns
+
+**Should Learn** — Important for real projects, comes up regularly:
+field-level validation errors · filtering and sorting with whitelist safety · 422 customization
+
+**Good to Know** — Useful in specific situations, not always tested:
+combining filtering/sorting/pagination in one endpoint
+
+**Reference** — Know it exists, look up syntax when needed:
+RFC 7807 ProblemDetails format · error metric tracking · machine-readable error catalogs
+
+---
+
 ## 1. Error Response Design — One Consistent Structure
 
 Every error from your API should follow the same shape. No surprises, no inconsistency.

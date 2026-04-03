@@ -13,6 +13,22 @@ API survives contact with real users.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Dockerfile best practices (non-root/layer caching/slim base) · Gunicorn + UvicornWorker config · health checks (/health/live/ready)
+
+**Should Learn** — Important for real projects, comes up regularly:
+Kubernetes deployment (RollingUpdate/probes/resource limits) · CI/CD pipeline (test→build→push→deploy)
+
+**Good to Know** — Useful in specific situations, not always tested:
+Prometheus metrics · structured JSON logging · Sentry error tracking
+
+**Reference** — Know it exists, look up syntax when needed:
+GitOps (ArgoCD) · blue-green deployments · canary strategies · pod disruption budgets
+
+---
+
 ## 1. Dockerizing FastAPI
 
 Docker gives you a portable, reproducible runtime. The same container that runs on

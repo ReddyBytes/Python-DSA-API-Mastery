@@ -11,6 +11,22 @@ BST is where trees become efficient.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+BST property · search · insert · delete (all three cases)
+
+**Should Learn** — Important for real projects, comes up regularly:
+inorder gives sorted order · successor and predecessor · BST validation
+
+**Good to Know** — Useful in specific situations, not always tested:
+height implications on performance · augmented BST
+
+**Reference** — Know it exists, look up syntax when needed:
+AVL trees · Red-Black trees · self-balancing tree overview
+
+---
+
 # 🌳 1️⃣ Real Life Story — Organized Library Shelves
 
 Imagine a library where books are randomly placed.

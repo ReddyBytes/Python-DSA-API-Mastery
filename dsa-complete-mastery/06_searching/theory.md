@@ -11,6 +11,22 @@ Your entire approach depends on this.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+binary search mechanics · O(log n) · monotonic property · loop invariant
+
+**Should Learn** — Important for real projects, comes up regularly:
+first/last occurrence · lower/upper bound · search on answer pattern
+
+**Good to Know** — Useful in specific situations, not always tested:
+search in rotated sorted array · search in 2D matrix
+
+**Reference** — Know it exists, look up syntax when needed:
+exponential search · interpolation search · jump search
+
+---
+
 # 1️⃣ The Two Worlds of Searching
 
 Searching problems fall into two major categories:

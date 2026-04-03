@@ -19,6 +19,22 @@ It is powerful but can be slow.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+choose-explore-undo pattern · base case for backtracking · pruning
+
+**Should Learn** — Important for real projects, comes up regularly:
+subsets · permutations · combination sum · N-Queens · Sudoku solver
+
+**Good to Know** — Useful in specific situations, not always tested:
+backtracking vs DFS distinction · time complexity of backtracking
+
+**Reference** — Know it exists, look up syntax when needed:
+constraint propagation · intelligent backtracking · CSP heuristics
+
+---
+
 # 🧩 1️⃣ Real Life Story — Maze Explorer
 
 Imagine you are inside a maze.

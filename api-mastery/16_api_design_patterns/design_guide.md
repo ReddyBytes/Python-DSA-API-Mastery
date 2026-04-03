@@ -15,6 +15,22 @@ instinct.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+idempotency keys (client-generated/Redis storage) · async long-running operations (202 Accepted) · soft delete vs hard delete
+
+**Should Learn** — Important for real projects, comes up regularly:
+bulk operations (207 Multi-Status) · PATCH (JSON Merge Patch) · API contract evolution (additive changes)
+
+**Good to Know** — Useful in specific situations, not always tested:
+JSON Patch (RFC 6902) · null vs omitted distinction
+
+**Reference** — Know it exists, look up syntax when needed:
+saga pattern for distributed transactions · event-driven API patterns
+
+---
+
 ## Idempotency — The Most Important Pattern
 
 It's 2 AM. A user clicks "Pay Now" on your checkout page. The request goes out.

@@ -7,6 +7,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+merge sort · quick sort · heap sort · stability definition · O(n log n) lower bound
+
+**Should Learn** — Important for real projects, comes up regularly:
+Timsort (Python default) · counting sort · radix sort · when to use which
+
+**Good to Know** — Useful in specific situations, not always tested:
+insertion sort for nearly-sorted data · sorting stability trade-offs
+
+**Reference** — Know it exists, look up syntax when needed:
+shell sort · introsort · bucket sort
+
+---
+
 # 1️⃣ What Problem Does Sorting Actually Solve?
 
 Unsorted data forces you to scan everything.

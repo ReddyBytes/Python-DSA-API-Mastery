@@ -13,6 +13,22 @@ you move intelligently.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+opposite-direction pointers · same-direction pointers · two sum sorted
+
+**Should Learn** — Important for real projects, comes up regularly:
+when to use two pointers vs hashmap · removing duplicates · palindrome check
+
+**Good to Know** — Useful in specific situations, not always tested:
+container with most water · partition pattern
+
+**Reference** — Know it exists, look up syntax when needed:
+two pointers on different arrays · three-pointer variants
+
+---
+
 # 1️⃣ Real-Life Analogy — Finding a Book Between Two People
 
 Imagine two people standing at opposite ends of a long shelf.

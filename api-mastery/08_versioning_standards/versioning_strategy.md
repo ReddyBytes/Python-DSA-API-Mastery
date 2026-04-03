@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+breaking change definition · URL versioning (/v1/ /v2/) · deprecation headers (RFC 8594)
+
+**Should Learn** — Important for real projects, comes up regularly:
+header versioning trade-offs · API lifecycle (alpha/beta/v1/deprecated/sunset) · migration guides
+
+**Good to Know** — Useful in specific situations, not always tested:
+query parameter versioning · version sunset communication
+
+**Reference** — Know it exists, look up syntax when needed:
+canary deployment coordination · backward compatibility testing in CI
+
+---
+
 ## 1. Why Versioning is Hard
 
 Your API is a public contract. The moment you ship it and a client integrates, every behavior becomes load-bearing. The field name, the data type, the status code for an error — changing any of it can silently break a mobile app that you don't control, a partner integration you didn't know existed, or a script running in a customer's CI pipeline.

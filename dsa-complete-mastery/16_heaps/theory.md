@@ -19,6 +19,22 @@ Heaps are extremely important in interviews.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+heap property · complete binary tree · bubble up/down · Python heapq module
+
+**Should Learn** — Important for real projects, comes up regularly:
+heapify · heap sort · k-th largest/smallest patterns
+
+**Good to Know** — Useful in specific situations, not always tested:
+heap vs BST trade-offs · array storage indexing
+
+**Reference** — Know it exists, look up syntax when needed:
+D-ary heaps · Fibonacci heaps · binomial heaps
+
+---
+
 # 🏆 1️⃣ Real Life Story — School Assembly Line
 
 Imagine students standing in line for awards.

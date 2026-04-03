@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Big-O notation · time vs space trade-offs · common complexity classes (O(1) O(n) O(log n) O(n²) O(2^n)) · worst/average/best case
+
+**Should Learn** — Important for real projects, comes up regularly:
+amortized complexity · input size constraints · recursion space complexity
+
+**Good to Know** — Useful in specific situations, not always tested:
+Omega and Theta notation · complexity comparison edge cases
+
+**Reference** — Know it exists, look up syntax when needed:
+little-o notation · Master Theorem
+
+---
+
 # 🌍 Chapter 1: Welcome to the World of Problem Solving
 
 Ravi was a curious 10-year-old boy.

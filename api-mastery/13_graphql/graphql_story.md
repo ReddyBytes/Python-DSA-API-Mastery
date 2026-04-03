@@ -30,6 +30,22 @@ This is the everyday reality that GraphQL was built to fix.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+over-fetching/under-fetching problem · schema design (Query/Mutation/Subscription) · DataLoader for N+1 fix
+
+**Should Learn** — Important for real projects, comes up regularly:
+subscriptions via WebSocket · when GraphQL vs REST · resolver execution model
+
+**Good to Know** — Useful in specific situations, not always tested:
+GraphQL Federation · Strawberry GraphQL with FastAPI
+
+**Reference** — Know it exists, look up syntax when needed:
+query complexity analysis · schema stitching · subscription connection management
+
+---
+
 ## The Two Problems REST Can't Shake
 
 ### Problem 1: Over-Fetching

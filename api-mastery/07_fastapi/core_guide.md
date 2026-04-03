@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Pydantic models (Field/validators/nested) · dependency injection · middleware
+
+**Should Learn** — Important for real projects, comes up regularly:
+APIRouter (organization/prefixes/tags) · custom exception handlers · background tasks
+
+**Good to Know** — Useful in specific situations, not always tested:
+chaining dependencies · yield pattern for DB sessions
+
+**Reference** — Know it exists, look up syntax when needed:
+response streaming · custom OpenAPI schema · vendor extensions
+
+---
+
 ## The Story So Far
 
 In the previous stage you built routes, handled path parameters, returned JSON, and watched Swagger UI generate itself automatically. That alone is impressive. But you were still writing "CRUD in a function" — routes that do everything themselves: validate input, run business logic, manage resources, return responses.

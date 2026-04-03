@@ -14,6 +14,22 @@ is one of the most important interview skills.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+greedy choice property · optimal substructure · when greedy is provably correct
+
+**Should Learn** — Important for real projects, comes up regularly:
+activity selection · coin change · fractional knapsack · interval problems
+
+**Good to Know** — Useful in specific situations, not always tested:
+greedy vs DP distinction · Huffman coding
+
+**Reference** — Know it exists, look up syntax when needed:
+job sequencing · graph-based greedy (Kruskal's/Prim's overview)
+
+---
+
 # 🍰 1️⃣ Real Life Story — Eating Cake
 
 You have cake pieces:

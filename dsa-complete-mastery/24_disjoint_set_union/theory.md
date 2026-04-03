@@ -15,6 +15,22 @@ Disjoint Set Union solves this efficiently.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+find operation · union operation · path compression
+
+**Should Learn** — Important for real projects, comes up regularly:
+union by rank/size · cycle detection in graphs · Kruskal's MST application
+
+**Good to Know** — Useful in specific situations, not always tested:
+connected components use case · time complexity (inverse Ackermann)
+
+**Reference** — Know it exists, look up syntax when needed:
+weighted DSU · DSU with rollback · persistent DSU · bipartite checking
+
+---
+
 # 🧠 1️⃣ Real Life Story — Friend Circles
 
 Imagine 7 students:

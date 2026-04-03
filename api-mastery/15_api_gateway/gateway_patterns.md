@@ -23,6 +23,22 @@ That's the problem that API Gateways solve.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+gateway purpose (cross-cutting concerns) · path-based routing · auth offload · BFF pattern
+
+**Should Learn** — Important for real projects, comes up regularly:
+rate limiting at edge · request aggregation · protocol translation (REST↔gRPC)
+
+**Good to Know** — Useful in specific situations, not always tested:
+gateway tool comparison (AWS/Kong/Nginx/Envoy) · anti-patterns (no business logic)
+
+**Reference** — Know it exists, look up syntax when needed:
+canary routing policies · service discovery integration · circuit breaker at gateway
+
+---
+
 ## Cross-Cutting Concerns
 
 In software, a "cross-cutting concern" is something that almost every part of

@@ -8,6 +8,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+indexing and slicing · insertion and deletion complexity · dynamic array resizing
+
+**Should Learn** — Important for real projects, comes up regularly:
+prefix sum arrays · multi-dimensional arrays · in-place vs out-of-place
+
+**Good to Know** — Useful in specific situations, not always tested:
+cache locality and SIMD · circular arrays
+
+**Reference** — Know it exists, look up syntax when needed:
+difference arrays · array compression techniques
+
+---
+
 # 1️⃣ What Is an Array?
 
 Imagine you have 10 lockers placed side by side in a straight line.
@@ -406,6 +422,74 @@ internally use arrays.
 
 Master arrays deeply.
 They are the foundation of algorithmic thinking.
+
+---
+
+## 🧮 Prefix Sum Arrays — Precompute to Answer in O(1)
+
+> Think of a bank account ledger. Instead of adding up all transactions to find your balance on day N, you record a running total — then any range query is just two lookups.
+
+A **prefix sum array** (also called a cumulative sum array) stores the running sum from index 0 to i at position i. This turns repeated range-sum queries from O(n) into O(1).
+
+```python
+# Build prefix sum array
+nums = [3, 1, 4, 1, 5, 9, 2, 6]
+prefix = [0] * (len(nums) + 1)   # prefix[0] = 0 (sentinel)
+
+for i, x in enumerate(nums):
+    prefix[i + 1] = prefix[i] + x  # ← running total
+
+# Query: sum of nums[l..r] (inclusive, 0-indexed)
+def range_sum(l, r):
+    return prefix[r + 1] - prefix[l]  # ← O(1) — subtract two lookups
+
+range_sum(2, 5)   # sum of indices 2,3,4,5 = 4+1+5+9 = 19
+```
+
+**Why it works:**
+```
+nums:    [ 3,  1,  4,  1,  5,  9,  2,  6 ]
+prefix:  [ 0,  3,  4,  8,  9, 14, 23, 25, 31 ]
+                                             ↑ prefix[r+1]
+                                   ↑ prefix[l]
+range_sum(2,5) = prefix[6] - prefix[2] = 23 - 4 = 19  ✓
+```
+
+**2D prefix sum** (for matrix range queries):
+
+```python
+# Build 2D prefix sum
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+rows, cols = len(matrix), len(matrix[0])
+P = [[0]*(cols+1) for _ in range(rows+1)]
+
+for r in range(rows):
+    for c in range(cols):
+        P[r+1][c+1] = matrix[r][c] + P[r][c+1] + P[r+1][c] - P[r][c]
+
+# Sum of submatrix (r1,c1) to (r2,c2) inclusive:
+def submatrix_sum(r1, c1, r2, c2):
+    return P[r2+1][c2+1] - P[r1][c2+1] - P[r2+1][c1] + P[r1][c1]
+```
+
+**When to use prefix sum:**
+- Multiple range sum queries on a static array → O(1) per query after O(n) build
+- Subarray with target sum → combine with hashmap `{prefix_sum: index}`
+- 2D matrix range queries
+
+**Difference array** (inverse — for range updates):
+
+```python
+# Range update [l, r] += val in O(1), then reconstruct in O(n)
+diff = [0] * (n + 1)
+diff[l] += val      # ← start update
+diff[r + 1] -= val  # ← end update (exclusive)
+
+# Reconstruct original array after all updates:
+result = list(itertools.accumulate(diff[:n]))
+```
+
+**Complexity:** Build O(n), Query O(1), Space O(n)
 
 ---
 

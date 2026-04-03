@@ -23,6 +23,22 @@ We now explore the four major pillars:
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+topological sort (Kahn's + DFS) · Dijkstra's algorithm · Bellman-Ford
+
+**Should Learn** — Important for real projects, comes up regularly:
+SCC (Kosaraju's/Tarjan's) · MST (Kruskal's/Prim's) · Floyd-Warshall
+
+**Good to Know** — Useful in specific situations, not always tested:
+negative cycle detection · all-pairs shortest path
+
+**Reference** — Know it exists, look up syntax when needed:
+Dinic's max flow · A* search · bidirectional Dijkstra · Eulerian path · bipartite matching
+
+---
+
 # 🧭 1️⃣ Topological Sort — Ordering Dependencies
 
 ## 📖 Real Life Example

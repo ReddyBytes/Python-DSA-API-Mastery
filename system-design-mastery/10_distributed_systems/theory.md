@@ -6,6 +6,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+fallacies of distributed computing · Raft consensus · replication modes (leader-follower/multi-leader/leaderless) · CAP implications
+
+**Should Learn** — Important for real projects, comes up regularly:
+vector clocks · quorum reads/writes · consistent hashing · distributed transactions (2PC/Saga/Outbox)
+
+**Good to Know** — Useful in specific situations, not always tested:
+gossip protocols · CRDTs · split-brain and fencing · leader election
+
+**Reference** — Know it exists, look up syntax when needed:
+Byzantine fault tolerance · partial synchrony assumptions · causality tracking
+
+---
+
 ## 📋 Contents
 
 ```
@@ -260,6 +276,41 @@ Read repair: on read, detect stale versions → update the stale node
 Anti-entropy: background process syncs nodes
 Used by: Cassandra, DynamoDB, Riak
 ```
+
+### CRDTs — Conflict-Free Replicated Data Types
+
+In eventual consistency, different replicas may receive updates in different orders. **CRDTs (Conflict-free Replicated Data Types)** are data structures mathematically designed to merge conflicting updates automatically — no coordinator needed, no conflicts possible.
+
+**The key insight:** instead of storing raw values, store operations in a way that merging is always commutative, associative, and idempotent.
+
+**Common CRDTs:**
+
+```
+G-Counter (grow-only counter):
+  Each node increments only its own slot.
+  Value = sum of all slots.
+
+  Node A: [3, 0, 0]    Node B: [0, 5, 0]
+  Merge:  [3, 5, 0]  ← take max per slot — no conflict!
+
+OR-Set (observed-remove set):
+  Add: generate unique tag (uuid) for each element.
+  Remove: track which tags are "removed."
+  Merge: union of all adds and removes — deterministic.
+
+LWW-Register (last-write-wins register):
+  Attach a timestamp to each value.
+  Merge: always keep the higher timestamp.
+  Risk: clock skew can cause incorrect merges.
+```
+
+**Where CRDTs are used:**
+- Redis (CRDT-based geo-distributed mode)
+- Riak KV (distributed database)
+- Collaborative editors (Google Docs uses OT, Figma uses CRDTs)
+- Shopping carts (Amazon Dynamo paper)
+
+**Trade-off:** CRDTs restrict what operations are possible — only operations that are mathematically mergeable. For arbitrary business logic, you still need coordination or conflict resolution rules.
 
 ---
 

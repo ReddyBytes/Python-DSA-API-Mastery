@@ -13,6 +13,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+FAANG-level DP · advanced graph algorithms · system design patterns in data structures
+
+**Should Learn** — Important for real projects, comes up regularly:
+LRU/LFU implementations · rate limiters · segment tree applications
+
+**Good to Know** — Useful in specific situations, not always tested:
+consistent hashing implementation · advanced backtracking
+
+**Reference** — Know it exists, look up syntax when needed:
+competitive programming patterns · advanced flow algorithms
+
+---
+
 # 🧠 What FAANG Expects
 
 You must be comfortable with:

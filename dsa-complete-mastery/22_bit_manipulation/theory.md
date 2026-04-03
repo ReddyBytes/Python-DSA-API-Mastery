@@ -18,6 +18,22 @@ this becomes fun.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+bitwise operators (AND OR XOR NOT shifts) · check even/odd · power of two check
+
+**Should Learn** — Important for real projects, comes up regularly:
+XOR properties · bitmask for subsets · count set bits
+
+**Good to Know** — Useful in specific situations, not always tested:
+swap without temp · clear/set/toggle bit patterns
+
+**Reference** — Know it exists, look up syntax when needed:
+gray code · Hamming codes · parity checking
+
+---
+
 # 🧠 1️⃣ Real Life Story — Light Switch Board
 
 Imagine a switch board with 8 switches.

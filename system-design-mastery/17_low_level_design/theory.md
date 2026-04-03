@@ -26,6 +26,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+SOLID principles · design patterns (Factory/Strategy/Observer/State/Decorator)
+
+**Should Learn** — Important for real projects, comes up regularly:
+class diagram notation · OOP pillars application · state machines
+
+**Good to Know** — Useful in specific situations, not always tested:
+worked examples (parking lot/elevator/chess) · Singleton/Builder patterns
+
+**Reference** — Know it exists, look up syntax when needed:
+design pattern selection tree · SOLID violation identification · concurrency in LLD
+
+---
+
 ## 1. What is LLD?
 
 Low Level Design bridges the gap between architecture and code.

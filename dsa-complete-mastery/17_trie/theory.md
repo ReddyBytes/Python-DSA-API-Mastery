@@ -15,6 +15,22 @@ for string-based problems.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+trie node structure · insert · search · prefix search
+
+**Should Learn** — Important for real projects, comes up regularly:
+autocomplete pattern · memory optimization with arrays · word search applications
+
+**Good to Know** — Useful in specific situations, not always tested:
+trie vs hashmap trade-offs · deletion from trie
+
+**Reference** — Know it exists, look up syntax when needed:
+compressed trie · radix tree · patricia tree · DAWG
+
+---
+
 # 📖 1️⃣ Real Life Story — Dictionary in Your Brain
 
 Imagine you have a dictionary.

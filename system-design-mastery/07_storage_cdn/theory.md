@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+block vs file vs object storage selection · CDN architecture and PoPs · cache headers (Cache-Control/ETag)
+
+**Should Learn** — Important for real projects, comes up regularly:
+S3 consistency model · media processing pipeline (transcoding/thumbnails) · presigned URLs
+
+**Good to Know** — Useful in specific situations, not always tested:
+storage class transitions (hot/warm/cold/archive) · multipart uploads
+
+**Reference** — Know it exists, look up syntax when needed:
+cross-region replication · data durability (11 9s) explanation · bandwidth optimization
+
+---
+
 ## 📋 Contents
 
 ```

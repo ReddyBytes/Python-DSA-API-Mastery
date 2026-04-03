@@ -2,6 +2,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+LRU cache implementation · rate limiting algorithms (token bucket/sliding window) · caching strategies (cache-aside/write-through)
+
+**Should Learn** — Important for real projects, comes up regularly:
+consistent hashing · LFU cache · concurrency considerations
+
+**Good to Know** — Useful in specific situations, not always tested:
+bloom filter · skip list structure
+
+**Reference** — Know it exists, look up syntax when needed:
+CRDT patterns · distributed consensus · circuit breaker
+
+---
+
 ## Complexity Reference
 
 | Data Structure / Pattern    | Access    | Search    | Insert    | Delete    | Space   |

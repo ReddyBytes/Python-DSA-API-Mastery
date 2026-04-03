@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+SQL vs NoSQL selection criteria · ACID properties · index trade-offs · sharding strategies
+
+**Should Learn** — Important for real projects, comes up regularly:
+replication modes (async vs sync) · connection pool sizing · query optimization basics
+
+**Good to Know** — Useful in specific situations, not always tested:
+transaction isolation levels · B-tree vs LSM-tree trade-offs · read replicas
+
+**Reference** — Know it exists, look up syntax when needed:
+write amplification · PITR backup · schema versioning and migrations
+
+---
+
 ## 📋 Contents
 
 ```

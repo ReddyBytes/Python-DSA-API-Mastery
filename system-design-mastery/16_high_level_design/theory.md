@@ -29,6 +29,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+HLD framework (clarify→estimate→architecture→deep dive→trade-offs) · capacity estimation · communication patterns (sync vs async)
+
+**Should Learn** — Important for real projects, comes up regularly:
+case study patterns (fan-out/geo-indexing/streaming) · architecture selection (monolith vs microservices vs event-driven)
+
+**Good to Know** — Useful in specific situations, not always tested:
+design decisions matrix · bottleneck identification
+
+**Reference** — Know it exists, look up syntax when needed:
+detailed case study walkthroughs (URL shortener/Twitter/WhatsApp/Netflix/Uber) · cost estimation
+
+---
+
 ## 1. What is HLD?
 
 ```

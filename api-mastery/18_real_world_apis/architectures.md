@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+payment state machines · idempotency in financial APIs · multi-tenancy patterns
+
+**Should Learn** — Important for real projects, comes up regularly:
+fan-out vs fan-in (social media) · presigned URLs for media · surge pricing calculation
+
+**Good to Know** — Useful in specific situations, not always tested:
+RBAC implementation · usage tracking and billing · real-time location (Redis GEO)
+
+**Reference** — Know it exists, look up syntax when needed:
+tenant isolation strategies · architecture decision trade-offs per domain
+
+---
+
 ## Why Case Studies Matter
 
 Every API tutorial shows you a to-do list API. The endpoints are simple, the data is tiny, and the only thing that can go wrong is returning a `400` when the input is missing a field.

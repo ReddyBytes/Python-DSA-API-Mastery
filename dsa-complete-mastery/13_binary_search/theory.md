@@ -14,6 +14,22 @@ binary search is teleporting halfway.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+core binary search mechanics · O(log n) · monotonic property · boundary conditions
+
+**Should Learn** — Important for real projects, comes up regularly:
+first/last occurrence · search on answer pattern · search in rotated array
+
+**Good to Know** — Useful in specific situations, not always tested:
+search in infinite array · search in 2D matrix
+
+**Reference** — Know it exists, look up syntax when needed:
+ternary search · fractional binary search · binary lifting
+
+---
+
 # 🎯 1️⃣ Real Life Story — Guess the Number Game
 
 Imagine I tell you:
