@@ -152,6 +152,84 @@ print(hello("Alice"))   # "Hello, Alice!"
 print(hey("Bob"))       # "Hey, Bob!"
 ```
 
+## 🔬 Closure Internals — Where Captured Variables Live
+
+When a closure captures a variable, Python creates a **cell object** on the heap.
+The outer function's stack frame is destroyed on return, but the cell object survives.
+
+```
+make_greeting("Hello") call:
+
+Stack (during call):
+┌──────────────────────────────────────────┐
+│  make_greeting() frame                   │
+│    prefix → cell_object (on heap)        │
+└──────────────────────────────────────────┘
+
+Stack (after return): frame DESTROYED
+
+Heap:
+  ┌─────────────────────────────────────────┐
+  │  cell object                            │
+  │    cell_contents: "Hello"               │  ← prefix value lives here
+  └─────────────────────────────────────────┘
+          ↑
+  ┌─────────────────────────────────────────┐
+  │  function object: greet                 │
+  │    __closure__: (cell_object,)          │  ← keeps cell alive
+  └─────────────────────────────────────────┘
+          ↑
+  hello → points to this function object
+```
+
+You can inspect this:
+
+```python
+def make_greeting(prefix):
+    def greet(name):
+        return f"{prefix}, {name}!"
+    return greet
+
+hello = make_greeting("Hello")
+
+print(hello.__closure__)                       # (<cell at 0x10f3b5d30>,)
+print(hello.__closure__[0].cell_contents)      # "Hello"
+```
+
+**Each call to `make_greeting` creates a SEPARATE cell object:**
+
+```
+hello = make_greeting("Hello")   →  cell_contents: "Hello"
+hey   = make_greeting("Hey")     →  cell_contents: "Hey"   (different cell)
+```
+
+This is why `c1` and `c2` from the counter example above have independent state —
+they each close over a different cell.
+
+**Why `nonlocal` works:**
+
+`nonlocal count` tells the inner function:
+"Don't create a new local `count` — modify the existing cell object."
+Both inner functions sharing the same cell will see each other's updates.
+
+```python
+def make_counter():
+    count = 0           # cell object: count=0
+
+    def inc():
+        nonlocal count  # writes to cell
+        count += 1
+
+    def get():
+        return count    # reads from same cell
+
+    return inc, get
+
+inc, get = make_counter()
+inc(); inc(); inc()
+print(get())    # 3 — same cell shared by inc and get
+```
+
 ---
 
 ## 🎁 Chapter 3: Your First Decorator — Manual Form

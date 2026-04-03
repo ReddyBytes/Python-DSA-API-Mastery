@@ -405,6 +405,126 @@ for order in orders:
 
 ---
 
+## Connection Pooling — Why Default Settings Kill You
+
+Every database call requires a connection. Creating a connection is expensive:
+
+```
+Without pooling:
+  Request arrives → open TCP connection → authenticate → run query → close connection
+  Time cost:  ~10-50ms for connection setup  +  actual query time
+
+With pooling:
+  Request arrives → grab idle connection from pool → run query → return to pool
+  Time cost:  ~0.1ms (pool checkout) + actual query time
+```
+
+A connection pool maintains a set of pre-established connections that are reused.
+
+---
+
+### How It Works
+
+```
+Connection Pool (max_size=10):
+
+┌─────────────────────────────────────────────────────┐
+│  conn_1  [IDLE]   conn_2  [IN USE]  conn_3  [IDLE]  │
+│  conn_4  [IDLE]   conn_5  [IN USE]  conn_6  [IDLE]  │
+│  conn_7  [IDLE]   conn_8  [IDLE]    conn_9  [IDLE]  │
+│  conn_10 [IDLE]                                     │
+└─────────────────────────────────────────────────────┘
+
+Request → checks out conn_1 (IDLE)
+Query runs using conn_1
+Request completes → returns conn_1 to pool (IDLE again)
+```
+
+If all connections are in use, the request **waits** in a queue until one is returned.
+If the wait exceeds `pool_timeout`, it raises a connection timeout error.
+
+---
+
+### The Default Settings Problem
+
+SQLAlchemy default pool size: **5 connections**.
+Django default: **no pooling** (new connection per request!).
+
+**At scale:**
+
+```
+1,000 concurrent requests → all waiting for 5 pool slots → timeouts → errors
+```
+
+---
+
+### Pool Sizing Formula
+
+The widely-used formula for databases (from HikariCP research):
+
+```
+pool_size = (number_of_cores × 2) + 1
+
+Examples:
+  4-core server: (4 × 2) + 1 = 9 connections
+  8-core server: (8 × 2) + 1 = 17 connections
+```
+
+Why? A database thread spends ~50% of time waiting on I/O.
+Doubling cores + 1 keeps all cores busy while some connections wait.
+
+**SQLAlchemy configuration:**
+
+```python
+from sqlalchemy import create_engine
+
+engine = create_engine(
+    "postgresql://user:pass@host/db",
+    pool_size=9,          # core_count × 2 + 1
+    max_overflow=5,       # additional connections when pool is full (temporary)
+    pool_timeout=30,      # seconds to wait before timeout
+    pool_recycle=1800,    # recycle connections after 30 min (prevent stale)
+    pool_pre_ping=True,   # test connection before use (detect dead connections)
+)
+```
+
+**FastAPI with async SQLAlchemy:**
+
+```python
+from sqlalchemy.ext.asyncio import create_async_engine
+
+engine = create_async_engine(
+    "postgresql+asyncpg://user:pass@host/db",
+    pool_size=9,
+    max_overflow=5,
+    pool_timeout=30,
+)
+```
+
+---
+
+### Connection Pool Anti-Patterns
+
+```
+❌ Creating engine inside each request:
+   @app.get("/data")
+   async def endpoint():
+       engine = create_engine(...)   # new pool on every request!
+       # Fix: create engine once at startup
+
+❌ Not returning connections:
+   conn = pool.getconn()
+   result = conn.execute(query)
+   # forgot conn.close() or return to pool → pool exhaustion
+
+❌ Pool too large:
+   pool_size = 1000
+   # Databases have connection limits. PostgreSQL default: 100.
+   # 10 app servers × 100 pool = 1000 connections → exceeds DB limit
+```
+
+---
+
 ## 4. Connection Pool Sizing
 
 Every database connection has a cost: memory on the DB server, a file descriptor on the

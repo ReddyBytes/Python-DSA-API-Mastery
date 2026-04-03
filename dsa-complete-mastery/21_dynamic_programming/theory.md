@@ -326,6 +326,82 @@ Partition equal subset
 
 ---
 
+---
+
+## DP Dimensions — Choosing the Right State
+
+One of the hardest parts of DP is deciding how many dimensions your dp array needs.
+The rule: **one dimension per independently varying parameter**.
+
+```
+STATE DIMENSION GUIDE
+
+1D dp[i]       → one varying parameter
+               → "what's the best answer for the first i items?"
+               Examples: Fibonacci, climbing stairs, house robber
+
+2D dp[i][j]    → two varying parameters
+               → "best answer for first i items with capacity j?"
+               Examples: 0/1 knapsack, edit distance, longest common subsequence
+
+3D dp[i][j][k] → three varying parameters
+               → rare, usually means you need to reconsider your state
+               Examples: some grid problems with a variable constraint
+```
+
+**1D Example — Climbing Stairs:**
+
+```python
+# State: dp[i] = number of ways to reach step i
+# Varying parameter: current step i
+dp = [0] * (n + 1)
+dp[0] = 1
+dp[1] = 1
+for i in range(2, n + 1):
+    dp[i] = dp[i-1] + dp[i-2]
+```
+
+**2D Example — 0/1 Knapsack:**
+
+```python
+# State: dp[i][w] = max value using first i items with weight limit w
+# Two varying parameters: item index i, remaining capacity w
+dp = [[0] * (W + 1) for _ in range(n + 1)]
+for i in range(1, n + 1):
+    for w in range(W + 1):
+        if weights[i-1] <= w:
+            dp[i][w] = max(dp[i-1][w], values[i-1] + dp[i-1][w - weights[i-1]])
+        else:
+            dp[i][w] = dp[i-1][w]
+```
+
+**Space Optimization Trick:**
+
+Many 2D DP problems only look at the previous row — collapse to 1D:
+
+```python
+# 0/1 knapsack space-optimized: O(W) instead of O(n × W)
+dp = [0] * (W + 1)
+for i in range(n):
+    for w in range(W, weights[i] - 1, -1):   # ← traverse BACKWARDS to avoid using item twice
+        dp[w] = max(dp[w], values[i] + dp[w - weights[i]])
+```
+
+**State Transition Diagram:**
+
+Think of the DP table as a directed graph where each cell depends on others:
+
+```
+dp[i][j] depends on:
+  - dp[i-1][j]     (skip current item)
+  - dp[i-1][j-w]   (take current item)
+
+Fill order: row by row, left to right
+→ always fill cells before they are needed
+```
+
+---
+
 # ⚠️ 1️⃣2️⃣ Common Mistakes
 
 - Not defining state properly

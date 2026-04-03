@@ -738,6 +738,41 @@ Python can optimise them better because they never change.
 
 ---
 
+### Memory Layout: List vs Tuple
+
+The memory difference between list and tuple is more than just mutability:
+
+```
+list  = dynamic array of POINTERS
+        ┌─────┬─────┬─────┬─────┬─────┐
+        │ptr 0│ptr 1│ptr 2│ ... │extra│  ← over-allocates to amortize append cost
+        └─────┴─────┴─────┴─────┴─────┘
+              ↓     ↓     ↓
+           heap  heap  heap  (actual objects)
+
+tuple = fixed-size array of POINTERS
+        ┌─────┬─────┬─────┐
+        │ptr 0│ptr 1│ptr 2│  ← exactly the right size, no extra
+        └─────┴─────┴─────┘
+```
+
+Practical implications:
+
+- **Tuple creation is faster** — no size calculation or over-allocation
+- **Tuple uses less memory** — no extra buffer slots
+- **List has O(1) amortized append** — pre-allocates extra space
+- **Tuples signal intent** — "this data does not change" (readable, prevents bugs)
+
+```python
+import sys
+a = [1, 2, 3, 4, 5]
+b = (1, 2, 3, 4, 5)
+print(sys.getsizeof(a))   # 104 bytes  (extra allocation)
+print(sys.getsizeof(b))   # 80 bytes   (exact size)
+```
+
+---
+
 # 🎯 Part 7: `set` — Only Unique Items
 
 ### What is it?
@@ -842,6 +877,47 @@ Visual diagram:
   & means intersection (only middle)
   - means difference (one side only)
 ```
+
+---
+
+### Why Sets Require Hashable Elements — The Hash Table Internals
+
+A set stores elements in a **hash table** — an array where the position of each element
+is determined by its hash value.
+
+```
+set = {10, 25, 42, 7}
+
+Hash table (simplified, size=8):
+  slot 0: empty
+  slot 1: empty
+  slot 2: 10  (10 % 8 = 2)
+  slot 3: 11  (not present)
+  slot 4: empty
+  slot 5: 13  (not present)
+  slot 6: 42  (42 % 8 = 2 → collision → probe to slot 6)
+  slot 7: 7   (7 % 8 = 7)
+  slot 1: 25  (25 % 8 = 1)
+```
+
+**Why lookup is O(1):**
+To check if `42` is in the set:
+1. Compute `hash(42)` → fixed position in array
+2. Check that slot → found or not found
+3. One or a few operations — regardless of set size
+
+**Why elements must be hashable:**
+The hash determines WHERE in the table to store/look up the element.
+Lists are mutable — if you mutate a list after adding it to a set, its hash would change,
+making it unfindable. That's why lists (mutable) cannot be set elements.
+
+```python
+s = {1, 2, 3}         # ints: hashable ✓
+s = {(1, 2), (3, 4)}  # tuples of ints: hashable ✓ (tuples are immutable)
+s = {[1, 2]}          # TypeError: unhashable type: 'list'
+```
+
+The same rule applies to dict keys.
 
 ---
 
@@ -996,6 +1072,47 @@ school = {
 print(school["Alice"]["gpa"])          # 9.2
 print(school["Bob"]["subjects"][0])    # "Commerce"
 ```
+
+---
+
+---
+
+### Dict Ordering Guarantee (Python 3.7+)
+
+Since Python 3.7, dicts are guaranteed to maintain **insertion order**.
+
+```python
+d = {}
+d['c'] = 3
+d['a'] = 1
+d['b'] = 2
+
+for key in d:
+    print(key)   # c, a, b — insertion order preserved
+```
+
+**Before Python 3.7:** Order was an implementation detail — you couldn't rely on it.
+**Python 3.7+:** Insertion order is part of the language spec.
+
+**Why it was added:**
+Python's dict was re-implemented in CPython 3.6 to be both faster and more compact.
+The new implementation naturally preserved insertion order as a side effect.
+It was made official in Python 3.7.
+
+**When it matters:**
+
+```python
+# Building an ordered response:
+response = {"status": "ok", "data": result, "timestamp": now}
+# Order in JSON output will match insertion order — predictable API responses
+
+# Configuration priority:
+config = {"host": "localhost", "port": 8080, "debug": True}
+# First key is first key — readability and predictability
+```
+
+**Note:** If you need sorted order, use `sorted(d.keys())` — dict preserves insertion order,
+not sort order.
 
 ---
 

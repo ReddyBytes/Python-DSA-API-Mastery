@@ -275,6 +275,46 @@ AP choice: Node A and B both serve requests independently
 
 ---
 
+### CAP Theorem — The Visual
+
+```
+                    Consistency
+                        /\
+                       /  \
+                      /    \
+                     /  ??  \
+                    /        \
+                   /──────────\
+          Availability    Partition Tolerance
+```
+
+In a distributed system, a **network partition** (nodes can't communicate) is unavoidable.
+So the real choice is: **when a partition occurs, do you sacrifice Consistency or Availability?**
+
+```
+CP (Consistent + Partition Tolerant):
+  During partition → refuse requests rather than return stale data
+  Examples: HBase, Zookeeper, etcd
+  Use when: financial transactions, inventory counts, anything where wrong = dangerous
+
+AP (Available + Partition Tolerant):
+  During partition → serve potentially stale data rather than fail
+  Examples: Cassandra, DynamoDB, CouchDB
+  Use when: social media likes, shopping carts, anything where "eventually right" is fine
+
+CA (Consistent + Available) — theoretical only:
+  Requires no partitions → impossible in distributed systems (network always fails eventually)
+  Only possible in single-node systems
+```
+
+**The interview answer:**
+
+"In practice, partition tolerance is not optional — network failures happen. So the real
+trade-off is CP vs AP. I'd choose CP for financial data and AP for user-facing features
+where temporary staleness is acceptable."
+
+---
+
 ## 7. PACELC — CAP's Practical Extension
 
 CAP describes what happens during partitions. PACELC adds: **even when the

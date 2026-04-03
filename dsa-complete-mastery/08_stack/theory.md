@@ -368,6 +368,109 @@ Stack must be managed carefully.
 
 ---
 
+---
+
+## The Monotonic Stack Pattern
+
+A **monotonic stack** is a stack that maintains elements in either strictly increasing or strictly decreasing order. It's one of the most powerful patterns for "next greater/smaller element" problems.
+
+**The core idea:**
+
+Instead of comparing each element against all others (O(n²)), use a stack to efficiently find the next element that "breaks" the current order — O(n) total.
+
+---
+
+### Pattern 1: Next Greater Element
+
+**Problem:** For each element in an array, find the next element to its right that is greater.
+
+```
+Input:  [2, 1, 5, 3, 6]
+Output: [5, 5, 6, 6, -1]
+         ↑  ↑  ↑  ↑   ↑
+         2→5  1→5  5→6  3→6  6→none
+```
+
+**Stack state walkthrough:**
+
+```
+i=0: stack=[]      → push 2      → stack=[2]
+i=1: stack=[2]     → 1<2, push   → stack=[2,1]
+i=2: stack=[2,1]   → 5>1, pop 1  → answer[1]=5  → stack=[2]
+                   → 5>2, pop 2  → answer[0]=5  → stack=[]
+                   → push 5      → stack=[5]
+i=3: stack=[5]     → 3<5, push   → stack=[5,3]
+i=4: stack=[5,3]   → 6>3, pop 3  → answer[3]=6  → stack=[5]
+                   → 6>5, pop 5  → answer[2]=6  → stack=[]
+                   → push 6      → stack=[6]
+end: stack=[6]     → 6 has no next greater → answer[4]=-1
+```
+
+```python
+def next_greater(nums):
+    n = len(nums)
+    answer = [-1] * n
+    stack = []                      # stores indices
+
+    for i in range(n):
+        while stack and nums[i] > nums[stack[-1]]:
+            idx = stack.pop()
+            answer[idx] = nums[i]   # nums[i] is the next greater for idx
+        stack.append(i)
+
+    return answer
+```
+
+**Time:** O(n) — each element pushed and popped at most once.
+**Space:** O(n) — stack.
+
+---
+
+### Pattern 2: Stock Span Problem
+
+**Problem:** For each day's stock price, find how many consecutive days before it had a price ≤ today's price (including today itself).
+
+```
+Prices: [100, 80, 60, 70, 60, 75, 85]
+Spans:  [  1,  1,  1,  2,  1,  4,  6]
+
+Day 6: price=75 → look back: 60≤75, 70≤75, 60≤75, then 80>75 → span=4
+```
+
+```python
+def stock_span(prices):
+    stack = []   # stores (price, span)
+    result = []
+
+    for price in prices:
+        span = 1
+        while stack and stack[-1][0] <= price:
+            span += stack.pop()[1]   # accumulate spans of popped elements
+        stack.append((price, span))
+        result.append(span)
+
+    return result
+```
+
+---
+
+### When to Use Monotonic Stack
+
+```
+Problem pattern                          → Use monotonic stack
+─────────────────────────────────────────────────────────────
+"Next greater/smaller element"           → decreasing/increasing stack
+"Previous greater/smaller element"       → process left to right
+"Largest rectangle in histogram"         → maintain increasing stack
+"Trapping rain water"                    → maintain decreasing stack
+"Daily temperatures"                     → next greater (decreasing)
+```
+
+**The recognition signal:** If the problem asks "for each element, find the nearest element
+satisfying condition X in O(n)", monotonic stack is likely the answer.
+
+---
+
 # 📌 Final Understanding
 
 Stack is:

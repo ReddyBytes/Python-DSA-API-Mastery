@@ -399,6 +399,117 @@ Engineering decision is contextual.
 
 ---
 
+---
+
+## Non-Comparison Sorts
+
+All the algorithms above (merge sort, quick sort, heap sort) compare elements.
+Their lower bound is O(n log n) — provably optimal for comparison-based sorting.
+
+But if you know something about your data, you can do better.
+
+---
+
+### Counting Sort — O(n + k)
+
+**When to use:** Elements are integers in a known, small range [0, k].
+
+```
+Input:  [4, 2, 2, 8, 3, 3, 1]   range: 0-8 (k=8)
+
+Count:  [0, 1, 2, 2, 1, 0, 0, 0, 1]
+         0  1  2  3  4  5  6  7  8
+
+Output: [1, 2, 2, 3, 3, 4, 8]
+```
+
+```python
+def counting_sort(arr, max_val):
+    count = [0] * (max_val + 1)
+    for num in arr:
+        count[num] += 1
+    result = []
+    for num, freq in enumerate(count):
+        result.extend([num] * freq)
+    return result
+```
+
+**Time:** O(n + k). **Space:** O(k).
+**Limit:** Only works for non-negative integers. Impractical if k >> n.
+
+---
+
+### Radix Sort — O(d × n)
+
+**When to use:** Integers with d digits (or strings of length d). Sorts digit by digit.
+
+```
+Input:  [329, 457, 657, 839, 436, 720, 355]
+
+Pass 1 (ones digit):
+  720, 355, 436, 457, 657, 329, 839
+
+Pass 2 (tens digit):
+  720, 329, 436, 839, 355, 457, 657
+
+Pass 3 (hundreds digit):
+  329, 355, 436, 457, 657, 720, 839  ← sorted!
+```
+
+**Key:** Each pass uses a stable sort (like counting sort).
+**Time:** O(d × n). For 32-bit ints, d=10 → effectively O(n).
+
+---
+
+## Stability — Why It Matters
+
+A **stable sort** preserves the relative order of equal elements.
+
+**Why it matters:**
+
+```
+Students:  [(Alice, A), (Bob, B), (Charlie, A), (Dave, B)]
+
+Sort by grade (stable):
+  [(Alice, A), (Charlie, A), (Bob, B), (Dave, B)]   ← Alice before Charlie (original order)
+
+Sort by grade (unstable):
+  [(Charlie, A), (Alice, A), (Dave, B), (Bob, B)]   ← order within grade lost!
+```
+
+Real scenario: You first sort by date, then by category. If the second sort is unstable,
+the date ordering within each category is destroyed.
+
+**Stability by algorithm:**
+```
+Stable:   Merge sort, Counting sort, Radix sort, Timsort (Python's built-in)
+Unstable: Quick sort, Heap sort, Selection sort
+```
+
+Python's `sorted()` and `list.sort()` use **Timsort** — stable, O(n log n) worst case,
+and O(n) on already-sorted data.
+
+---
+
+## Choosing the Right Sort
+
+```
+┌───────────────────────────────────────────────────────────────────────────┐
+│  Scenario                          │  Algorithm         │  Why             │
+├────────────────────────────────────┼────────────────────┼──────────────────┤
+│  General purpose                   │  Python sorted()   │  Timsort, stable │
+│  Nearly sorted data                │  Insertion/Timsort │  O(n) best case  │
+│  Integer keys, small range         │  Counting sort     │  O(n+k)          │
+│  Fixed-length integers/strings     │  Radix sort        │  O(d×n)          │
+│  Memory limited, in-place needed   │  Heap sort         │  O(1) extra space│
+│  Average case matters most         │  Quick sort        │  Best cache perf │
+│  Worst case must be O(n log n)     │  Merge/Heap sort   │  Guaranteed      │
+│  Must preserve equal-element order │  Merge/Timsort     │  Stable          │
+└───────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 # 📌 Final Perspective
 
 Sorting is:

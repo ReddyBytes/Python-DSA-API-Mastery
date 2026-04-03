@@ -332,6 +332,49 @@ Used when:
 
 ---
 
+### Breaking Out of Nested Loops
+
+`break` only exits the **innermost** loop it's in. This surprises many beginners.
+
+```python
+# break only exits the inner loop:
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break           # exits j loop, i loop continues
+    print(f"i={i}")         # prints i=0, i=1, i=2
+
+# Output: i=0, i=1, i=2  ← outer loop ran all 3 times
+```
+
+**Pattern 1: Use a flag variable**
+
+```python
+found = False
+for i in range(rows):
+    for j in range(cols):
+        if grid[i][j] == target:
+            found = True
+            break
+    if found:
+        break
+```
+
+**Pattern 2: Use a function with return**
+
+```python
+def find_in_grid(grid, target):
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == target:
+                return (i, j)   # exits BOTH loops immediately
+    return None
+```
+
+The function approach is the cleanest — `return` exits all loops at once.
+
+---
+
 # 🔹 7. continue Statement
 
 Skips current iteration.
@@ -510,6 +553,55 @@ else:
 ```
 
 Prints False.
+
+---
+
+### Short-Circuit Evaluation
+
+Python's `and` and `or` operators **stop evaluating as soon as the result is determined**.
+This is called short-circuit evaluation.
+
+```
+x and y:
+  If x is falsy → return x immediately (don't evaluate y)
+  If x is truthy → return y
+
+x or y:
+  If x is truthy → return x immediately (don't evaluate y)
+  If x is falsy → return y
+```
+
+**Why it matters — avoid expensive calls:**
+
+```python
+def is_valid_user(user_id):
+    # expensive DB call
+    return db.query(f"SELECT 1 FROM users WHERE id={user_id}")
+
+# BAD: always calls is_valid_user, even if user_id is None
+if user_id != None and is_valid_user(user_id):
+    process(user_id)
+
+# GOOD: if user_id is falsy, is_valid_user never runs
+if user_id and is_valid_user(user_id):
+    process(user_id)
+```
+
+**The `or` default pattern:**
+
+```python
+name = user_input or "Anonymous"   # if user_input is empty/None, use "Anonymous"
+config = loaded_config or DEFAULT_CONFIG
+```
+
+**Short-circuit with side effects (careful):**
+
+```python
+# If condition1 is False, condition2 never runs
+# Can be a bug if condition2 has side effects you expect to happen
+if condition1 and condition2_with_side_effect():
+    ...
+```
 
 ---
 

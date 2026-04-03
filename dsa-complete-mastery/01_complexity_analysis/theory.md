@@ -396,6 +396,50 @@ Stack grows → O(n) space
 
 ---
 
+---
+
+## Choosing the Right Algorithm by Input Size
+
+In interviews and production, the question isn't just "what is the complexity?" —
+it's "given the input size, will this actually run in time?"
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│  Input Size (n)  │  Max Complexity     │  Example Algorithm              │
+├──────────────────┼─────────────────────┼─────────────────────────────────┤
+│  n ≤ 10          │  O(n!)              │  Permutation brute force        │
+│  n ≤ 20          │  O(2ⁿ)             │  Subset enumeration             │
+│  n ≤ 100         │  O(n³)             │  Floyd-Warshall, 3-loop DP      │
+│  n ≤ 1,000       │  O(n²)             │  Bubble sort, naive DP          │
+│  n ≤ 100,000     │  O(n log n)        │  Merge sort, heap sort          │
+│  n ≤ 10,000,000  │  O(n)              │  Linear scan, hash map          │
+│  n > 10,000,000  │  O(log n) or O(1)  │  Binary search, lookup table    │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+**Why this matters in practice:**
+
+Modern computers execute roughly 10⁸ to 10⁹ simple operations per second.
+
+```
+If n = 1,000,000 and your algorithm is O(n²):
+  operations = (10⁶)² = 10¹² operations
+  time ≈ 10¹² / 10⁸ = 10,000 seconds ≈ 2.7 hours
+
+If n = 1,000,000 and your algorithm is O(n log n):
+  operations = 10⁶ × 20 = 2 × 10⁷ operations
+  time ≈ 2 × 10⁷ / 10⁸ = 0.2 seconds ✓
+```
+
+**The interview move:** When you see the constraints, immediately decide complexity.
+- `n ≤ 10⁵` → O(n log n) is fine, O(n²) is not
+- `n ≤ 10³` → O(n²) is acceptable
+- `n ≤ 20` → exponential approaches are OK
+
+This is what interviewers mean when they say "analyze your approach before coding."
+
+---
+
 # 🧠 Interview Insights
 
 Interviewers don't care about:
