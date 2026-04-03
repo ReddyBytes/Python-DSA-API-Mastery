@@ -43,6 +43,22 @@ This is the core promise of concurrency: **overlap the waiting**.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+GIL and its implications · `threading.Thread` · `ThreadPoolExecutor` · `asyncio` basics (`async def`, `await`, `asyncio.gather`) · I/O-bound vs CPU-bound decision
+
+**Should Learn** — Important for real projects, comes up regularly:
+`ProcessPoolExecutor` · `asyncio.create_task` · `asyncio.Queue` · `threading.Lock` · `asyncio.Semaphore`
+
+**Good to Know** — Useful in specific situations:
+`asyncio.TaskGroup` (Python 3.11+) · `asyncio.timeout()` · Task cancellation · `asyncio.shield()`
+
+**Reference** — Know it exists, look up when needed:
+Event loop policies · `asyncio.Barrier` · Multiprocessing managers · Zombie processes · Distributed task queues (Celery)
+
+---
+
 ## 🧠 Chapter 1: Concurrency vs Parallelism — The Critical Distinction
 
 These terms are often confused. They are **not** the same:
@@ -154,7 +170,7 @@ With GIL (reality in CPython):
 
 **Why does the GIL exist?**
 
-CPython's memory management (reference counting) is not thread-safe.
+CPython's memory management ([reference counting](../01.1_memory_management/theory.md#-3️⃣-reference-counting)) is not thread-safe.
 Without the GIL, two threads could simultaneously modify a reference count,
 corrupting memory. The GIL is a simple solution: serialize all bytecode execution.
 
@@ -359,7 +375,7 @@ counter += 1  compiles to:
 
 ## 🔐 Chapter 5: Thread Synchronization
 
-### Lock — Mutual Exclusion
+### [Lock](../12_context_managers/theory.md) — Mutual Exclusion
 
 ```python
 import threading
@@ -384,6 +400,8 @@ lock.locked()          # True if currently held
 
 # Always use with statement — guarantees release on exception
 ```
+
+`threading.Lock` is a [context manager](../12_context_managers/theory.md#-chapter-2-the-context-manager-protocol) — `with lock:` calls `lock.acquire()` on entry and `lock.release()` on exit, even if an exception occurs.
 
 ### RLock — Re-Entrant Lock
 

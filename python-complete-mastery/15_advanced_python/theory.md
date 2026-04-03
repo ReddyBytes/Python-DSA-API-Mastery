@@ -29,6 +29,22 @@ This is what advanced Python is: **understanding and using the protocols that po
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Dunder methods (`__repr__`, `__str__`, `__eq__`, `__hash__`, `__len__`, `__getitem__`) · Descriptor protocol (`__get__`, `__set__`, `__delete__`) · `@property` internals
+
+**Should Learn** — Important for real projects, comes up regularly:
+`__getattr__` vs `__getattribute__` · `__init_subclass__` · `__slots__` deep dive · `type()` for dynamic class creation · ABCs and `@abstractmethod`
+
+**Good to Know** — Useful in specific situations:
+`__class_getitem__` · `__missing__` · `__reduce__` / pickle protocol · Virtual subclasses (`ABC.register()`) · `__sizeof__`
+
+**Reference** — Know it exists, look up when needed:
+`__prepare__` · Metaclass conflicts · Buffer protocol / `memoryview` · `linecache` · Code object introspection
+
+---
+
 ## 🔑 Chapter 1: Dunder Methods — Python's Protocol System
 
 **Dunder** = **D**ouble **under**score. Python's way of defining object behaviour through well-known method names that the interpreter calls automatically.
@@ -336,7 +352,7 @@ class Container:
 
 ---
 
-## 🔧 Chapter 6: `__slots__` — Memory Optimization
+## 🔧 Chapter 6: [`__slots__`](../05_oops/15_slots.md) — Memory Optimization
 
 By default, every Python object stores its attributes in a `__dict__` (a hash table). This is flexible but uses ~200-300 bytes per instance.
 
@@ -388,7 +404,7 @@ __slots__ GIVES you:      __slots__ TAKES AWAY:
 
 A **descriptor** is an object that defines how attribute access works. It implements one or more of: `__get__`, `__set__`, `__delete__`.
 
-**This is how `@property`, `@classmethod`, `@staticmethod` are all implemented** — they're just descriptors.
+**This is how [`@property`](../05_oops/11_properties.md), [`@classmethod` / `@staticmethod`](../05_oops/09_class_instance_static_methods.md) are all implemented** — they're just descriptors.
 
 ```python
 # Descriptor protocol:

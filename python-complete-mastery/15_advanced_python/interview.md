@@ -8,8 +8,8 @@
 ## 📋 Contents
 
 ```
-Junior   (1–4):   dunders, __slots__, @dataclass, property
-Mid-Level(5–9):   descriptor protocol, metaclasses, __new__, callable objects, class creation
+Junior   (1–4):   dunders, [`__slots__`](../05_oops/15_slots.md), @dataclass, property
+Mid-Level(5–9):   [descriptor protocol](../05_oops/17_descriptors.md), [metaclasses](../05_oops/16_metaclasses.md), __new__, callable objects, class creation
 Senior  (10–13):  attribute lookup order, metaclass conflicts, ABCs, Protocol
 Traps    (5):     subtle mistakes every senior gets asked
 ```
@@ -69,7 +69,7 @@ This is intentional — it prevents security exploits and improves performance.
 
 ---
 
-### Q2. What is `__slots__` and when should you use it?
+### Q2. What is [`__slots__`](../05_oops/15_slots.md) and when should you use it?
 
 **Intent:** Understand the default instance storage model and the optimization.
 

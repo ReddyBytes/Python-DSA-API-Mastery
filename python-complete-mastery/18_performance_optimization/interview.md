@@ -183,10 +183,10 @@ Clear classification required.
 
 Possible approaches:
 
-- Use generators instead of lists
+- Use [generators](../11_generators_iterators/theory.md#why-generators-are-lazy--the-memory-story) instead of lists
 - Process data in chunks
 - Use streaming
-- Use __slots__ in classes
+- Use [`__slots__`](../05_oops/15_slots.md) in classes
 - Clear unused references
 - Avoid storing unnecessary data
 

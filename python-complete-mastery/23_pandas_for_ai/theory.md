@@ -53,6 +53,22 @@ This guide teaches you the whole workflow — from raw messy CSV to clean JSONL 
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`DataFrame` / `Series` basics · `read_csv` / `to_csv` · Indexing (`loc`, `iloc`) · `groupby` · `merge` / `join` · Handling missing data (`fillna`, `dropna`)
+
+**Should Learn** — Important for real projects, comes up regularly:
+`apply` / `map` / `applymap` · Chaining methods · `query()` · `pivot_table` · Time series basics · `explode()` · `cut()` / `qcut()`
+
+**Good to Know** — Useful in specific situations:
+MultiIndex · `resample()` / `rolling()` · Categorical dtype · `eval()` · Named groupby aggregations · Copy semantics (view vs copy)
+
+**Reference** — Know it exists, look up when needed:
+Sparse dtypes · HDF5 export · `pd.testing` · Fuzzy merges · DST edge cases
+
+---
+
 # 1️⃣ What is Pandas — Series vs DataFrame
 
 Pandas is a Python library for working with structured, tabular data.

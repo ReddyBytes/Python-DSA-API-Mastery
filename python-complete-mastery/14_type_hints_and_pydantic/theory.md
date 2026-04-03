@@ -33,6 +33,22 @@ This is why type hints and Pydantic matter — not just for correctness, but for
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Basic annotations (`x: int`, `def f(x: int) -> str`) · `Optional` / `Union` · `List`, `Dict`, `Tuple`, `Set` · Pydantic `BaseModel` · `@field_validator`
+
+**Should Learn** — Important for real projects, comes up regularly:
+`TypeVar` · `Protocol` · `typing.Literal` · `TypedDict` · Pydantic v2 patterns · `dataclass` vs Pydantic
+
+**Good to Know** — Useful in specific situations:
+`typing.overload` · `typing.get_type_hints()` · Forward references · `TypeGuard`
+
+**Reference** — Know it exists, look up when needed:
+`typing.ParamSpec` · `typing.Concatenate` · Variance (covariant/contravariant) · `pyright` / `pyre` config
+
+---
+
 ## 1️⃣ Why Type Hints Exist
 
 Python is **dynamically typed** — variables have no declared type, and you can reassign anything to anything. This is great for quick scripts. It becomes a liability in large codebases.
@@ -228,7 +244,7 @@ def run_later(callback: Callable[[], str]) -> None:
     print(result)
 ```
 
-### Generator Types
+### [Generator Types](../11_generators_iterators/theory.md#-chapter-3-generator-functions--yield)
 
 ```python
 from typing import Generator, Iterator
@@ -271,7 +287,7 @@ def send(message: Message) -> None:
     print(f"{message['role']}: {message['content']}")
 ```
 
-### dataclasses — Typed Classes Without Boilerplate
+### [dataclasses](../05_oops/14_dataclasses.md#-the-basics) — Typed Classes Without Boilerplate
 
 ```python
 from dataclasses import dataclass, field
@@ -291,6 +307,170 @@ print(msg)          # ChatMessage(role='user', content='What is Python?', tokens
 # dataclass gives you: __init__, __repr__, __eq__ for free
 # No runtime validation — just structure + type hints
 ```
+
+---
+
+## 🔤 `TypeVar` — Generic Functions
+
+When a function should work on any type but return the SAME type it received, you need `TypeVar`.
+
+Without it, type checkers can't track that `first([1,2,3])` returns `int`:
+
+```python
+from typing import TypeVar, List
+
+T = TypeVar("T")   # T can be any type
+
+def first(items: List[T]) -> T:
+    return items[0]
+
+result = first([1, 2, 3])     # type checker knows result is int
+result = first(["a", "b"])    # type checker knows result is str
+```
+
+**The contract:** whatever type goes in, the same type comes back.
+
+```python
+from typing import TypeVar
+
+T = TypeVar("T")
+
+def identity(value: T) -> T:
+    return value   # must return the same type
+
+def swap(a: T, b: T) -> tuple[T, T]:
+    return b, a    # a and b must be same type
+```
+
+**Constraining TypeVar to specific types:**
+
+```python
+from typing import TypeVar
+
+# T can only be int or float (not str, list, etc.):
+Number = TypeVar("Number", int, float)
+
+def double(x: Number) -> Number:
+    return x * 2
+
+double(5)     # ✓ int
+double(2.5)   # ✓ float
+double("hi")  # ✗ type error — str not allowed
+```
+
+**Bound TypeVar — T must be a subtype of something:**
+
+```python
+from typing import TypeVar
+
+class Animal:
+    def speak(self) -> str: ...
+
+A = TypeVar("A", bound=Animal)
+
+def make_noise(animal: A) -> A:
+    animal.speak()
+    return animal   # returns same subtype, not just Animal
+```
+
+**When to use TypeVar:**
+- When a function returns the same type it receives
+- When two parameters must have the same type
+- When building generic data structures
+
+---
+
+## 🦆 `typing.Protocol` — Duck Typing with Type Hints
+
+Python has always used duck typing: "if it walks like a duck and quacks like a duck, it's a duck."
+`Protocol` lets you express this in the type system — **without inheritance**.
+
+```python
+from typing import Protocol
+
+class Drawable(Protocol):
+    def draw(self) -> None: ...
+    def resize(self, factor: float) -> None: ...
+
+# These classes DON'T inherit from Drawable:
+class Circle:
+    def draw(self) -> None:
+        print("drawing circle")
+    def resize(self, factor: float) -> None:
+        self.radius *= factor
+
+class Square:
+    def draw(self) -> None:
+        print("drawing square")
+    def resize(self, factor: float) -> None:
+        self.side *= factor
+
+# But they SATISFY the Drawable protocol:
+def render(shape: Drawable) -> None:
+    shape.draw()
+
+render(Circle())   # ✓  — no inheritance needed
+render(Square())   # ✓  — structurally compatible
+```
+
+**Protocol vs ABC — the key difference:**
+
+```python
+# ABC — requires explicit inheritance:
+from abc import ABC, abstractmethod
+
+class Drawable(ABC):
+    @abstractmethod
+    def draw(self): ...
+
+class Circle(Drawable):   # MUST inherit
+    def draw(self): ...
+
+# Protocol — no inheritance needed:
+from typing import Protocol
+
+class Drawable(Protocol):
+    def draw(self) -> None: ...
+
+class Circle:             # does NOT need to inherit
+    def draw(self): ...   # just needs the method
+
+# Both satisfy Drawable — checked structurally
+```
+
+**`runtime_checkable` — enable isinstance() checks:**
+
+```python
+from typing import Protocol, runtime_checkable
+
+@runtime_checkable
+class Sized(Protocol):
+    def __len__(self) -> int: ...
+
+print(isinstance([1, 2, 3], Sized))   # True — list has __len__
+print(isinstance("hello", Sized))     # True — str has __len__
+print(isinstance(42, Sized))          # False — int has no __len__
+```
+
+**Real production use — accepting any "file-like" object:**
+
+```python
+from typing import Protocol
+
+class Readable(Protocol):
+    def read(self, n: int = -1) -> bytes: ...
+    def seek(self, pos: int) -> int: ...
+
+def parse_binary(source: Readable) -> dict:
+    header = source.read(4)
+    # works with real files, BytesIO, network streams — anything with read/seek
+    ...
+```
+
+**When to use Protocol vs ABC:**
+- Use `Protocol` when you want structural typing (duck typing + type safety)
+- Use `ABC` when you want to enforce inheritance hierarchy
+- Protocol is the modern Pythonic choice for "accepts anything with these methods"
 
 ---
 

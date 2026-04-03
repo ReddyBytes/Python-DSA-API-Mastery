@@ -188,14 +188,14 @@ Inside function.
 Global scope:
 Defined outside.
 
-LEGB rule:
+[LEGB rule](../04_functions/theory.md#the-legb-pyramid):
 
 - Local
 - Enclosing
 - Global
 - Built-in
 
-Mention LEGB explicitly.
+Mention [LEGB](../04_functions/theory.md#the-legb-pyramid) explicitly.
 
 ---
 

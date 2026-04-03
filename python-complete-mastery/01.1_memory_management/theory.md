@@ -3,6 +3,22 @@ From Reference Counting to Garbage Collection Internals
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Stack vs heap · Reference counting · Garbage collection (cyclic GC) · Object identity (`id()`)
+
+**Should Learn** — Important for real projects, comes up regularly:
+`__slots__` memory optimization · Generators vs lists (memory) · `sys.getsizeof()` · `weakref`
+
+**Good to Know** — Useful in specific situations:
+Memory layout (arenas → pools → blocks) · Small integer caching internals
+
+**Reference** — Know it exists, look up when needed:
+`weakref` callbacks · `gc` module API · Frame introspection
+
+---
+
 # 🎯 Why Memory Management Matters
 
 Imagine:
@@ -279,7 +295,7 @@ Avoid heavy logic inside __del__.
 
 ---
 
-## 🔹 Use Generators Instead of Lists
+## 🔹 Use [Generators](../11_generators_iterators/theory.md) Instead of Lists
 
 Instead of:
 
@@ -295,7 +311,7 @@ Use:
 
 ---
 
-## 🔹 Use __slots__ in Classes
+## 🔹 Use [`__slots__`](../05_oops/15_slots.md) in Classes
 
 Normal class:
 
@@ -435,7 +451,7 @@ Designs memory-efficient architectures.
 
 # 🗺️ 1️⃣7️⃣ Memory Layout: Stack, Heap, and Scope
 
-Understanding WHERE variables live explains performance, lifetimes, and closures.
+Understanding WHERE variables live explains performance, lifetimes, and [closures](../04_functions/theory.md#closure-cell-internals--how-captured-variables-actually-work).
 
 ---
 

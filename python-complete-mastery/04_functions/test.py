@@ -158,20 +158,32 @@
 
 
 
-x = "global"                          # G: global scope
+# x = "global"                          # G: global scope
+
+# def outer():
+#     # x = "enclosing"                   # E: enclosing scope
+
+#     def inner():
+#         x = "local"                   # L: local scope
+#         print(x)                      # finds "local" first (L)
+
+#     def inner_no_local():
+#         print(x)                      # no local x → finds "enclosing" (E)
+
+#     inner()             # prints "local"
+#     inner_no_local()    # prints "enclosing"
+
+# outer()
+# print(x)                # prints "global" (G)
+
+
 
 def outer():
-    # x = "enclosing"                   # E: enclosing scope
-
+    x=10
+    print("enclosed ")
     def inner():
-        x = "local"                   # L: local scope
-        print(x)                      # finds "local" first (L)
-
-    def inner_no_local():
-        print(x)                      # no local x → finds "enclosing" (E)
-
-    inner()             # prints "local"
-    inner_no_local()    # prints "enclosing"
-
-outer()
-print(x)                # prints "global" (G)
+        print(x)
+        
+    return inner()
+f=outer()
+f()

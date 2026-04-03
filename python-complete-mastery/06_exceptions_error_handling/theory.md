@@ -31,6 +31,22 @@ That's what this chapter is about.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`try`/`except`/`finally` · Specific exception types · `raise` · Custom exceptions · Context managers for cleanup
+
+**Should Learn** — Important for real projects, comes up regularly:
+`raise X from Y` / `raise X from None` · Exception hierarchy · `else` clause on try · Retry patterns
+
+**Good to Know** — Useful in specific situations:
+`warnings` module · `sys.exc_info()` · `atexit` module
+
+**Reference** — Know it exists, look up when needed:
+`ExceptionGroup` (Python 3.11+) · Signal handlers · `warnings.filterwarnings`
+
+---
+
 ## 🧠 Chapter 1 — What Actually Happens When Python Raises an Exception
 
 When Python encounters an error (like dividing by zero), here's the exact sequence:
@@ -529,7 +545,7 @@ process(data)        # ← if THIS raises, file.close() never runs → resource 
 file.close()
 ```
 
-### `with` Statement — The Solution
+### [`with` Statement](../12_context_managers/theory.md) — The Solution
 
 ```python
 # ✅ SAFE — always closes, even if an exception is raised:
@@ -668,7 +684,7 @@ EXAMPLE OF RACE CONDITION WITH LBYL:
 
 ### Pattern 1 — Retry with Exponential Backoff
 
-For transient failures: network blips, rate limits, temporary DB outages.
+For transient failures: network blips, rate limits, temporary DB outages. Uses the [decorator pattern](../10_decorators/theory.md#-chapter-5-functoolswraps--preserving-identity) with `@functools.wraps`.
 
 ```python
 import time
@@ -980,7 +996,7 @@ except Exception:
 ### Threads — Exceptions Are Silently Lost!
 
 ```python
-import threading
+import threading   # → [13_concurrency](../13_concurrency/theory.md) for full threading guide
 
 def worker():
     raise ValueError("Something went wrong in thread!")
@@ -1031,7 +1047,7 @@ with ThreadPoolExecutor(max_workers=4) as executor:
             print(f"Task {n} raised: {e}")
 ```
 
-### Async — `asyncio`
+### Async — [`asyncio`](../13_concurrency/theory.md)
 
 ```python
 import asyncio
@@ -1168,6 +1184,80 @@ Traceback (most recent call last):    ← this means BOTTOM is most recent
   File "app.py", line 2, in level3
     raise ValueError("something went wrong")   ← innermost (closest to error)
 ValueError: something went wrong
+```
+
+---
+
+## ⚠️ `warnings` Module — Non-Fatal Alerts
+
+Exceptions stop execution. But sometimes you want to **alert** the caller about a problem without crashing — a deprecated API, a performance issue, an unusual input.
+
+That's what `warnings` is for.
+
+```python
+import warnings
+
+# Issue a warning (does not raise, does not stop):
+warnings.warn("This function is deprecated", DeprecationWarning)
+
+# Warning categories:
+warnings.warn("Low disk space", ResourceWarning)
+warnings.warn("Result may be inaccurate", UserWarning)
+warnings.warn("Internal change ahead", FutureWarning)
+```
+
+**Warning categories:**
+
+```
+UserWarning        — general purpose (default when no category given)
+DeprecationWarning — API is deprecated (shown in dev, hidden in prod)
+FutureWarning      — behavior will change in a future version
+RuntimeWarning     — suspicious runtime behavior
+ResourceWarning    — resource usage issues (file not closed, etc.)
+SyntaxWarning      — dubious syntax
+```
+
+**Filtering warnings — control what gets shown:**
+
+```python
+import warnings
+
+# Suppress all deprecation warnings:
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# Turn warnings into errors (great for CI/CD):
+warnings.filterwarnings("error", category=DeprecationWarning)
+# Now DeprecationWarning raises an exception
+
+# Show each unique warning only once:
+warnings.filterwarnings("once")
+```
+
+**Practical use — deprecating your own functions:**
+
+```python
+import warnings
+
+def old_function(x):
+    warnings.warn(
+        "old_function() is deprecated. Use new_function() instead.",
+        DeprecationWarning,
+        stacklevel=2   # ← points warning to CALLER, not here
+    )
+    return new_function(x)
+```
+
+`stacklevel=2` is important — it makes the warning point to the caller's line, not inside your function.
+
+**Testing warnings:**
+
+```python
+import warnings
+import pytest
+
+def test_deprecation_warning():
+    with pytest.warns(DeprecationWarning, match="deprecated"):
+        old_function(42)
 ```
 
 ---

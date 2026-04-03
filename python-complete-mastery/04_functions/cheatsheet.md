@@ -209,7 +209,7 @@ counter()    # 2
 
 ---
 
-## 🎨 Decorators
+## 🎨 [Decorators](../10_decorators/theory.md)
 
 ```python
 from functools import wraps

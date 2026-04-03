@@ -31,6 +31,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`pytest` basics (test discovery, `assert`, fixtures) · `unittest.mock.patch` / `MagicMock` · `pytest.mark.parametrize` · Test isolation (setup/teardown)
+
+**Should Learn** — Important for real projects, comes up regularly:
+`pytest.fixtures` scope (function/class/module/session) · `caplog` / `capsys` fixtures · `pytest.raises` · `monkeypatch` · Code coverage (`pytest-cov`)
+
+**Good to Know** — Useful in specific situations:
+`pytest-mock` · Snapshot testing · `tox` for multi-environment · Contract testing
+
+**Reference** — Know it exists, look up when needed:
+`pytest-benchmark` · `pytest-subprocess` · `doctest` integration · `nox`
+
+---
+
 ## 1. Why Testing? The Safety Net Mental Model
 
 Imagine a high-wire acrobat. Without a safety net, every step is terrifying.
@@ -171,7 +187,7 @@ class TestMath(unittest.TestCase):
 # self.assertAlmostEqual(a, b)    round(a-b, 7) == 0
 # self.assertGreater(a, b)        a > b
 # self.assertLess(a, b)           a < b
-# self.assertRaises(Exc)          context manager
+# self.assertRaises(Exc)          [context manager](../12_context_managers/theory.md)
 # self.assertLogs(logger, level)  context manager for log output
 # self.assertRegex(text, regexp)  re.search(regexp, text)
 

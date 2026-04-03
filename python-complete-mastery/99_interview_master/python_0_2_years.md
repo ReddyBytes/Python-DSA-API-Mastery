@@ -21,6 +21,22 @@ At this stage, clarity matters more than complexity.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Python basics (types, mutability, scope) · OOP fundamentals · Exception handling · File handling · Basic data structures · FizzBuzz-level coding
+
+**Should Learn** — Important for real projects, comes up regularly:
+Comprehensions · Common built-ins · `*args` / `**kwargs` · Context managers · Basic testing
+
+**Good to Know** — Useful in specific situations:
+Shallow vs deep copy · Mutable default argument trap · Off-by-one errors
+
+**Reference** — Know it exists, look up when needed:
+Advanced OOP · Concurrency · Type hints (not expected at 0–2 years)
+
+---
+
 # 🔹 1️⃣ Python Fundamentals
 
 ---
@@ -110,7 +126,7 @@ def greet(name="Guest"):
     return f"Hello {name}"
 ```
 
-Be careful with mutable defaults.
+Be careful with [mutable defaults](../04_functions/theory.md#️-type-3-edge-case--the-mutable-default-argument-trap).
 
 ---
 
@@ -209,7 +225,7 @@ For uniqueness and fast membership check.
 
 ## Q: How to read file safely?
 
-Use context manager:
+Use [context manager](../12_context_managers/theory.md#-chapter-1-the-with-statement--what-actually-happens):
 
 ```python
 with open("file.txt") as f:

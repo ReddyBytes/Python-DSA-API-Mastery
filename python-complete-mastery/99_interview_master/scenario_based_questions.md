@@ -172,7 +172,7 @@ Solution:
 - Reduce shared state
 - Use multiprocessing if CPU-bound
 
-Explain GIL if needed.
+Explain [GIL](../13_concurrency/theory.md#-chapter-2-the-gil--pythons-most-misunderstood-feature) if needed.
 
 ---
 

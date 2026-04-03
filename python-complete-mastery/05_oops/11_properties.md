@@ -264,7 +264,7 @@ print(analyzer.word_count)   # Just the count — no loading (cached!)
 `@property` is actually a **descriptor** — a class that implements `__get__`, `__set__`, `__delete__`.
 
 ```python
-# The @property decorator is roughly equivalent to:
+# The @property [decorator](../10_decorators/theory.md) is roughly equivalent to:
 class property:
     def __init__(self, fget=None, fset=None, fdel=None):
         self.fget = fget

@@ -341,7 +341,7 @@ print(settings.max_tokens)      # int, auto-cast from "4096"
 
 **Gotcha:** If `openai_api_key` is not in `.env` or environment, pydantic raises `ValidationError` at startup — fast fail.
 
-**Gotcha:** Use `@lru_cache` to avoid re-reading `.env` on every call.
+**Gotcha:** Use [`@lru_cache`](../04_functions/theory.md#functoolslru_cache--memoization-made-easy) to avoid re-reading `.env` on every call.
 
 ---
 

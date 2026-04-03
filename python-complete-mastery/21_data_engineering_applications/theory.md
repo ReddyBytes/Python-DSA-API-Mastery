@@ -34,6 +34,22 @@ Python is heavily used in:
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+ETL vs ELT · Batch vs streaming · Memory-efficient processing (generators) · Idempotency · Checkpointing · Retry with backoff
+
+**Should Learn** — Important for real projects, comes up regularly:
+Kafka basics (producers, consumers, partitions) · Schema validation · Data deduplication · Monitoring pipelines
+
+**Good to Know** — Useful in specific situations:
+Change Data Capture (CDC) · Stream windowing · Exactly-once semantics · Schema evolution (Avro/Protobuf)
+
+**Reference** — Know it exists, look up when needed:
+OLAP vs OLTP · Slowly Changing Dimensions · Data lineage tools · Differential privacy · GDPR compliance in pipelines
+
+---
+
 # 🧠 1️⃣ What Is Data Engineering?
 
 Data engineering means:
@@ -131,7 +147,7 @@ Memory efficient.
 
 ---
 
-## 🔹 Chunk Processing
+## 🔹 Chunk Processing (uses [walrus operator `:=`](../02_control_flow/theory.md#-while-loop))
 
 ```python
 def read_in_chunks(file, size=1024):
@@ -228,7 +244,7 @@ Large-scale ETL must consider:
 
 ---
 
-## 🔹 Use Generators
+## 🔹 Use [Generators](../11_generators_iterators/theory.md#why-generators-are-lazy--the-memory-story)
 
 Instead of:
 

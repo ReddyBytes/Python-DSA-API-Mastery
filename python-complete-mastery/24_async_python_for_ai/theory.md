@@ -54,6 +54,22 @@ This module covers both: concurrency patterns for scale, and streaming patterns 
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`async def` / `await` · `asyncio.gather` · `asyncio.create_task` · Event loop basics · When to use async vs threads
+
+**Should Learn** — Important for real projects, comes up regularly:
+`asyncio.Semaphore` for rate limiting · `asyncio.Queue` · Task cancellation (`task.cancel()`) · `async with` / `async for` · `asyncio.timeout()`
+
+**Good to Know** — Useful in specific situations:
+`asyncio.TaskGroup` (Python 3.11+) · `asyncio.shield()` · Async generators · `aiofiles` · Debugging async code
+
+**Reference** — Know it exists, look up when needed:
+Event loop policies · `asyncio.Barrier` · Multiple event loops · Greenlets vs asyncio
+
+---
+
 ## 1️⃣ Quick Recap — async/await in 60 Seconds
 
 You covered asyncio fundamentals in module 13. Here is the core you need to carry into this module:
@@ -142,13 +158,13 @@ For AI services, asyncio is the standard choice.
 
 ---
 
-## 3️⃣ Streaming LLM Responses — Async Generators
+## 3️⃣ Streaming LLM Responses — [Async Generators](../11_generators_iterators/theory.md#-chapter-12-async-generators-python-36)
 
 This is the feature that makes ChatGPT feel responsive. The model generates tokens one at a time, and instead of buffering them all, the API sends each token immediately.
 
 ### What is an async generator?
 
-A regular generator uses `yield` to produce values lazily:
+A regular [generator](../11_generators_iterators/theory.md#-chapter-3-generator-functions--yield) uses `yield` to produce values lazily:
 
 ```python
 def count_up(n):

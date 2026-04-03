@@ -36,6 +36,22 @@ The same pattern appears with:
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`with` statement · `__enter__` / `__exit__` protocol · `@contextmanager` decorator · Resource cleanup guarantee
+
+**Should Learn** — Important for real projects, comes up regularly:
+`contextlib.ExitStack` · `contextlib.redirect_stdout` / `redirect_stderr` · `async with` / `__aenter__` / `__aexit__`
+
+**Good to Know** — Useful in specific situations:
+`contextlib.nullcontext` · `contextlib.asynccontextmanager` · `contextlib.suppress`
+
+**Reference** — Know it exists, look up when needed:
+`contextlib.AbstractContextManager` · `contextlib.redirect_stdin` · Context variables (`contextvars`)
+
+---
+
 ## 🔑 Chapter 1: The `with` Statement — What Actually Happens
 
 ```python
@@ -164,7 +180,7 @@ with suppress(FileNotFoundError):
 
 ## 🌿 Chapter 4: `@contextmanager` — Generator-Based Context Managers
 
-Writing a full class for every context manager is verbose. The `@contextmanager` decorator lets you use a generator function instead:
+Writing a full class for every context manager is verbose. The [`@contextmanager`](../10_decorators/theory.md) decorator lets you use a [generator function](../11_generators_iterators/theory.md#-chapter-3-generator-functions--yield) instead:
 
 ```python
 from contextlib import contextmanager

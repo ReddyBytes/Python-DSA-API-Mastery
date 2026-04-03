@@ -25,6 +25,22 @@ This chapter teaches you not just the syntax, but the *design thinking* behind i
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`import` statement · `from X import Y` · `__name__ == "__main__"` · Package structure (`__init__.py`) · `sys.modules`
+
+**Should Learn** — Important for real projects, comes up regularly:
+Relative imports · `__all__` · `importlib.import_module()` · Circular imports (and how to fix them)
+
+**Good to Know** — Useful in specific situations:
+`importlib.reload()` · Lazy imports · `__package__` attribute
+
+**Reference** — Know it exists, look up when needed:
+Import hooks · Namespace packages · `importlib.resources`
+
+---
+
 ## 🧠 Chapter 1 — What Is a Module, Really?
 
 A module is simultaneously **two things**:
@@ -64,7 +80,7 @@ print(dir(math_utils))           # ['PI', '__builtins__', '__doc__', '__file__',
 
 ## 🔍 Chapter 2 — The Import Machinery (What Really Happens)
 
-When Python sees `import math_utils`, here is the exact sequence:
+When Python sees `import math_utils`, here is the exact sequence (`sys.modules` is Python's [module-level cache](../01.1_memory_management/theory.md#-heap) — a dict on the heap that lives for the entire process):
 
 ```
 STEP 1: Check sys.modules (the cache)

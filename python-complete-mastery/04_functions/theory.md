@@ -21,6 +21,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`def`, return values · `*args` / `**kwargs` · Default arguments · Lambda functions · Closures · LEGB rule · `functools.lru_cache`
+
+**Should Learn** — Important for real projects, comes up regularly:
+Positional-only `/` and keyword-only `*` params · `functools.partial` · `functools.wraps` · Recursion + `sys.setrecursionlimit()`
+
+**Good to Know** — Useful in specific situations:
+`functools.reduce` · `inspect.signature()` · Docstring formats (Google/NumPy/Sphinx)
+
+**Reference** — Know it exists, look up when needed:
+Tail recursion (Python doesn't optimize it) · `functools.singledispatch` (see decorators module)
+
+---
+
 # 📖 Chapter 1 — The Problem Functions Solve
 
 ## 🎬 The Story

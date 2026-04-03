@@ -21,6 +21,22 @@ Now imagine Python has to store all of this. It can't treat all of them the same
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`list` · `dict` · `str` · `int` / `float` / `bool` · Comprehensions · `collections.defaultdict` · `collections.Counter` · `collections.deque`
+
+**Should Learn** — Important for real projects, comes up regularly:
+`tuple` · `set` · `bytes` / `bytearray` · `frozenset` · String methods (`.split`, `.join`, `.strip`, `.format`)
+
+**Good to Know** — Useful in specific situations:
+`collections.OrderedDict` · `str.encode()` / `bytes.decode()` · `slice()` objects · String validation methods (`.isdigit()`, `.isalpha()`)
+
+**Reference** — Know it exists, look up when needed:
+`complex` type · `memoryview` · Old `%` string formatting
+
+---
+
 ## 🗺️ The Big Picture — All Data Types at a Glance
 
 ```
@@ -1299,6 +1315,176 @@ You now know all of Python's core data types:
   dict    Key-value pairs, .get() is your friend, nested dicts
   None    Intentional emptiness, use 'is' to check
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+---
+
+## 🔢 `bytes` and `bytearray` — Binary Data
+
+When you work with files, network sockets, or encoding text, you deal with **raw binary data** — not strings.
+
+**`bytes`** — immutable sequence of integers (0–255)
+**`bytearray`** — mutable version of bytes
+
+```python
+# Creating bytes:
+b1 = b"hello"               # literal
+b2 = bytes([72, 101, 108])  # from list of ints
+b3 = "hello".encode("utf-8")  # from string
+
+# Creating bytearray (mutable):
+ba = bytearray(b"hello")
+ba[0] = 72                  # can modify
+ba.append(33)               # can append
+
+# Key operations:
+b = b"hello world"
+b[0]          # 104  (int, not char)
+b[0:5]        # b'hello'
+len(b)        # 11
+b.decode("utf-8")   # "hello world"  ← back to string
+
+# String ↔ bytes conversion (always specify encoding):
+text = "café"
+encoded = text.encode("utf-8")    # b'caf\xc3\xa9'
+decoded = encoded.decode("utf-8") # "café"
+```
+
+**When you need this:**
+
+```python
+# Reading binary files:
+with open("image.png", "rb") as f:   # "rb" = read binary
+    data = f.read()                   # bytes object
+
+# Network sockets:
+sock.send(b"GET / HTTP/1.1\r\n")     # must be bytes, not str
+
+# Checking file headers (magic bytes):
+with open("file", "rb") as f:
+    header = f.read(4)
+    if header == b"\x89PNG":
+        print("This is a PNG file")
+```
+
+**`bytes` vs `str` — the key difference:**
+
+```python
+type(b"hello")   # <class 'bytes'>
+type("hello")    # <class 'str'>
+
+# You cannot mix them:
+b"hello" + " world"    # TypeError — must use bytes + bytes
+b"hello" + b" world"   # b'hello world' ✓
+```
+
+---
+
+## 🗂️ `collections` Module — Smarter Data Structures
+
+Python's `collections` module gives you specialized containers that solve common problems better than plain dicts and lists.
+
+### `defaultdict` — Dictionary That Never Raises KeyError
+
+```python
+from collections import defaultdict
+
+# Regular dict — KeyError if key missing:
+counts = {}
+counts["apple"] += 1    # KeyError: 'apple'
+
+# defaultdict — creates default value automatically:
+counts = defaultdict(int)   # default value: 0
+counts["apple"] += 1        # works — starts at 0
+counts["apple"] += 1
+print(counts["apple"])      # 2
+print(counts["banana"])     # 0 — created automatically
+
+# Group items by key:
+from collections import defaultdict
+groups = defaultdict(list)
+for item in ["a", "b", "a", "c", "b", "a"]:
+    groups[item].append(item)
+# defaultdict(<class 'list'>, {'a': ['a', 'a', 'a'], 'b': ['b', 'b'], 'c': ['c']})
+```
+
+### `Counter` — Frequency Counting
+
+```python
+from collections import Counter
+
+# Count occurrences in one line:
+words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
+count = Counter(words)
+# Counter({'apple': 3, 'banana': 2, 'cherry': 1})
+
+count["apple"]      # 3
+count["missing"]    # 0  ← no KeyError (like defaultdict)
+count.most_common(2)  # [('apple', 3), ('banana', 2)]
+
+# Counter arithmetic:
+c1 = Counter(a=3, b=2)
+c2 = Counter(a=1, b=4)
+c1 + c2   # Counter({'b': 6, 'a': 4})
+c1 - c2   # Counter({'a': 2})  ← only positive counts kept
+
+# Count characters in a string:
+Counter("mississippi")
+# Counter({'s': 4, 'i': 4, 'p': 2, 'm': 1})
+```
+
+### `deque` — Double-Ended Queue
+
+A regular list is slow (`O(n)`) when inserting/removing at the front.
+`deque` is `O(1)` at BOTH ends.
+
+```python
+from collections import deque
+
+d = deque([1, 2, 3])
+d.append(4)        # add to right:  [1, 2, 3, 4]
+d.appendleft(0)    # add to left:   [0, 1, 2, 3, 4]
+d.pop()            # remove right:  returns 4
+d.popleft()        # remove left:   returns 0
+
+# Fixed-size sliding window (maxlen):
+recent = deque(maxlen=3)
+for x in range(6):
+    recent.append(x)
+    print(list(recent))
+# [0]
+# [0, 1]
+# [0, 1, 2]
+# [1, 2, 3]  ← oldest dropped automatically
+# [2, 3, 4]
+# [3, 4, 5]
+```
+
+**Use `deque` when:** implementing queues, BFS algorithms, sliding windows, or any pattern needing fast front-insertion.
+
+### `frozenset` — Immutable Set
+
+```python
+# frozenset is hashable — can be used as dict key or in another set:
+fs = frozenset([1, 2, 3])
+fs.add(4)   # AttributeError — immutable
+
+# Use as dict key (regular set can't do this):
+cache = {}
+cache[frozenset([1, 2, 3])] = "result"
+
+# Use as set of sets:
+seen = set()
+seen.add(frozenset([1, 2]))   # frozenset is hashable, set is not
+```
+
+**Quick reference — when to use each:**
+
+```
+defaultdict  → grouping, counting, graph adjacency lists
+Counter      → frequency analysis, most common items, bag operations
+deque        → queues, BFS/DFS, sliding windows, recent-N items
+frozenset    → set as dict key, immutable set membership
 ```
 
 ---

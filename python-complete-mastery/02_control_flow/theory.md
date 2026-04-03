@@ -11,6 +11,22 @@ This chapter builds decision-making ability into your programs.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`if`/`elif`/`else` · `for` loop · `while` loop · `break` / `continue` / `else` on loops · List/dict/set comprehensions
+
+**Should Learn** — Important for real projects, comes up regularly:
+Walrus operator `:=` · `match`/`case` pattern matching · Generator expressions
+
+**Good to Know** — Useful in specific situations:
+Comprehension scoping rules · `reversed()` · Ternary expression
+
+**Reference** — Know it exists, look up when needed:
+`itertools` (covered in generators module)
+
+---
+
 # 🧠 Big Picture: What is Control Flow?
 
 Control Flow means:
@@ -238,6 +254,57 @@ Not replacement for all if-else logic.
 
 ---
 
+## 🔗 The Walrus Operator `:=` — Assignment Expression
+
+Python 3.8 introduced the **walrus operator** `:=` — officially called an **assignment expression**.
+
+It assigns a value AND returns it in a single expression.
+Without it, you sometimes compute a value twice:
+
+```python
+# Without walrus — compute len() twice:
+data = get_data()
+if len(data) > 10:
+    print(f"Large dataset: {len(data)} items")   # computed again!
+
+# With walrus — compute once, use in same expression:
+if (n := len(data)) > 10:
+    print(f"Large dataset: {n} items")           # n already assigned
+```
+
+**Where it genuinely helps:**
+
+```python
+# 1 — while loops reading chunks (classic pattern):
+import io
+f = io.BytesIO(b"hello world data")
+while chunk := f.read(4):          # assign + check in one step
+    process(chunk)
+
+# 2 — filtering with computed value (avoid double call):
+results = [y for x in data if (y := expensive(x)) > 0]
+
+# 3 — regex match + use:
+import re
+text = "Order: 12345"
+if m := re.search(r"\d+", text):
+    print(f"Found number: {m.group()}")   # m is already bound
+```
+
+**The rule:** Use walrus when you'd otherwise compute the same value twice.
+Don't use it just to be clever — if it makes code harder to read, use two lines.
+
+```python
+# Fine:
+while line := file.readline():
+    process(line)
+
+# Don't do this — hard to read:
+print(y := f(x), y)
+```
+
+---
+
 # 🔁 5. Loops (Repetition)
 
 Loops repeat code.
@@ -280,7 +347,7 @@ Used with:
 - strings
 - dictionaries
 - sets
-- generators
+- [generators](../11_generators_iterators/theory.md#-chapter-3-generator-functions--yield)
 
 ---
 
@@ -474,6 +541,44 @@ evens = [x for x in range(10) if x % 2 == 0]
 
 Readable when simple.
 Avoid very complex ones.
+
+---
+
+### Comprehension Scoping — Variables Don't Leak
+
+In Python 3, each comprehension has **its own scope**. The loop variable does not leak out.
+
+```python
+# In Python 3 — loop variable is LOCAL to the comprehension:
+squares = [x**2 for x in range(5)]
+print(x)   # NameError: name 'x' is not defined
+
+# Generator expressions — also isolated:
+gen = (x for x in range(5))
+print(x)   # NameError
+
+# Dict comprehension — same rule:
+mapping = {k: v for k, v in pairs}
+print(k)   # NameError
+```
+
+Contrast with a regular `for` loop — that DOES leak:
+
+```python
+for i in range(5):
+    pass
+print(i)   # 4 — the loop variable persists after a regular for loop
+```
+
+**Why this matters:**
+
+```python
+# Bug if you expected Python 2 behavior:
+result = [n for n in range(3)]
+# In Python 2, n would be 2 here — in Python 3, n doesn't exist
+# This change prevents subtle bugs where comprehension variables
+# accidentally shadow outer variables
+```
 
 ---
 

@@ -83,7 +83,7 @@ Custom equality logic.
 
 ---
 
-## Q: What is method resolution order (MRO)?
+## Q: What is method resolution order ([MRO](../05_oops/13_mro_and_super.md))?
 
 Strong answer:
 
@@ -125,7 +125,7 @@ Link to testing.
 
 ---
 
-## Q: Difference between threading and multiprocessing?
+## Q: Difference between [threading and multiprocessing](../13_concurrency/theory.md)?
 
 Threading:
 Shared memory, good for I/O-bound tasks.
@@ -133,11 +133,11 @@ Shared memory, good for I/O-bound tasks.
 Multiprocessing:
 Separate memory, good for CPU-bound tasks.
 
-Mention GIL.
+Mention [GIL](../13_concurrency/theory.md#-chapter-2-the-gil--pythons-most-misunderstood-feature).
 
 ---
 
-## Q: What is GIL?
+## Q: What is [GIL](../13_concurrency/theory.md)?
 
 Strong answer:
 
@@ -394,7 +394,7 @@ Professional tone matters.
 - Still thinking like beginner
 - Ignoring testing discipline
 - Ignoring performance measurement
-- Not understanding GIL
+- Not understanding [GIL](../13_concurrency/theory.md#-chapter-2-the-gil--pythons-most-misunderstood-feature)
 - Ignoring scalability
 - Not handling failures properly
 - Writing tightly coupled code

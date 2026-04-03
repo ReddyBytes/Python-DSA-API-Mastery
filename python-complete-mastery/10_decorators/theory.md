@@ -59,6 +59,22 @@ Two lines per function. The behavior is defined once, reused everywhere. That's 
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Basic decorator pattern · `@functools.wraps` · `functools.lru_cache` · Class decorators · Decorator factories (with arguments)
+
+**Should Learn** — Important for real projects, comes up regularly:
+`functools.cache` (Python 3.9+) · `functools.cached_property` · Stacked decorators · `@property` / `@classmethod` / `@staticmethod`
+
+**Good to Know** — Useful in specific situations:
+`functools.singledispatch` · `__wrapped__` and `inspect.unwrap()` · Decorator performance overhead
+
+**Reference** — Know it exists, look up when needed:
+`@decorator.decorator` (third-party) · Decorators that modify signatures (`wrapt`)
+
+---
+
 ## 📦 Chapter 1: Functions Are First-Class Objects
 
 Before decorators make sense, you need to deeply understand this:
@@ -106,7 +122,7 @@ print(triple(5))   # 15
 
 ## 🔒 Chapter 2: Closures — The Engine Inside Decorators
 
-A **closure** is a function that captures variables from its enclosing scope, even after that scope has finished executing.
+A **[closure](../04_functions/theory.md#closure-cell-internals--how-captured-variables-actually-work)** is a function that captures variables from its enclosing scope, even after that scope has finished executing.
 
 ```python
 def make_counter():
@@ -494,7 +510,7 @@ db2 = DatabaseConnection("postgres://...")   # (no output — returns cached ins
 print(db1 is db2)   # True
 ```
 
-**`@dataclass` is a built-in class decorator:**
+**`@dataclass` is a built-in class decorator** (deep dive: [05_oops → Dataclasses](../05_oops/14_dataclasses.md#-the-basics)):
 
 ```python
 from dataclasses import dataclass
@@ -516,7 +532,7 @@ print(o)   # Order(order_id=1, user_id=42, total=99.99, status='pending')
 
 Python ships three essential decorators for classes:
 
-### `@property` — Computed attributes with validation
+### [`@property`](../05_oops/11_properties.md#-what-property-actually-is) — Computed attributes with validation
 
 ```python
 class Temperature:
@@ -546,7 +562,7 @@ print(t.fahrenheit)   # 77.0
 t.celsius = -300      # ValueError: Temperature -300°C below absolute zero
 ```
 
-### `@classmethod` — Factory constructors
+### [`@classmethod`](../05_oops/09_class_instance_static_methods.md#2️⃣-class-methods--classmethod-and-cls) — Factory constructors
 
 ```python
 class Order:
@@ -571,7 +587,7 @@ class Order:
 order = Order.from_dict({"id": 1, "items": [{"price": 9.99}]})
 ```
 
-### `@staticmethod` — Utility functions on the class
+### [`@staticmethod`](../05_oops/09_class_instance_static_methods.md#3️⃣-static-methods--staticmethod) — Utility functions on the class
 
 ```python
 class Order:
@@ -739,6 +755,173 @@ def ttl_cache(ttl_seconds=60):
 @ttl_cache(ttl_seconds=300)   # cache for 5 minutes
 def get_config(key):
     return config_service.fetch(key)
+```
+
+---
+
+### `functools.cache` — Simpler Unlimited Cache (Python 3.9+)
+
+`functools.cache` is `lru_cache(maxsize=None)` with a cleaner name.
+No size limit — cached forever until the process exits.
+
+```python
+from functools import cache
+
+@cache
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+fibonacci(100)   # instant — each sub-result computed once, cached forever
+
+# Check cache stats:
+fibonacci.cache_info()    # CacheInfo(hits=..., misses=..., maxsize=None, currsize=...)
+fibonacci.cache_clear()   # clear the cache
+```
+
+**`cache` vs `lru_cache`:**
+
+```
+@cache                           @lru_cache(maxsize=128)
+─────────────────────────────── ───────────────────────────────────
+No size limit                   Evicts oldest when maxsize reached
+Uses less memory overhead       Slightly more memory per entry
+Simpler syntax                  More control
+Use when: unlimited is fine     Use when: memory budget matters
+```
+
+---
+
+### `functools.cached_property` — Compute Once, Cache on Instance
+
+A regular `@property` re-runs its function every time you access it.
+`@cached_property` runs once, then stores the result on the instance itself.
+
+```python
+from functools import cached_property
+import math
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    @cached_property
+    def area(self):
+        print("computing area...")
+        return math.pi * self.radius ** 2
+
+    @cached_property
+    def circumference(self):
+        return 2 * math.pi * self.radius
+
+c = Circle(5)
+print(c.area)   # "computing area..." then 78.53...
+print(c.area)   # no print — returns cached value from c.__dict__
+print(c.area)   # same — always cached after first access
+```
+
+**How it works:**
+On first access, `cached_property` calls the function, then stores the result directly in `instance.__dict__` under the same name. Since instance `__dict__` takes priority over descriptors for non-data descriptors, subsequent accesses bypass the descriptor entirely — just a dict lookup.
+
+```python
+c = Circle(5)
+c.area          # computes and stores in c.__dict__['area']
+c.__dict__       # {'radius': 5, 'area': 78.53...}  ← value is there
+```
+
+**When to use it:**
+Use `@cached_property` when:
+- The computation is expensive (DB query, complex math, parsing)
+- The input (object attributes) won't change after creation
+- You want lazy evaluation — don't compute until needed
+
+**Note:** `cached_property` is NOT thread-safe. For concurrent access, use `@property` with explicit locking or `lru_cache`.
+
+---
+
+### `functools.singledispatch` — Function Overloading by Type
+
+In Python you can't define two functions with the same name and different types.
+`singledispatch` solves this — it routes to different implementations based on the type of the first argument.
+
+```python
+from functools import singledispatch
+
+@singledispatch
+def process(value):
+    """Default — handles anything not specifically registered."""
+    print(f"Processing unknown type: {type(value).__name__}")
+
+@process.register(int)
+def _(value):
+    print(f"Integer: {value * 2}")
+
+@process.register(str)
+def _(value):
+    print(f"String: {value.upper()}")
+
+@process.register(list)
+def _(value):
+    print(f"List with {len(value)} items")
+
+process(42)           # Integer: 84
+process("hello")      # String: HELLO
+process([1, 2, 3])    # List with 3 items
+process(3.14)         # Processing unknown type: float
+```
+
+**Register multiple types at once (Python 3.7+):**
+
+```python
+@process.register(float)
+@process.register(complex)
+def _(value):
+    print(f"Numeric: {value}")
+```
+
+**Real use case — serialization:**
+
+```python
+from functools import singledispatch
+import json
+from datetime import datetime, date
+from decimal import Decimal
+
+@singledispatch
+def to_json_value(obj):
+    raise TypeError(f"Cannot serialize {type(obj)}")
+
+@to_json_value.register(datetime)
+def _(obj):
+    return obj.isoformat()
+
+@to_json_value.register(Decimal)
+def _(obj):
+    return float(obj)
+
+@to_json_value.register(date)
+def _(obj):
+    return obj.isoformat()
+```
+
+**`singledispatchmethod`** — for methods on a class (Python 3.8+):
+
+```python
+from functools import singledispatchmethod
+
+class Processor:
+    @singledispatchmethod
+    def process(self, value):
+        raise NotImplementedError
+
+    @process.register(int)
+    def _(self, value):
+        return value * 2
+
+    @process.register(str)
+    def _(self, value):
+        return value.upper()
 ```
 
 ### Input Validation

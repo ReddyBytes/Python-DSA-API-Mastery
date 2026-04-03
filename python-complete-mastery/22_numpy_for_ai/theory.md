@@ -10,6 +10,22 @@ This module teaches you NumPy from scratch — not as a math library, but as the
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Array creation · Indexing and slicing · Broadcasting · Vectorized operations · `np.array` dtype · `reshape` / `flatten`
+
+**Should Learn** — Important for real projects, comes up regularly:
+Linear algebra (`np.linalg`) · `np.random` · Boolean indexing · Fancy indexing · `np.where` / `np.select` · Memory layout (C vs F order)
+
+**Good to Know** — Useful in specific situations:
+`np.einsum` · Stride tricks · Masked arrays · `np.memmap` for large files · Structured arrays
+
+**Reference** — Know it exists, look up when needed:
+FFT (`np.fft`) · Custom ufuncs · `nditer` · Array interface protocol · `numexpr`
+
+---
+
 ## 1️⃣ What is NumPy and Why AI Needs It
 
 NumPy stands for Numerical Python.
