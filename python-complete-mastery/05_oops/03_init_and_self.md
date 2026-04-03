@@ -165,6 +165,108 @@ print(id(s1) == id(s2))    # True
 
 ---
 
+## 🏗️ When and How to Override `__new__`
+
+Most developers never override `__new__`. But three real-world patterns require it.
+
+---
+
+### Pattern 1: Singleton — Only One Instance Ever
+
+The simple Singleton above works, but in practice `__init__` is called every time you "create" an instance — which re-initializes the already-existing object. Guard against that:
+
+```python
+class DatabaseConnection:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)  # create the ONE instance
+        return cls._instance                       # always return the same one
+
+    def __init__(self, host, port):
+        # __init__ is called every time — guard against re-initialization
+        if not hasattr(self, '_initialized'):
+            self.host = host
+            self.port = port
+            self._initialized = True
+
+db1 = DatabaseConnection("localhost", 5432)
+db2 = DatabaseConnection("otherhost", 5433)
+
+print(db1 is db2)       # True — same object!
+print(db1.host)         # "localhost"  (first init won)
+```
+
+---
+
+### Pattern 2: Immutable Type Subclass
+
+You **cannot** set attributes in `__init__` on immutable types like `int` and `tuple` — the object is already sealed by the time `__init__` runs. Use `__new__` instead.
+
+```python
+class PositiveInt(int):
+    def __new__(cls, value):
+        if value <= 0:
+            raise ValueError(f"PositiveInt requires value > 0, got {value}")
+        return super().__new__(cls, value)  # create the int with the validated value
+
+x = PositiveInt(5)
+print(x + 3)        # 8 — behaves exactly like int
+print(type(x))      # <class 'PositiveInt'>
+
+y = PositiveInt(-1) # ValueError: PositiveInt requires value > 0
+```
+
+The key: `super().__new__(cls, value)` passes `value` to `int.__new__`, which sets the immutable value. You cannot do this in `__init__` — by then `int` is already sealed.
+
+---
+
+### The `__new__` → `__init__` Sequence
+
+```
+MyClass(arg1, arg2)
+    │
+    ├─ Step 1: MyClass.__new__(MyClass, arg1, arg2)
+    │          → allocates memory
+    │          → returns a new object (usually instance of MyClass)
+    │
+    └─ Step 2: if returned object is instance of MyClass:
+               MyClass.__init__(new_object, arg1, arg2)
+               → initializes attributes on the object
+```
+
+```python
+class TrackedCreation:
+    def __new__(cls, *args, **kwargs):
+        print(f"__new__ called — allocating {cls.__name__}")
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, name):
+        print(f"__init__ called — initializing with name={name}")
+        self.name = name
+
+t = TrackedCreation("test")
+# __new__ called — allocating TrackedCreation
+# __init__ called — initializing with name=test
+```
+
+---
+
+### When to Use Each
+
+```
+__init__:  Almost always. Sets instance attributes. Called after object exists.
+__new__:   Rarely. When you need to control object creation itself:
+           • Singleton pattern
+           • Subclassing immutable types (int, str, float, tuple, frozenset)
+           • Custom memory allocation or object pooling
+           • Factory patterns that return different types
+```
+
+---
+
 ## ✅ Validation Inside `__init__`
 
 `__init__` is the right place to validate input.

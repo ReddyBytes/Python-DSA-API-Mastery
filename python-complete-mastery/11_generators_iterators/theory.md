@@ -293,6 +293,96 @@ Generator expression:
 
 ---
 
+## Why Generators Are Lazy — The Memory Story
+
+Lazy evaluation means: **compute only when asked, not all at once**.
+
+A list evaluates everything immediately and stores all values in memory.
+A generator evaluates one item at a time and stores nothing except its suspended frame.
+
+```
+EAGER (list):                        LAZY (generator):
+
+range_list = [0,1,2,...,999999]      range_gen = (x for x in range(1_000_000))
+
+Memory:                              Memory:
+┌─────────────────────────────┐      ┌────────────────────────────┐
+│ [0][1][2][3]...[999999]     │      │ code pointer: line 1       │
+│  8 MB in RAM                │      │ local: x = (current value) │
+│  all at once                │      │ ~200 bytes                 │
+└─────────────────────────────┘      └────────────────────────────┘
+                                     generates next value on demand
+```
+
+**Concrete numbers:**
+
+```python
+import sys
+
+# Eager: all 1 million numbers in RAM immediately
+eager = [x for x in range(1_000_000)]
+print(sys.getsizeof(eager))      # ~8,056,952 bytes ≈ 8 MB
+
+# Lazy: same sequence, but 200 bytes total
+lazy = (x for x in range(1_000_000))
+print(sys.getsizeof(lazy))       # ~112 bytes
+```
+
+**Why it matters in production:**
+
+```python
+# Problem: log file is 10 GB. Read all lines into memory?
+lines = open("server.log").readlines()   # ← loads 10 GB into RAM. OOM crash.
+
+# Solution: generator — process one line at a time
+def read_lines(path):
+    with open(path) as f:
+        for line in f:
+            yield line               # yields one line, then suspends
+
+for line in read_lines("server.log"):  # never more than one line in memory
+    if "ERROR" in line:
+        process(line)
+```
+
+---
+
+## Generator vs Iterator vs List — When to Use Each
+
+```
+┌────────────────┬──────────────────────────────┬──────────────────────────┐
+│                │  Use when                    │  Avoid when              │
+├────────────────┼──────────────────────────────┼──────────────────────────┤
+│  list          │  Need random access (by idx) │  Large datasets          │
+│                │  Need to iterate multiple    │  Memory is constrained   │
+│                │  times                       │                          │
+│                │  Need len(), slicing         │                          │
+├────────────────┼──────────────────────────────┼──────────────────────────┤
+│  generator     │  Large/infinite sequences    │  Need random access      │
+│  (lazy)        │  One-pass processing         │  Need multiple passes    │
+│                │  Stream processing           │  Need len()              │
+│                │  Memory-constrained systems  │                          │
+├────────────────┼──────────────────────────────┼──────────────────────────┤
+│  iterator      │  Custom iteration logic      │  When generator syntax   │
+│  (class-based) │  Stateful with multiple      │  would be simpler        │
+│                │  methods                     │                          │
+└────────────────┴──────────────────────────────┴──────────────────────────┘
+```
+
+**The one-pass caveat — a common bug:**
+
+```python
+gen = (x * 2 for x in range(5))
+
+first_pass  = list(gen)    # [0, 2, 4, 6, 8]
+second_pass = list(gen)    # []  ← generator is exhausted!
+
+# Fix: if you need multiple passes, convert to list first
+data = list(gen_function())  # materialize it once
+```
+
+---
+
 ## ⚡ Chapter 5: Generator Expressions
 
 The generator equivalent of list comprehensions:

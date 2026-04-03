@@ -251,6 +251,140 @@ Ask this for every problem before writing code:
 
 <img src="./assets/divider.svg" width="100%"/>
 
+## Pattern Recognition Index — Which Tool for Which Problem?
+
+The hardest part of DSA interviews is not knowing the algorithms — it's knowing which one to reach for. Use this index to map problem characteristics to techniques.
+
+---
+
+### By Problem Signal
+
+```
+Signal in the problem                          → Technique
+──────────────────────────────────────────────────────────────────────────────
+"Find max/min subarray of size k"              → Sliding Window (fixed)
+"Find smallest subarray with sum ≥ X"          → Sliding Window (variable)
+"Pair with target sum in sorted array"         → Two Pointers (opposite ends)
+"Detect cycle in linked list"                  → Two Pointers (slow/fast)
+"Find element in sorted array"                 → Binary Search
+"Minimize/maximize a value, answer is monotone"→ Binary Search on Answer
+"Kth largest/smallest element"                 → Heap (min/max)
+"Top K frequent elements"                      → Heap + Hash Map
+"Subsets / combinations / permutations"        → Backtracking
+"Optimal substructure + overlapping subproblems"→ Dynamic Programming
+"Make locally greedy choices at each step"     → Greedy
+"Prefix sums, frequency counts"                → Hash Map
+"Connected components, shortest path"          → Graph BFS/DFS
+"Task ordering, dependency resolution"         → Topological Sort
+"Group elements by connectivity"               → Union-Find (DSU)
+"Range queries + point updates"                → Segment Tree
+"Autocomplete, prefix matching"                → Trie
+"Balanced parentheses, next greater element"   → Stack
+"BFS level order, process in order received"   → Queue
+```
+
+---
+
+### Sliding Window vs Two Pointers vs Binary Search
+
+These three are the most commonly confused. Here's the boundary:
+
+```
+Sliding Window:
+  • Contiguous subarray / substring
+  • Window expands right, shrinks left
+  • Fixed or variable size constraint
+  • "Maximum sum subarray of size k" → fixed
+  • "Longest substring without repeating chars" → variable
+
+Two Pointers:
+  • Sorted array, or linked list cycle detection
+  • Pointers from opposite ends, or fast/slow
+  • "Two sum in sorted array" → opposite ends
+  • "Cycle detection" → fast/slow
+
+Binary Search:
+  • Sorted array → O(log n) lookup
+  • "Search on answer" → when the answer space is monotone
+  • "Minimum capacity to ship packages in D days" → binary search on capacity
+```
+
+---
+
+### Backtracking vs Dynamic Programming
+
+```
+Backtracking:
+  • Enumerate all solutions / combinations
+  • No reuse of subproblem results
+  • Prune invalid branches early
+  • When: count/find all permutations, N-Queens, Sudoku solver
+
+Dynamic Programming:
+  • Count optimal solutions (not enumerate all)
+  • Overlapping subproblems (same sub-computation reused)
+  • When: "how many ways", "maximum value", "minimum cost"
+
+Boundary question: "Is there overlap in subproblems?"
+  Yes → DP (memoize/tabulate)
+  No  → Backtracking (pure enumeration)
+```
+
+---
+
+### Graph Problem Decision Tree
+
+```
+START: What does the problem involve?
+         │
+         ├─ Shortest path?
+         │       ├─ No negative weights → Dijkstra  O(E log V)
+         │       ├─ Negative weights, single source → Bellman-Ford  O(VE)
+         │       └─ All-pairs shortest path → Floyd-Warshall  O(V³)
+         │
+         ├─ Connected components or grouping?
+         │       ├─ Static graph → BFS/DFS
+         │       └─ Dynamic union/find queries → Union-Find (DSU)
+         │
+         ├─ Task ordering with dependencies?
+         │       └─ Topological Sort (Kahn's or DFS)
+         │
+         ├─ Minimum cost to connect all nodes?
+         │       └─ MST: Kruskal (sparse) or Prim (dense)
+         │
+         └─ Cycle detection?
+                 ├─ Undirected graph → BFS/DFS or Union-Find
+                 └─ Directed graph → DFS with visited states (3-color)
+```
+
+---
+
+### Time Complexity Quick Reference
+
+```
+┌──────────────────────────────┬────────────────┬────────────────────────────────┐
+│  Algorithm                   │  Time          │  Space                         │
+├──────────────────────────────┼────────────────┼────────────────────────────────┤
+│  Binary Search               │  O(log n)      │  O(1)                          │
+│  Two Pointers                │  O(n)          │  O(1)                          │
+│  Sliding Window              │  O(n)          │  O(k) window state             │
+│  BFS / DFS                   │  O(V + E)      │  O(V)                          │
+│  Topological Sort            │  O(V + E)      │  O(V)                          │
+│  Dijkstra                    │  O(E log V)    │  O(V)                          │
+│  Bellman-Ford                │  O(V × E)      │  O(V)                          │
+│  Floyd-Warshall              │  O(V³)         │  O(V²)                         │
+│  Kruskal MST                 │  O(E log E)    │  O(V)                          │
+│  Union-Find (path compress)  │  O(α(n)) ≈ O(1)│  O(n)                          │
+│  Heap push/pop               │  O(log n)      │  O(n)                          │
+│  Trie insert/search          │  O(L)          │  O(L × alphabet)               │
+│  Segment Tree query/update   │  O(log n)      │  O(n)                          │
+└──────────────────────────────┴────────────────┴────────────────────────────────┘
+```
+
+---
+
+<img src="./assets/divider.svg" width="100%"/>
+
 <div align="center">
 
 ## 🚀 Start Here

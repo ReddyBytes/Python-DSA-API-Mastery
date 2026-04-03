@@ -210,6 +210,97 @@ else:
 
 ---
 
+## `finally` Edge Cases — Tricky Behavior
+
+`finally` always runs. But some edge cases surprise even experienced developers.
+
+---
+
+### Edge Case 1: `return` Inside `finally` Swallows Exceptions
+
+```python
+def dangerous():
+    try:
+        raise ValueError("something bad")
+    finally:
+        return 42   # ← this silently discards the ValueError!
+
+result = dangerous()
+print(result)    # 42 — no exception raised, no error, nothing
+# The ValueError was SWALLOWED by the return in finally
+```
+
+This is a silent bug. Never `return` from `finally` unless you intend to suppress exceptions.
+
+---
+
+### Edge Case 2: `return` in `try` vs `return` in `finally`
+
+```python
+def which_return():
+    try:
+        return "from try"
+    finally:
+        return "from finally"   # this wins!
+
+print(which_return())   # "from finally"
+# finally's return OVERRIDES try's return
+```
+
+The `finally` block always executes — even when `try` hits a `return`.
+`finally`'s `return` replaces the one from `try`.
+
+---
+
+### Edge Case 3: `continue` and `break` in `finally`
+
+```python
+for i in range(3):
+    try:
+        if i == 1:
+            raise ValueError()
+    except ValueError:
+        print(f"caught at i={i}")
+        break               # ← try to break
+    finally:
+        if i == 1:
+            continue        # ← finally's continue OVERRIDES the break!
+
+# Output: caught at i=1
+# The loop CONTINUES because finally's continue beats except's break
+```
+
+---
+
+### Edge Case 4: `finally` Runs Even with `sys.exit()`
+
+```python
+import sys
+
+def cleanup():
+    try:
+        sys.exit(1)
+    finally:
+        print("cleanup runs even on sys.exit!")
+        # ← this WILL print before the program exits
+
+cleanup()
+```
+
+The only way to prevent `finally` from running: `os._exit()` (hard kill, bypasses Python runtime).
+
+---
+
+### The Safe Rule
+
+```
+✓ Use finally for: cleanup, closing files, releasing locks — side effects
+✗ Avoid in finally: return, raise, break, continue
+  → They silently override the exception/flow control from try/except
+```
+
+---
+
 ## 🔧 Chapter 4 — Handling Exceptions: Patterns and Pitfalls
 
 ### Catching the Exception Object
@@ -1005,6 +1096,78 @@ READING STRATEGY:
   2. The line just above = where in YOUR code it happened
   3. "The above exception was the direct cause of..." = chained exception
   4. Top of traceback = the entry point (where the call chain started)
+```
+
+---
+
+## Exception Propagation — How Exceptions Travel Up the Call Stack
+
+When an exception is raised, Python unwinds the call stack frame by frame, looking for a handler (`try/except`). If none is found, the program crashes with a traceback.
+
+```
+def level3():
+    raise ValueError("something went wrong")   # ← exception born here
+
+def level2():
+    level3()    # no try/except — exception propagates UP
+
+def level1():
+    level2()    # no try/except — exception propagates UP
+
+def main():
+    try:
+        level1()           # ← exception caught here
+    except ValueError as e:
+        print(f"Caught: {e}")
+
+main()
+```
+
+Stack unwinding visualization:
+
+```
+CALL STACK (before exception):
+
+  ┌──────────────────────────────────────────────┐  ← top
+  │  level3() frame                              │
+  │    raise ValueError("something went wrong")  │
+  │    → EXCEPTION BORN HERE                    │
+  ├──────────────────────────────────────────────┤
+  │  level2() frame                              │
+  │    no try/except → PROPAGATES UP            │
+  ├──────────────────────────────────────────────┤
+  │  level1() frame                              │
+  │    no try/except → PROPAGATES UP            │
+  ├──────────────────────────────────────────────┤
+  │  main() frame                                │
+  │    try: level1()  ← HANDLER FOUND HERE      │
+  │    except ValueError → CAUGHT               │
+  └──────────────────────────────────────────────┘
+
+UNWINDING ORDER:
+  1. level3() frame destroyed  (no handler)
+  2. level2() frame destroyed  (no handler)
+  3. level1() frame destroyed  (no handler)
+  4. main() try/except catches it ✓
+```
+
+Each frame is **destroyed** as the exception propagates through it (unless that frame has a `try/except` that catches it). If the exception reaches the bottom of the stack without being caught, Python prints the traceback and exits.
+
+**What the traceback shows:**
+
+The traceback is the unwind path in reverse — bottom (closest to the error) to top (entry point). That's why you read tracebacks from bottom to top.
+
+```
+Traceback (most recent call last):    ← this means BOTTOM is most recent
+  File "app.py", line 15, in main     ← outermost (first call, farthest from error)
+    level1()
+  File "app.py", line 10, in level1
+    level2()
+  File "app.py", line 6, in level2
+    level3()
+  File "app.py", line 2, in level3
+    raise ValueError("something went wrong")   ← innermost (closest to error)
+ValueError: something went wrong
 ```
 
 ---
