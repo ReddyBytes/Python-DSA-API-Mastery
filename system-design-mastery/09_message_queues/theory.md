@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+why queues (decoupling/buffering) · Kafka vs RabbitMQ selection · pub-sub vs point-to-point · delivery semantics (at-least-once/exactly-once)
+
+**Should Learn** — Important for real projects, comes up regularly:
+consumer groups · dead letter queues · consumer lag monitoring · partition strategy
+
+**Good to Know** — Useful in specific situations, not always tested:
+topic compaction · message ordering guarantees · backpressure strategies
+
+**Reference** — Know it exists, look up syntax when needed:
+offset management · exactly-once complexity · message retention policies
+
+---
+
 ## 📋 Contents
 
 ```

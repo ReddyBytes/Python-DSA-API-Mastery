@@ -59,6 +59,22 @@ problem in the early 2010s. Their answer was gRPC.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Protocol Buffers (.proto syntax/field numbers) · 4 communication modes (unary/server-streaming/client-streaming/bidirectional) · when gRPC vs REST
+
+**Should Learn** — Important for real projects, comes up regularly:
+code generation workflow · gRPC interceptors (auth/logging/retry) · gRPC vs REST comparison
+
+**Good to Know** — Useful in specific situations, not always tested:
+backward compatibility in .proto files · Python gRPC server/client setup
+
+**Reference** — Know it exists, look up syntax when needed:
+gRPC health check protocol · gRPC gateway · load balancing strategies
+
+---
+
 ## What gRPC Is
 
 gRPC is a high-performance, open-source remote procedure call framework originally
@@ -562,6 +578,113 @@ gRPC makes a specific trade: it gives up human-readability and browser-native su
 in exchange for speed, type safety, and streaming power. That trade is worth it
 in the right context — and knowing that context is what separates engineers who
 cargo-cult technology from those who choose it deliberately.
+
+---
+
+## 🔗 gRPC Interceptors — Cross-Cutting Concerns
+
+> Just as FastAPI middleware wraps every HTTP request, gRPC interceptors wrap every RPC call — the right place to add authentication, logging, metrics, and retry logic without touching each handler.
+
+**gRPC interceptors** (called **middleware** in HTTP terms) run before and after every RPC call on both server and client sides. They're the standard pattern for authentication, structured logging, request ID injection, and metrics collection.
+
+### Server-side interceptor
+
+```python
+import grpc
+import time
+import logging
+
+class LoggingInterceptor(grpc.ServerInterceptor):
+    """Log every incoming RPC with timing."""
+
+    def intercept_service(self, continuation, handler_call_details):
+        method = handler_call_details.method   # ← "/package.Service/Method"
+
+        def intercept_call(request, context):
+            start = time.time()
+            try:
+                response = continuation(handler_call_details)(request, context)
+                duration_ms = (time.time() - start) * 1000
+                logging.info(f"gRPC {method} OK  {duration_ms:.1f}ms")
+                return response
+            except Exception as e:
+                duration_ms = (time.time() - start) * 1000
+                logging.error(f"gRPC {method} ERR {duration_ms:.1f}ms — {e}")
+                raise
+
+        return grpc.unary_unary_rpc_method_handler(intercept_call)
+
+class AuthInterceptor(grpc.ServerInterceptor):
+    """Validate bearer token on every RPC."""
+
+    SKIP_AUTH = {"/grpc.health.v1.Health/Check"}   # ← health checks skip auth
+
+    def intercept_service(self, continuation, handler_call_details):
+        method = handler_call_details.method
+        if method in self.SKIP_AUTH:
+            return continuation(handler_call_details)   # ← pass through
+
+        def check_auth(request, context):
+            metadata = dict(context.invocation_metadata())
+            token = metadata.get("authorization", "").removeprefix("Bearer ")
+
+            if not validate_token(token):
+                context.abort(grpc.StatusCode.UNAUTHENTICATED, "Invalid token")
+
+            return continuation(handler_call_details)(request, context)
+
+        return grpc.unary_unary_rpc_method_handler(check_auth)
+
+# Register interceptors when creating server:
+server = grpc.server(
+    futures.ThreadPoolExecutor(max_workers=10),
+    interceptors=[AuthInterceptor(), LoggingInterceptor()]   # ← order matters
+)
+```
+
+### Client-side interceptor
+
+```python
+class RetryInterceptor(grpc.UnaryUnaryClientInterceptor):
+    """Retry on transient failures with exponential backoff."""
+
+    RETRIABLE = {grpc.StatusCode.UNAVAILABLE, grpc.StatusCode.RESOURCE_EXHAUSTED}
+
+    def intercept_unary_unary(self, continuation, client_call_details, request):
+        for attempt in range(3):
+            response = continuation(client_call_details, request)
+            try:
+                return response.result()        # ← raises on error
+            except grpc.RpcError as e:
+                if e.code() not in self.RETRIABLE or attempt == 2:
+                    raise
+                time.sleep(2 ** attempt)        # ← backoff: 1s, 2s, 4s
+                logging.warning(f"Retry {attempt+1} for {e.code()}")
+
+# Create channel with interceptors:
+channel = grpc.intercept_channel(
+    grpc.insecure_channel("localhost:50051"),
+    RetryInterceptor()
+)
+stub = UserServiceStub(channel)
+```
+
+**Interceptor execution order:**
+```
+Request:   Interceptor1 → Interceptor2 → Handler
+Response:  Handler → Interceptor2 → Interceptor1
+
+[AuthInterceptor, LoggingInterceptor]:
+  Request:  Auth checks first → Logging wraps second
+  Response: Logging records time → Auth doesn't act on response
+```
+
+**Common interceptors in production:**
+- **Authentication** — validate token, inject user context
+- **Logging** — structured RPC logs with method, status, duration
+- **Metrics** — increment counters, record histograms per method
+- **Request ID** — inject/propagate trace ID via metadata
+- **Retry** — client-side retry for transient failures
 
 ---
 

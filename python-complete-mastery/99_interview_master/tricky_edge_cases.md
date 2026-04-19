@@ -66,7 +66,7 @@ Always mention:
 
 ---
 
-# 🔥 2️⃣ Late Binding Closure Trap
+# 🔥 2️⃣ [Late Binding Closure Trap](../04_functions/theory.md#️-the-late-binding-closure-trap)
 
 ### ❌ Problem
 
@@ -442,7 +442,7 @@ Structured thinking wins.
 - Mutable default arguments
 - Shallow copy misunderstanding
 - Modifying list during iteration
-- Late binding closure
+- [Late binding closure](../04_functions/theory.md#️-the-late-binding-closure-trap)
 - List multiplication trap
 - Identity vs equality confusion
 - Floating point precision misunderstanding
@@ -455,7 +455,7 @@ You eliminate 80% of Python traps.
 # 🎯 Final Edge Case Checklist
 
 - Default argument trap
-- Closure late binding
+- [Closure late binding](../04_functions/theory.md#️-the-late-binding-closure-trap)
 - is vs ==
 - Shallow vs deep copy
 - Modifying during iteration

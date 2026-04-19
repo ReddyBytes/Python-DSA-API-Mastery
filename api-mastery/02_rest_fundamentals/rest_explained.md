@@ -27,6 +27,22 @@ That's it. No REST police. No compliance certificate. Just principles.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+6 REST constraints · resource modeling (nouns not verbs) · HTTP verb semantics · idempotency
+
+**Should Learn** — Important for real projects, comes up regularly:
+HATEOAS · URL design patterns (collections/nested/actions) · statelessness
+
+**Good to Know** — Useful in specific situations, not always tested:
+Fielding dissertation concepts · cacheability constraint
+
+**Reference** — Know it exists, look up syntax when needed:
+strict REST vs pragmatic REST · HATEOAS in practice
+
+---
+
 ## The 6 REST Constraints
 
 Fielding defined six constraints. Follow all of them (or most of them) and you've got

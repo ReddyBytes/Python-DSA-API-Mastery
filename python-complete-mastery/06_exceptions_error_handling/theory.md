@@ -31,6 +31,22 @@ That's what this chapter is about.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`try`/`except`/`finally` · Specific exception types · `raise` · Custom exceptions · Context managers for cleanup
+
+**Should Learn** — Important for real projects, comes up regularly:
+`raise X from Y` / `raise X from None` · Exception hierarchy · `else` clause on try · Retry patterns
+
+**Good to Know** — Useful in specific situations:
+`warnings` module · `sys.exc_info()` · `atexit` module
+
+**Reference** — Know it exists, look up when needed:
+`ExceptionGroup` (Python 3.11+) · Signal handlers · `warnings.filterwarnings`
+
+---
+
 ## 🧠 Chapter 1 — What Actually Happens When Python Raises an Exception
 
 When Python encounters an error (like dividing by zero), here's the exact sequence:
@@ -206,6 +222,97 @@ except ValueError:
     print("fetch failed — invalid data format")
 else:
     process(data)          # ← only runs if fetch succeeded
+```
+
+---
+
+## `finally` Edge Cases — Tricky Behavior
+
+`finally` always runs. But some edge cases surprise even experienced developers.
+
+---
+
+### Edge Case 1: `return` Inside `finally` Swallows Exceptions
+
+```python
+def dangerous():
+    try:
+        raise ValueError("something bad")
+    finally:
+        return 42   # ← this silently discards the ValueError!
+
+result = dangerous()
+print(result)    # 42 — no exception raised, no error, nothing
+# The ValueError was SWALLOWED by the return in finally
+```
+
+This is a silent bug. Never `return` from `finally` unless you intend to suppress exceptions.
+
+---
+
+### Edge Case 2: `return` in `try` vs `return` in `finally`
+
+```python
+def which_return():
+    try:
+        return "from try"
+    finally:
+        return "from finally"   # this wins!
+
+print(which_return())   # "from finally"
+# finally's return OVERRIDES try's return
+```
+
+The `finally` block always executes — even when `try` hits a `return`.
+`finally`'s `return` replaces the one from `try`.
+
+---
+
+### Edge Case 3: `continue` and `break` in `finally`
+
+```python
+for i in range(3):
+    try:
+        if i == 1:
+            raise ValueError()
+    except ValueError:
+        print(f"caught at i={i}")
+        break               # ← try to break
+    finally:
+        if i == 1:
+            continue        # ← finally's continue OVERRIDES the break!
+
+# Output: caught at i=1
+# The loop CONTINUES because finally's continue beats except's break
+```
+
+---
+
+### Edge Case 4: `finally` Runs Even with `sys.exit()`
+
+```python
+import sys
+
+def cleanup():
+    try:
+        sys.exit(1)
+    finally:
+        print("cleanup runs even on sys.exit!")
+        # ← this WILL print before the program exits
+
+cleanup()
+```
+
+The only way to prevent `finally` from running: `os._exit()` (hard kill, bypasses Python runtime).
+
+---
+
+### The Safe Rule
+
+```
+✓ Use finally for: cleanup, closing files, releasing locks — side effects
+✗ Avoid in finally: return, raise, break, continue
+  → They silently override the exception/flow control from try/except
 ```
 
 ---
@@ -438,7 +545,7 @@ process(data)        # ← if THIS raises, file.close() never runs → resource 
 file.close()
 ```
 
-### `with` Statement — The Solution
+### [`with` Statement](../12_context_managers/theory.md) — The Solution
 
 ```python
 # ✅ SAFE — always closes, even if an exception is raised:
@@ -577,7 +684,7 @@ EXAMPLE OF RACE CONDITION WITH LBYL:
 
 ### Pattern 1 — Retry with Exponential Backoff
 
-For transient failures: network blips, rate limits, temporary DB outages.
+For transient failures: network blips, rate limits, temporary DB outages. Uses the [decorator pattern](../10_decorators/theory.md#-chapter-5-functoolswraps--preserving-identity) with `@functools.wraps`.
 
 ```python
 import time
@@ -889,7 +996,7 @@ except Exception:
 ### Threads — Exceptions Are Silently Lost!
 
 ```python
-import threading
+import threading   # → [13_concurrency](../13_concurrency/theory.md) for full threading guide
 
 def worker():
     raise ValueError("Something went wrong in thread!")
@@ -940,7 +1047,7 @@ with ThreadPoolExecutor(max_workers=4) as executor:
             print(f"Task {n} raised: {e}")
 ```
 
-### Async — `asyncio`
+### Async — [`asyncio`](../13_concurrency/theory.md)
 
 ```python
 import asyncio
@@ -1005,6 +1112,152 @@ READING STRATEGY:
   2. The line just above = where in YOUR code it happened
   3. "The above exception was the direct cause of..." = chained exception
   4. Top of traceback = the entry point (where the call chain started)
+```
+
+---
+
+## Exception Propagation — How Exceptions Travel Up the Call Stack
+
+When an exception is raised, Python unwinds the call stack frame by frame, looking for a handler (`try/except`). If none is found, the program crashes with a traceback.
+
+```
+def level3():
+    raise ValueError("something went wrong")   # ← exception born here
+
+def level2():
+    level3()    # no try/except — exception propagates UP
+
+def level1():
+    level2()    # no try/except — exception propagates UP
+
+def main():
+    try:
+        level1()           # ← exception caught here
+    except ValueError as e:
+        print(f"Caught: {e}")
+
+main()
+```
+
+Stack unwinding visualization:
+
+```
+CALL STACK (before exception):
+
+  ┌──────────────────────────────────────────────┐  ← top
+  │  level3() frame                              │
+  │    raise ValueError("something went wrong")  │
+  │    → EXCEPTION BORN HERE                    │
+  ├──────────────────────────────────────────────┤
+  │  level2() frame                              │
+  │    no try/except → PROPAGATES UP            │
+  ├──────────────────────────────────────────────┤
+  │  level1() frame                              │
+  │    no try/except → PROPAGATES UP            │
+  ├──────────────────────────────────────────────┤
+  │  main() frame                                │
+  │    try: level1()  ← HANDLER FOUND HERE      │
+  │    except ValueError → CAUGHT               │
+  └──────────────────────────────────────────────┘
+
+UNWINDING ORDER:
+  1. level3() frame destroyed  (no handler)
+  2. level2() frame destroyed  (no handler)
+  3. level1() frame destroyed  (no handler)
+  4. main() try/except catches it ✓
+```
+
+Each frame is **destroyed** as the exception propagates through it (unless that frame has a `try/except` that catches it). If the exception reaches the bottom of the stack without being caught, Python prints the traceback and exits.
+
+**What the traceback shows:**
+
+The traceback is the unwind path in reverse — bottom (closest to the error) to top (entry point). That's why you read tracebacks from bottom to top.
+
+```
+Traceback (most recent call last):    ← this means BOTTOM is most recent
+  File "app.py", line 15, in main     ← outermost (first call, farthest from error)
+    level1()
+  File "app.py", line 10, in level1
+    level2()
+  File "app.py", line 6, in level2
+    level3()
+  File "app.py", line 2, in level3
+    raise ValueError("something went wrong")   ← innermost (closest to error)
+ValueError: something went wrong
+```
+
+---
+
+## ⚠️ `warnings` Module — Non-Fatal Alerts
+
+Exceptions stop execution. But sometimes you want to **alert** the caller about a problem without crashing — a deprecated API, a performance issue, an unusual input.
+
+That's what `warnings` is for.
+
+```python
+import warnings
+
+# Issue a warning (does not raise, does not stop):
+warnings.warn("This function is deprecated", DeprecationWarning)
+
+# Warning categories:
+warnings.warn("Low disk space", ResourceWarning)
+warnings.warn("Result may be inaccurate", UserWarning)
+warnings.warn("Internal change ahead", FutureWarning)
+```
+
+**Warning categories:**
+
+```
+UserWarning        — general purpose (default when no category given)
+DeprecationWarning — API is deprecated (shown in dev, hidden in prod)
+FutureWarning      — behavior will change in a future version
+RuntimeWarning     — suspicious runtime behavior
+ResourceWarning    — resource usage issues (file not closed, etc.)
+SyntaxWarning      — dubious syntax
+```
+
+**Filtering warnings — control what gets shown:**
+
+```python
+import warnings
+
+# Suppress all deprecation warnings:
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+# Turn warnings into errors (great for CI/CD):
+warnings.filterwarnings("error", category=DeprecationWarning)
+# Now DeprecationWarning raises an exception
+
+# Show each unique warning only once:
+warnings.filterwarnings("once")
+```
+
+**Practical use — deprecating your own functions:**
+
+```python
+import warnings
+
+def old_function(x):
+    warnings.warn(
+        "old_function() is deprecated. Use new_function() instead.",
+        DeprecationWarning,
+        stacklevel=2   # ← points warning to CALLER, not here
+    )
+    return new_function(x)
+```
+
+`stacklevel=2` is important — it makes the warning point to the caller's line, not inside your function.
+
+**Testing warnings:**
+
+```python
+import warnings
+import pytest
+
+def test_deprecation_warning():
+    with pytest.warns(DeprecationWarning, match="deprecated"):
+        old_function(42)
 ```
 
 ---

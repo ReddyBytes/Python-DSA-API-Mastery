@@ -17,6 +17,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+structured interview approach (requirements→estimation→design→trade-offs) · time allocation per phase · clarifying questions
+
+**Should Learn** — Important for real projects, comes up regularly:
+trade-off articulation · common mistakes to avoid · candidate communication style
+
+**Good to Know** — Useful in specific situations, not always tested:
+how to handle unknown requirements · drawing diagrams effectively
+
+**Reference** — Know it exists, look up syntax when needed:
+RESHADED framework · preparation checklist · post-design Q&A patterns
+
+---
+
 ## 📖 **Main content**: [the_45_minute_playbook.md](./the_45_minute_playbook.md)
 
 ---

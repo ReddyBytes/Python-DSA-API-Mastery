@@ -378,8 +378,8 @@ accounts = {acc1, acc2}
 • In lists, __repr__ is used for each element, not __str__
 • __add__ → a+b; __radd__ → b+a when a doesn't support +
 • __call__ makes an object callable like a function
-• __enter__/__exit__ = context manager (with statement)
-• __iter__/__next__ = iterator protocol (for loops, next())
+• __enter__/__exit__ = [context manager](../12_context_managers/theory.md#-chapter-2-the-context-manager-protocol) (with statement)
+• __iter__/__next__ = [iterator protocol](../11_generators_iterators/theory.md#-chapter-1-the-iteration-protocol) (for loops, next())
 • If you define __eq__, also define __hash__
 • __bool__ controls truthiness of your object
 • Always use @functools.total_ordering when implementing comparisons

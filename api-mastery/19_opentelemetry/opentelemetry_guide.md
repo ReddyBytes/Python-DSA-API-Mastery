@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+three pillars (traces/metrics/logs) · distributed tracing (spans/trace context) · auto-instrumentation
+
+**Should Learn** — Important for real projects, comes up regularly:
+manual spans · custom metrics (counter/histogram/gauge) · correlated logs with trace context · sampling strategies
+
+**Good to Know** — Useful in specific situations, not always tested:
+OTEL Collector deployment · exporter configuration
+
+**Reference** — Know it exists, look up syntax when needed:
+head vs tail sampling · baggage API · custom resource providers
+
+---
+
 ## 1. Core Intuition
 
 Your FastAPI service is getting slow. Users complain. You check logs — nothing obvious. You check CPU — looks fine. You have no idea where the 2 seconds are going.

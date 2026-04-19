@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+REST vs GraphQL vs gRPC trade-offs · API versioning strategies · idempotency keys
+
+**Should Learn** — Important for real projects, comes up regularly:
+cursor-based pagination · rate limiting placement · OpenAPI documentation
+
+**Good to Know** — Useful in specific situations, not always tested:
+API gateway role · request/response design patterns
+
+**Reference** — Know it exists, look up syntax when needed:
+HTTP method idempotency semantics · API deprecation workflow
+
+---
+
 ## 📋 Contents
 
 ```

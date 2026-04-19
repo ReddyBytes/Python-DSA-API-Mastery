@@ -6,6 +6,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+OSI and TCP/IP models · TCP vs UDP · HTTP methods and status codes · DNS resolution · TLS basics
+
+**Should Learn** — Important for real projects, comes up regularly:
+HTTP/2 multiplexing · gRPC over HTTP/2 · L4 vs L7 load balancing · CDN architecture
+
+**Good to Know** — Useful in specific situations, not always tested:
+QUIC/HTTP/3 advantages · SSE vs WebSocket vs long-polling · network latency optimization
+
+**Reference** — Know it exists, look up syntax when needed:
+TCP internals (SACK/Nagle/window scaling) · DNSSEC · TCP congestion control algorithms
+
+---
+
 ## 📋 Contents
 
 ```

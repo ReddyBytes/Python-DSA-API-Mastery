@@ -84,6 +84,98 @@ SAVINGS: ~230 bytes per object (78% reduction!)
 
 ---
 
+## 🗺️ Memory Layout: `__dict__` vs `__slots__`
+
+Seeing the actual heap layout explains WHY `__slots__` saves memory:
+
+```
+Normal object (with __dict__):
+
+  Heap:
+  ┌────────────────────────────────────────────────────────┐
+  │  Point object                                          │
+  │    ob_type → Point class                               │
+  │    ob_refcnt → 1                                       │
+  │    __dict__ → ─────────────────────────────────────────┼──→ dict object
+  │                                                        │        {'x': →1, 'y': →2}
+  │                                                        │        (232 bytes overhead!)
+  └────────────────────────────────────────────────────────┘
+
+__slots__ object:
+
+  Heap:
+  ┌────────────────────────────────────────────────────────┐
+  │  Point object                                          │
+  │    ob_type → Point class                               │
+  │    ob_refcnt → 1                                       │
+  │    slot[0] → ─────────────────────────────────────────┼──→ int object 1  (x)
+  │    slot[1] → ─────────────────────────────────────────┼──→ int object 2  (y)
+  │    (no __dict__ — no 232-byte overhead)               │
+  └────────────────────────────────────────────────────────┘
+```
+
+The slot references are stored directly inside the object — no intermediate dict.
+`__slots__` replaces a hash table (expensive, flexible) with a fixed-size array (cheap, rigid).
+
+---
+
+## ⚠️ `__slots__` Trade-offs and Gotchas
+
+`__slots__` is not free. Know when NOT to use it:
+
+```
+Use __slots__ when:
+  ✓ You have many instances (tens of thousands+)
+  ✓ Attributes are fixed and known at class definition time
+  ✓ Memory is the bottleneck
+
+Avoid __slots__ when:
+  ✗ You need to add arbitrary attributes at runtime
+  ✗ You use pickle and haven't read the docs (requires __getstate__/__setstate__)
+  ✗ You use frameworks that inspect/modify __dict__ (some ORMs, dataclasses add-ons)
+  ✗ The class is subclassed by code you don't control (breaks dynamic attrs for subclasses)
+```
+
+**Gotcha 1: `__slots__` with inheritance**
+
+```python
+class Base:
+    __slots__ = ['x']
+
+class Child(Base):
+    # Did NOT define __slots__ → Child GETS a __dict__!
+    # __slots__ from Base still works, but Child can add arbitrary attrs
+    pass
+
+c = Child()
+c.x = 1       # uses slot from Base ✓
+c.extra = 2   # uses __dict__ from Child (because Child has no __slots__)
+```
+
+If you want `__slots__` all the way down, every class in the hierarchy must define it.
+
+**Gotcha 2: Cannot pickle by default in complex cases**
+
+```python
+import pickle
+
+class Point:
+    __slots__ = ['x', 'y']
+    def __init__(self, x, y):
+        self.x = x; self.y = y
+
+p = Point(1, 2)
+pickle.dumps(p)   # works for simple cases in Python 3.2+
+
+# For full, reliable pickle support with __slots__:
+class Point:
+    __slots__ = ['x', 'y']
+    def __getstate__(self):  return {'x': self.x, 'y': self.y}
+    def __setstate__(self, state): self.x = state['x']; self.y = state['y']
+```
+
+---
+
 ## 📊 Benchmark — Real Numbers
 
 ```python

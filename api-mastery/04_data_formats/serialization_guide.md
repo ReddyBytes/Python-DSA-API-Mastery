@@ -20,6 +20,22 @@ different systems talk to each other.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+JSON types and limitations · date/time (ISO 8601) · Decimal as string · Pydantic validation
+
+**Should Learn** — Important for real projects, comes up regularly:
+Protocol Buffers (Protobuf) · MessagePack · CSV/Parquet for data export
+
+**Good to Know** — Useful in specific situations, not always tested:
+binary format comparison (size/speed) · CBOR
+
+**Reference** — Know it exists, look up syntax when needed:
+Avro · wire format internals · schema evolution strategies
+
+---
+
 ## 1. JSON — The Web's Common Language
 
 JSON (JavaScript Object Notation) won. It's not the most efficient format. It's not

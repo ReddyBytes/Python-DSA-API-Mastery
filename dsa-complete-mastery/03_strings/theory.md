@@ -8,6 +8,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+string immutability · indexing and slicing · concatenation pitfall (O(n²)) · two-pointer patterns
+
+**Should Learn** — Important for real projects, comes up regularly:
+string interning · character encoding · split/reverse/replace operations
+
+**Good to Know** — Useful in specific situations, not always tested:
+palindrome checking patterns · basic substring search
+
+**Reference** — Know it exists, look up syntax when needed:
+KMP algorithm · rolling hash · Rabin-Karp · suffix arrays
+
+---
+
 # 1️⃣ What Is a String?
 
 A string is a sequence of characters.

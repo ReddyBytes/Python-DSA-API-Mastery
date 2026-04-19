@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Classes and objects · `__init__` and `self` · Inheritance · Method types (instance/class/static) · `@property` · `__repr__` / `__str__`
+
+**Should Learn** — Important for real projects, comes up regularly:
+Multiple inheritance · MRO and `super()` · `@dataclass` · Encapsulation (`_` / `__`) · Dunder methods (`__eq__`, `__hash__`, `__len__`)
+
+**Good to Know** — Useful in specific situations:
+`__slots__` · Mixins · `@abstractmethod` / ABC · Descriptors · Metaclasses (basic concept)
+
+**Reference** — Know it exists, look up when needed:
+Metaclass advanced patterns · `__reduce__` / pickle protocol · `__init_subclass__`
+
+---
+
 # 🌍 Chapter 1 – Why OOP Was Invented (A Real Engineering Story)
 
 Let me tell you something important.
@@ -295,7 +311,7 @@ Now SavingsAccount inherits:
 - balance
 - deposit()
 
-Internally Python uses MRO (Method Resolution Order)
+Internally Python uses [MRO (Method Resolution Order)](./13_mro_and_super.md)
 to search methods.
 
 Search order:

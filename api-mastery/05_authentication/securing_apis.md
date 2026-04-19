@@ -20,6 +20,22 @@ This chapter is about making sure that never happens to you.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+API keys · JWT (structure/validation/refresh) · OAuth2 flows (authorization code/client credentials) · rate limiting algorithms
+
+**Should Learn** — Important for real projects, comes up regularly:
+CORS (same-origin policy/preflight) · input validation (SQL injection/Pydantic) · RS256 vs HS256
+
+**Good to Know** — Useful in specific situations, not always tested:
+token bucket vs leaky bucket vs sliding window · CSRF protection
+
+**Reference** — Know it exists, look up syntax when needed:
+mTLS · FIDO2/WebAuthn · OAuth2 device flow · certificate pinning
+
+---
+
 ## The Three Questions Every API Must Answer
 
 Before any request touches your business logic, your API needs to answer three questions:

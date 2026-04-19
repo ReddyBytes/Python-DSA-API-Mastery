@@ -17,6 +17,22 @@ Segment Tree is a data structure designed for:
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+segment tree structure · range query · point update · O(log n) operations
+
+**Should Learn** — Important for real projects, comes up regularly:
+lazy propagation · Fenwick tree (BIT) as simpler alternative
+
+**Good to Know** — Useful in specific situations, not always tested:
+when to use over prefix sum · build complexity O(n)
+
+**Reference** — Know it exists, look up syntax when needed:
+persistent segment tree · 2D segment trees · square root decomposition
+
+---
+
 # 🧠 1️⃣ Real Life Story — Warehouse Inventory
 
 Imagine a warehouse with 1000 shelves.
@@ -268,6 +284,90 @@ Mastering segment tree prepares you for:
 
 Segment Tree is a power tool.
 Use when necessary.
+
+---
+
+## 🌳 Fenwick Tree (Binary Indexed Tree) — Simpler Range Queries
+
+> If a segment tree is a full surgical kit, a Fenwick tree is a pocket knife — less powerful, but faster to code and half the memory when point updates and prefix sums are all you need.
+
+A **Fenwick tree** (also called a **Binary Indexed Tree** or BIT) supports two operations on an array in O(log n):
+1. **Point update** — change a single element
+2. **Prefix sum query** — sum from index 1 to i
+
+Unlike a segment tree, a Fenwick tree cannot handle range minimum/maximum queries, but for prefix sums and point updates it requires less code and half the memory.
+
+```python
+class FenwickTree:
+    def __init__(self, n):
+        self.n = n
+        self.tree = [0] * (n + 1)   # ← 1-indexed
+
+    def update(self, i, delta):
+        """Add delta to position i (1-indexed)."""
+        while i <= self.n:
+            self.tree[i] += delta
+            i += i & (-i)           # ← move to next responsible node (lowbit trick)
+
+    def query(self, i):
+        """Prefix sum from 1 to i (inclusive)."""
+        total = 0
+        while i > 0:
+            total += self.tree[i]
+            i -= i & (-i)           # ← move to parent (remove lowbit)
+        return total
+
+    def range_query(self, l, r):
+        """Sum from l to r inclusive (1-indexed)."""
+        return self.query(r) - self.query(l - 1)
+
+# Build from existing array in O(n log n):
+def build(arr):
+    ft = FenwickTree(len(arr))
+    for i, val in enumerate(arr):
+        ft.update(i + 1, val)       # ← convert to 1-indexed
+    return ft
+```
+
+**The lowbit trick explained:**
+```
+i & (-i)  extracts the lowest set bit of i
+
+i = 6  →  binary: 110  →  lowbit = 010 = 2
+i = 12 →  binary: 1100 →  lowbit = 0100 = 4
+
+Each index i is responsible for a range of lowbit(i) elements
+```
+
+**Fenwick tree vs Segment tree:**
+
+```
+                 Fenwick Tree        Segment Tree
+─────────────────────────────────────────────────
+Code complexity     Simple (10 lines)   Moderate (30+ lines)
+Memory              O(n)                O(4n)
+Point update        O(log n)            O(log n)
+Range sum           O(log n)            O(log n)
+Range min/max       ✗ Not supported     ✓ Supported
+Lazy propagation    ✗ Not supported     ✓ Supported
+Range update        ✓ With trick        ✓ Native
+─────────────────────────────────────────────────
+Use Fenwick when: only prefix sum queries + point updates needed
+Use Segment when: range min/max, lazy propagation, or range updates
+```
+
+**Range update with Fenwick (difference array trick):**
+
+```python
+# To support range update [l, r] += val:
+# Use two Fenwick trees (advanced pattern)
+# Or: maintain difference array in Fenwick tree
+ft.update(l, val)        # ← add val at l
+ft.update(r + 1, -val)   # ← subtract at r+1
+# Then point query at i = ft.query(i)
+```
+
+**Complexity:** O(n) build, O(log n) update and query, O(n) space
 
 ---
 

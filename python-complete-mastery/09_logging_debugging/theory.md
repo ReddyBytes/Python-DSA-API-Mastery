@@ -27,6 +27,22 @@ would have surfaced in 30 seconds.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`logging.getLogger()` · Log levels (DEBUG/INFO/WARNING/ERROR/CRITICAL) · Handlers (StreamHandler, FileHandler) · Formatters · `pdb` basics (`n`, `s`, `c`, `p`, `b`)
+
+**Should Learn** — Important for real projects, comes up regularly:
+`logging.config.dictConfig()` · RotatingFileHandler · Logger hierarchy · `logging.exception()` · `breakpoint()` (Python 3.7+)
+
+**Good to Know** — Useful in specific situations:
+`logging.captureWarnings()` · `QueueHandler` + `QueueListener` · `sys.settrace()`
+
+**Reference** — Know it exists, look up when needed:
+`SMTPHandler` · `SysLogHandler` · `logging.setLoggerClass()` · `pdb` custom commands
+
+---
+
 ## 💡 Chapter 1 — print() vs logging: The Real Difference
 
 ```python
@@ -839,7 +855,7 @@ faulthandler.dump_traceback_later(timeout=30, repeat=True)
 # If your program hangs for 30s, dumps all thread stacks to stderr
 ```
 
-### Memory Profiling
+### Memory Profiling (`@profile` is a [decorator](../10_decorators/theory.md) — see [memory internals](../01.1_memory_management/theory.md) for heap/GC details)
 
 ```python
 # pip install memory-profiler

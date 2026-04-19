@@ -93,7 +93,7 @@ RULE OF THUMB:
 
 ---
 
-### Q3: What is an async generator and when would you use one for AI?
+### Q3: What is an [async generator](../11_generators_iterators/theory.md#-chapter-12-async-generators-python-36) and when would you use one for AI?
 
 **Weak answer:** "It's a generator but async."
 

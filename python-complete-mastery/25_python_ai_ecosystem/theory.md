@@ -24,6 +24,22 @@ This module covers the Python utility belt every AI engineer uses daily.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`python-dotenv` · `httpx` (async HTTP) · `tenacity` (retry) · `loguru` · `pydantic-settings` · `pathlib` for file paths
+
+**Should Learn** — Important for real projects, comes up regularly:
+`tqdm` progress bars · `rich` for terminal output · `tiktoken` for token counting · `json` / `jsonlines` patterns
+
+**Good to Know** — Useful in specific situations:
+`click` / `typer` CLI tools · LangChain basics · LlamaIndex for RAG · vLLM for serving
+
+**Reference** — Know it exists, look up when needed:
+ONNX / TensorRT · Ray / Dask distributed · Model quantization (INT8/FP8) · Multi-GPU patterns
+
+---
+
 ## 1️⃣ python-dotenv — Loading API Keys Safely
 
 ### The Problem

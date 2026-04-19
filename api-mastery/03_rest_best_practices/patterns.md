@@ -19,6 +19,22 @@ Let's go through them.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+URL naming conventions (lowercase/hyphens/plural nouns) · pagination (offset vs cursor) · error response structure · versioning strategies
+
+**Should Learn** — Important for real projects, comes up regularly:
+filtering and sorting safety · idempotency keys · HTTP caching headers (ETag/Cache-Control)
+
+**Good to Know** — Useful in specific situations, not always tested:
+sparse fieldsets · rate limiting headers · response envelopes
+
+**Reference** — Know it exists, look up syntax when needed:
+request signing · response compression · backward compatibility testing
+
+---
+
 ## 1. URL Naming Rules
 
 URLs are the public face of your API. They're what developers type into their code,

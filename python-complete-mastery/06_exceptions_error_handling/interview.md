@@ -271,7 +271,7 @@ except PaymentError:
 
 ---
 
-### Q9: What is a context manager and how does it relate to exception handling?
+### Q9: What is a [context manager](../12_context_managers/theory.md) and how does it relate to exception handling?
 
 **Strong answer:**
 

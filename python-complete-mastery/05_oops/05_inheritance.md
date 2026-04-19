@@ -78,8 +78,8 @@ student.submit_assignment("Math", "Homework 3")
 
 ## 🔑 `super()` — The Right Way to Call the Parent
 
-`super()` means: "go to the next class in the MRO chain and call the method there."
-(See file 13 for MRO deep dive.)
+`super()` means: "go to the next class in the [MRO](./13_mro_and_super.md) chain and call the method there."
+(See [13_mro_and_super.md](./13_mro_and_super.md) for MRO deep dive.)
 
 ```python
 class Animal:

@@ -91,7 +91,7 @@ print(p2)    # Product(name='Pen', price=20, category='Stationery', in_stock=Tru
 ### ⚠️ Mutable Default — Use `field(default_factory=...)`
 
 You cannot use mutable objects (list, dict, set) as direct defaults.
-Python would share one instance across all objects — the same mutable default trap!
+Python would share one instance across all objects — the same [mutable default trap](../04_functions/theory.md#️-type-3-edge-case--the-mutable-default-argument-trap)!
 
 ```python
 from dataclasses import dataclass, field

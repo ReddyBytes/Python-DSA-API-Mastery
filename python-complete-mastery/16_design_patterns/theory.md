@@ -34,6 +34,22 @@ Design patterns are architecture tools.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Singleton · Factory (Factory Method) · Strategy · Observer · Decorator (structural)
+
+**Should Learn** — Important for real projects, comes up regularly:
+Repository · Dependency Injection · Command · Adapter · SOLID principles (all 5)
+
+**Good to Know** — Useful in specific situations:
+Builder · Composite · Facade · State · Template Method · Proxy
+
+**Reference** — Know it exists, look up when needed:
+Abstract Factory · Flyweight · Mediator · Memento · Visitor · Interpreter · CQRS · Event Sourcing
+
+---
+
 # 🧠 1️⃣ What Is a Design Pattern?
 
 A design pattern is:

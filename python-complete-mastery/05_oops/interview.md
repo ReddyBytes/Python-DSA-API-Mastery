@@ -16,16 +16,16 @@ LEVEL 1 — Junior (0–2 years)
   • __init__, self, methods
 
 LEVEL 2 — Mid-Level (2–5 years)
-  • MRO and super()
+  • [MRO](./13_mro_and_super.md) and super()
   • Dunder methods
   • @property vs attribute
   • Composition vs inheritance
   • Class vs instance variables trap
 
 LEVEL 3 — Senior (5+ years)
-  • Metaclasses and descriptors
+  • [Metaclasses](./16_metaclasses.md) and [descriptors](./17_descriptors.md)
   • SOLID principles
-  • __slots__ and memory optimization
+  • [`__slots__`](./15_slots.md) and memory optimization
   • Design patterns with OOP
   • Abstract Base Classes
 ```
@@ -229,7 +229,7 @@ Decision tree:
 
 ---
 
-### Q6: Explain Python's MRO and how `super()` actually works.
+### Q6: Explain Python's [MRO](./13_mro_and_super.md) and how `super()` actually works.
 
 **Weak answer:** "`super()` calls the parent class."
 
@@ -502,7 +502,7 @@ print(u.to_json())     # {"name": "Alice", "email": "alice@mail.com", "_changes"
 
 ---
 
-### Q13: What are descriptors? How do they work?
+### Q13: What are [descriptors](./17_descriptors.md)? How do they work?
 
 **Strong answer:**
 
@@ -546,7 +546,7 @@ p.price = -100   # ValueError: price must be a positive number
 
 ---
 
-### Q14: Explain `__slots__`. When would you use it?
+### Q14: Explain [`__slots__`](./15_slots.md). When would you use it?
 
 **Strong answer:**
 
@@ -721,7 +721,7 @@ Q: What is __init_subclass__ and why is it simpler than metaclasses?
 A: Hook called on the parent class whenever a subclass is created.
    Simpler because it's a regular method, no metaclass magic needed.
 
-Q: How does @functools.lru_cache relate to descriptors?
+Q: How does [`@functools.lru_cache`](../04_functions/theory.md#functoolslru_cache--memoization-made-easy) relate to descriptors?
 A: lru_cache wraps a function. But on class methods, it can cause issues
    because it caches based on self — which holds a reference, preventing GC.
    Use functools.cached_property instead for instance-level caching.

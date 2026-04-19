@@ -6,6 +6,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+latency hierarchy (CPU cache/RAM/SSD/network) · CPU cores and cache levels · memory layout (stack vs heap)
+
+**Should Learn** — Important for real projects, comes up regularly:
+process vs thread · context switching cost · I/O blocking vs async models
+
+**Good to Know** — Useful in specific situations, not always tested:
+serialization format trade-offs · L1/L2/L3 cache behavior
+
+**Reference** — Know it exists, look up syntax when needed:
+specific nanosecond/microsecond latency numbers · NUMA architecture
+
+---
+
 ## The Story Begins: You Click "Send"
 
 Imagine you're chatting with a friend on WhatsApp. You type "Hey!" and tap Send.
@@ -307,6 +323,129 @@ CPU Core timeline:
 - 1,000 threads → millions of switches per second → **significant CPU overhead**
 - This is why async/event-loop models (Node.js, Python asyncio) can be
   more efficient than thread-per-request: they avoid context switching cost.
+
+---
+
+## Part 4.5: Memory Layout Within a Process — Where Variables Live
+
+The previous section explained that threads share heap memory and each have their own stack. Let's go one level deeper: what actually lives in each region, and why it matters for writing efficient code.
+
+### The Two Regions Every Process Has
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                         PROCESS                                │
+│                                                                │
+│  ┌──────────────────────────────────┐                         │
+│  │            STACK                 │  Fast. Automatic.       │
+│  │  - one frame per function call   │  Size: 1–8 MB typical   │
+│  │  - local variable name bindings  │                         │
+│  │  - grows downward, shrinks fast  │                         │
+│  └──────────────────────────────────┘                         │
+│             ↕ (grows down)                                     │
+│                   ...                                          │
+│             ↕ (grows up)                                       │
+│  ┌──────────────────────────────────┐                         │
+│  │            HEAP                  │  Flexible. GC-managed.  │
+│  │  - all objects (int, list, dict) │  Size: grows as needed  │
+│  │  - persists across function calls│                         │
+│  │  - requires GC or manual free    │                         │
+│  └──────────────────────────────────┘                         │
+│                                                                │
+│  ┌──────────────────────────────────┐                         │
+│  │         DATA SEGMENT             │  Permanent.             │
+│  │  - global and module-level vars  │  Lives for process      │
+│  │  - static constants              │  lifetime.              │
+│  └──────────────────────────────────┘                         │
+└────────────────────────────────────────────────────────────────┘
+```
+
+### The Stack Frame — One per Function Call
+
+Every time you call a function, the CPU pushes a **stack frame** onto the stack. The frame holds local variable name-to-reference bindings and the return address.
+
+```
+def calculate(x, y):
+    result = x + y
+    return result
+
+total = calculate(10, 5)
+```
+
+Stack state during execution:
+
+```
+DURING calculate(10, 5):
+
+  ┌──────────────────────────────────────────────┐  ← top of stack
+  │  calculate() frame                           │
+  │    x      → [object: 10]  (on heap)          │
+  │    y      → [object: 5]   (on heap)          │
+  │    result → [object: 15]  (on heap)          │
+  │    return address: → back to global frame    │
+  ├──────────────────────────────────────────────┤
+  │  global frame                                │
+  │    calculate → [function object] (on heap)   │
+  │    total → ???                               │
+  └──────────────────────────────────────────────┘
+
+AFTER calculate() returns:
+
+  ┌──────────────────────────────────────────────┐
+  │  global frame                                │
+  │    total → [object: 15] (on heap)            │
+  └──────────────────────────────────────────────┘
+
+  calculate() frame is GONE.
+  x, y, result name bindings disappear.
+  The integer objects on heap are collected when nothing else references them.
+```
+
+**Key insight:** The stack stores *name → reference* pairs, not actual values. The values always live on the heap.
+
+### Scope and Memory Lifetime
+
+This is where the "thread diagram" from earlier connects to code:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  Scope      │  Memory Location          │  Lifetime             │
+├─────────────┼───────────────────────────┼───────────────────────┤
+│  Local      │  Stack frame              │  Dies on return       │
+│  Enclosing  │  Heap — closure cell obj  │  Lives while closure  │
+│  (closure)  │                           │  function is alive    │
+│  Global     │  Module __dict__ (heap)   │  Lives forever        │
+│  Built-in   │  builtins module (heap)   │  Lives forever        │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+Closure variables are special: when an inner function captures an outer variable, Python promotes it from the stack to a **cell object** on the heap. The outer function's frame can be destroyed, but the variable lives on.
+
+```python
+def make_adder(n):
+    # 'n' is captured by inner() → promoted to heap cell object
+    def add(x):
+        return x + n
+    return add
+
+add5 = make_adder(5)
+# make_adder() returned — its stack frame is gone
+# but 'n=5' still lives in a cell on the heap
+```
+
+### Why Stack Access is Faster Than Heap Access
+
+Connecting back to the latency table you'll see next:
+
+```
+Stack (local variables): ~0.5–1 ns   — CPU register or L1 cache
+Heap  (object access):   ~100 ns     — RAM access (cache miss)
+                         ~100–200× slower
+```
+
+The CPU caches recently accessed stack data in L1 cache. Heap objects are scattered in memory — more cache misses, slower access.
+
+**Practical implication:** Caching a frequently-used function/attribute in a local variable (not reaching into the heap dict every iteration) can give real speedups in tight loops. Python's bytecode even has a separate `LOAD_FAST` instruction for locals vs `LOAD_GLOBAL` for globals — because locals are designed to be fast.
 
 ---
 

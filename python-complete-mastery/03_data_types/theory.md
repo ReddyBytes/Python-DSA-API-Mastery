@@ -21,6 +21,22 @@ Now imagine Python has to store all of this. It can't treat all of them the same
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`list` · `dict` · `str` · `int` / `float` / `bool` · Comprehensions · `collections.defaultdict` · `collections.Counter` · `collections.deque`
+
+**Should Learn** — Important for real projects, comes up regularly:
+`tuple` · `set` · `bytes` / `bytearray` · `frozenset` · String methods (`.split`, `.join`, `.strip`, `.format`)
+
+**Good to Know** — Useful in specific situations:
+`collections.OrderedDict` · `str.encode()` / `bytes.decode()` · `slice()` objects · String validation methods (`.isdigit()`, `.isalpha()`)
+
+**Reference** — Know it exists, look up when needed:
+`complex` type · `memoryview` · Old `%` string formatting
+
+---
+
 ## 🗺️ The Big Picture — All Data Types at a Glance
 
 ```
@@ -738,6 +754,41 @@ Python can optimise them better because they never change.
 
 ---
 
+### Memory Layout: List vs Tuple
+
+The memory difference between list and tuple is more than just mutability:
+
+```
+list  = dynamic array of POINTERS
+        ┌─────┬─────┬─────┬─────┬─────┐
+        │ptr 0│ptr 1│ptr 2│ ... │extra│  ← over-allocates to amortize append cost
+        └─────┴─────┴─────┴─────┴─────┘
+              ↓     ↓     ↓
+           heap  heap  heap  (actual objects)
+
+tuple = fixed-size array of POINTERS
+        ┌─────┬─────┬─────┐
+        │ptr 0│ptr 1│ptr 2│  ← exactly the right size, no extra
+        └─────┴─────┴─────┘
+```
+
+Practical implications:
+
+- **Tuple creation is faster** — no size calculation or over-allocation
+- **Tuple uses less memory** — no extra buffer slots
+- **List has O(1) amortized append** — pre-allocates extra space
+- **Tuples signal intent** — "this data does not change" (readable, prevents bugs)
+
+```python
+import sys
+a = [1, 2, 3, 4, 5]
+b = (1, 2, 3, 4, 5)
+print(sys.getsizeof(a))   # 104 bytes  (extra allocation)
+print(sys.getsizeof(b))   # 80 bytes   (exact size)
+```
+
+---
+
 # 🎯 Part 7: `set` — Only Unique Items
 
 ### What is it?
@@ -842,6 +893,47 @@ Visual diagram:
   & means intersection (only middle)
   - means difference (one side only)
 ```
+
+---
+
+### Why Sets Require Hashable Elements — The Hash Table Internals
+
+A set stores elements in a **hash table** — an array where the position of each element
+is determined by its hash value.
+
+```
+set = {10, 25, 42, 7}
+
+Hash table (simplified, size=8):
+  slot 0: empty
+  slot 1: empty
+  slot 2: 10  (10 % 8 = 2)
+  slot 3: 11  (not present)
+  slot 4: empty
+  slot 5: 13  (not present)
+  slot 6: 42  (42 % 8 = 2 → collision → probe to slot 6)
+  slot 7: 7   (7 % 8 = 7)
+  slot 1: 25  (25 % 8 = 1)
+```
+
+**Why lookup is O(1):**
+To check if `42` is in the set:
+1. Compute `hash(42)` → fixed position in array
+2. Check that slot → found or not found
+3. One or a few operations — regardless of set size
+
+**Why elements must be hashable:**
+The hash determines WHERE in the table to store/look up the element.
+Lists are mutable — if you mutate a list after adding it to a set, its hash would change,
+making it unfindable. That's why lists (mutable) cannot be set elements.
+
+```python
+s = {1, 2, 3}         # ints: hashable ✓
+s = {(1, 2), (3, 4)}  # tuples of ints: hashable ✓ (tuples are immutable)
+s = {[1, 2]}          # TypeError: unhashable type: 'list'
+```
+
+The same rule applies to dict keys.
 
 ---
 
@@ -996,6 +1088,47 @@ school = {
 print(school["Alice"]["gpa"])          # 9.2
 print(school["Bob"]["subjects"][0])    # "Commerce"
 ```
+
+---
+
+---
+
+### Dict Ordering Guarantee (Python 3.7+)
+
+Since Python 3.7, dicts are guaranteed to maintain **insertion order**.
+
+```python
+d = {}
+d['c'] = 3
+d['a'] = 1
+d['b'] = 2
+
+for key in d:
+    print(key)   # c, a, b — insertion order preserved
+```
+
+**Before Python 3.7:** Order was an implementation detail — you couldn't rely on it.
+**Python 3.7+:** Insertion order is part of the language spec.
+
+**Why it was added:**
+Python's dict was re-implemented in CPython 3.6 to be both faster and more compact.
+The new implementation naturally preserved insertion order as a side effect.
+It was made official in Python 3.7.
+
+**When it matters:**
+
+```python
+# Building an ordered response:
+response = {"status": "ok", "data": result, "timestamp": now}
+# Order in JSON output will match insertion order — predictable API responses
+
+# Configuration priority:
+config = {"host": "localhost", "port": 8080, "debug": True}
+# First key is first key — readability and predictability
+```
+
+**Note:** If you need sorted order, use `sorted(d.keys())` — dict preserves insertion order,
+not sort order.
 
 ---
 
@@ -1182,6 +1315,176 @@ You now know all of Python's core data types:
   dict    Key-value pairs, .get() is your friend, nested dicts
   None    Intentional emptiness, use 'is' to check
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+---
+
+## 🔢 `bytes` and `bytearray` — Binary Data
+
+When you work with files, network sockets, or encoding text, you deal with **raw binary data** — not strings.
+
+**`bytes`** — immutable sequence of integers (0–255)
+**`bytearray`** — mutable version of bytes
+
+```python
+# Creating bytes:
+b1 = b"hello"               # literal
+b2 = bytes([72, 101, 108])  # from list of ints
+b3 = "hello".encode("utf-8")  # from string
+
+# Creating bytearray (mutable):
+ba = bytearray(b"hello")
+ba[0] = 72                  # can modify
+ba.append(33)               # can append
+
+# Key operations:
+b = b"hello world"
+b[0]          # 104  (int, not char)
+b[0:5]        # b'hello'
+len(b)        # 11
+b.decode("utf-8")   # "hello world"  ← back to string
+
+# String ↔ bytes conversion (always specify encoding):
+text = "café"
+encoded = text.encode("utf-8")    # b'caf\xc3\xa9'
+decoded = encoded.decode("utf-8") # "café"
+```
+
+**When you need this:**
+
+```python
+# Reading binary files:
+with open("image.png", "rb") as f:   # "rb" = read binary
+    data = f.read()                   # bytes object
+
+# Network sockets:
+sock.send(b"GET / HTTP/1.1\r\n")     # must be bytes, not str
+
+# Checking file headers (magic bytes):
+with open("file", "rb") as f:
+    header = f.read(4)
+    if header == b"\x89PNG":
+        print("This is a PNG file")
+```
+
+**`bytes` vs `str` — the key difference:**
+
+```python
+type(b"hello")   # <class 'bytes'>
+type("hello")    # <class 'str'>
+
+# You cannot mix them:
+b"hello" + " world"    # TypeError — must use bytes + bytes
+b"hello" + b" world"   # b'hello world' ✓
+```
+
+---
+
+## 🗂️ `collections` Module — Smarter Data Structures
+
+Python's `collections` module gives you specialized containers that solve common problems better than plain dicts and lists.
+
+### `defaultdict` — Dictionary That Never Raises KeyError
+
+```python
+from collections import defaultdict
+
+# Regular dict — KeyError if key missing:
+counts = {}
+counts["apple"] += 1    # KeyError: 'apple'
+
+# defaultdict — creates default value automatically:
+counts = defaultdict(int)   # default value: 0
+counts["apple"] += 1        # works — starts at 0
+counts["apple"] += 1
+print(counts["apple"])      # 2
+print(counts["banana"])     # 0 — created automatically
+
+# Group items by key:
+from collections import defaultdict
+groups = defaultdict(list)
+for item in ["a", "b", "a", "c", "b", "a"]:
+    groups[item].append(item)
+# defaultdict(<class 'list'>, {'a': ['a', 'a', 'a'], 'b': ['b', 'b'], 'c': ['c']})
+```
+
+### `Counter` — Frequency Counting
+
+```python
+from collections import Counter
+
+# Count occurrences in one line:
+words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
+count = Counter(words)
+# Counter({'apple': 3, 'banana': 2, 'cherry': 1})
+
+count["apple"]      # 3
+count["missing"]    # 0  ← no KeyError (like defaultdict)
+count.most_common(2)  # [('apple', 3), ('banana', 2)]
+
+# Counter arithmetic:
+c1 = Counter(a=3, b=2)
+c2 = Counter(a=1, b=4)
+c1 + c2   # Counter({'b': 6, 'a': 4})
+c1 - c2   # Counter({'a': 2})  ← only positive counts kept
+
+# Count characters in a string:
+Counter("mississippi")
+# Counter({'s': 4, 'i': 4, 'p': 2, 'm': 1})
+```
+
+### `deque` — Double-Ended Queue
+
+A regular list is slow (`O(n)`) when inserting/removing at the front.
+`deque` is `O(1)` at BOTH ends.
+
+```python
+from collections import deque
+
+d = deque([1, 2, 3])
+d.append(4)        # add to right:  [1, 2, 3, 4]
+d.appendleft(0)    # add to left:   [0, 1, 2, 3, 4]
+d.pop()            # remove right:  returns 4
+d.popleft()        # remove left:   returns 0
+
+# Fixed-size sliding window (maxlen):
+recent = deque(maxlen=3)
+for x in range(6):
+    recent.append(x)
+    print(list(recent))
+# [0]
+# [0, 1]
+# [0, 1, 2]
+# [1, 2, 3]  ← oldest dropped automatically
+# [2, 3, 4]
+# [3, 4, 5]
+```
+
+**Use `deque` when:** implementing queues, BFS algorithms, sliding windows, or any pattern needing fast front-insertion.
+
+### `frozenset` — Immutable Set
+
+```python
+# frozenset is hashable — can be used as dict key or in another set:
+fs = frozenset([1, 2, 3])
+fs.add(4)   # AttributeError — immutable
+
+# Use as dict key (regular set can't do this):
+cache = {}
+cache[frozenset([1, 2, 3])] = "result"
+
+# Use as set of sets:
+seen = set()
+seen.add(frozenset([1, 2]))   # frozenset is hashable, set is not
+```
+
+**Quick reference — when to use each:**
+
+```
+defaultdict  → grouping, counting, graph adjacency lists
+Counter      → frequency analysis, most common items, bag operations
+deque        → queues, BFS/DFS, sliding windows, recent-N items
+frozenset    → set as dict key, immutable set membership
 ```
 
 ---

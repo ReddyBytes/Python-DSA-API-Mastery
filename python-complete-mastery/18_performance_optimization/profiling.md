@@ -37,6 +37,22 @@ Then optimize.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`cProfile` / `profile` · `timeit` · Algorithmic complexity (choose right data structure) · Generator vs list tradeoff
+
+**Should Learn** — Important for real projects, comes up regularly:
+`memory_profiler` · `tracemalloc` · `__slots__` · `functools.lru_cache` / `cache` · `dis` module (bytecode inspection)
+
+**Good to Know** — Useful in specific situations:
+`py-spy` sampling profiler · Flamegraph interpretation · `scalene` · Numba JIT basics
+
+**Reference** — Know it exists, look up when needed:
+NUMA awareness · SIMD vectorization · `numexpr` · Escape analysis
+
+---
+
 # 🧠 1️⃣ First Rule: Measure Before Optimizing
 
 Never guess performance issues.
@@ -188,7 +204,7 @@ Faster than traditional loops.
 
 ---
 
-## 🔹 Use Generator Expressions
+## 🔹 Use [Generator Expressions](../11_generators_iterators/theory.md)
 
 Reduce memory usage.
 
@@ -200,7 +216,7 @@ Cache results if reused.
 
 Use:
 
-- functools.lru_cache
+- [functools.lru_cache](../04_functions/theory.md#functoolslru_cache--memoization-made-easy)
 
 Example:
 
@@ -335,8 +351,8 @@ Parallelize CPU tasks.
 
 ## 🔹 Memory Usage Too High
 
-Replace lists with generators.
-Use __slots__.
+Replace lists with [generators](../11_generators_iterators/theory.md#why-generators-are-lazy--the-memory-story).
+Use [`__slots__`](../05_oops/15_slots.md).
 Clear unused references.
 
 ---

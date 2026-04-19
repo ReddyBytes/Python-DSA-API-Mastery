@@ -29,6 +29,22 @@ This is what advanced Python is: **understanding and using the protocols that po
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Dunder methods (`__repr__`, `__str__`, `__eq__`, `__hash__`, `__len__`, `__getitem__`) · Descriptor protocol (`__get__`, `__set__`, `__delete__`) · `@property` internals
+
+**Should Learn** — Important for real projects, comes up regularly:
+`__getattr__` vs `__getattribute__` · `__init_subclass__` · `__slots__` deep dive · `type()` for dynamic class creation · ABCs and `@abstractmethod`
+
+**Good to Know** — Useful in specific situations:
+`__class_getitem__` · `__missing__` · `__reduce__` / pickle protocol · Virtual subclasses (`ABC.register()`) · `__sizeof__`
+
+**Reference** — Know it exists, look up when needed:
+`__prepare__` · Metaclass conflicts · Buffer protocol / `memoryview` · `linecache` · Code object introspection
+
+---
+
 ## 🔑 Chapter 1: Dunder Methods — Python's Protocol System
 
 **Dunder** = **D**ouble **under**score. Python's way of defining object behaviour through well-known method names that the interpreter calls automatically.
@@ -336,7 +352,7 @@ class Container:
 
 ---
 
-## 🔧 Chapter 6: `__slots__` — Memory Optimization
+## 🔧 Chapter 6: [`__slots__`](../05_oops/15_slots.md) — Memory Optimization
 
 By default, every Python object stores its attributes in a `__dict__` (a hash table). This is flexible but uses ~200-300 bytes per instance.
 
@@ -388,7 +404,7 @@ __slots__ GIVES you:      __slots__ TAKES AWAY:
 
 A **descriptor** is an object that defines how attribute access works. It implements one or more of: `__get__`, `__set__`, `__delete__`.
 
-**This is how `@property`, `@classmethod`, `@staticmethod` are all implemented** — they're just descriptors.
+**This is how [`@property`](../05_oops/11_properties.md), [`@classmethod` / `@staticmethod`](../05_oops/09_class_instance_static_methods.md) are all implemented** — they're just descriptors.
 
 ```python
 # Descriptor protocol:
@@ -501,6 +517,158 @@ p = Product("Widget", 9.99, 100)
 p.price = -1.0     # ValueError: price: -1.0 < minimum 0.0
 p.price = "free"   # TypeError: price: expected float, got str
 ```
+
+---
+
+---
+
+## Descriptors — The Protocol Behind @property
+
+A **descriptor** is any object that implements `__get__`, `__set__`, or `__delete__`.
+This protocol powers `@property`, `@classmethod`, `@staticmethod`, and more.
+
+---
+
+### The Descriptor Protocol
+
+```python
+class Descriptor:
+    def __get__(self, obj, objtype=None):
+        # obj = the instance (None if accessed on the class)
+        # objtype = the class
+        pass
+
+    def __set__(self, obj, value):
+        # Called on attribute assignment: instance.attr = value
+        pass
+
+    def __delete__(self, obj):
+        # Called on: del instance.attr
+        pass
+```
+
+A class becomes a descriptor by implementing at least one of these.
+
+---
+
+### @property Is Just a Descriptor
+
+When you write:
+
+```python
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+
+    @property
+    def area(self):
+        return 3.14159 * self._radius ** 2
+```
+
+Python translates this to:
+
+```python
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+
+    def _area_getter(self):
+        return 3.14159 * self._radius ** 2
+
+    area = property(_area_getter)   # ← property() creates a descriptor object
+```
+
+`property` is a built-in class that implements `__get__`, `__set__`, `__delete__`.
+When you access `circle.area`, Python calls `area.__get__(circle, Circle)`.
+
+---
+
+### Data vs Non-Data Descriptors
+
+```
+Non-data descriptor: implements __get__ only
+  → Instance __dict__ takes priority
+  → Examples: functions (methods are non-data descriptors)
+
+Data descriptor: implements __get__ AND __set__ (or __delete__)
+  → Takes priority OVER instance __dict__
+  → Examples: property, classmethod, staticmethod
+```
+
+**Why this matters:**
+
+```python
+class MyClass:
+    x = NonDataDescriptor()   # only __get__
+
+obj = MyClass()
+obj.__dict__['x'] = 42        # instance __dict__ wins
+print(obj.x)                  # 42 — instance dict, not descriptor
+
+class MyClass2:
+    x = DataDescriptor()      # __get__ + __set__
+
+obj2 = MyClass2()
+obj2.__dict__['x'] = 42       # this never gets stored in __dict__
+print(obj2.x)                 # descriptor's __get__ is called, not dict
+```
+
+---
+
+### Practical Example: Validated Attribute
+
+```python
+class PositiveNumber:
+    """Data descriptor: enforces positive values."""
+    def __set_name__(self, owner, name):
+        self.name = name                    # store attribute name
+
+    def __get__(self, obj, objtype=None):
+        if obj is None:
+            return self                     # accessed on class, return descriptor
+        return obj.__dict__.get(self.name)
+
+    def __set__(self, obj, value):
+        if value <= 0:
+            raise ValueError(f"{self.name} must be positive, got {value}")
+        obj.__dict__[self.name] = value
+
+class Product:
+    price = PositiveNumber()     # ← descriptor instance as class attribute
+    quantity = PositiveNumber()
+
+    def __init__(self, price, quantity):
+        self.price = price           # calls PositiveNumber.__set__
+        self.quantity = quantity
+
+p = Product(10, 5)    # works
+p.price = -1          # ValueError: price must be positive, got -1
+```
+
+---
+
+### How Functions Become Methods
+
+Functions are non-data descriptors. When you access `obj.method`, Python calls:
+
+```python
+method.__get__(obj, type(obj))
+```
+
+This returns a **bound method** — the function with `obj` pre-filled as `self`.
+
+```python
+class Foo:
+    def bar(self):
+        return self
+
+foo = Foo()
+print(foo.bar)          # <bound method Foo.bar of <Foo object>>
+print(Foo.bar)          # <function Foo.bar at 0x...>
+print(foo.bar())        # <Foo object>    ← self = foo, auto-filled
+```
+
+The descriptor protocol is why `foo.bar()` automatically passes `foo` as `self`.
 
 ---
 

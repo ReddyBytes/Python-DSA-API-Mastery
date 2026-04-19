@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+CQRS (Command Query Responsibility Segregation) trade-offs · event sourcing concepts · fan-out on write vs read
+
+**Should Learn** — Important for real projects, comes up regularly:
+data denormalization trade-offs · write amplification costs · database federation
+
+**Good to Know** — Useful in specific situations, not always tested:
+event versioning · read model construction · temporal queries
+
+**Reference** — Know it exists, look up syntax when needed:
+event store internals · cross-shard transactions · operational debugging of event-sourced systems
+
+---
+
 ## 📋 Contents
 
 ```

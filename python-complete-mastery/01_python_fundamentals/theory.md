@@ -2,6 +2,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Variables and types · Mutability (list vs tuple vs str) · `is` vs `==` · `None` handling · Dynamic typing · LEGB scope rule
+
+**Should Learn** — Important for real projects, comes up regularly:
+Integer caching · String interning · `pass` / `assert` · Augmented assignment (`+=`, `-=`)
+
+**Good to Know** — Useful in specific situations:
+`divmod()` · `hex()` / `oct()` / `bin()` · Raw strings (`r"..."`) · Escape sequences
+
+**Reference** — Know it exists, look up when needed:
+`complex` type · Old-style `%` string formatting
+
+---
+
 # 1️⃣ What is Python?
 
 Imagine you want to talk to a computer.
@@ -334,22 +350,83 @@ Never rely on this behavior.
 
 # 📦 Shallow Copy vs Deep Copy (Real Production Issue)
 
+Copying an object seems simple until you hit the bug:
+you "copy" a list, modify the copy, and the original changes too.
+
 ```python
 import copy
 
 a = [[1, 2], [3, 4]]
-b = copy.copy(a)
-c = copy.deepcopy(a)
+b = copy.copy(a)      # shallow copy
+c = copy.deepcopy(a)  # deep copy
+
+b[0][0] = 999
+print(a)   # [[999, 2], [3, 4]]  ← original changed!
+print(c)   # [[1, 2], [3, 4]]   ← deep copy is independent
 ```
 
-Shallow copy:
-Copies outer structure only.
+**Why does shallow copy change the original?**
 
-Deep copy:
-Copies everything recursively.
+```
+SHALLOW COPY — copies the outer container, shares inner objects:
 
-If nested objects are modified:
-Shallow copy may still reflect changes.
+  a ──► [ ref0, ref1 ]
+              │      │
+  b ──► [ ref0, ref1 ]   ← same inner list objects!
+              │
+            [1, 2]   ← modifying b[0][0] modifies THIS object
+                        which both a[0] and b[0] point to
+
+DEEP COPY — copies everything recursively:
+
+  a ──► [ ref0, ref1 ]
+              │      │
+            [1,2]  [3,4]
+
+  c ──► [ ref2, ref3 ]   ← completely new inner objects
+              │      │
+            [1,2]  [3,4]   ← independent copies
+```
+
+**Three ways to make a shallow copy:**
+
+```python
+import copy
+
+original = [[1, 2], [3, 4]]
+
+b = copy.copy(original)      # explicit shallow copy
+c = original[:]              # slice syntax (lists only)
+d = list(original)           # list constructor
+e = original.copy()          # .copy() method (list, dict, set)
+
+# All four are shallow — inner objects still shared
+```
+
+**When you actually need deep copy:**
+
+```python
+import copy
+
+# Config that gets modified per-request:
+base_config = {"limits": {"rate": 100, "burst": 200}, "enabled": True}
+
+# Shallow copy — limits dict is still shared:
+request_config = copy.copy(base_config)
+request_config["limits"]["rate"] = 50   # modifies base_config too!
+
+# Deep copy — fully independent:
+request_config = copy.deepcopy(base_config)
+request_config["limits"]["rate"] = 50   # only affects request_config
+```
+
+**Performance note:** `deepcopy` is significantly slower — it must recursively copy every nested object. Only use it when you actually need independence. For flat structures (no nesting), shallow copy is safe and fast.
+
+```python
+flat = [1, 2, 3, 4, 5]
+copy_flat = flat[:]    # shallow copy is fine — ints are immutable
+                       # no nested mutables to worry about
+```
 
 This is extremely important in:
 - Data pipelines

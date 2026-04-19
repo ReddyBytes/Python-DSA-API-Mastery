@@ -26,7 +26,7 @@
 
 ---
 
-## 1. Why Multiprocessing? The GIL Problem
+## 1. Why Multiprocessing? The [GIL](./theory.md#-chapter-2-the-gil--pythons-most-misunderstood-feature) Problem
 
 ```python
 import time, threading, multiprocessing

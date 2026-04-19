@@ -18,6 +18,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+monolith vs microservices trade-offs · Strangler Fig decomposition pattern · synchronous vs asynchronous communication selection
+
+**Should Learn** — Important for real projects, comes up regularly:
+circuit breaker pattern · saga pattern · service discovery · distributed tracing need
+
+**Good to Know** — Useful in specific situations, not always tested:
+API gateway role · Conway's Law implications
+
+**Reference** — Know it exists, look up syntax when needed:
+service mesh (Istio/Linkerd) · mTLS between services · cost per service (operational overhead)
+
+---
+
 ## 📖 **Main content**: [monolith_to_micro.md](./monolith_to_micro.md)
 
 ---

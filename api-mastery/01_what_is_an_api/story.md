@@ -47,6 +47,22 @@ standard ordering flow. APIs are that interface, but for software.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+HTTP methods (GET/POST/PUT/PATCH/DELETE) · HTTP status codes · JSON basics · request/response headers
+
+**Should Learn** — Important for real projects, comes up regularly:
+client-server separation · request anatomy · API types overview (REST/GraphQL/gRPC)
+
+**Good to Know** — Useful in specific situations, not always tested:
+HTTP version differences (1.1 vs 2 vs 3) · API taxonomy
+
+**Reference** — Know it exists, look up syntax when needed:
+specific HTTP spec details · header catalog
+
+---
+
 ## Every App You Love Uses APIs
 
 Let's play a quick game. Think of any app you use regularly. I'll show you the APIs

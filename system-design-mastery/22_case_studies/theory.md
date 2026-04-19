@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+case study methodology (requirements→estimation→architecture→bottlenecks→trade-offs) · capacity estimation process
+
+**Should Learn** — Important for real projects, comes up regularly:
+pattern recognition across system types · URL shortener · Twitter feed design
+
+**Good to Know** — Useful in specific situations, not always tested:
+Netflix CDN pattern · Uber geo-indexing · WhatsApp message ordering
+
+**Reference** — Know it exists, look up syntax when needed:
+pattern map across case studies · cost estimation per design
+
+---
+
 ## 📂 Available Case Studies
 
 | System | Core Patterns | File |

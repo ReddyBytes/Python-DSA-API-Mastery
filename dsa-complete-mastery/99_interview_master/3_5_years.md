@@ -15,6 +15,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+graphs (BFS/DFS/topological sort) · dynamic programming patterns · binary search variants
+
+**Should Learn** — Important for real projects, comes up regularly:
+trees (advanced patterns) · heap patterns · backtracking
+
+**Good to Know** — Useful in specific situations, not always tested:
+segment tree · DSU · advanced DP (bitmask/string DP)
+
+**Reference** — Know it exists, look up syntax when needed:
+advanced graph algorithms (SCC/MST/flow)
+
+---
+
 # 🧠 What Companies Expect (3–5 Years)
 
 You should be comfortable with:

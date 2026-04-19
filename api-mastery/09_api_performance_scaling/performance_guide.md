@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+N+1 query detection and fix · database indexes · connection pooling · percentile-based metrics (p50/p95/p99)
+
+**Should Learn** — Important for real projects, comes up regularly:
+Redis cache patterns (cache-aside) · circuit breaker pattern · horizontal scaling (stateless design)
+
+**Good to Know** — Useful in specific situations, not always tested:
+orjson · exclude_unset · async for I/O-bound paths
+
+**Reference** — Know it exists, look up syntax when needed:
+query plan analysis · multi-level caching · query cost modeling
+
+---
+
 ## The Problem With Performance Being an Afterthought
 
 Most APIs start life handling a few dozen requests per day. The code works. Tests pass.
@@ -405,6 +421,126 @@ for order in orders:
 
 ---
 
+## Connection Pooling — Why Default Settings Kill You
+
+Every database call requires a connection. Creating a connection is expensive:
+
+```
+Without pooling:
+  Request arrives → open TCP connection → authenticate → run query → close connection
+  Time cost:  ~10-50ms for connection setup  +  actual query time
+
+With pooling:
+  Request arrives → grab idle connection from pool → run query → return to pool
+  Time cost:  ~0.1ms (pool checkout) + actual query time
+```
+
+A connection pool maintains a set of pre-established connections that are reused.
+
+---
+
+### How It Works
+
+```
+Connection Pool (max_size=10):
+
+┌─────────────────────────────────────────────────────┐
+│  conn_1  [IDLE]   conn_2  [IN USE]  conn_3  [IDLE]  │
+│  conn_4  [IDLE]   conn_5  [IN USE]  conn_6  [IDLE]  │
+│  conn_7  [IDLE]   conn_8  [IDLE]    conn_9  [IDLE]  │
+│  conn_10 [IDLE]                                     │
+└─────────────────────────────────────────────────────┘
+
+Request → checks out conn_1 (IDLE)
+Query runs using conn_1
+Request completes → returns conn_1 to pool (IDLE again)
+```
+
+If all connections are in use, the request **waits** in a queue until one is returned.
+If the wait exceeds `pool_timeout`, it raises a connection timeout error.
+
+---
+
+### The Default Settings Problem
+
+SQLAlchemy default pool size: **5 connections**.
+Django default: **no pooling** (new connection per request!).
+
+**At scale:**
+
+```
+1,000 concurrent requests → all waiting for 5 pool slots → timeouts → errors
+```
+
+---
+
+### Pool Sizing Formula
+
+The widely-used formula for databases (from HikariCP research):
+
+```
+pool_size = (number_of_cores × 2) + 1
+
+Examples:
+  4-core server: (4 × 2) + 1 = 9 connections
+  8-core server: (8 × 2) + 1 = 17 connections
+```
+
+Why? A database thread spends ~50% of time waiting on I/O.
+Doubling cores + 1 keeps all cores busy while some connections wait.
+
+**SQLAlchemy configuration:**
+
+```python
+from sqlalchemy import create_engine
+
+engine = create_engine(
+    "postgresql://user:pass@host/db",
+    pool_size=9,          # core_count × 2 + 1
+    max_overflow=5,       # additional connections when pool is full (temporary)
+    pool_timeout=30,      # seconds to wait before timeout
+    pool_recycle=1800,    # recycle connections after 30 min (prevent stale)
+    pool_pre_ping=True,   # test connection before use (detect dead connections)
+)
+```
+
+**FastAPI with async SQLAlchemy:**
+
+```python
+from sqlalchemy.ext.asyncio import create_async_engine
+
+engine = create_async_engine(
+    "postgresql+asyncpg://user:pass@host/db",
+    pool_size=9,
+    max_overflow=5,
+    pool_timeout=30,
+)
+```
+
+---
+
+### Connection Pool Anti-Patterns
+
+```
+❌ Creating engine inside each request:
+   @app.get("/data")
+   async def endpoint():
+       engine = create_engine(...)   # new pool on every request!
+       # Fix: create engine once at startup
+
+❌ Not returning connections:
+   conn = pool.getconn()
+   result = conn.execute(query)
+   # forgot conn.close() or return to pool → pool exhaustion
+
+❌ Pool too large:
+   pool_size = 1000
+   # Databases have connection limits. PostgreSQL default: 100.
+   # 10 app servers × 100 pool = 1000 connections → exceeds DB limit
+```
+
+---
+
 ## 4. Connection Pool Sizing
 
 Every database connection has a cost: memory on the DB server, a file descriptor on the
@@ -781,6 +917,113 @@ Metrics that matter:
   DB connection pool utilization
   Cache hit rate
 ```
+
+---
+
+## 🔌 Circuit Breaker — Stop Cascading Failures
+
+> Imagine your house's electrical circuit breaker. When a wire overloads, the breaker trips to prevent fire spreading to the rest of the house. The software circuit breaker does the same: when a downstream service is failing, stop sending requests and fail fast — before the failure cascades everywhere.
+
+The **circuit breaker pattern** wraps calls to external services and tracks failure rates. When failures exceed a threshold, the circuit "opens" and immediately returns an error without hitting the failing service — giving it time to recover.
+
+**Three states:**
+```
+CLOSED  →  Normal operation. Requests pass through. Failures are counted.
+OPEN    →  Too many failures. Requests fail immediately (no network call).
+HALF-OPEN → After timeout, let a test request through. If it succeeds → CLOSED.
+                                                       If it fails   → OPEN again.
+```
+
+```python
+import time
+from enum import Enum
+
+class CircuitState(Enum):
+    CLOSED    = "closed"      # normal — requests pass through
+    OPEN      = "open"        # tripped — fail fast
+    HALF_OPEN = "half_open"   # testing — one probe request allowed
+
+class CircuitBreaker:
+    def __init__(self, failure_threshold=5, timeout=60):
+        self.failure_threshold = failure_threshold  # ← failures before opening
+        self.timeout = timeout                      # ← seconds before trying again
+        self.failure_count = 0
+        self.last_failure_time = None
+        self.state = CircuitState.CLOSED
+
+    def call(self, func, *args, **kwargs):
+        if self.state == CircuitState.OPEN:
+            if time.time() - self.last_failure_time > self.timeout:
+                self.state = CircuitState.HALF_OPEN  # ← try probe request
+            else:
+                raise Exception("Circuit OPEN — service unavailable")
+
+        try:
+            result = func(*args, **kwargs)
+            self._on_success()
+            return result
+        except Exception as e:
+            self._on_failure()
+            raise
+
+    def _on_success(self):
+        self.failure_count = 0
+        self.state = CircuitState.CLOSED    # ← reset on success
+
+    def _on_failure(self):
+        self.failure_count += 1
+        self.last_failure_time = time.time()
+        if self.failure_count >= self.failure_threshold:
+            self.state = CircuitState.OPEN  # ← trip the breaker
+
+# Usage:
+cb = CircuitBreaker(failure_threshold=3, timeout=30)
+
+def call_payment_service(order_id):
+    return cb.call(payment_client.charge, order_id)
+```
+
+**FastAPI integration with tenacity + custom circuit breaker:**
+
+```python
+from tenacity import retry, stop_after_attempt, wait_exponential, CircuitBreaker
+
+# Simple approach: retry with backoff (for transient failures)
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=1, max=10)
+)
+async def fetch_user_data(user_id: int):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{USER_SERVICE}/users/{user_id}", timeout=5.0)
+        response.raise_for_status()
+        return response.json()
+
+# Full pattern in production: use a library like 'circuitbreaker' or 'pybreaker'
+# pip install pybreaker
+import pybreaker
+
+db_breaker = pybreaker.CircuitBreaker(fail_max=5, reset_timeout=30)
+
+@db_breaker
+def query_database(query):
+    return db.execute(query)
+```
+
+**Circuit breaker vs retry — when to use each:**
+
+```
+Retry:           Transient failures (brief network blip, 503 under load)
+Circuit Breaker: Systemic failures (service down, database unavailable)
+
+Rule: Retry for brief spikes. Circuit Breaker for sustained failures.
+Combine: Circuit Breaker wraps the function, Retry is inside.
+```
+
+**Key metrics to monitor:**
+- Circuit open rate (how often it trips)
+- Error rate before/after circuit opens
+- Response time distribution (circuit open = near-zero latency for failures)
 
 ---
 

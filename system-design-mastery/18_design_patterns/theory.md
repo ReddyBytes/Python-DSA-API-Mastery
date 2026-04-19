@@ -20,6 +20,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+creational (Singleton/Factory/Builder) · structural (Adapter/Decorator/Facade/Proxy) · behavioral (Observer/Strategy/Command/State)
+
+**Should Learn** — Important for real projects, comes up regularly:
+anti-patterns (God Object/Anemic Model/Golden Hammer) · patterns in distributed systems (Circuit Breaker/Retry as patterns)
+
+**Good to Know** — Useful in specific situations, not always tested:
+pattern combinations in real systems · Chain of Responsibility · Template Method
+
+**Reference** — Know it exists, look up syntax when needed:
+performance implications of patterns · functional programming alternatives
+
+---
+
 ## 1. Why Patterns Matter
 
 ```

@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+L4 vs L7 load balancing · algorithms (round-robin/least-connections/IP hash) · health checks
+
+**Should Learn** — Important for real projects, comes up regularly:
+consistent hashing for minimizing reshuffling · sticky sessions anti-pattern · stateless alternatives
+
+**Good to Know** — Useful in specific situations, not always tested:
+GSLB (global server load balancing) · weighted routing
+
+**Reference** — Know it exists, look up syntax when needed:
+DSR (Direct Server Return) mode · active vs passive health checking · connection draining
+
+---
+
 ## 📋 Contents
 
 ```

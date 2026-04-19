@@ -5,6 +5,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+vertical vs horizontal scaling · CAP theorem (CP vs AP) · consistency models · fault tolerance patterns (circuit breaker/bulkhead/retry)
+
+**Should Learn** — Important for real projects, comes up regularly:
+back-of-envelope estimation · SLO/SLI/SLA · availability calculations · PACELC theorem
+
+**Good to Know** — Useful in specific situations, not always tested:
+idempotency strategies · Little's Law · percentile-based thinking
+
+**Reference** — Know it exists, look up syntax when needed:
+Byzantine fault tolerance · FMEA · chaos engineering principles
+
+---
+
 ## 📋 Contents
 
 ```
@@ -275,6 +291,46 @@ AP choice: Node A and B both serve requests independently
 
 ---
 
+### CAP Theorem — The Visual
+
+```
+                    Consistency
+                        /\
+                       /  \
+                      /    \
+                     /  ??  \
+                    /        \
+                   /──────────\
+          Availability    Partition Tolerance
+```
+
+In a distributed system, a **network partition** (nodes can't communicate) is unavoidable.
+So the real choice is: **when a partition occurs, do you sacrifice Consistency or Availability?**
+
+```
+CP (Consistent + Partition Tolerant):
+  During partition → refuse requests rather than return stale data
+  Examples: HBase, Zookeeper, etcd
+  Use when: financial transactions, inventory counts, anything where wrong = dangerous
+
+AP (Available + Partition Tolerant):
+  During partition → serve potentially stale data rather than fail
+  Examples: Cassandra, DynamoDB, CouchDB
+  Use when: social media likes, shopping carts, anything where "eventually right" is fine
+
+CA (Consistent + Available) — theoretical only:
+  Requires no partitions → impossible in distributed systems (network always fails eventually)
+  Only possible in single-node systems
+```
+
+**The interview answer:**
+
+"In practice, partition tolerance is not optional — network failures happen. So the real
+trade-off is CP vs AP. I'd choose CP for financial data and AP for user-facing features
+where temporary staleness is acceptable."
+
+---
+
 ## 7. PACELC — CAP's Practical Extension
 
 CAP describes what happens during partitions. PACELC adds: **even when the
@@ -404,6 +460,47 @@ def call_with_retry(fn, max_attempts=3, base_delay=1.0, max_delay=60.0):
             jitter = random.uniform(0, delay * 0.1)  # prevent thundering herd
             time.sleep(delay + jitter)
 ```
+
+### RTO and RPO — Recovery Objectives
+
+Two numbers every system designer must know when discussing disaster recovery:
+
+**RTO (Recovery Time Objective)** — the maximum acceptable downtime. How long can the system be unavailable before it causes unacceptable business impact?
+
+**RPO (Recovery Point Objective)** — the maximum acceptable data loss. How much data (measured in time) can you afford to lose?
+
+```
+Failure occurs at T=0
+
+RPO                        RTO
+←──────────────────────┐   ┌──────────────────────────────→
+Last good backup        T=0  Recovery complete
+
+RPO = time between last backup and failure  (data loss window)
+RTO = time from failure to service restored (downtime window)
+```
+
+**Examples by system type:**
+
+```
+System              RPO          RTO          Strategy
+─────────────────────────────────────────────────────────────
+Payment system      ~0 seconds   < 30 seconds  Synchronous replication, hot standby
+E-commerce cart     < 5 minutes  < 5 minutes   Async replication, warm standby
+Analytics reports   < 24 hours   < 4 hours     Daily backup, cold standby
+Dev/test env        < 1 week     < 24 hours    Weekly snapshot
+```
+
+**Recovery strategies ranked by cost and speed:**
+
+```
+Hot standby    — live replica, failover in seconds      (highest cost)
+Warm standby   — replica updated periodically, failover in minutes
+Cold standby   — backup restored on new hardware, failover in hours
+Backup/restore — restore from S3/tape, failover in hours–days  (lowest cost)
+```
+
+The right choice depends on: cost of downtime per minute × expected downtime vs infrastructure cost.
 
 ---
 

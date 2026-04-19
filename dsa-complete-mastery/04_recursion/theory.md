@@ -8,6 +8,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+base case · recursive case · call stack · recurrence relations · recursion tree
+
+**Should Learn** — Important for real projects, comes up regularly:
+memoization as bridge to DP · time complexity analysis · recursion vs iteration
+
+**Good to Know** — Useful in specific situations, not always tested:
+tail recursion · space complexity of recursion
+
+**Reference** — Know it exists, look up syntax when needed:
+Master Theorem · mutual recursion · trampolining
+
+---
+
 # 1️⃣ What Is Recursion?
 
 Recursion is a technique where a function calls itself to solve a smaller version of the same problem.

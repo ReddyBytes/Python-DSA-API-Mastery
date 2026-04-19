@@ -66,7 +66,7 @@ class Child(Parent):
         return f"Child + {parent_result}"
 
 # Multiple inheritance:
-class C(A, B):          # MRO: C → A → B → object (left-to-right, then shared base last)
+class C(A, B):          # [MRO](./13_mro_and_super.md): C → A → B → object (left-to-right, then shared base last)
     pass
 
 # Check MRO:
@@ -219,7 +219,7 @@ class Employee:
 
 ---
 
-## ⚡ `__slots__`
+## ⚡ [`__slots__`](./15_slots.md)
 
 ```python
 class Point:
@@ -271,7 +271,7 @@ class MyModel:
 
 ---
 
-## 🧬 Metaclasses
+## 🧬 [Metaclasses](./16_metaclasses.md)
 
 ```python
 class MyMeta(type):

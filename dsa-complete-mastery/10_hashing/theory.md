@@ -11,6 +11,22 @@ It is a strategy to reduce lookup time.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+hash function · collision resolution (chaining vs open addressing) · O(1) average operations
+
+**Should Learn** — Important for real projects, comes up regularly:
+load factor · resizing · Python dict and set internals
+
+**Good to Know** — Useful in specific situations, not always tested:
+hash table vulnerabilities · quadratic probing and double hashing
+
+**Reference** — Know it exists, look up syntax when needed:
+cryptographic hashing · bloom filters · consistent hashing · cuckoo hashing
+
+---
+
 # 1️⃣ Real Life Analogy — Library Without and With Hashing
 
 Imagine a library with 1 million books.

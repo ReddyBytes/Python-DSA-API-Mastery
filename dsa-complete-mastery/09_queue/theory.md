@@ -13,6 +13,22 @@ They model waiting systems.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+FIFO principle · deque (double-ended queue) · BFS usage
+
+**Should Learn** — Important for real projects, comes up regularly:
+circular queue · priority queue introduction · Python collections.deque
+
+**Good to Know** — Useful in specific situations, not always tested:
+queue in real systems · monotonic deque
+
+**Reference** — Know it exists, look up syntax when needed:
+blocking queue · bounded queue · double-ended priority queue
+
+---
+
 # 1️⃣ Daily Life: Where You Already Use Queue
 
 ### 🛒 Supermarket Line

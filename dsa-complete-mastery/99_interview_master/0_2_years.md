@@ -11,6 +11,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+arrays and strings basics · two pointers · sliding window · hash maps · stack and queue
+
+**Should Learn** — Important for real projects, comes up regularly:
+basic tree traversals · binary search · recursion fundamentals · sorting knowledge
+
+**Good to Know** — Useful in specific situations, not always tested:
+linked list operations · BFS/DFS basics
+
+**Reference** — Know it exists, look up syntax when needed:
+heap/priority queue · trie basics
+
+---
+
 # 🧠 What Companies Expect (0–2 Years)
 
 You should be comfortable with:

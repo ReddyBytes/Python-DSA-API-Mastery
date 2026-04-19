@@ -21,6 +21,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`def`, return values · `*args` / `**kwargs` · Default arguments · Lambda functions · Closures · LEGB rule · `functools.lru_cache`
+
+**Should Learn** — Important for real projects, comes up regularly:
+Positional-only `/` and keyword-only `*` params · `functools.partial` · `functools.wraps` · Recursion + `sys.setrecursionlimit()`
+
+**Good to Know** — Useful in specific situations:
+`functools.reduce` · `inspect.signature()` · Docstring formats (Google/NumPy/Sphinx)
+
+**Reference** — Know it exists, look up when needed:
+Tail recursion (Python doesn't optimize it) · `functools.singledispatch` (see decorators module)
+
+---
+
 # 📖 Chapter 1 — The Problem Functions Solve
 
 ## 🎬 The Story
@@ -166,6 +182,45 @@ After add() returns:
 > **Key insight:** Each function call gets its own isolated memory frame.
 > Variables in `add()` cannot accidentally affect variables in `main`.
 > This isolation is why functions are safe to reuse.
+
+---
+
+## What the Stack Frame Actually Contains
+
+Each stack frame holds more than just your variables:
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                    stack frame for add(10, 5)                    │
+│                                                                  │
+│  local namespace:   { 'a': →10, 'b': →5, 'result': →15 }       │
+│                           ↓    ↓          ↓                      │
+│                       heap  heap        heap  (actual objects)   │
+│                                                                  │
+│  reference to global namespace  (so the frame can find globals) │
+│  reference to code object       (bytecode of the function)      │
+│  return address                 (where to go after return)      │
+│  previous frame pointer         (link back to caller's frame)   │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+Key points:
+
+- The frame stores **references**, not values.
+- The actual objects (10, 5, 15) live on the **heap**.
+- Multiple frames can reference the same heap object.
+- When the frame is destroyed, only the name bindings disappear — heap objects survive until reference count hits zero.
+
+```python
+x = [1, 2, 3]      # list object created on heap
+
+def show(items):
+    print(items)    # 'items' in frame → same list on heap as 'x'
+    items.append(4) # mutates the heap object — x also sees this!
+
+show(x)
+print(x)            # [1, 2, 3, 4] — heap object was mutated
+```
 
 ---
 
@@ -698,6 +753,63 @@ print(inc())    # 1  ← reset worked!
 
 ---
 
+## Memory Behavior by Scope
+
+Scope isn't just about WHERE Python looks for names — it also determines WHERE the variables live in memory and HOW LONG they survive.
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  Scope      │  Memory Location         │  Lifetime                           │
+├─────────────┼──────────────────────────┼─────────────────────────────────────┤
+│  Local      │  Current stack frame     │  Dies when function returns.        │
+│             │                          │  The fastest access.                │
+├─────────────┼──────────────────────────┼─────────────────────────────────────┤
+│  Enclosing  │  Heap — cell object      │  Survives after outer function      │
+│             │  held by __closure__     │  returns, as long as inner          │
+│             │                          │  function is alive.                 │
+├─────────────┼──────────────────────────┼─────────────────────────────────────┤
+│  Global     │  Module __dict__ (heap)  │  Lives for entire program run.      │
+│             │                          │  Never auto-cleaned.                │
+├─────────────┼──────────────────────────┼─────────────────────────────────────┤
+│  Built-in   │  builtins module (heap)  │  Lives for entire interpreter       │
+│             │                          │  session.                           │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Local scope — stack, fastest, auto-cleaned:**
+
+```python
+def process():
+    result = compute()   # 'result' lives in THIS frame's local namespace
+    return result
+# After return: 'result' reference is gone, heap object collected if no other ref
+```
+
+**Global scope — heap, persists forever:**
+
+```python
+cache = {}   # module-level: lives in module.__dict__ on heap
+
+def add_to_cache(key, value):
+    cache[key] = value   # mutates the heap dict — persists across all calls
+```
+
+**Enclosing scope — heap cell, survives outer function:**
+
+```python
+def make_adder(n):
+    # 'n' becomes a cell object on heap when inner function captures it
+    def add(x):
+        return x + n     # looks up n in __closure__ cell, not a stack frame
+    return add
+
+add5 = make_adder(5)
+# make_adder() returned — its stack frame is GONE
+# but 'n=5' still lives in a cell on the heap, referenced by add5.__closure__
+```
+
+---
+
 # 📖 Chapter 7 — Functions Are Objects (First-Class Citizens)
 
 This is the concept that unlocks all advanced Python.
@@ -984,6 +1096,97 @@ functions[2]()    # 2  ✓
 ```python
 functions = [lambda x=i: x for i in range(5)]
 functions[0]()    # 0  ✓
+```
+
+---
+
+## Closure Cell Internals — How Captured Variables Actually Work
+
+When an inner function captures a variable from its enclosing scope, Python doesn't copy the value. It creates a **cell object** on the heap that both functions share.
+
+```
+def outer(x):
+    def inner(y):
+        return x + y    # 'x' is captured — becomes a cell
+    return inner
+
+add5 = outer(5)
+```
+
+Memory after `outer(5)` returns:
+
+```
+Stack: outer() frame DESTROYED (x reference gone from stack)
+
+Heap:
+  ┌──────────────────────────────────────┐
+  │  cell object                         │
+  │    cell_contents: 5                  │  ← 'x=5' lives here
+  └──────────────────────────────────────┘
+         ↑
+  ┌──────────────────────────────────────┐
+  │  function object: inner              │
+  │    __closure__: (cell_object,)       │  ← keeps cell alive
+  └──────────────────────────────────────┘
+         ↑
+  add5 → points to this function object
+```
+
+Inspect the cell:
+
+```python
+print(add5.__closure__)                     # (<cell at 0x...>,)
+print(add5.__closure__[0].cell_contents)    # 5
+```
+
+**Why cells cause late binding:**
+
+The cell doesn't store the value at closure creation time — it stores a **reference**.
+When `inner` runs and looks up `x`, it reads the cell's current value.
+
+```python
+# The classic late binding trap
+functions = []
+for i in range(3):
+    def f():
+        return i       # captures the CELL for 'i', not the current value
+    functions.append(f)
+
+print(functions[0]())  # 2 — reads cell at call time, loop is done, i=2
+print(functions[1]())  # 2
+print(functions[2]())  # 2
+```
+
+Fix: force value capture by using a default argument (evaluated at definition time, not call time):
+
+```python
+functions = [lambda i=i: i for i in range(3)]
+print(functions[0]())  # 0  ✓
+print(functions[1]())  # 1  ✓
+```
+
+**Multiple closures sharing one cell:**
+
+```python
+def make_counter():
+    count = 0               # one cell for 'count'
+
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+
+    def reset():
+        nonlocal count
+        count = 0            # same cell — both functions modify the same object
+
+    return increment, reset
+
+inc, rst = make_counter()
+inc()   # 1
+inc()   # 2
+rst()   # resets to 0
+inc()   # 1  — shared cell, reset worked
 ```
 
 ---

@@ -232,7 +232,7 @@ with ThreadPoolExecutor(max_workers=10) as executor:
     results = list(executor.map(fetch, urls, timeout=30))
 ```
 
-> **Advantages vs manual threads:** automatic pool management, `Future` API with exception propagation, works as context manager, `as_completed` for processing in completion order.
+> **Advantages vs manual threads:** automatic pool management, `Future` API with exception propagation, works as [context manager](../12_context_managers/theory.md#-chapter-2-the-context-manager-protocol), `as_completed` for processing in completion order.
 
 ---
 

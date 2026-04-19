@@ -26,6 +26,22 @@ and designing code that survives the real world.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`open()` + context manager · Read/write modes · `pathlib.Path` · `json.load` / `json.dump` · CSV reading/writing
+
+**Should Learn** — Important for real projects, comes up regularly:
+`io.StringIO` / `io.BytesIO` · Binary mode (`rb`/`wb`) · `str.encode()` / `bytes.decode()` · Directory operations (`mkdir`, `glob`)
+
+**Good to Know** — Useful in specific situations:
+`tempfile` module · `os.stat()` · Atomic file write patterns · `os.getcwd()`
+
+**Reference** — Know it exists, look up when needed:
+`mmap` module · File locks · `os.chmod()` · Symlinks
+
+---
+
 ## 🧠 Chapter 1 — What Is a File, Really?
 
 At the OS level, a file is a sequence of bytes on disk.
@@ -119,7 +135,7 @@ with open("input.txt") as infile, open("output.txt", "w") as outfile:
         outfile.write(line.upper())
 ```
 
-### What happens inside `with open(...)`:
+### What happens inside `with open(...)` ([context manager protocol](../12_context_managers/theory.md)):
 
 ```python
 # The with statement calls:
@@ -549,7 +565,7 @@ def compute_checksum(filepath: str) -> str:
     return sha256.hexdigest()
 ```
 
-### Pattern 3 — Generator for Lazy Processing
+### Pattern 3 — [Generator](../11_generators_iterators/theory.md#why-generators-are-lazy--the-memory-story) for Lazy Processing
 
 ```python
 def read_csv_rows(filepath: str):
@@ -770,6 +786,86 @@ print(f"Free:  {usage.free  / 1e9:.1f} GB")
 shutil.make_archive("backup_2025", "zip", "my_folder/")   # → backup_2025.zip
 shutil.unpack_archive("backup_2025.zip", "restored/")
 ```
+
+---
+
+## 🧪 `io.StringIO` and `io.BytesIO` — In-Memory Files
+
+Sometimes you need something that **behaves like a file** but lives entirely in memory — no disk I/O.
+
+`StringIO` is an in-memory text file. `BytesIO` is an in-memory binary file.
+Both support the same interface as real files: `read()`, `write()`, `seek()`, `tell()`.
+
+```python
+from io import StringIO, BytesIO
+
+# StringIO — in-memory text file:
+buffer = StringIO()
+buffer.write("Hello\n")
+buffer.write("World\n")
+buffer.seek(0)              # go back to start
+content = buffer.read()     # "Hello\nWorld\n"
+buffer.close()
+
+# BytesIO — in-memory binary file:
+buf = BytesIO()
+buf.write(b"\x89PNG\r\n")   # write bytes
+buf.seek(0)
+data = buf.read()            # b'\x89PNG\r\n'
+```
+
+**Why this matters — the real use cases:**
+
+```python
+# 1 — Testing code that writes to files (no temp files needed):
+from io import StringIO
+
+def write_report(f):
+    f.write("Sales: 1000\n")
+    f.write("Returns: 50\n")
+
+# In your test:
+output = StringIO()
+write_report(output)
+output.seek(0)
+assert "Sales: 1000" in output.read()   # no disk involved
+
+# 2 — Build a file in memory, then upload/send it:
+import csv
+from io import StringIO
+
+output = StringIO()
+writer = csv.writer(output)
+writer.writerow(["name", "score"])
+writer.writerow(["Alice", 95])
+csv_content = output.getvalue()   # get entire contents as string
+# Now send csv_content via HTTP, email, etc.
+
+# 3 — Pass a string to a function that expects a file:
+import json
+from io import StringIO
+
+def process_file(f):
+    return json.load(f)
+
+data = '{"name": "Alice", "age": 30}'
+result = process_file(StringIO(data))   # works without creating a real file
+```
+
+**`getvalue()` — get entire buffer content without seeking:**
+
+```python
+buf = StringIO()
+buf.write("line 1\n")
+buf.write("line 2\n")
+# No need to seek(0):
+content = buf.getvalue()   # "line 1\nline 2\n"
+```
+
+**Key difference from real files:**
+- No file path, no disk usage
+- Lives in RAM — garbage collected when reference goes away
+- Perfect for testing, building content in memory, or adapting string APIs
 
 ---
 

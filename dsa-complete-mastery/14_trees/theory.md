@@ -15,6 +15,22 @@ In life.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+tree terminology · binary tree structure · inorder/preorder/postorder traversal · level-order traversal
+
+**Should Learn** — Important for real projects, comes up regularly:
+recursion pattern for trees · tree serialization · height and depth · balanced vs skewed
+
+**Good to Know** — Useful in specific situations, not always tested:
+path sum problems · tree reconstruction from traversals
+
+**Reference** — Know it exists, look up syntax when needed:
+Morris traversal · N-ary trees
+
+---
+
 # 🌳 1️⃣ Real Life Story — Family Tree
 
 Imagine your family.
@@ -409,9 +425,150 @@ They are a gateway to advanced DSA.
 
 ---
 
+## 🌊 Level-Order Traversal — BFS on Trees
+
+> Imagine photographing a tree from above, capturing one row at a time — roots first, then their children, then grandchildren. That's level-order traversal.
+
+**Level-order traversal** visits nodes level by level using a queue (BFS). It is the go-to technique for any problem involving tree levels, width, or top-down relationships.
+
+```python
+from collections import deque
+
+def level_order(root):
+    if not root:
+        return []
+
+    result = []
+    queue = deque([root])          # ← start with root
+
+    while queue:
+        level_size = len(queue)    # ← snapshot: how many nodes at this level
+        level = []
+
+        for _ in range(level_size):
+            node = queue.popleft()
+            level.append(node.val)
+            if node.left:  queue.append(node.left)
+            if node.right: queue.append(node.right)
+
+        result.append(level)       # ← one sublist per level
+
+    return result
+
+# Tree:     1
+#          / \
+#         2   3
+#        / \
+#       4   5
+# Output: [[1], [2, 3], [4, 5]]
+```
+
+**Common level-order patterns:**
+```python
+# Right side view — last node at each level:
+def right_side_view(root):
+    result = []
+    queue = deque([root]) if root else deque()
+    while queue:
+        level_size = len(queue)
+        for i in range(level_size):
+            node = queue.popleft()
+            if i == level_size - 1:    # ← last node at this level
+                result.append(node.val)
+            if node.left:  queue.append(node.left)
+            if node.right: queue.append(node.right)
+    return result
+
+# Maximum width of tree — max nodes at any level:
+def max_width(root):
+    if not root: return 0
+    max_w = 0
+    queue = deque([root])
+    while queue:
+        max_w = max(max_w, len(queue))
+        for _ in range(len(queue)):
+            node = queue.popleft()
+            if node.left:  queue.append(node.left)
+            if node.right: queue.append(node.right)
+    return max_w
+```
+
+**Complexity:** O(n) time, O(n) space (queue holds up to n/2 nodes at widest level)
+
+---
+
+## 📦 Tree Serialization — Store and Rebuild Any Tree
+
+> Like saving a game — serialization encodes the entire tree into a string you can store, transmit, or reconstruct exactly.
+
+**Serialization** converts a tree to a string. **Deserialization** rebuilds the exact tree from that string. The standard approach uses BFS (level-order) or preorder with null markers.
+
+```python
+# Preorder serialization — encodes structure via null markers
+class Codec:
+    def serialize(self, root):
+        """Preorder DFS — mark None as 'N'."""
+        vals = []
+
+        def dfs(node):
+            if not node:
+                vals.append('N')    # ← null marker preserves structure
+                return
+            vals.append(str(node.val))
+            dfs(node.left)
+            dfs(node.right)
+
+        dfs(root)
+        return ','.join(vals)       # "1,2,N,N,3,N,N"
+
+    def deserialize(self, data):
+        """Rebuild using same preorder order."""
+        vals = iter(data.split(','))
+
+        def build():
+            val = next(vals)
+            if val == 'N':
+                return None         # ← null → no node here
+            node = TreeNode(int(val))
+            node.left  = build()   # ← recurse same order
+            node.right = build()
+            return node
+
+        return build()
+
+# BFS serialization (LeetCode format):
+def serialize_bfs(root):
+    if not root: return ''
+    queue = deque([root])
+    vals = []
+    while queue:
+        node = queue.popleft()
+        if node:
+            vals.append(str(node.val))
+            queue.append(node.left)    # ← append even if None
+            queue.append(node.right)
+        else:
+            vals.append('N')
+    return ','.join(vals)
+```
+
+**Why null markers matter:**
+```
+Tree:     1        Preorder without nulls: "1,2,3" — AMBIGUOUS
+         / \       Preorder with nulls:    "1,2,N,N,3,N,N" — UNIQUE ✓
+        2   3
+```
+
+**When this pattern appears:**
+- LeetCode 297 (Serialize and Deserialize Binary Tree)
+- Any problem requiring tree persistence or transmission
+- Reconstruct binary tree from traversal output
+
+---
+
 # 🔁 Navigation
 
-Previous:  
+Previous:
 [13_binary_search/interview.md](/dsa-complete-mastery/13_binary_search/interview.md)
 
 Next:  

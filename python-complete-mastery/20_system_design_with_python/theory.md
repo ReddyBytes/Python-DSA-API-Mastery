@@ -28,6 +28,22 @@ Not just writing functions.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+REST API design principles · HTTP status codes · Request/response lifecycle · Rate limiting · Pagination strategies · API authentication basics
+
+**Should Learn** — Important for real projects, comes up regularly:
+gRPC vs REST · API versioning · Circuit breaker pattern · Graceful shutdown · Idempotency keys · OpenAPI/Swagger docs
+
+**Good to Know** — Useful in specific situations:
+GraphQL basics · Webhook design · Distributed tracing · Service mesh concepts · Bulkhead pattern
+
+**Reference** — Know it exists, look up when needed:
+HATEOAS · CQRS · Consensus algorithms (Raft/Paxos) · Multi-region strategies
+
+---
+
 # 🧠 1️⃣ What Is System Design?
 
 System design means:

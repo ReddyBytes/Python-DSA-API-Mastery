@@ -3,6 +3,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+cache-aside (lazy loading) · write-through · write-behind · TTL and expiry · eviction policies (LRU/LFU)
+
+**Should Learn** — Important for real projects, comes up regularly:
+Redis data structures · cache stampede and thundering herd prevention · CDN caching
+
+**Good to Know** — Useful in specific situations, not always tested:
+multi-tier caching (L1 app / L2 Redis / L3 CDN) · cache key design patterns
+
+**Reference** — Know it exists, look up syntax when needed:
+bloom filters for negative caching · cache warm-up strategies · cache coherency
+
+---
+
 ## 📋 Contents
 
 ```

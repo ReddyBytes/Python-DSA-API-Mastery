@@ -56,7 +56,7 @@ Strong answer:
 
 - Use streaming (line-by-line reading)
 - Avoid loading entire file into memory
-- Use generators
+- Use [generators](../11_generators_iterators/theory.md#why-generators-are-lazy--the-memory-story)
 - Process in chunks
 
 Mention memory efficiency.
@@ -218,7 +218,7 @@ Graceful failure handling is key.
 
 Strong answer:
 
-- Use generators
+- Use [generators](../11_generators_iterators/theory.md#why-generators-are-lazy--the-memory-story)
 - Stream processing
 - Avoid large in-memory joins
 - Process in batches

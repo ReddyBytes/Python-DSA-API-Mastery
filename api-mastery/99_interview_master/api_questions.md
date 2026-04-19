@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+REST definition · PUT vs PATCH · idempotency · status code semantics · auth vs authz
+
+**Should Learn** — Important for real projects, comes up regularly:
+URL shortener design · pagination comparison · API versioning · distributed rate limiting
+
+**Good to Know** — Useful in specific situations, not always tested:
+GraphQL vs REST trade-offs · backward compatibility at scale
+
+**Reference** — Know it exists, look up syntax when needed:
+Stripe-style API design · Twitter API design patterns
+
+---
+
 ## How to Use This
 
 These are not essay prompts. Interviewers want to see that you understand the concepts, the trade-offs, and can reason under pressure. For each question, the model answer gives you the key points to hit. Expand on them conversationally — don't recite them.

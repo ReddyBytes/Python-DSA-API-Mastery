@@ -22,6 +22,22 @@ Graphs are everywhere.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+graph representation (adjacency list vs matrix) · BFS · DFS · time complexity
+
+**Should Learn** — Important for real projects, comes up regularly:
+topological sort · cycle detection · connected components
+
+**Good to Know** — Useful in specific situations, not always tested:
+shortest path unweighted · directed vs undirected implications
+
+**Reference** — Know it exists, look up syntax when needed:
+Dijkstra · Bellman-Ford · MST (covered in 25_advanced_graphs)
+
+---
+
 # 🌍 1️⃣ Real Life Story — City Map
 
 Imagine a city.
@@ -337,6 +353,100 @@ Mastering graphs prepares you for:
 - Advanced system design
 
 Graphs are one of the most important topics in DSA.
+
+---
+
+## 🔢 Topological Sort — Ordering Dependencies
+
+> Think of course prerequisites: you must take Math 101 before Calculus, and Calculus before Differential Equations. Topological sort finds a valid ordering of tasks with dependencies.
+
+**Topological sort** produces a linear ordering of vertices in a directed acyclic graph (DAG) such that for every edge u → v, u comes before v. It only works on DAGs — cycles make a valid ordering impossible.
+
+**When to use:** Build systems, course scheduling, task pipelines, package dependency resolution.
+
+### Kahn's Algorithm (BFS-based)
+
+```python
+from collections import deque, defaultdict
+
+def topological_sort_kahn(n, edges):
+    """
+    n: number of nodes (0 to n-1)
+    edges: list of (u, v) meaning u must come before v
+    Returns: ordered list, or [] if cycle detected
+    """
+    graph = defaultdict(list)
+    in_degree = [0] * n          # ← count incoming edges per node
+
+    for u, v in edges:
+        graph[u].append(v)
+        in_degree[v] += 1
+
+    # Start with all nodes that have no dependencies
+    queue = deque([i for i in range(n) if in_degree[i] == 0])
+    order = []
+
+    while queue:
+        node = queue.popleft()
+        order.append(node)
+
+        for neighbor in graph[node]:
+            in_degree[neighbor] -= 1    # ← remove this dependency
+            if in_degree[neighbor] == 0:  # ← all deps satisfied
+                queue.append(neighbor)
+
+    # If not all nodes processed → cycle exists
+    return order if len(order) == n else []
+```
+
+### DFS-based Topological Sort
+
+```python
+def topological_sort_dfs(n, edges):
+    graph = defaultdict(list)
+    for u, v in edges:
+        graph[u].append(v)
+
+    visited = [0] * n    # 0=unvisited, 1=in-progress, 2=done
+    result = []
+    has_cycle = [False]
+
+    def dfs(node):
+        if visited[node] == 1:    # ← back edge = cycle
+            has_cycle[0] = True
+            return
+        if visited[node] == 2:    # ← already processed
+            return
+
+        visited[node] = 1         # ← mark in-progress
+        for neighbor in graph[node]:
+            dfs(neighbor)
+        visited[node] = 2         # ← mark done
+        result.append(node)       # ← append AFTER visiting all descendants
+
+    for i in range(n):
+        if visited[i] == 0:
+            dfs(i)
+
+    if has_cycle[0]: return []
+    return result[::-1]           # ← reverse: DFS adds in reverse order
+```
+
+**Cycle detection — the key insight:**
+```
+Kahn's: if len(order) < n → some nodes never reached in_degree 0 → cycle
+DFS:    if we revisit an in-progress node → back edge → cycle
+
+Kahn's advantage:   easier cycle detection, natural BFS layer-by-layer order
+DFS advantage:      can produce lexicographically smallest order with modification
+```
+
+**Classic applications:**
+- Course schedule (LeetCode 207, 210)
+- Alien dictionary (LeetCode 269)
+- Task scheduling with dependencies
+
+**Complexity:** O(V + E) time, O(V + E) space
 
 ---
 

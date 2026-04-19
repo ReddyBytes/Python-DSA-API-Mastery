@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+systematic approach to scenario questions (diagnose→root cause→solution→trade-offs) · cascading failure prevention · database bottleneck patterns
+
+**Should Learn** — Important for real projects, comes up regularly:
+real-time notification at scale · distributed rate limiter design · zero-downtime migration
+
+**Good to Know** — Useful in specific situations, not always tested:
+monolith-to-microservices migration pattern · global leaderboard design
+
+**Reference** — Know it exists, look up syntax when needed:
+traffic spike preparation · data corruption incident response · follow-up question patterns
+
+---
+
 ## How to Use These Scenarios
 
 The scenarios in this file are not trivia questions with right answers. They are probes for judgment. When you practice them, do not try to memorize the "strong answer elements" — internalize the reasoning structure behind each one.

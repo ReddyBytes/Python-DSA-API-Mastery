@@ -4,6 +4,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+CAP theorem answer · SLO/SLI/SLA distinction · latency numbers by tier · consistent hashing explanation
+
+**Should Learn** — Important for real projects, comes up regularly:
+circuit breaker states · gossip protocol use case · CQRS vs event sourcing distinction
+
+**Good to Know** — Useful in specific situations, not always tested:
+Raft vs Paxos difference · vector clock purpose · bloom filter application
+
+**Reference** — Know it exists, look up syntax when needed:
+specific port numbers · exact consistency model names · cloud service comparisons
+
+---
+
 ## Contents
 
 ```

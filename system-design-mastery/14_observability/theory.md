@@ -18,6 +18,22 @@
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+three pillars (metrics/traces/logs) · distributed tracing (spans/trace context) · SLO and error budget concepts
+
+**Should Learn** — Important for real projects, comes up regularly:
+metrics types (counter/gauge/histogram) · structured log correlation · alerting thresholds
+
+**Good to Know** — Useful in specific situations, not always tested:
+OpenTelemetry instrumentation · Grafana query basics · ELK stack overview
+
+**Reference** — Know it exists, look up syntax when needed:
+metric cardinality explosion · sampling strategies · alert fatigue management
+
+---
+
 ## 📖 **Main content**: [seeing_your_system.md](./seeing_your_system.md)
 
 ---

@@ -43,6 +43,22 @@ This is the core promise of concurrency: **overlap the waiting**.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+GIL and its implications · `threading.Thread` · `ThreadPoolExecutor` · `asyncio` basics (`async def`, `await`, `asyncio.gather`) · I/O-bound vs CPU-bound decision
+
+**Should Learn** — Important for real projects, comes up regularly:
+`ProcessPoolExecutor` · `asyncio.create_task` · `asyncio.Queue` · `threading.Lock` · `asyncio.Semaphore`
+
+**Good to Know** — Useful in specific situations:
+`asyncio.TaskGroup` (Python 3.11+) · `asyncio.timeout()` · Task cancellation · `asyncio.shield()`
+
+**Reference** — Know it exists, look up when needed:
+Event loop policies · `asyncio.Barrier` · Multiprocessing managers · Zombie processes · Distributed task queues (Celery)
+
+---
+
 ## 🧠 Chapter 1: Concurrency vs Parallelism — The Critical Distinction
 
 These terms are often confused. They are **not** the same:
@@ -132,6 +148,130 @@ def increment(n):
 - `time.sleep()`
 - Calls into C extensions that release it (NumPy operations, sqlite3, etc.)
 - Every ~5ms (sys.getswitchinterval()) — forced context switch
+
+---
+
+## The GIL — Global Interpreter Lock
+
+The **GIL** is CPython's mechanism that allows only ONE thread to execute Python bytecode at a time — even on multi-core systems.
+
+```
+Without GIL (conceptual):
+  Core 1: Thread A ──────────────────────────────────────
+  Core 2: Thread B ──────────────────────────────────────
+
+With GIL (reality in CPython):
+  Core 1: Thread A ████░░░░████░░░░████░░░░████░░░░
+  Core 2: Thread B ░░░░████░░░░████░░░░████░░░░████
+                        ↑
+                   Only one holds GIL at a time
+                   Other waits, even on separate core
+```
+
+**Why does the GIL exist?**
+
+CPython's memory management ([reference counting](../01.1_memory_management/theory.md#-3️⃣-reference-counting)) is not thread-safe.
+Without the GIL, two threads could simultaneously modify a reference count,
+corrupting memory. The GIL is a simple solution: serialize all bytecode execution.
+
+**What the GIL means for you:**
+
+```
+CPU-bound task (heavy computation):
+  threading → NOT faster (GIL prevents parallel execution)
+  multiprocessing → FASTER (each process has its own GIL)
+
+I/O-bound task (network, disk, sleep):
+  threading → FASTER (GIL is released during I/O waits)
+  asyncio   → FASTER (no GIL needed — single thread, no context switch)
+```
+
+**The GIL IS released during:**
+- File reads/writes
+- Network operations
+- `time.sleep()`
+- Most C extension operations (NumPy, etc.)
+
+---
+
+## Decision Tree: Which Concurrency Model?
+
+```
+START: What is your task?
+         │
+         ├─ I/O-bound (network, file, DB, sleep)?
+         │       │
+         │       ├─ Many connections, high concurrency needed?
+         │       │       └─ asyncio  (single thread, event loop, no context switch overhead)
+         │       │
+         │       └─ Simpler use case, already using blocking libraries?
+         │               └─ threading  (simpler, GIL released during I/O)
+         │
+         └─ CPU-bound (heavy math, image processing, ML inference)?
+                 │
+                 ├─ Task is parallelizable across data?
+                 │       └─ multiprocessing  (each process = own GIL, true parallel)
+                 │
+                 └─ Mix of CPU-bound and I/O-bound?
+                         └─ asyncio + ProcessPoolExecutor
+                            (async event loop + separate processes for CPU work)
+```
+
+**Quick reference:**
+
+```
+┌──────────────────┬──────────────────────┬──────────────────────┐
+│                  │  I/O-bound           │  CPU-bound           │
+├──────────────────┼──────────────────────┼──────────────────────┤
+│  threading       │  ✓ Good              │  ✗ GIL blocks        │
+│  multiprocessing │  ✗ Overkill          │  ✓ True parallel     │
+│  asyncio         │  ✓ Best for scale    │  ✗ Single thread     │
+└──────────────────┴──────────────────────┴──────────────────────┘
+```
+
+---
+
+## asyncio Event Loop — Cooperative, Not Preemptive
+
+Threads are **preemptive**: the OS can interrupt any thread at any time.
+asyncio is **cooperative**: a task runs until it explicitly yields (with `await`).
+
+```
+THREADING (preemptive):
+  Task A: ────────────┤OS interrupt├────────────
+  Task B:             ────────────┤OS interrupt├─
+
+  OS decides when to switch. Can happen in the middle of anything.
+
+ASYNCIO (cooperative):
+  Task A: ──────────── await ──────────────────
+  Task B:              ──────── await ──────────
+
+  Task A runs until it hits 'await'.
+  Then the event loop gives control to Task B.
+  Task A resumes when its awaited operation completes.
+```
+
+**Key insight:** With asyncio, context switches only happen at `await` points.
+No surprise interruptions. No race conditions from switching mid-operation.
+This is why asyncio can handle thousands of connections with low overhead.
+
+```python
+import asyncio
+
+async def fetch(url):
+    # Runs until it hits 'await' — then event loop runs other tasks
+    response = await aiohttp.get(url)   # ← yields control here
+    return await response.text()        # ← yields again
+
+async def main():
+    # These run CONCURRENTLY — not sequentially
+    results = await asyncio.gather(
+        fetch("http://example.com/1"),
+        fetch("http://example.com/2"),
+        fetch("http://example.com/3"),
+    )
+```
 
 ---
 
@@ -235,7 +375,7 @@ counter += 1  compiles to:
 
 ## 🔐 Chapter 5: Thread Synchronization
 
-### Lock — Mutual Exclusion
+### [Lock](../12_context_managers/theory.md) — Mutual Exclusion
 
 ```python
 import threading
@@ -260,6 +400,8 @@ lock.locked()          # True if currently held
 
 # Always use with statement — guarantees release on exception
 ```
+
+`threading.Lock` is a [context manager](../12_context_managers/theory.md#-chapter-2-the-context-manager-protocol) — `with lock:` calls `lock.acquire()` on entry and `lock.release()` on exit, even if an exception occurs.
 
 ### RLock — Re-Entrant Lock
 
