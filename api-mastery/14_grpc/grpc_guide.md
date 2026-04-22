@@ -62,16 +62,16 @@ problem in the early 2010s. Their answer was gRPC.
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-Protocol Buffers (.proto syntax/field numbers) · 4 communication modes (unary/server-streaming/client-streaming/bidirectional) · when gRPC vs REST
+.proto file · service definition · Python server/client
 
-**Should Learn** — Important for real projects, comes up regularly:
-code generation workflow · gRPC interceptors (auth/logging/retry) · gRPC vs REST comparison
+**Should Learn** — Important for real projects:
+streaming modes
 
-**Good to Know** — Useful in specific situations, not always tested:
-backward compatibility in .proto files · Python gRPC server/client setup
+**Good to Know** — Useful in specific situations:
+gRPC-web
 
 **Reference** — Know it exists, look up syntax when needed:
-gRPC health check protocol · gRPC gateway · load balancing strategies
+Protocol Buffers advanced features
 
 ---
 

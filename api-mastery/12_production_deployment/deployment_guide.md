@@ -16,16 +16,16 @@ API survives contact with real users.
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-Dockerfile best practices (non-root/layer caching/slim base) · Gunicorn + UvicornWorker config · health checks (/health/live/ready)
+Dockerfile for FastAPI · Gunicorn/Uvicorn config · env vars
 
-**Should Learn** — Important for real projects, comes up regularly:
-Kubernetes deployment (RollingUpdate/probes/resource limits) · CI/CD pipeline (test→build→push→deploy)
+**Should Learn** — Important for real projects:
+docker-compose · health checks · CI/CD
 
-**Good to Know** — Useful in specific situations, not always tested:
-Prometheus metrics · structured JSON logging · Sentry error tracking
+**Good to Know** — Useful in specific situations:
+K8s deployment
 
 **Reference** — Know it exists, look up syntax when needed:
-GitOps (ArgoCD) · blue-green deployments · canary strategies · pod disruption budgets
+Blue-green deployment
 
 ---
 

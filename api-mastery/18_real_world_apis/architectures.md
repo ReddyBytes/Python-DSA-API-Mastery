@@ -7,16 +7,16 @@
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-payment state machines · idempotency in financial APIs · multi-tenancy patterns
+Stripe-style idempotency · webhook signature verification
 
-**Should Learn** — Important for real projects, comes up regularly:
-fan-out vs fan-in (social media) · presigned URLs for media · surge pricing calculation
+**Should Learn** — Important for real projects:
+cursor pagination · API key scoping
 
-**Good to Know** — Useful in specific situations, not always tested:
-RBAC implementation · usage tracking and billing · real-time location (Redis GEO)
+**Good to Know** — Useful in specific situations:
+SDK generation
 
 **Reference** — Know it exists, look up syntax when needed:
-tenant isolation strategies · architecture decision trade-offs per domain
+OpenAPI generator
 
 ---
 

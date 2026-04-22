@@ -7,7 +7,7 @@
 <div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.10+-84CC16?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![Modules](https://img.shields.io/badge/Modules-21-EAB308?style=for-the-badge)](#full-curriculum)
+[![Modules](https://img.shields.io/badge/Modules-33-EAB308?style=for-the-badge)](#full-curriculum)
 [![Practice Files](https://img.shields.io/badge/Practice%20Files-60%2B-84CC16?style=for-the-badge)](#full-curriculum)
 [![Level](https://img.shields.io/badge/Level-Core%20to%20Expert-EAB308?style=for-the-badge)](#choose-your-path)
 [![License](https://img.shields.io/badge/License-MIT-94a3b8?style=for-the-badge)](../LICENSE)
@@ -39,9 +39,10 @@ A complete, structured Python mastery system — from absolute basics to product
 | 🟢 **01–06** | [Core Python](#section-1-core-python) | Fundamentals, Control Flow, Data Types, Functions, OOP, Exceptions | Beginner–Intermediate | 20–25 hrs |
 | 🔵 **07–15** | [Advanced Python](#section-2-advanced-python) | Modules, File I/O, Logging, Decorators, Generators, Concurrency, Memory | Intermediate–Advanced | 25–30 hrs |
 | 🟣 **16–21** | [Architecture & Production](#section-3-architecture--production) | Design Patterns, Testing, Performance, System Design, Data Engineering | Advanced–Expert | 25–30 hrs |
+| 🔶 **22–33** | [Data Science & AI Track](#section-5-data-science--ai-track) | NumPy, Pandas, Stats, Matplotlib, EDA, Scraping, SQL, Regex, Flask, Streamlit | Intermediate–Advanced | 30–35 hrs |
 | 🎯 **99** | [Interview Master](#section-4-interview-master) | 0–2 yrs, 3–5 yrs, Scenario-based, Edge Cases | All levels | 10–15 hrs |
 
-**Total: ~80–100 hours of structured learning**
+**Total: ~110–130 hours of structured learning**
 
 </div>
 
@@ -170,6 +171,26 @@ A complete, structured Python mastery system — from absolute basics to product
 </details>
 
 <details>
+<summary><strong>🔶 Section 5 — Data Science & AI Track (Modules 22–33)</strong></summary>
+
+| Module | Theory | Cheatsheet | Interview | Practice |
+|--------|--------|------------|-----------|----------|
+| 22 · NumPy for AI | [📖](./22_numpy_for_ai/theory.md) | [⚡](./22_numpy_for_ai/cheetsheet.md) | [🎤](./22_numpy_for_ai/interview.md) | [practice.py](./22_numpy_for_ai/practice.py) |
+| 23 · Pandas for AI | [📖](./23_pandas_for_ai/theory.md) | [⚡](./23_pandas_for_ai/cheetsheet.md) | [🎤](./23_pandas_for_ai/interview.md) | [practice.py](./23_pandas_for_ai/practice.py) |
+| 24 · Async Python for AI | [📖](./24_async_python_for_ai/theory.md) | [⚡](./24_async_python_for_ai/cheetsheet.md) | [🎤](./24_async_python_for_ai/interview.md) | [practice.py](./24_async_python_for_ai/practice.py) |
+| 25 · Python AI Ecosystem | [📖](./25_python_ai_ecosystem/theory.md) | [⚡](./25_python_ai_ecosystem/cheetsheet.md) | [🎤](./25_python_ai_ecosystem/interview.md) | [practice.py](./25_python_ai_ecosystem/practice.py) |
+| 26 · Statistics & Probability | [📖](./26_statistics_and_probability/theory.md) | [⚡](./26_statistics_and_probability/cheetsheet.md) | [🎤](./26_statistics_and_probability/interview.md) | [practice.py](./26_statistics_and_probability/practice.py) |
+| 27 · Matplotlib & Seaborn | [📖](./27_matplotlib_seaborn/theory.md) | [⚡](./27_matplotlib_seaborn/cheetsheet.md) | [🎤](./27_matplotlib_seaborn/interview.md) | [practice.py](./27_matplotlib_seaborn/practice.py) |
+| 28 · EDA Workflow | [📖](./28_eda_workflow/theory.md) | [⚡](./28_eda_workflow/cheetsheet.md) | [🎤](./28_eda_workflow/interview.md) | [practice.py](./28_eda_workflow/practice.py) |
+| 29 · Web Scraping | [📖](./29_web_scraping/theory.md) | [⚡](./29_web_scraping/cheetsheet.md) | [🎤](./29_web_scraping/interview.md) | [practice.py](./29_web_scraping/practice.py) |
+| 30 · SQL with Python | [📖](./30_sql_with_python/theory.md) | [⚡](./30_sql_with_python/cheetsheet.md) | [🎤](./30_sql_with_python/interview.md) | [practice.py](./30_sql_with_python/practice.py) |
+| 31 · File Formats (PDF, XML…) | [📖](./31_file_formats_pdf_xml/theory.md) | [⚡](./31_file_formats_pdf_xml/cheetsheet.md) | [🎤](./31_file_formats_pdf_xml/interview.md) | [practice.py](./31_file_formats_pdf_xml/practice.py) |
+| 32 · Streamlit & Flask | [📖](./32_streamlit_flask/theory.md) | [⚡](./32_streamlit_flask/cheetsheet.md) | [🎤](./32_streamlit_flask/interview.md) | [practice.py](./32_streamlit_flask/practice.py) |
+| 33 · Regular Expressions | [📖](./33_regular_expressions/theory.md) | [⚡](./33_regular_expressions/cheetsheet.md) | [🎤](./33_regular_expressions/interview.md) | [practice.py](./33_regular_expressions/practice.py) |
+
+</details>
+
+<details>
 <summary><strong>🎯 Section 4 — Interview Master</strong></summary>
 
 | File | Level | Focus |
@@ -217,6 +238,8 @@ A complete, structured Python mastery system — from absolute basics to product
 **Interview prep?** → [python_0_2_years.md](./99_interview_master/python_0_2_years.md) → [tricky_edge_cases.md](./99_interview_master/tricky_edge_cases.md)
 
 **Production engineering?** → [Design Patterns](./16_design_patterns/theory.md) → [Performance](./18_performance_optimization/profiling.md) → [System Design](./20_system_design_with_python/theory.md)
+
+**Data science / AI path?** → [NumPy](./22_numpy_for_ai/theory.md) → [Pandas](./23_pandas_for_ai/theory.md) → [Statistics](./26_statistics_and_probability/theory.md) → [Matplotlib](./27_matplotlib_seaborn/theory.md) → [EDA](./28_eda_workflow/theory.md)
 
 **Back to root** → [../README.md](../README.md)
 

@@ -680,11 +680,66 @@ EXAMPLE OF RACE CONDITION WITH LBYL:
 
 ---
 
-## 🔄 Chapter 9 — Production Patterns
+## ⏱️ Retry & Exponential Backoff — The Full Picture
 
-### Pattern 1 — Retry with Exponential Backoff
+> You knock on a door. No answer. You wait 1 second and knock again. Still nothing.
+> You wait 2 seconds. Then 4. Then 8. You're not hammering the door down — you're
+> giving the person inside time to get up. That's exponential backoff.
 
-For transient failures: network blips, rate limits, temporary DB outages. Uses the [decorator pattern](../10_decorators/theory.md#-chapter-5-functoolswraps--preserving-identity) with `@functools.wraps`.
+Networks blip. APIs rate-limit. Databases hiccup. The wrong response is to retry
+immediately in a tight loop — you'll overwhelm a struggling service and make things
+worse. **Exponential backoff** spaces retries out with increasing delays, giving
+the upstream system room to recover.
+
+---
+
+### The Math
+
+```
+attempt 1 fails → wait base_delay * factor^0  = 1s
+attempt 2 fails → wait base_delay * factor^1  = 2s
+attempt 3 fails → wait base_delay * factor^2  = 4s
+attempt 4 fails → wait base_delay * factor^3  = 8s
+attempt 5 fails → wait base_delay * factor^4  = 16s  (capped at max_delay)
+```
+
+```
+Timeline (no jitter):
+
+t=0s   ───[attempt 1]──── FAIL
+t=1s   ───[attempt 2]──── FAIL
+t=3s   ───[attempt 3]──── FAIL
+t=7s   ───[attempt 4]──── OK ✓
+
+Timeline (with jitter):
+
+t=0s   ───[attempt 1]──── FAIL
+t=1.3s ───[attempt 2]──── FAIL   ← 1s + 0.3s random
+t=3.7s ───[attempt 3]──── FAIL   ← 2s + 0.7s random (delays overlap less)
+t=8.1s ───[attempt 4]──── OK ✓
+```
+
+---
+
+### Why Jitter Matters — The Thundering Herd Problem
+
+Without jitter, every client that hit the same failure retries at the exact same
+moment — 100 services all wake up at t=1s, hammer the API in sync, cause the same
+failure again. **Jitter** adds random noise to spread retry storms across time.
+
+```
+WITHOUT jitter (100 clients all retry at t=1s):
+    t=1s  ████████████████████████████████ (100 requests hit simultaneously)
+    t=3s  ████████████████████████████████ (still synchronized)
+
+WITH jitter (each client adds random(0, delay)):
+    t=0.8-1.9s  ░░░█░░██░█░░░█░░░██░░█░ (spread out — service breathes)
+    t=2.1-4.3s  ░█░░░█░░░░█░░░██░░░█░░░ (no spike)
+```
+
+---
+
+### Hand-Rolled Implementation
 
 ```python
 import time
@@ -692,13 +747,14 @@ import random
 import functools
 
 
-def retry(max_attempts=3, exceptions=(Exception,), backoff_factor=2.0, jitter=True):
-    """Decorator for automatic retry with exponential backoff."""
+def retry(max_attempts=3, exceptions=(Exception,), base_delay=1.0,
+          backoff_factor=2.0, max_delay=60.0, jitter=True):
+    """Retry decorator with exponential backoff and optional jitter."""
 
     def decorator(func):
-        @functools.wraps(func)
+        @functools.wraps(func)     # ← preserves __name__, __doc__ on wrapped func
         def wrapper(*args, **kwargs):
-            delay = 1.0
+            delay = base_delay
             last_exc = None
 
             for attempt in range(1, max_attempts + 1):
@@ -708,29 +764,134 @@ def retry(max_attempts=3, exceptions=(Exception,), backoff_factor=2.0, jitter=Tr
                 except exceptions as e:
                     last_exc = e
                     if attempt == max_attempts:
-                        break
+                        break                      # ← exhausted, fall through to raise
 
-                    wait = delay + (random.random() if jitter else 0)
-                    print(f"Attempt {attempt} failed ({e}). Retrying in {wait:.2f}s...")
+                    wait = min(delay, max_delay)
+                    if jitter:
+                        wait += random.uniform(0, wait * 0.1)   # ← ±10% noise
+                    print(f"Attempt {attempt}/{max_attempts} failed: {e}. "
+                          f"Retrying in {wait:.2f}s...")
                     time.sleep(wait)
-                    delay *= backoff_factor
+                    delay *= backoff_factor        # ← double the wait each round
 
-            raise last_exc    # ← all retries exhausted, raise last error
+            raise last_exc    # ← all attempts exhausted
 
         return wrapper
     return decorator
+```
 
+Usage:
+
+```python
+@retry(max_attempts=4, exceptions=(ConnectionError, TimeoutError), base_delay=1.0)
+def fetch_user(user_id: int):
+    return requests.get(f"https://api.example.com/users/{user_id}", timeout=5)
+
+# Attempt 1/4 failed: ConnectionError. Retrying in 1.07s...
+# Attempt 2/4 failed: ConnectionError. Retrying in 2.14s...
+# Attempt 3/4 failed: ConnectionError. Retrying in 4.02s...
+# Attempt 4/4 failed: ConnectionError.
+# ConnectionError raised  ← caller handles it
+```
+
+---
+
+### Production Approach — `tenacity`
+
+For production code, use **`tenacity`** — battle-tested, handles edge cases,
+composable stop/wait/retry conditions.
+
+```python
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_exponential,
+    retry_if_exception_type,
+    before_sleep_log,
+)
+import logging
+
+logger = logging.getLogger(__name__)
+
+@retry(
+    stop=stop_after_attempt(5),                    # ← max 5 tries
+    wait=wait_exponential(multiplier=1, min=1, max=60),  # ← 1s, 2s, 4s... capped at 60s
+    retry=retry_if_exception_type((ConnectionError, TimeoutError)),
+    before_sleep=before_sleep_log(logger, logging.WARNING),  # ← logs each retry
+)
+def call_payment_api(payload: dict):
+    return requests.post("https://api.stripe.com/v1/charges", data=payload)
+```
+
+---
+
+### Async Version
+
+When using `asyncio`, `time.sleep()` blocks the event loop — use `asyncio.sleep()`.
+
+```python
+import asyncio
+import random
+
+async def with_backoff(coro_func, *args, max_retries=5, base_delay=1.0):
+    """Async retry with exponential backoff."""
+    delay = base_delay
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            return await coro_func(*args)          # ← await the coroutine
+
+        except (ConnectionError, TimeoutError) as e:
+            if attempt == max_retries:
+                raise
+            jitter = random.uniform(0, delay * 0.1)
+            await asyncio.sleep(delay + jitter)    # ← non-blocking sleep
+            delay *= 2
 
 # Usage:
-@retry(max_attempts=3, exceptions=(ConnectionError, TimeoutError), backoff_factor=2.0)
-def call_payment_api(payload):
-    return requests.post("https://api.stripe.com/v1/charges", data=payload)
+result = await with_backoff(fetch_user_async, user_id=42)
+```
 
+---
 
-# Attempt 1 failed (ConnectionError). Retrying in 1.23s...
-# Attempt 2 failed (ConnectionError). Retrying in 2.45s...
-# Attempt 3 failed (ConnectionError).
-# ConnectionError raised
+### When NOT to Retry
+
+Not every error is transient. Retrying these makes things worse, not better:
+
+```
+RETRY these (transient):          DON'T RETRY these (permanent):
+────────────────────────────────  ──────────────────────────────────
+ConnectionError                   400 Bad Request  (your data is wrong)
+TimeoutError                      401 Unauthorized (fix your auth)
+503 Service Unavailable           403 Forbidden    (you don't have access)
+429 Too Many Requests             404 Not Found    (resource doesn't exist)
+network blips                     ValidationError  (your input is invalid)
+```
+
+```python
+# Check HTTP status before deciding to retry:
+def should_retry(exc: Exception) -> bool:
+    if isinstance(exc, requests.HTTPError):
+        return exc.response.status_code in {429, 500, 502, 503, 504}  # ← transient
+    return isinstance(exc, (ConnectionError, TimeoutError))
+```
+
+---
+
+## 🔄 Chapter 9 — Production Patterns
+
+### Pattern 1 — Retry with Exponential Backoff
+
+See the [dedicated section above](#️-retry--exponential-backoff--the-full-picture) for the complete treatment — math, jitter, hand-rolled implementation, `tenacity`, async, and when not to retry.
+
+Quick reference:
+
+```python
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(min=1, max=30))
+def unreliable_api_call():
+    return requests.get("https://api.example.com/data")
 ```
 
 ---

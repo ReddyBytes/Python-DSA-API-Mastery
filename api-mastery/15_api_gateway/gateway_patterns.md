@@ -26,16 +26,16 @@ That's the problem that API Gateways solve.
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-gateway purpose (cross-cutting concerns) · path-based routing · auth offload · BFF pattern
+gateway routing · rate limiting · auth offloading
 
-**Should Learn** — Important for real projects, comes up regularly:
-rate limiting at edge · request aggregation · protocol translation (REST↔gRPC)
+**Should Learn** — Important for real projects:
+BFF pattern · circuit breaking
 
-**Good to Know** — Useful in specific situations, not always tested:
-gateway tool comparison (AWS/Kong/Nginx/Envoy) · anti-patterns (no business logic)
+**Good to Know** — Useful in specific situations:
+service mesh vs gateway
 
 **Reference** — Know it exists, look up syntax when needed:
-canary routing policies · service discovery integration · circuit breaker at gateway
+Kong plugins
 
 ---
 

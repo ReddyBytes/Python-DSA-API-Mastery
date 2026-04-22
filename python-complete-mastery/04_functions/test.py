@@ -178,12 +178,54 @@
 
 
 
-def outer():
-    x=10
-    print("enclosed ")
-    def inner():
-        print(x)
+# def outer():
+#     x=10
+#     print("enclosed ")
+#     def inner():
+#         print(x)
         
-    return inner()
-f=outer()
-f()
+#     return inner()
+# f=outer()
+# f()
+
+
+# x=[1,3,[5,23],123]
+# y=x[:]
+# x.append(10)
+# print(x)
+# print(y)
+
+
+
+# x=[1,2,3]
+
+# def display(y):
+#     y.append(100)
+# display(x)
+# print(x)
+
+
+
+
+# add=lambda *args:[i**2 for i in args]
+# print(add(10,20,23,32,32,31,3))
+
+st=["run","walk","strike","pull","eat","sleep"]
+
+# res=map(lambda x:x+"ing",st)
+# print(list(res))
+
+l=[1,4,6,2,5,7,4,8,4,8,97,5,43]
+
+# res=filter(lambda x:x%2==0 ,l)
+# from functools import reduce
+# res=reduce(lambda a,b:a+b,l)
+# print((res))
+
+
+d={"a":12,"c":1,"z":3,"x":5}
+
+# print(d.items())
+# res={d[0]:d[1] for d in sorted(list(d.items()),key=lambda x:x[1])}
+res=sorted(list(d.items()))
+print(res)
