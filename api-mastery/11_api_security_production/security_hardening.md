@@ -7,16 +7,16 @@
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-HTTPS/TLS enforcement · token security (short-lived/rotation/revocation) · input validation · security headers (HSTS/CSP/X-Frame-Options)
+HTTPS · input validation · rate limiting · auth security
 
-**Should Learn** — Important for real projects, comes up regularly:
-CORS origin validation · advanced rate limiting (per-user/per-endpoint) · audit logging · file upload validation
+**Should Learn** — Important for real projects:
+OWASP API Top 10 · JWT security
 
-**Good to Know** — Useful in specific situations, not always tested:
-bot detection · httpOnly cookies · CSRF protection
+**Good to Know** — Useful in specific situations:
+API gateway WAF
 
 **Reference** — Know it exists, look up syntax when needed:
-WAF configuration · secrets rotation · DDoS patterns vs business logic rate limits
+mTLS · certificate pinning
 
 ---
 

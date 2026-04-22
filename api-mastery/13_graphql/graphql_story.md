@@ -33,16 +33,16 @@ This is the everyday reality that GraphQL was built to fix.
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-over-fetching/under-fetching problem · schema design (Query/Mutation/Subscription) · DataLoader for N+1 fix
+schema definition · queries · mutations · resolvers
 
-**Should Learn** — Important for real projects, comes up regularly:
-subscriptions via WebSocket · when GraphQL vs REST · resolver execution model
+**Should Learn** — Important for real projects:
+DataLoader · subscriptions
 
-**Good to Know** — Useful in specific situations, not always tested:
-GraphQL Federation · Strawberry GraphQL with FastAPI
+**Good to Know** — Useful in specific situations:
+federation
 
 **Reference** — Know it exists, look up syntax when needed:
-query complexity analysis · schema stitching · subscription connection management
+Persisted queries
 
 ---
 

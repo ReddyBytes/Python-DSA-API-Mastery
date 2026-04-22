@@ -54,6 +54,22 @@ This is what FastAPI solves. Let's understand exactly how.
 
 ---
 
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+route decorators (get/post/put/delete) · Pydantic request/response models · dependency injection (`Depends`) · automatic 422 validation
+
+**Should Learn** — Important for real projects, comes up regularly:
+background tasks · middleware · async vs sync routes · TestClient usage
+
+**Good to Know** — Useful in specific situations, not always tested:
+WebSockets in FastAPI · streaming responses · lifespan events
+
+**Reference** — Know it exists, look up syntax when needed:
+Starlette internals · ASGI spec details · custom response classes
+
+---
+
 ## The Comparison Table
 
 Before going deep, here is the honest comparison between the three main Python API

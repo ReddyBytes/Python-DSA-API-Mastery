@@ -7,16 +7,16 @@
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-three pillars (traces/metrics/logs) · distributed tracing (spans/trace context) · auto-instrumentation
+traces and spans · metric instruments · log correlation
 
-**Should Learn** — Important for real projects, comes up regularly:
-manual spans · custom metrics (counter/histogram/gauge) · correlated logs with trace context · sampling strategies
+**Should Learn** — Important for real projects:
+OTEL collector config · exporters
 
-**Good to Know** — Useful in specific situations, not always tested:
-OTEL Collector deployment · exporter configuration
+**Good to Know** — Useful in specific situations:
+sampling strategies
 
 **Reference** — Know it exists, look up syntax when needed:
-head vs tail sampling · baggage API · custom resource providers
+OpenMetrics format
 
 ---
 

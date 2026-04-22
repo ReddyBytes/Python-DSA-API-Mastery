@@ -28,16 +28,16 @@ With HTTP alone, there's only one way: the client has to ask.
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-WebSocket protocol · HTTP upgrade handshake · full-duplex communication · when to use WebSocket
+WebSocket handshake · send/receive · connection lifecycle
 
-**Should Learn** — Important for real projects, comes up regularly:
-Redis pub/sub for multi-server scaling · real-time use cases · security (wss:// + auth)
+**Should Learn** — Important for real projects:
+broadcast patterns · reconnection
 
-**Good to Know** — Useful in specific situations, not always tested:
-WebSocket vs SSE vs long-polling comparison · sticky sessions
+**Good to Know** — Useful in specific situations:
+Socket.io
 
 **Reference** — Know it exists, look up syntax when needed:
-reconnection strategies with backoff · message compression · permessage-deflate
+WebRTC differences
 
 ---
 
