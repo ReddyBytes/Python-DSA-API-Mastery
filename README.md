@@ -355,6 +355,10 @@ Every topic follows a structured format:
 
 **Daily reference?** → [Daily Job Guide](./DAILY_JOB_GUIDE.md)
 
+**Full multi-repo learning path?** → [Master Learning Path](./MASTER_LEARNING_PATH.md) — 12-phase roadmap across all repos
+
+**AI Engineer career roadmap?** → [AI Engineer Roadmap](./AI_ENGINEER_ROADMAP.md) — full path from fundamentals to production
+
 <img src="./assets/divider.svg" width="100%"/>
 
 <div align="center">
