@@ -1995,4 +1995,4 @@ f = lambda x: (x**2 if x>0 else abs(x)*3 + x/2)  # USE def for clarity
 
 **Prev:** [← Data Types — Interview Q&A](../03_data_types/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md) · [Itertools & Functools](./itertools_functools.md)

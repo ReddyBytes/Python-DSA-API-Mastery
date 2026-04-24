@@ -905,4 +905,4 @@ content = buf.getvalue()   # "line 1\nline 2\n"
 
 **Prev:** [← Modules Packages — Interview Q&A](../07_modules_packages/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Pathlib Guide](./pathlib_guide.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Pathlib Guide](./pathlib_guide.md) · [Interview Q&A](./interview.md) · [OS Module](./os_module.md) · [Datetime Module](./datetime_module.md)

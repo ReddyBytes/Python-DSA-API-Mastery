@@ -926,4 +926,4 @@ DEBUGGING:
 
 **Prev:** [← File Handling — Interview Q&A](../08_file_handling/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [PDB Debugging Guide](./pdb_guide.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheatsheet.md) · [PDB Debugging Guide](./pdb_guide.md) · [Interview Q&A](./interview.md) · [Profiling & Advanced Debugging](./profiling_and_advanced_debugging.md)
