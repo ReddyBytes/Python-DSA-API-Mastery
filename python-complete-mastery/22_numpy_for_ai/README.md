@@ -817,9 +817,6 @@ Once you understand:
 - How to use matrix multiply for batch operations
 
 You can implement any AI algorithm from scratch, and you can understand what libraries like PyTorch and TensorFlow are doing under the hood. They are NumPy with gradients and GPU support.
-
----
-
 ## 🔁 Navigation
 
 Previous: `21_typing_and_pydantic/theory.md`
@@ -832,3 +829,22 @@ Next: `23_pandas_for_ai/theory.md`
 **Prev:** [← Data Engineering Applications — Interview Q&A](../21_data_engineering_applications/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheatsheet.md)
 
 **Related Topics:** [Cheat Sheet](./cheatsheet.md) · [Interview Q&A](./interview.md)
+
+---
+
+---
+
+## 🗺️ NumPy Learning Path — Topic Files
+
+Study these in order after completing this theory file:
+
+| Order | Topic | File |
+|---|---|---|
+| 01 | dtypes, float16 vs float32, int8 quantization | [01_dtype_and_precision.md](./01_dtype_and_precision.md) |
+| 02 | Views vs copies — the #1 source of silent bugs | [02_views_and_copies.md](./02_views_and_copies.md) |
+| 03 | Random number generation, seeding, sampling, weight init | [03_random_and_sampling.md](./03_random_and_sampling.md) |
+| 04 | Conditional ops: `np.where`, `np.select`, `np.clip` | [04_conditional_operations.md](./04_conditional_operations.md) |
+| 05 | Percentiles, quantiles, histograms, correlation, covariance | [05_statistics_and_distributions.md](./05_statistics_and_distributions.md) |
+| 06 | Least squares, QR decomposition, condition number, SVD | [06_linear_algebra_advanced.md](./06_linear_algebra_advanced.md) |
+| 07 | `np.einsum`, batch matmul, Transformer attention, performance | [07_einsum_and_performance.md](./07_einsum_and_performance.md) |
+| 08 | `.npy`/`.npz` save/load, memory-mapped files for large arrays | [08_io_and_memory.md](./08_io_and_memory.md) |

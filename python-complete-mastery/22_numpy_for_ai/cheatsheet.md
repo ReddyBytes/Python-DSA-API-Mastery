@@ -221,8 +221,170 @@ v.reshape(3, 1)     # (3, 1) — explicitly a column vector
 
 ---
 
+## Views vs Copies
+
+```python
+b = a[1:4]          # VIEW — shares memory with a
+b = a[1:4].copy()   # COPY — independent allocation
+b.base is a         # True  = b is a view of a
+b.base is None      # True  = b owns its data (copy or original)
+
+# Operations that return a VIEW:  slice, .T, compatible reshape, .ravel()
+# Operations that return a COPY:  boolean index, fancy index, .astype(), .flatten()
+
+# DANGER — in-place op mutates caller's array if passed a view:
+arr /= arr.max()    # modifies original if arr is a view
+# SAFE:
+arr = arr / arr.max()
+```
+
+---
+
+## Precision and Memory
+
+```python
+np.finfo(np.float16).max   # 65504 — max value before overflow
+np.finfo(np.float32).eps   # ~1.2e-7 — smallest representable delta from 1.0
+np.iinfo(np.int8).max      # 127
+
+np.can_cast(np.float32, np.float16)   # False — range loss
+np.can_cast(np.float32, np.float64)   # True  — safe upcast
+
+# Memory cost per 1M embeddings of dim 768:
+# float64 → 6.1 GB | float32 → 3.0 GB | float16 → 1.5 GB | int8 → 768 MB
+```
+
+---
+
+## Random (New API)
+
+```python
+rng = np.random.default_rng(seed=42)   # reproducible generator
+rng.random((3, 4))                      # uniform [0, 1)
+rng.standard_normal((3, 4))             # N(0, 1)
+rng.integers(0, 10, size=(2, 5))        # int in [0, 10)
+rng.choice(arr, size=100, replace=False) # sampling without replacement
+rng.shuffle(arr)                         # in-place shuffle
+
+# Weight initialization patterns:
+rng.standard_normal((fan_in, fan_out)) * np.sqrt(2 / fan_in)  # He init
+rng.standard_normal((fan_in, fan_out)) * np.sqrt(1 / fan_in)  # Xavier init
+```
+
+---
+
+## Conditional Operations
+
+```python
+# np.where — vectorized if/else
+np.where(condition, val_if_true, val_if_false)
+np.where(x > 0, x, 0)                   # ReLU
+np.where(condition)                      # returns indices where True
+
+# np.select — multi-condition (first match wins)
+np.select([c >= 90, c >= 70, c >= 50], ['A', 'B', 'C'], default='F')
+
+# np.clip — enforce min/max bounds
+np.clip(arr, -1.0, 1.0)                 # cap values
+np.clip(probs, 1e-7, 1 - 1e-7)         # prevent log(0) in cross-entropy
+np.clip(grads, -1.0, 1.0)              # gradient clipping
+
+# np.maximum / np.minimum — element-wise between two arrays
+np.maximum(a, b)        # NOT the same as np.max(a)
+np.maximum(x, 0)        # ReLU (preferred over np.where)
+
+# NaN / Inf handling
+np.isnan(arr).any()     # check for NaN
+np.isinf(arr).any()     # check for Inf
+np.nan_to_num(arr, nan=0.0, posinf=1e6, neginf=-1e6)
+```
+
+---
+
+## Statistics and Distributions
+
+```python
+np.percentile(arr, 95)              # 95th percentile (P95)
+np.percentile(arr, [25, 50, 75])    # quartiles Q1, Q2, Q3
+np.quantile(arr, 0.95)              # same as percentile but 0-1 scale
+
+q1, q3 = np.percentile(arr, [25, 75])
+iqr = q3 - q1                       # interquartile range
+outliers = arr[(arr < q1 - 1.5*iqr) | (arr > q3 + 1.5*iqr)]
+
+counts, edges = np.histogram(arr, bins=50)       # frequency bins
+np.corrcoef(arr1, arr2)[0, 1]                    # Pearson correlation
+np.cov(arr1, arr2)                               # covariance matrix
+```
+
+---
+
+## Linear Algebra (Advanced)
+
+```python
+# Least squares
+coeffs, residuals, rank, sv = np.linalg.lstsq(A, b, rcond=None)
+
+# Condition number — sensitivity to perturbations
+cond = np.linalg.cond(A)   # > 1e10 = ill-conditioned (numerical instability)
+
+# QR decomposition
+Q, R = np.linalg.qr(A)     # A = Q @ R; Q orthogonal, R upper triangular
+
+# SVD
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+rank = np.sum(s > 1e-10)   # effective rank
+A_approx = U[:, :k] @ np.diag(s[:k]) @ Vt[:k, :]  # rank-k approximation
+
+# Eigendecomposition (symmetric matrices only for real eigenvalues)
+eigenvalues, eigenvectors = np.linalg.eigh(A)
+```
+
+---
+
+## einsum
+
+```python
+# Dot product:         np.einsum('i,i->', a, b)
+# Matrix multiply:     np.einsum('ij,jk->ik', A, B)
+# Batch matmul:        np.einsum('bij,bjk->bik', A, B)
+# Transpose:           np.einsum('ij->ji', A)
+# Outer product:       np.einsum('i,j->ij', a, b)
+# Trace:               np.einsum('ii->', A)
+
+# Transformer attention (scaled dot-product):
+scores = np.einsum('bhd,bhd->bh', Q, K) / np.sqrt(d_k)  # simplified
+```
+
+---
+
+## I/O and Memory-Mapped Files
+
+```python
+# Save / load single array
+np.save('arr.npy', arr)          # binary, preserves dtype
+arr = np.load('arr.npy')
+
+# Save / load multiple arrays
+np.savez('data.npz', X=X, y=y)
+data = np.load('data.npz')
+X, y = data['X'], data['y']
+
+np.savez_compressed('data.npz', X=X)  # smaller file, slower
+
+# Text formats (CSV interop)
+np.savetxt('arr.csv', arr, delimiter=',')
+arr = np.loadtxt('arr.csv', delimiter=',')
+
+# Memory-mapped — large arrays without loading into RAM
+mmap = np.load('big.npy', mmap_mode='r')   # 'r'=read, 'r+'=read-write, 'w+'=new
+row = mmap[0]   # only loads row 0 from disk
+```
+
+---
+
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+**Prev:** [← Theory](./README.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./README.md) · [Interview Q&A](./interview.md)

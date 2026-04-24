@@ -335,6 +335,169 @@ Practical advice:
 
 </details>
 
+<br>
+
+**Q14: What is the difference between float16, float32, and float64 — when would you use each in ML?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+- **float64** — default Python/NumPy float. Most precise, but doubles memory vs float32. Rarely needed in ML.
+- **float32** — standard for ML training. PyTorch/TensorFlow default on GPU. Sufficient precision for gradient descent.
+- **float16** — inference and mixed-precision training. 4× less memory than float64. Risk: max value is 65504 — overflow produces `inf` silently.
+- **int8** — quantized inference (LLM quantization via GPTQ/AWQ). 8× smaller than float32 at cost of some accuracy.
+
+Practical choice: store embeddings in float16 (memory), compute similarity in float32 (precision).
+
+```python
+np.finfo(np.float16).max   # 65504
+np.can_cast(np.float32, np.float16)  # False — may lose range
+arr = arr.astype(np.float16) if arr.max() <= 65504 else arr
+```
+
+**Why it matters:** Choosing the wrong dtype can mean the difference between a model fitting in GPU memory or not.
+
+</details>
+
+<br>
+
+**Q15: When does NumPy return a view vs a copy? Why does this distinction matter?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+NumPy slicing returns a **view** — it shares the same memory buffer. Boolean indexing and fancy indexing return **copies**.
+
+| View | Copy |
+|---|---|
+| `a[1:4]`, `a.T`, `a.reshape()` | `a[a > 0]`, `a[[0,2,4]]`, `.astype()`, `.flatten()` |
+
+**Why it matters:** Mutating a view mutates the original array silently. This is the most common source of hard-to-find bugs in NumPy code.
+
+```python
+b = a[1:4]    # view
+b[0] = 99     # ← modifies a[1] too!
+
+b.base is a   # True = b is a view
+b = a[1:4].copy()  # explicit copy — now safe to modify
+```
+
+Safe rule: avoid in-place operators (`/=`, `*=`) inside functions — use `arr = arr / arr.max()` instead.
+
+**Why it matters:** Performance-critical code uses views deliberately for zero-copy operations; defensive code copies when passing subarrays to functions.
+
+</details>
+
+<br>
+
+**Q16: What is `np.where` and how is it different from `np.maximum`?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+`np.where(condition, val_if_true, val_if_false)` is a vectorized ternary — it selects from two arrays based on a condition.
+
+`np.maximum(a, b)` compares two arrays **element-wise** and returns the larger at each position — it is NOT a reduction.
+
+```python
+np.where(x > 0, x, 0)   # ReLU — but evaluates both branches first
+np.maximum(x, 0)         # ReLU — preferred, cleaner, avoids branch evaluation issue
+
+np.max(a)                # reduction → single scalar (completely different)
+np.maximum(a, b)         # element-wise → same-shaped array
+```
+
+Single-argument `np.where(condition)` returns **indices** where condition is True — useful for finding outlier positions.
+
+**Why it matters:** Confusing `np.max` and `np.maximum` is a common interview mistake. `np.where` with in-place division needs the double-`np.where` safe-divide pattern.
+
+</details>
+
+<br>
+
+**Q17: What is `np.einsum` and when would you use it over `np.dot` or `@`?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+`np.einsum` expresses tensor operations using subscript notation — each letter names an axis, and the output subscript describes what to keep vs sum over.
+
+```python
+np.einsum('ij,jk->ik', A, B)    # matrix multiply (same as A @ B)
+np.einsum('bij,bjk->bik', A, B) # batch matrix multiply
+np.einsum('bhd,bhd->bh', Q, K)  # simplified attention score per head
+np.einsum('i,j->ij', a, b)      # outer product
+```
+
+Use `np.einsum` over `@` when:
+1. You need **batch dimensions** (multiple matrix products at once)
+2. The operation isn't expressible as a simple 2D matmul
+3. You want self-documenting axis semantics in complex tensor ops
+
+**Why it matters:** Transformer attention, multi-head operations, and most deep learning tensor math is expressed as einsum patterns.
+
+</details>
+
+<br>
+
+**Q18: What is a memory-mapped array and when would you use one?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+A **memory-mapped array** (`np.load(..., mmap_mode='r')`) maps a file directly to virtual memory. Reading a slice loads only that slice from disk — the full array never loads into RAM.
+
+```python
+mmap = np.load('embeddings.npy', mmap_mode='r')  # ← file not loaded yet
+row = mmap[0]   # ← only loads row 0 from disk
+```
+
+Use when:
+- The array is larger than available RAM
+- You only need to access slices at a time (streaming inference, large dataset preprocessing)
+- Multiple processes need read access to the same array
+
+Limitation: writes are slow; not suitable for random-write patterns.
+
+**Why it matters:** Standard pattern for datasets that don't fit in memory — 40GB embedding files, genomics data, audio corpora.
+
+</details>
+
+<br>
+
+**Q19: How do you compute percentiles and detect outliers with NumPy?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+```python
+p95 = np.percentile(arr, 95)           # 95th percentile
+q1, q3 = np.percentile(arr, [25, 75])  # quartiles
+iqr = q3 - q1
+
+# IQR-based outlier detection:
+outliers = arr[(arr < q1 - 1.5*iqr) | (arr > q3 + 1.5*iqr)]
+positions = np.where((arr < q1 - 1.5*iqr) | (arr > q3 + 1.5*iqr))
+```
+
+Percentiles vs standard deviation: `np.std`-based outlier detection assumes a normal distribution. IQR is distribution-free and more robust for skewed data.
+
+**Why it matters:** Monitoring model outputs (P95/P99 latency), detecting data quality issues in feature pipelines, and feature clipping before training all rely on percentile computations.
+
+</details>
+
 
 # 🔥 Common Interview Traps
 
@@ -408,6 +571,6 @@ Next: `23_pandas_for_ai/interview.md`
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Pandas For Ai — Theory →](../23_pandas_for_ai/theory.md)
+**Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Pandas For Ai →](../23_pandas_for_ai/README.md)
 
-**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)
+**Related Topics:** [Theory](./README.md) · [Cheat Sheet](./cheatsheet.md)
