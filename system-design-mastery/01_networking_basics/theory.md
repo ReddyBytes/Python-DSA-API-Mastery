@@ -196,6 +196,8 @@ DNS load balancing:
   Health-check DNS: remove unhealthy IPs from rotation
 ```
 
+> 📝 **Practice:** [Q9 · dns-system-design](../system_design_practice_questions_100.md#q9--thinking--dns-system-design)
+
 ---
 
 ## 6. HTTP/1.1
@@ -593,6 +595,12 @@ RTT math:
 ```
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q11 · reverse-proxy-vs-forward-proxy](../system_design_practice_questions_100.md#q11--interview--reverse-proxy-vs-forward-proxy)
 
 ## 🔁 Navigation
 

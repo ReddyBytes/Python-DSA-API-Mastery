@@ -21,7 +21,10 @@ They care about production discipline, not just writing code that works once.
 
 ---
 
-## 1️⃣ Why should you use python-dotenv instead of hardcoding API keys?
+**Q1: Why should you use python-dotenv instead of hardcoding API keys?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -32,9 +35,14 @@ Key points:
 - `os.getenv("KEY")` reads the variable safely after `load_dotenv()`
 - You commit `.env.example` with fake values so teammates know what to configure
 
----
+</details>
 
-## 2️⃣ What is tenacity and why is it used in AI applications?
+<br>
+
+**Q2: What is tenacity and why is it used in AI applications?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -52,9 +60,14 @@ async def call_llm(prompt):
     return response.json()
 ```
 
----
+</details>
 
-## 3️⃣ What is the difference between httpx and requests?
+<br>
+
+**Q3: What is the difference between httpx and requests?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -67,9 +80,14 @@ Key differences:
 - Both have similar APIs — easy to switch
 - httpx supports HTTP/2
 
----
+</details>
 
-## 4️⃣ What does tqdm do?
+<br>
+
+**Q4: What does tqdm do?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -83,9 +101,14 @@ for doc in tqdm(documents, desc="Embedding"):
 # Embedding: 100%|████████| 10000/10000 [02:30<00:00, 66.67it/s]
 ```
 
----
+</details>
 
-## 5️⃣ Why use loguru instead of print statements?
+<br>
+
+**Q5: Why use loguru instead of print statements?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -100,13 +123,17 @@ logger.error("API call failed: 429")
 # 2024-01-15 10:23:45 | WARNING | client:call_api:45 - Token count near limit
 ```
 
----
+</details>
+
 
 # 🔹 Intermediate Questions
 
 ---
 
-## 6️⃣ How do you count tokens before an OpenAI API call?
+**Q6: How do you count tokens before an OpenAI API call?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -129,9 +156,14 @@ def truncate(text, max_tokens=100_000):
 
 Mention: for chat messages, add ~4 tokens per message for role overhead plus 3 tokens for reply priming.
 
----
+</details>
 
-## 7️⃣ How do you add retries with exponential backoff to an LLM API call?
+<br>
+
+**Q7: How do you add retries with exponential backoff to an LLM API call?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -156,9 +188,14 @@ Wait sequence: 2s → 4s → 8s → 16s → 32s.
 
 For rate limits specifically, also check the `Retry-After` header if the API provides one.
 
----
+</details>
 
-## 8️⃣ How do you structure a production AI project?
+<br>
+
+**Q8: How do you structure a production AI project?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -186,9 +223,14 @@ Key principles:
 - `config/settings.py` as single source of truth
 - Separate `raw/` from `processed/` — always reproducible
 
----
+</details>
 
-## 9️⃣ How do you validate environment configuration with pydantic-settings?
+<br>
+
+**Q9: How do you validate environment configuration with pydantic-settings?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -213,13 +255,17 @@ def get_settings():
     return Settings()
 ```
 
----
+</details>
+
 
 # 🔹 Advanced Questions
 
 ---
 
-## 🔟 How do you handle rate limit errors (429) with tenacity?
+**Q10: How do you handle rate limit errors (429) with tenacity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -257,9 +303,14 @@ async def resilient_llm_call(client, payload):
 
 `wait_random_exponential` adds jitter — each retry waits a random amount between 1s and 60s. This spreads retries out and prevents all workers hitting the API simultaneously.
 
----
+</details>
 
-## 1️⃣1️⃣ How do you process a 50,000-row JSONL dataset with progress tracking?
+<br>
+
+**Q11: How do you process a 50,000-row JSONL dataset with progress tracking?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -313,9 +364,14 @@ async def process_dataset(input_path: str, output_path: str, batch_size: int = 2
     logger.info(f"Done. Processed {processed}/{total} records.")
 ```
 
----
+</details>
 
-## 1️⃣2️⃣ How do you validate environment config with pydantic-settings and make it fail fast?
+<br>
+
+**Q12: How do you validate environment config with pydantic-settings and make it fail fast?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -358,9 +414,14 @@ except Exception as e:
 
 The `@validator` runs Pydantic validators at instantiation. Combined with `lru_cache`, the settings object is validated once and shared everywhere.
 
----
+</details>
 
-## 1️⃣3️⃣ Rapid-Fire Round
+<br>
+
+**Q13: Rapid-Fire Round**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```
 Q: What format do LLM fine-tuning datasets use?
@@ -394,7 +455,8 @@ Q: What rich class do you use to display tabular data in the terminal?
 A: rich.table.Table, then console.print(table)
 ```
 
----
+</details>
+
 
 # 🔥 How to Answer Like a Strong Candidate
 

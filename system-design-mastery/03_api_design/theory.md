@@ -1,5 +1,8 @@
 # 🔌 API Design — Theory
+
 > Design APIs that are intuitive, versioned, efficient, and production-ready for consumers at any scale.
+
+> 📝 **Practice:** [Q23 · rest-in-system-design](../system_design_practice_questions_100.md#q23--thinking--rest-in-system-design)
 
 ---
 
@@ -37,6 +40,12 @@ HTTP method idempotency semantics · API deprecation workflow
 ## 📖 **Main content**: [overview.md](./overview.md)
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q85 · compare-rest-grpc-internal](../system_design_practice_questions_100.md#q85--interview--compare-rest-grpc-internal)
 
 ## 🔁 Navigation
 

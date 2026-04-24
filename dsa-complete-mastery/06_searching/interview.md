@@ -33,7 +33,10 @@ Recognizing pattern is half the solution.
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is the difference between linear search and binary search?
+**Q1: What is the difference between linear search and binary search?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Linear Search:
 - Works on unsorted data
@@ -46,9 +49,14 @@ Binary Search:
 Key difference:
 Binary search reduces search space by half each step.
 
----
+</details>
 
-## 2️⃣ Why does binary search require sorted data?
+<br>
+
+**Q2: Why does binary search require sorted data?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Binary search eliminates half the array each step.
 
@@ -57,9 +65,14 @@ You cannot decide which half to discard.
 
 Sorted order enables directional elimination.
 
----
+</details>
 
-## 3️⃣ What is the time complexity of binary search?
+<br>
+
+**Q3: What is the time complexity of binary search?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Each step halves search space.
 
@@ -70,9 +83,14 @@ After k steps → size becomes 1.
 So:
 Time complexity = O(log n)
 
----
+</details>
 
-## 4️⃣ What is the space complexity of binary search?
+<br>
+
+**Q4: What is the space complexity of binary search?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Iterative:
 O(1)
@@ -82,9 +100,14 @@ O(log n) (stack space)
 
 Many candidates forget recursion stack space.
 
----
+</details>
 
-## 5️⃣ What are common binary search mistakes?
+<br>
+
+**Q5: What are common binary search mistakes?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Incorrect loop condition (`low < high` vs `<=`)
 - Infinite loops
@@ -94,11 +117,15 @@ Many candidates forget recursion stack space.
 
 Binary search errors are usually boundary-related.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 6️⃣ How do you find the first occurrence of an element?
+**Q6: How do you find the first occurrence of an element?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Modified binary search:
 
@@ -115,9 +142,14 @@ Pattern:
 
 Return stored index.
 
----
+</details>
 
-## 7️⃣ How do you find the last occurrence?
+<br>
+
+**Q7: How do you find the last occurrence?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Same logic but:
 
@@ -126,9 +158,14 @@ Move `low = mid + 1`
 
 These variations are extremely common.
 
----
+</details>
 
-## 8️⃣ What is lower bound and upper bound?
+<br>
+
+**Q8: What is lower bound and upper bound?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Lower bound:
 First element ≥ target.
@@ -142,9 +179,14 @@ These are useful in:
 - Frequency calculations
 - Competitive programming
 
----
+</details>
 
-## 9️⃣ What is “search on answer”?
+<br>
+
+**Q9: What is “search on answer”?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Instead of searching in array,
 you search in solution space.
@@ -167,9 +209,14 @@ Binary search finds first True.
 
 Very common in interviews.
 
----
+</details>
 
-## 🔟 How do you search in a rotated sorted array?
+<br>
+
+**Q10: How do you search in a rotated sorted array?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -190,11 +237,15 @@ O(log n)
 
 Frequently asked question.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 1️⃣1️⃣ When is sorting before searching justified?
+**Q11: When is sorting before searching justified?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If:
 You need to search multiple times.
@@ -210,9 +261,14 @@ Total far better than repeated linear scans.
 
 Shows preprocessing trade-off reasoning.
 
----
+</details>
 
-## 1️⃣2️⃣ How does searching scale in distributed systems?
+<br>
+
+**Q12: How does searching scale in distributed systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Binary search assumes random access.
 
@@ -226,9 +282,14 @@ Searching strategy depends on storage architecture.
 
 Senior-level awareness required.
 
----
+</details>
 
-## 1️⃣3️⃣ When does binary search fail conceptually?
+<br>
+
+**Q13: When does binary search fail conceptually?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Binary search requires:
 
@@ -241,9 +302,14 @@ Binary search invalid.
 
 Understanding monotonicity is critical.
 
----
+</details>
 
-## 1️⃣4️⃣ How would you debug a failing binary search?
+<br>
+
+**Q14: How would you debug a failing binary search?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Checklist:
 
@@ -259,9 +325,14 @@ Checklist:
 
 Systematic debugging approach matters.
 
----
+</details>
 
-## 1️⃣5️⃣ Compare searching strategies for large data systems.
+<br>
+
+**Q15: Compare searching strategies for large data systems.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Options:
 
@@ -280,24 +351,34 @@ Each has trade-offs in:
 
 Senior engineers compare beyond algorithm level.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Given 10 million sorted integers, find if 999999 exists.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Expected:
 Binary search.
 
 Linear scan unacceptable.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Given unsorted data and frequent searches.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Options:
 
@@ -313,10 +394,15 @@ Depends on memory constraints.
 
 Trade-off discussion expected.
 
+</details>
 ---
 
 ## Scenario 3:
+
 You must find minimum capacity to ship packages within D days.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Brute force:
 Try all capacities → too slow.
@@ -327,18 +413,28 @@ Binary search on answer.
 Key:
 Capacity feasibility is monotonic.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Binary search implementation works for most cases but fails for duplicates.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely issue:
 Not handling first/last occurrence properly.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Searching in linked list using binary search.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Problem:
 No random access.
@@ -349,6 +445,7 @@ Linear scan better.
 
 Demonstrates structural awareness.
 
+</details>
 ---
 
 # 🧠 Senior-Level Structured Answer Example

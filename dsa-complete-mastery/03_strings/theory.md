@@ -6,6 +6,8 @@
 > Focus: memory behavior, performance implications, manipulation patterns,
 > and real-world engineering usage.
 
+> 📝 **Practice:** [Q71 · kmp-string-matching](../dsa_practice_questions_100.md#q71--thinking--kmp-string-matching)
+
 ---
 
 ## 📌 Learning Priority
@@ -317,6 +319,8 @@ Space: O(1)
 
 Better than reversing string (extra memory).
 
+> 📝 **Practice:** [Q8 · palindrome-check](../dsa_practice_questions_100.md#q8--thinking--palindrome-check)
+
 ---
 
 # 1️⃣4️⃣ Substring Search
@@ -330,6 +334,8 @@ Optimized algorithms:
 - Boyer-Moore
 
 For senior roles, knowing at least KMP is expected.
+
+> 📝 **Practice:** [Q9 · substring-search](../dsa_practice_questions_100.md#q9--code--substring-search)
 
 ---
 
@@ -431,6 +437,14 @@ Understanding immutability,
 memory behavior,
 and algorithmic patterns
 is essential for mastering string problems.
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q72 · rabin-karp-hash](../dsa_practice_questions_100.md#q72--normal--rabin-karp-hash)
+
+> 📝 **Practice:** [Q7 · anagram-detection](../dsa_practice_questions_100.md#q7--code--anagram-detection)
 
 ---
 

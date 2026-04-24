@@ -17,6 +17,8 @@ Backtracking is used when:
 
 It is powerful but can be slow.
 
+> 📝 **Practice:** [Q60 · backtracking-subsets](../dsa_practice_questions_100.md#q60--normal--backtracking-subsets) · [Q61 · backtracking-permutations](../dsa_practice_questions_100.md#q61--thinking--backtracking-permutations)
+
 ---
 
 ## 📌 Learning Priority
@@ -178,6 +180,8 @@ Use:
 
 Classic backtracking problem.
 
+> 📝 **Practice:** [Q62 · backtracking-n-queens](../dsa_practice_questions_100.md#q62--design--backtracking-n-queens)
+
 ---
 
 ## 🔹 Sudoku Solver
@@ -203,6 +207,8 @@ Stop recursion.
 This reduces time dramatically.
 
 Pruning makes backtracking efficient.
+
+> 📝 **Practice:** [Q63 · backtracking-pruning](../dsa_practice_questions_100.md#q63--interview--backtracking-pruning)
 
 ---
 

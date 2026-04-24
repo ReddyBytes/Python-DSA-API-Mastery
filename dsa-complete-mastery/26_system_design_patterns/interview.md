@@ -50,16 +50,24 @@ Think: **System design with DSA foundations**
 
 ---
 
-## 1️⃣ What Interviewer Tests
+**Q1: What Interviewer Tests**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Can you design O(1) get/put?
 - Can you combine hashmap + doubly linked list?
 - Do you understand eviction policy?
 - Can you handle edge cases?
 
----
+</details>
 
-## 2️⃣ Strong Candidate Explanation
+<br>
+
+**Q2: Strong Candidate Explanation**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Instead of:
 
@@ -71,9 +79,14 @@ Say:
 
 That shows structural reasoning.
 
----
+</details>
 
-## 3️⃣ Follow-Up Questions
+<br>
+
+**Q3: Follow-Up Questions**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - What if multiple threads access cache?
 - How to make it thread-safe?
@@ -88,21 +101,30 @@ Expected discussion:
 - LFU vs LRU
 - TTL expiration
 
----
+</details>
+
 
 # 🔹 Rate Limiter — Interview Focus
 
 ---
 
-## 1️⃣ Common Problem
+**Q4: Common Problem**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Limit API to:
 
 100 requests per minute per user.
 
----
+</details>
 
-## 2️⃣ Strong Candidate Approach
+<br>
+
+**Q5: Strong Candidate Approach**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Instead of:
 
@@ -114,9 +136,14 @@ Say:
 
 Shows pattern awareness.
 
----
+</details>
 
-## 3️⃣ Algorithm Trade-offs
+<br>
+
+**Q6: Algorithm Trade-offs**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ### Fixed Window
 Simple but bursty.
@@ -128,9 +155,14 @@ Accurate but memory heavy.
 Allows bursts.
 Common in production.
 
----
+</details>
 
-## 4️⃣ Follow-Up Questions
+<br>
+
+**Q7: Follow-Up Questions**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - How to implement in distributed system?
 - How to handle millions of users?
@@ -145,13 +177,17 @@ Expected senior discussion:
 - Replication
 - Consistency vs availability trade-offs
 
----
+</details>
+
 
 # 🔹 Caching Strategies — Interview Focus
 
 ---
 
-## 1️⃣ Cache Aside (Lazy Loading)
+**Q8: Cache Aside (Lazy Loading)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Most common.
 
@@ -161,76 +197,116 @@ Interviewer tests:
 - Data consistency
 - Stale data risk
 
----
+</details>
 
-## 2️⃣ Write Through
+<br>
+
+**Q9: Write Through**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Safer.
 Slower.
 
----
+</details>
 
-## 3️⃣ Write Back
+<br>
+
+**Q10: Write Back**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Fast.
 Risky.
 
----
+</details>
 
-## 4️⃣ Strong Candidate Line
+<br>
+
+**Q11: Strong Candidate Line**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 > “The choice of caching strategy depends on consistency requirements and read/write ratio.”
 
 Shows trade-off maturity.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Database under heavy read load.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 Introduce cache-aside strategy.
 
 Discuss TTL and invalidation.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Users spamming API.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 Token bucket rate limiter.
 
 Discuss per-user key storage.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Cache memory full.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 LRU eviction.
 
 Discuss alternative policies (LFU).
 
+</details>
 ---
 
 ## Scenario 4:
+
 Distributed microservices need shared rate limit.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 Redis-based centralized limiter.
 
 Discuss race conditions.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Cache returns stale data.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Discuss:
 
@@ -238,6 +314,7 @@ Discuss:
 - Invalidation strategy
 - Event-driven cache update
 
+</details>
 ---
 
 # 🧠 Concurrency Discussion (Important)

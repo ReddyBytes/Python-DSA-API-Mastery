@@ -34,7 +34,10 @@ LEVEL 3 — Advanced
 
 ---
 
-### Q1: What is async/await and why do we need it for AI applications?
+**Q1: What is async/await and why do we need it for AI applications?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "async is for running things faster. await waits for something."
 
@@ -60,9 +63,14 @@ async def handle_100_users(prompts):
 
 > **The key insight:** LLM calls are I/O-bound. Async is the right tool for I/O-bound work at scale.
 
----
+</details>
 
-### Q2: When should you use async instead of threading for an AI service?
+<br>
+
+**Q2: When should you use async instead of threading for an AI service?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -91,9 +99,14 @@ RULE OF THUMB:
 
 > The OpenAI SDK, Anthropic SDK, and every modern LLM client library ships an async version specifically because async is the right model for LLM API calls.
 
----
+</details>
 
-### Q3: What is an [async generator](../11_generators_iterators/theory.md#-chapter-12-async-generators-python-36) and when would you use one for AI?
+<br>
+
+**Q3: What is an [async generator](../11_generators_iterators/theory.md#-chapter-12-async-generators-python-36) and when would you use one for AI?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It's a generator but async."
 
@@ -125,13 +138,17 @@ async def display():
 
 > Without streaming, the user stares at a blank screen for 3 seconds. With streaming, they see the first word in under 200ms. Async generators make this possible.
 
----
+</details>
+
 
 ## 🔵 Level 2 — Intermediate Questions
 
 ---
 
-### Q4: How does asyncio.gather work under the hood?
+**Q4: How does asyncio.gather work under the hood?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It runs coroutines in parallel."
 
@@ -169,9 +186,14 @@ results = await asyncio.gather(task1, task2, task3, return_exceptions=True)
 # results = [value1, SomeException(...), value3]  ← task3 still ran!
 ```
 
----
+</details>
 
-### Q5: What is a Semaphore and why do you need one for LLM APIs?
+<br>
+
+**Q5: What is a Semaphore and why do you need one for LLM APIs?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -200,9 +222,14 @@ async def embed_safe(texts, max_concurrent=20):
 
 > **How to choose the limit:** start conservative (10-20), observe if you get 429 errors, increase until you hit the limit, then back off slightly.
 
----
+</details>
 
-### Q6: What is the difference between asyncio.create_task and asyncio.gather?
+<br>
+
+**Q6: What is the difference between asyncio.create_task and asyncio.gather?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -244,9 +271,14 @@ async def main():
     # but useful if you need the task handles to cancel individual ones
 ```
 
----
+</details>
 
-### Q7: What is an async context manager and why do HTTP clients use them?
+<br>
+
+**Q7: What is an async context manager and why do HTTP clients use them?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -273,9 +305,14 @@ async def fetch(url):
     return await app_client.get(url)   # reuses connection pool
 ```
 
----
+</details>
 
-### Q8: How do you handle errors across a batch of async LLM calls?
+<br>
+
+**Q8: How do you handle errors across a batch of async LLM calls?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -313,13 +350,17 @@ async def batch_with_error_handling(prompts: list[str]) -> dict:
     return {"successes": successes, "failures": failures}
 ```
 
----
+</details>
+
 
 ## 🔴 Level 3 — Advanced Questions
 
 ---
 
-### Q9: Walk me through implementing a streaming LLM response in FastAPI end-to-end.
+**Q9: Walk me through implementing a streaming LLM response in FastAPI end-to-end.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -369,9 +410,14 @@ async def stream_chat(prompt: str):
 > 5. Client receives tokens one by one — rendering them in real time
 > 6. `[DONE]` signals the end of the stream
 
----
+</details>
 
-### Q10: How would you batch-embed 10,000 documents for a vector store while respecting OpenAI rate limits?
+<br>
+
+**Q10: How would you batch-embed 10,000 documents for a vector store while respecting OpenAI rate limits?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -430,9 +476,14 @@ asyncio.run(embed_corpus(documents, max_concurrent=20))
 > - `return_exceptions=True`: one failure does not abort the other 9,999
 > - Exponential backoff inside each task handles transient 429s
 
----
+</details>
 
-### Q11: How do you handle partial failures in asyncio.gather?
+<br>
+
+**Q11: How do you handle partial failures in asyncio.gather?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -480,9 +531,14 @@ async def batch_logged(prompts):
         # Don't raise — log and continue
 ```
 
----
+</details>
 
-### Q12: Why is FastAPI well-suited for LLM API services compared to Flask or Django?
+<br>
+
+**Q12: Why is FastAPI well-suited for LLM API services compared to Flask or Django?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -519,7 +575,8 @@ def chat():
 
 > **Bottom line:** FastAPI + async handles hundreds of concurrent LLM calls with one worker. Flask needs dozens of workers to achieve the same. For LLM APIs where every request waits 3 seconds, async concurrency is a major advantage.
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

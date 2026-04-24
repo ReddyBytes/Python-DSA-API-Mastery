@@ -34,7 +34,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: What is a context manager and why do we need it?
+**Q1: What is a context manager and why do we need it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It's used with `with open()` to close files."
 
@@ -63,9 +66,14 @@ def load_config(path):
 
 > The value is in the **guarantee**, not just the convenience.
 
----
+</details>
 
-### Q2: What does `with EXPR as VAR` actually do under the hood?
+<br>
+
+**Q2: What does `with EXPR as VAR` actually do under the hood?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -89,9 +97,14 @@ else:
 
 > Key: `__exit__` is **always** called, with or without an exception. The `as f` variable receives whatever `__enter__()` returns.
 
----
+</details>
 
-### Q3: What are `__enter__` and `__exit__`?
+<br>
+
+**Q3: What are `__enter__` and `__exit__`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -122,9 +135,14 @@ class ManagedResource:
         return False   # don't suppress
 ```
 
----
+</details>
 
-### Q4: Why use context managers instead of `try/finally`?
+<br>
+
+**Q4: Why use context managers instead of `try/finally`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -154,13 +172,17 @@ with db_transaction() as conn:
 # - Prevents forgetting cleanup
 ```
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q5: What are the three parameters of `__exit__` and what do they mean?
+**Q5: What are the three parameters of `__exit__` and what do they mean?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -196,9 +218,14 @@ if exc_tb is not None:
     traceback.print_tb(exc_tb)
 ```
 
----
+</details>
 
-### Q6: How do you write a context manager using `@contextmanager`?
+<br>
+
+**Q6: How do you write a context manager using `@contextmanager`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Use yield instead of `__enter__`/`__exit__`."
 
@@ -247,9 +274,14 @@ def safe():
         release(resource)   # ← guaranteed
 ```
 
----
+</details>
 
-### Q7: What does `contextlib.suppress()` do and when would you use it?
+<br>
+
+**Q7: What does `contextlib.suppress()` do and when would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -279,9 +311,14 @@ with suppress(KeyError, AttributeError):
 # DON'T use when failure should be logged or handled
 ```
 
----
+</details>
 
-### Q8: How do multiple context managers in one `with` work?
+<br>
+
+**Q8: How do multiple context managers in one `with` work?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -304,13 +341,17 @@ with (
 
 > **If one `__exit__` raises:** Python still calls the remaining `__exit__` methods before propagating the exception.
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q9: What is `ExitStack` and when do you need it?
+**Q9: What is `ExitStack` and when do you need it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It lets you use multiple context managers."
 
@@ -350,9 +391,14 @@ def open_resources(paths):
     return files, stack   # caller is responsible for stack.close()
 ```
 
----
+</details>
 
-### Q10: How do you implement an async context manager?
+<br>
+
+**Q10: How do you implement an async context manager?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -401,9 +447,14 @@ async def main():
         await conn.execute("INSERT INTO orders ...")
 ```
 
----
+</details>
 
-### Q11: Design a context manager for a distributed lock.
+<br>
+
+**Q11: Design a context manager for a distributed lock.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -453,7 +504,8 @@ with DistributedLock(redis, "order-4892", ttl=60):
     process_order(4892)
 ```
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

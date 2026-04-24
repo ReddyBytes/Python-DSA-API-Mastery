@@ -376,8 +376,10 @@ name = "Alice"
 age  = 25
 
 # f-strings — the best way to embed values in text (Python 3.6+)
+
 message = f"My name is {name} and I am {age} years old."
 print(message)   # My name is Alice and I am 25 years old.
+
 
 # You can put any expression inside {}:
 print(f"Next year I'll be {age + 1}")        # Next year I'll be 26
@@ -385,6 +387,9 @@ print(f"2 + 2 = {2 + 2}")                   # 2 + 2 = 4
 print(f"Pi is about {3.14159:.2f}")          # Pi is about 3.14  (2 decimal places)
 print(f"Total: {1234567:,}")                 # Total: 1,234,567  (comma separator)
 ```
+
+> 📝 **Practice:** [Q18 · f-strings](../python_practice_questions_100.md#q18--normal--f-strings)
+
 
 ### Strings are Sequences — Indexing & Slicing
 
@@ -398,6 +403,7 @@ A string is like a **train of carriages**. Each carriage holds one character and
 
 ```python
 s = "Python"
+
 
 # Indexing — get ONE character:
 print(s[0])     # 'P'    first character
@@ -418,6 +424,9 @@ print(s[::-1])  # 'nohtyP' → reversed! (step of -1 goes backwards)
 print(s[::2])   # 'Pto'   → every 2nd character
 ```
 
+> 📝 **Practice:** [Q17 · string-slicing](../python_practice_questions_100.md#q17--logical--string-slicing)
+
+
 **Why does `s[0:3]` give characters 0, 1, 2 — not 0, 1, 2, 3?**
 
 Think of indices as positions BETWEEN characters, not on them:
@@ -437,6 +446,7 @@ Strings come with dozens of built-in tools. Here are the most important ones:
 
 ```python
 s = "  Hello, World!  "
+
 
 # ── CLEANING ──────────────────────────────────────────
 s.strip()           # "Hello, World!"     removes spaces from both ends
@@ -481,10 +491,14 @@ words = ["hello", "world", "python"]
 "ABC".isupper()     # True   → all uppercase?
 ```
 
+> 📝 **Practice:** [Q16 · string-methods](../python_practice_questions_100.md#q16--normal--string-methods)
+
+
 ### Strings are Immutable — What That Means
 
 ```python
 s = "hello"
+
 
 # You CANNOT change a character:
 # s[0] = "H"   ← this would give a TypeError!
@@ -499,6 +513,9 @@ result   = original.upper()
 print(original)   # "hello"  ← unchanged!
 print(result)     # "HELLO"  ← the new string
 ```
+
+> 📝 **Practice:** [Q3 · mutability](../python_practice_questions_100.md#q3--critical--mutability)
+
 
 ### String Length and Counting
 
@@ -577,6 +594,8 @@ print(fruits)  # ["apple", "avocado", "banana", "cherry", "date", "fig"]
 
 # What's the difference between append and extend?
 # append([4,5]) adds the LIST ITSELF as one item → [1,2,3, [4,5]]
+
+
 # extend([4,5]) adds each ITEM separately       → [1,2,3, 4, 5]
 
 a = [1, 2, 3]
@@ -584,6 +603,9 @@ b = [1, 2, 3]
 a.append([4, 5])   # a = [1, 2, 3, [4, 5]]  ← nested!
 b.extend([4, 5])   # b = [1, 2, 3, 4, 5]    ← flat
 ```
+
+> 📝 **Practice:** [Q4 · list-operations](../python_practice_questions_100.md#q4--logical--list-operations)
+
 
 ### Removing Items
 
@@ -674,6 +696,8 @@ print(b)   # [1, 2, 3, 4]
 ---
 
 # 📦 Part 6: `tuple` — The Sealed List
+
+> 📝 **Practice:** [Q81 · compare-list-tuple](../python_practice_questions_100.md#q81--interview--compare-list-tuple)
 
 ### What is it?
 
@@ -863,6 +887,7 @@ Sets support mathematical operations that are incredibly useful:
 python_students  = {"Alice", "Bob", "Charlie", "Diana"}
 java_students    = {"Bob", "Eve", "Charlie", "Frank"}
 
+
 # UNION — everyone who studies either Python OR Java (or both):
 all_students = python_students | java_students
 print(all_students)   # {'Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank'}
@@ -879,6 +904,9 @@ print(only_python)    # {'Alice', 'Diana'}
 exclusive = python_students ^ java_students
 print(exclusive)    # {'Alice', 'Diana', 'Eve', 'Frank'}
 ```
+
+> 📝 **Practice:** [Q6 · set-operations](../python_practice_questions_100.md#q6--thinking--set-operations)
+
 
 ```
 Visual diagram:
@@ -988,9 +1016,12 @@ person = {
 person = dict(name="Alice", age=25, city="Mumbai")
 
 # Empty dictionary:
+
 empty = {}
 empty = dict()
 ```
+
+> 📝 **Practice:** [Q5 · dict-basics](../python_practice_questions_100.md#q5--normal--dict-basics)
 
 ### Accessing Values
 
@@ -1389,6 +1420,7 @@ Python's `collections` module gives you specialized containers that solve common
 ```python
 from collections import defaultdict
 
+
 # Regular dict — KeyError if key missing:
 counts = {}
 counts["apple"] += 1    # KeyError: 'apple'
@@ -1407,6 +1439,9 @@ for item in ["a", "b", "a", "c", "b", "a"]:
     groups[item].append(item)
 # defaultdict(<class 'list'>, {'a': ['a', 'a', 'a'], 'b': ['b', 'b'], 'c': ['c']})
 ```
+
+> 📝 **Practice:** [Q82 · compare-dict-defaultdict](../python_practice_questions_100.md#q82--interview--compare-dict-defaultdict)
+
 
 ### `Counter` — Frequency Counting
 

@@ -12,6 +12,8 @@ Binary Search is one of the most powerful optimization techniques.
 If linear search is walking step-by-step,
 binary search is teleporting halfway.
 
+> 📝 **Practice:** [Q16 · binary-search-conditions](../dsa_practice_questions_100.md#q16--normal--binary-search-conditions) · [Q94 · debug-binary-search](../dsa_practice_questions_100.md#q94--debug--debug-binary-search)
+
 ---
 
 ## 📌 Learning Priority
@@ -238,6 +240,8 @@ Try larger.
 Binary search can search over solution space.
 
 This is advanced pattern.
+
+> 📝 **Practice:** [Q17 · binary-search-on-answer](../dsa_practice_questions_100.md#q17--thinking--binary-search-on-answer)
 
 ---
 

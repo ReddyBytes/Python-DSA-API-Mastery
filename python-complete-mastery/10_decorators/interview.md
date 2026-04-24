@@ -35,7 +35,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: What is a decorator in Python?
+**Q1: What is a decorator in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It modifies a function."
 
@@ -66,9 +69,14 @@ add(2, 3)
 
 > The `@logged` line is exactly equivalent to `add = logged(add)`. It runs at **definition time**, not at call time.
 
----
+</details>
 
-### Q2: What does `@decorator` actually do under the hood?
+<br>
+
+**Q2: What does `@decorator` actually do under the hood?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -88,9 +96,14 @@ greet = my_decorator(greet)
 
 > After the `@` line executes, the name `greet` no longer refers to the original function — it refers to whatever `my_decorator` returned. Usually a wrapper function.
 
----
+</details>
 
-### Q3: Why do we use `*args` and `**kwargs` in the wrapper?
+<br>
+
+**Q3: Why do we use `*args` and `**kwargs` in the wrapper?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "So it accepts any arguments."
 
@@ -116,9 +129,14 @@ def greet(name):
 # Same decorator works on both — wrapper transparently forwards arguments
 ```
 
----
+</details>
 
-### Q4: What is `functools.wraps` and why is it important?
+<br>
+
+**Q4: What is `functools.wraps` and why is it important?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It copies the function name."
 
@@ -158,13 +176,17 @@ print(process.__wrapped__)  # <function process> ← bonus: points to original
 
 > `@functools.wraps` copies: `__name__`, `__qualname__`, `__doc__`, `__module__`, `__annotations__`, `__dict__`, and adds `__wrapped__`. **Always use it. No exceptions.**
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q5: How do you write a decorator that accepts arguments?
+**Q5: How do you write a decorator that accepts arguments?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Add parameters to the decorator function."
 
@@ -201,9 +223,14 @@ def fetch_data(url):
 
 > **Call chain:** `retry(max_attempts=5)` returns `decorator` → `decorator(fetch_data)` returns `wrapper` → each call to `fetch_data(url)` runs `wrapper(url)`.
 
----
+</details>
 
-### Q6: What is the execution order when decorators are stacked?
+<br>
+
+**Q6: What is the execution order when decorators are stacked?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -243,9 +270,14 @@ process()
 # Equivalent to: process = A(B(process))
 ```
 
----
+</details>
 
-### Q7: What is the difference between `@property`, `@classmethod`, and `@staticmethod`?
+<br>
+
+**Q7: What is the difference between `@property`, `@classmethod`, and `@staticmethod`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -286,9 +318,14 @@ Order.is_valid_amount(99.99)         # staticmethod — pure utility
 > - `@classmethod` — gets `cls`; used for factory constructors and alternative constructors
 > - `@staticmethod` — gets nothing; utility functions that belong to the class logically
 
----
+</details>
 
-### Q8: How do you decorate an async function?
+<br>
+
+**Q8: How do you decorate an async function?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -318,9 +355,14 @@ async def fetch_user(user_id):
 
 > **What breaks if you forget `async`/`await`:** The wrapper returns a coroutine object without executing it. The decorated function appears to succeed but returns `<coroutine>` instead of the actual value.
 
----
+</details>
 
-### Q9: What is a class-based decorator and when would you use it?
+<br>
+
+**Q9: What is a class-based decorator and when would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -355,13 +397,17 @@ def call_api(endpoint):
 
 > Class-based decorators are also useful for call counters, circuit breakers, and any decorator that accumulates statistics.
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q10: Write a decorator that works both with and without arguments.
+**Q10: Write a decorator that works both with and without arguments.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -395,9 +441,14 @@ def retry(_func=None, *, max_attempts=3):
     return decorator
 ```
 
----
+</details>
 
-### Q11: How does `@property` work internally (the descriptor protocol)?
+<br>
+
+**Q11: How does `@property` work internally (the descriptor protocol)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -426,9 +477,14 @@ class property:   # simplified implementation
 
 > This is why `@property` without `@name.setter` creates a read-only attribute — `__set__` raises `AttributeError`.
 
----
+</details>
 
-### Q12: How do you design a production-grade retry decorator?
+<br>
+
+**Q12: How do you design a production-grade retry decorator?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -478,9 +534,14 @@ def fetch_from_api(endpoint):
 
 > Key production considerations: **jitter** (prevents thundering herd when many services retry simultaneously), **specific exception types** (don't retry `ValueError` or `PermissionError`), **logging at each attempt**, and **on_retry callback** for metrics.
 
----
+</details>
 
-### Q13: How would you implement a decorator that adds type checking?
+<br>
+
+**Q13: How would you implement a decorator that adds type checking?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -515,7 +576,8 @@ create_order(1, 99.99)          # ✅
 create_order("bad", 99.99)      # TypeError: 'user_id' expected int, got str
 ```
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

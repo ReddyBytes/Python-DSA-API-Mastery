@@ -3,6 +3,8 @@
 > *"Dataclasses eliminate the boilerplate.*
 > *You describe what your data looks like — Python writes the plumbing."*
 
+> 📝 **Practice:** [Q50 · dataclass](../python_practice_questions_100.md#q50--design--dataclass)
+
 ---
 
 ## 🎬 The Story

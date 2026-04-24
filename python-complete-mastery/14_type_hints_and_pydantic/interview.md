@@ -34,7 +34,10 @@ LEVEL 3 — Advanced
 
 ---
 
-### Q1: What are type hints in Python and why would you use them?
+**Q1: What are type hints in Python and why would you use them?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "They tell Python what type a variable is."
 
@@ -60,9 +63,14 @@ def send_message(recipient: str, content: str, priority: int = 1) -> bool:
 
 > Type hints are especially valuable in large teams and codebases where you don't hold all the context in your head.
 
----
+</details>
 
-### Q2: Are type hints enforced at runtime in Python?
+<br>
+
+**Q2: Are type hints enforced at runtime in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Yes, Python will raise a TypeError if you pass the wrong type."
 
@@ -95,9 +103,14 @@ class User(BaseModel):
 User(name="Alice", age="not-a-number")   # raises ValidationError at runtime
 ```
 
----
+</details>
 
-### Q3: What is Pydantic and why do AI engineers use it so much?
+<br>
+
+**Q3: What is Pydantic and why do AI engineers use it so much?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -130,9 +143,14 @@ except Exception as e:
 > - **Parsing LLM responses** — after calling an LLM, you validate and type the result with Pydantic
 > - **Configuration** — Pydantic Settings reads environment variables and validates them
 
----
+</details>
 
-### Q4: What is the difference between `Optional[str]` and `str | None`?
+<br>
+
+**Q4: What is the difference between `Optional[str]` and `str | None`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -167,13 +185,17 @@ def greet(name: str | None) -> str:   # still required!
     ...
 ```
 
----
+</details>
+
 
 ## 🔵 Level 2 — Intermediate Questions
 
 ---
 
-### Q5: When would you use Pydantic vs dataclass vs TypedDict?
+**Q5: When would you use Pydantic vs dataclass vs TypedDict?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -223,9 +245,14 @@ MessageDC(role=123, content="Hi")         # stores 123 — no error
 MessagePydantic(role=123, content="Hi")   # coerces 123 → "123" (or raises)
 ```
 
----
+</details>
 
-### Q6: How does Pydantic validate data? What happens when you pass the wrong type?
+<br>
+
+**Q6: How does Pydantic validate data? What happens when you pass the wrong type?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -262,9 +289,14 @@ except Exception as e:
 
 > **Key point:** Pydantic is lenient about compatible types (string digits → int) but strict about incompatible ones. This is called "lax mode" in v2. You can enable strict mode if you need exact type matching.
 
----
+</details>
 
-### Q7: How do you add constraints to a Pydantic field? Show examples.
+<br>
+
+**Q7: How do you add constraints to a Pydantic field? Show examples.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -297,9 +329,14 @@ except Exception as e:
 > - `default_factory` → callable for mutable defaults (list, dict)
 > - `description` → included in JSON Schema output
 
----
+</details>
 
-### Q8: What is `@field_validator` and when do you use it instead of `Field()`?
+<br>
+
+**Q8: What is `@field_validator` and when do you use it instead of `Field()`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -338,9 +375,14 @@ print(msg.content)   # "Hello" — transformed by validator
 > - Must return the value (possibly transformed)
 > - Raise `ValueError` (not `ValidationError`) to signal failure
 
----
+</details>
 
-### Q9: What does `model_dump()` do and when would you use it?
+<br>
+
+**Q9: What does `model_dump()` do and when would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -378,13 +420,17 @@ resp.model_dump_json()
 > - Passing data to a function that expects a dict
 > - Selective export: `model_dump(exclude={"internal_field"})`
 
----
+</details>
+
 
 ## 🔴 Level 3 — Advanced Questions
 
 ---
 
-### Q10: What are the main improvements in Pydantic v2 compared to v1?
+**Q10: What are the main improvements in Pydantic v2 compared to v1?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -423,9 +469,14 @@ class StrictModel(BaseModel):
 StrictModel(age="30")   # raises in strict mode — "30" is not an int
 ```
 
----
+</details>
 
-### Q11: How does Pydantic integrate with FastAPI?
+<br>
+
+**Q11: How does Pydantic integrate with FastAPI?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -469,9 +520,14 @@ async def chat(request: ChatRequest) -> ChatResponse:
 > - Serializes the response model to JSON
 > - Generates `/docs` (Swagger UI) from the Pydantic model schemas
 
----
+</details>
 
-### Q12: How do you use Pydantic for LLM structured outputs?
+<br>
+
+**Q12: How do you use Pydantic for LLM structured outputs?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -516,9 +572,14 @@ for entity in result.entities:
 
 > **Why it matters:** without structured outputs you parse free-text JSON and hope the LLM followed your prompt. With structured outputs + Pydantic, the output is **guaranteed** to match your schema, and you get a fully typed Python object back automatically.
 
----
+</details>
 
-### Q13: How does `model_json_schema()` work for OpenAI function calling?
+<br>
+
+**Q13: How does `model_json_schema()` work for OpenAI function calling?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -566,7 +627,8 @@ result = get_weather(query.location, query.unit, query.days)
 
 > **The loop:** define schema with Pydantic → generate JSON Schema → pass to OpenAI → validate returned args back through Pydantic. Type safety at every step.
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

@@ -6,7 +6,10 @@
 
 ## Junior Level
 
-### Q1. What is scalability and what are the two main approaches?
+**Q1: What is scalability and what are the two main approaches?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -20,9 +23,14 @@ no single point of failure, but requires stateless design and adds network compl
 
 In practice: start vertical (simple), switch to horizontal when you hit limits or need HA.
 
----
+</details>
 
-### Q2. What is the difference between latency and throughput?
+<br>
+
+**Q2: What is the difference between latency and throughput?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -36,9 +44,14 @@ An interactive app needs low latency — users notice anything over ~200ms.
 **Always track percentiles, not averages.** A P99 of 2 seconds means 1 in 100
 users waits 2 seconds, even if the average is 50ms.
 
----
+</details>
 
-### Q3. What is availability and how do you measure it?
+<br>
+
+**Q3: What is availability and how do you measure it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -55,11 +68,15 @@ Availability is the percentage of time a system is operational and correct.
 required and each has 99% availability: combined = 99% × 99% = 98%.
 This is why minimizing required dependencies is a key availability strategy.
 
----
+</details>
+
 
 ## Mid-Level
 
-### Q4. Explain the CAP theorem. How does it affect your design decisions?
+**Q4: Explain the CAP theorem. How does it affect your design decisions?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -75,9 +92,14 @@ higher latency). DynamoDB offers eventual or strong consistency per-read.
 
 The right answer isn't always obvious — know your access patterns.
 
----
+</details>
 
-### Q5. What is eventual consistency? When is it acceptable?
+<br>
+
+**Q5: What is eventual consistency? When is it acceptable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -99,9 +121,14 @@ converge to the same value. Reads may return stale data in the interim.
 **The key question:** "What is the impact of reading stale data?" If the answer
 is "annoying but not harmful," eventual consistency is fine.
 
----
+</details>
 
-### Q6. What is idempotency and why does it matter for distributed systems?
+<br>
+
+**Q6: What is idempotency and why does it matter for distributed systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -127,11 +154,15 @@ HTTP method idempotency by design:
 - `GET`, `PUT`, `DELETE` — idempotent by spec
 - `POST` — NOT idempotent (each call may create a new resource)
 
----
+</details>
+
 
 ## Senior Level
 
-### Q7. Walk through back-of-envelope estimation for a URL shortener like bit.ly
+**Q7: Walk through back-of-envelope estimation for a URL shortener like bit.ly**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -152,9 +183,14 @@ HTTP method idempotency by design:
 - 183 TB is manageable with a single DB cluster (sharded if needed)
 - No real-time constraint → can tolerate eventual consistency on redirect counts
 
----
+</details>
 
-### Q8. Explain the difference between SLI, SLO, and SLA
+<br>
+
+**Q8: Explain the difference between SLI, SLO, and SLA**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -166,7 +202,8 @@ HTTP method idempotency by design:
 
 **Error budget:** `1 - SLO = error budget`. At 99.9%, you have 43 minutes/month to fail. This budget governs deployment frequency and risk tolerance.
 
----
+</details>
+
 
 ## 🔥 Rapid-Fire
 

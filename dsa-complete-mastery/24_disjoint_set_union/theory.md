@@ -13,6 +13,8 @@ You don’t want to search entire network every time.
 
 Disjoint Set Union solves this efficiently.
 
+> 📝 **Practice:** [Q52 · union-find](../dsa_practice_questions_100.md#q52--thinking--union-find)
+
 ---
 
 ## 📌 Learning Priority

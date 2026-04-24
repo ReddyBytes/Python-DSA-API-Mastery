@@ -4,6 +4,8 @@
 > Understanding patterns helps you design components that are maintainable,
 > extensible, and communicate intent clearly.
 
+> 📝 **Practice:** [Q46 · outbox-pattern](../system_design_practice_questions_100.md#q46--thinking--outbox-pattern)
+
 ---
 
 ## 📋 Contents
@@ -377,6 +379,7 @@ class Combo(MenuItem):
 ## 4. Behavioral Patterns
 
 ### Observer (Event Bus)
+
 One-to-many dependency. When one object changes, dependents notified automatically.
 
 ```python
@@ -396,6 +399,7 @@ class EventBus:
             except Exception as e:
                 print(f"Handler error for {event}: {e}")
 
+
 # Usage:
 bus = EventBus()
 bus.on("order.placed", send_confirmation_email)
@@ -403,6 +407,9 @@ bus.on("order.placed", update_inventory)
 bus.on("order.placed", notify_warehouse)
 bus.emit("order.placed", order)  # all 3 handlers called
 ```
+
+> 📝 **Practice:** [Q42 · event-sourcing](../system_design_practice_questions_100.md#q42--thinking--event-sourcing)
+
 
 **Real-world:** Domain events, UI event systems, webhook dispatchers, Kafka consumers.
 
@@ -446,6 +453,7 @@ class PricingEngine:
 ---
 
 ### Command
+
 Encapsulate a request as an object — supports undo, logging, queueing.
 
 ```python
@@ -483,6 +491,8 @@ class TransactionHistory:
 ```
 
 **Real-world:** Transaction systems, undo/redo, job queues, database migrations, macro recording.
+
+> 📝 **Practice:** [Q43 · cqrs-pattern](../system_design_practice_questions_100.md#q43--normal--cqrs-pattern)
 
 ---
 
@@ -637,6 +647,8 @@ CQRS:                     → Strategy
                             Different read strategy vs write strategy per path
 ```
 
+> 📝 **Practice:** [Q44 · saga-pattern](../system_design_practice_questions_100.md#q44--thinking--saga-pattern)
+
 ---
 
 ## 6. Pattern Combinations in Real Systems
@@ -705,6 +717,12 @@ Magic Numbers:
 ```
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q61 · feature-flags](../system_design_practice_questions_100.md#q61--normal--feature-flags)
 
 ## 🔁 Navigation
 

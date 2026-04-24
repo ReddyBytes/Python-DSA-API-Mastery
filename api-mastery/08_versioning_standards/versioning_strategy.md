@@ -1,6 +1,12 @@
 # 12 — API Versioning
 
+> 📝 **Practice:** [Q65 · api-versioning-strategies](../api_practice_questions_100.md#q65--interview--api-versioning-strategies)
+
+> 📝 **Practice:** [Q14 · api-versioning-url](../api_practice_questions_100.md#q14--thinking--api-versioning-url)
+
 > "Every client relies on your current behavior. How do you change anything without breaking the world?"
+
+> 📝 **Practice:** [Q100 · design-api-versioning-system](../api_practice_questions_100.md#q100--design--design-api-versioning-system)
 
 ---
 
@@ -64,6 +70,8 @@ Improving error messages  (as long as the error code/status doesn't change)
 ```
 
 When in doubt, treat it as breaking. The cost of a false negative (silent breakage) is much higher than the cost of a false positive (unnecessary version bump).
+
+> 📝 **Practice:** [Q90 · design-versioning-breaking-change](../api_practice_questions_100.md#q90--design--design-versioning-breaking-change)
 
 ---
 
@@ -233,6 +241,12 @@ v2 cursor-based:
 ```
 
 A migration guide that is honest about the changes (including breaking ones) builds trust even when the changes are painful.
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q80 · explain-backward-compatibility](../api_practice_questions_100.md#q80--interview--explain-backward-compatibility)
 
 ---
 

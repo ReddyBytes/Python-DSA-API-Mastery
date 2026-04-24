@@ -2,6 +2,8 @@
 
 > The universal language of observability — one SDK, any backend, zero vendor lock-in.
 
+> 📝 **Practice:** [Q69 · api-observability](../api_practice_questions_100.md#q69--normal--api-observability)
+
 ---
 
 ## 📌 Learning Priority
@@ -400,6 +402,8 @@ async def check_inventory(items: list[dict]) -> bool:
 The real power: trace a single user request as it flows through multiple services.
 
 ```python
+
+
 # Service A: Orders API — starts the trace
 import httpx
 from opentelemetry.propagate import inject
@@ -439,6 +443,9 @@ async def reserve_inventory(request: Request, data: dict):
         # → You see the full journey in Jaeger: Orders → Inventory → DB
         ...
 ```
+
+> 📝 **Practice:** [Q70 · distributed-tracing](../api_practice_questions_100.md#q70--thinking--distributed-tracing)
+
 
 ```
 Resulting trace in Jaeger:

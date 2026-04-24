@@ -24,7 +24,10 @@ Basic pattern awareness expected.
 
 ---
 
-## 1️⃣ What is a design pattern?
+**Q1: What is a design pattern?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -35,9 +38,14 @@ Avoid:
 
 It is a concept.
 
----
+</details>
 
-## 2️⃣ Why do we use design patterns?
+<br>
+
+**Q2: Why do we use design patterns?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Improve maintainability
 - Improve scalability
@@ -45,9 +53,14 @@ It is a concept.
 - Reduce duplication
 - Encourage best practices
 
----
+</details>
 
-## 3️⃣ What is Singleton?
+<br>
+
+**Q3: What is Singleton?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -63,7 +76,8 @@ Important:
 
 Mention testing challenges due to global state.
 
----
+</details>
+
 
 # 🔹 Level 2: 2–5 Years Experience
 
@@ -76,7 +90,10 @@ Now interviewer expects:
 
 ---
 
-## 4️⃣ What is Factory pattern?
+**Q4: What is Factory pattern?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -90,9 +107,14 @@ Benefits:
 
 Mention Open/Closed principle.
 
----
+</details>
 
-## 5️⃣ What is Strategy pattern?
+<br>
+
+**Q5: What is Strategy pattern?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -107,9 +129,14 @@ Used in:
 Key benefit:
 Behavior can change without modifying context class.
 
----
+</details>
 
-## 6️⃣ What is Observer pattern?
+<br>
+
+**Q6: What is Observer pattern?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -121,9 +148,14 @@ Used in:
 - Messaging
 - UI frameworks
 
----
+</details>
 
-## 7️⃣ What is Dependency Injection?
+<br>
+
+**Q7: What is Dependency Injection?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -137,7 +169,8 @@ Benefits:
 
 This is highly valued in interviews.
 
----
+</details>
+
 
 # 🔹 Level 3: 5–10 Years Experience
 
@@ -145,7 +178,10 @@ Now interview shifts to architecture maturity.
 
 ---
 
-## 8️⃣ When should you NOT use Singleton?
+**Q8: When should you NOT use Singleton?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -153,9 +189,14 @@ Strong answer:
 
 Shows mature thinking.
 
----
+</details>
 
-## 9️⃣ How does Strategy pattern support Open/Closed Principle?
+<br>
+
+**Q9: How does Strategy pattern support Open/Closed Principle?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -163,9 +204,14 @@ Strong answer:
 
 Explicit SOLID reference is good.
 
----
+</details>
 
-## 🔟 How would you refactor large if-else block into pattern?
+<br>
+
+**Q10: How would you refactor large if-else block into pattern?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -178,9 +224,14 @@ Refactor using:
 
 Shows practical understanding.
 
----
+</details>
 
-## 1️⃣1️⃣ How does Dependency Injection improve testing?
+<br>
+
+**Q11: How does Dependency Injection improve testing?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -188,9 +239,14 @@ Strong answer:
 
 Interviewers love this answer.
 
----
+</details>
 
-## 1️⃣2️⃣ How would you implement plugin architecture?
+<br>
+
+**Q12: How would you implement plugin architecture?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -198,14 +254,19 @@ Strong answer:
 
 Shows advanced system thinking.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 You have growing if-else conditions to select behavior.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -216,10 +277,15 @@ Why?
 Removes condition complexity.
 Improves extensibility.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Multiple modules need same configuration object.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -228,10 +294,15 @@ Singleton or centralized config injection.
 But mention:
 Be careful of global state.
 
+</details>
 ---
 
 ## Scenario 3:
+
 You need to notify multiple systems when event occurs.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -239,10 +310,15 @@ Observer pattern.
 
 Decouples producer and consumers.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Testing a service class is difficult due to database dependency.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -250,10 +326,15 @@ Apply Dependency Injection.
 
 Inject mock DB.
 
+</details>
 ---
 
 ## Scenario 5:
+
 System must support multiple payment gateways in future.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -264,6 +345,7 @@ Context executes it.
 
 Scalable architecture.
 
+</details>
 ---
 
 # 🧠 How to Answer Like a Strong Candidate

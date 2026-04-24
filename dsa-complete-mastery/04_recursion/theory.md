@@ -1,10 +1,14 @@
 # 📘 Recursion in Python — Complete Theory (Zero to Advanced)
 
+> 📝 **Practice:** [Q77 · explain-recursion-analogy](../dsa_practice_questions_100.md#q77--interview--explain-recursion-analogy) · [Q91 · predict-output-recursion](../dsa_practice_questions_100.md#q91--logical--predict-output-recursion)
+
 > This file builds a strong conceptual foundation of recursion,
 > from first principles to advanced performance reasoning.
 >  
 > Focus: call stack behavior, recursion tree analysis, optimization,
 > and when recursion is appropriate in real systems.
+
+> 📝 **Practice:** [Q12 · recursion-fibonacci](../dsa_practice_questions_100.md#q12--code--recursion-fibonacci)
 
 ---
 
@@ -46,6 +50,8 @@ Every recursive function must have:
 Condition where recursion stops.
 
 Without base case → infinite recursion.
+
+> 📝 **Practice:** [Q10 · recursion-base-case](../dsa_practice_questions_100.md#q10--normal--recursion-base-case) · [Q95 · debug-recursion-limit](../dsa_practice_questions_100.md#q95--debug--debug-recursion-limit)
 
 ---
 
@@ -96,6 +102,8 @@ Now returns happen in reverse order.
 Important:
 
 Recursion uses **implicit stack memory**.
+
+> 📝 **Practice:** [Q88 · production-stack-overflow](../dsa_practice_questions_100.md#q88--design--production-stack-overflow)
 
 ---
 
@@ -342,6 +350,8 @@ This bridges recursion and dynamic programming.
 | Performance | Similar in many cases | Slightly faster |
 
 Choose based on clarity and constraints.
+
+> 📝 **Practice:** [Q11 · recursion-vs-iteration](../dsa_practice_questions_100.md#q11--thinking--recursion-vs-iteration)
 
 ---
 

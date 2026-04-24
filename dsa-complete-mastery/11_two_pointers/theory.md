@@ -1,5 +1,7 @@
 # 📘 Two Pointers — Thinking With Two Moving Hands
 
+> 📝 **Practice:** [Q4 · two-pointer-opposite-ends](../dsa_practice_questions_100.md#q4--code--two-pointer-opposite-ends) · [Q92 · predict-two-pointer-trace](../dsa_practice_questions_100.md#q92--logical--predict-two-pointer-trace)
+
 > Two pointers is not a data structure.
 > It is a technique.
 >
@@ -10,6 +12,8 @@ Two pointers is about controlled movement.
 
 Instead of scanning everything repeatedly,
 you move intelligently.
+
+> 📝 **Practice:** [Q21 · two-pointer-fast-slow](../dsa_practice_questions_100.md#q21--code--two-pointer-fast-slow)
 
 ---
 
@@ -146,6 +150,8 @@ O(n)
 
 Instead of O(n²).
 
+> 📝 **Practice:** [Q22 · two-pointer-3sum](../dsa_practice_questions_100.md#q22--code--two-pointer-3sum)
+
 ---
 
 # 6️⃣ Why It Works
@@ -253,6 +259,8 @@ Time:
 O(n)
 
 Two pointers helps rearrange in-place.
+
+> 📝 **Practice:** [Q23 · two-pointer-partition](../dsa_practice_questions_100.md#q23--thinking--two-pointer-partition)
 
 ---
 

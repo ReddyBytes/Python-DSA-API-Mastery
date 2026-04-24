@@ -159,6 +159,8 @@ class SuppressErrors:
 
 with SuppressErrors(FileNotFoundError, PermissionError):
     content = open("optional_config.json").read()
+
+
 # If file doesn't exist: no exception raised — execution continues normally
 # If IOError: propagates normally
 
@@ -166,6 +168,9 @@ with SuppressErrors(FileNotFoundError, PermissionError):
 with SuppressErrors(KeyError):
     del cache[key]   # silently skip if key not present
 ```
+
+> 📝 **Practice:** [Q37 · context-manager-exception](../python_practice_questions_100.md#q37--thinking--context-manager-exception)
+
 
 **The built-in equivalent:** `contextlib.suppress()`:
 
@@ -228,8 +233,13 @@ def transaction(conn):
 with transaction(db) as conn:
     conn.execute("INSERT INTO orders ...", data)
     conn.execute("UPDATE inventory ...", data)
+
+
 # Commits if both succeed. Rolls back if either fails.
 ```
+
+> 📝 **Practice:** [Q38 · contextlib](../python_practice_questions_100.md#q38--normal--contextlib)
+
 
 ---
 
@@ -351,6 +361,8 @@ output = buffer.getvalue()   # "This goes to buffer, not console\n"
 Python 3.1+ allows multiple context managers in a single `with`:
 
 ```python
+
+
 # Old nested style (works but verbose):
 with open("input.txt") as fin:
     with open("output.txt", "w") as fout:
@@ -368,6 +380,9 @@ with (   # parenthesized form (Python 3.10+) — supports trailing comma
 ):
     c.write(a.read() + b.read())
 ```
+
+> 📝 **Practice:** [Q36 · context-managers](../python_practice_questions_100.md#q36--normal--context-managers)
+
 
 **Each context manager's `__exit__` is called in reverse order** (last opened, first closed — LIFO):
 

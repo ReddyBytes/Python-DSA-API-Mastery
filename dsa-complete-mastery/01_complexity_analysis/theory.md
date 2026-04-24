@@ -1,4 +1,7 @@
 # 📘 01 – Complexity Analysis  
+
+> 📝 **Practice:** [Q3 · amortised-complexity](../dsa_practice_questions_100.md#q3--thinking--amortised-complexity)
+
 ## The First Level of DSA Mastery  
 ### “Ravi and the Secret of Fast Thinking”
 
@@ -106,6 +109,8 @@ There are two main heroes:
 
 Imagine Ravi searching for his red ball in a box.
 
+> 📝 **Practice:** [Q2 · time-space-tradeoff](../dsa_practice_questions_100.md#q2--thinking--time-space-tradeoff) · [Q76 · explain-time-complexity](../dsa_practice_questions_100.md#q76--interview--explain-time-complexity)
+
 ## Case 1 – Best Case
 
 Ball is on top.
@@ -152,6 +157,8 @@ We ignore:
 - small differences
 
 We focus only on growth.
+
+> 📝 **Practice:** [Q1 · big-o-notation](../dsa_practice_questions_100.md#q1--normal--big-o-notation)
 
 ---
 

@@ -133,6 +133,8 @@ Python searches:
 
 This search order is called MRO.
 
+> 📝 **Practice:** [Q45 · mro](../python_practice_questions_100.md#q45--thinking--mro)
+
 ---
 
 ## 🧠 Why MRO Matters?
@@ -227,11 +229,17 @@ It means:
 
 This matters in multiple inheritance.
 
+> 📝 **Practice:** [Q46 · super](../python_practice_questions_100.md#q46--normal--super)
+
 ---
 
 # 🧩 Chapter 5 – Class Methods vs Static Methods
 
+> 📝 **Practice:** [Q14 · class-variable-trap](../python_practice_questions_100.md#q14--logical--class-variable-trap)
+
 Let’s clarify properly.
+
+> 📝 **Practice:** [Q92 · predict-output-class](../python_practice_questions_100.md#q92--logical--predict-output-class)
 
 ## Instance Method
 
@@ -330,6 +338,8 @@ Composition keeps them flexible.
 
 Senior engineers prefer composition.
 
+> 📝 **Practice:** [Q98 · design-decision-inheritance](../python_practice_questions_100.md#q98--design--design-decision-inheritance)
+
 ---
 
 # 🎭 Chapter 7 – Dunder (Magic) Methods
@@ -366,6 +376,8 @@ p1 + p2
 Works because of `__add__`.
 
 This is how built-in types work internally.
+
+> 📝 **Practice:** [Q47 · dunder-methods](../python_practice_questions_100.md#q47--logical--dunder-methods)
 
 ---
 

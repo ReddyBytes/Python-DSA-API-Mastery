@@ -1,6 +1,12 @@
 # 09 — FastAPI Core Concepts: The Features That Make It Powerful
 
+> 📝 **Practice:** [Q29 · fastapi-request-body](../api_practice_questions_100.md#q29--normal--fastapi-request-body)
+
+> 📝 **Practice:** [Q28 · fastapi-path-vs-query](../api_practice_questions_100.md#q28--normal--fastapi-path-vs-query)
+
 > You've built your first FastAPI routes. Now it's time to understand the machinery that makes FastAPI genuinely different from every other Python web framework.
+
+> 📝 **Practice:** [Q45 · fastapi-router-organization](../api_practice_questions_100.md#q45--design--fastapi-router-organization)
 
 ---
 
@@ -32,9 +38,13 @@ This stage covers the six features that solve these problems — and together th
 
 ## 1. Pydantic Models — Deep Dive
 
+> 📝 **Practice:** [Q27 · pydantic-validation](../api_practice_questions_100.md#q27--thinking--pydantic-validation)
+
 You've seen basic Pydantic models. Now let's understand what they can actually do.
 
 Pydantic isn't just a way to describe data shapes. It's a full validation and serialization library. FastAPI uses it for everything that crosses the API boundary: request bodies, response shapes, and query parameters.
+
+> 📝 **Practice:** [Q48 · pydantic-settings](../api_practice_questions_100.md#q48--normal--pydantic-settings)
 
 ### The Full Power of Fields
 
@@ -182,9 +192,13 @@ The `response_model=OrderResponse` on the route does two things:
 1. It filters the return value — if your function returns extra fields, they're stripped
 2. It generates the response schema in Swagger UI
 
+> 📝 **Practice:** [Q30 · fastapi-response-models](../api_practice_questions_100.md#q30--thinking--fastapi-response-models)
+
 ---
 
 ## 2. Dependency Injection — FastAPI's Superpower
+
+> 📝 **Practice:** [Q26 · fastapi-dependency-injection](../api_practice_questions_100.md#q26--normal--fastapi-dependency-injection)
 
 Dependency Injection (DI) sounds academic. The practical meaning is simple:
 
@@ -193,6 +207,8 @@ Dependency Injection (DI) sounds academic. The practical meaning is simple:
 Without DI, every route that needs pagination would duplicate this logic:
 
 ```python
+
+
 # WITHOUT dependency injection
 @app.get("/users")
 def list_users(page: int = 1, limit: int = 20):
@@ -208,6 +224,9 @@ def list_orders(page: int = 1, limit: int = 20):
     offset = (page - 1) * limit
     # ... duplicated again
 ```
+
+> 📝 **Practice:** [Q46 · dependency-injection-auth](../api_practice_questions_100.md#q46--design--dependency-injection-auth)
+
 
 With DI, you write the logic once:
 
@@ -619,6 +638,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 ```
 
 This keeps your error format consistent whether the problem is a validation error or a business logic error.
+
+> 📝 **Practice:** [Q44 · validation-error-422](../api_practice_questions_100.md#q44--normal--validation-error-422)
 
 ---
 

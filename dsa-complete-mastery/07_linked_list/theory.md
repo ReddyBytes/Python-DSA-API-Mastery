@@ -145,6 +145,8 @@ Advantages:
 Limitation:
 Cannot move backward.
 
+> 📝 **Practice:** [Q26 · linked-list-operations](../dsa_practice_questions_100.md#q26--normal--linked-list-operations) · [Q30 · linked-list-tradeoffs](../dsa_practice_questions_100.md#q30--interview--linked-list-tradeoffs)
+
 ---
 
 ## 🔹 Doubly Linked List
@@ -370,6 +372,8 @@ You must maintain:
 
 Mismanaging pointer order causes data loss.
 
+> 📝 **Practice:** [Q28 · linked-list-reversal](../dsa_practice_questions_100.md#q28--logical--linked-list-reversal)
+
 ---
 
 ## 🔹 Detect Cycle
@@ -385,6 +389,8 @@ Why it works:
 Fast pointer eventually laps slow pointer in cycle.
 
 Elegant mathematical reasoning.
+
+> 📝 **Practice:** [Q27 · linked-list-cycle](../dsa_practice_questions_100.md#q27--thinking--linked-list-cycle) · [Q96 · debug-cycle-detection](../dsa_practice_questions_100.md#q96--debug--debug-cycle-detection)
 
 ---
 
@@ -409,6 +415,8 @@ Time:
 O(n + m)
 
 Used in merge sort.
+
+> 📝 **Practice:** [Q29 · merge-sorted-lists](../dsa_practice_questions_100.md#q29--normal--merge-sorted-lists)
 
 ---
 

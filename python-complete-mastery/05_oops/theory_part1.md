@@ -1,4 +1,7 @@
 # 🏗 Object Oriented Programming (OOP) in Python
+
+> 📝 **Practice:** [Q15 · oop-basics](../python_practice_questions_100.md#q15--interview--oop-basics)
+
 ## Part 1 – Thinking Like a Real Engineer
 
 ---
@@ -135,6 +138,8 @@ Right now:
 - No user exists
 
 It’s just a blueprint.
+
+> 📝 **Practice:** [Q13 · class-basics](../python_practice_questions_100.md#q13--normal--class-basics)
 
 ---
 

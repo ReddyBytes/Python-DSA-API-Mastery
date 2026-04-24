@@ -60,7 +60,10 @@ That shows clarity.
 
 ---
 
-## 1️⃣ What is a Trie?
+**Q1: What is a Trie?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -68,9 +71,14 @@ A Trie is a tree-based data structure used to store strings where each node repr
 
 Keep it precise.
 
----
+</details>
 
-## 2️⃣ Time Complexity of Trie Operations?
+<br>
+
+**Q2: Time Complexity of Trie Operations?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Insert → O(L)  
 Search → O(L)  
@@ -81,9 +89,14 @@ L = length of word.
 Important:
 Not dependent on number of words.
 
----
+</details>
 
-## 3️⃣ Why is End-of-Word Flag Necessary?
+<br>
+
+**Q3: Why is End-of-Word Flag Necessary?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because prefix may exist without full word.
 
@@ -93,9 +106,14 @@ Search “ca” should return False unless explicitly marked.
 
 End-of-word flag differentiates.
 
----
+</details>
 
-## 4️⃣ Space Complexity?
+<br>
+
+**Q4: Space Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Worst case:
 O(total characters in all words)
@@ -104,13 +122,17 @@ Memory heavy compared to hashmap.
 
 Mention trade-off.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Implement Trie
+**Q5: Implement Trie**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Core structure:
 
@@ -124,9 +146,14 @@ class TrieNode:
 Interview tip:
 Explain before coding.
 
----
+</details>
 
-## 6️⃣ Longest Common Prefix
+<br>
+
+**Q6: Longest Common Prefix**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Insert words into Trie.
 
@@ -140,9 +167,14 @@ Return accumulated prefix.
 Time:
 O(total characters)
 
----
+</details>
 
-## 7️⃣ Word Search II (Board + Dictionary)
+<br>
+
+**Q7: Word Search II (Board + Dictionary)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 
@@ -156,9 +188,14 @@ Avoid checking every word repeatedly.
 
 Time optimized significantly.
 
----
+</details>
 
-## 8️⃣ Replace Words (Prefix Replacement)
+<br>
+
+**Q8: Replace Words (Prefix Replacement)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Given sentence and dictionary of roots.
 
@@ -169,9 +206,14 @@ Replace accordingly.
 
 Trie provides efficient prefix matching.
 
----
+</details>
 
-## 9️⃣ Count Words With Given Prefix
+<br>
+
+**Q9: Count Words With Given Prefix**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Traverse to prefix node.
 
@@ -183,13 +225,17 @@ Maintain count at each node.
 Time:
 O(L)
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Autocomplete System Design
+**Q10: Autocomplete System Design**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Requirements:
 
@@ -205,9 +251,14 @@ Discuss memory trade-offs.
 
 Senior-level discussion expected.
 
----
+</details>
 
-## 1️⃣1️⃣ Deletion in Trie
+<br>
+
+**Q11: Deletion in Trie**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 To delete word:
 
@@ -219,9 +270,14 @@ Shared prefixes must not be removed.
 
 Tests careful memory handling.
 
----
+</details>
 
-## 1️⃣2️⃣ Memory Optimization
+<br>
+
+**Q12: Memory Optimization**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Instead of dictionary:
 
@@ -236,9 +292,14 @@ Compress chains of single-child nodes.
 
 Saves memory.
 
----
+</details>
 
-## 1️⃣3️⃣ Compare Trie vs Hashmap
+<br>
+
+**Q13: Compare Trie vs Hashmap**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Hashmap:
 Good for exact search.
@@ -250,32 +311,47 @@ More memory.
 
 Choose based on requirement.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Need search suggestions in real-time typing.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Trie ideal.
 
 Explain prefix traversal.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Memory usage too high.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider compressed trie.
 
 Discuss trade-offs.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Dictionary extremely large.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider:
 
@@ -285,24 +361,35 @@ Consider:
 
 System design thinking.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Need to check if string can be segmented into dictionary words.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Trie + DP.
 
 Efficient prefix matching.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Need to match incoming character stream against dictionary.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use Trie + sliding window.
 
 Advanced but impressive.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

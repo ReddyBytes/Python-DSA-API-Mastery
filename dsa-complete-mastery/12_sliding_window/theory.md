@@ -15,6 +15,8 @@ It is a way of thinking.
 It transforms slow O(n²) substring and subarray problems
 into fast O(n) solutions.
 
+> 📝 **Practice:** [Q70 · sliding-window-deque](../dsa_practice_questions_100.md#q70--thinking--sliding-window-deque)
+
 ---
 
 ## 📌 Learning Priority
@@ -139,6 +141,8 @@ Window size always k.
 
 Only slides forward.
 
+> 📝 **Practice:** [Q24 · sliding-window-fixed](../dsa_practice_questions_100.md#q24--code--sliding-window-fixed)
+
 ---
 
 ## 🔹 Variable Size Window
@@ -152,6 +156,8 @@ Window expands until condition satisfied,
 then shrinks to optimize.
 
 This is more powerful.
+
+> 📝 **Practice:** [Q25 · sliding-window-variable](../dsa_practice_questions_100.md#q25--thinking--sliding-window-variable)
 
 ---
 

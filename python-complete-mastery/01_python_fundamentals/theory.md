@@ -42,6 +42,8 @@ Python is:
 
 Python was created by Guido van Rossum in 1991.
 
+> 📝 **Practice:** [Q23 · none-checks](../python_practice_questions_100.md#q23--thinking--none-checks)
+
 ---
 
 # 2️⃣ How Python Actually Runs Your Code
@@ -79,6 +81,8 @@ If you understand this once, clearly, you will avoid:
 - Most tricky interview traps
 
 Let’s build this properly.
+
+> 📝 **Practice:** [Q1 · variable-binding](../python_practice_questions_100.md#q1--normal--variable-binding)
 
 ---
 
@@ -320,6 +324,8 @@ Never use `is` for value comparison.
 
 Use `==`.
 
+> 📝 **Practice:** [Q2 · identity-vs-equality](../python_practice_questions_100.md#q2--logical--identity-vs-equality) · [Q22 · type-conversion](../python_practice_questions_100.md#q22--normal--type-conversion)
+
 ---
 
 # 🔍 Small Integer Interning (Advanced Understanding)
@@ -546,6 +552,14 @@ That one sentence separates beginners from professionals.
 
 ⬅ Previous: `01_python_fundamentals/theory.md`  
 ➡ Next: `03_data_types/theory.md`
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q25 · unpacking](../python_practice_questions_100.md#q25--thinking--unpacking)
+
+> 📝 **Practice:** [Q24 · truthiness](../python_practice_questions_100.md#q24--normal--truthiness)
 
 ---
 

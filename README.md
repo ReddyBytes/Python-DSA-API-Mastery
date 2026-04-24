@@ -359,6 +359,11 @@ Every topic follows a structured format:
 
 **AI Engineer career roadmap?** → [AI Engineer Roadmap](./AI_ENGINEER_ROADMAP.md) — full path from fundamentals to production
 
+**Want to test yourself?** → [100 Python Questions](./python-complete-mastery/python_practice_questions_100.md) — basics to critical thinking, answers hidden until you click
+**Practice DSA?** → [100 DSA Questions](./dsa-complete-mastery/dsa_practice_questions_100.md) — Big O to system design, trace executions, debug algorithms
+**Practice APIs?** → [100 API Questions](./api-mastery/api_practice_questions_100.md) — HTTP basics to production architecture, FastAPI to GraphQL
+**Practice System Design?** → [100 System Design Questions](./system-design-mastery/system_design_practice_questions_100.md) — fundamentals to real-world distributed systems
+
 <img src="./assets/divider.svg" width="100%"/>
 
 <div align="center">

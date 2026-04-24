@@ -26,7 +26,10 @@ you handle 10M-row datasets that don't fit in memory.
 
 ---
 
-## 1️⃣ What is a DataFrame? How is it different from a regular Python list or dict?
+**Q1: What is a DataFrame? How is it different from a regular Python list or dict?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:**
 > "A DataFrame is like a table with rows and columns."
@@ -51,9 +54,14 @@ df[df["rating"] >= 4]          # filter — no loop needed
 df["rating"].mean()            # aggregation — no loop needed
 ```
 
----
+</details>
 
-## 2️⃣ What is the difference between `loc` and `iloc`?
+<br>
+
+**Q2: What is the difference between `loc` and `iloc`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "`loc` is label-based — you use the actual index label and column name.
@@ -73,9 +81,14 @@ df.loc[10:30]     # rows 10, 20, 30 (inclusive)
 df.iloc[0:2]      # rows at positions 0, 1 (exclusive end) → rows 10, 20
 ```
 
----
+</details>
 
-## 3️⃣ How do you handle missing values in Pandas?
+<br>
+
+**Q3: How do you handle missing values in Pandas?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "First I inspect: `df.isnull().sum()` to count missing values per column and understand the scale.
@@ -95,9 +108,14 @@ df = df.dropna(subset=["rating"])
 df["rating"] = df["rating"].astype(int)
 ```
 
----
+</details>
 
-## 4️⃣ How do you remove duplicate rows?
+<br>
+
+**Q4: How do you remove duplicate rows?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "I use `drop_duplicates()`. For a training dataset, I often deduplicate on a specific column —
@@ -116,9 +134,14 @@ df = df.drop_duplicates(subset=["question"], keep="first")
 df = df.reset_index(drop=True)
 ```
 
----
+</details>
 
-## 5️⃣ How do you filter rows based on a condition?
+<br>
+
+**Q5: How do you filter rows based on a condition?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "I use boolean indexing. You write a condition that returns a boolean Series,
@@ -136,13 +159,17 @@ df[(df["rating"] >= 4) & (df["answer"].notna())]
 df[df["question"].str.contains("Python")]
 ```
 
----
+</details>
+
 
 # 🟡 Level 2 — Intermediate (2 to 5 Years)
 
 ---
 
-## 6️⃣ What is the difference between `apply`, `map`, and vectorized operations? Which should you prefer?
+**Q6: What is the difference between `apply`, `map`, and vectorized operations? Which should you prefer?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "`apply` calls a Python function on each element or row — it's flexible but slow because it's a loop under the hood.
@@ -168,9 +195,14 @@ df["prompt"] = df.apply(build_prompt, axis=1)
 df["rating"] = df["rating"].map({"four": 4, "five": 5})
 ```
 
----
+</details>
 
-## 7️⃣ How does `groupby` work? Walk me through an example.
+<br>
+
+**Q7: How does `groupby` work? Walk me through an example.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "`groupby` splits the DataFrame into groups by a column's unique values,
@@ -197,9 +229,14 @@ df.groupby("source").agg(
 df[df["rating"] >= 4].groupby("source").size().sort_values(ascending=False)
 ```
 
----
+</details>
 
-## 8️⃣ How do you optimize memory usage in Pandas when working with large datasets?
+<br>
+
+**Q8: How do you optimize memory usage in Pandas when working with large datasets?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "Three main techniques:
@@ -229,9 +266,14 @@ for chunk in pd.read_csv("huge.csv", chunksize=50_000):
 df = pd.concat(results, ignore_index=True)
 ```
 
----
+</details>
 
-## 9️⃣ What is `SettingWithCopyWarning` and how do you fix it?
+<br>
+
+**Q9: What is `SettingWithCopyWarning` and how do you fix it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "It appears when you try to modify a DataFrame that is a slice of another DataFrame.
@@ -248,9 +290,14 @@ subset = df[df["rating"] >= 4].copy()
 subset["prompt"] = "Q: " + subset["question"]   # safe — you own this copy
 ```
 
----
+</details>
 
-## 🔟 How do you merge two DataFrames? What is the difference between merge types?
+<br>
+
+**Q10: How do you merge two DataFrames? What is the difference between merge types?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "`pd.merge` works like SQL joins.
@@ -272,13 +319,17 @@ result = pd.merge(df_questions, df_metadata, on="question_id", how="left")
 combined = pd.concat([df_batch1, df_batch2, df_batch3], ignore_index=True)
 ```
 
----
+</details>
+
 
 # 🔵 Level 3 — Advanced and AI Engineer (5+ Years)
 
 ---
 
-## 1️⃣1️⃣ How do you prepare a fine-tuning dataset with Pandas from start to finish?
+**Q11: How do you prepare a fine-tuning dataset with Pandas from start to finish?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "The full pipeline is: Load → Inspect → Fix types → Remove nulls → Deduplicate → Filter quality → Format prompt/completion → Export as JSONL.
@@ -318,9 +369,14 @@ with open("fine_tuning.jsonl", "w") as f:
 print(f"Exported {len(df)} examples.")
 ```
 
----
+</details>
 
-## 1️⃣2️⃣ How do you process a dataset that is too large to fit in memory?
+<br>
+
+**Q12: How do you process a dataset that is too large to fit in memory?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "I use `chunksize` in `read_csv` to read and process the file in batches.
@@ -344,9 +400,14 @@ df = pd.concat(results, ignore_index=True)
 print(f"Total clean rows: {len(df)}")
 ```
 
----
+</details>
 
-## 1️⃣3️⃣ How do you convert a DataFrame to JSONL format for OpenAI fine-tuning?
+<br>
+
+**Q13: How do you convert a DataFrame to JSONL format for OpenAI fine-tuning?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "JSONL is one JSON object per line. OpenAI's fine-tuning format requires each line to have
@@ -378,7 +439,8 @@ with open("chat_fine_tuning.jsonl", "w") as f:
         f.write(json.dumps(record) + "\n")
 ```
 
----
+</details>
+
 
 # 🔥 Common Candidate Mistakes
 

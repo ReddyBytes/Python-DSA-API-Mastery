@@ -24,15 +24,23 @@ Basic understanding expected.
 
 ---
 
-## 1️⃣ What is performance optimization?
+**Q1: What is performance optimization?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
 > Performance optimization is the process of improving the speed, efficiency, or memory usage of a program while maintaining correctness.
 
----
+</details>
 
-## 2️⃣ What is time complexity?
+<br>
+
+**Q2: What is time complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -44,18 +52,28 @@ O(n), O(n²), O(log n)
 Important:
 Algorithm choice matters more than micro-optimizations.
 
----
+</details>
 
-## 3️⃣ What is space complexity?
+<br>
+
+**Q3: What is space complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Space complexity measures how memory usage grows with input size.
 
 Example:
 Using list vs generator affects space complexity.
 
----
+</details>
 
-## 4️⃣ What is profiling?
+<br>
+
+**Q4: What is profiling?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -64,7 +82,8 @@ Strong answer:
 Key phrase:
 Measure before optimize.
 
----
+</details>
+
 
 # 🔹 Level 2: 2–5 Years Experience
 
@@ -77,7 +96,10 @@ Now interviewer expects:
 
 ---
 
-## 5️⃣ What tools do you use for profiling?
+**Q5: What tools do you use for profiling?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -88,9 +110,14 @@ Strong answer:
 
 Mention specific use case for each.
 
----
+</details>
 
-## 6️⃣ How do you identify a bottleneck?
+<br>
+
+**Q6: How do you identify a bottleneck?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -102,9 +129,14 @@ Strong answer:
 Focus on:
 Highest cumulative time.
 
----
+</details>
 
-## 7️⃣ Why are built-in functions faster?
+<br>
+
+**Q7: Why are built-in functions faster?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -113,9 +145,14 @@ Strong answer:
 Example:
 sum(), min(), max() are faster than manual loops.
 
----
+</details>
 
-## 8️⃣ When would you use caching?
+<br>
+
+**Q8: When would you use caching?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -123,9 +160,14 @@ Strong answer:
 
 Mention memory trade-off.
 
----
+</details>
 
-## 9️⃣ What is premature optimization?
+<br>
+
+**Q9: What is premature optimization?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -133,7 +175,8 @@ Strong answer:
 
 Classic engineering wisdom.
 
----
+</details>
+
 
 # 🔹 Level 3: 5–10 Years Experience
 
@@ -141,7 +184,10 @@ Now discussion moves to system-level thinking.
 
 ---
 
-## 🔟 How do you optimize a slow API endpoint?
+**Q10: How do you optimize a slow API endpoint?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong structured answer:
 
@@ -155,9 +201,14 @@ Strong structured answer:
 
 System-level thinking matters.
 
----
+</details>
 
-## 1️⃣1️⃣ How do you decide between optimizing code and scaling infrastructure?
+<br>
+
+**Q11: How do you decide between optimizing code and scaling infrastructure?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -165,9 +216,14 @@ Strong answer:
 
 Engineering trade-off mindset.
 
----
+</details>
 
-## 1️⃣2️⃣ CPU-bound vs I/O-bound optimization strategy?
+<br>
+
+**Q12: CPU-bound vs I/O-bound optimization strategy?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 CPU-bound:
 Use multiprocessing or optimize algorithm.
@@ -177,9 +233,14 @@ Use async or threading.
 
 Clear classification required.
 
----
+</details>
 
-## 1️⃣3️⃣ How do you optimize memory-heavy data processing?
+<br>
+
+**Q13: How do you optimize memory-heavy data processing?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible approaches:
 
@@ -192,9 +253,14 @@ Possible approaches:
 
 Structured answer shows experience.
 
----
+</details>
 
-## 1️⃣4️⃣ How do you optimize database-heavy applications?
+<br>
+
+**Q14: How do you optimize database-heavy applications?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -206,9 +272,14 @@ Strong answer:
 
 Not all performance issues are Python-level.
 
----
+</details>
 
-## 1️⃣5️⃣ When would you use C extensions or external libraries?
+<br>
+
+**Q15: When would you use C extensions or external libraries?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -216,14 +287,19 @@ Strong answer:
 
 Shows practical awareness.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Your function runs in O(n²). How do you improve it?
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Answer:
 
@@ -235,10 +311,15 @@ Answer:
 
 Algorithmic improvement > micro-optimization.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Memory usage keeps increasing during batch processing.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 
@@ -253,10 +334,15 @@ Solution:
 - Profile memory
 - Clear references
 
+</details>
 ---
 
 ## Scenario 3:
+
 API latency spikes under high traffic.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 
@@ -268,10 +354,15 @@ Possible causes:
 Solution:
 Analyze full request lifecycle.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Async application still slow.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible cause:
 
@@ -280,10 +371,15 @@ Blocking synchronous call inside async function.
 Solution:
 Move to thread pool or process pool.
 
+</details>
 ---
 
 ## Scenario 5:
+
 After optimization, code becomes unreadable.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 What do you do?
 
@@ -293,6 +389,7 @@ Strong answer:
 
 Engineering maturity.
 
+</details>
 ---
 
 # 🧠 How to Answer Like a Strong Candidate

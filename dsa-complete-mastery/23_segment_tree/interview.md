@@ -54,7 +54,10 @@ That shows performance awareness.
 
 ---
 
-## 1️⃣ What Problem Does Segment Tree Solve?
+**Q1: What Problem Does Segment Tree Solve?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 It solves:
 
@@ -66,9 +69,14 @@ Query = O(n)
 With segment tree:
 Query = O(log n)
 
----
+</details>
 
-## 2️⃣ What Is Time Complexity?
+<br>
+
+**Q2: What Is Time Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Build → O(n)  
 Query → O(log n)  
@@ -79,9 +87,14 @@ O(4n)
 
 Always mention 4n allocation.
 
----
+</details>
 
-## 3️⃣ What Are the Three Query Overlap Cases?
+<br>
+
+**Q3: What Are the Three Query Overlap Cases?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 1. No overlap → return neutral value
 2. Complete overlap → return node value
@@ -89,13 +102,17 @@ Always mention 4n allocation.
 
 Interviewers expect this explanation clearly.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 4️⃣ Why Is Height log n?
+**Q4: Why Is Height log n?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because tree splits array into halves.
 
@@ -105,9 +122,14 @@ Height = log₂(n)
 
 Operations travel from root to leaf.
 
----
+</details>
 
-## 5️⃣ Why Build Time Is O(n), Not O(n log n)?
+<br>
+
+**Q5: Why Build Time Is O(n), Not O(n log n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Each element participates in limited number of nodes.
 
@@ -117,9 +139,14 @@ Build is linear.
 
 Strong candidates mention this insight.
 
----
+</details>
 
-## 6️⃣ Compare Segment Tree vs Prefix Sum
+<br>
+
+**Q6: Compare Segment Tree vs Prefix Sum**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Prefix sum:
 Query O(1)
@@ -131,9 +158,14 @@ Update O(log n)
 
 Use segment tree when updates frequent.
 
----
+</details>
 
-## 7️⃣ Range Minimum Query
+<br>
+
+**Q7: Range Minimum Query**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Same structure.
 
@@ -144,9 +176,14 @@ Segment tree supports any associative function.
 
 Important concept.
 
----
+</details>
 
-## 8️⃣ What Is Lazy Propagation?
+<br>
+
+**Q8: What Is Lazy Propagation?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Lazy propagation is:
 
@@ -160,13 +197,17 @@ Propagate only when necessary.
 Time:
 O(log n)
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Range Update + Range Query
+**Q9: Range Update + Range Query**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 Add +5 to range [l, r]
@@ -176,9 +217,14 @@ Requires lazy propagation.
 
 Explain lazy array concept.
 
----
+</details>
 
-## 1️⃣1️⃣ Maximum Subarray Sum in Range
+<br>
+
+**Q10: Maximum Subarray Sum in Range**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Each node stores:
 
@@ -191,9 +237,14 @@ Advanced segment tree variant.
 
 Appears in hard rounds.
 
----
+</details>
 
-## 1️⃣2️⃣ Segment Tree vs Fenwick Tree
+<br>
+
+**Q11: Segment Tree vs Fenwick Tree**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Fenwick Tree:
 Simpler
@@ -205,9 +256,14 @@ Handles custom range functions
 
 Discuss trade-offs clearly.
 
----
+</details>
 
-## 1️⃣3️⃣ Dynamic Segment Tree
+<br>
+
+**Q12: Dynamic Segment Tree**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Used when:
 
@@ -218,49 +274,74 @@ Build nodes only when needed.
 
 Advanced concept.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Too many range queries and updates.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Segment tree appropriate.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Memory issue due to 4n allocation.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider Fenwick tree.
 
 Trade-off discussion expected.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Query returns wrong result.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Incorrect overlap handling.
 
 Check three-case logic.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Range update slow.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Forgot lazy propagation.
 
 Implement delayed updates.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Input size small.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Segment tree unnecessary.
 
@@ -268,6 +349,7 @@ Simpler approach better.
 
 Always justify usage.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

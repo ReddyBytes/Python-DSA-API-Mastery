@@ -1,5 +1,8 @@
 # 🏗 Design Patterns in Python  
+
 From Clean Code to Scalable Architecture
+
+> 📝 **Practice:** [Q86 · rate-limiter-scenario](../python_practice_questions_100.md#q86--design--rate-limiter-scenario) · [Q100 · open-ended-system](../python_practice_questions_100.md#q100--critical--open-ended-system)
 
 ---
 
@@ -68,6 +71,8 @@ It is a structured idea.
 
 # 🧩 2️⃣ Singleton Pattern
 
+> 📝 **Practice:** [Q69 · singleton-pattern](../python_practice_questions_100.md#q69--design--singleton-pattern)
+
 ---
 
 ## 🔹 Problem
@@ -129,6 +134,8 @@ Singleton often overused.
 ---
 
 # 🏭 3️⃣ Factory Pattern
+
+> 📝 **Practice:** [Q70 · factory-pattern](../python_practice_questions_100.md#q70--normal--factory-pattern)
 
 ---
 
@@ -239,6 +246,8 @@ Used heavily in:
 ---
 
 # 👀 5️⃣ Observer Pattern
+
+> 📝 **Practice:** [Q71 · observer-pattern](../python_practice_questions_100.md#q71--thinking--observer-pattern)
 
 ---
 
@@ -441,6 +450,12 @@ Previous:
 
 Next:  
 [16_design_patterns/interview.md](./interview.md)
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q88 · retry-scenario](../python_practice_questions_100.md#q88--design--retry-scenario)
 
 ---
 

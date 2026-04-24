@@ -50,7 +50,10 @@ This shows structural thinking.
 
 ---
 
-## 1️⃣ What is a Queue?
+**Q1: What is a Queue?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -58,9 +61,14 @@ A queue is a linear data structure that follows the First-In, First-Out principl
 
 Keep answer crisp.
 
----
+</details>
 
-## 2️⃣ What are core operations?
+<br>
+
+**Q2: What are core operations?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Enqueue → Add element to rear
 - Dequeue → Remove element from front
@@ -69,9 +77,14 @@ Keep answer crisp.
 
 Time complexity: O(1) when properly implemented.
 
----
+</details>
 
-## 3️⃣ How do you implement a queue in Python?
+<br>
+
+**Q3: How do you implement a queue in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Correct answer:
 
@@ -93,9 +106,14 @@ Because it is O(n).
 
 Mention this — interviewers like awareness.
 
----
+</details>
 
-## 4️⃣ What is the difference between stack and queue?
+<br>
+
+**Q4: What is the difference between stack and queue?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Stack → LIFO  
 Queue → FIFO  
@@ -105,13 +123,17 @@ Queue processes older elements first.
 
 Be precise.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Explain BFS Using Queue
+**Q5: Explain BFS Using Queue**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Before coding, say:
 
@@ -129,9 +151,14 @@ Time: O(V + E)
 
 Queue maintains traversal order.
 
----
+</details>
 
-## 6️⃣ Level Order Traversal of Tree
+<br>
+
+**Q6: Level Order Traversal of Tree**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Tree traversal level by level.
 
@@ -142,9 +169,14 @@ Explain logic verbally before coding.
 Mention:
 If queue is empty → traversal complete.
 
----
+</details>
 
-## 7️⃣ Design a Circular Queue
+<br>
+
+**Q7: Design a Circular Queue**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain issue with linear queue in array:
 Unused space at front.
@@ -156,9 +188,14 @@ Use modulo operator.
 
 This shows deeper understanding.
 
----
+</details>
 
-## 8️⃣ Implement Stack Using Queue
+<br>
+
+**Q8: Implement Stack Using Queue**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain strategy first:
 
@@ -172,9 +209,14 @@ Explain trade-offs.
 
 Interviewers like reasoning about operation cost.
 
----
+</details>
 
-## 9️⃣ Sliding Window Maximum (Using Deque)
+<br>
+
+**Q9: Sliding Window Maximum (Using Deque)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain:
 
@@ -190,13 +232,17 @@ O(n)
 
 This shows advanced queue understanding.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Queue in System Design
+**Q10: Queue in System Design**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 How queues help in production systems:
 
@@ -212,9 +258,14 @@ Queue decouples producer and consumer.
 
 Shows system-level thinking.
 
----
+</details>
 
-## 1️⃣1️⃣ How Do You Handle Queue Overload?
+<br>
+
+**Q11: How Do You Handle Queue Overload?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If queue grows infinitely:
 
@@ -231,9 +282,14 @@ Solutions:
 
 Senior engineers think beyond algorithm.
 
----
+</details>
 
-## 1️⃣2️⃣ Priority Queue vs Normal Queue
+<br>
+
+**Q12: Priority Queue vs Normal Queue**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Normal queue:
 FIFO
@@ -249,9 +305,14 @@ Remove → O(log n)
 
 Important distinction.
 
----
+</details>
 
-## 1️⃣3️⃣ Queue in Distributed Systems
+<br>
+
+**Q13: Queue in Distributed Systems**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Message brokers use queues:
 
@@ -266,24 +327,34 @@ Queues provide:
 
 Mentioning this reflects maturity.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 You must process tasks in order of arrival.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Correct structure:
 Queue.
 
 Explain FIFO reasoning.
 
+</details>
 ---
 
 ## Scenario 2:
+
 System is overloaded with incoming requests.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 How would queue help?
 
@@ -293,10 +364,15 @@ Queue buffers requests,
 prevents immediate system crash,
 allows controlled processing.
 
+</details>
 ---
 
 ## Scenario 3:
+
 You need to process nodes by shortest path first.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Normal queue may not work.
 
@@ -305,10 +381,15 @@ Priority queue (Dijkstra’s algorithm).
 
 Shows understanding of queue variants.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Queue-based BFS gives incorrect order.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible issues:
 
@@ -318,10 +399,15 @@ Possible issues:
 
 Explain debugging approach.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Design rate limiter for API calls.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 
@@ -331,6 +417,7 @@ Check size threshold.
 
 Shows practical design skill.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

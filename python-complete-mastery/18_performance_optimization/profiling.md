@@ -1,5 +1,8 @@
 # 🚀 Performance Optimization in Python  
+
 From Profiling to Scalable Systems
+
+> 📝 **Practice:** [Q74 · performance-bug](../python_practice_questions_100.md#q74--debug--performance-bug)
 
 ---
 
@@ -114,6 +117,8 @@ Shows:
 - Cumulative time
 
 Helps identify bottlenecks.
+
+> 📝 **Practice:** [Q72 · profiling](../python_practice_questions_100.md#q72--normal--profiling)
 
 ---
 
@@ -330,6 +335,8 @@ When Python alone is not enough.
 
 # 🏗 1️⃣5️⃣ Real Production Scenarios
 
+> 📝 **Practice:** [Q87 · caching-scenario](../python_practice_questions_100.md#q87--design--caching-scenario)
+
 ---
 
 ## 🔹 Slow API Response
@@ -416,6 +423,14 @@ Previous:
 
 Next:  
 [18_performance_optimization/interview.md](./interview.md)
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q97 · design-decision-cache](../python_practice_questions_100.md#q97--design--design-decision-cache)
+
+> 📝 **Practice:** [Q73 · complexity-in-practice](../python_practice_questions_100.md#q73--thinking--complexity-in-practice)
 
 ---
 

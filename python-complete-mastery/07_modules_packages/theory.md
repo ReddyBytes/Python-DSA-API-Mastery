@@ -251,14 +251,22 @@ myapp/                          ← root package
 ```
 
 ```python
+
+
 # Importing from a package:
 from myapp.models.user      import User
 from myapp.services.payment import PaymentService
 from myapp.utils.validators import validate_email
 
 # Or use the package's public API (if __init__.py exports it):
+
 from myapp.models import User       # if models/__init__.py exports User
 ```
+
+> 📝 **Practice:** [Q39 · imports](../python_practice_questions_100.md#q39--normal--imports)
+
+
+> 📝 **Practice:** [Q41 · __all__](../python_practice_questions_100.md#q41--normal--__all__)
 
 ---
 
@@ -300,9 +308,12 @@ __version__ = "1.2.3"
 __author__  = "Your Name"
 
 # Initialize logging for the whole package:
+
 import logging
 logging.getLogger("myapp").addHandler(logging.NullHandler())
 ```
+
+> 📝 **Practice:** [Q99 · open-ended-logging](../python_practice_questions_100.md#q99--critical--open-ended-logging)
 
 ### Empty vs Populated `__init__.py`
 
@@ -419,6 +430,8 @@ if __name__ == "__main__":
 ## ⚠️ Chapter 8 — Circular Imports: The Design Warning
 
 A circular import happens when module A imports module B, and module B (directly or indirectly) imports module A.
+
+> 📝 **Practice:** [Q40 · circular-imports](../python_practice_questions_100.md#q40--critical--circular-imports)
 
 ### How It Breaks
 

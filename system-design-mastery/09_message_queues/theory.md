@@ -1,5 +1,11 @@
 # 📨 Message Queues — Theory
+
+> 📝 **Practice:** [Q48 · dead-letter-queues](../system_design_practice_questions_100.md#q48--normal--dead-letter-queues)
+
+> 📝 **Practice:** [Q19 · message-queue-purpose](../system_design_practice_questions_100.md#q19--normal--message-queue-purpose)
 > Decouple producers from consumers, absorb traffic spikes, and guarantee reliable async communication between services.
+
+> 📝 **Practice:** [Q49 · backpressure-queues](../system_design_practice_questions_100.md#q49--thinking--backpressure-queues)
 
 ---
 
@@ -37,6 +43,15 @@ offset management · exactly-once complexity · message retention policies
 ## 📖 **Main content**: [why_queues_exist.md](./why_queues_exist.md)
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q82 · compare-kafka-rabbitmq](../system_design_practice_questions_100.md#q82--interview--compare-kafka-rabbitmq)
+> 📝 **Practice:** [Q96 · debug-duplicate-messages](../system_design_practice_questions_100.md#q96--critical--debug-duplicate-messages)
+
+> 📝 **Practice:** [Q20 · sync-vs-async-communication](../system_design_practice_questions_100.md#q20--thinking--sync-vs-async-communication)
 
 ## 🔁 Navigation
 

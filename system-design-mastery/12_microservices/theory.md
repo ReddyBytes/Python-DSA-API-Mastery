@@ -1,5 +1,9 @@
 # 🧩 Microservices — Theory
+
+> 📝 **Practice:** [Q21 · what-is-microservice](../system_design_practice_questions_100.md#q21--normal--what-is-microservice) · [Q22 · monolith-vs-microservice](../system_design_practice_questions_100.md#q22--interview--monolith-vs-microservice) · [Q54 · service-discovery](../system_design_practice_questions_100.md#q54--normal--service-discovery) · [Q59 · service-mesh](../system_design_practice_questions_100.md#q59--thinking--service-mesh) · [Q83 · compare-monolith-microservice](../system_design_practice_questions_100.md#q83--interview--compare-monolith-microservice) · [Q97 · design-decision-monolith-startup](../system_design_practice_questions_100.md#q97--design--design-decision-monolith-startup)
 > Break a monolith into independently deployable services — and manage the distributed systems complexity that follows.
+
+> 📝 **Practice:** [Q55 · circuit-breaker-microservices](../system_design_practice_questions_100.md#q55--thinking--circuit-breaker-microservices)
 
 ---
 
@@ -37,6 +41,16 @@ service mesh (Istio/Linkerd) · mTLS between services · cost per service (opera
 ## 📖 **Main content**: [monolith_to_micro.md](./monolith_to_micro.md)
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q57 · sidecar-pattern](../system_design_practice_questions_100.md#q57--normal--sidecar-pattern)
+> 📝 **Practice:** [Q58 · bff-pattern](../system_design_practice_questions_100.md#q58--design--bff-pattern)
+> 📝 **Practice:** [Q88 · production-cascade-failure](../system_design_practice_questions_100.md#q88--design--production-cascade-failure)
+
+> 📝 **Practice:** [Q56 · bulkhead-pattern](../system_design_practice_questions_100.md#q56--normal--bulkhead-pattern)
 
 ## 🔁 Navigation
 

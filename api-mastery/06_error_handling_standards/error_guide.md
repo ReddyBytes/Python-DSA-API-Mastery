@@ -64,6 +64,8 @@ Here's the structure that works:
 
 Three layers, each serving a different consumer:
 
+> 📝 **Practice:** [Q20 · error-response-format](../api_practice_questions_100.md#q20--normal--error-response-format)
+
 ### Layer 1: Machine-Readable Code
 
 ```json
@@ -230,6 +232,10 @@ async def create_user(body: CreateUserRequest, db: Session = Depends(get_db)):
 
 ## 3. HTTP Status Codes — Quick Reference
 
+> 📝 **Practice:** [Q5 · status-codes-4xx](../api_practice_questions_100.md#q5--critical--status-codes-4xx)
+
+> 📝 **Practice:** [Q4 · status-codes-2xx](../api_practice_questions_100.md#q4--normal--status-codes-2xx)
+
 Use the right status code. Clients — and monitoring systems — rely on them.
 
 ```
@@ -261,6 +267,8 @@ A common mistake: returning 200 with `{"success": false}` for errors. Don't do t
 Use the correct HTTP status code — that's what they're for. Client libraries, proxies,
 monitoring systems, and CDNs all interpret status codes. Wrapping failures in 200
 responses breaks all of them.
+
+> 📝 **Practice:** [Q6 · http-404-security](../api_practice_questions_100.md#q6--thinking--http-404-security)
 
 ---
 

@@ -138,16 +138,26 @@ def increment(n):
     for _ in range(n):
         counter += 1   # NOT thread-safe despite GIL!
 
+
 # The GIL protects individual bytecodes but NOT compound operations
+
+
 # counter += 1 compiles to: LOAD counter → ADD 1 → STORE counter
 # Another thread can run between LOAD and STORE → race condition
+
 ```
+
+> 📝 **Practice:** [Q78 · explain-gil](../python_practice_questions_100.md#q78--interview--explain-gil)
+> 📝 **Practice:** [Q52 · threading-vs-gil](../python_practice_questions_100.md#q52--thinking--threading-vs-gil)
+
 
 **GIL is released during:**
 - Any I/O operation (file read/write, network, pipe)
 - `time.sleep()`
 - Calls into C extensions that release it (NumPy operations, sqlite3, etc.)
 - Every ~5ms (sys.getswitchinterval()) — forced context switch
+
+> 📝 **Practice:** [Q95 · debug-thread-race](../python_practice_questions_100.md#q95--debug--debug-thread-race)
 
 ---
 
@@ -191,6 +201,8 @@ I/O-bound task (network, disk, sleep):
 - Network operations
 - `time.sleep()`
 - Most C extension operations (NumPy, etc.)
+
+> 📝 **Practice:** [Q51 · gil](../python_practice_questions_100.md#q51--interview--gil)
 
 ---
 
@@ -273,11 +285,15 @@ async def main():
     )
 ```
 
+> 📝 **Practice:** [Q54 · asyncio-basics](../python_practice_questions_100.md#q54--normal--asyncio-basics) · [Q79 · explain-async](../python_practice_questions_100.md#q79--interview--explain-async)
+
 ---
 
 ## 🧵 Chapter 3: Threading — I/O-Bound Concurrency
 
 Use threads when your bottleneck is **waiting** (network, disk, DB, external APIs).
+
+> 📝 **Practice:** [Q53 · threading-vs-multiprocessing](../python_practice_questions_100.md#q53--design--threading-vs-multiprocessing)
 
 ### Basic Thread
 
@@ -407,10 +423,12 @@ lock.locked()          # True if currently held
 
 ```python
 # Regular Lock deadlocks if the same thread tries to acquire it twice:
+
 lock = threading.Lock()
 with lock:
     with lock:   # DEADLOCK — thread blocks waiting for itself!
         ...
+
 
 # RLock allows the same thread to acquire multiple times:
 rlock = threading.RLock()
@@ -419,6 +437,9 @@ with rlock:
         ...
 # Must be released same number of times it was acquired
 ```
+
+> 📝 **Practice:** [Q90 · thread-safe-counter](../python_practice_questions_100.md#q90--design--thread-safe-counter)
+
 
 ### Semaphore — Rate Limiting / Pool
 
@@ -573,6 +594,8 @@ Crash isolation      No (kills all)      Yes (crash stays in process)
 Best for             I/O-bound           CPU-bound
 ```
 
+> 📝 **Practice:** [Q84 · compare-process-thread-coroutine](../python_practice_questions_100.md#q84--interview--compare-process-thread-coroutine)
+
 ### Sharing Data Between Processes
 
 ```python
@@ -611,10 +634,12 @@ q.get()        # receives from queue
 import asyncio
 
 # coroutine: an async function (doesn't run immediately when called)
+
 async def fetch(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             return await response.json()
+
 
 # calling fetch(url) returns a coroutine OBJECT, not the result:
 coro = fetch("http://api.com/data")   # nothing runs yet
@@ -626,6 +651,9 @@ result = asyncio.run(fetch("http://api.com/data"))
 task = asyncio.create_task(fetch("http://api.com/data"))
 result = await task
 ```
+
+> 📝 **Practice:** [Q55 · asyncio-await](../python_practice_questions_100.md#q55--logical--asyncio-await)
+
 
 ### The Event Loop
 
@@ -682,10 +710,12 @@ for task in pending:
 
 ```python
 # asyncio has its own sync primitives (non-blocking):
+
 lock      = asyncio.Lock()
 event     = asyncio.Event()
 semaphore = asyncio.Semaphore(10)
 queue     = asyncio.Queue(maxsize=100)
+
 
 # Lock (same semantics as threading.Lock):
 async with lock:
@@ -705,6 +735,9 @@ await queue.join()
 await event.wait()   # non-blocking wait — yields to event loop
 event.set()
 ```
+
+> 📝 **Practice:** [Q56 · blocking-in-async](../python_practice_questions_100.md#q56--critical--blocking-in-async)
+
 
 ---
 

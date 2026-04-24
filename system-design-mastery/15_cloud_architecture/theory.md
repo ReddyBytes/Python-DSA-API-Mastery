@@ -251,15 +251,23 @@ Active-Active:
 **Data replication across regions:**
 
 ```python
+
+
 # Aurora Global Database: one primary region writes, 5 secondary regions read
 # Replication lag: typically < 1 second between regions
 
 # DynamoDB Global Tables: active-active, multi-region writes
+
+
 # Conflict resolution: last-write-wins (by timestamp)
 
 # S3 Cross-Region Replication (CRR):
 # Async. Usually < 15 minutes. Enable for compliance or latency.
 ```
+
+> 📝 **Practice:** [Q60 · blue-green-canary](../system_design_practice_questions_100.md#q60--interview--blue-green-canary)
+> 📝 **Practice:** [Q75 · global-system-design](../system_design_practice_questions_100.md#q75--design--global-system-design)
+
 
 **Route 53 routing policies:**
 
@@ -330,6 +338,12 @@ Tag all resources (team, environment, service) for cost attribution.
 ```
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q10 · api-gateway-role](../system_design_practice_questions_100.md#q10--normal--api-gateway-role)
 
 ## 🔁 Navigation
 

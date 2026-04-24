@@ -37,6 +37,21 @@ event store internals · cross-shard transactions · operational debugging of ev
 
 ---
 
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q30 · consistent-hashing](../system_design_practice_questions_100.md#q30--thinking--consistent-hashing)
+> 📝 **Practice:** [Q53 · rate-limiting-at-scale](../system_design_practice_questions_100.md#q53--design--rate-limiting-at-scale)
+> 📝 **Practice:** [Q68 · write-heavy-optimisations](../system_design_practice_questions_100.md#q68--thinking--write-heavy-optimisations)
+> 📝 **Practice:** [Q70 · thundering-herd](../system_design_practice_questions_100.md#q70--thinking--thundering-herd)
+> 📝 **Practice:** [Q71 · tail-latency-p99](../system_design_practice_questions_100.md#q71--interview--tail-latency-p99)
+> 📝 **Practice:** [Q79 · explain-consistent-hashing](../system_design_practice_questions_100.md#q79--interview--explain-consistent-hashing)
+> 📝 **Practice:** [Q80 · explain-rate-limiting-pm](../system_design_practice_questions_100.md#q80--interview--explain-rate-limiting-pm)
+> 📝 **Practice:** [Q92 · design-rate-limiter-service](../system_design_practice_questions_100.md#q92--design--design-rate-limiter-service)
+
+> 📝 **Practice:** [Q26 · read-heavy-write-heavy](../system_design_practice_questions_100.md#q26--design--read-heavy-write-heavy)
+
 ## 🔁 Navigation
 
 | | |

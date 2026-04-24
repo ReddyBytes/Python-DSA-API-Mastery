@@ -12,7 +12,10 @@ you are no longer a beginner.
 
 # 🔹 Basic Level (0–2 Years)
 
-## 1️⃣ How does Python manage memory?
+**Q1: How does Python manage memory?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python automatically manages memory using:
 
@@ -25,9 +28,14 @@ Variables store references to those objects.
 When reference count becomes zero,
 the object is deleted.
 
----
+</details>
 
-## 2️⃣ What is reference counting?
+<br>
+
+**Q2: What is reference counting?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Each object keeps track of how many references point to it.
 
@@ -50,9 +58,14 @@ Reference count = 1
 
 If it becomes 0 → object is removed.
 
----
+</details>
 
-## 3️⃣ What is garbage collection in Python?
+<br>
+
+**Q3: What is garbage collection in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Garbage collection is the process of removing unused objects from memory.
 
@@ -61,9 +74,14 @@ Python uses:
 - Reference counting
 - Generational cyclic garbage collector
 
----
+</details>
 
-## 4️⃣ What is the difference between stack and heap in Python?
+<br>
+
+**Q4: What is the difference between stack and heap in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Stack:
 - Stores function calls
@@ -75,11 +93,15 @@ Heap:
 Python abstracts stack/heap details,
 but conceptually this separation exists.
 
----
+</details>
+
 
 # 🔹 Intermediate Level (2–5 Years)
 
-## 5️⃣ What is circular reference? Why is it a problem?
+**Q5: What is circular reference? Why is it a problem?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Circular reference happens when:
 
@@ -103,9 +125,14 @@ Reference counting alone cannot clean this.
 
 That’s why Python has cyclic GC.
 
----
+</details>
 
-## 6️⃣ How does Python handle circular references?
+<br>
+
+**Q6: How does Python handle circular references?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python has a cyclic garbage collector that:
 
@@ -115,9 +142,14 @@ Python has a cyclic garbage collector that:
 
 It works alongside reference counting.
 
----
+</details>
 
-## 7️⃣ What are generations in garbage collection?
+<br>
+
+**Q7: What are generations in garbage collection?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python divides objects into:
 
@@ -130,9 +162,14 @@ So Python checks younger generations more frequently.
 
 This improves performance.
 
----
+</details>
 
-## 8️⃣ What is small integer interning?
+<br>
+
+**Q8: What is small integer interning?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python pre-creates small integers
 (typically -5 to 256).
@@ -149,9 +186,14 @@ This saves memory and improves performance.
 
 Never rely on `is` for value comparison.
 
----
+</details>
 
-## 9️⃣ What is the difference between `is` and `==`?
+<br>
+
+**Q9: What is the difference between `is` and `==`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 `==` → compares values  
 `is` → compares identity (memory location)
@@ -166,9 +208,14 @@ a == b  # True
 a is b  # False
 ```
 
----
+</details>
 
-## 🔟 Can Python have memory leaks?
+<br>
+
+**Q10: Can Python have memory leaks?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Yes.
 
@@ -182,11 +229,15 @@ Common causes:
 
 Even with GC, memory leaks are possible.
 
----
+</details>
+
 
 # 🔹 Advanced Level (5–10 Years)
 
-## 1️⃣1️⃣ Explain how Python allocates memory internally.
+**Q11: Explain how Python allocates memory internally.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 In CPython:
 
@@ -198,9 +249,14 @@ In CPython:
 
 Small objects are optimized using pymalloc.
 
----
+</details>
 
-## 1️⃣2️⃣ What is pymalloc?
+<br>
+
+**Q12: What is pymalloc?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Pymalloc is Python’s specialized memory allocator for small objects.
 
@@ -214,9 +270,14 @@ It manages memory in:
 
 This avoids frequent OS calls.
 
----
+</details>
 
-## 1️⃣3️⃣ Why does memory usage not immediately drop after deleting objects?
+<br>
+
+**Q13: Why does memory usage not immediately drop after deleting objects?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because:
 
@@ -228,9 +289,14 @@ Deleting object ≠ returning memory to OS instantly.
 
 This confuses many developers in production.
 
----
+</details>
 
-## 1️⃣4️⃣ How do you debug memory issues in production?
+<br>
+
+**Q14: How do you debug memory issues in production?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Tools professionals use:
 
@@ -249,9 +315,14 @@ tracemalloc.start()
 
 Then compare snapshots.
 
----
+</details>
 
-## 1️⃣5️⃣ What happens when you pass a large object to a function?
+<br>
+
+**Q15: What happens when you pass a large object to a function?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python passes reference,
 not a copy.
@@ -268,9 +339,14 @@ original list may change.
 
 Important in APIs and pipelines.
 
----
+</details>
 
-## 1️⃣6️⃣ How does mutability impact memory?
+<br>
+
+**Q16: How does mutability impact memory?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Immutable objects:
 - New object created on change.
@@ -280,9 +356,14 @@ Mutable objects:
 
 Mutable objects can cause shared state bugs.
 
----
+</details>
 
-## 1️⃣7️⃣ What is reference cycle detection threshold?
+<br>
+
+**Q17: What is reference cycle detection threshold?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python does not check cycles continuously.
 
@@ -298,12 +379,17 @@ gc.get_threshold()
 This is rarely asked,
 but mentioning it shows depth.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ## Scenario 1:
+
 Memory increases slowly in a long-running service. Why?
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible reasons:
 
@@ -313,10 +399,15 @@ Possible reasons:
 - Unclosed file handles
 - Large lists accumulating data
 
+</details>
 ---
 
 ## Scenario 2:
+
 You delete a large list but memory usage does not reduce. Why?
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because:
 
@@ -324,13 +415,19 @@ Because:
 - Fragmentation
 - Memory not returned to OS immediately
 
+</details>
 ---
 
 ## Scenario 3:
+
 Why is `a is b` sometimes True for integers?
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because of small integer interning.
 
+</details>
 ---
 
 # 🧠 Senior-Level Summary Answer

@@ -56,7 +56,10 @@ Interviewers notice this.
 
 ---
 
-## 1️⃣ What is a Stack?
+**Q1: What is a Stack?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -65,18 +68,28 @@ A stack is a linear data structure that follows the Last-In, First-Out principle
 Keep it concise.
 Don’t over-explain unless asked.
 
----
+</details>
 
-## 2️⃣ Why are push and pop O(1)?
+<br>
+
+**Q2: Why are push and pop O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because operations occur at one end only.
 No shifting, no traversal.
 
 Explain in terms of behavior, not just complexity.
 
----
+</details>
 
-## 3️⃣ How is stack implemented in Python?
+<br>
+
+**Q3: How is stack implemented in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Using list:
 
@@ -91,9 +104,14 @@ Python list append and pop from end are O(1).
 
 Avoid using pop(0).
 
----
+</details>
 
-## 4️⃣ What is stack overflow?
+<br>
+
+**Q4: What is stack overflow?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 When the stack exceeds memory capacity.
 
@@ -103,13 +121,17 @@ Usually caused by:
 
 This shows awareness of real system constraints.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Validate Parentheses — How to Respond
+**Q5: Validate Parentheses — How to Respond**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Before coding, say:
 
@@ -133,9 +155,14 @@ Mention edge cases:
 
 Communication matters.
 
----
+</details>
 
-## 6️⃣ Evaluate Postfix Expression
+<br>
+
+**Q6: Evaluate Postfix Expression**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain logic verbally:
 
@@ -150,9 +177,14 @@ Second popped element is first operand.
 Common mistake:
 Wrong operand order.
 
----
+</details>
 
-## 7️⃣ Implement Min Stack
+<br>
+
+**Q7: Implement Min Stack**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Problem:
 Retrieve minimum in O(1).
@@ -173,9 +205,14 @@ Mention trade-offs.
 
 This shows design thinking.
 
----
+</details>
 
-## 8️⃣ Simplify File Path (e.g., "/a/./b/../c/")
+<br>
+
+**Q8: Simplify File Path (e.g., "/a/./b/../c/")**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain:
 
@@ -188,13 +225,17 @@ Stack models navigation history.
 
 Shows real-world understanding.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 9️⃣ Monotonic Stack — How to Explain
+**Q9: Monotonic Stack — How to Explain**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If asked about Next Greater Element:
 
@@ -209,9 +250,14 @@ O(n)
 
 This shows amortized reasoning.
 
----
+</details>
 
-## 🔟 Largest Rectangle in Histogram
+<br>
+
+**Q10: Largest Rectangle in Histogram**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Key idea:
 
@@ -222,9 +268,14 @@ Calculate area for popped bars.
 
 Strong candidates explain reasoning, not memorized solution.
 
----
+</details>
 
-## 1️⃣1️⃣ How Stack Relates to DFS
+<br>
+
+**Q11: How Stack Relates to DFS**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 DFS uses stack:
 
@@ -235,9 +286,14 @@ Explain that recursion internally uses stack.
 
 Shows conceptual connection.
 
----
+</details>
 
-## 1️⃣2️⃣ When Not to Use Stack
+<br>
+
+**Q12: When Not to Use Stack**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If problem requires FIFO behavior → use queue.
 
@@ -247,14 +303,19 @@ If priority-based → use heap.
 
 Choosing wrong structure shows shallow understanding.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Interview Questions
 
 ---
 
 ## Scenario 1:
+
 System crashes due to stack overflow.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 What could be wrong?
 
@@ -266,10 +327,15 @@ Mitigation:
 - Increase stack size carefully
 - Optimize recursion depth
 
+</details>
 ---
 
 ## Scenario 2:
+
 Undo feature must support unlimited operations.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Concern:
 Stack memory growth.
@@ -277,10 +343,15 @@ Stack memory growth.
 Solution:
 Limit stack size or use persistent storage.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Expression evaluator giving wrong result.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely issue:
 Wrong operand order when popping.
@@ -288,20 +359,30 @@ Wrong operand order when popping.
 Explain how you'd debug:
 Trace stack after each operation.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Need to track minimum and maximum in real time.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 Two auxiliary stacks.
 
 Discuss memory trade-offs.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Given 10 million elements for Next Greater Element.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Time constraint strict.
 
@@ -310,6 +391,7 @@ Explain why monotonic stack is O(n), not O(n²).
 Strong candidates mention:
 Each element pushed once and popped once.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

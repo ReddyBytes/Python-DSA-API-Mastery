@@ -35,7 +35,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: What is the difference between an iterable and an iterator?
+**Q1: What is the difference between an iterable and an iterator?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Both can be used in for loops."
 
@@ -65,9 +68,14 @@ it is iter(it)             # True  ← __iter__ returns self
 
 > **Practical consequence:** you can loop over a list multiple times; you can loop over an iterator only once.
 
----
+</details>
 
-### Q2: What does `yield` do? How does it differ from `return`?
+<br>
+
+**Q2: What does `yield` do? How does it differ from `return`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "yield returns a value without ending the function."
 
@@ -92,9 +100,14 @@ next(g)   # prints "C", raises StopIteration
 
 > Calling a generator function does **not** execute its body — it returns a generator object immediately. The body only runs when you call `next()`.
 
----
+</details>
 
-### Q3: What is a generator expression and when should you use it over a list comprehension?
+<br>
+
+**Q3: What is a generator expression and when should you use it over a list comprehension?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -118,9 +131,14 @@ found = any(x > 100 for x in data)                # short-circuits early
 
 > **Rule:** if you're passing directly to `sum()`, `any()`, `all()`, `max()`, `min()`, or a `for` loop — use a generator expression. Only use a list comprehension if you need the list itself (index access, multiple passes, `len()`).
 
----
+</details>
 
-### Q4: How does Python's `for` loop work internally?
+<br>
+
+**Q4: How does Python's `for` loop work internally?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -143,13 +161,17 @@ while True:
 
 > This means **any object** that implements `__iter__` and `__next__` works in a `for` loop — lists, files, generators, custom classes, database cursors, network streams.
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q5: What does `yield from` do?
+**Q5: What does `yield from` do?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It yields from another iterable."
 
@@ -184,9 +206,14 @@ list(flatten([1, [2, [3, 4]], 5]))   # [1, 2, 3, 4, 5]
 > result = yield from sub_generator()   # receives sub-generator's return value
 > ```
 
----
+</details>
 
-### Q6: Explain `generator.send()`. When would you use it?
+<br>
+
+**Q6: Explain `generator.send()`. When would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -213,9 +240,14 @@ acc.send(5)      # → 35  (total = 35)
 > - Sending a non-None value to an unprimed generator raises `TypeError`
 > - Used in asyncio (Python's async is built on generators + send)
 
----
+</details>
 
-### Q7: How would you design a streaming pipeline for processing a 10GB log file?
+<br>
+
+**Q7: How would you design a streaming pipeline for processing a 10GB log file?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Read line by line and process each."
 
@@ -259,9 +291,14 @@ for record in pipeline:
 
 > **Each stage:** reads 1 item from upstream, produces 0 or 1 items downstream. Total RAM used: O(1 record). Throughput: limited only by I/O speed.
 
----
+</details>
 
-### Q8: What are the most useful `itertools` functions?
+<br>
+
+**Q8: What are the most useful `itertools` functions?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -296,9 +333,14 @@ list(product("AB", repeat=2))            # AA AB BA BB
 list(combinations([1,2,3], 2))           # [(1,2),(1,3),(2,3)]
 ```
 
----
+</details>
 
-### Q9: What is the memory difference between a list and a generator for large data?
+<br>
+
+**Q9: What is the memory difference between a list and a generator for large data?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -322,13 +364,17 @@ sys.getsizeof(squares_gen)    # ~200 bytes
 # If you need multiple passes, random access, or len() → list
 ```
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q10: Write a custom iterator class that pages through an API.
+**Q10: Write a custom iterator class that pages through an API.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -374,9 +420,14 @@ for user in PaginatedAPI("https://api.example.com/users"):
     process(user)   # never loads all users into memory
 ```
 
----
+</details>
 
-### Q11: How does Python's async machinery relate to generators?
+<br>
+
+**Q11: How does Python's async machinery relate to generators?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -406,9 +457,14 @@ def fetch():
 >         yield row   # yield inside async def = async generator
 > ```
 
----
+</details>
 
-### Q12: What is a generator's `return` value and how do you capture it?
+<br>
+
+**Q12: What is a generator's `return` value and how do you capture it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -442,9 +498,14 @@ def delegator():
 list(delegator())   # [0, 1, 2, 99], prints "Sub-generator said: generated 3 values"
 ```
 
----
+</details>
 
-### Q13: How would you make a pipeline restartable?
+<br>
+
+**Q13: How would you make a pipeline restartable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -481,7 +542,8 @@ list(p)   # [0, 4, 8, 12, 16]  first pass
 list(p)   # [0, 4, 8, 12, 16]  second pass — works!
 ```
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

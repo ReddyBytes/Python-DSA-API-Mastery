@@ -65,7 +65,10 @@ This shows structural understanding.
 
 ---
 
-## 1️⃣ What is the Two Pointer Technique?
+**Q1: What is the Two Pointer Technique?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -73,9 +76,14 @@ The two-pointer technique uses two indices that move through the data structure 
 
 Keep it precise.
 
----
+</details>
 
-## 2️⃣ When Can Two Pointers Be Used?
+<br>
+
+**Q2: When Can Two Pointers Be Used?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two pointers typically work when:
 
@@ -86,9 +94,14 @@ Two pointers typically work when:
 
 Recognizing applicability is critical.
 
----
+</details>
 
-## 3️⃣ Why Does It Reduce O(n²) to O(n)?
+<br>
+
+**Q3: Why Does It Reduce O(n²) to O(n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because each pointer moves only forward (or inward) once.
 
@@ -98,13 +111,17 @@ Total pointer movements ≤ 2n.
 
 Hence O(n).
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 4️⃣ Two Sum (Sorted Array)
+**Q4: Two Sum (Sorted Array)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 
@@ -124,9 +141,14 @@ Space: O(1)
 Important:
 Mention sorted condition explicitly.
 
----
+</details>
 
-## 5️⃣ Remove Duplicates (In-Place)
+<br>
+
+**Q5: Remove Duplicates (In-Place)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -141,9 +163,14 @@ Space: O(1)
 
 Interviewers like in-place reasoning.
 
----
+</details>
 
-## 6️⃣ Container With Most Water
+<br>
+
+**Q6: Container With Most Water**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Logic:
 
@@ -159,9 +186,14 @@ Moving taller one won’t increase area.
 
 This shows mathematical reasoning.
 
----
+</details>
 
-## 7️⃣ Three Sum
+<br>
+
+**Q7: Three Sum**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strategy:
 
@@ -175,9 +207,14 @@ Explain why sorting required.
 
 Also mention duplicate handling.
 
----
+</details>
 
-## 8️⃣ Valid Palindrome
+<br>
+
+**Q8: Valid Palindrome**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Opposite-direction pointers.
 
@@ -189,13 +226,17 @@ Time: O(n)
 
 Simple but tests boundary control.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 9️⃣ Trapping Rain Water
+**Q9: Trapping Rain Water**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two pointer solution:
 
@@ -214,9 +255,14 @@ Space: O(1)
 
 Strong candidates explain reasoning clearly.
 
----
+</details>
 
-## 🔟 Merge Two Sorted Arrays (In-Place)
+<br>
+
+**Q10: Merge Two Sorted Arrays (In-Place)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -230,9 +276,14 @@ Time: O(n + m)
 
 Explain why backward traversal is efficient.
 
----
+</details>
 
-## 1️⃣1️⃣ When Two Pointers Is NOT Appropriate
+<br>
+
+**Q11: When Two Pointers Is NOT Appropriate**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Avoid when:
 
@@ -243,9 +294,14 @@ Avoid when:
 
 Strong candidates mention alternative techniques.
 
----
+</details>
 
-## 1️⃣2️⃣ Compare Two Pointers vs Hashing
+<br>
+
+**Q12: Compare Two Pointers vs Hashing**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two Sum Example:
 
@@ -258,15 +314,20 @@ Space vs sorted requirement.
 
 This comparison is often asked.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Input size = 10⁵.
 Brute force solution is O(n²).
+
+<details>
+<summary>💡 Show Answer</summary>
 
 What do you do?
 
@@ -275,10 +336,15 @@ Apply two pointers.
 
 Optimization reasoning expected.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Array not sorted and cannot modify order.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two pointers fails.
 
@@ -286,19 +352,29 @@ Use hashing.
 
 Shows adaptability.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Need to remove duplicates but preserve order.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use slow-fast pointer.
 
 Explain carefully.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Three Sum returning duplicate triplets.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Cause:
 Not skipping duplicate elements.
@@ -306,16 +382,22 @@ Not skipping duplicate elements.
 Explain fix:
 Skip duplicates after sorting.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Infinite loop in two-pointer solution.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Incorrect boundary updates.
 
 Debug by printing pointer positions.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

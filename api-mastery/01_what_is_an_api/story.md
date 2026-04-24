@@ -154,6 +154,8 @@ That's an API. A raw HTTP request going out, a raw HTTP response coming back. Ev
 else — the libraries, the frameworks, the SDKs — they're just making this easier to
 write and read.
 
+> 📝 **Practice:** [Q18 · http-connection-keepalive](../api_practice_questions_100.md#q18--normal--http-connection-keepalive)
+
 ---
 
 ## HTTP Methods — The Verbs
@@ -501,7 +503,9 @@ Now let's hit the GitHub API. No authentication needed for public data:
 import requests
 
 # Make a GET request to the GitHub API
+
 response = requests.get("https://api.github.com/users/octocat")
+
 
 # Check if it worked
 print(response.status_code)  # 200
@@ -512,6 +516,9 @@ print(data["name"])    # "The Octocat"
 print(data["login"])   # "octocat"
 print(data["public_repos"])  # 8
 ```
+
+> 📝 **Practice:** [Q16 · request-lifecycle](../api_practice_questions_100.md#q16--normal--request-lifecycle)
+
 
 That's it. That's an API call.
 
@@ -746,6 +753,12 @@ requests    = Python library for making HTTP requests
 
 You've got the foundation. Now let's go deeper into REST specifically — the most
 common API style you'll encounter.
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q17 · http2-vs-http1](../api_practice_questions_100.md#q17--thinking--http2-vs-http1)
 
 ---
 

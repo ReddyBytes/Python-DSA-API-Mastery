@@ -62,7 +62,10 @@ That shows reasoning.
 
 ---
 
-## 1️⃣ What Does XOR Do?
+**Q1: What Does XOR Do?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -74,9 +77,14 @@ Important properties:
 - a ^ 0 = a
 - XOR is commutative
 
----
+</details>
 
-## 2️⃣ How to Check if Number is Even?
+<br>
+
+**Q2: How to Check if Number is Even?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Check last bit:
 
@@ -86,9 +94,14 @@ if n & 1 == 0
 
 Bitwise faster than modulo.
 
----
+</details>
 
-## 3️⃣ Check if Power of Two
+<br>
+
+**Q3: Check if Power of Two**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Condition:
 
@@ -100,9 +113,14 @@ Explain why it works.
 
 Only one bit set.
 
----
+</details>
 
-## 4️⃣ Count Set Bits
+<br>
+
+**Q4: Count Set Bits**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -116,13 +134,17 @@ Removes lowest set bit each iteration.
 Time:
 O(number of set bits)
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Single Number (All Others Twice)
+**Q5: Single Number (All Others Twice)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -139,9 +161,14 @@ O(n)
 Space:
 O(1)
 
----
+</details>
 
-## 6️⃣ Two Numbers Appear Once
+<br>
+
+**Q6: Two Numbers Appear Once**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 
@@ -152,9 +179,14 @@ Approach:
 
 Advanced XOR partition trick.
 
----
+</details>
 
-## 7️⃣ Missing Number
+<br>
+
+**Q7: Missing Number**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Given array from 0 to n with one missing.
 
@@ -164,9 +196,14 @@ XOR all indices and elements.
 
 Result gives missing number.
 
----
+</details>
 
-## 8️⃣ Subsets Using Bitmask
+<br>
+
+**Q8: Subsets Using Bitmask**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 For n elements:
 
@@ -179,9 +216,14 @@ O(n × 2^n)
 
 Very elegant solution.
 
----
+</details>
 
-## 9️⃣ Reverse Bits
+<br>
+
+**Q9: Reverse Bits**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Loop through 32 bits.
 
@@ -189,13 +231,17 @@ Shift and build reversed number.
 
 Used in system-level interviews.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Maximum XOR of Two Numbers
+**Q10: Maximum XOR of Two Numbers**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use Trie (bit-level).
 
@@ -208,9 +254,14 @@ O(n)
 
 Shows combination of Trie + bits.
 
----
+</details>
 
-## 1️⃣1️⃣ Add Without Using + Operator
+<br>
+
+**Q11: Add Without Using + Operator**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -221,9 +272,14 @@ Repeat until carry = 0.
 
 Shows bit-level arithmetic understanding.
 
----
+</details>
 
-## 1️⃣2️⃣ Bitmask DP Introduction
+<br>
+
+**Q12: Bitmask DP Introduction**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Represent subset as mask.
 
@@ -235,9 +291,14 @@ dp[mask][i] = min cost to visit nodes in mask ending at i.
 
 Advanced but impressive in interviews.
 
----
+</details>
 
-## 1️⃣3️⃣ Find Rightmost Set Bit
+<br>
+
+**Q13: Find Rightmost Set Bit**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```
 n & (-n)
@@ -247,53 +308,79 @@ Extract lowest set bit.
 
 Important trick.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Need constant space solution.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Hashmap not allowed.
 
 Use XOR trick.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Need to optimize boolean array storage.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use bitmask instead of list.
 
 Save memory.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Performance-critical system.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Bit operations faster than arithmetic.
 
 Use shift instead of multiply.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Two numbers missing.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use XOR partition technique.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Large subset generation.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Bitmask simpler than recursion.
 
 Compare approaches.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

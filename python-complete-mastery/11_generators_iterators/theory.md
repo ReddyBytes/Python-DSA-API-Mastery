@@ -224,6 +224,7 @@ def generator():
     yield 1     # body NOT executed at call time
     yield 2     # execution is suspended after each yield
 
+
 # Calling:
 regular()      # → 1          (runs the body)
 generator()    # → <generator object>  (body NOT run yet!)
@@ -233,6 +234,9 @@ next(g)   # → 1   (runs until first yield, pauses)
 next(g)   # → 2   (resumes from after first yield, pauses at second)
 next(g)   # → StopIteration (fell off the end of the function)
 ```
+
+> 📝 **Practice:** [Q33 · generators-basics](../python_practice_questions_100.md#q33--normal--generators-basics) · [Q34 · yield](../python_practice_questions_100.md#q34--thinking--yield) · [Q93 · predict-output-generator](../python_practice_questions_100.md#q93--logical--predict-output-generator)
+
 
 ---
 
@@ -290,6 +294,7 @@ except StopIteration:
 # Calling next(g) third time:
 # E: final
 # Generator exhausted
+
 ```
 
 **Memory model — why this enables lazy evaluation:**
@@ -306,6 +311,8 @@ Generator expression:
   → each next() computes ONE result, uses it, discards it
   → constant memory regardless of input size
 ```
+
+> 📝 **Practice:** [Q35 · generator-exhaustion](../python_practice_questions_100.md#q35--critical--generator-exhaustion)
 
 ---
 
@@ -335,6 +342,7 @@ Memory:                              Memory:
 ```python
 import sys
 
+
 # Eager: all 1 million numbers in RAM immediately
 eager = [x for x in range(1_000_000)]
 print(sys.getsizeof(eager))      # ~8,056,952 bytes ≈ 8 MB
@@ -343,6 +351,9 @@ print(sys.getsizeof(eager))      # ~8,056,952 bytes ≈ 8 MB
 lazy = (x for x in range(1_000_000))
 print(sys.getsizeof(lazy))       # ~112 bytes
 ```
+
+> 📝 **Practice:** [Q76 · explain-generators](../python_practice_questions_100.md#q76--interview--explain-generators)
+
 
 **Why it matters in production:**
 
@@ -522,6 +533,8 @@ avg.send(20)   # → 15.0
 avg.send(30)   # → 20.0
 ```
 
+> 📝 **Practice:** [Q96 · debug-generator-send](../python_practice_questions_100.md#q96--debug--debug-generator-send)
+
 ---
 
 ## 🔧 Chapter 8: Generator Pipelines — Streaming ETL
@@ -535,6 +548,7 @@ Each arrow is a generator. Memory is O(1) at every stage.
 
 ```python
 from pathlib import Path
+
 
 # Stage 1: Read lines from file (source)
 def read_lines(filepath):
@@ -577,6 +591,9 @@ def process_log(filepath):
     for record in pipeline:
         insert_to_db(record)
 ```
+
+> 📝 **Practice:** [Q89 · pipeline-scenario](../python_practice_questions_100.md#q89--design--pipeline-scenario)
+
 
 **What happens in memory:**
 ```

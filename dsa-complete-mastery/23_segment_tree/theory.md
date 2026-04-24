@@ -15,6 +15,8 @@ Segment Tree is a data structure designed for:
 - Fast range queries
 - Fast updates
 
+> 📝 **Practice:** [Q67 · segment-tree-range-query](../dsa_practice_questions_100.md#q67--thinking--segment-tree-range-query)
+
 ---
 
 ## 📌 Learning Priority
@@ -321,6 +323,7 @@ class FenwickTree:
         """Sum from l to r inclusive (1-indexed)."""
         return self.query(r) - self.query(l - 1)
 
+
 # Build from existing array in O(n log n):
 def build(arr):
     ft = FenwickTree(len(arr))
@@ -328,6 +331,9 @@ def build(arr):
         ft.update(i + 1, val)       # ← convert to 1-indexed
     return ft
 ```
+
+> 📝 **Practice:** [Q68 · fenwick-tree](../dsa_practice_questions_100.md#q68--normal--fenwick-tree)
+
 
 **The lowbit trick explained:**
 ```

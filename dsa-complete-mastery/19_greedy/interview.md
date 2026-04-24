@@ -59,15 +59,23 @@ That shows reasoning.
 
 ---
 
-## 1️⃣ What is a Greedy Algorithm?
+**Q1: What is a Greedy Algorithm?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
 A greedy algorithm makes the locally optimal choice at each step with the hope of achieving a globally optimal solution.
 
----
+</details>
 
-## 2️⃣ Does Greedy Always Work?
+<br>
+
+**Q2: Does Greedy Always Work?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 No.
 
@@ -78,9 +86,14 @@ Greedy works only when:
 
 Important to mention.
 
----
+</details>
 
-## 3️⃣ Why Sorting Often Used in Greedy?
+<br>
+
+**Q3: Why Sorting Often Used in Greedy?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sorting helps us:
 
@@ -91,13 +104,17 @@ Sorting helps us:
 Example:
 Activity selection sorted by end time.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 4️⃣ Activity Selection
+**Q4: Activity Selection**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Problem:
 Maximize number of non-overlapping intervals.
@@ -114,9 +131,14 @@ O(n log n)
 Interview tip:
 Explain why earliest finish leaves more room.
 
----
+</details>
 
-## 5️⃣ Merge Intervals
+<br>
+
+**Q5: Merge Intervals**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sort by start time.
 
@@ -131,9 +153,14 @@ O(n log n)
 
 Common pattern.
 
----
+</details>
 
-## 6️⃣ Jump Game
+<br>
+
+**Q6: Jump Game**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Greedy rule:
 
@@ -146,9 +173,14 @@ O(n)
 
 Shows forward decision tracking.
 
----
+</details>
 
-## 7️⃣ Gas Station Problem
+<br>
+
+**Q7: Gas Station Problem**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Track total gas and current tank.
 
@@ -159,9 +191,14 @@ Greedy works because total feasibility ensures solution.
 
 Must explain reasoning clearly.
 
----
+</details>
 
-## 8️⃣ Partition Labels
+<br>
+
+**Q8: Partition Labels**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Track last occurrence of each character.
 
@@ -172,13 +209,17 @@ Greedy segmentation.
 Time:
 O(n)
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Huffman Coding
+**Q9: Huffman Coding**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Greedy:
 Always merge two smallest frequencies.
@@ -190,9 +231,14 @@ O(n log n)
 
 Explain why merging smallest first is optimal.
 
----
+</details>
 
-## 1️⃣1️⃣ Task Scheduler
+<br>
+
+**Q10: Task Scheduler**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Arrange tasks with cooldown.
 
@@ -200,9 +246,14 @@ Use greedy frequency ordering.
 
 Often combined with heap.
 
----
+</details>
 
-## 1️⃣2️⃣ Why Greedy Fails in 0/1 Knapsack
+<br>
+
+**Q11: Why Greedy Fails in 0/1 Knapsack**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because:
 
@@ -213,9 +264,14 @@ Demonstrate counterexample.
 
 Strong candidates mention this.
 
----
+</details>
 
-## 1️⃣3️⃣ How to Prove Greedy Correctness
+<br>
+
+**Q12: How to Prove Greedy Correctness**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approaches:
 
@@ -226,50 +282,75 @@ Approaches:
 You don’t need formal proof,
 but explain intuition.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Greedy solution fails on edge case.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible issue:
 Greedy property not valid.
 
 Consider DP instead.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Sorting unnecessary increases complexity.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If input already sorted,
 avoid extra sort.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Time limit tight.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Greedy preferred over DP.
 
 Explain trade-off.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Need minimal number of intervals removed.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sort by end time.
 
 Apply activity selection logic.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Need to minimize number of arrows to burst balloons.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sort intervals by end.
 
@@ -277,6 +358,7 @@ Same pattern.
 
 Recognize interval scheduling pattern.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

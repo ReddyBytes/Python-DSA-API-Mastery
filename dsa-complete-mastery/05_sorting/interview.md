@@ -29,7 +29,10 @@ Understanding when and why to sort is more important than writing the algorithm.
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is sorting?
+**Q1: What is sorting?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sorting arranges elements in a defined order (ascending or descending).
 
@@ -42,9 +45,14 @@ Example:
 Key understanding:
 Sorting enables efficient searching and structured processing.
 
----
+</details>
 
-## 2️⃣ What is the time complexity of common sorting algorithms?
+<br>
+
+**Q2: What is the time complexity of common sorting algorithms?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Be able to state:
 
@@ -58,9 +66,14 @@ Be able to state:
 But more importantly:
 Explain *why*.
 
----
+</details>
 
-## 3️⃣ Why can’t comparison-based sorting do better than O(n log n)?
+<br>
+
+**Q3: Why can’t comparison-based sorting do better than O(n log n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 There is a theoretical lower bound.
 
@@ -72,9 +85,14 @@ log₂(n!) ≈ n log n.
 You don’t need formal proof.
 Just explain decision tree reasoning briefly.
 
----
+</details>
 
-## 4️⃣ What is stable sorting?
+<br>
+
+**Q4: What is stable sorting?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 A sorting algorithm is stable if equal elements preserve original order.
 
@@ -82,9 +100,14 @@ Important when sorting objects by multiple fields.
 
 Python’s built-in sort is stable.
 
----
+</details>
 
-## 5️⃣ What is in-place sorting?
+<br>
+
+**Q5: What is in-place sorting?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sorting without using extra memory proportional to input size.
 
@@ -92,11 +115,15 @@ Quick sort and heap sort are in-place (mostly).
 
 Merge sort requires extra space.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 6️⃣ When would you prefer Merge Sort over Quick Sort?
+**Q6: When would you prefer Merge Sort over Quick Sort?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Merge Sort:
 
@@ -113,9 +140,14 @@ Quick Sort:
 
 You must compare trade-offs.
 
----
+</details>
 
-## 7️⃣ What is the worst-case scenario for Quick Sort?
+<br>
+
+**Q7: What is the worst-case scenario for Quick Sort?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If pivot selection is poor (e.g., always smallest element),
 array becomes highly unbalanced.
@@ -129,9 +161,14 @@ Mitigation:
 
 Interviewers expect this awareness.
 
----
+</details>
 
-## 8️⃣ Why is Insertion Sort used in real systems?
+<br>
+
+**Q8: Why is Insertion Sort used in real systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Insertion sort performs well when:
 
@@ -142,9 +179,14 @@ Hybrid algorithms like Timsort use insertion sort for small partitions.
 
 Shows practical knowledge.
 
----
+</details>
 
-## 9️⃣ What is the difference between internal and external sorting?
+<br>
+
+**Q9: What is the difference between internal and external sorting?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Internal sorting:
 Data fits in memory.
@@ -154,9 +196,14 @@ Data too large → split, sort chunks, merge.
 
 Even if not implementing, know the concept.
 
----
+</details>
 
-## 🔟 How do you sort custom objects in Python?
+<br>
+
+**Q10: How do you sort custom objects in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use key function:
 
@@ -174,11 +221,15 @@ Stable sort preserves ordering.
 
 Interviewers expect comfort with key-based sorting.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 1️⃣1️⃣ How do you choose sorting strategy in production?
+**Q11: How do you choose sorting strategy in production?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider:
 
@@ -191,9 +242,14 @@ Consider:
 
 Sorting choice is constraint-driven.
 
----
+</details>
 
-## 1️⃣2️⃣ When is sorting unnecessary?
+<br>
+
+**Q12: When is sorting unnecessary?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -207,9 +263,14 @@ Sorting entire dataset may be wasteful.
 
 Senior candidates avoid unnecessary sorting.
 
----
+</details>
 
-## 1️⃣3️⃣ How does sorting impact system performance?
+<br>
+
+**Q13: How does sorting impact system performance?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sorting large datasets:
 
@@ -221,9 +282,14 @@ Sorting large datasets:
 In high-scale systems:
 Sorting strategy affects response time.
 
----
+</details>
 
-## 1️⃣4️⃣ How would you optimize sorting in distributed systems?
+<br>
+
+**Q14: How would you optimize sorting in distributed systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 
@@ -236,9 +302,14 @@ MapReduce frameworks.
 
 This shows scalability thinking.
 
----
+</details>
 
-## 1️⃣5️⃣ Explain hybrid sorting algorithms.
+<br>
+
+**Q15: Explain hybrid sorting algorithms.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Modern languages use hybrid sorts.
 
@@ -253,15 +324,20 @@ Optimized for real-world patterns.
 
 Understanding hybrid behavior reflects maturity.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 You have an array of 10⁶ integers.
 Brute-force solution is O(n²).
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Will it pass?
 
@@ -271,10 +347,15 @@ Need O(n log n) or O(n).
 Likely approach:
 Sort + two pointers or hashing.
 
+</details>
 ---
 
 ## Scenario 2:
+
 You must sort records by salary, then by name.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Which sorting property matters?
 
@@ -282,10 +363,15 @@ Stability.
 
 Use stable sort or sort in reverse order carefully.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Quick sort is timing out on certain inputs.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible cause:
 Worst-case pivot selection.
@@ -293,20 +379,30 @@ Worst-case pivot selection.
 Fix:
 Randomize pivot or use hybrid approach.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Memory is limited, but sorting required.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Better:
 Heap sort (in-place).
 
 Avoid merge sort (extra memory).
 
+</details>
 ---
 
 ## Scenario 5:
+
 You only need the 5 largest elements from 1 million values.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sorting entire array → wasteful.
 
@@ -316,6 +412,7 @@ Time: O(n log k)
 
 Senior engineers optimize like this.
 
+</details>
 ---
 
 # 🧠 Senior-Level Structured Answer Example

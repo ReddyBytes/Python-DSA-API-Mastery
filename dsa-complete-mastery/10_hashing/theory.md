@@ -9,6 +9,8 @@
 Hashing is not just a data structure.
 It is a strategy to reduce lookup time.
 
+> 📝 **Practice:** [Q18 · hash-map-internals](../dsa_practice_questions_100.md#q18--normal--hash-map-internals) · [Q74 · hashmap-from-scratch](../dsa_practice_questions_100.md#q74--thinking--hashmap-from-scratch)
+
 ---
 
 ## 📌 Learning Priority
@@ -143,6 +145,8 @@ Techniques:
 - Quadratic probing
 - Double hashing
 
+> 📝 **Practice:** [Q80 · hash-collision-resolution](../dsa_practice_questions_100.md#q80--interview--hash-collision-resolution)
+
 ---
 
 # 5️⃣ Load Factor
@@ -187,6 +191,8 @@ d["apple"]
 
 Average:
 O(1)
+
+> 📝 **Practice:** [Q20 · hash-map-vs-hash-set](../dsa_practice_questions_100.md#q20--critical--hash-map-vs-hash-set) · [Q86 · production-wrong-data-structure](../dsa_practice_questions_100.md#q86--design--production-wrong-data-structure)
 
 ---
 
@@ -335,6 +341,16 @@ Previous:
 Next:  
 [10_hashing/interview.md](/dsa-complete-mastery/10_hashing/interview.md)  
 [11_two_pointers/theory.md](/dsa-complete-mastery/11_two_pointers/theory.md)
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q73 · lru-cache-design](../dsa_practice_questions_100.md#q73--design--lru-cache-design)
+> 📝 **Practice:** [Q97 · design-cache-eviction](../dsa_practice_questions_100.md#q97--design--design-cache-eviction)
+> 📝 **Practice:** [Q99 · design-word-frequency](../dsa_practice_questions_100.md#q99--design--design-word-frequency)
+
+> 📝 **Practice:** [Q19 · frequency-counting](../dsa_practice_questions_100.md#q19--code--frequency-counting)
 
 ---
 

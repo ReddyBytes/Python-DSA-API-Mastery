@@ -62,7 +62,10 @@ This shows maturity.
 
 ---
 
-## 1️⃣ What is Sliding Window?
+**Q1: What is Sliding Window?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -70,9 +73,14 @@ Sliding window is a technique that uses two pointers to maintain a dynamic range
 
 Keep it structured.
 
----
+</details>
 
-## 2️⃣ When Should We Use Sliding Window?
+<br>
+
+**Q2: When Should We Use Sliding Window?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 When:
 
@@ -83,9 +91,14 @@ When:
 
 Pattern recognition is key.
 
----
+</details>
 
-## 3️⃣ Why Does It Run in O(n)?
+<br>
+
+**Q3: Why Does It Run in O(n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because:
 
@@ -99,13 +112,17 @@ Hence O(n).
 
 Mention this clearly.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 4️⃣ Maximum Sum Subarray of Size K
+**Q4: Maximum Sum Subarray of Size K**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Fixed window.
 
@@ -122,9 +139,14 @@ Before coding, say:
 
 > “Since window size is fixed, we can reuse previous sum instead of recalculating.”
 
----
+</details>
 
-## 5️⃣ Longest Substring Without Repeating Characters
+<br>
+
+**Q5: Longest Substring Without Repeating Characters**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Variable window.
 
@@ -140,9 +162,14 @@ Space: O(min(n, charset))
 
 Explain carefully how duplicates handled.
 
----
+</details>
 
-## 6️⃣ Smallest Subarray with Sum ≥ Target
+<br>
+
+**Q6: Smallest Subarray with Sum ≥ Target**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Variable window.
 
@@ -154,9 +181,14 @@ Because removing from left reduces window size.
 
 This tests boundary precision.
 
----
+</details>
 
-## 7️⃣ Longest Substring with At Most K Distinct Characters
+<br>
+
+**Q7: Longest Substring with At Most K Distinct Characters**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Maintain:
 
@@ -169,9 +201,14 @@ Shrink left until valid.
 
 This tests state maintenance.
 
----
+</details>
 
-## 8️⃣ Find All Anagrams in String
+<br>
+
+**Q8: Find All Anagrams in String**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -184,13 +221,17 @@ That would be O(nk log k).
 
 Sliding window reduces to O(n).
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 9️⃣ Minimum Window Substring
+**Q9: Minimum Window Substring**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 One of the hardest sliding window problems.
 
@@ -207,9 +248,14 @@ Requires careful state tracking.
 
 Strong candidates explain invariant clearly.
 
----
+</details>
 
-## 🔟 Sliding Window Maximum (Using Deque)
+<br>
+
+**Q10: Sliding Window Maximum (Using Deque)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use monotonic deque.
 
@@ -225,9 +271,14 @@ Time: O(n)
 
 Explain why not O(nk).
 
----
+</details>
 
-## 1️⃣1️⃣ Compare Sliding Window vs Two Pointers
+<br>
+
+**Q11: Compare Sliding Window vs Two Pointers**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two pointers:
 Movement only.
@@ -241,9 +292,14 @@ Longest substring uses sliding window.
 
 Distinguish clearly.
 
----
+</details>
 
-## 1️⃣2️⃣ When Sliding Window Fails
+<br>
+
+**Q12: When Sliding Window Fails**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Cannot use when:
 
@@ -253,24 +309,34 @@ Cannot use when:
 
 Recognizing inapplicability shows depth.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Brute force solution gives TLE.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 How to optimize?
 
 Identify contiguous structure.
 Apply sliding window.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Infinite loop in sliding window solution.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Not moving left pointer properly.
@@ -279,30 +345,45 @@ Explain debugging:
 
 Print left/right movement.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Memory usage too high due to map.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Optimize by:
 Using array instead of dictionary (if fixed charset).
 
 Shows optimization instinct.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Window not shrinking properly.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Common mistake:
 Not updating state when removing element.
 
 Explain careful decrement logic.
 
+</details>
 ---
 
 ## Scenario 5:
+
 String length 10⁶.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Brute force impossible.
 
@@ -310,6 +391,7 @@ Sliding window required.
 
 Time complexity discussion expected.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

@@ -66,6 +66,8 @@ Notice what's missing: dates, integers vs floats, binary data, sets, tuples, byt
 JSON doesn't know about any of these. This gap between "Python's type system" and
 "JSON's type system" is where serialization bugs live.
 
+> 📝 **Practice:** [Q10 · content-type-header](../api_practice_questions_100.md#q10--normal--content-type-header)
+
 ### What JSON Can't Represent — And The Workarounds
 
 **Dates and datetimes**

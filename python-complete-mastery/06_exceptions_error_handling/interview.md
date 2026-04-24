@@ -35,7 +35,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: What is an exception in Python? How is it different from a syntax error?
+**Q1: What is an exception in Python? How is it different from a syntax error?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Exception is when code breaks."
 
@@ -53,9 +56,14 @@ if True       # ← missing colon: SyntaxError before program runs
 int("abc")    # ← ValueError at runtime → catchable
 ```
 
----
+</details>
 
-### Q2: What is the full structure of a try block? What does each part do?
+<br>
+
+**Q2: What is the full structure of a try block? What does each part do?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -79,9 +87,14 @@ finally:
 # Key insight: finally is for guaranteed resource release
 ```
 
----
+</details>
 
-### Q3: What is `finally` and why is it critical?
+<br>
+
+**Q3: What is `finally` and why is it critical?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It always runs."
 
@@ -107,9 +120,14 @@ def read_config(path):
         return parse(data) if data else {}
 ```
 
----
+</details>
 
-### Q4: Why should you never use a bare `except:`?
+<br>
+
+**Q4: Why should you never use a bare `except:`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -135,9 +153,14 @@ except ValueError:
     print("Please enter a valid number")
 ```
 
----
+</details>
 
-### Q5: Name 8 common built-in exceptions and when each occurs.
+<br>
+
+**Q5: Name 8 common built-in exceptions and when each occurs.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```python
 # ValueError    — right type, wrong value:
@@ -167,13 +190,17 @@ open("ghost.txt")     # FileNotFoundError: No such file or directory
 10 / 0                # ZeroDivisionError: division by zero
 ```
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q6: What is exception propagation? How does the call stack affect it?
+**Q6: What is exception propagation? How does the call stack affect it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -199,9 +226,14 @@ except ZeroDivisionError:
 # Catch at the layer that can meaningfully handle the error.
 ```
 
----
+</details>
 
-### Q7: What is exception chaining? Why does `raise X from Y` matter?
+<br>
+
+**Q7: What is exception chaining? Why does `raise X from Y` matter?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It re-raises with a message."
 
@@ -228,9 +260,14 @@ raise ServiceError("DB unavailable") from None
 # Output: only ServiceError — says "I intentionally suppressed the cause"
 ```
 
----
+</details>
 
-### Q8: How would you design a custom exception hierarchy for a domain?
+<br>
+
+**Q8: How would you design a custom exception hierarchy for a domain?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -269,9 +306,14 @@ except PaymentError:
     show_generic_payment_failure()         # all payment errors
 ```
 
----
+</details>
 
-### Q9: What is a [context manager](../12_context_managers/theory.md) and how does it relate to exception handling?
+<br>
+
+**Q9: What is a [context manager](../12_context_managers/theory.md) and how does it relate to exception handling?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -302,9 +344,14 @@ with managed_db_connection("postgres://localhost/mydb") as conn:
     # If anything raises here → rollback + close happens automatically
 ```
 
----
+</details>
 
-### Q10: What is LBYL vs EAFP? Which is more Pythonic?
+<br>
+
+**Q10: What is LBYL vs EAFP? Which is more Pythonic?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -333,9 +380,14 @@ if os.path.exists("file.txt"):     # file exists NOW
 # EAFP wins: just open(), catch FileNotFoundError
 ```
 
----
+</details>
 
-### Q11: What's the difference between `raise` and `raise e`?
+<br>
+
+**Q11: What's the difference between `raise` and `raise e`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer — this is a common trap:**
 
@@ -354,13 +406,17 @@ except Exception as e:
 # ALWAYS use bare raise inside except blocks when re-raising.
 ```
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q12: How do you design exception handling in a layered architecture?
+**Q12: How do you design exception handling in a layered architecture?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -396,9 +452,14 @@ def handle_exception(e):
     # ← NEVER return str(e) or traceback to the client!
 ```
 
----
+</details>
 
-### Q13: How would you implement a retry mechanism for an unreliable service?
+<br>
+
+**Q13: How would you implement a retry mechanism for an unreliable service?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -434,9 +495,14 @@ def call_api(payload): ...
 > - Only retry **transient** exceptions (ConnectionError, TimeoutError) — not ValueError
 > - **Max attempts** — don't retry forever
 
----
+</details>
 
-### Q14: How do exceptions work in threads? What's the danger?
+<br>
+
+**Q14: How do exceptions work in threads? What's the danger?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -464,9 +530,14 @@ with ThreadPoolExecutor() as executor:
         print(f"Worker failed: {e}")
 ```
 
----
+</details>
 
-### Q15: How would you log exceptions correctly in production?
+<br>
+
+**Q15: How would you log exceptions correctly in production?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -502,9 +573,14 @@ except Exception as e:
     return None    # caller has no idea what failed
 ```
 
----
+</details>
 
-### Q16: What's the difference between `logging.error()` and `logging.exception()`?
+<br>
+
+**Q16: What's the difference between `logging.error()` and `logging.exception()`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```python
 try:
@@ -524,7 +600,8 @@ except Exception as e:
 # so the full traceback is captured for debugging.
 ```
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

@@ -56,15 +56,23 @@ Shows performance reasoning.
 
 ---
 
-## 1️⃣ What Is DSU?
+**Q1: What Is DSU?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
 Disjoint Set Union is a data structure that keeps track of elements partitioned into disjoint sets and supports efficient union and find operations.
 
----
+</details>
 
-## 2️⃣ What Are Find and Union?
+<br>
+
+**Q2: What Are Find and Union?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Find:
 Returns representative (root) of element.
@@ -75,9 +83,14 @@ Merges two sets.
 Time complexity with optimizations:
 Almost O(1)
 
----
+</details>
 
-## 3️⃣ Why Path Compression?
+<br>
+
+**Q3: Why Path Compression?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 It flattens the tree.
 
@@ -85,9 +98,14 @@ Reduces depth.
 
 Speeds up future find operations.
 
----
+</details>
 
-## 4️⃣ Why Union by Rank?
+<br>
+
+**Q4: Why Union by Rank?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Attach smaller tree under larger tree.
 
@@ -95,13 +113,17 @@ Prevents tree from becoming tall.
 
 Improves efficiency.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Detect Cycle in Undirected Graph
+**Q5: Detect Cycle in Undirected Graph**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 For each edge (u, v):
 
@@ -114,9 +136,14 @@ O(E α(V))
 
 Classic DSU usage.
 
----
+</details>
 
-## 6️⃣ Number of Connected Components
+<br>
+
+**Q6: Number of Connected Components**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 After all unions:
 
@@ -125,18 +152,28 @@ Count unique roots.
 Time:
 Near linear.
 
----
+</details>
 
-## 7️⃣ Redundant Connection
+<br>
+
+**Q7: Redundant Connection**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If union finds same root:
 Edge is redundant.
 
 Leetcode favorite.
 
----
+</details>
 
-## 8️⃣ Kruskal’s Algorithm
+<br>
+
+**Q8: Kruskal’s Algorithm**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Steps:
 
@@ -153,13 +190,17 @@ O(E log E)
 
 Interviewers expect this combination.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Union by Size vs Rank
+**Q9: Union by Size vs Rank**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Rank:
 Approximate tree height.
@@ -171,9 +212,14 @@ Both acceptable.
 
 Explain trade-offs.
 
----
+</details>
 
-## 1️⃣1️⃣ Amortized Complexity
+<br>
+
+**Q10: Amortized Complexity**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 With:
 
@@ -189,9 +235,14 @@ Practically constant.
 
 Mentioning this shows depth.
 
----
+</details>
 
-## 1️⃣2️⃣ DSU with Extra Information
+<br>
+
+**Q11: DSU with Extra Information**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -205,9 +256,14 @@ Extend DSU to track metadata.
 
 Advanced usage.
 
----
+</details>
 
-## 1️⃣3️⃣ DSU Limitations
+<br>
+
+**Q12: DSU Limitations**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Not ideal for directed graphs cycle detection
 - Hard to undo union (unless persistent DSU)
@@ -215,21 +271,31 @@ Advanced usage.
 
 Strong candidates mention limitations.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Large number of connectivity queries.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use DSU instead of DFS repeatedly.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Need to merge accounts by email.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Each email belongs to account.
 
@@ -237,31 +303,47 @@ Union by email id.
 
 Classic accounts merge problem.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Network cables removed and re-added.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Need dynamic connectivity.
 
 Use DSU.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Graph too large.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Need near constant-time connectivity check.
 
 DSU best choice.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Need to maintain component sizes.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Extend DSU with size array.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

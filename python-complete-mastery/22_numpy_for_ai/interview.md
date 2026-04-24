@@ -22,7 +22,10 @@ They test:
 
 ---
 
-## 1️⃣ What is NumPy?
+**Q1: What is NumPy?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -30,9 +33,14 @@ Strong answer:
 
 Keep it simple. Mention: arrays, C, fast.
 
----
+</details>
 
-## 2️⃣ What is the difference between a NumPy array and a Python list?
+<br>
+
+**Q2: What is the difference between a NumPy array and a Python list?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -42,9 +50,14 @@ Concrete numbers help:
 
 > A Python int takes ~28 bytes. A NumPy float32 takes 4 bytes. For a million numbers, that is a 7x difference in memory.
 
----
+</details>
 
-## 3️⃣ What is the shape of an array?
+<br>
+
+**Q3: What is the shape of an array?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -54,9 +67,14 @@ Then explain in AI context:
 
 > In AI, a batch of 100 document embeddings each with 1536 dimensions has shape `(100, 1536)`. The shape tells you exactly how to interpret the data.
 
----
+</details>
 
-## 4️⃣ What is a dtype?
+<br>
+
+**Q4: What is a dtype?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -66,9 +84,14 @@ Why it matters:
 
 > In AI, models use `float32` by default. If you accidentally create `float64` arrays, you double your memory usage for no accuracy benefit. Always check your dtype when working with embeddings.
 
----
+</details>
 
-## 5️⃣ How do you create a NumPy array?
+<br>
+
+**Q5: How do you create a NumPy array?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```python
 import numpy as np
@@ -81,13 +104,17 @@ np.linspace(0, 1, 5)                   # 5 points from 0 to 1
 np.random.default_rng(42).standard_normal((3, 3))  # Gaussian random
 ```
 
----
+</details>
+
 
 # 🔹 Level 2: Intermediate (1–3 Years)
 
 ---
 
-## 6️⃣ What is broadcasting?
+**Q6: What is broadcasting?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -111,9 +138,14 @@ In AI terms:
 
 > Adding a bias vector of shape `(512,)` to a batch output of shape `(32, 512)` uses broadcasting. This is exactly what a neural network layer does.
 
----
+</details>
 
-## 7️⃣ What is vectorization and why does it matter?
+<br>
+
+**Q7: What is vectorization and why does it matter?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -133,9 +165,14 @@ Why it matters:
 
 > For 1 million elements, the Python loop might take 200ms. The NumPy version takes under 1ms. In production AI systems handling thousands of requests, this is not a micro-optimization — it is the difference between a scalable product and one that falls over under load.
 
----
+</details>
 
-## 8️⃣ How does matrix multiplication work and why does it matter for AI?
+<br>
+
+**Q8: How does matrix multiplication work and why does it matter for AI?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -152,9 +189,14 @@ In AI:
 
 > Every dense layer in a neural network is `output = input @ weights + bias`. The input batch has shape `(batch_size, input_features)`. The weight matrix has shape `(input_features, output_features)`. One `@` call transforms the whole batch in one shot — no loop over samples.
 
----
+</details>
 
-## 9️⃣ What is the difference between a view and a copy?
+<br>
+
+**Q9: What is the difference between a view and a copy?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -176,9 +218,14 @@ Why it matters:
 
 > In AI pipelines processing large tensors, unexpected mutations through views cause subtle bugs that are hard to trace. Always call `.copy()` when you need independence, or be explicit in your reasoning.
 
----
+</details>
 
-## 🔟 Explain the axis parameter in aggregations.
+<br>
+
+**Q10: Explain the axis parameter in aggregations.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -196,13 +243,17 @@ In AI:
 
 > You have embeddings with shape `(100, 1536)`. `mean(axis=0)` gives the average embedding across all documents — shape `(1536,)`. `mean(axis=1)` gives the average value per document — shape `(100,)`. Knowing which axis you want is critical.
 
----
+</details>
+
 
 # 🔹 Level 3: Advanced (3+ Years)
 
 ---
 
-## 1️⃣1️⃣ How do you compute cosine similarity between a query and many documents using NumPy — without a loop?
+**Q11: How do you compute cosine similarity between a query and many documents using NumPy — without a loop?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -229,9 +280,14 @@ Why no loop:
 
 > The `@` operator computes all n dot products simultaneously using BLAS routines. For 10,000 documents with 1536 dimensions, this runs in ~3ms. A Python loop over the same computation takes ~3 seconds.
 
----
+</details>
 
-## 1️⃣2️⃣ How are embeddings stored as NumPy arrays and what are the memory implications?
+<br>
+
+**Q12: How are embeddings stored as NumPy arrays and what are the memory implications?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -245,9 +301,14 @@ Layout matters for performance:
 
 > NumPy default (C order, row-major) stores rows contiguously. When you compute `docs @ query`, you are reading each row sequentially — this is cache-friendly and fast. If the array were Fortran order (column-major), the same operation would be slower due to cache misses.
 
----
+</details>
 
-## 1️⃣3️⃣ What is memory layout (C order vs Fortran order) and why does it matter for performance?
+<br>
+
+**Q13: What is memory layout (C order vs Fortran order) and why does it matter for performance?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -272,7 +333,8 @@ Practical advice:
 
 > After operations like `arr.T` (transpose), the result is a view in the opposite layout. If you then do heavy computation on it, call `np.ascontiguousarray()` first to restore cache-friendly layout.
 
----
+</details>
+
 
 # 🔥 Common Interview Traps
 

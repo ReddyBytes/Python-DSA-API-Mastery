@@ -205,6 +205,8 @@ finally:
     cleanup()
 ```
 
+> 📝 **Practice:** [Q19 · try-except-finally](../python_practice_questions_100.md#q19--normal--try-except-finally)
+
 ### Why `else` Exists — It Matters
 
 ```python
@@ -335,6 +337,8 @@ except ValueError as e:
 ### Catching Multiple Exception Types
 
 ```python
+
+
 # ✅ Tuple syntax — both exceptions share the same handler:
 try:
     x = int(input("Enter a number: "))
@@ -351,6 +355,9 @@ except ValueError:
 except ZeroDivisionError:
     print("Can't divide by zero.")
 ```
+
+> 📝 **Practice:** [Q21 · exception-types](../python_practice_questions_100.md#q21--critical--exception-types)
+
 
 ### ⚠️ The Order of Except Clauses Matters
 
@@ -423,6 +430,9 @@ def get_user(user_id: int):
 # ← shows ConnectionError's full traceback too!
 ```
 
+> 📝 **Practice:** [Q43 · exception-chaining](../python_practice_questions_100.md#q43--thinking--exception-chaining)
+
+
 ```python
 # To suppress the original exception chain (explicit suppression):
 raise NewError("context-free message") from None
@@ -431,6 +441,8 @@ raise NewError("context-free message") from None
 ---
 
 ## 🏗️ Chapter 6 — Custom Exceptions: Design Like a Pro
+
+> 📝 **Practice:** [Q42 · custom-exceptions](../python_practice_questions_100.md#q42--normal--custom-exceptions)
 
 ### The Basics
 
@@ -1082,12 +1094,17 @@ except Exception as e:
 ### ❌ Anti-Pattern 1 — Bare `except` / Silent `pass`
 
 ```python
+
+
 # WORST possible code:
 try:
     do_something()
 except:          # catches SystemExit, KeyboardInterrupt, everything!
     pass         # hides every error silently — debugging nightmare
 ```
+
+> 📝 **Practice:** [Q44 · bare-except](../python_practice_questions_100.md#q44--critical--bare-except)
+
 
 ### ❌ Anti-Pattern 2 — Catching Too Broadly
 
@@ -1104,6 +1121,8 @@ except Exception as e:
 ### ❌ Anti-Pattern 3 — Using Exceptions for Normal Control Flow
 
 ```python
+
+
 # BAD — exceptions are expensive:
 for item in large_list:
     try:
@@ -1115,6 +1134,9 @@ for item in large_list:
 for item in large_list:
     result = item.get("key", default_value)
 ```
+
+> 📝 **Practice:** [Q20 · exception-flow](../python_practice_questions_100.md#q20--logical--exception-flow)
+
 
 ### ❌ Anti-Pattern 4 — Losing the Original Exception
 
