@@ -9,6 +9,8 @@
 
 BST is where trees become efficient.
 
+> 📝 **Practice:** [Q38 · bst-search-insert](../dsa_practice_questions_100.md#q38--normal--bst-search-insert)
+
 ---
 
 ## 📌 Learning Priority
@@ -287,6 +289,8 @@ Can be done using:
 - Min/max range recursion
 
 Important interview question.
+
+> 📝 **Practice:** [Q37 · bst-properties](../dsa_practice_questions_100.md#q37--critical--bst-properties)
 
 ---
 

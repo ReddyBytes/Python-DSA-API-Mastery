@@ -1,5 +1,13 @@
 # GraphQL — When the Client Gets to Drive
 
+> 📝 **Practice:** [Q81 · compare-rest-graphql](../api_practice_questions_100.md#q81--interview--compare-rest-graphql)
+
+> 📝 **Practice:** [Q62 · graphql-n-plus-one](../api_practice_questions_100.md#q62--thinking--graphql-n-plus-one)
+
+> 📝 **Practice:** [Q61 · graphql-vs-rest](../api_practice_questions_100.md#q61--interview--graphql-vs-rest)
+
+> 📝 **Practice:** [Q97 · design-rest-vs-graphql](../api_practice_questions_100.md#q97--design--design-rest-vs-graphql)
+
 ## The Monday Morning Problem
 
 It's Monday morning. You're building the mobile app for an e-commerce startup.

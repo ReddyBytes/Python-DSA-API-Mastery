@@ -3,6 +3,8 @@
 > *"A decorator is a function that takes a function, wraps new behavior around it,*
 > *and returns the enhanced version. One of Python's most elegant ideas."*
 
+> 📝 **Practice:** [Q77 · explain-decorators](../python_practice_questions_100.md#q77--interview--explain-decorators) · [Q94 · debug-decorator](../python_practice_questions_100.md#q94--debug--debug-decorator)
+
 ---
 
 ## 🎬 The Problem That Made Decorators Inevitable
@@ -379,6 +381,8 @@ print(greet.__wrapped__)  # original function ← @wraps adds this too
 
 **Rule: Every wrapper function should have `@functools.wraps(func)`. No exceptions.**
 
+> 📝 **Practice:** [Q30 · functools-wraps](../python_practice_questions_100.md#q30--thinking--functools-wraps)
+
 ---
 
 ## ⚙️ Chapter 6: Decorators with Arguments — Decorator Factories
@@ -427,6 +431,8 @@ retry(max_attempts=5)   → returns decorator
 decorator(fetch_data)   → returns wrapper  (at @-decoration time)
 wrapper(url)            → runs each time you call fetch_data(url)
 ```
+
+> 📝 **Practice:** [Q32 · parametrized-decorator](../python_practice_questions_100.md#q32--design--parametrized-decorator)
 
 ---
 
@@ -532,6 +538,8 @@ print(o)   # Order(order_id=1, user_id=42, total=99.99, status='pending')
 
 Python ships three essential decorators for classes:
 
+> 📝 **Practice:** [Q29 · decorators-basics](../python_practice_questions_100.md#q29--normal--decorators-basics)
+
 ### [`@property`](../05_oops/11_properties.md#-what-property-actually-is) — Computed attributes with validation
 
 ```python
@@ -623,9 +631,13 @@ When you stack decorators, order matters. A critical rule:
 def fetch_data(url):
     ...
 
+
 # Equivalent to:
 fetch_data = timer(logger(retry(3)(fetch_data)))
 ```
+
+> 📝 **Practice:** [Q31 · stacked-decorators](../python_practice_questions_100.md#q31--logical--stacked-decorators)
+
 
 **Execution order when `fetch_data(url)` is called:**
 

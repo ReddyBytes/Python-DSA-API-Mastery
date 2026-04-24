@@ -82,6 +82,8 @@ Add more resources to one machine:
 **Cons:** Hard ceiling (can't scale infinitely). Single point of failure.
 Expensive at high end. Requires downtime to upgrade.
 
+> 📝 **Practice:** [Q1 · horizontal-vs-vertical-scaling](../system_design_practice_questions_100.md#q1--normal--horizontal-vs-vertical-scaling)
+
 ### Horizontal Scaling (Scale Out)
 
 Add more machines:
@@ -128,6 +130,8 @@ Availability   Downtime per year     Downtime per month
 99.999%        ~5.26 minutes         ~26 seconds   ← "five nines"
 99.9999%       ~31.5 seconds         ~2.6 seconds
 ```
+
+> 📝 **Practice:** [Q3 · availability-reliability-durability](../system_design_practice_questions_100.md#q3--interview--availability-reliability-durability)
 
 ### SLA vs SLO vs SLI
 
@@ -245,6 +249,8 @@ Example: If 1000 req/s arrive and each takes 10ms
 L = 1000 × 0.010 = 10 concurrent requests in flight
 ```
 
+> 📝 **Practice:** [Q2 · latency-vs-throughput](../system_design_practice_questions_100.md#q2--normal--latency-vs-throughput)
+
 ---
 
 ## 6. CAP Theorem
@@ -288,6 +294,8 @@ CP choice: Node A rejects writes/reads until partition heals
 AP choice: Node A and B both serve requests independently
            → they diverge, consistency sacrificed, availability preserved
 ```
+
+> 📝 **Practice:** [Q4 · cap-theorem](../system_design_practice_questions_100.md#q4--thinking--cap-theorem) · [Q76 · explain-cap-junior](../system_design_practice_questions_100.md#q76--interview--explain-cap-junior)
 
 ---
 
@@ -390,6 +398,8 @@ Analytics dashboards:     → Eventual consistency (approximate is fine)
 Distributed locks:        → Linearizability (must be accurate)
 Shopping cart:            → Eventual with conflict resolution (merge carts)
 ```
+
+> 📝 **Practice:** [Q5 · eventual-vs-strong-consistency](../system_design_practice_questions_100.md#q5--thinking--eventual-vs-strong-consistency) · [Q77 · explain-eventual-consistency](../system_design_practice_questions_100.md#q77--interview--explain-eventual-consistency)
 
 ---
 

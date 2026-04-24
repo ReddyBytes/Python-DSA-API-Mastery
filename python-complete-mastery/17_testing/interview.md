@@ -19,7 +19,10 @@ Traps    (5):    subtle mistakes every engineer gets asked
 
 ---
 
-### Q1. What is the difference between unit, integration, and end-to-end tests?
+**Q1: What is the difference between unit, integration, and end-to-end tests?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -53,9 +56,14 @@ The pyramid shape reflects the trade-off: the more a test resembles real usage,
 the slower and more brittle it is. Unit tests give fast feedback; E2E tests give
 confidence in the real system.
 
----
+</details>
 
-### Q2. What is pytest and why do most Python teams use it over `unittest`?
+<br>
+
+**Q2: What is pytest and why do most Python teams use it over `unittest`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -84,9 +92,14 @@ def test_add():
 - Plugin ecosystem — coverage, xdist (parallel), asyncio, faker, etc.
 - Better test discovery and filtering (`-k`, `--lf`, `-x`)
 
----
+</details>
 
-### Q3. What does a good unit test look like? What should it test?
+<br>
+
+**Q3: What does a good unit test look like? What should it test?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -113,9 +126,14 @@ def test_calculate_discount_above_threshold():
 - **One assertion per test** (or closely related assertions) — one failure = one clear diagnosis
 - **Readable name** — `test_calculate_discount_above_threshold` tells you everything
 
----
+</details>
 
-### Q4. How do you test that code raises an exception?
+<br>
+
+**Q4: How do you test that code raises an exception?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -155,13 +173,17 @@ class TestDivide(unittest.TestCase):
             divide(10, 0)
 ```
 
----
+</details>
+
 
 ## Mid-Level
 
 ---
 
-### Q5. What are pytest fixtures? How do they differ from `setUp`/`tearDown`?
+**Q5: What are pytest fixtures? How do they differ from `setUp`/`tearDown`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -214,9 +236,14 @@ def fresh_client(app_server):      # depends on session-scoped app_server
     return app_server.test_client()
 ```
 
----
+</details>
 
-### Q6. What is `@pytest.mark.parametrize`? When would you use it?
+<br>
+
+**Q6: What is `@pytest.mark.parametrize`? When would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -267,9 +294,14 @@ def test_is_prime(n, expected):
     assert is_prime(n) == expected
 ```
 
----
+</details>
 
-### Q7. What is mocking? When should you mock and when shouldn't you?
+<br>
+
+**Q7: What is mocking? When should you mock and when shouldn't you?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -314,9 +346,14 @@ def test_get_weather(mock_get):
 **The rule:** Mock at system **boundaries** (external I/O), not at the interior
 of your own code.
 
----
+</details>
 
-### Q8. Explain the difference between `@patch` and `monkeypatch`. When do you use each?
+<br>
+
+**Q8: Explain the difference between `@patch` and `monkeypatch`. When do you use each?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -361,9 +398,14 @@ it's **defined**:
 - `monkeypatch` — prefer in pytest-only codebases; simpler, auto-cleanup
 - `@patch` — when you also need `call_count`, `assert_called_with`, or other Mock verification
 
----
+</details>
 
-### Q9. What is code coverage? What are its limits?
+<br>
+
+**Q9: What is code coverage? What are its limits?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -404,13 +446,17 @@ whether you're asserting the right things.
 - Prioritize coverage on business-critical paths
 - Never game the metric — coverage without assertions is worthless
 
----
+</details>
+
 
 ## Senior Level
 
 ---
 
-### Q10. How do you design code to be testable?
+**Q10: How do you design code to be testable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -475,9 +521,14 @@ def calculate_discount(cart, config: Config):   # explicit dependency
     ...
 ```
 
----
+</details>
 
-### Q11. Explain TDD. What does the Red-Green-Refactor cycle look like in practice?
+<br>
+
+**Q11: Explain TDD. What does the Red-Green-Refactor cycle look like in practice?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -526,9 +577,14 @@ def validate_password(pwd):
 - If something is hard to test, it's a design smell (too coupled, too complex)
 - Each feature has a test from day one — no gaps
 
----
+</details>
 
-### Q12. What causes flaky tests? How do you diagnose and fix them?
+<br>
+
+**Q12: What causes flaky tests? How do you diagnose and fix them?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -561,9 +617,14 @@ pytest -p randomly
 pytest tests/test_scheduler.py::test_job_runs_at_midnight -v
 ```
 
----
+</details>
 
-### Q13. How do you structure a testing strategy for a production microservice?
+<br>
+
+**Q13: How do you structure a testing strategy for a production microservice?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -608,7 +669,8 @@ Post-deploy:
 - Which tests are blocking (must pass to deploy) vs advisory
 - How to handle DB migrations in integration tests (Docker + Alembic)
 
----
+</details>
+
 
 ## 🔴 Trap Questions
 

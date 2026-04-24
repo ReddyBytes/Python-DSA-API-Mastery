@@ -14,6 +14,8 @@ Dynamic Programming (DP) is:
 
 Let’s break it slowly and clearly.
 
+> 📝 **Practice:** [Q79 · explain-dynamic-programming](../dsa_practice_questions_100.md#q79--interview--explain-dynamic-programming)
+
 ---
 
 ## 📌 Learning Priority
@@ -109,6 +111,8 @@ That’s it.
 
 DP = Recursion + Memory
 
+> 📝 **Practice:** [Q93 · predict-dp-table](../dsa_practice_questions_100.md#q93--logical--predict-dp-table)
+
 ---
 
 # 🧩 4️⃣ Two Requirements for DP
@@ -155,6 +159,8 @@ def climb(n):
 
 Time:
 O(n)
+
+> 📝 **Practice:** [Q55 · dp-memoization-tabulation](../dsa_practice_questions_100.md#q55--normal--dp-memoization-tabulation) · [Q85 · memoization-vs-tabulation](../dsa_practice_questions_100.md#q85--interview--memoization-vs-tabulation)
 
 ---
 
@@ -219,6 +225,8 @@ dp[i][w] = best using first i items and capacity w.
 
 Important 2D DP.
 
+> 📝 **Practice:** [Q56 · dp-01-knapsack](../dsa_practice_questions_100.md#q56--design--dp-01-knapsack)
+
 ---
 
 ## 🔹 Longest Common Subsequence (LCS)
@@ -230,6 +238,8 @@ dp[i][j] = LCS of first i and j characters.
 
 Classic 2D DP.
 
+> 📝 **Practice:** [Q57 · dp-lcs](../dsa_practice_questions_100.md#q57--normal--dp-lcs)
+
 ---
 
 ## 🔹 Longest Increasing Subsequence (LIS)
@@ -238,6 +248,8 @@ State:
 dp[i] = longest increasing subsequence ending at i.
 
 Advanced optimization possible.
+
+> 📝 **Practice:** [Q58 · dp-lis](../dsa_practice_questions_100.md#q58--thinking--dp-lis)
 
 ---
 
@@ -250,6 +262,8 @@ dp[amount] = minimum coins.
 
 Greedy fails here sometimes.
 DP required.
+
+> 📝 **Practice:** [Q59 · dp-coin-change](../dsa_practice_questions_100.md#q59--logical--dp-coin-change)
 
 ---
 
@@ -655,6 +669,12 @@ Previous:
 Next:  
 [21_dynamic_programming/interview.md](/dsa-complete-mastery/21_dynamic_programming/interview.md)  
 [22_bit_manipulation/theory.md](/dsa-complete-mastery/22_bit_manipulation/theory.md)
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q54 · dp-overlapping-subproblems](../dsa_practice_questions_100.md#q54--thinking--dp-overlapping-subproblems)
 
 ---
 

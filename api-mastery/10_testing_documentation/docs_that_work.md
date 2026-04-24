@@ -141,6 +141,8 @@ components:
 
 You can render this instantly with Swagger UI (open-source) or paste it into https://editor.swagger.io.
 
+> 📝 **Practice:** [Q66 · openapi-benefits](../api_practice_questions_100.md#q66--normal--openapi-benefits)
+
 ---
 
 ## 3. Auto-Generating Docs in Python

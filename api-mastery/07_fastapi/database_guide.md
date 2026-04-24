@@ -64,6 +64,8 @@ Add `.env` to your `.gitignore` immediately. Never commit credentials.
 ## 2. Database Connection — `database.py`
 
 ```python
+
+
 # database.py
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -89,6 +91,9 @@ def get_db():
         db.close()
 ```
 
+> 📝 **Practice:** [Q36 · db-connection-pooling](../api_practice_questions_100.md#q36--thinking--db-connection-pooling)
+
+
 **What each piece does:**
 
 `create_engine(DATABASE_URL)` — Creates the connection pool. SQLAlchemy maintains a pool of connections so your app isn't opening and closing a connection on every request.
@@ -106,6 +111,8 @@ def get_db():
 SQLAlchemy models describe your database tables as Python classes. Each class is a table. Each class attribute is a column.
 
 ```python
+
+
 # models.py
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
@@ -138,6 +145,9 @@ class Order(Base):
 
     user = relationship("User", back_populates="orders")
 ```
+
+> 📝 **Practice:** [Q37 · orm-vs-raw-sql](../api_practice_questions_100.md#q37--interview--orm-vs-raw-sql)
+
 
 **Column options explained:**
 
@@ -476,11 +486,17 @@ alembic upgrade head
 alembic current
 
 # Roll back one migration
+
 alembic downgrade -1
+
 
 # View migration history
 alembic history
 ```
+
+> 📝 **Practice:** [Q38 · n-plus-one-query](../api_practice_questions_100.md#q38--critical--n-plus-one-query)
+> 📝 **Practice:** [Q96 · debug-n-plus-one-load](../api_practice_questions_100.md#q96--debug--debug-n-plus-one-load)
+
 
 After running `alembic revision --autogenerate`, inspect the generated file in `alembic/versions/`. Alembic is good at detecting new tables and columns but sometimes misses index changes or complex constraints. Always review the generated migration before running it.
 
@@ -702,6 +718,12 @@ Open `http://localhost:8000/docs` — you have a fully documented API backed by 
 | Migrations | `alembic/` | Schema change history — how the database evolves |
 
 The clean separation between layers is the entire point. `crud.py` doesn't know about HTTP. `models.py` doesn't know about JSON. `schemas.py` doesn't know about the database. Each file has one job, and changes in one layer don't ripple into others.
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q39 · db-transactions-rest](../api_practice_questions_100.md#q39--thinking--db-transactions-rest)
 
 ---
 

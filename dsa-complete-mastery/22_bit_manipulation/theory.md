@@ -82,6 +82,8 @@ Each bit represents power of 2.
 
 # ⚙️ 3️⃣ Bitwise Operators
 
+> 📝 **Practice:** [Q64 · bit-manipulation-basics](../dsa_practice_questions_100.md#q64--normal--bit-manipulation-basics)
+
 ---
 
 ## 🔹 AND (&)
@@ -130,9 +132,14 @@ Example:
 ```
 101
 011
+
+
 ---
 110 = 6
 ```
+
+> 📝 **Practice:** [Q65 · xor-single-number](../dsa_practice_questions_100.md#q65--logical--xor-single-number)
+
 
 Very powerful operator.
 
@@ -222,6 +229,8 @@ Removes lowest set bit each time.
 
 Time:
 O(number of set bits)
+
+> 📝 **Practice:** [Q66 · count-set-bits](../dsa_practice_questions_100.md#q66--thinking--count-set-bits)
 
 ---
 

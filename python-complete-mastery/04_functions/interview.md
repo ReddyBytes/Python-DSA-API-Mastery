@@ -25,7 +25,10 @@ Strong fundamentals + edge case awareness = professional signal.
 
 ---
 
-## 1️⃣ What is a function in Python?
+**Q1: What is a function in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:**
 > "A function is a block of code you can reuse."
@@ -37,9 +40,14 @@ Strong fundamentals + edge case awareness = professional signal.
 > When it returns, that frame is destroyed.
 > This makes functions both reusable and safe — they can't accidentally affect each other's state."
 
----
+</details>
 
-## 2️⃣ What is the difference between parameters and arguments?
+<br>
+
+**Q2: What is the difference between parameters and arguments?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "Parameters are the placeholders defined in the function signature.
@@ -55,9 +63,14 @@ def add(a, b):         # a, b = parameters
 add(10, 5)             # 10, 5 = arguments
 ```
 
----
+</details>
 
-## 3️⃣ What is the difference between `return` and `print`?
+<br>
+
+**Q3: What is the difference between `return` and `print`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "`print()` sends output to the console but the calling code gets nothing back — the function returns `None`.
@@ -75,9 +88,14 @@ result = add_bad(3, 4)    # result = None  ← can't use it further!
 result = add_good(3, 4)   # result = 7     ← can chain, calculate, store
 ```
 
----
+</details>
 
-## 4️⃣ What does Python do when a function has no return statement?
+<br>
+
+**Q4: What does Python do when a function has no return statement?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "Python implicitly returns `None`. Every function in Python has a return value —
@@ -104,9 +122,14 @@ def describe(n):
 ```
 > "Yes. Each `return` immediately exits the function. This is the 'early return' or 'guard clause' pattern — very common in production code to avoid deep nesting."
 
----
+</details>
 
-## 5️⃣ What are default arguments?
+<br>
+
+**Q5: What are default arguments?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "Default arguments are values given to parameters in the function definition.
@@ -124,9 +147,14 @@ greet("Alice", greeting="Hey")  # Hey, Alice!
 
 > "There's a famous gotcha: never use mutable objects (lists, dicts, sets) as default values. I'll explain in the next question."
 
----
+</details>
 
-## 6️⃣ What is the mutable default argument trap? ⚠️
+<br>
+
+**Q6: What is the mutable default argument trap? ⚠️**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 > This question alone can decide an interview. Know this cold.
 
@@ -160,9 +188,14 @@ add_item("banana")   # ['banana']   ← correct!
 
 > "This applies to all mutable defaults: lists, dicts, sets, custom objects."
 
----
+</details>
 
-## 7️⃣ What are `*args` and `**kwargs`?
+<br>
+
+**Q7: What are `*args` and `**kwargs`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "`*args` collects any number of positional arguments into a **tuple** inside the function.
@@ -184,13 +217,17 @@ def full(positional_only, /, regular, default=10, *args, kw_only, **kwargs):
 # Order: positional-only (/) → regular → defaults → *args → keyword-only → **kwargs
 ```
 
----
+</details>
+
 
 # 🟡 Level 2 — 2 to 5 Years
 
 ---
 
-## 8️⃣ Explain the LEGB scope rule.
+**Q8: Explain the LEGB scope rule.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "When Python resolves a variable name, it searches in this exact order:
@@ -238,9 +275,14 @@ def outer():
 # nonlocal = nearest enclosing function scope
 ```
 
----
+</details>
 
-## 9️⃣ What are first-class functions?
+<br>
+
+**Q9: What are first-class functions?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "In Python, functions are objects — the same kind as integers or strings.
@@ -275,9 +317,14 @@ x = greet      # stores the function OBJECT — nothing runs
 x = greet()    # CALLS the function — runs immediately, stores result
 ```
 
----
+</details>
 
-## 🔟 What is a closure? Give a real-world example.
+<br>
+
+**Q10: What is a closure? Give a real-world example.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "A closure is an inner function that remembers variables from its enclosing scope,
@@ -302,9 +349,14 @@ print(double.__closure__[0].cell_contents)  # 2  — you can inspect it!
 **Real-world use case:**
 > "Closures are used to create customized loggers, rate limiters, or validators — any time you want a function that's pre-configured with some state without using a full class."
 
----
+</details>
 
-## 1️⃣1️⃣ What is the late binding closure trap? ⚠️
+<br>
+
+**Q11: What is the late binding closure trap? ⚠️**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 > This is one of the top 5 Python interview traps.
 
@@ -345,9 +397,14 @@ print(functions[0]())    # 0  ✓
 print(functions[1]())    # 1  ✓
 ```
 
----
+</details>
 
-## 1️⃣2️⃣ What is a decorator and how does it work internally?
+<br>
+
+**Q12: What is a decorator and how does it work internally?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "A decorator is a function that takes another function as input, wraps it with additional behavior, and returns the new function.
@@ -378,9 +435,14 @@ slow_function()    # slow_function took 0.1001s
 **Follow-up:** *"Why do you need `@wraps(func)`?"*
 > "Without `@wraps`, the decorator replaces the function's `__name__` and `__doc__` with the wrapper's. Debugging becomes confusing because function names show as 'wrapper' everywhere — in tracebacks, logs, and introspection."
 
----
+</details>
 
-## 1️⃣3️⃣ What are keyword-only arguments? Why would you use them?
+<br>
+
+**Q13: What are keyword-only arguments? Why would you use them?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "Keyword-only arguments are parameters that MUST be passed by name — you cannot pass them positionally.
@@ -402,9 +464,14 @@ connect("localhost", 8080, 60, True)   # TypeError!
 # Option 2: connect("db", 5432, timeout=30, secure=True)  ← crystal clear
 ```
 
----
+</details>
 
-## 1️⃣4️⃣ How does `*args` unpacking work when calling a function?
+<br>
+
+**Q14: How does `*args` unpacking work when calling a function?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "The `*` operator can both collect (in a definition) and unpack (at a call site).
@@ -425,13 +492,17 @@ data = {"name": "Alice", "greeting": "Hello"}
 greet(**data)       # same as greet(name="Alice", greeting="Hello")
 ```
 
----
+</details>
+
 
 # 🔵 Level 3 — 5+ Years
 
 ---
 
-## 1️⃣5️⃣ How are functions stored in memory?
+**Q15: How are functions stored in memory?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "Functions are objects stored in heap memory, just like any other Python object.
@@ -454,9 +525,14 @@ print(greet.__annotations__)    # {}
 print(greet.__defaults__)       # None (no defaults)
 ```
 
----
+</details>
 
-## 1️⃣6️⃣ What is a pure function and why does it matter in production?
+<br>
+
+**Q16: What is a pure function and why does it matter in production?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "A pure function always returns the same output for the same input and has no side effects.
@@ -483,9 +559,14 @@ def record(value):
     return value
 ```
 
----
+</details>
 
-## 1️⃣7️⃣ Explain `functools.lru_cache` — how it works and when to use it.
+<br>
+
+**Q17: Explain `functools.lru_cache` — how it works and when to use it.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "`lru_cache` is a decorator that memoizes function results.
@@ -522,9 +603,14 @@ def process(data: list):   # ← TypeError! Lists are not hashable
 process(tuple(data))
 ```
 
----
+</details>
 
-## 1️⃣8️⃣ What is the difference between a generator function and a regular function?
+<br>
+
+**Q18: What is the difference between a generator function and a regular function?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "A regular function runs to completion and returns all data at once.
@@ -550,9 +636,14 @@ print(sys.getsizeof(regular))    # ~8,000,056 bytes
 print(sys.getsizeof(gen))        # 200 bytes
 ```
 
----
+</details>
 
-## 1️⃣9️⃣ How do decorators with arguments work internally?
+<br>
+
+**Q19: How do decorators with arguments work internally?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "A decorator with arguments needs three layers instead of two.
@@ -582,9 +673,14 @@ def say_hi():
 say_hi()    # prints "Hi!" three times
 ```
 
----
+</details>
 
-## 2️⃣0️⃣ What is the difference between shallow and deep function design?
+<br>
+
+**Q20: What is the difference between shallow and deep function design?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 > "A shallow understanding treats functions as just syntax — define, call, done.
@@ -596,7 +692,8 @@ say_hi()    # prints "Hi!" three times
 > and how decorators preserve or lose metadata (so logs and tracebacks are useful).
 > Interviewers can tell the difference within two questions."
 
----
+</details>
+
 
 # 🔴 Scenario-Based Questions
 
@@ -614,10 +711,14 @@ print(append_to(2))    # ?
 print(append_to(3))    # ?
 ```
 
+<details>
+<summary>💡 Show Answer</summary>
+
 **Answer expected:**
 > "`[1]`, `[1, 2]`, `[1, 2, 3]` — because `[]` is created once and shared across calls.
 > Fix: use `to=None` and create `[]` inside the function."
 
+</details>
 ---
 
 ## Scenario 2: Closure in a Loop
@@ -628,11 +729,15 @@ print(adders[0](10))    # ?
 print(adders[3](10))    # ?
 ```
 
+<details>
+<summary>💡 Show Answer</summary>
+
 **Answer expected:**
 > "Both print `14`. All lambdas share the same `i` variable.
 > After the loop, `i = 4`. So `x + i = 10 + 4 = 14` for all of them.
 > Fix: `lambda x, i=i: x + i` to capture the value."
 
+</details>
 ---
 
 ## Scenario 3: Decorator Loses Metadata
@@ -652,10 +757,14 @@ print(calculate.__name__)    # ?
 print(calculate.__doc__)     # ?
 ```
 
+<details>
+<summary>💡 Show Answer</summary>
+
 **Answer expected:**
 > "`'wrapper'` and `None`. The decorator replaced the function with `wrapper` without preserving metadata.
 > Fix: add `@wraps(func)` from `functools` to the wrapper."
 
+</details>
 ---
 
 ## Scenario 4: Recursion Depth
@@ -667,12 +776,16 @@ def countdown(n):
 countdown(10000)    # What happens?
 ```
 
+<details>
+<summary>💡 Show Answer</summary>
+
 **Answer expected:**
 > "`RecursionError: maximum recursion depth exceeded`.
 > Python's default limit is 1000 frames.
 > This function has no base case — it recurses forever.
 > Fix: add `if n <= 0: return 0` as the base case."
 
+</details>
 ---
 
 ## Scenario 5: `global` Trap
@@ -687,12 +800,16 @@ def modify():
 modify()
 ```
 
+<details>
+<summary>💡 Show Answer</summary>
+
 **Answer expected:**
 > "`UnboundLocalError: local variable 'x' referenced before assignment`.
 > Python sees the assignment `x += 1` (which is `x = x + 1`) and classifies `x` as local.
 > Then it tries to read the local `x` before it's assigned — error!
 > Fix: add `global x` inside the function."
 
+</details>
 ---
 
 # 🔥 Common Candidate Mistakes in Interviews

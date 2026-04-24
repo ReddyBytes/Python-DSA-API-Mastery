@@ -61,7 +61,10 @@ That sentence shows maturity.
 
 ---
 
-## 1️⃣ What is a Tree?
+**Q1: What is a Tree?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -69,18 +72,28 @@ A tree is a hierarchical data structure consisting of nodes connected by edges, 
 
 Keep answer structured.
 
----
+</details>
 
-## 2️⃣ What is a Binary Tree?
+<br>
+
+**Q2: What is a Binary Tree?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 A binary tree is a tree where each node has at most two children: left and right.
 
 Important:
 “At most” two children.
 
----
+</details>
 
-## 3️⃣ Explain Tree Traversals
+<br>
+
+**Q3: Explain Tree Traversals**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Inorder:
 Left → Root → Right
@@ -94,9 +107,14 @@ Left → Right → Root
 Interview tip:
 Always draw small example when explaining.
 
----
+</details>
 
-## 4️⃣ What is Height of Tree?
+<br>
+
+**Q4: What is Height of Tree?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Height = number of edges on longest path from root to leaf.
 
@@ -106,13 +124,17 @@ Height = 1 + max(height(left), height(right))
 
 Recursive definition.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Level Order Traversal
+**Q5: Level Order Traversal**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use queue (BFS).
 
@@ -130,9 +152,14 @@ Before coding, say:
 
 > “Since we need level-by-level traversal, BFS using queue is appropriate.”
 
----
+</details>
 
-## 6️⃣ Check if Tree is Balanced
+<br>
+
+**Q6: Check if Tree is Balanced**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Balanced means:
 
@@ -147,9 +174,14 @@ Return height while checking balance → O(n)
 
 Strong candidates mention optimization.
 
----
+</details>
 
-## 7️⃣ Diameter of Tree
+<br>
+
+**Q7: Diameter of Tree**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Diameter = longest path between two nodes.
 
@@ -163,9 +195,14 @@ Time: O(n)
 
 Tests subtree combination logic.
 
----
+</details>
 
-## 8️⃣ Lowest Common Ancestor (LCA)
+<br>
+
+**Q8: Lowest Common Ancestor (LCA)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If both nodes exist in different subtrees,
 current node is LCA.
@@ -182,9 +219,14 @@ Current is LCA.
 
 This tests recursion reasoning.
 
----
+</details>
 
-## 9️⃣ Symmetric Tree
+<br>
+
+**Q9: Symmetric Tree**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Check if left subtree is mirror of right subtree.
 
@@ -195,13 +237,17 @@ left.right vs right.left
 
 Tests structural comparison.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Maximum Path Sum
+**Q10: Maximum Path Sum**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Path can start and end anywhere.
 
@@ -215,9 +261,14 @@ Global maximum updated.
 
 This is advanced tree DP.
 
----
+</details>
 
-## 1️⃣1️⃣ Serialize and Deserialize Tree
+<br>
+
+**Q11: Serialize and Deserialize Tree**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Convert tree to string and back.
 
@@ -228,9 +279,14 @@ Use:
 
 Shows system-level thinking.
 
----
+</details>
 
-## 1️⃣2️⃣ Construct Tree from Traversals
+<br>
+
+**Q12: Construct Tree from Traversals**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Given preorder + inorder:
 
@@ -242,9 +298,14 @@ Recursively build subtrees.
 
 Tests understanding of traversal relationships.
 
----
+</details>
 
-## 1️⃣3️⃣ When Recursion May Fail
+<br>
+
+**Q13: When Recursion May Fail**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If tree is skewed:
 
@@ -257,58 +318,84 @@ Iterative solution.
 
 Senior candidates mention this.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Tree problem running in O(n²).
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely issue:
 Recomputing height repeatedly.
 
 Optimize by combining computations.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Infinite recursion or crash.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Cause:
 Missing base case.
 
 Always check if node is None.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Need to check if path exists from root to leaf with sum = target.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use recursion.
 
 Pass cumulative sum.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Given extremely large tree.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Concern:
 Recursion depth.
 
 Use iterative approach.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Need to print nodes level by level in zigzag order.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use queue + reverse alternate levels.
 
 Tests BFS modification.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

@@ -11,7 +11,10 @@ this file builds interview confidence.
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is an Array?
+**Q1: What is an Array?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 An array is a data structure that stores elements in contiguous memory locations and allows index-based access.
 
@@ -23,9 +26,14 @@ Key properties:
 - Mutable
 - Dynamic resizing (in Python)
 
----
+</details>
 
-## 2️⃣ Why is array indexing O(1)?
+<br>
+
+**Q2: Why is array indexing O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because memory is contiguous.
 
@@ -40,9 +48,14 @@ This direct calculation allows constant-time access regardless of array size.
 Interview Tip:
 Mention memory address computation explicitly.
 
----
+</details>
 
-## 3️⃣ What is the time complexity of common array operations?
+<br>
+
+**Q3: What is the time complexity of common array operations?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 | Operation | Time Complexity |
 |------------|-----------------|
@@ -55,17 +68,27 @@ Mention memory address computation explicitly.
 
 Be able to explain **why**, not just state values.
 
----
+</details>
 
-## 4️⃣ Why is insertion in the middle O(n)?
+<br>
+
+**Q4: Why is insertion in the middle O(n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because elements after the insertion point must shift one position to the right.
 
 Shifting n elements → O(n)
 
----
+</details>
 
-## 5️⃣ What is amortized O(1)?
+<br>
+
+**Q5: What is amortized O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Append operation in Python list is usually O(1),
 but occasionally triggers resizing (O(n)).
@@ -74,11 +97,15 @@ Over many operations, average cost per append is constant.
 
 This is called amortized analysis.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 6️⃣ How does Python list resizing work internally?
+**Q6: How does Python list resizing work internally?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python lists:
 - Allocate extra capacity
@@ -91,9 +118,14 @@ Growth strategy avoids frequent resizing.
 Interview insight:
 Mention over-allocation strategy.
 
----
+</details>
 
-## 7️⃣ What is the difference between array and linked list?
+<br>
+
+**Q7: What is the difference between array and linked list?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 | Feature | Array | Linked List |
 |----------|--------|--------------|
@@ -105,9 +137,14 @@ Mention over-allocation strategy.
 Discussion expected:
 Trade-offs between speed and flexibility.
 
----
+</details>
 
-## 8️⃣ When would you avoid using arrays?
+<br>
+
+**Q8: When would you avoid using arrays?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Avoid arrays when:
 - Frequent insert/delete at front
@@ -116,9 +153,14 @@ Avoid arrays when:
 
 Consider linked lists or other structures.
 
----
+</details>
 
-## 9️⃣ What is in-place algorithm?
+<br>
+
+**Q9: What is in-place algorithm?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 An in-place algorithm modifies the array without using extra memory proportional to input size.
 
@@ -129,9 +171,14 @@ Space complexity: O(1)
 
 Interviewers value in-place solutions.
 
----
+</details>
 
-## 🔟 What are common array patterns in interviews?
+<br>
+
+**Q10: What are common array patterns in interviews?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 1. Two Pointers
 2. Sliding Window
@@ -142,11 +189,15 @@ Interviewers value in-place solutions.
 
 Recognizing pattern quickly is key to clearing interviews.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 1️⃣1️⃣ Explain memory locality and cache friendliness.
+**Q11: Explain memory locality and cache friendliness.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Arrays are contiguous.
 
@@ -159,9 +210,14 @@ Linked lists do not have this advantage.
 Senior-level insight:
 Mention spatial locality.
 
----
+</details>
 
-## 1️⃣2️⃣ How would you optimize an O(n²) array solution?
+<br>
+
+**Q12: How would you optimize an O(n²) array solution?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approaches:
 - Use hashing → reduce to O(n)
@@ -171,9 +227,14 @@ Approaches:
 
 Always relate optimization to input constraints.
 
----
+</details>
 
-## 1️⃣3️⃣ What is the complexity of removing duplicates?
+<br>
+
+**Q13: What is the complexity of removing duplicates?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach 1:
 Use set → O(n) time, O(n) space
@@ -183,9 +244,14 @@ Sort + scan → O(n log n), O(1) extra space (if in-place sort)
 
 Trade-off discussion expected.
 
----
+</details>
 
-## 1️⃣4️⃣ How do arrays behave in large-scale systems?
+<br>
+
+**Q14: How do arrays behave in large-scale systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 In high-volume systems:
 - Arrays are used for batching
@@ -200,9 +266,14 @@ Senior engineers consider:
 - Memory alignment
 - Garbage collection impact
 
----
+</details>
 
-## 1️⃣5️⃣ Explain difference between shallow copy and deep copy in arrays.
+<br>
+
+**Q15: Explain difference between shallow copy and deep copy in arrays.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Shallow copy:
 
@@ -224,14 +295,22 @@ In nested arrays, shallow copy copies references only.
 
 Common interview trap.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Interview Questions
 
 ---
 
 ## Scenario 1:
+
 Given an array of 10 million integers, find if any number appears twice.
+
+<details>
+<summary>💡 Show Answer</summary>
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Brute force:
 O(n²) → unacceptable.
@@ -242,10 +321,20 @@ Use set → O(n)
 Expected reasoning:
 Time-space trade-off.
 
+</details>
+
+</details>
 ---
 
 ## Scenario 2:
+
 You need to rotate an array by k steps.
+
+<details>
+<summary>💡 Show Answer</summary>
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Naive approach:
 Shift one-by-one → O(nk)
@@ -256,10 +345,20 @@ Reverse array segments → O(n)
 Interview expectation:
 Discuss in-place rotation.
 
+</details>
+
+</details>
 ---
 
 ## Scenario 3:
+
 You are working in a memory-constrained environment.
+
+<details>
+<summary>💡 Show Answer</summary>
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two options:
 - O(n) time, O(n) space
@@ -272,10 +371,20 @@ Answer depends on constraints.
 Senior-level answer:
 Evaluate system limits first.
 
+</details>
+
+</details>
 ---
 
 ## Scenario 4:
+
 A system slows down when handling large arrays.
+
+<details>
+<summary>💡 Show Answer</summary>
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 - Frequent resizing
@@ -285,10 +394,20 @@ Possible causes:
 
 Be able to discuss system-level reasons.
 
+</details>
+
+</details>
 ---
 
 ## Scenario 5:
+
 You modify an array while iterating and get unexpected behavior.
+
+<details>
+<summary>💡 Show Answer</summary>
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Cause:
 Index shifting after deletion.
@@ -296,6 +415,9 @@ Index shifting after deletion.
 Fix:
 Iterate backward or create new list.
 
+</details>
+
+</details>
 ---
 
 # 🧠 Senior-Level Structured Answer Example

@@ -215,6 +215,8 @@ Visiting all nodes.
 
 Three main types:
 
+> 📝 **Practice:** [Q35 · binary-tree-traversal](../dsa_practice_questions_100.md#q35--logical--binary-tree-traversal)
+
 ---
 
 ## 🔹 Inorder (Left → Root → Right)
@@ -334,6 +336,8 @@ Skewed:
 Height = 3
 
 Skewed behaves like linked list.
+
+> 📝 **Practice:** [Q39 · tree-height-balance](../dsa_practice_questions_100.md#q39--thinking--tree-height-balance)
 
 ---
 
@@ -455,6 +459,7 @@ def level_order(root):
 
     return result
 
+
 # Tree:     1
 #          / \
 #         2   3
@@ -462,6 +467,9 @@ def level_order(root):
 #       4   5
 # Output: [[1], [2, 3], [4, 5]]
 ```
+
+> 📝 **Practice:** [Q36 · bfs-level-order](../dsa_practice_questions_100.md#q36--normal--bfs-level-order)
+
 
 **Common level-order patterns:**
 ```python

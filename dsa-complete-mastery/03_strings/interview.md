@@ -9,7 +9,10 @@
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is a String in Python?
+**Q1: What is a String in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 A string is an immutable sequence of characters.
 
@@ -21,9 +24,14 @@ Key properties:
 
 Immutability means once created, it cannot be modified in place.
 
----
+</details>
 
-## 2️⃣ Why Are Strings Immutable?
+<br>
+
+**Q2: Why Are Strings Immutable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Reasons:
 
@@ -35,9 +43,14 @@ Reasons:
 Interview Tip:
 Mention hashing stability — it shows deeper understanding.
 
----
+</details>
 
-## 3️⃣ What Is the Time Complexity of String Operations?
+<br>
+
+**Q3: What Is the Time Complexity of String Operations?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 | Operation | Complexity |
 |------------|------------|
@@ -50,9 +63,14 @@ Mention hashing stability — it shows deeper understanding.
 
 You must explain that slicing creates a new string.
 
----
+</details>
 
-## 4️⃣ Why Is Repeated String Concatenation Slow?
+<br>
+
+**Q4: Why Is Repeated String Concatenation Slow?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -80,9 +98,14 @@ Time → O(n)
 
 This is a common interview discussion.
 
----
+</details>
 
-## 5️⃣ What Is String Interning?
+<br>
+
+**Q5: What Is String Interning?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python may store identical strings in the same memory location.
 
@@ -99,11 +122,15 @@ Used for optimization.
 
 Never rely on it in business logic.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 6️⃣ How Do You Check If a String Is a Palindrome?
+**Q6: How Do You Check If a String Is a Palindrome?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach 1:
 
@@ -132,9 +159,14 @@ Space: O(1)
 
 Interviewers prefer in-place logic (two pointers).
 
----
+</details>
 
-## 7️⃣ How Do You Detect Anagrams?
+<br>
+
+**Q7: How Do You Detect Anagrams?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach 1:
 Sort both strings → O(n log n)
@@ -147,9 +179,14 @@ Use frequency map for linear time.
 
 Discuss space-time trade-off.
 
----
+</details>
 
-## 8️⃣ How Do You Find First Non-Repeating Character?
+<br>
+
+**Q8: How Do You Find First Non-Repeating Character?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 
@@ -161,9 +198,14 @@ Space: O(n)
 
 Must mention two-pass strategy.
 
----
+</details>
 
-## 9️⃣ What Is the Complexity of `"substring" in string`?
+<br>
+
+**Q9: What Is the Complexity of `"substring" in string`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python uses optimized search algorithm internally.
 
@@ -171,9 +213,14 @@ Worst case: O(nm)
 
 For large-scale systems, discuss KMP for guaranteed O(n + m).
 
----
+</details>
 
-## 🔟 What Are Common String Patterns in Interviews?
+<br>
+
+**Q10: What Are Common String Patterns in Interviews?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Most string problems fall into:
 
@@ -186,11 +233,15 @@ Most string problems fall into:
 
 Recognizing pattern quickly is crucial.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 1️⃣1️⃣ How Would You Optimize Substring Search?
+**Q11: How Would You Optimize Substring Search?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Naive approach:
 O(nm)
@@ -202,9 +253,14 @@ Optimized:
 
 Senior candidates should at least explain KMP conceptually.
 
----
+</details>
 
-## 1️⃣2️⃣ How Do You Handle Very Large Strings (GB-level)?
+<br>
+
+**Q12: How Do You Handle Very Large Strings (GB-level)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider:
 
@@ -215,9 +271,14 @@ Consider:
 
 Senior-level interviews test scalability thinking.
 
----
+</details>
 
-## 1️⃣3️⃣ What Happens Internally When You Slice a String?
+<br>
+
+**Q13: What Happens Internally When You Slice a String?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```python
 s[2:5]
@@ -232,9 +293,14 @@ Space: O(k)
 
 Large repeated slicing can cause memory pressure.
 
----
+</details>
 
-## 1️⃣4️⃣ Compare String vs Bytearray
+<br>
+
+**Q14: Compare String vs Bytearray**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 String:
 - Immutable
@@ -252,9 +318,14 @@ Use bytearray in:
 
 Shows production awareness.
 
----
+</details>
 
-## 1️⃣5️⃣ What Are Trade-offs Between Different Approaches?
+<br>
+
+**Q15: What Are Trade-offs Between Different Approaches?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 Check if two strings are anagrams.
@@ -270,14 +341,19 @@ Decision depends on:
 - Input size
 - System performance goals
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 You need to process 50 million log entries (strings).
+
+<details>
+<summary>💡 Show Answer</summary>
 
 What should you avoid?
 
@@ -291,10 +367,15 @@ Prefer:
 - Iterative processing
 - Generators
 
+</details>
 ---
 
 ## Scenario 2:
+
 A service slows down when building a large response string.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible issue:
 Using += in loop.
@@ -302,10 +383,15 @@ Using += in loop.
 Fix:
 Use list + join().
 
+</details>
 ---
 
 ## Scenario 3:
+
 You must check if a very large string contains a pattern repeatedly.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Brute force search too slow.
 
@@ -314,10 +400,15 @@ Use KMP or rolling hash.
 
 Discuss complexity improvement.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Memory usage spikes during substring operations.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible cause:
 Creating too many intermediate strings.
@@ -325,10 +416,15 @@ Creating too many intermediate strings.
 Solution:
 Use indices instead of slicing repeatedly.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Your system processes user inputs in multiple languages.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 What should you consider?
 
@@ -339,6 +435,7 @@ What should you consider?
 
 Senior engineers discuss internationalization.
 
+</details>
 ---
 
 # 🧠 Senior-Level Structured Answer Example

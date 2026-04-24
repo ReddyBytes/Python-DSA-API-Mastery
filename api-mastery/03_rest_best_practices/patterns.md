@@ -1,5 +1,7 @@
 # REST Best Practices
 
+> 📝 **Practice:** [Q8 · rest-resource-naming](../api_practice_questions_100.md#q8--normal--rest-resource-naming)
+
 ## The Gap Between "Works" and "Good"
 
 You can build an API that works while breaking every rule in this document. Requests
@@ -40,6 +42,8 @@ request signing · response compression · backward compatibility testing
 URLs are the public face of your API. They're what developers type into their code,
 what shows up in logs, what gets bookmarked and shared. They should be clean,
 predictable, and boring.
+
+> 📝 **Practice:** [Q13 · url-path-vs-query](../api_practice_questions_100.md#q13--normal--url-path-vs-query)
 
 ### Use lowercase
 
@@ -551,6 +555,8 @@ existing clients.
 
 Pick a convention. Document it. Use it everywhere. Consistency dramatically reduces
 the number of questions and bugs from API consumers.
+
+> 📝 **Practice:** [Q25 · rest-response-envelope](../api_practice_questions_100.md#q25--normal--rest-response-envelope)
 
 ---
 

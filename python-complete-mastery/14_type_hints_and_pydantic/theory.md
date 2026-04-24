@@ -2,6 +2,8 @@
 
 > *"Types are not a cage. They are a contract. They tell your teammates — and your future self — exactly what your code expects and what it promises to return."*
 
+> 📝 **Practice:** [Q66 · type-hints](../python_practice_questions_100.md#q66--normal--type-hints)
+
 ---
 
 ## 🎬 The Problem: 2 AM, Production is Down
@@ -392,6 +394,7 @@ class Drawable(Protocol):
     def draw(self) -> None: ...
     def resize(self, factor: float) -> None: ...
 
+
 # These classes DON'T inherit from Drawable:
 class Circle:
     def draw(self) -> None:
@@ -412,6 +415,9 @@ def render(shape: Drawable) -> None:
 render(Circle())   # ✓  — no inheritance needed
 render(Square())   # ✓  — structurally compatible
 ```
+
+> 📝 **Practice:** [Q67 · protocol](../python_practice_questions_100.md#q67--thinking--protocol) · [Q83 · compare-abc-protocol](../python_practice_questions_100.md#q83--interview--compare-abc-protocol)
+
 
 **Protocol vs ABC — the key difference:**
 
@@ -514,6 +520,7 @@ class ChatMessage(BaseModel):
     content: str
     tokens: int = 0
 
+
 # Creating an instance — triggers validation:
 msg = ChatMessage(role="user", content="Hello")
 print(msg.role)      # "user"
@@ -532,6 +539,9 @@ except Exception as e:
 # → ValidationError: 1 validation error for ChatMessage
 #   tokens: Input should be a valid integer, unable to parse string as an integer
 ```
+
+> 📝 **Practice:** [Q68 · pydantic](../python_practice_questions_100.md#q68--normal--pydantic)
+
 
 ### Field Types and Defaults
 

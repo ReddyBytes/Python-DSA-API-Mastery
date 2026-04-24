@@ -315,6 +315,8 @@ def f(a=1, b, c=10):  ✗  SyntaxError — b (no default) after a (has default)
 > Learn this deeply. You will be asked about it.
 
 ```python
+
+
 # What do you expect this to print?
 def add_item(item, cart=[]):
     cart.append(item)
@@ -324,6 +326,9 @@ print(add_item("apple"))    # Expected: ['apple']
 print(add_item("banana"))   # Expected: ['banana']
 print(add_item("cherry"))   # Expected: ['cherry']
 ```
+
+> 📝 **Practice:** [Q10 · mutable-default-argument](../python_practice_questions_100.md#q10--critical--mutable-default-argument) · [Q49 · mutable-default-fix](../python_practice_questions_100.md#q49--thinking--mutable-default-fix)
+
 
 **Actual output:**
 ```
@@ -418,10 +423,15 @@ def create_profile(**info):
         print(f"  {key}: {value}")
 
 create_profile(name="Alice", age=25, city="Mumbai")
+
+
 # name: Alice
 # age: 25
 # city: Mumbai
 ```
+
+> 📝 **Practice:** [Q11 · args-kwargs](../python_practice_questions_100.md#q11--normal--args-kwargs)
+
 
 **Unpacking a dict with `**` in a call:**
 ```python
@@ -550,12 +560,14 @@ def add(a, b):
 result = add(3, 4)    # result = 7
 
 # Scenario 2: Return nothing (implicit None)
+
 def greet(name):
     print(f"Hello, {name}")
     # no return statement
 
 result = greet("Alice")    # prints "Hello, Alice"
 print(result)               # None  ← function returns None!
+
 
 # Scenario 3: Return early (guard clause)
 def divide(a, b):
@@ -577,6 +589,9 @@ def find_first(items, target):
             return i         # ← exits immediately when found
     return -1                # ← only reached if not found
 ```
+
+> 📝 **Practice:** [Q12 · return-none](../python_practice_questions_100.md#q12--thinking--return-none)
+
 
 ## ⚠️ The Return vs Print Confusion
 
@@ -611,6 +626,8 @@ print(total * 2)            # 14  ✓
 
 > When Python encounters a variable name, it searches for it in this exact order.
 > Miss one level and you'll be confused for years.
+
+> 📝 **Practice:** [Q91 · predict-output-scope](../python_practice_questions_100.md#q91--logical--predict-output-scope)
 
 ## The LEGB Pyramid
 
@@ -738,6 +755,8 @@ rst()
 print(inc())    # 1  ← reset worked!
 ```
 
+> 📝 **Practice:** [Q28 · nonlocal](../python_practice_questions_100.md#q28--normal--nonlocal)
+
 ## Scope Summary Table
 
 ```
@@ -806,7 +825,10 @@ def make_adder(n):
 add5 = make_adder(5)
 # make_adder() returned — its stack frame is GONE
 # but 'n=5' still lives in a cell on the heap, referenced by add5.__closure__
+
 ```
+
+> 📝 **Practice:** [Q26 · closures](../python_practice_questions_100.md#q26--thinking--closures)
 
 ---
 
@@ -1050,6 +1072,8 @@ print(add5.__closure__[0].cell_contents)    # 5  ← x is stored here!
 > This is the #2 most famous Python gotcha. It appears in interviews constantly.
 
 ```python
+
+
 # You want 5 functions that each print their loop number:
 functions = []
 for i in range(5):
@@ -1063,6 +1087,9 @@ functions[2]()    # Expected: 2   Got: 4
 functions[3]()    # Expected: 3   Got: 4
 functions[4]()    # Expected: 4   Got: 4  (only this is "correct")
 ```
+
+> 📝 **Practice:** [Q27 · closure-loop-trap](../python_practice_questions_100.md#q27--critical--closure-loop-trap)
+
 
 **Why?**
 ```

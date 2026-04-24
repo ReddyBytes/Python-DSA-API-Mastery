@@ -277,6 +277,7 @@ rate(http_requests_total{status=~"4.."}[5m])
 
 ```python
 # Write to InfluxDB
+
 from influxdb_client import InfluxDBClient
 
 client = InfluxDBClient(url="http://localhost:8086", token=TOKEN)
@@ -299,6 +300,8 @@ Raw (15s):    keep for 7 days    → high resolution recent data
 
 Continuous query runs on schedule: INSERT INTO 5m_avg SELECT mean(*) FROM raw WHERE time > now()-5m GROUP BY time(5m)
 ```
+
+> 📝 **Practice:** [Q67 · fan-out-social-feed](../system_design_practice_questions_100.md#q67--design--fan-out-social-feed)
 
 ---
 
@@ -364,6 +367,14 @@ Higher tick rate = more accurate hit detection = more server CPU
 ```
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q99 · design-notification-100m](../system_design_practice_questions_100.md#q99--design--design-notification-100m)
+
+> 📝 **Practice:** [Q91 · design-twitter-feed](../system_design_practice_questions_100.md#q91--design--design-twitter-feed)
 
 ## 🔁 Navigation
 

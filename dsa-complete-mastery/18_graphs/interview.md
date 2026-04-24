@@ -64,15 +64,23 @@ That shows structure.
 
 ---
 
-## 1️⃣ What is a Graph?
+**Q1: What is a Graph?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
 A graph is a data structure consisting of vertices (nodes) and edges that represent relationships between them.
 
----
+</details>
 
-## 2️⃣ What is BFS and DFS?
+<br>
+
+**Q2: What is BFS and DFS?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 BFS:
 Explores level by level using queue.
@@ -83,9 +91,14 @@ Explores depth-first using recursion or stack.
 Both run in:
 O(V + E)
 
----
+</details>
 
-## 3️⃣ Why Do We Need Visited Array?
+<br>
+
+**Q3: Why Do We Need Visited Array?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 To avoid:
 
@@ -95,9 +108,14 @@ To avoid:
 
 Always mention visited.
 
----
+</details>
 
-## 4️⃣ Difference Between Directed and Undirected Graph
+<br>
+
+**Q4: Difference Between Directed and Undirected Graph**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Undirected:
 Edges are bidirectional.
@@ -107,13 +125,17 @@ Edges have direction.
 
 Cycle detection logic differs.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Number of Islands
+**Q5: Number of Islands**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Grid treated as graph.
 
@@ -129,9 +151,14 @@ O(m × n)
 
 Classic graph pattern.
 
----
+</details>
 
-## 6️⃣ Detect Cycle in Undirected Graph
+<br>
+
+**Q6: Detect Cycle in Undirected Graph**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use DFS with parent tracking.
 
@@ -140,9 +167,14 @@ If visited neighbor is not parent → cycle exists.
 Time:
 O(V + E)
 
----
+</details>
 
-## 7️⃣ Detect Cycle in Directed Graph
+<br>
+
+**Q7: Detect Cycle in Directed Graph**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -153,9 +185,14 @@ If node appears in recursion stack → cycle.
 
 Important for course schedule.
 
----
+</details>
 
-## 8️⃣ Course Schedule (Topological Sort)
+<br>
+
+**Q8: Course Schedule (Topological Sort)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If cycle exists → cannot complete.
 
@@ -167,9 +204,14 @@ OR
 
 Strong candidates explain both.
 
----
+</details>
 
-## 9️⃣ Bipartite Graph
+<br>
+
+**Q9: Bipartite Graph**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Color nodes with two colors.
 
@@ -180,13 +222,17 @@ Use BFS or DFS.
 Time:
 O(V + E)
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Dijkstra’s Algorithm
+**Q10: Dijkstra’s Algorithm**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Used for shortest path with non-negative weights.
 
@@ -197,9 +243,14 @@ O(E log V)
 
 Strong candidates explain why BFS fails in weighted graph.
 
----
+</details>
 
-## 1️⃣1️⃣ Bellman-Ford
+<br>
+
+**Q11: Bellman-Ford**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Handles negative weights.
 
@@ -210,9 +261,14 @@ Detects negative cycle.
 
 Mention when Dijkstra fails.
 
----
+</details>
 
-## 1️⃣2️⃣ Minimum Spanning Tree
+<br>
+
+**Q12: Minimum Spanning Tree**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -224,9 +280,14 @@ Used in network design.
 Time:
 O(E log V)
 
----
+</details>
 
-## 1️⃣3️⃣ Strongly Connected Components (SCC)
+<br>
+
+**Q13: Strongly Connected Components (SCC)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -237,54 +298,80 @@ Advanced graph concept.
 
 Appears in senior-level interviews.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 System stuck in infinite traversal.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Visited not marked properly.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Shortest path incorrect.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible issue:
 Using BFS in weighted graph.
 
 Should use Dijkstra.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Cycle detection failing.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely mistake:
 Confusing directed vs undirected logic.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Performance issue in dense graph.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Adjacency matrix better.
 
 Space/time trade-off discussion expected.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Need to group connected users in social network.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use connected components.
 
 DFS/BFS.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

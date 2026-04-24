@@ -64,15 +64,23 @@ This shows you understand why.
 
 ---
 
-## 1️⃣ What is a Heap?
+**Q1: What is a Heap?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
 A heap is a complete binary tree that satisfies the heap property — either min-heap (parent ≤ children) or max-heap (parent ≥ children).
 
----
+</details>
 
-## 2️⃣ What is Time Complexity?
+<br>
+
+**Q2: What is Time Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Insert → O(log n)  
 Delete → O(log n)  
@@ -81,9 +89,14 @@ Build heap → O(n)
 
 Mention build heap O(n) — interviewers like that.
 
----
+</details>
 
-## 3️⃣ Difference Between Min Heap and Max Heap
+<br>
+
+**Q3: Difference Between Min Heap and Max Heap**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Min Heap:
 Smallest at root.
@@ -93,9 +106,14 @@ Largest at root.
 
 Python supports min heap by default.
 
----
+</details>
 
-## 4️⃣ Why Heap Stored as Array?
+<br>
+
+**Q4: Why Heap Stored as Array?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because complete tree can be mapped using index formulas:
 
@@ -107,13 +125,17 @@ No pointers required.
 
 Efficient memory usage.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Kth Largest Element
+**Q5: Kth Largest Element**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach 1:
 Build max heap → pop k times → O(n + k log n)
@@ -133,9 +155,14 @@ O(n log k)
 
 Strong candidates mention space optimization.
 
----
+</details>
 
-## 6️⃣ Top K Frequent Elements
+<br>
+
+**Q6: Top K Frequent Elements**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Steps:
 
@@ -148,9 +175,14 @@ O(n log k)
 Mention:
 Space trade-off.
 
----
+</details>
 
-## 7️⃣ Merge K Sorted Lists
+<br>
+
+**Q7: Merge K Sorted Lists**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Push first element of each list into heap.
 
@@ -163,9 +195,14 @@ O(n log k)
 
 Classic heap pattern.
 
----
+</details>
 
-## 8️⃣ Median from Data Stream
+<br>
+
+**Q8: Median from Data Stream**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use two heaps:
 
@@ -184,13 +221,17 @@ Find median O(1)
 
 Advanced but common.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Why Build Heap is O(n), Not O(n log n)?
+**Q9: Why Build Heap is O(n), Not O(n log n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because heapify runs bottom-up.
 
@@ -200,9 +241,14 @@ Total cost sums to O(n).
 
 Strong candidates can explain amortized reasoning.
 
----
+</details>
 
-## 1️⃣1️⃣ Compare Heap vs Sorting
+<br>
+
+**Q10: Compare Heap vs Sorting**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sorting:
 O(n log n)
@@ -214,9 +260,14 @@ Heap better when k << n.
 
 Optimization thinking expected.
 
----
+</details>
 
-## 1️⃣2️⃣ Heap in Graph Algorithms
+<br>
+
+**Q11: Heap in Graph Algorithms**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Dijkstra’s algorithm uses min heap.
 
@@ -229,9 +280,14 @@ O(E log V)
 
 Understanding heap in graph context shows depth.
 
----
+</details>
 
-## 1️⃣3️⃣ When Not to Use Heap
+<br>
+
+**Q12: When Not to Use Heap**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Avoid heap when:
 
@@ -241,14 +297,19 @@ Avoid heap when:
 
 Heap gives only top element efficiently.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Need top 10 elements from million numbers.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Sorting entire array:
 O(n log n) expensive.
@@ -258,29 +319,44 @@ Min heap of size 10 → O(n log 10)
 
 Huge improvement.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Streaming input — cannot store all data.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Heap helpful:
 Maintain limited size.
 
 Discuss memory constraints.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Need dynamic median.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two heap approach.
 
 Explain balancing logic carefully.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Heap solution TLE.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible reason:
 Using heap incorrectly when k is large.
@@ -289,10 +365,15 @@ Maybe sorting is better.
 
 Choose based on constraints.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Data already sorted.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Heap unnecessary.
 
@@ -300,6 +381,7 @@ Simple indexing enough.
 
 Choose wisely.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

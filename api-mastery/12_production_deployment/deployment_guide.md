@@ -1,5 +1,7 @@
 # Production Deployment for FastAPI
 
+> 📝 **Practice:** [Q49 · api-logging-patterns](../api_practice_questions_100.md#q49--design--api-logging-patterns)
+
 ## From "It Works on My Machine" to Production
 
 Your FastAPI app runs perfectly with `uvicorn main:app --reload`. One worker, your

@@ -50,7 +50,10 @@ Never jump directly to coding.
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is a Linked List?
+**Q1: What is a Linked List?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional Answer:
 
@@ -60,18 +63,28 @@ Notice:
 Explain contrast with array.
 That shows understanding.
 
----
+</details>
 
-## 2️⃣ Why is access O(n)?
+<br>
+
+**Q2: Why is access O(n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because linked lists do not support direct indexing.
 To reach the nth element, we must traverse sequentially from the head.
 
 Mention traversal explicitly.
 
----
+</details>
 
-## 3️⃣ Why is insertion at head O(1)?
+<br>
+
+**Q3: Why is insertion at head O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because we only update pointers:
 
@@ -82,9 +95,14 @@ No traversal required.
 
 Always explain pointer update logic verbally.
 
----
+</details>
 
-## 4️⃣ What are common edge cases?
+<br>
+
+**Q4: What are common edge cases?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Empty list
 - Single node
@@ -95,11 +113,15 @@ Always explain pointer update logic verbally.
 
 Interviewers expect you to mention edge cases before coding.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 5️⃣ Reverse a Linked List — How to Respond
+**Q5: Reverse a Linked List — How to Respond**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Before coding, say:
 
@@ -119,9 +141,14 @@ O(1)
 
 Clear explanation before coding is important.
 
----
+</details>
 
-## 6️⃣ Detect Cycle — How to Respond
+<br>
+
+**Q6: Detect Cycle — How to Respond**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Say:
 
@@ -134,9 +161,14 @@ fast pointer will eventually meet slow pointer.
 
 Interviewers want reasoning, not just code.
 
----
+</details>
 
-## 7️⃣ Remove Nth Node From End
+<br>
+
+**Q7: Remove Nth Node From End**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional approach:
 
@@ -151,9 +183,14 @@ second is before target node.
 
 Avoid counting length separately unless asked.
 
----
+</details>
 
-## 8️⃣ Merge Two Sorted Lists
+<br>
+
+**Q8: Merge Two Sorted Lists**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain approach before coding:
 
@@ -164,11 +201,15 @@ O(n + m)
 
 Explain why no extra space is required.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 9️⃣ How Would You Handle Linked List in Production System?
+**Q9: How Would You Handle Linked List in Production System?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Discuss:
 
@@ -179,9 +220,14 @@ Discuss:
 
 Senior-level thinking goes beyond algorithm.
 
----
+</details>
 
-## 🔟 Compare Linked List vs Array in Real System
+<br>
+
+**Q10: Compare Linked List vs Array in Real System**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain:
 
@@ -196,9 +242,14 @@ Array advantages:
 
 Professional candidates compare trade-offs clearly.
 
----
+</details>
 
-## 1️⃣1️⃣ How Do You Debug Linked List Issues?
+<br>
+
+**Q11: How Do You Debug Linked List Issues?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain systematic debugging:
 
@@ -210,9 +261,14 @@ Explain systematic debugging:
 
 Mention drawing diagram — interviewers like visual thinkers.
 
----
+</details>
 
-## 1️⃣2️⃣ How Do You Handle Very Large Linked Lists?
+<br>
+
+**Q12: How Do You Handle Very Large Linked Lists?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider:
 
@@ -223,34 +279,49 @@ Consider:
 
 Senior engineers think about scalability.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Your reverse function causes infinite loop.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Pointer not updated correctly.
 
 Explain how you would trace pointers step-by-step.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Cycle detection fails on single-node list.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Edge case:
 Node pointing to itself.
 
 Mention edge-case testing explicitly.
 
+</details>
 ---
 
 ## Scenario 3:
+
 You are asked to implement LRU cache.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Expected answer:
 
@@ -260,10 +331,15 @@ Use:
 
 Explain why singly linked list is insufficient.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Memory usage is too high.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Linked list storing millions of nodes.
 
@@ -271,10 +347,15 @@ Explain overhead of pointers.
 
 Consider alternative data structures.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Given two linked lists, detect intersection.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Explain logic:
 
@@ -287,6 +368,7 @@ Possible approaches:
 
 Interviewers test conceptual reasoning here.
 
+</details>
 ---
 
 # 🧠 How to Respond Like a Strong Candidate

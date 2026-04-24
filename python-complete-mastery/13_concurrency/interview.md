@@ -35,7 +35,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: What is the difference between concurrency and parallelism?
+**Q1: What is the difference between concurrency and parallelism?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "They're basically the same — running things at the same time."
 
@@ -61,9 +64,14 @@ PARALLELISM (multi-core):
 
 > Python's `threading` is concurrent (GIL allows only one at a time). Python's `multiprocessing` is parallel (separate GILs, truly simultaneous).
 
----
+</details>
 
-### Q2: What is the GIL and why does it exist?
+<br>
+
+**Q2: What is the GIL and why does it exist?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It prevents multiple threads from running Python at the same time."
 
@@ -94,9 +102,14 @@ def api_call(url):
 
 > **GIL is released during:** I/O operations, `time.sleep()`, most NumPy/C extension calls.
 
----
+</details>
 
-### Q3: When would you use threading vs multiprocessing vs asyncio?
+<br>
+
+**Q3: When would you use threading vs multiprocessing vs asyncio?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -126,9 +139,14 @@ with ProcessPoolExecutor(max_workers=8) as exc:
     list(exc.map(compress_file, file_paths))
 ```
 
----
+</details>
 
-### Q4: What is a race condition? Give an example.
+<br>
+
+**Q4: What is a race condition? Give an example.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -161,13 +179,17 @@ def safe_withdraw(amount):
             balance -= amount
 ```
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q5: What synchronization primitives does Python provide and when do you use each?
+**Q5: What synchronization primitives does Python provide and when do you use each?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -202,9 +224,14 @@ q.task_done()
 q.join()              # wait for all task_done() calls
 ```
 
----
+</details>
 
-### Q6: How does `ThreadPoolExecutor` work and what are its advantages?
+<br>
+
+**Q6: How does `ThreadPoolExecutor` work and what are its advantages?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -234,9 +261,14 @@ with ThreadPoolExecutor(max_workers=10) as executor:
 
 > **Advantages vs manual threads:** automatic pool management, `Future` API with exception propagation, works as [context manager](../12_context_managers/theory.md#-chapter-2-the-context-manager-protocol), `as_completed` for processing in completion order.
 
----
+</details>
 
-### Q7: Explain the asyncio event loop and what `await` does.
+<br>
+
+**Q7: Explain the asyncio event loop and what `await` does.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "asyncio runs async functions. await pauses them."
 
@@ -266,9 +298,14 @@ async def main():
 
 > **Key:** `await` only suspends the current coroutine, not the whole thread. Other coroutines continue running.
 
----
+</details>
 
-### Q8: What is a deadlock and how do you prevent it?
+<br>
+
+**Q8: What is a deadlock and how do you prevent it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -310,13 +347,17 @@ def thread2():
             pass
 ```
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q9: When does the GIL get released? How does this affect your threading strategy?
+**Q9: When does the GIL get released? How does this affect your threading strategy?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -344,9 +385,14 @@ np.dot(a, b)   # NumPy releases GIL → true parallel execution with threads!
 # If your work is mixed → profile first, then decide
 ```
 
----
+</details>
 
-### Q10: How do you share data between processes safely?
+<br>
+
+**Q10: How do you share data between processes safely?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -385,9 +431,14 @@ with Manager() as manager:
     print(shared_dict)   # sees changes made by child process
 ```
 
----
+</details>
 
-### Q11: Design a concurrent web scraper with rate limiting.
+<br>
+
+**Q11: Design a concurrent web scraper with rate limiting.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -432,9 +483,14 @@ async def scrape_all(urls, max_rps=10, max_concurrent=20):
 results = asyncio.run(scrape_all(urls, max_rps=10))
 ```
 
----
+</details>
 
-### Q12: What is `asyncio.run_in_executor` and when do you need it?
+<br>
+
+**Q12: What is `asyncio.run_in_executor` and when do you need it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -468,7 +524,8 @@ async def process_image(image_bytes):
 
 > **Use for:** legacy blocking I/O, CPU-bound operations in async code, calling synchronous libraries (PIL, pandas) from async functions.
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

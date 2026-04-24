@@ -17,6 +17,8 @@ Heaps power:
 
 Heaps are extremely important in interviews.
 
+> 📝 **Practice:** [Q41 · heap-kth-largest](../dsa_practice_questions_100.md#q41--design--heap-kth-largest)
+
 ---
 
 ## 📌 Learning Priority
@@ -103,6 +105,8 @@ Completeness is mandatory.
 ---
 
 # 🔼 4️⃣ Heap Property
+
+> 📝 **Practice:** [Q40 · heap-property](../dsa_practice_questions_100.md#q40--normal--heap-property)
 
 ---
 
@@ -318,6 +322,8 @@ BST:
 Better for range queries.
 
 Choose wisely.
+
+> 📝 **Practice:** [Q42 · heap-vs-bst](../dsa_practice_questions_100.md#q42--interview--heap-vs-bst) · [Q83 · heap-vs-bst-compare](../dsa_practice_questions_100.md#q83--interview--heap-vs-bst-compare)
 
 ---
 

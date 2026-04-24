@@ -10,7 +10,10 @@ this file trains you how to defend your solution in interviews.
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is Time Complexity?
+**Q1: What is Time Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Time complexity measures how an algorithm’s execution time grows as input size grows.
 
@@ -21,9 +24,14 @@ It measures growth trend using Big-O notation.
 Example:
 If input doubles and runtime doubles → O(n)
 
----
+</details>
 
-## 2️⃣ What is Space Complexity?
+<br>
+
+**Q2: What is Space Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Space complexity measures how much extra memory an algorithm requires relative to input size.
 
@@ -34,9 +42,14 @@ It includes:
 
 It does NOT include input storage itself.
 
----
+</details>
 
-## 3️⃣ What is Big-O Notation?
+<br>
+
+**Q3: What is Big-O Notation?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Big-O describes the upper bound (worst-case growth).
 
@@ -49,9 +62,14 @@ Example:
 
 O(n² + n + 10) → O(n²)
 
----
+</details>
 
-## 4️⃣ Difference Between O(1), O(n), O(log n), O(n²)?
+<br>
+
+**Q4: Difference Between O(1), O(n), O(log n), O(n²)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - O(1) → constant time (array access)
 - O(n) → linear scan
@@ -61,9 +79,14 @@ O(n² + n + 10) → O(n²)
 Important:
 Understand growth behavior, not memorization.
 
----
+</details>
 
-## 5️⃣ Best Case vs Worst Case vs Average Case
+<br>
+
+**Q5: Best Case vs Worst Case vs Average Case**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Best case → minimal operations
 - Worst case → maximum operations
@@ -71,11 +94,15 @@ Understand growth behavior, not memorization.
 
 In interviews, we usually discuss worst case unless specified.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 6️⃣ How Do You Calculate Time Complexity?
+**Q6: How Do You Calculate Time Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Step-by-step:
 
@@ -95,9 +122,14 @@ for i in range(n):
 
 Time → O(n²)
 
----
+</details>
 
-## 7️⃣ What is Amortized Complexity?
+<br>
+
+**Q7: What is Amortized Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Some operations are expensive occasionally but cheap on average.
 
@@ -111,9 +143,14 @@ Overall average → O(1)
 
 You must explain dynamic array resizing.
 
----
+</details>
 
-## 8️⃣ How Do You Analyze Recursive Complexity?
+<br>
+
+**Q8: How Do You Analyze Recursive Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use recurrence relation.
 
@@ -136,9 +173,14 @@ Using Master Theorem:
 
 Mid-level engineers must derive this confidently.
 
----
+</details>
 
-## 9️⃣ What Is the Complexity of Python Dictionary Operations?
+<br>
+
+**Q9: What Is the Complexity of Python Dictionary Operations?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Insert → O(1) average
 - Search → O(1) average
@@ -150,9 +192,14 @@ O(n) (hash collision)
 Interview tip:
 Mention average vs worst-case behavior.
 
----
+</details>
 
-## 🔟 When Is O(n²) Acceptable?
+<br>
+
+**Q10: When Is O(n²) Acceptable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Depends on input constraints.
 
@@ -164,11 +211,15 @@ O(n²) → 10¹⁰ → unacceptable.
 
 Always analyze against constraints.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 1️⃣1️⃣ Explain Master Theorem
+**Q11: Explain Master Theorem**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 For recurrence:
 
@@ -183,9 +234,14 @@ Three cases:
 
 You should explain with examples like Merge Sort.
 
----
+</details>
 
-## 1️⃣2️⃣ Compare Merge Sort and Quick Sort
+<br>
+
+**Q12: Compare Merge Sort and Quick Sort**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Merge Sort:
 - Time → O(n log n)
@@ -201,9 +257,14 @@ Discussion expected:
 - Space trade-off
 - Cache performance
 
----
+</details>
 
-## 1️⃣3️⃣ How Do You Estimate Real Runtime?
+<br>
+
+**Q13: How Do You Estimate Real Runtime?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Rule of thumb:
 
@@ -215,9 +276,14 @@ If n = 10⁵:
 
 Senior engineers estimate feasibility quickly.
 
----
+</details>
 
-## 1️⃣4️⃣ What Is Trade-off Between Time and Space?
+<br>
+
+**Q14: What Is Trade-off Between Time and Space?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -230,9 +296,14 @@ If speed critical → choose hashing.
 
 Engineering decision depends on system constraints.
 
----
+</details>
 
-## 1️⃣5️⃣ How Do You Analyze Complexity in Large Systems?
+<br>
+
+**Q15: How Do You Analyze Complexity in Large Systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider:
 
@@ -251,14 +322,19 @@ Senior engineers discuss:
 - Streaming
 - Distributed processing
 
----
+</details>
+
 
 # 🔥 Scenario-Based Interview Questions
 
 ---
 
 ## Scenario 1:
+
 You wrote a solution with O(n²) complexity. Input size is 10⁶.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Question:
 Will this pass in production?
@@ -269,21 +345,31 @@ No. 10¹² operations are infeasible.
 Expected follow-up:
 How can you optimize?
 
+</details>
 ---
 
 ## Scenario 2:
+
 You optimized from O(n²) to O(n log n).  
 Interviewer asks: “Can we do better?”
+
+<details>
+<summary>💡 Show Answer</summary>
 
 You should:
 - Check if hashing can reduce to O(n)
 - Analyze space trade-off
 
+</details>
 ---
 
 ## Scenario 3:
+
 Your algorithm uses O(n) extra memory.  
 System has memory constraints.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 What do you do?
 
@@ -293,10 +379,15 @@ Possible approaches:
 - Streaming approach
 - Chunk processing
 
+</details>
 ---
 
 ## Scenario 4:
+
 You use recursion for depth 10⁶.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 What happens?
 
@@ -306,10 +397,15 @@ Stack overflow.
 Solution:
 Convert to iterative approach.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Your dictionary-based solution slows down unexpectedly.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible cause:
 Hash collisions → worst-case O(n).
@@ -317,6 +413,7 @@ Hash collisions → worst-case O(n).
 Advanced insight:
 Discuss hashing internals.
 
+</details>
 ---
 
 # 🧠 Senior-Level Response Example

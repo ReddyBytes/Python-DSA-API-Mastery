@@ -20,7 +20,10 @@ Traps    (5):     subtle mistakes every senior gets asked
 
 ---
 
-### Q1. What is a "dunder method" and why does Python use them?
+**Q1: What is a "dunder method" and why does Python use them?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Intent:** Understand the protocol system and why it was chosen.
 
@@ -67,9 +70,14 @@ t.__len__()   # 999 — direct call bypasses the protocol
 
 This is intentional — it prevents security exploits and improves performance.
 
----
+</details>
 
-### Q2. What is [`__slots__`](../05_oops/15_slots.md) and when should you use it?
+<br>
+
+**Q2: What is [`__slots__`](../05_oops/15_slots.md) and when should you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Intent:** Understand the default instance storage model and the optimization.
 
@@ -116,9 +124,14 @@ print(type(PointSlots.x))   # <class 'member_descriptor'>
 - Multiple inheritance requires all parents to also use `__slots__`
 - Need `__getstate__`/`__setstate__` for pickling in some cases
 
----
+</details>
 
-### Q3. What does `@dataclass` generate, and when is it preferable to a plain class?
+<br>
+
+**Q3: What does `@dataclass` generate, and when is it preferable to a plain class?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Intent:** Know the automation, the field configuration, and the trade-offs.
 
@@ -168,9 +181,14 @@ print(hash(v1))     # works — frozen=True makes it hashable
 - Heavy method-rich classes where boilerplate is minimal
 - Need custom `__init__` logic that doesn't fit the field model
 
----
+</details>
 
-### Q4. What is `@property` and how does it work under the hood?
+<br>
+
+**Q4: What is `@property` and how does it work under the hood?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Intent:** Understand it as a descriptor, not just convenient syntax.
 
@@ -221,13 +239,17 @@ def __get__(self, obj, objtype=None):
     return self.fget(obj)   # c.radius → calls fget(c)
 ```
 
----
+</details>
+
 
 ## Mid-Level
 
 ---
 
-### Q5. Explain the descriptor protocol. Data vs non-data descriptors?
+**Q5: Explain the descriptor protocol. Data vs non-data descriptors?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Intent:** Core Python internals for framework design.
 
@@ -291,9 +313,14 @@ class lazy:
         return value                      # next access: __dict__ found first → descriptor skipped
 ```
 
----
+</details>
 
-### Q6. Walk me through what happens when Python executes `class Foo(Bar): pass`
+<br>
+
+**Q6: Walk me through what happens when Python executes `class Foo(Bar): pass`**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Intent:** Deep class creation machinery.
 
@@ -338,9 +365,14 @@ class MyClass:
     x = Descriptor()   # prints: Assigned: MyClass.x
 ```
 
----
+</details>
 
-### Q7. What is a metaclass and what are real use cases?
+<br>
+
+**Q7: What is a metaclass and what are real use cases?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Intent:** Know when to use metaclasses vs simpler alternatives.
 
@@ -384,9 +416,14 @@ print(RegistryMeta._registry)
 | Descriptor | Need attribute-level interception |
 | `@dataclass` | Need auto-generated methods |
 
----
+</details>
 
-### Q8. What is a callable object? How does it differ from a plain function?
+<br>
+
+**Q8: What is a callable object? How does it differ from a plain function?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -427,9 +464,14 @@ for v in [10, 20, 30, 40, 50]:
 **Use cases:** counters, accumulators, memoization wrappers with stats,
 retry policies with state, configurable predicates, pipelines.
 
----
+</details>
 
-### Q9. What is `__new__` and when would you override it?
+<br>
+
+**Q9: What is `__new__` and when would you override it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -477,13 +519,17 @@ print(a.value)     # 1 — not overwritten
 **Common pitfall:** `__init__` is called every time `cls()` is called —
 even if `__new__` returns an existing instance. Always guard.
 
----
+</details>
+
 
 ## Senior Level
 
 ---
 
-### Q10. Explain the full attribute lookup order including descriptors and `__getattr__`
+**Q10: Explain the full attribute lookup order including descriptors and `__getattr__`**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -554,9 +600,14 @@ class Risky:
         # Fix: object.__getattribute__(self, "name")
 ```
 
----
+</details>
 
-### Q11. What is the metaclass conflict problem and how do you resolve it?
+<br>
+
+**Q11: What is the metaclass conflict problem and how do you resolve it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -604,9 +655,14 @@ class MyMeta(ABCMeta):   # inherit from ABCMeta, not type!
 **Prevention:** Use `__init_subclass__` instead of metaclasses when possible —
 it composes perfectly across multiple inheritance with no conflict risk.
 
----
+</details>
 
-### Q12. How do ABCs enforce abstract methods? What are virtual subclasses?
+<br>
+
+**Q12: How do ABCs enforce abstract methods? What are virtual subclasses?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -664,9 +720,14 @@ issubclass(LegacyTriangle, Shape)     # True
 Virtual subclasses are useful for retrofitting existing/third-party classes
 into an abstract hierarchy without modifying their source code.
 
----
+</details>
 
-### Q13. Protocol vs ABC — explain the difference and when to use each
+<br>
+
+**Q13: Protocol vs ABC — explain the difference and when to use each**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -710,7 +771,8 @@ isinstance(Circle(), Drawable)   # True — has the method → qualifies
 - ABC: "you must claim membership by inheriting"
 - Protocol: "if you look like it, you are it"
 
----
+</details>
+
 
 ## 🔴 Trap Questions
 

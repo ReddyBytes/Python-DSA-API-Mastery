@@ -1,5 +1,8 @@
 # 💾 Storage & CDN — Theory
+
 > Store, retrieve, and serve files at global scale — from raw bytes to video streams delivered milliseconds from every user.
+
+> 📝 **Practice:** [Q8 · cdn-what-and-why](../system_design_practice_questions_100.md#q8--normal--cdn-what-and-why) · [Q35 · blob-storage-patterns](../system_design_practice_questions_100.md#q35--normal--blob-storage-patterns) · [Q36 · cdn-cache-invalidation](../system_design_practice_questions_100.md#q36--thinking--cdn-cache-invalidation) · [Q37 · push-vs-pull-cdn](../system_design_practice_questions_100.md#q37--normal--push-vs-pull-cdn) · [Q100 · design-global-cdn](../system_design_practice_questions_100.md#q100--design--design-global-cdn)
 
 ---
 

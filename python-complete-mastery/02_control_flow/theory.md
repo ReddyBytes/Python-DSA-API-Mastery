@@ -276,10 +276,12 @@ if (n := len(data)) > 10:
 
 ```python
 # 1 — while loops reading chunks (classic pattern):
+
 import io
 f = io.BytesIO(b"hello world data")
 while chunk := f.read(4):          # assign + check in one step
     process(chunk)
+
 
 # 2 — filtering with computed value (avoid double call):
 results = [y for x in data if (y := expensive(x)) > 0]
@@ -290,6 +292,9 @@ text = "Order: 12345"
 if m := re.search(r"\d+", text):
     print(f"Found number: {m.group()}")   # m is already bound
 ```
+
+> 📝 **Practice:** [Q7 · loop-else](../python_practice_questions_100.md#q7--logical--loop-else)
+
 
 **The rule:** Use walrus when you'd otherwise compute the same value twice.
 Don't use it just to be clever — if it makes code harder to read, use two lines.
@@ -542,6 +547,8 @@ evens = [x for x in range(10) if x % 2 == 0]
 Readable when simple.
 Avoid very complex ones.
 
+> 📝 **Practice:** [Q8 · list-comprehension](../python_practice_questions_100.md#q8--normal--list-comprehension)
+
 ---
 
 ### Comprehension Scoping — Variables Don't Leak
@@ -558,6 +565,7 @@ gen = (x for x in range(5))
 print(x)   # NameError
 
 # Dict comprehension — same rule:
+
 mapping = {k: v for k, v in pairs}
 print(k)   # NameError
 ```
@@ -573,12 +581,17 @@ print(i)   # 4 — the loop variable persists after a regular for loop
 **Why this matters:**
 
 ```python
+
+
 # Bug if you expected Python 2 behavior:
 result = [n for n in range(3)]
 # In Python 2, n would be 2 here — in Python 3, n doesn't exist
 # This change prevents subtle bugs where comprehension variables
 # accidentally shadow outer variables
 ```
+
+> 📝 **Practice:** [Q9 · dict-comprehension](../python_practice_questions_100.md#q9--thinking--dict-comprehension)
+
 
 ---
 

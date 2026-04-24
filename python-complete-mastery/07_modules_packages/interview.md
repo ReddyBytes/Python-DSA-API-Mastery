@@ -35,7 +35,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: What is a module in Python?
+**Q1: What is a module in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "A module is a file."
 
@@ -50,9 +53,14 @@ print(math.__file__)        # path to math.py / math.so
 print("math" in sys.modules)  # True
 ```
 
----
+</details>
 
-### Q2: What is the difference between a module and a package?
+<br>
+
+**Q2: What is the difference between a module and a package?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -68,9 +76,14 @@ package:  myapp/                    → import myapp
                  validators.py      → from myapp.utils import validators
 ```
 
----
+</details>
 
-### Q3: What are the different ways to import in Python? When would you use each?
+<br>
+
+**Q3: What are the different ways to import in Python? When would you use each?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -85,9 +98,14 @@ from module import *             # ⚠️ avoid — pollutes namespace, debuggin
 > Best practice: prefer `import module` or `from module import specific_name`.
 > Use `import *` only in `__init__.py` for controlled re-exports, never in application code.
 
----
+</details>
 
-### Q4: What does `if __name__ == "__main__":` mean and why is it important?
+<br>
+
+**Q4: What does `if __name__ == "__main__":` mean and why is it important?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It runs the code only when executed directly."
 
@@ -111,9 +129,14 @@ if __name__ == "__main__":
     print(add(1, 2))   # only runs when: python calculator.py
 ```
 
----
+</details>
 
-### Q5: Why should you avoid `from module import *`?
+<br>
+
+**Q5: Why should you avoid `from module import *`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -135,13 +158,17 @@ sqrt(16)    # which module is sqrt from? No way to tell without reading imports
 from math import sqrt, pi
 ```
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q6: Explain exactly what happens when Python imports a module.
+**Q6: Explain exactly what happens when Python imports a module.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -161,9 +188,14 @@ print("json" in sys.modules)   # True
 import json   # second import — nothing executes, just returns cache
 ```
 
----
+</details>
 
-### Q7: What is a circular import? How do you fix it?
+<br>
+
+**Q7: What is a circular import? How do you fix it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "A imports B and B imports A — it causes an error."
 
@@ -195,9 +227,14 @@ import b                    # module import can handle partial loading better
 def use_b(): return b.greet_b()
 ```
 
----
+</details>
 
-### Q8: What is the difference between absolute and relative imports? Which do you prefer?
+<br>
+
+**Q8: What is the difference between absolute and relative imports? Which do you prefer?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -217,9 +254,14 @@ from ..models import User       # parent package's models
 from .payment import process    # sibling module
 ```
 
----
+</details>
 
-### Q9: What is `__init__.py`? What can you put in it?
+<br>
+
+**Q9: What is `__init__.py`? What can you put in it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -243,9 +285,14 @@ from myapp.models import User       # clean
 from myapp.models.user import User  # leaks internal structure
 ```
 
----
+</details>
 
-### Q10: What is `__all__` and why would you define it?
+<br>
+
+**Q10: What is `__all__` and why would you define it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -268,9 +315,14 @@ def _normalize(value): ...        # private — not in __all__, not exported
 > Even if you rarely use `from module import *`, defining `__all__` is good practice:
 > it documents your intent and helps tools like `pydoc`, `sphinx`, and linters.
 
----
+</details>
 
-### Q11: What is `sys.path` and when would you modify it?
+<br>
+
+**Q11: What is `sys.path` and when would you modify it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -291,13 +343,17 @@ import my_lib   # found in /path/to/my/libs/my_lib.py
 # pip install -e .   ← editable install, registers in site-packages
 ```
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q12: How would you structure a large Python project?
+**Q12: How would you structure a large Python project?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -319,9 +375,14 @@ Key rules:
   4. utils/ imports nothing from the rest of myapp
 ```
 
----
+</details>
 
-### Q13: How do you implement a plugin system with dynamic imports?
+<br>
+
+**Q13: How do you implement a plugin system with dynamic imports?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -355,9 +416,14 @@ plugin = get_plugin("audio")
 plugin.run()
 ```
 
----
+</details>
 
-### Q14: What are lazy imports and when should you use them?
+<br>
+
+**Q14: What are lazy imports and when should you use them?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -382,9 +448,14 @@ class MLPredictor:
 # Python 3.12+ has importlib.util for official lazy loading support
 ```
 
----
+</details>
 
-### Q15: What is the difference between regular packages and namespace packages?
+<br>
+
+**Q15: What is the difference between regular packages and namespace packages?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -405,7 +476,8 @@ class MLPredictor:
 # Python merges them into one "mycompany" namespace package.
 ```
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

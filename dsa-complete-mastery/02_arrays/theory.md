@@ -6,6 +6,8 @@
 > Not just definitions — but intuition, memory behavior, performance thinking,  
 > and how arrays behave in real systems.
 
+> 📝 **Practice:** [Q6 · rotate-array](../dsa_practice_questions_100.md#q6--code--rotate-array) · [Q81 · array-vs-linked-list](../dsa_practice_questions_100.md#q81--interview--array-vs-linked-list)
+
 ---
 
 ## 📌 Learning Priority
@@ -246,6 +248,8 @@ In interviews, always clarify:
 “Are we allowed to use extra space?”
 
 That question alone shows maturity.
+
+> 📝 **Practice:** [Q5 · in-place-operations](../dsa_practice_questions_100.md#q5--thinking--in-place-operations)
 
 ---
 
@@ -498,6 +502,12 @@ result = list(itertools.accumulate(diff[:n]))
 [Complexity Analysis Theory](/dsa-complete-mastery/01_complexity_analysis/theory.md)  
 [Arrays Implementation](/dsa-complete-mastery/02_arrays/implementation.py)  
 [Arrays Interview Guide](/dsa-complete-mastery/02_arrays/interview.md)
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q75 · reservoir-sampling](../dsa_practice_questions_100.md#q75--critical--reservoir-sampling)
 
 ---
 

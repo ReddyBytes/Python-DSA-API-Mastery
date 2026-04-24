@@ -1,6 +1,12 @@
 # 11 — FastAPI Advanced Features
 
+> 📝 **Practice:** [Q42 · fastapi-middleware](../api_practice_questions_100.md#q42--normal--fastapi-middleware)
+
+> 📝 **Practice:** [Q40 · fastapi-async-endpoints](../api_practice_questions_100.md#q40--thinking--fastapi-async-endpoints)
+
 > "The basics get you to production. The advanced features keep you there."
+
+> 📝 **Practice:** [Q50 · fastapi-lifespan](../api_practice_questions_100.md#q50--thinking--fastapi-lifespan)
 
 ---
 
@@ -432,6 +438,8 @@ proper task queue.
 
 Celery is the standard Python choice: a distributed task queue that runs jobs
 asynchronously on separate worker processes, backed by Redis or RabbitMQ as a broker.
+
+> 📝 **Practice:** [Q41 · fastapi-background-tasks](../api_practice_questions_100.md#q41--normal--fastapi-background-tasks)
 
 ### Setting Up Celery
 
@@ -928,6 +936,12 @@ Async vs Sync
   → Never call blocking sync code inside async def
   → FastAPI runs def routes in a thread pool automatically
 ```
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q93 · predict-dependency-chain](../api_practice_questions_100.md#q93--logical--predict-dependency-chain)
 
 ---
 

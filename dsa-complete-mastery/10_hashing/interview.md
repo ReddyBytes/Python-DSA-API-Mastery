@@ -62,7 +62,10 @@ This shows reasoning, not memorization.
 
 ---
 
-## 1️⃣ What is hashing?
+**Q1: What is hashing?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -70,9 +73,14 @@ Hashing is a technique that uses a hash function to map keys to indices in a has
 
 Keep it concise.
 
----
+</details>
 
-## 2️⃣ Why is hash table lookup O(1)?
+<br>
+
+**Q2: Why is hash table lookup O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because instead of searching,
 we compute index using hash function.
@@ -83,9 +91,14 @@ O(n) worst case (due to collisions).
 
 Mentioning worst case shows maturity.
 
----
+</details>
 
-## 3️⃣ What is a collision?
+<br>
+
+**Q3: What is a collision?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 When two keys map to the same index.
 
@@ -98,9 +111,14 @@ hash("tac") = 5
 
 Collision resolution required.
 
----
+</details>
 
-## 4️⃣ How are collisions handled?
+<br>
+
+**Q4: How are collisions handled?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Two common approaches:
 
@@ -109,9 +127,14 @@ Two common approaches:
 
 Strong candidates mention both.
 
----
+</details>
 
-## 5️⃣ Why must keys be immutable?
+<br>
+
+**Q5: Why must keys be immutable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If key changes,
 its hash changes,
@@ -124,13 +147,17 @@ Hence:
 
 This is frequently asked.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 6️⃣ Two Sum — How to Respond
+**Q6: Two Sum — How to Respond**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Instead of brute force:
 
@@ -143,9 +170,14 @@ Space: O(n)
 
 Explain logic clearly.
 
----
+</details>
 
-## 7️⃣ How to Find Duplicates in O(n)?
+<br>
+
+**Q7: How to Find Duplicates in O(n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use set.
 
@@ -156,9 +188,14 @@ Time: O(n)
 
 Explain space trade-off.
 
----
+</details>
 
-## 8️⃣ Group Anagrams
+<br>
+
+**Q8: Group Anagrams**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Key idea:
 Anagrams share same sorted form.
@@ -174,9 +211,14 @@ O(n k log k)
 
 Strong candidates explain why tuple is used (hashable).
 
----
+</details>
 
-## 9️⃣ Subarray Sum Equals K
+<br>
+
+**Q9: Subarray Sum Equals K**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use prefix sum + hashmap.
 
@@ -190,9 +232,14 @@ Time: O(n)
 
 This is a classic hashing + prefix pattern.
 
----
+</details>
 
-## 🔟 Longest Consecutive Sequence
+<br>
+
+**Q10: Longest Consecutive Sequence**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Store numbers in set.
 
@@ -205,13 +252,17 @@ Time: O(n)
 
 This tests optimization instinct.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 1️⃣1️⃣ Explain Load Factor
+**Q11: Explain Load Factor**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Load factor = n / table_size.
 
@@ -222,9 +273,14 @@ Python automatically resizes.
 
 Senior candidates mention resizing cost is amortized.
 
----
+</details>
 
-## 1️⃣2️⃣ When Does Hashing Fail?
+<br>
+
+**Q12: When Does Hashing Fail?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Worst case:
 All elements collide.
@@ -236,9 +292,14 @@ Good hash function minimizes this risk.
 
 Mention adversarial inputs.
 
----
+</details>
 
-## 1️⃣3️⃣ Ordered vs Unordered Maps
+<br>
+
+**Q13: Ordered vs Unordered Maps**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python 3.7+ preserves insertion order.
 
@@ -247,9 +308,14 @@ But hash table itself is unordered by nature.
 If sorted order required:
 Use tree-based map instead.
 
----
+</details>
 
-## 1️⃣4️⃣ How Hashing Impacts Memory
+<br>
+
+**Q14: How Hashing Impacts Memory**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Hash tables require extra space:
 
@@ -261,9 +327,14 @@ Space for speed.
 
 Senior candidates always mention this.
 
----
+</details>
 
-## 1️⃣5️⃣ Hashing in Real Systems
+<br>
+
+**Q15: Hashing in Real Systems**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Examples:
 
@@ -275,15 +346,20 @@ Examples:
 
 Strong candidates connect DSA to real systems.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Interview Questions
 
 ---
 
 ## Scenario 1:
+
 Brute-force solution is O(n²).
 Input size = 10⁵.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Will it pass?
 
@@ -291,10 +367,15 @@ No.
 
 Use hashing to reduce to O(n).
 
+</details>
 ---
 
 ## Scenario 2:
+
 You need to count frequencies of millions of words.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 Use dictionary.
@@ -304,10 +385,15 @@ Memory usage.
 
 Discuss trade-offs.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Hash table performance degraded suddenly.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible reasons:
 
@@ -318,10 +404,15 @@ Possible reasons:
 
 Explain debugging approach.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Need to design LRU cache.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Correct answer:
 
@@ -331,10 +422,15 @@ Use:
 
 Explain why both needed.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Need to check if two arrays share common element.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Naive:
 Nested loop → O(n²)
@@ -347,6 +443,7 @@ Then check second array.
 Total:
 O(n)
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

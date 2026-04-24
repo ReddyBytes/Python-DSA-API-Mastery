@@ -8,7 +8,10 @@
 
 ## Junior Level
 
-### Q1. What is the SOLID principle? Explain each with one line.
+**Q1: What is the SOLID principle? Explain each with one line.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -39,9 +42,14 @@ class UserEmailer:
     def send_welcome(self, user): ...
 ```
 
----
+</details>
 
-### Q2. What is the difference between composition and inheritance? When do you use each?
+<br>
+
+**Q2: What is the difference between composition and inheritance? When do you use each?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -90,9 +98,14 @@ class Logger:
             writer.write(msg)
 ```
 
----
+</details>
 
-### Q3. Design a Stack class. What methods should it have?
+<br>
+
+**Q3: Design a Stack class. What methods should it have?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -139,11 +152,15 @@ class Stack:
 - `peek` doesn't remove
 - LIFO order guaranteed
 
----
+</details>
+
 
 ## Mid Level
 
-### Q4. Design a vending machine. What classes do you need?
+**Q4: Design a vending machine. What classes do you need?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -234,9 +251,14 @@ class VendingMachine:
         self._state = VMState.IDLE
 ```
 
----
+</details>
 
-### Q5. Explain the Dependency Inversion Principle with a real example.
+<br>
+
+**Q5: Explain the Dependency Inversion Principle with a real example.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -283,9 +305,14 @@ test_service = OrderService(
 3. Swap SMTP → SendGrid without changing OrderService
 4. Each piece is independently testable
 
----
+</details>
 
-### Q6. Design a notification service that supports email, SMS, and push. How do you make it extensible?
+<br>
+
+**Q6: Design a notification service that supports email, SMS, and push. How do you make it extensible?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -368,11 +395,15 @@ class SlackSender(NotificationSender):
 service.register_sender(Channel.SLACK, SlackSender(slack_token))
 ```
 
----
+</details>
+
 
 ## Senior Level
 
-### Q7. Design a thread-safe LRU cache.
+**Q7: Design a thread-safe LRU cache.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -421,9 +452,14 @@ Multi-process:  Redis with ZADD (score = access time) + ZREMRANGEBYRANK
 Distributed:    Redis + Lua script for atomic get-and-update
 ```
 
----
+</details>
 
-### Q8. Design an in-memory file system.
+<br>
+
+**Q8: Design an in-memory file system.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Answer:**
 
@@ -548,7 +584,8 @@ class FileSystem:
         return node.list_contents()
 ```
 
----
+</details>
+
 
 ## 🔥 Rapid-Fire
 

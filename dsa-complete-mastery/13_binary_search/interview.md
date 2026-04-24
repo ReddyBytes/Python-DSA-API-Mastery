@@ -67,7 +67,10 @@ That shows deep understanding.
 
 ---
 
-## 1️⃣ What is Binary Search?
+**Q1: What is Binary Search?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -75,9 +78,14 @@ Binary search is an algorithm that repeatedly divides a sorted search space in h
 
 Keep it crisp.
 
----
+</details>
 
-## 2️⃣ Why is it O(log n)?
+<br>
+
+**Q2: Why is it O(log n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because each iteration halves the search space.
 
@@ -85,9 +93,14 @@ n → n/2 → n/4 → n/8 → …
 
 Number of steps = log₂(n).
 
----
+</details>
 
-## 3️⃣ What are the boundary conditions?
+<br>
+
+**Q3: What are the boundary conditions?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Standard loop:
 
@@ -99,21 +112,30 @@ Always ensure:
 
 Search space shrinks each iteration.
 
----
+</details>
 
-## 4️⃣ What if array is not sorted?
+<br>
+
+**Q4: What if array is not sorted?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Binary search fails.
 
 Sorted or monotonic property is mandatory.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ First and Last Occurrence
+**Q5: First and Last Occurrence**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Problem:
 Array has duplicates.
@@ -131,9 +153,14 @@ Continue searching right side.
 
 This tests boundary precision.
 
----
+</details>
 
-## 6️⃣ Lower Bound & Upper Bound
+<br>
+
+**Q6: Lower Bound & Upper Bound**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Lower bound:
 First element ≥ target.
@@ -149,9 +176,14 @@ Used in:
 
 Explain difference clearly.
 
----
+</details>
 
-## 7️⃣ Search Insert Position
+<br>
+
+**Q7: Search Insert Position**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Return position where element should be inserted.
 
@@ -161,9 +193,14 @@ Return left.
 
 Tests understanding of boundary behavior.
 
----
+</details>
 
-## 8️⃣ Search in Rotated Sorted Array
+<br>
+
+**Q8: Search in Rotated Sorted Array**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -184,9 +221,14 @@ Search other half.
 
 This tests pattern recognition.
 
----
+</details>
 
-## 9️⃣ Find Peak Element
+<br>
+
+**Q9: Find Peak Element**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Peak means:
 
@@ -204,13 +246,17 @@ No full scan needed.
 
 This is binary search on pattern, not exact value.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Binary Search on Answer (Very Important)
+**Q10: Binary Search on Answer (Very Important)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 Minimum speed to finish work.
@@ -234,9 +280,14 @@ O(n log answer_range)
 
 Very common in FAANG interviews.
 
----
+</details>
 
-## 1️⃣1️⃣ Infinite Search Space
+<br>
+
+**Q11: Infinite Search Space**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If array size unknown:
 
@@ -250,9 +301,14 @@ Then apply binary search.
 
 This is advanced but impressive.
 
----
+</details>
 
-## 1️⃣2️⃣ Avoiding Overflow (Language Awareness)
+<br>
+
+**Q12: Avoiding Overflow (Language Awareness)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 In some languages:
 
@@ -265,9 +321,14 @@ mid = left + (right - left) // 2
 
 Shows systems-level awareness.
 
----
+</details>
 
-## 1️⃣3️⃣ Binary Search in Floating Point
+<br>
+
+**Q13: Binary Search in Floating Point**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Used in:
 
@@ -278,14 +339,19 @@ Stop when difference < epsilon.
 
 Shows mathematical maturity.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Interview Questions
 
 ---
 
 ## Scenario 1:
+
 Your binary search goes into infinite loop.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 
@@ -294,20 +360,30 @@ Likely cause:
 
 Debug by printing boundaries.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Time limit exceeded.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible reason:
 Used linear search instead of binary search.
 
 Identify sorted property.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Binary search on answer gives wrong result.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible issue:
 
@@ -315,10 +391,15 @@ Incorrect monotonic condition.
 
 Check predicate carefully.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Need to find smallest possible maximum.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Classic binary search on answer.
 
@@ -330,15 +411,21 @@ Examples:
 
 Recognize pattern.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Data not sorted but almost sorted.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Binary search may fail.
 
 Sort first or use alternative.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

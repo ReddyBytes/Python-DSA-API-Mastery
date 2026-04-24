@@ -67,6 +67,12 @@ Background workers         Netflix (transcoding), URL analytics aggregation
 
 ---
 
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q90 · production-url-shortener](../system_design_practice_questions_100.md#q90--design--production-url-shortener)
+
 ## 🔁 Navigation
 
 | | |

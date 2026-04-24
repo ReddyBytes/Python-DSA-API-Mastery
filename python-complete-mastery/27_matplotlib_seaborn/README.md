@@ -279,11 +279,24 @@ ax.set_yscale("log")
 
 ---
 
+## 🗺️ Matplotlib & Seaborn Learning Path — Topic Files
+
+| Order | Topic | File |
+|---|---|---|
+| 01 | Subplots and Layouts — GridSpec, mosaic, shared axes | [01_subplots_and_layouts.md](./01_subplots_and_layouts.md) |
+| 02 | Customization and Styling — rcParams, annotations, twin axes | [02_customization_and_styling.md](./02_customization_and_styling.md) |
+| 03 | Color and Colormaps — sequential, diverging, accessible palettes | [03_color_and_colormaps.md](./03_color_and_colormaps.md) |
+| 04 | Seaborn Advanced — FacetGrid, PairGrid, regression plots | [04_seaborn_advanced.md](./04_seaborn_advanced.md) |
+| 05 | ML Visualization — confusion matrix, ROC, learning curves | [05_ml_visualization.md](./05_ml_visualization.md) |
+| 06 | Saving and Exporting — DPI, formats, publication quality | [06_saving_and_exporting.md](./06_saving_and_exporting.md) |
+
+---
+
 ## 🔁 Navigation
 
 | | |
 |---|---|
-| 📖 Theory | [theory.md](./theory.md) |
+| 📖 README | [README.md](./README.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.py](./practice.py) |

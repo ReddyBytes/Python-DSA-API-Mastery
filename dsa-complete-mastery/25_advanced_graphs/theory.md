@@ -193,6 +193,8 @@ Also O(V + E)
 
 # 🌳 3️⃣ Minimum Spanning Tree (MST)
 
+> 📝 **Practice:** [Q53 · minimum-spanning-tree](../dsa_practice_questions_100.md#q53--interview--minimum-spanning-tree)
+
 ## 📖 Real Life Example
 
 Connecting cities with minimum cable cost.
@@ -298,9 +300,13 @@ Dijkstra (covered in module 18) handles non-negative weights.
 But what if edges have negative weights?
 What if you need ALL pairs of shortest paths?
 
+> 📝 **Practice:** [Q100 · design-shortest-path-constraints](../dsa_practice_questions_100.md#q100--design--design-shortest-path-constraints)
+
 ---
 
 ## Bellman-Ford — Shortest Path with Negative Weights
+
+> 📝 **Practice:** [Q89 · production-negative-cycles](../dsa_practice_questions_100.md#q89--design--production-negative-cycles)
 
 ### The Problem Dijkstra Can't Solve
 
@@ -316,6 +322,8 @@ Graph:
 
 Dijkstra fails here — it greedily picks the shortest path and never revises.
 With negative edges, a longer path might become shorter after traversal.
+
+> 📝 **Practice:** [Q51 · dijkstra-algorithm](../dsa_practice_questions_100.md#q51--normal--dijkstra-algorithm)
 
 ---
 

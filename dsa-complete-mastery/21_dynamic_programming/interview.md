@@ -66,15 +66,23 @@ That shows modeling clarity.
 
 ---
 
-## 1️⃣ What is Dynamic Programming?
+**Q1: What is Dynamic Programming?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
 Dynamic Programming is a technique used to solve problems with overlapping subproblems and optimal substructure by storing intermediate results to avoid recomputation.
 
----
+</details>
 
-## 2️⃣ Difference Between Memoization and Tabulation
+<br>
+
+**Q2: Difference Between Memoization and Tabulation**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Memoization:
 Top-down recursion + cache.
@@ -84,22 +92,31 @@ Bottom-up iteration.
 
 Mention recursion stack difference.
 
----
+</details>
 
-## 3️⃣ Why Does DP Improve Performance?
+<br>
+
+**Q3: Why Does DP Improve Performance?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because it avoids repeated computation.
 
 Example:
 Fibonacci → exponential to linear.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 4️⃣ 0/1 Knapsack
+**Q4: 0/1 Knapsack**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 State:
 
@@ -118,9 +135,14 @@ O(nW)
 
 Important pattern.
 
----
+</details>
 
-## 5️⃣ Longest Common Subsequence
+<br>
+
+**Q5: Longest Common Subsequence**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 State:
 
@@ -136,9 +158,14 @@ max(dp[i-1][j], dp[i][j-1])
 
 Classic 2D DP.
 
----
+</details>
 
-## 6️⃣ Coin Change (Minimum Coins)
+<br>
+
+**Q6: Coin Change (Minimum Coins)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 State:
 
@@ -152,9 +179,14 @@ Greedy may fail here.
 
 DP guarantees correctness.
 
----
+</details>
 
-## 7️⃣ House Robber
+<br>
+
+**Q7: House Robber**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 State:
 
@@ -166,9 +198,14 @@ dp[i] = max(dp[i-1], dp[i-2] + nums[i])
 
 Simple but tests thinking.
 
----
+</details>
 
-## 8️⃣ Unique Paths (Grid DP)
+<br>
+
+**Q8: Unique Paths (Grid DP)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 State:
 
@@ -180,13 +217,17 @@ dp[i][j] = dp[i-1][j] + dp[i][j-1]
 
 Common grid pattern.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Edit Distance
+**Q9: Edit Distance**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 State:
 
@@ -200,9 +241,14 @@ Operations:
 
 Classic advanced DP.
 
----
+</details>
 
-## 1️⃣1️⃣ Longest Increasing Subsequence (LIS)
+<br>
+
+**Q10: Longest Increasing Subsequence (LIS)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Basic DP:
 O(n²)
@@ -212,9 +258,14 @@ O(n log n) using binary search.
 
 Shows advanced optimization skill.
 
----
+</details>
 
-## 1️⃣2️⃣ DP with Bitmask
+<br>
+
+**Q11: DP with Bitmask**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Used in:
 
@@ -225,9 +276,14 @@ State includes bitmask of visited elements.
 
 Advanced but impressive.
 
----
+</details>
 
-## 1️⃣3️⃣ DP on Trees
+<br>
+
+**Q12: DP on Trees**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 House Robber III.
@@ -241,54 +297,79 @@ Combine child results.
 
 Advanced recursive DP.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Recursion solution gives TLE.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely issue:
 Overlapping subproblems.
 
 Add memoization.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Memory exceeds limit.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Optimize space.
 
 Example:
 Use rolling array instead of full 2D DP.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Transition formula incorrect.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Incorrect state definition.
 
 Re-evaluate what dp[i] represents.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Greedy solution fails.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider DP.
 
 Example:
 Coin change counterexample.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Time complexity too large.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Maybe optimized DP exists.
 
@@ -297,6 +378,7 @@ LIS O(n log n).
 
 Discuss trade-offs.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

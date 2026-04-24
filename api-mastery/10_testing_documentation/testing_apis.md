@@ -112,6 +112,8 @@ Integration tests call your actual running API (or a test version of it) over HT
 FastAPI's `TestClient` wraps `httpx` and runs your app in-process. No separate server needed.
 
 ```python
+
+
 # main.py (simplified)
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -136,6 +138,9 @@ def get_item(item_id: int):
         raise HTTPException(status_code=404, detail="Item not found")
     return ITEMS[item_id]
 ```
+
+> 📝 **Practice:** [Q47 · testing-fastapi-testclient](../api_practice_questions_100.md#q47--normal--testing-fastapi-testclient)
+
 
 ```python
 # tests/test_items_api.py
@@ -246,6 +251,8 @@ Consumer (Frontend)              Provider (Backend)
 **Pact concept in Python (consumer side):**
 
 ```python
+
+
 # consumer/test_user_consumer.py
 import pytest
 from pact import Consumer, Provider
@@ -270,6 +277,9 @@ def test_get_user():
         result = requests.get(pact.uri + "/users/1")
         assert result.json()["username"] == "alice"
 ```
+
+> 📝 **Practice:** [Q67 · contract-testing](../api_practice_questions_100.md#q67--thinking--contract-testing)
+
 
 The pact file is published to a Pact Broker. The backend (provider) team runs verification against it in CI. If the provider changes something the consumer expects, the CI pipeline fails before the change reaches production.
 

@@ -57,7 +57,10 @@ That shows deep understanding.
 
 ---
 
-## 1️⃣ What is a Binary Search Tree?
+**Q1: What is a Binary Search Tree?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
@@ -65,9 +68,14 @@ A Binary Search Tree is a binary tree where for every node, all values in its le
 
 Mention “for every node.”
 
----
+</details>
 
-## 2️⃣ What is Time Complexity of Search?
+<br>
+
+**Q2: What is Time Complexity of Search?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Search time = O(h)
 
@@ -79,9 +87,14 @@ O(n)
 
 Always mention both cases.
 
----
+</details>
 
-## 3️⃣ How to Insert in BST?
+<br>
+
+**Q3: How to Insert in BST?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Logic:
 
@@ -98,9 +111,14 @@ O(h)
 
 Explain traversal clearly.
 
----
+</details>
 
-## 4️⃣ How to Find Minimum and Maximum?
+<br>
+
+**Q4: How to Find Minimum and Maximum?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Minimum:
 Keep going left.
@@ -110,13 +128,17 @@ Keep going right.
 
 Because left subtree always smaller.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Delete Node in BST
+**Q5: Delete Node in BST**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Most common tricky question.
 
@@ -135,9 +157,14 @@ Then delete successor.
 
 Explain why this preserves BST property.
 
----
+</details>
 
-## 6️⃣ Validate BST
+<br>
+
+**Q6: Validate BST**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Common mistake:
 Only checking immediate children.
@@ -160,9 +187,14 @@ def validate(node, min_val, max_val):
 
 This checks entire subtree.
 
----
+</details>
 
-## 7️⃣ Kth Smallest Element
+<br>
+
+**Q7: Kth Smallest Element**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Important property:
 
@@ -181,9 +213,14 @@ O(h + k)
 
 Strong candidates mention pruning.
 
----
+</details>
 
-## 8️⃣ Lowest Common Ancestor in BST
+<br>
+
+**Q8: Lowest Common Ancestor in BST**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use ordering:
 
@@ -201,9 +238,14 @@ O(h)
 
 Much simpler than general tree LCA.
 
----
+</details>
 
-## 9️⃣ Convert Sorted Array to BST
+<br>
+
+**Q9: Convert Sorted Array to BST**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Middle element becomes root.
 
@@ -217,13 +259,17 @@ O(n)
 
 Shows divide-and-conquer thinking.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 Floor and Ceil in BST
+**Q10: Floor and Ceil in BST**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Floor:
 Largest value ≤ target.
@@ -235,9 +281,14 @@ Traverse while tracking candidate.
 
 Used in range queries.
 
----
+</details>
 
-## 1️⃣1️⃣ Inorder Successor
+<br>
+
+**Q11: Inorder Successor**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If node has right subtree:
 Successor = minimum of right subtree.
@@ -247,9 +298,14 @@ Move up until node is left child of parent.
 
 Tests understanding of tree relationships.
 
----
+</details>
 
-## 1️⃣2️⃣ Why BST May Degrade to O(n)
+<br>
+
+**Q12: Why BST May Degrade to O(n)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If inserted in sorted order:
 
@@ -261,9 +317,14 @@ Search becomes O(n).
 
 Discuss need for self-balancing trees.
 
----
+</details>
 
-## 1️⃣3️⃣ Compare BST vs Hash Table
+<br>
+
+**Q13: Compare BST vs Hash Table**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 BST:
 Ordered.
@@ -279,14 +340,19 @@ Choose based on use case.
 
 Strong candidates compare trade-offs.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Search is slow in production.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible reason:
 BST unbalanced.
@@ -294,41 +360,62 @@ BST unbalanced.
 Solution:
 Use self-balancing BST (AVL, Red-Black).
 
+</details>
 ---
 
 ## Scenario 2:
+
 Validate BST failing for deep subtree.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely issue:
 Only checking parent-child relation.
 
 Must use min/max constraints.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Need to retrieve sorted order frequently.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 BST helpful.
 
 Hash table not suitable.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Memory constraint strict.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 BST uses pointers (more memory than array).
 
 Discuss trade-offs.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Need fast insert and search with ordering.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 BST or balanced BST appropriate.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

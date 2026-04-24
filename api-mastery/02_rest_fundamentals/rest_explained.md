@@ -1,5 +1,13 @@
 # REST Fundamentals
 
+> 📝 **Practice:** [Q22 · rest-vs-rpc](../api_practice_questions_100.md#q22--normal--rest-vs-rpc)
+
+> 📝 **Practice:** [Q9 · rest-hateoas](../api_practice_questions_100.md#q9--thinking--rest-hateoas)
+
+> 📝 **Practice:** [Q7 · rest-statelessness](../api_practice_questions_100.md#q7--normal--rest-statelessness)
+
+> 📝 **Practice:** [Q76 · explain-rest-principles](../api_practice_questions_100.md#q76--interview--explain-rest-principles)
+
 ## A Guy Wrote a Dissertation and Changed How We Build Software
 
 In the year 2000, Roy Fielding — one of the principal authors of the HTTP specification
@@ -374,6 +382,8 @@ Useful for mobile clients that don't want to receive data they won't use.
 
 ## HTTP Verbs — Deep Dive
 
+> 📝 **Practice:** [Q1 · http-methods-semantics](../api_practice_questions_100.md#q1--normal--http-methods-semantics)
+
 You've seen the verbs. Let's go deeper on two important properties: **idempotency** and
 **safety**.
 
@@ -393,6 +403,8 @@ can call it a million times and nothing changes. POST is not safe — it creates
 
 **Idempotent** means calling the operation N times has the same effect as calling it
 once. More on this in the next section.
+
+> 📝 **Practice:** [Q23 · http-methods-safe](../api_practice_questions_100.md#q23--normal--http-methods-safe)
 
 ### GET — The Getter
 
@@ -437,6 +449,8 @@ Location: /users/99
 
 POST creates a new resource. The server assigns the ID. The response includes a
 `Location` header pointing to the new resource. Status code is 201, not 200.
+
+> 📝 **Practice:** [Q2 · post-vs-put-vs-patch](../api_practice_questions_100.md#q2--thinking--post-vs-put-vs-patch)
 
 ### PUT — The Full Replacer
 
@@ -510,6 +524,8 @@ deleted object (useful if you want to confirm what was deleted), but 204 is the 
 
 ## Idempotency — One of the Most Important Concepts
 
+> 📝 **Practice:** [Q3 · idempotency-keys](../api_practice_questions_100.md#q3--critical--idempotency-keys)
+
 Let's talk about this in depth because it matters more than most developers realize.
 
 **Idempotent** means: calling the operation multiple times produces the same result as
@@ -570,6 +586,8 @@ Server: "201 Created" — you may have just charged the customer twice!
 This is why payment APIs like Stripe require you to send an **Idempotency Key** with
 charge requests — so if you retry, Stripe returns the original response instead of
 processing the charge again. More on this in the best practices module.
+
+> 📝 **Practice:** [Q77 · explain-idempotency-analogy](../api_practice_questions_100.md#q77--interview--explain-idempotency-analogy)
 
 ---
 

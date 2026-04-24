@@ -39,6 +39,21 @@ bloom filters for negative caching · cache warm-up strategies · cache coherenc
 
 ---
 
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q17 · cache-hit-miss](../system_design_practice_questions_100.md#q17--normal--cache-hit-miss)
+> 📝 **Practice:** [Q18 · cache-eviction-policies](../system_design_practice_questions_100.md#q18--normal--cache-eviction-policies)
+> 📝 **Practice:** [Q31 · redis-use-cases](../system_design_practice_questions_100.md#q31--normal--redis-use-cases)
+> 📝 **Practice:** [Q32 · redis-vs-memcached](../system_design_practice_questions_100.md#q32--interview--redis-vs-memcached)
+> 📝 **Practice:** [Q38 · cache-write-strategies](../system_design_practice_questions_100.md#q38--thinking--cache-write-strategies)
+> 📝 **Practice:** [Q84 · compare-redis-db-sessions](../system_design_practice_questions_100.md#q84--interview--compare-redis-db-sessions)
+> 📝 **Practice:** [Q87 · production-cache-stampede](../system_design_practice_questions_100.md#q87--design--production-cache-stampede)
+> 📝 **Practice:** [Q93 · design-distributed-cache](../system_design_practice_questions_100.md#q93--design--design-distributed-cache)
+
+> 📝 **Practice:** [Q16 · cache-when-to-use](../system_design_practice_questions_100.md#q16--normal--cache-when-to-use)
+
 ## 🔁 Navigation
 
 | | |

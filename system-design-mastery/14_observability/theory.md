@@ -1,5 +1,8 @@
 # 🔭 Observability — Theory
+
 > Know what your system is doing in production — metrics, tracing, logging, and alerting for reliable systems.
+
+> 📝 **Practice:** [Q63 · observability-pillars](../system_design_practice_questions_100.md#q63--normal--observability-pillars)
 
 ---
 
@@ -37,6 +40,16 @@ metric cardinality explosion · sampling strategies · alert fatigue management
 ## 📖 **Main content**: [seeing_your_system.md](./seeing_your_system.md)
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q64 · slo-sla-sli](../system_design_practice_questions_100.md#q64--interview--slo-sla-sli)
+> 📝 **Practice:** [Q65 · alerting-strategies](../system_design_practice_questions_100.md#q65--thinking--alerting-strategies)
+> 📝 **Practice:** [Q94 · debug-p99-latency-spikes](../system_design_practice_questions_100.md#q94--critical--debug-p99-latency-spikes)
+
+> 📝 **Practice:** [Q62 · chaos-engineering](../system_design_practice_questions_100.md#q62--normal--chaos-engineering)
 
 ## 🔁 Navigation
 

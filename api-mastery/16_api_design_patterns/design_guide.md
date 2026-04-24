@@ -1,5 +1,13 @@
 # API Design Patterns
 
+> 📝 **Practice:** [Q72 · async-job-api](../api_practice_questions_100.md#q72--design--async-job-api)
+
+> 📝 **Practice:** [Q60 · event-driven-api](../api_practice_questions_100.md#q60--normal--event-driven-api)
+
+> 📝 **Practice:** [Q55 · circuit-breaker-pattern](../api_practice_questions_100.md#q55--normal--circuit-breaker-pattern)
+
+> 📝 **Practice:** [Q73 · file-upload-api](../api_practice_questions_100.md#q73--normal--file-upload-api)
+
 ## The Patterns That Separate Good APIs from Great Ones
 
 You've learned HTTP. You know REST. You understand auth, gateways, all of it.
@@ -58,6 +66,8 @@ POST   /emails/send  → NOT idempotent: two requests = two emails sent
 
 For any operation with real-world side effects — charge a card, create an order,
 send a notification, provision infrastructure — you need an idempotency key.
+
+> 📝 **Practice:** [Q71 · idempotency-implementation](../api_practice_questions_100.md#q71--design--idempotency-implementation)
 
 ### The Idempotency Key Pattern
 
@@ -209,6 +219,10 @@ The rule of thumb: **if it takes more than 5 seconds, it should be async.**
 
 ### The Async Polling Pattern
 
+> 📝 **Practice:** [Q83 · compare-sync-async-api](../api_practice_questions_100.md#q83--interview--compare-sync-async-api)
+
+> 📝 **Practice:** [Q58 · webhooks-vs-polling](../api_practice_questions_100.md#q58--interview--webhooks-vs-polling)
+
 ```
 Step 1: Client submits the job
   POST /exports
@@ -292,6 +306,8 @@ Or use the `Retry-After` header:
 HTTP/1.1 200 OK
 Retry-After: 5
 ```
+
+> 📝 **Practice:** [Q85 · compare-webhook-vs-polling](../api_practice_questions_100.md#q85--interview--compare-webhook-vs-polling)
 
 ### Webhook Callbacks — "Call Me When Done"
 
@@ -823,6 +839,14 @@ Versioning
   Use Deprecation + Sunset headers to signal planned removal
   URL versioning (/v1/, /v2/) or header versioning — be consistent
 ```
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q92 · predict-concurrent-idempotent](../api_practice_questions_100.md#q92--critical--predict-concurrent-idempotent)
+
+> 📝 **Practice:** [Q56 · retry-exponential-backoff](../api_practice_questions_100.md#q56--critical--retry-exponential-backoff)
 
 ---
 

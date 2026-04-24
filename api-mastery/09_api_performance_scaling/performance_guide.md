@@ -1,6 +1,12 @@
 # 13 — API Performance and Scaling
 
+> 📝 **Practice:** [Q51 · api-caching-strategies](../api_practice_questions_100.md#q51--normal--api-caching-strategies)
+
+> 📝 **Practice:** [Q24 · api-rate-limiting-headers](../api_practice_questions_100.md#q24--thinking--api-rate-limiting-headers)
+
 > "Fast by default, scalable by design."
+
+> 📝 **Practice:** [Q75 · mobile-api-optimisation](../api_practice_questions_100.md#q75--design--mobile-api-optimisation)
 
 ---
 
@@ -39,6 +45,8 @@ about each layer.
 
 ## 1. Where APIs Get Slow — Profiling the Request Lifecycle
 
+> 📝 **Practice:** [Q68 · load-testing-apis](../api_practice_questions_100.md#q68--normal--load-testing-apis)
+
 Before optimizing anything, understand what you are actually optimizing. A request flows
 through several stages, and the slowness lives in a specific one:
 
@@ -63,6 +71,8 @@ Client
 In practice, **database query time is the dominant factor** in the vast majority of slow
 API responses. Serialization is second once you're at scale. Everything else is usually
 noise.
+
+> 📝 **Practice:** [Q86 · production-api-slow](../api_practice_questions_100.md#q86--design--production-api-slow)
 
 ### Adding Timing to Find the Real Bottleneck
 
@@ -149,9 +159,17 @@ to the database and a single roundtrip.
 
 ## 2. Response Caching — Redis Cache Patterns
 
+> 📝 **Practice:** [Q52 · redis-caching-pattern](../api_practice_questions_100.md#q52--design--redis-caching-pattern)
+
+> 📝 **Practice:** [Q19 · pagination-response-format](../api_practice_questions_100.md#q19--critical--pagination-response-format)
+
+> 📝 **Practice:** [Q12 · cache-control-header](../api_practice_questions_100.md#q12--thinking--cache-control-header)
+
 Caching is the highest-leverage optimization available. If the same data is requested
 frequently and changes infrequently, serving it from a memory store instead of recomputing
 it on every request can reduce database load by orders of magnitude.
+
+> 📝 **Practice:** [Q53 · cache-invalidation](../api_practice_questions_100.md#q53--thinking--cache-invalidation)
 
 ### Cache-Aside for Single Resources
 
@@ -250,6 +268,12 @@ async def list_products(
 
 ### Cache TTL Strategy
 
+> 📝 **Practice:** [Q89 · production-rate-limit-good-users](../api_practice_questions_100.md#q89--design--production-rate-limit-good-users)
+
+> 📝 **Practice:** [Q79 · explain-rate-limiting-pm](../api_practice_questions_100.md#q79--interview--explain-rate-limiting-pm)
+
+> 📝 **Practice:** [Q54 · rate-limiting-algorithms](../api_practice_questions_100.md#q54--thinking--rate-limiting-algorithms)
+
 ```
 Type of data                        Recommended TTL
 ────────────────────────────────────────────────────
@@ -265,9 +289,13 @@ The right TTL is always a tradeoff between cache freshness and database load. Wh
 doubt, start with a short TTL (60 seconds) and increase it after monitoring shows the
 data is stable.
 
+> 📝 **Practice:** [Q99 · design-rate-limiter](../api_practice_questions_100.md#q99--design--design-rate-limiter)
+
 ---
 
 ## 3. Database Query Optimization
+
+> 📝 **Practice:** [Q88 · production-stale-data](../api_practice_questions_100.md#q88--design--production-stale-data)
 
 ### Add Indexes on Filtered Columns
 
@@ -363,6 +391,7 @@ column, regardless of how many records come before it:
 from fastapi import Query
 from typing import Optional
 
+
 # Offset-based — simple but degrades at high page numbers
 @app.get("/users/offset")
 def list_users_offset(page: int = 1, limit: int = 20, db: Session = Depends(get_db)):
@@ -393,6 +422,9 @@ def list_users_cursor(
         "has_more": has_more
     }
 ```
+
+> 📝 **Practice:** [Q15 · pagination-strategies](../api_practice_questions_100.md#q15--normal--pagination-strategies)
+
 
 Cursor pagination requires a stable sort order (always sort by the cursor column) and
 is best suited for "infinite scroll" style UIs. Use offset pagination when users need
@@ -813,6 +845,8 @@ indicate viral traffic or a DoS attack.
 Know your capacity before you need it:
 
 ```bash
+
+
 # Quick load test with wrk
 wrk -t4 -c100 -d30s http://localhost:8000/products
 
@@ -820,6 +854,9 @@ wrk -t4 -c100 -d30s http://localhost:8000/products
 # locustfile.py defines user behavior patterns
 locust -f locustfile.py --host=http://localhost:8000
 ```
+
+> 📝 **Practice:** [Q21 · etag-conditional-requests](../api_practice_questions_100.md#q21--thinking--etag-conditional-requests)
+
 
 ### Database Connection Pool Usage
 

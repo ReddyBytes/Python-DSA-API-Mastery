@@ -371,6 +371,7 @@ sys.getsizeof(p)             # ~56 bytes (object overhead)
 sys.getsizeof(p.__dict__)    # ~232 bytes (the dict itself)
 # Total: ~288 bytes per instance
 
+
 # With __slots__:
 class PointSlotted:
     __slots__ = ('x', 'y')   # declare allowed attributes
@@ -388,6 +389,9 @@ sys.getsizeof(ps)            # ~64 bytes — NO __dict__!
 #   without __slots__: ~288 MB
 #   with    __slots__: ~64 MB   ← 4.5x smaller
 ```
+
+> 📝 **Practice:** [Q62 · __new__-vs-__init__](../python_practice_questions_100.md#q62--thinking--__new__-vs-__init__)
+
 
 **Trade-offs:**
 ```
@@ -408,6 +412,7 @@ A **descriptor** is an object that defines how attribute access works. It implem
 
 ```python
 # Descriptor protocol:
+
 class MyDescriptor:
     def __get__(self, obj, objtype=None):
         """Called when attribute is READ.
@@ -435,6 +440,8 @@ class MyDescriptor:
 
 **Data descriptor** (has `__set__` or `__delete__`): takes priority over instance `__dict__`.
 **Non-data descriptor** (has only `__get__`): instance `__dict__` takes priority.
+
+> 📝 **Practice:** [Q63 · descriptors](../python_practice_questions_100.md#q63--normal--descriptors)
 
 ### Implementing `@property` from Scratch
 
@@ -471,6 +478,8 @@ class property:
     def deleter(self, fdel):
         return property(self.fget, self.fset, fdel)
 ```
+
+> 📝 **Practice:** [Q64 · property-decorator](../python_practice_questions_100.md#q64--thinking--property-decorator)
 
 ### Custom Validation Descriptor
 
@@ -526,6 +535,8 @@ p.price = "free"   # TypeError: price: expected float, got str
 
 A **descriptor** is any object that implements `__get__`, `__set__`, or `__delete__`.
 This protocol powers `@property`, `@classmethod`, `@staticmethod`, and more.
+
+> 📝 **Practice:** [Q65 · descriptor-vs-property](../python_practice_questions_100.md#q65--critical--descriptor-vs-property)
 
 ---
 
@@ -687,6 +698,8 @@ METACLASS:       type       creates    MyClass
 ```
 
 ```python
+
+
 # Verifying:
 type(42)         # <class 'int'>
 type(int)        # <class 'type'>    ← int was created by 'type'
@@ -695,6 +708,9 @@ type(type)       # <class 'type'>    ← type created itself!
 class Foo: pass
 type(Foo)        # <class 'type'>    ← Foo was created by 'type'
 ```
+
+> 📝 **Practice:** [Q60 · metaclass](../python_practice_questions_100.md#q60--interview--metaclass) · [Q61 · type-as-metaclass](../python_practice_questions_100.md#q61--logical--type-as-metaclass)
+
 
 **How `class` statement works internally:**
 

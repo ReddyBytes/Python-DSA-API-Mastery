@@ -1,5 +1,8 @@
 # 🧠 Memory Management in Python
+
 From Reference Counting to Garbage Collection Internals
+
+> 📝 **Practice:** [Q80 · explain-memory](../python_practice_questions_100.md#q80--interview--explain-memory)
 
 ---
 
@@ -115,6 +118,8 @@ When reference count becomes zero:
 
 Object is immediately deleted.
 
+> 📝 **Practice:** [Q57 · reference-counting](../python_practice_questions_100.md#q57--thinking--reference-counting)
+
 ---
 
 ## 🔹 Example
@@ -208,6 +213,8 @@ import gc
 GC detects cycles.
 
 Deletes unreachable cyclic objects.
+
+> 📝 **Practice:** [Q58 · gc-cycles](../python_practice_questions_100.md#q58--normal--gc-cycles)
 
 ---
 
@@ -328,6 +335,8 @@ class User:
 
 Prevents dynamic attribute creation.
 Reduces memory usage.
+
+> 📝 **Practice:** [Q59 · __slots__](../python_practice_questions_100.md#q59--design--__slots__) · [Q75 · slots-optimization](../python_practice_questions_100.md#q75--design--slots-optimization)
 
 ---
 
@@ -671,6 +680,14 @@ Previous:
 
 Next:
 [14_memory_management/interview.md](./interview.md)
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q85 · compare-deepcopy-pickle](../python_practice_questions_100.md#q85--interview--compare-deepcopy-pickle)
+
+> 📝 **Practice:** [Q48 · shallow-vs-deep-copy](../python_practice_questions_100.md#q48--critical--shallow-vs-deep-copy)
 
 ---
 

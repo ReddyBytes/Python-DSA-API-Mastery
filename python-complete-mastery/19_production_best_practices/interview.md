@@ -25,7 +25,10 @@ Basic production awareness expected.
 
 ---
 
-## 1️⃣ What is production-ready code?
+**Q1: What is production-ready code?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -33,9 +36,14 @@ Strong answer:
 
 Working locally is not enough.
 
----
+</details>
 
-## 2️⃣ Why use virtual environments?
+<br>
+
+**Q2: Why use virtual environments?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -43,9 +51,14 @@ Strong answer:
 
 Avoid installing dependencies globally.
 
----
+</details>
 
-## 3️⃣ Why should you not hardcode secrets?
+<br>
+
+**Q3: Why should you not hardcode secrets?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -53,9 +66,14 @@ Strong answer:
 
 Security awareness matters.
 
----
+</details>
 
-## 4️⃣ Why is logging important?
+<br>
+
+**Q4: Why is logging important?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -63,7 +81,8 @@ Strong answer:
 
 Print statements are not production-grade.
 
----
+</details>
+
 
 # 🔹 Level 2: 2–5 Years Experience
 
@@ -76,7 +95,10 @@ Now interviewer expects:
 
 ---
 
-## 5️⃣ What is CI/CD?
+**Q5: What is CI/CD?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -84,9 +106,14 @@ Strong answer:
 
 Automation reduces risk.
 
----
+</details>
 
-## 6️⃣ How do you ensure code quality in a team?
+<br>
+
+**Q6: How do you ensure code quality in a team?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -98,9 +125,14 @@ Strong answer:
 
 Structured process matters.
 
----
+</details>
 
-## 7️⃣ Why should dependencies be version-pinned?
+<br>
+
+**Q7: Why should dependencies be version-pinned?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -108,9 +140,14 @@ Strong answer:
 
 Reproducibility is critical in production.
 
----
+</details>
 
-## 8️⃣ How do you handle configuration in production?
+<br>
+
+**Q8: How do you handle configuration in production?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -118,9 +155,14 @@ Strong answer:
 
 Separation of concerns.
 
----
+</details>
 
-## 9️⃣ What is observability?
+<br>
+
+**Q9: What is observability?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -128,7 +170,8 @@ Strong answer:
 
 Shows system awareness.
 
----
+</details>
+
 
 # 🔹 Level 3: 5–10 Years Experience
 
@@ -136,7 +179,10 @@ Now interview becomes scenario-heavy and architectural.
 
 ---
 
-## 🔟 How would you deploy a Python application to production?
+**Q10: How would you deploy a Python application to production?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong structured answer:
 
@@ -151,9 +197,14 @@ Strong structured answer:
 
 Deployment maturity matters.
 
----
+</details>
 
-## 1️⃣1️⃣ How do you handle production incidents?
+<br>
+
+**Q11: How do you handle production incidents?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -161,9 +212,14 @@ Strong answer:
 
 Calm structured approach.
 
----
+</details>
 
-## 1️⃣2️⃣ How do you design systems to fail gracefully?
+<br>
+
+**Q12: How do you design systems to fail gracefully?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -175,9 +231,14 @@ Strong answer:
 
 Resilience thinking matters.
 
----
+</details>
 
-## 1️⃣3️⃣ How do you manage secrets securely?
+<br>
+
+**Q13: How do you manage secrets securely?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -188,9 +249,14 @@ Strong answer:
 
 Security maturity.
 
----
+</details>
 
-## 1️⃣4️⃣ How do you structure large Python projects?
+<br>
+
+**Q14: How do you structure large Python projects?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -202,9 +268,14 @@ Strong answer:
 
 Architecture awareness.
 
----
+</details>
 
-## 1️⃣5️⃣ What is blue-green deployment?
+<br>
+
+**Q15: What is blue-green deployment?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -212,14 +283,19 @@ Strong answer:
 
 Deployment strategy awareness.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Application works locally but fails in production.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 
@@ -231,10 +307,15 @@ Possible causes:
 
 Need systematic debugging.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Logs are too noisy in production.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -245,10 +326,15 @@ Solution:
 
 Logging discipline.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Deployment broke system for users.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Response:
 
@@ -260,10 +346,15 @@ Response:
 
 Professional response matters.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Security vulnerability discovered in dependency.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -275,10 +366,15 @@ Solution:
 
 Security awareness.
 
+</details>
 ---
 
 ## Scenario 5:
+
 System slows down under heavy traffic.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -290,6 +386,7 @@ Solution:
 
 System-level thinking.
 
+</details>
 ---
 
 # 🧠 How to Answer Like a Strong Candidate

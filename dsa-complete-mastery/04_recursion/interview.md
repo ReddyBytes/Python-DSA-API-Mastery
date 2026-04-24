@@ -29,7 +29,10 @@ Recursion reveals whether you understand execution flow deeply.
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is recursion?
+**Q1: What is recursion?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Recursion is when a function calls itself to solve smaller subproblems until a base condition is met.
 
@@ -39,9 +42,14 @@ Key components:
 
 Without base case → infinite recursion.
 
----
+</details>
 
-## 2️⃣ What happens internally when a recursive function is called?
+<br>
+
+**Q2: What happens internally when a recursive function is called?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Each call:
 
@@ -54,9 +62,14 @@ Execution resumes in reverse order when base case is reached.
 
 This is called the **call stack mechanism**.
 
----
+</details>
 
-## 3️⃣ What is the space complexity of recursion?
+<br>
+
+**Q3: What is the space complexity of recursion?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Even if no extra data structures are used,
 recursion uses stack space.
@@ -65,9 +78,14 @@ If recursion depth is n → space complexity O(n).
 
 Many candidates forget stack space.
 
----
+</details>
 
-## 4️⃣ What causes stack overflow?
+<br>
+
+**Q4: What causes stack overflow?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If recursion depth exceeds Python’s recursion limit (~1000 by default).
 
@@ -79,9 +97,14 @@ Common causes:
 Professional awareness:
 Recursion depth matters in production systems.
 
----
+</details>
 
-## 5️⃣ When is recursion better than iteration?
+<br>
+
+**Q5: When is recursion better than iteration?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Recursion is often cleaner when:
 
@@ -92,11 +115,15 @@ Recursion is often cleaner when:
 
 Clarity sometimes outweighs small performance differences.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 6️⃣ How do you analyze time complexity of recursion?
+**Q6: How do you analyze time complexity of recursion?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approach:
 
@@ -120,9 +147,14 @@ T(n) = 2T(n-1) + O(1)
 
 Be comfortable deriving this.
 
----
+</details>
 
-## 7️⃣ What is tail recursion?
+<br>
+
+**Q7: What is tail recursion?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Tail recursion means the recursive call is the last operation in the function.
 
@@ -134,9 +166,14 @@ So stack still grows.
 
 Important clarification during interviews.
 
----
+</details>
 
-## 8️⃣ How do you optimize naive recursive Fibonacci?
+<br>
+
+**Q8: How do you optimize naive recursive Fibonacci?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Naive:
 
@@ -156,9 +193,14 @@ Space → O(n)
 
 Interviewers expect you to identify repeated subproblems.
 
----
+</details>
 
-## 9️⃣ When would you convert recursion to iteration?
+<br>
+
+**Q9: When would you convert recursion to iteration?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Situations:
 
@@ -172,9 +214,14 @@ DFS recursive → iterative using explicit stack.
 
 This shows flexibility.
 
----
+</details>
 
-## 🔟 What are common recursion mistakes?
+<br>
+
+**Q10: What are common recursion mistakes?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Missing base case
 - Incorrect base case
@@ -183,11 +230,15 @@ This shows flexibility.
 - Forgetting return value propagation
 - Ignoring exponential growth
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 1️⃣1️⃣ Explain recursion tree analysis.
+**Q11: Explain recursion tree analysis.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -205,9 +256,14 @@ O(n log n)
 
 You should be able to explain visually.
 
----
+</details>
 
-## 1️⃣2️⃣ What is the difference between recursion and divide-and-conquer?
+<br>
+
+**Q12: What is the difference between recursion and divide-and-conquer?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Recursion:
 Function calls itself.
@@ -220,9 +276,14 @@ combine results.
 All divide-and-conquer uses recursion,
 but not all recursion is divide-and-conquer.
 
----
+</details>
 
-## 1️⃣3️⃣ How do you detect overlapping subproblems?
+<br>
+
+**Q13: How do you detect overlapping subproblems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If recursive tree shows repeated states,
 problem likely requires memoization.
@@ -232,9 +293,14 @@ Fibonacci.
 
 Recognition of overlap separates strong candidates.
 
----
+</details>
 
-## 1️⃣4️⃣ Discuss recursion in memory-constrained systems.
+<br>
+
+**Q14: Discuss recursion in memory-constrained systems.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Concerns:
 
@@ -246,9 +312,14 @@ Concerns:
 In production systems,
 iteration is often preferred for reliability.
 
----
+</details>
 
-## 1️⃣5️⃣ How does recursion behave in multi-threaded systems?
+<br>
+
+**Q15: How does recursion behave in multi-threaded systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Each thread has its own stack.
 
@@ -257,14 +328,19 @@ can increase memory usage significantly.
 
 Senior engineers consider stack size when designing systems.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Your recursive function works for small inputs but crashes for large inputs.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Stack overflow.
@@ -274,10 +350,15 @@ Fix:
 - Increase recursion limit (temporary)
 - Optimize recursion depth
 
+</details>
 ---
 
 ## Scenario 2:
+
 Your recursive algorithm is extremely slow for n = 40.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Problem:
 Exponential time complexity.
@@ -285,10 +366,15 @@ Exponential time complexity.
 Fix:
 Introduce memoization or dynamic programming.
 
+</details>
 ---
 
 ## Scenario 3:
+
 You need to traverse a directory structure with millions of nested folders.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Recursive approach may fail.
 
@@ -297,10 +383,15 @@ Iterative using explicit stack.
 
 Shows production awareness.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Your recursive backtracking solution times out.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible improvements:
 
@@ -311,10 +402,15 @@ Possible improvements:
 
 Optimization thinking is expected.
 
+</details>
 ---
 
 ## Scenario 5:
+
 You are solving tree traversal.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Interviewer asks:
 “Can you do this without recursion?”
@@ -324,6 +420,7 @@ Explain iterative approach using stack.
 
 Demonstrates deeper understanding.
 
+</details>
 ---
 
 # 🧠 Senior-Level Structured Answer Example

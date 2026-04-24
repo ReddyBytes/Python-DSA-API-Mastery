@@ -20,7 +20,10 @@ you are not ready for mid-level interviews.
 
 ---
 
-## 1️⃣ What is Time Complexity?
+**Q1: What is Time Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Time complexity measures how execution time grows as input size increases.
 
@@ -36,9 +39,14 @@ We express growth using Big-O notation:
 - O(n²) → quadratic
 - O(log n) → logarithmic
 
----
+</details>
 
-## 2️⃣ What is Space Complexity?
+<br>
+
+**Q2: What is Space Complexity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Space complexity measures how memory usage grows with input size.
 
@@ -47,22 +55,31 @@ Example:
 Creating new list from existing list:
 Memory doubles → O(n) space.
 
----
+</details>
 
-## 3️⃣ Why is Big-O important in real systems?
+<br>
+
+**Q3: Why is Big-O important in real systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because code that works for 100 records may fail for 1 million records.
 
 Interviewers want to see:
 You think about scalability.
 
----
+</details>
+
 
 # 🟡 SECTION 2 — Data Structure Specific Questions
 
 ---
 
-## 4️⃣ Why is list index access O(1)?
+**Q4: Why is list index access O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because lists are dynamic arrays.
 
@@ -79,9 +96,14 @@ Python calculates memory offset directly.
 
 No searching needed.
 
----
+</details>
 
-## 5️⃣ Why is list membership check O(n)?
+<br>
+
+**Q5: Why is list membership check O(n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```
 x in my_list
@@ -97,9 +119,14 @@ Python checks:
 Worst case:
 Checks entire list → O(n)
 
----
+</details>
 
-## 6️⃣ Why is set membership O(1)?
+<br>
+
+**Q6: Why is set membership O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Set uses hash table.
 
@@ -115,9 +142,14 @@ Average case → O(1)
 
 Worst case → O(n) (rare hash collision)
 
----
+</details>
 
-## 7️⃣ Why is dictionary lookup O(1)?
+<br>
+
+**Q7: Why is dictionary lookup O(1)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Same reason as set.
 
@@ -129,9 +161,14 @@ key → hash → index → value
 
 Direct access via hash table.
 
----
+</details>
 
-## 8️⃣ Why is inserting into middle of list O(n)?
+<br>
+
+**Q8: Why is inserting into middle of list O(n)?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because elements must shift.
 
@@ -152,13 +189,17 @@ Elements 2,3,4 must move.
 
 That shifting costs O(n).
 
----
+</details>
+
 
 # 🔴 SECTION 3 — Advanced Interview Questions
 
 ---
 
-## 9️⃣ Why is string concatenation inside loop bad?
+**Q9: Why is string concatenation inside loop bad?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -186,9 +227,14 @@ final = "".join(result)
 
 More efficient.
 
----
+</details>
 
-## 🔟 What is the complexity of sorting a list?
+<br>
+
+**Q10: What is the complexity of sorting a list?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```
 my_list.sort()
@@ -200,9 +246,14 @@ O(n log n)
 Python uses:
 Timsort algorithm.
 
----
+</details>
 
-## 1️⃣1️⃣ When does dictionary performance degrade?
+<br>
+
+**Q11: When does dictionary performance degrade?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Worst case:
 O(n)
@@ -212,9 +263,14 @@ Heavy hash collisions.
 
 Though rare in real systems.
 
----
+</details>
 
-## 1️⃣2️⃣ Compare list vs set performance.
+<br>
+
+**Q12: Compare list vs set performance.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 | Operation | List | Set |
 |------------|-------|------|
@@ -230,7 +286,8 @@ Fast membership testing.
 Use list for:
 Ordered collections.
 
----
+</details>
+
 
 # 🟣 SECTION 4 — Scenario-Based Questions
 
@@ -239,6 +296,9 @@ Ordered collections.
 ## Scenario 1
 
 You have 5 million user IDs.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Need to:
 Check if user exists quickly.
@@ -249,22 +309,30 @@ Set.
 Why?
 O(1) lookup.
 
+</details>
 ---
 
 ## Scenario 2
 
 You need ordered collection with frequent insertions in middle.
 
+<details>
+<summary>💡 Show Answer</summary>
+
 List may not be ideal.
 Consider different structures (like deque).
 
 Shows architectural maturity.
 
+</details>
 ---
 
 ## Scenario 3
 
 Your API became slow after data grew from 10k → 1M.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible reason:
 
@@ -273,13 +341,17 @@ Possible reason:
 - Repeated string concatenation
 - Unnecessary deep copying
 
+</details>
 ---
 
 # 🧠 Deep Thinking Questions (Senior Level)
 
 ---
 
-## 1️⃣3️⃣ Why does Python allow O(1) average but not guarantee worst-case O(1) for dict?
+**Q13: Why does Python allow O(1) average but not guarantee worst-case O(1) for dict?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because hashing may cause collisions.
 
@@ -288,9 +360,14 @@ Multiple keys map to same bucket.
 
 Then it behaves like list → O(n).
 
----
+</details>
 
-## 1️⃣4️⃣ Why is tuple slightly more memory efficient than list?
+<br>
+
+**Q14: Why is tuple slightly more memory efficient than list?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because:
 
@@ -300,9 +377,14 @@ Because:
 
 Better cache performance.
 
----
+</details>
 
-## 1️⃣5️⃣ How do you reduce O(n²) problems?
+<br>
+
+**Q15: How do you reduce O(n²) problems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example bad code:
 
@@ -327,7 +409,8 @@ Time improves from O(n²) → O(n)
 
 That is real optimization thinking.
 
----
+</details>
+
 
 # 🎯 Most Important Interview Signal
 

@@ -187,40 +187,59 @@ Shows modeling maturity.
 ## Scenario 1:
 Course schedule impossible.
 
+<details>
+<summary>💡 Show Answer</summary>
+
 Likely cause:
 Cycle in graph.
 
 Use topological sort to detect.
 
+</details>
 ---
 
 ## Scenario 2:
 Need to cluster strongly connected nodes.
 
+<details>
+<summary>💡 Show Answer</summary>
+
 Use SCC.
 
+</details>
 ---
 
 ## Scenario 3:
 Need cheapest way to connect servers.
 
+<details>
+<summary>💡 Show Answer</summary>
+
 Use MST.
 
 Compare Kruskal vs Prim.
 
+</details>
 ---
 
 ## Scenario 4:
 Need to assign limited resources efficiently.
 
+<details>
+<summary>💡 Show Answer</summary>
+
 Model as flow network.
 
 Use max flow.
 
+</details>
 ---
 
 ## Scenario 5:
 Graph extremely large.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Consider:
 
@@ -230,6 +249,7 @@ Consider:
 
 Performance matters.
 
+</details>
 ---
 
 # 🧠 Complexity Awareness

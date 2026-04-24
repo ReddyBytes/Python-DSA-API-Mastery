@@ -1,6 +1,10 @@
 # 13 — API Security in Production
 
+> 📝 **Practice:** [Q59 · webhook-security-hmac](../api_practice_questions_100.md#q59--thinking--webhook-security-hmac)
+
 > Stage 5 covered the fundamentals: JWT, OAuth2, API keys, rate limiting basics. This chapter goes deeper. These are the things that separate an API that's "pretty secure" from one that can stand up to real-world attackers, regulatory audits, and the slow entropy of a production system.
+
+> 📝 **Practice:** [Q74 · api-security-owasp](../api_practice_questions_100.md#q74--interview--api-security-owasp)
 
 ---
 
@@ -193,6 +197,8 @@ def search(q: str = Query(..., min_length=1, max_length=100)):
     return results
 ```
 
+> 📝 **Practice:** [Q43 · cors-fastapi](../api_practice_questions_100.md#q43--critical--cors-fastapi)
+
 ### SQL Injection: ORM as Defense
 
 String-concatenating user input into SQL is the classic path to injection attacks. SQLAlchemy's ORM prevents this automatically — query parameters are always passed as bind parameters, never interpolated into the query string.
@@ -373,6 +379,7 @@ def is_token_revoked(jti: str) -> bool:
     return r.exists(f"{REVOCATION_PREFIX}{jti}") > 0
 
 # In your authentication dependency
+
 async def get_current_user(token: str = Depends(oauth2_scheme)):
     payload = decode_and_validate_token(token)  # raises on invalid/expired
 
@@ -382,6 +389,8 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
     return payload
 ```
+
+> 📝 **Practice:** [Q94 · debug-auth-middleware](../api_practice_questions_100.md#q94--debug--debug-auth-middleware)
 
 ### Store Tokens in httpOnly Cookies for Browser Apps
 
@@ -558,11 +567,14 @@ This is heuristic. Production-grade bot detection (Cloudflare Bot Management, Ak
 
 ## 5. CORS Configuration in Production
 
+> 📝 **Practice:** [Q11 · cors-basics](../api_practice_questions_100.md#q11--normal--cors-basics)
+
 Wildcard CORS (`Access-Control-Allow-Origin: *`) is fine for public read-only APIs. It is wrong for any API that handles authentication or user data.
 
 ```python
 from fastapi.middleware.cors import CORSMiddleware
 import os
+
 
 # Load allowed origins from environment — different per environment
 ALLOWED_ORIGINS = os.getenv("CORS_ORIGINS", "").split(",")
@@ -579,6 +591,9 @@ app.add_middleware(
     max_age=86400,                          # browser caches preflight for 24 hours
 )
 ```
+
+> 📝 **Practice:** [Q95 · debug-cors-prod](../api_practice_questions_100.md#q95--debug--debug-cors-prod)
+
 
 If you need to dynamically validate origins against a database allowlist (e.g., for a multi-tenant SaaS where each tenant has their own frontend domain):
 

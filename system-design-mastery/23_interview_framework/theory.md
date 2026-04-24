@@ -37,6 +37,12 @@ RESHADED framework · preparation checklist · post-design Q&A patterns
 
 ---
 
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q72 · back-of-envelope](../system_design_practice_questions_100.md#q72--normal--back-of-envelope)
+
 ## 🔁 Navigation
 
 | | |

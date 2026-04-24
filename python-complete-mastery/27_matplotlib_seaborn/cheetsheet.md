@@ -201,3 +201,159 @@ sns.set_palette("husl")
 3. Use Seaborn for statistical plots; use Matplotlib directly for custom/complex layouts
 4. For presentations: increase `figsize`, `fontsize`, and `linewidth` — defaults are too small
 5. Color choice matters: use diverging (coolwarm) for correlations, sequential (Blues) for density
+
+---
+
+## Subplots and Layouts
+
+```python
+# Simple grid
+fig, axes = plt.subplots(2, 3, figsize=(12, 8), sharex=True)
+for ax in axes.flat:   # ← iterate all axes
+    ax.plot(x, y)
+plt.tight_layout()
+
+# GridSpec — unequal sizes
+gs = fig.add_gridspec(2, 3)
+ax_main = fig.add_subplot(gs[0, :2])   # ← spans first 2 columns
+ax_side = fig.add_subplot(gs[0, 2])
+
+# subplot_mosaic — named panels
+fig, axd = plt.subplot_mosaic("AAB\nCCB", figsize=(10, 6))
+axd['A'].plot(x, y)     # ← top-left, 2 wide
+axd['B'].plot(x, y)     # ← right, full height
+
+# constrained_layout (modern tight_layout replacement)
+fig, axes = plt.subplots(2, 2, layout='constrained')
+```
+
+---
+
+## Customization
+
+```python
+# Global defaults
+plt.rcParams['figure.figsize'] = (10, 6)
+plt.rcParams['font.size'] = 13
+plt.rc('axes', labelsize=12, titlesize=14)
+
+# Style sheet
+plt.style.use('seaborn-v0_8')
+with plt.style.context('dark_background'):   # ← temporary context
+    ax.plot(x, y)
+
+# Annotations
+ax.annotate('Overfitting starts',
+    xy=(15, 0.95), xytext=(20, 0.80),
+    arrowprops=dict(arrowstyle='->', color='red'))
+ax.axvline(x=15, color='r', linestyle='--', label='Threshold')
+ax.fill_between(x, y_lower, y_upper, alpha=0.2, label='CI')
+
+# Twin y-axis
+ax2 = ax1.twinx()
+ax2.set_ylabel('Accuracy', color='red')
+ax2.tick_params(axis='y', labelcolor='red')
+```
+
+---
+
+## Color and Colormaps
+
+```python
+# Sequential: magnitude data
+ax.scatter(x, y, c=values, cmap='viridis', vmin=0, vmax=1)
+fig.colorbar(scatter, ax=ax, label='Score')
+
+# Diverging: data with meaningful midpoint (correlations, deltas)
+im = ax.imshow(matrix, cmap='RdBu_r', vmin=-1, vmax=1)
+fig.colorbar(im, ax=ax)
+
+# Qualitative: categorical data
+cmap = plt.cm.get_cmap('tab10', n_classes)   # n distinct colors
+colors = [cmap(i) for i in range(n_classes)]
+
+# Accessible palettes (colorblind-safe)
+sns.color_palette('colorblind')   # use for categorical
+# viridis, plasma, cividis are perceptually uniform — prefer over jet/rainbow
+```
+
+---
+
+## Seaborn Advanced
+
+```python
+# FacetGrid — same plot per group
+g = sns.FacetGrid(df, col='model', row='split', height=3, aspect=1.2)
+g.map(sns.histplot, 'accuracy')
+g.add_legend()
+
+# catplot — high-level categorical with facets
+sns.catplot(data=df, x='model', y='score', col='dataset',
+            kind='box', height=4)
+
+# PairGrid / pairplot
+sns.pairplot(df, hue='class', diag_kind='kde', plot_kws={'alpha': 0.4})
+
+# Regression
+sns.lmplot(data=df, x='feature', y='target', hue='split', ci=95)
+sns.residplot(x='feature', y='residuals', data=df)  # ← model diagnostics
+
+# Clustered heatmap
+sns.clustermap(corr_df, cmap='coolwarm', center=0, figsize=(10, 10))
+
+# Theme
+sns.set_theme(style='whitegrid', palette='muted', font_scale=1.2)
+with sns.plotting_context('talk'):   # paper | notebook | talk | poster
+    sns.histplot(data=df, x='val')
+```
+
+---
+
+## ML Visualization
+
+```python
+# Confusion matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+ConfusionMatrixDisplay.from_predictions(y_true, y_pred, cmap='Blues').plot()
+
+# ROC curve
+from sklearn.metrics import roc_curve, auc
+fpr, tpr, _ = roc_curve(y_true, y_scores)
+ax.plot(fpr, tpr, label=f'AUC={auc(fpr,tpr):.2f}')
+ax.plot([0,1],[0,1],'k--')   # ← random baseline
+
+# Learning curves
+ax.plot(train_loss, label='Train'); ax.plot(val_loss, '--', label='Val')
+ax.axvline(best_epoch, color='r', linestyle=':')
+
+# Feature importance (horizontal bar)
+sorted_idx = np.argsort(importances)
+ax.barh(np.array(names)[sorted_idx], importances[sorted_idx])
+
+# Decision boundary
+xx, yy = np.meshgrid(np.linspace(x1,x2,200), np.linspace(y1,y2,200))
+Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+ax.contourf(xx, yy, Z, alpha=0.3, cmap='RdYlBu')
+```
+
+---
+
+## Saving Figures
+
+```python
+# Always use fig.savefig (not plt.savefig) when you have multiple figs
+fig.savefig('plot.png',
+    dpi=150,                 # 72=screen | 150=web | 300=paper
+    bbox_inches='tight',     # ← prevent label clipping
+    transparent=False,
+    facecolor='white')
+
+# Format guide:
+# PNG  → web, general use (raster)
+# SVG  → web (vector, scalable)
+# PDF  → LaTeX papers (vector, fonts embedded)
+# JPEG → avoid for charts (lossy artifacts)
+
+plt.close(fig)    # ← free memory after saving
+plt.close('all')  # ← close all open figures (use in loops)
+```

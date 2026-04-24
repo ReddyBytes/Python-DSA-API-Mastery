@@ -280,6 +280,8 @@ Validation process:
 
 Stack ensures proper nesting.
 
+> 📝 **Practice:** [Q32 · valid-parentheses](../dsa_practice_questions_100.md#q32--logical--valid-parentheses)
+
 ---
 
 # 🔟 Reversing Order — Why Stack Helps
@@ -334,6 +336,8 @@ O(n)
 This pattern appears complex,
 but it’s just structured waiting.
 
+> 📝 **Practice:** [Q33 · monotonic-stack](../dsa_practice_questions_100.md#q33--thinking--monotonic-stack)
+
 ---
 
 # 1️⃣2️⃣ Stack vs Queue in Daily Life
@@ -352,6 +356,8 @@ last plate placed leaves first.
 
 Confusing these leads to wrong algorithm choice.
 
+> 📝 **Practice:** [Q82 · stack-vs-queue](../dsa_practice_questions_100.md#q82--interview--stack-vs-queue)
+
 ---
 
 # 1️⃣3️⃣ Where You Use Stack Without Knowing
@@ -365,6 +371,8 @@ Confusing these leads to wrong algorithm choice.
 - Depth-first search
 
 Stack is everywhere in computing.
+
+> 📝 **Practice:** [Q31 · stack-lifo-uses](../dsa_practice_questions_100.md#q31--normal--stack-lifo-uses)
 
 ---
 
@@ -439,6 +447,8 @@ def next_greater(nums):
 
 **Time:** O(n) — each element pushed and popped at most once.
 **Space:** O(n) — stack.
+
+> 📝 **Practice:** [Q69 · monotonic-stack-nge](../dsa_practice_questions_100.md#q69--logical--monotonic-stack-nge)
 
 ---
 

@@ -24,7 +24,10 @@ Basic system awareness expected.
 
 ---
 
-## 1️⃣ How would you design a simple REST API?
+**Q1: How would you design a simple REST API?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -37,9 +40,14 @@ Strong answer:
 
 Mention stateless design.
 
----
+</details>
 
-## 2️⃣ What is stateless architecture and why is it important?
+<br>
+
+**Q2: What is stateless architecture and why is it important?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -53,9 +61,14 @@ State stored in:
 
 Stateless services scale easily.
 
----
+</details>
 
-## 3️⃣ How would you handle high traffic on your API?
+<br>
+
+**Q3: How would you handle high traffic on your API?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong structured answer:
 
@@ -68,7 +81,8 @@ Strong structured answer:
 
 Scalability thinking matters.
 
----
+</details>
+
 
 # 🔹 Level 2: 4–7 Years Experience
 
@@ -81,7 +95,10 @@ Now interviewer expects:
 
 ---
 
-## 4️⃣ How would you implement rate limiting?
+**Q4: How would you implement rate limiting?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -92,9 +109,14 @@ Important:
 - Avoid in-memory counter in multi-server system.
 - Must be centralized or distributed.
 
----
+</details>
 
-## 5️⃣ How would you design caching for high-read system?
+<br>
+
+**Q5: How would you design caching for high-read system?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -107,9 +129,14 @@ Use cache-aside pattern:
 
 Mention TTL and invalidation strategy.
 
----
+</details>
 
-## 6️⃣ What is cache invalidation strategy?
+<br>
+
+**Q6: What is cache invalidation strategy?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -118,9 +145,14 @@ Strong answer:
 Also mention:
 Cache consistency trade-offs.
 
----
+</details>
 
-## 7️⃣ How would you scale a database?
+<br>
+
+**Q7: How would you scale a database?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -132,9 +164,14 @@ Strong answer:
 
 Database often bottleneck.
 
----
+</details>
 
-## 8️⃣ What is horizontal scaling?
+<br>
+
+**Q8: What is horizontal scaling?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Adding more servers.
 
@@ -142,7 +179,8 @@ Mention:
 
 Stateless design required.
 
----
+</details>
+
 
 # 🔹 Level 3: 7–10 Years Experience
 
@@ -150,7 +188,10 @@ Now discussion becomes architectural and failure-oriented.
 
 ---
 
-## 9️⃣ How would you design a scalable URL shortener?
+**Q9: How would you design a scalable URL shortener?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong structured answer:
 
@@ -167,9 +208,14 @@ Strong structured answer:
 
 Shows structured thinking.
 
----
+</details>
 
-## 🔟 How would you handle system failures?
+<br>
+
+**Q10: How would you handle system failures?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -182,9 +228,14 @@ Strong answer:
 
 Resilience thinking is critical.
 
----
+</details>
 
-## 1️⃣1️⃣ How do you design for high availability?
+<br>
+
+**Q11: How do you design for high availability?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -196,9 +247,14 @@ Strong answer:
 
 High availability mindset.
 
----
+</details>
 
-## 1️⃣2️⃣ What trade-offs do you consider in caching?
+<br>
+
+**Q12: What trade-offs do you consider in caching?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Trade-offs:
 
@@ -208,9 +264,14 @@ Trade-offs:
 
 Mention CAP theorem if relevant.
 
----
+</details>
 
-## 1️⃣3️⃣ How would you design a distributed task processing system?
+<br>
+
+**Q13: How would you design a distributed task processing system?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -223,14 +284,19 @@ Strong answer:
 
 Shows asynchronous architecture thinking.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Your API latency spikes randomly.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 
@@ -242,10 +308,15 @@ Possible causes:
 
 Structured investigation required.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Cache memory usage grows uncontrollably.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible cause:
 
@@ -256,10 +327,15 @@ Possible cause:
 Solution:
 Define expiration strategy.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Database CPU at 100%.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -271,10 +347,15 @@ Solution:
 
 System bottleneck awareness.
 
+</details>
 ---
 
 ## Scenario 4:
+
 System must handle 10x traffic growth.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -286,10 +367,15 @@ Solution:
 
 Scalability thinking.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Third-party API occasionally fails.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -300,6 +386,7 @@ Solution:
 
 Resilience awareness.
 
+</details>
 ---
 
 # 🧠 How to Answer Like a Strong Candidate

@@ -185,6 +185,8 @@ new numbers without breaking existing clients who just ignore unknown field numb
 **Never change a field number. Never reuse a field number.**
 Add new fields. Mark old ones as `reserved`. This is the compatibility contract.
 
+> 📝 **Practice:** [Q64 · protocol-buffers](../api_practice_questions_100.md#q64--normal--protocol-buffers)
+
 ### Generating Code from the Schema
 
 This is one of gRPC's superpowers. You write the schema once, and the proto compiler
@@ -478,6 +480,8 @@ Memory usage: gRPC ~60% lower
 ```
 
 These numbers matter when you're doing millions of calls per day between services.
+
+> 📝 **Practice:** [Q63 · grpc-vs-rest](../api_practice_questions_100.md#q63--interview--grpc-vs-rest)
 
 ---
 

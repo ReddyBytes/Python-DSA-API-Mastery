@@ -35,7 +35,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: How do you open and read a file safely in Python?
+**Q1: How do you open and read a file safely in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** `f = open("file.txt"); data = f.read(); f.close()`
 
@@ -57,9 +60,14 @@ f.close()          # ← never reached!
 
 > Internally, `with` calls `f.__exit__()` which calls `f.close()` regardless of how the block exits — via return, exception, or normally.
 
----
+</details>
 
-### Q2: What are the file modes? What's dangerous about `"w"`?
+<br>
+
+**Q2: What are the file modes? What's dangerous about `"w"`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -74,9 +82,14 @@ f.close()          # ← never reached!
 
 > The danger with `"w"` is it silently destroys existing content. If you meant to append, using `"w"` is a data-loss bug. Use `"a"` for logs, `"x"` when you want to fail safely if a file already exists.
 
----
+</details>
 
-### Q3: What is the difference between `read()`, `readline()`, and `readlines()`?
+<br>
+
+**Q3: What is the difference between `read()`, `readline()`, and `readlines()`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -89,9 +102,14 @@ for line in f:     # → str: one line at a time (memory efficient — use this!
 
 > For any file larger than a few MB, use `for line in f` — it reads only one line at a time, so memory usage stays constant regardless of file size.
 
----
+</details>
 
-### Q4: What is the difference between text mode and binary mode?
+<br>
+
+**Q4: What is the difference between text mode and binary mode?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -112,9 +130,14 @@ with open("hello.txt", "rb") as f:
 # Use text for: .txt, .csv, .json, .xml, .html, source code
 ```
 
----
+</details>
 
-### Q5: What happens if you forget to close a file?
+<br>
+
+**Q5: What happens if you forget to close a file?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -132,13 +155,17 @@ for i in range(1000):
 # Eventually: OSError: [Errno 24] Too many open files
 ```
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q6: How would you process a 50GB log file without crashing?
+**Q6: How would you process a 50GB log file without crashing?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "I would read it line by line."
 
@@ -168,9 +195,14 @@ with open("huge_binary.dat", "rb") as f:
         process(chunk)
 ```
 
----
+</details>
 
-### Q7: What is encoding? How do you debug a `UnicodeDecodeError`?
+<br>
+
+**Q7: What is encoding? How do you debug a `UnicodeDecodeError`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -200,9 +232,14 @@ with open("file.txt", encoding="utf-8", errors="replace") as f:
     data = f.read()   # replaces bad bytes with ?
 ```
 
----
+</details>
 
-### Q8: What is `seek()` and when would you use it?
+<br>
+
+**Q8: What is `seek()` and when would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -224,9 +261,14 @@ with open("data.txt", "r") as f:
 
 > **Real use case:** implementing `tail -f` (following a growing log file) — seek to end, read new content, sleep, repeat.
 
----
+</details>
 
-### Q9: How do you write to a CSV file correctly?
+<br>
+
+**Q9: How do you write to a CSV file correctly?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -251,9 +293,14 @@ with open("users.csv", "w", newline="", encoding="utf-8") as f:
 
 > Common mistake: forgetting `newline=""` → every row has a blank line between it on Windows. Also: never use `str.split(",")` to parse CSV — values can contain commas inside quotes.
 
----
+</details>
 
-### Q10: What is an atomic write and when is it necessary?
+<br>
+
+**Q10: What is an atomic write and when is it necessary?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Writing to a temp file then renaming."
 
@@ -281,13 +328,17 @@ def atomic_write_json(path: str, data: dict) -> None:
 # config.json is half-written and unreadable.
 ```
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q11: How would you design a streaming ETL pipeline for 50GB CSV files?
+**Q11: How would you design a streaming ETL pipeline for 50GB CSV files?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -336,9 +387,14 @@ def etl_pipeline(filepath: str, db_conn, batch_size: int = 1000) -> None:
     print(f"Done: {processed:,} processed, {skipped:,} skipped")
 ```
 
----
+</details>
 
-### Q12: How do you prevent path traversal attacks?
+<br>
+
+**Q12: How do you prevent path traversal attacks?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -363,9 +419,14 @@ def safe_read(user_input: str) -> str:
 # /etc/passwd.is_relative_to(/var/www/uploads) = False → PermissionError ✓
 ```
 
----
+</details>
 
-### Q13: How do you handle concurrent writes to the same file?
+<br>
+
+**Q13: How do you handle concurrent writes to the same file?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -394,7 +455,8 @@ logging.info("This is thread-safe")
 # instead of writing to files from multiple processes.
 ```
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

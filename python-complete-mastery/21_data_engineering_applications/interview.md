@@ -25,7 +25,10 @@ Basic pipeline awareness expected.
 
 ---
 
-## 1️⃣ What is ETL?
+**Q1: What is ETL?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -34,9 +37,14 @@ Strong answer:
 Mention:
 It can be batch or streaming.
 
----
+</details>
 
-## 2️⃣ What is the difference between batch and streaming processing?
+<br>
+
+**Q2: What is the difference between batch and streaming processing?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Batch:
 Processes large chunks periodically.
@@ -48,9 +56,14 @@ Important:
 Use batch when latency not critical.
 Use streaming when near real-time required.
 
----
+</details>
 
-## 3️⃣ How do you process large files efficiently in Python?
+<br>
+
+**Q3: How do you process large files efficiently in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -61,9 +74,14 @@ Strong answer:
 
 Mention memory efficiency.
 
----
+</details>
 
-## 4️⃣ What is idempotency in data pipelines?
+<br>
+
+**Q4: What is idempotency in data pipelines?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -74,7 +92,8 @@ Use upsert instead of insert.
 
 Idempotency is critical in production pipelines.
 
----
+</details>
+
 
 # 🔹 Level 2: 4–7 Years Experience
 
@@ -88,7 +107,10 @@ Now interviewer expects:
 
 ---
 
-## 5️⃣ How do you handle API rate limits in data ingestion?
+**Q5: How do you handle API rate limits in data ingestion?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -99,9 +121,14 @@ Strong answer:
 
 Avoid hitting API aggressively.
 
----
+</details>
 
-## 6️⃣ What is checkpointing and why is it important?
+<br>
+
+**Q6: What is checkpointing and why is it important?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -115,9 +142,14 @@ Examples:
 
 Important for reliability.
 
----
+</details>
 
-## 7️⃣ How do you validate incoming data?
+<br>
+
+**Q7: How do you validate incoming data?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -129,9 +161,14 @@ Strong answer:
 
 Data correctness matters more than speed.
 
----
+</details>
 
-## 8️⃣ How would you schedule recurring data pipelines?
+<br>
+
+**Q8: How would you schedule recurring data pipelines?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -142,9 +179,14 @@ Strong answer:
 
 Mention DAG structure if relevant.
 
----
+</details>
 
-## 9️⃣ How do you prevent duplicate data insertion?
+<br>
+
+**Q9: How do you prevent duplicate data insertion?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -155,7 +197,8 @@ Strong answer:
 
 Shows practical experience.
 
----
+</details>
+
 
 # 🔹 Level 3: 7–10 Years Experience
 
@@ -163,7 +206,10 @@ Now discussion becomes architectural and fault-tolerant.
 
 ---
 
-## 🔟 How would you design a scalable data ingestion system?
+**Q10: How would you design a scalable data ingestion system?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong structured answer:
 
@@ -180,9 +226,14 @@ Strong structured answer:
 
 Structured thinking wins.
 
----
+</details>
 
-## 1️⃣1️⃣ How do you ensure pipeline reliability?
+<br>
+
+**Q11: How do you ensure pipeline reliability?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -195,9 +246,14 @@ Strong answer:
 
 Reliability mindset matters.
 
----
+</details>
 
-## 1️⃣2️⃣ How would you handle partial failures?
+<br>
+
+**Q12: How would you handle partial failures?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 Data loaded partially.
@@ -212,9 +268,14 @@ Solution:
 
 Graceful failure handling is key.
 
----
+</details>
 
-## 1️⃣3️⃣ How do you optimize memory usage in ETL?
+<br>
+
+**Q13: How do you optimize memory usage in ETL?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -227,9 +288,14 @@ Strong answer:
 
 Memory efficiency critical in large pipelines.
 
----
+</details>
 
-## 1️⃣4️⃣ What is backpressure in streaming systems?
+<br>
+
+**Q14: What is backpressure in streaming systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -244,9 +310,14 @@ Solution:
 
 Shows advanced streaming knowledge.
 
----
+</details>
 
-## 1️⃣5️⃣ How do you design schema evolution in pipelines?
+<br>
+
+**Q15: How do you design schema evolution in pipelines?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -257,14 +328,19 @@ Strong answer:
 
 Schema evolution is real production problem.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Your pipeline duplicates data after rerun.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Cause:
 
@@ -275,10 +351,15 @@ Fix:
 Use upsert.
 Track processed IDs.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Pipeline crashes halfway during batch processing.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -286,10 +367,15 @@ Solution:
 - Resume from last successful record
 - Log failed records
 
+</details>
 ---
 
 ## Scenario 3:
+
 Memory usage grows over time during ETL.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 
@@ -302,10 +388,15 @@ Solution:
 Stream data.
 Process in chunks.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Kafka consumer lags behind producer.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 
@@ -319,10 +410,15 @@ Scale consumers.
 Optimize processing.
 Monitor offsets.
 
+</details>
 ---
 
 ## Scenario 5:
+
 API ingestion fails due to network timeout.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Solution:
 
@@ -334,6 +430,7 @@ Solution:
 
 Resilience awareness matters.
 
+</details>
 ---
 
 # 🧠 How to Answer Like a Strong Candidate

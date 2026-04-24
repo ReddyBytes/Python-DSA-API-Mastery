@@ -141,6 +141,8 @@ D: B, C
 
 Efficient for sparse graphs.
 
+> 📝 **Practice:** [Q46 · graph-representations](../dsa_practice_questions_100.md#q46--normal--graph-representations)
+
 ---
 
 ## 🔹 Adjacency Matrix
@@ -234,6 +236,8 @@ DFS:
 
 Choose wisely.
 
+> 📝 **Practice:** [Q78 · dfs-vs-bfs-when](../dsa_practice_questions_100.md#q78--interview--dfs-vs-bfs-when) · [Q84 · bfs-vs-dfs-compare](../dsa_practice_questions_100.md#q84--interview--bfs-vs-dfs-compare)
+
 ---
 
 # 🔄 9️⃣ Cycle Detection
@@ -245,6 +249,8 @@ In Directed Graph:
 Use visited + recursion stack.
 
 Important interview pattern.
+
+> 📝 **Practice:** [Q49 · graph-cycle-detection](../dsa_practice_questions_100.md#q49--thinking--graph-cycle-detection)
 
 ---
 
@@ -264,6 +270,8 @@ Use DFS/BFS.
 
 Count components.
 
+> 📝 **Practice:** [Q48 · dfs-connected-components](../dsa_practice_questions_100.md#q48--normal--dfs-connected-components)
+
 ---
 
 # 🛣 1️⃣1️⃣ Shortest Path (Unweighted)
@@ -273,6 +281,8 @@ Use BFS.
 Because BFS explores level by level.
 
 First time reaching node gives shortest distance.
+
+> 📝 **Practice:** [Q47 · bfs-shortest-path](../dsa_practice_questions_100.md#q47--thinking--bfs-shortest-path)
 
 ---
 
@@ -363,6 +373,8 @@ Graphs are one of the most important topics in DSA.
 **Topological sort** produces a linear ordering of vertices in a directed acyclic graph (DAG) such that for every edge u → v, u comes before v. It only works on DAGs — cycles make a valid ordering impossible.
 
 **When to use:** Build systems, course scheduling, task pipelines, package dependency resolution.
+
+> 📝 **Practice:** [Q50 · topological-sort](../dsa_practice_questions_100.md#q50--design--topological-sort)
 
 ### Kahn's Algorithm (BFS-based)
 

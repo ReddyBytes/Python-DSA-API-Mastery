@@ -12,7 +12,10 @@ this file trains you how to explain it.
 
 # 🔹 Basic Level Questions (0–2 Years)
 
-## 1️⃣ What is control flow in Python?
+**Q1: What is control flow in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Control flow determines the order in which statements execute.
 
@@ -26,9 +29,14 @@ Control flow structures allow us to:
 
 Without control flow, programs would be linear and unintelligent.
 
----
+</details>
 
-## 2️⃣ Difference between `if`, `elif`, and `else`?
+<br>
+
+**Q2: Difference between `if`, `elif`, and `else`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - `if` → checks condition
 - `elif` → checks additional conditions if previous are False
@@ -37,9 +45,14 @@ Without control flow, programs would be linear and unintelligent.
 Important detail:
 Python stops checking once it finds the first True condition.
 
----
+</details>
 
-## 3️⃣ Difference between `for` and `while` loop?
+<br>
+
+**Q3: Difference between `for` and `while` loop?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **for loop**
 - Used when number of iterations is known
@@ -53,9 +66,14 @@ Professional answer:
 Use `for` when iterating over collections.
 Use `while` when iteration depends on dynamic state.
 
----
+</details>
 
-## 4️⃣ What is `break` and `continue`?
+<br>
+
+**Q4: What is `break` and `continue`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - `break` → exits loop completely
 - `continue` → skips current iteration
@@ -64,9 +82,14 @@ Important:
 `break` affects loop termination.
 `continue` affects iteration flow.
 
----
+</details>
 
-## 5️⃣ What is `pass`?
+<br>
+
+**Q5: What is `pass`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 `pass` is a placeholder statement.
 It does nothing but prevents syntax error.
@@ -76,11 +99,15 @@ Used in:
 - Empty classes
 - Future implementations
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
-## 6️⃣ What is loop `else` in Python?
+**Q6: What is loop `else` in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python allows:
 
@@ -110,9 +137,14 @@ else:
 
 Cleaner than using flags.
 
----
+</details>
 
-## 7️⃣ What are truthy and falsy values?
+<br>
+
+**Q7: What are truthy and falsy values?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Falsy values:
 - None
@@ -143,9 +175,14 @@ if data:
 
 Cleaner and Pythonic.
 
----
+</details>
 
-## 8️⃣ When would you avoid deep nested `if` statements?
+<br>
+
+**Q8: When would you avoid deep nested `if` statements?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Deep nesting reduces readability and maintainability.
 
@@ -181,9 +218,14 @@ if not user.is_admin:
 
 Flat is better than nested.
 
----
+</details>
 
-## 9️⃣ What is `match-case` and when should it be used?
+<br>
+
+**Q9: What is `match-case` and when should it be used?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Introduced in Python 3.10.
 
@@ -196,9 +238,14 @@ Best used when:
 
 Not ideal for complex conditional logic.
 
----
+</details>
 
-## 🔟 What are common control flow mistakes in production?
+<br>
+
+**Q10: What are common control flow mistakes in production?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 1. Infinite loops
 2. Incorrect condition ordering
@@ -210,11 +257,15 @@ Not ideal for complex conditional logic.
 
 These cause logical bugs more than syntax bugs.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
-## 1️⃣1️⃣ How does Python evaluate conditions internally?
+**Q11: How does Python evaluate conditions internally?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python evaluates expressions to determine truth value.
 
@@ -236,9 +287,14 @@ class Test:
 
 This affects control flow behavior.
 
----
+</details>
 
-## 1️⃣2️⃣ What happens if indentation is incorrect?
+<br>
+
+**Q12: What happens if indentation is incorrect?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python uses indentation to define code blocks.
 
@@ -259,9 +315,14 @@ But sometimes indentation errors change logic without raising error.
 
 Very dangerous in production.
 
----
+</details>
 
-## 1️⃣3️⃣ How do you optimize heavy loops?
+<br>
+
+**Q13: How do you optimize heavy loops?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Approaches:
 
@@ -290,9 +351,14 @@ result = [x*x for x in data]
 
 More readable and often faster.
 
----
+</details>
 
-## 1️⃣4️⃣ When would you choose `while` over `for` in real systems?
+<br>
+
+**Q14: When would you choose `while` over `for` in real systems?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 When:
 
@@ -311,9 +377,14 @@ while not service_ready():
 
 Condition-based loop is natural here.
 
----
+</details>
 
-## 1️⃣5️⃣ Explain early return pattern.
+<br>
+
+**Q15: Explain early return pattern.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Instead of deeply nested logic,
 use early exits.
@@ -340,12 +411,17 @@ process(user)
 
 Improves readability and reduces cognitive load.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ## Scenario 1:
+
 A loop runs forever in production. What could be wrong?
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible causes:
 
@@ -354,10 +430,15 @@ Possible causes:
 - Missing break
 - External dependency not changing state
 
+</details>
 ---
 
 ## Scenario 2:
+
 An if-elif chain behaves incorrectly after adding new condition.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible issue:
 
@@ -366,15 +447,21 @@ Condition ordering problem.
 Python checks sequentially.
 Earlier condition may block later one.
 
+</details>
 ---
 
 ## Scenario 3:
+
 A search loop always prints "Not Found" even when item exists.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely mistake:
 
 Improper indentation of loop else.
 
+</details>
 ---
 
 # 🧠 Senior-Level Answer Example

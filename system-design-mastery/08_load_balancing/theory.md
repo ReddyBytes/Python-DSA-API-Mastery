@@ -1,5 +1,9 @@
 # ⚖️ Load Balancing — Theory
+
+> 📝 **Practice:** [Q6 · load-balancer-purpose](../system_design_practice_questions_100.md#q6--normal--load-balancer-purpose)
 > Distribute traffic intelligently across servers to maximise availability, throughput, and fault tolerance.
+
+> 📝 **Practice:** [Q7 · load-balancing-algorithms](../system_design_practice_questions_100.md#q7--normal--load-balancing-algorithms)
 
 ---
 

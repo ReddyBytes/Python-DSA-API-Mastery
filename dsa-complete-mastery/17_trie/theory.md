@@ -13,6 +13,8 @@ Prefix Tree.
 It is one of the most important structures
 for string-based problems.
 
+> 📝 **Practice:** [Q45 · trie-vs-hashmap](../dsa_practice_questions_100.md#q45--interview--trie-vs-hashmap) · [Q90 · design-autocomplete](../dsa_practice_questions_100.md#q90--design--design-autocomplete)
+
 ---
 
 ## 📌 Learning Priority
@@ -155,6 +157,8 @@ This builds prefix path.
 Time:
 O(L)
 
+> 📝 **Practice:** [Q43 · trie-insert-search](../dsa_practice_questions_100.md#q43--normal--trie-insert-search)
+
 ---
 
 # 🔍 7️⃣ Searching Word in Trie
@@ -184,6 +188,8 @@ No need to check is_end.
 If path exists → prefix exists.
 
 Very efficient.
+
+> 📝 **Practice:** [Q44 · trie-prefix-matching](../dsa_practice_questions_100.md#q44--thinking--trie-prefix-matching)
 
 ---
 

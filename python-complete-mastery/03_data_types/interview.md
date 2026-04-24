@@ -24,7 +24,10 @@ That is how interview maturity develops.
 
 ---
 
-### Q1. What are data types in Python and why do they matter?
+**Q1: What are data types in Python and why do they matter?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 A data type tells Python what kind of data a variable holds and what operations are allowed on it. Think of it like labels on storage boxes — a box labelled "fragile" (string) is handled differently than one labelled "heavy" (int). You wouldn't try to multiply two names, and you wouldn't try to capitalise a number. Data types prevent these nonsensical operations.
@@ -42,9 +45,14 @@ print(type(y))   # <class 'str'>
 print(type(z))   # <class 'list'>
 ```
 
----
+</details>
 
-### Q2. What is the difference between `int` and `float`?
+<br>
+
+**Q2: What is the difference between `int` and `float`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 Both represent numbers, but they have different precision and different internal representations.
@@ -75,9 +83,14 @@ print(type(10//2))  # <class 'int'>
 print(5 + 2.0)   # 7.0 ← Python "promotes" to float
 ```
 
----
+</details>
 
-### Q3. What is the difference between `==` and `is`?
+<br>
+
+**Q3: What is the difference between `==` and `is`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 This is one of the most common beginner confusions. They look similar but test very different things.
@@ -103,9 +116,14 @@ print(x is None)    # ✅ correct way
 print(x == None)    # ⚠️ works but not recommended
 ```
 
----
+</details>
 
-### Q4. Why is Python's `bool` surprising?
+<br>
+
+**Q4: Why is Python's `bool` surprising?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 In Python, `bool` is not a completely separate type — it's actually a **subclass of `int`**. This means `True` and `False` ARE integers. `True` equals `1` and `False` equals `0`.
@@ -130,9 +148,14 @@ passed  = sum(results)     # True counts as 1, False as 0
 print(f"{passed} out of {len(results)} passed")   # 4 out of 6 passed
 ```
 
----
+</details>
 
-### Q5. What does "immutable" mean? Which types are immutable?
+<br>
+
+**Q5: What does "immutable" mean? Which types are immutable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 Immutable means **"cannot be changed after creation"**. If you try to change an immutable object, Python doesn't modify it — it creates a brand new object instead.
@@ -162,9 +185,14 @@ print(lst)       # [99, 2, 3]
 # (can be changed after creation)
 ```
 
----
+</details>
 
-### Q6. What is the difference between a list and a tuple?
+<br>
+
+**Q6: What is the difference between a list and a tuple?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 Syntactically they look almost identical — the main difference is **mutability**. A list can be changed after creation, a tuple cannot.
@@ -198,9 +226,14 @@ print(type(t1))   # <class 'int'>
 print(type(t2))   # <class 'tuple'>
 ```
 
----
+</details>
 
-### Q7. What is the difference between `append()` and `extend()`?
+<br>
+
+**Q7: What is the difference between `append()` and `extend()`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 Both add items to a list, but they behave very differently when given a list as input.
@@ -227,9 +260,14 @@ c = [1, 2]
 c.append(3)   # [1, 2, 3] — adds single number normally
 ```
 
----
+</details>
 
-### Q8. What does `dict.get()` do and why is it better than `dict[key]`?
+<br>
+
+**Q8: What does `dict.get()` do and why is it better than `dict[key]`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 When you access a dict with `dict[key]` and the key doesn't exist, Python raises a `KeyError` — the program crashes. In real applications, you often don't know whether a key exists. Using `.get()` lets you handle missing keys gracefully without crashing.
@@ -259,13 +297,17 @@ print(word_count)
 # {'the': 2, 'cat': 1, 'sat': 1, 'on': 1, 'mat': 1}
 ```
 
----
+</details>
+
 
 ## 🟡 Intermediate Questions
 
 ---
 
-### Q9. Why is `{}` an empty dict and not an empty set?
+**Q9: Why is `{}` an empty dict and not an empty set?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 This is a historical decision in Python. Curly braces `{}` were used for dictionaries long before sets were added to the language. When sets were introduced, the `{}` syntax was already taken. So an empty `{}` stayed as an empty dict.
@@ -283,9 +325,14 @@ print(type(c))   # <class 'set'>
 print(type(d))   # <class 'set'>
 ```
 
----
+</details>
 
-### Q10. How does Python's `in` operator work differently for lists vs sets vs dicts?
+<br>
+
+**Q10: How does Python's `in` operator work differently for lists vs sets vs dicts?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 The `in` operator checks membership, but the **speed** is very different depending on the data type. This is one of the most practically important things to understand about data types.
@@ -321,9 +368,14 @@ else:
     print("Not in our network yet")
 ```
 
----
+</details>
 
-### Q11. What is "truthiness" and how does Python use it?
+<br>
+
+**Q11: What is "truthiness" and how does Python use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 In Python, every value has a boolean meaning — not just `True` and `False`. This is called **truthiness**. When Python evaluates an `if` condition, it converts the value to bool. Some values evaluate to `False` (called "falsy"); everything else evaluates to `True` (called "truthy").
@@ -361,9 +413,14 @@ print(bool([0]))    # True  — a list with one item, even if that item is 0!
 print(bool(0.001))  # True  — any non-zero float!
 ```
 
----
+</details>
 
-### Q12. Explain the aliasing problem with lists and how to avoid it.
+<br>
+
+**Q12: Explain the aliasing problem with lists and how to avoid it.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 When you assign a list to another variable with `b = a`, you don't create a copy — both variables point to the **same list in memory**. Changing one changes the other. This surprises almost every beginner.
@@ -393,9 +450,14 @@ print(a)   # [1, 2, 3]  ← unchanged now!
 print(b)   # [1, 2, 3, 99]
 ```
 
----
+</details>
 
-### Q13. What is type conversion? What are implicit vs explicit conversion?
+<br>
+
+**Q13: What is type conversion? What are implicit vs explicit conversion?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 Type conversion is changing a value from one type to another. Python does two kinds:
@@ -430,13 +492,17 @@ age = int(age)               # now it's the number 25
 age = int(input("Enter age: "))    # combined in one line
 ```
 
----
+</details>
+
 
 ## 🔴 Advanced Questions
 
 ---
 
-### Q14. What does "hashable" mean, and why can't you use a list as a dict key?
+**Q14: What does "hashable" mean, and why can't you use a list as a dict key?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 A hash is a fixed-size number computed from an object's value. Python uses hashes internally to build fast lookup tables (for dicts and sets). For hashing to work correctly, the hash **must never change** after it's calculated.
@@ -473,9 +539,14 @@ hash("hello")       # works fine — strings are hashable
 hash(42)            # works fine — ints are hashable
 ```
 
----
+</details>
 
-### Q15. What's the float precision problem really about, and how do professionals handle it?
+<br>
+
+**Q15: What's the float precision problem really about, and how do professionals handle it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **The Concept:**
 Computers store numbers in binary (base-2). Some decimal fractions that look simple — like `0.1` — cannot be represented exactly in binary. They become infinite repeating binary fractions, and the computer stores only an approximation.
@@ -508,7 +579,8 @@ print(result == Decimal("0.3"))  # True
 # ✅ if abs(price - 99.99) < 0.001:   ← compare with a tolerance
 ```
 
----
+</details>
+
 
 ## 🧠 Quick-Fire Predict-the-Output Questions
 
@@ -569,18 +641,14 @@ Don't just list them. Show you understand the *design*:
 ---
 
 
-
-
-
-
-
-
-
 # 🟢 SECTION 1 — Beginner Level (Foundation Check)
 
 ---
 
-## 1️⃣ What are Python data types?
+**Q1: What are Python data types?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ### Expected Answer (Simple & Clear)
 
@@ -592,9 +660,16 @@ Example:
 - list → collection
 - dict → key-value mapping
 
+</details>
+
 ---
 
-## 2️⃣ Difference between list and tuple?
+<br>
+
+**Q2: Difference between list and tuple?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ### Basic Answer
 
@@ -605,6 +680,7 @@ Example:
 | Performance | Slightly slower | Faster |
 | Use Case | Changeable data | Fixed data |
 
+</details>
 ---
 
 ### Professional Answer
@@ -620,7 +696,10 @@ Use list when:
 
 ---
 
-## 3️⃣ What is mutable vs immutable?
+**Q3: What is mutable vs immutable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Mutable → Can change after creation  
 Immutable → Cannot change after creation  
@@ -637,9 +716,16 @@ Mutable:
 - dict
 - set
 
+</details>
+
 ---
 
-## 4️⃣ Why are strings immutable?
+<br>
+
+**Q4: Why are strings immutable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because:
 
@@ -649,13 +735,17 @@ Because:
 
 Changing string creates new object.
 
+</details>
 ---
 
 # 🟡 SECTION 2 — Intermediate Level (Understanding Depth)
 
 ---
 
-## 5️⃣ What happens internally when you do:
+**Q5: What happens internally when you do:**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```
 a = 10
@@ -672,9 +762,16 @@ a = 20
 
 Because int is immutable.
 
+</details>
+
 ---
 
-## 6️⃣ Why is set faster than list for membership testing?
+<br>
+
+**Q6: Why is set faster than list for membership testing?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 ```
 x in my_list
@@ -691,9 +788,16 @@ List uses:
 
 So set is faster.
 
+</details>
+
 ---
 
-## 7️⃣ Can list be dictionary key?
+<br>
+
+**Q7: Can list be dictionary key?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 No.
 
@@ -704,9 +808,16 @@ List is mutable → cannot be hashed.
 
 Tuple can be dictionary key (if it contains immutable items).
 
+</details>
+
 ---
 
-## 8️⃣ Difference between remove() and pop() in list?
+<br>
+
+**Q8: Difference between remove() and pop() in list?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 remove(value)
 - Removes by value
@@ -716,9 +827,16 @@ pop(index)
 - Removes by index
 - Returns removed value
 
+</details>
+
 ---
 
-## 9️⃣ What is shallow copy vs deep copy?
+<br>
+
+**Q9: What is shallow copy vs deep copy?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Shallow copy:
 Copies reference of nested objects.
@@ -742,13 +860,17 @@ import copy
 copy.deepcopy()
 ```
 
+</details>
 ---
 
 # 🔴 SECTION 3 — Advanced Level (5 Years Experience Thinking)
 
 ---
 
-## 🔟 When would you use tuple instead of list in real production system?
+**Q10: When would you use tuple instead of list in real production system?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -764,9 +886,16 @@ Use tuple because:
 
 Senior developers use immutability for safety.
 
+</details>
+
 ---
 
-## 1️⃣1️⃣ Explain dictionary internal working.
+<br>
+
+**Q11: Explain dictionary internal working.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Dictionary uses:
 
@@ -785,18 +914,32 @@ Collision handled internally.
 That is why:
 Keys must be immutable.
 
+</details>
+
 ---
 
-## 1️⃣2️⃣ Why are sets unordered?
+<br>
+
+**Q12: Why are sets unordered?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Because they are based on hash tables.
 
 Order is not stored.
 Position depends on hash calculation.
 
+</details>
+
 ---
 
-## 1️⃣3️⃣ Why should we avoid string concatenation inside loop?
+<br>
+
+**Q13: Why should we avoid string concatenation inside loop?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Bad:
 
@@ -821,9 +964,16 @@ final = "".join(result)
 
 Professional developers think about memory allocations.
 
+</details>
+
 ---
 
-## 1️⃣4️⃣ What are real-world cases for set operations?
+<br>
+
+**Q14: What are real-world cases for set operations?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Example:
 
@@ -851,9 +1001,16 @@ Used in:
 - Permissions management
 - Fraud detection
 
+</details>
+
 ---
 
-## 1️⃣5️⃣ How would you design a student system?
+<br>
+
+**Q15: How would you design a student system?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Student data → dictionary  
 Subjects → list  
@@ -862,6 +1019,7 @@ Fixed config → tuple
 
 This is design thinking.
 
+</details>
 ---
 
 # 🟣 SECTION 4 — Trick Questions Interviewers Ask
@@ -974,7 +1132,6 @@ revisit theory.
 | ➡️ Next | [04 — Functions](../04_functions/README.md) |
 | 🏠 Home | [python-complete-mastery](../README.md) |
 # 🧠 How to Use This File
-
 
 
 ---

@@ -5,6 +5,8 @@
 > Many powerful algorithms assume sorted input.
 > Understanding sorting deeply improves your optimization skills.
 
+> 📝 **Practice:** [Q87 · production-slow-sort](../dsa_practice_questions_100.md#q87--design--production-slow-sort) · [Q98 · design-sorting-choice](../dsa_practice_questions_100.md#q98--design--design-sorting-choice)
+
 ---
 
 ## 📌 Learning Priority
@@ -201,6 +203,7 @@ Used in hybrid algorithms like Timsort.
 
 # 6️⃣ Merge Sort — Divide and Conquer Strategy
 
+
 ### Core Idea
 
 1. Divide array into halves.
@@ -210,6 +213,9 @@ Used in hybrid algorithms like Timsort.
 Example:
 
 ```
+
+> 📝 **Practice:** [Q13 · merge-sort-vs-quicksort](../dsa_practice_questions_100.md#q13--interview--merge-sort-vs-quicksort)
+
 [8, 3, 5, 4]
 ```
 
@@ -359,6 +365,8 @@ Quick sort → usually unstable
 
 Stability matters in multi-level sorting.
 
+> 📝 **Practice:** [Q14 · sorting-stability](../dsa_practice_questions_100.md#q14--thinking--sorting-stability)
+
 ---
 
 # 🔟 Python’s Built-in Sort
@@ -452,6 +460,8 @@ def counting_sort(arr, max_val):
 
 **Time:** O(n + k). **Space:** O(k).
 **Limit:** Only works for non-negative integers. Impractical if k >> n.
+
+> 📝 **Practice:** [Q15 · counting-sort](../dsa_practice_questions_100.md#q15--normal--counting-sort)
 
 ---
 

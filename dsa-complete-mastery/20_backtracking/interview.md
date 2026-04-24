@@ -57,15 +57,23 @@ That shows structured thinking.
 
 ---
 
-## 1️⃣ What is Backtracking?
+**Q1: What is Backtracking?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Professional answer:
 
 Backtracking is a recursive technique that builds solutions incrementally and abandons a path when it fails to meet constraints.
 
----
+</details>
 
-## 2️⃣ What Are the Key Steps in Backtracking?
+<br>
+
+**Q2: What Are the Key Steps in Backtracking?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 1. Choose
 2. Explore (recurse)
@@ -73,9 +81,14 @@ Backtracking is a recursive technique that builds solutions incrementally and ab
 
 Undo step is critical.
 
----
+</details>
 
-## 3️⃣ Time Complexity of Backtracking?
+<br>
+
+**Q3: Time Complexity of Backtracking?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Usually exponential:
 
@@ -84,22 +97,31 @@ Permutations → O(n!)
 
 Mention worst-case growth.
 
----
+</details>
 
-## 4️⃣ Why Do We Need Pruning?
+<br>
+
+**Q4: Why Do We Need Pruning?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 To stop exploring invalid paths early.
 
 Without pruning:
 Performance becomes infeasible.
 
----
+</details>
+
 
 # 🔹 Intermediate Level Questions (2–5 Years)
 
 ---
 
-## 5️⃣ Generate Subsets
+**Q5: Generate Subsets**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Pattern:
 
@@ -110,9 +132,14 @@ Decision tree size:
 
 Common template question.
 
----
+</details>
 
-## 6️⃣ Generate Permutations
+<br>
+
+**Q6: Generate Permutations**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Use:
 
@@ -126,9 +153,14 @@ Restore state after recursion.
 Time:
 O(n!)
 
----
+</details>
 
-## 7️⃣ Combination Sum
+<br>
+
+**Q7: Combination Sum**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Pick numbers until sum reaches target.
 
@@ -138,9 +170,14 @@ Sort input to help pruning.
 
 Common interview problem.
 
----
+</details>
 
-## 8️⃣ Word Search (Grid)
+<br>
+
+**Q8: Word Search (Grid)**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 DFS in 2D grid.
 
@@ -150,9 +187,14 @@ Undo marking after recursion.
 
 State management critical.
 
----
+</details>
 
-## 9️⃣ Palindrome Partitioning
+<br>
+
+**Q9: Palindrome Partitioning**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Split string at each position.
 
@@ -162,13 +204,17 @@ Recurse on remaining string.
 Pruning:
 Check palindrome early.
 
----
+</details>
+
 
 # 🔹 Advanced Level Questions (5–10 Years)
 
 ---
 
-## 🔟 N-Queens
+**Q10: N-Queens**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Place N queens on N×N board.
 
@@ -189,9 +235,14 @@ Exponential
 
 Classic interview benchmark.
 
----
+</details>
 
-## 1️⃣1️⃣ Sudoku Solver
+<br>
+
+**Q11: Sudoku Solver**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Try filling digits 1–9.
 
@@ -205,9 +256,14 @@ Prune invalid placements early.
 
 Tests constraint modeling.
 
----
+</details>
 
-## 1️⃣2️⃣ Optimization Techniques
+<br>
+
+**Q12: Optimization Techniques**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Sorting input
 - Using sets for O(1) checks
@@ -216,57 +272,83 @@ Tests constraint modeling.
 
 Senior candidates discuss optimization.
 
----
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
 ---
 
 ## Scenario 1:
+
 Solution too slow.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible issue:
 Not pruning effectively.
 
 Add constraint checks earlier.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Incorrect results.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 Forgot to undo state.
 
 State restoration critical.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Stack overflow.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Large recursion depth.
 
 Consider iterative or pruning more aggressively.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Need only one valid solution.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Stop recursion once found.
 
 Add global flag.
 
+</details>
 ---
 
 ## Scenario 5:
+
 Memory high due to storing all results.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 If possible, stream output or limit storage.
 
 Trade-off discussion expected.
 
+</details>
 ---
 
 # 🧠 How to Communicate Like a Strong Candidate

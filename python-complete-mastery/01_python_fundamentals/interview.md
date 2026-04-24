@@ -26,7 +26,10 @@ Basic clarity and syntax confidence expected.
 
 ---
 
-## 1️⃣ What is Python?
+**Q1: What is Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -35,9 +38,14 @@ Strong answer:
 Keep it simple.
 Avoid over-explaining.
 
----
+</details>
 
-## 2️⃣ Is Python compiled or interpreted?
+<br>
+
+**Q2: Is Python compiled or interpreted?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -45,9 +53,14 @@ Strong answer:
 
 This shows deeper understanding.
 
----
+</details>
 
-## 3️⃣ What are Python’s key features?
+<br>
+
+**Q3: What are Python’s key features?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 - Interpreted
 - Dynamically typed
@@ -58,9 +71,14 @@ This shows deeper understanding.
 
 Mention only key points.
 
----
+</details>
 
-## 4️⃣ What are Python data types?
+<br>
+
+**Q4: What are Python data types?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Built-in types:
 
@@ -76,9 +94,14 @@ Built-in types:
 
 Understand behavior of each.
 
----
+</details>
 
-## 5️⃣ Difference between list and tuple?
+<br>
+
+**Q5: Difference between list and tuple?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 List:
 - Mutable
@@ -93,9 +116,14 @@ Tuple:
 Professional tip:
 Tuple can be dictionary key (if immutable).
 
----
+</details>
 
-## 6️⃣ What is dynamic typing?
+<br>
+
+**Q6: What is dynamic typing?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -108,9 +136,14 @@ x = 5
 x = "hello"
 ```
 
----
+</details>
 
-## 7️⃣ What is None in Python?
+<br>
+
+**Q7: What is None in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 None represents absence of value.
 
@@ -128,7 +161,8 @@ Not:
 if x == None:
 ```
 
----
+</details>
+
 
 # 🔹 Level 2: 2–5 Years Experience
 
@@ -136,7 +170,10 @@ Now interviewer expects deeper clarity.
 
 ---
 
-## 8️⃣ What is mutability?
+**Q8: What is mutability?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Mutable objects:
 Can be changed after creation.
@@ -157,9 +194,14 @@ Mutable:
 
 Explain clearly.
 
----
+</details>
 
-## 9️⃣ Why are strings immutable?
+<br>
+
+**Q9: Why are strings immutable?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -167,9 +209,14 @@ Strong answer:
 
 Shows deeper thinking.
 
----
+</details>
 
-## 🔟 Difference between == and is?
+<br>
+
+**Q10: Difference between == and is?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 `==` → compares value  
 `is` → compares memory identity  
@@ -178,9 +225,14 @@ Important:
 
 Use `is` for None.
 
----
+</details>
 
-## 1️⃣1️⃣ What is variable scope?
+<br>
+
+**Q11: What is variable scope?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Local scope:
 Inside function.
@@ -197,9 +249,14 @@ Defined outside.
 
 Mention [LEGB](../04_functions/theory.md#the-legb-pyramid) explicitly.
 
----
+</details>
 
-## 1️⃣2️⃣ What happens if you modify global variable inside function?
+<br>
+
+**Q12: What happens if you modify global variable inside function?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Must declare:
 
@@ -210,17 +267,27 @@ global x
 Otherwise:
 UnboundLocalError.
 
----
+</details>
 
-## 1️⃣3️⃣ What is pass statement?
+<br>
+
+**Q13: What is pass statement?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Placeholder.
 Does nothing.
 Prevents syntax error.
 
----
+</details>
 
-## 1️⃣4️⃣ What is indentation in Python?
+<br>
+
+**Q14: What is indentation in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Indentation defines code blocks.
 
@@ -231,7 +298,8 @@ Improper indentation causes:
 
 Python enforces structure via indentation.
 
----
+</details>
+
 
 # 🔹 Level 3: 5+ Years Experience
 
@@ -241,7 +309,10 @@ Now depth matters.
 
 ---
 
-## 1️⃣5️⃣ How does Python manage memory?
+**Q15: How does Python manage memory?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Strong answer:
 
@@ -250,9 +321,14 @@ Strong answer:
 Mention:
 gc module.
 
----
+</details>
 
-## 1️⃣6️⃣ What is object identity?
+<br>
+
+**Q16: What is object identity?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Every object has:
 
@@ -266,9 +342,14 @@ Check identity using:
 id(obj)
 ```
 
----
+</details>
 
-## 1️⃣7️⃣ What is small integer caching?
+<br>
+
+**Q17: What is small integer caching?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python caches small integers (usually -5 to 256) for performance.
 
@@ -290,9 +371,14 @@ a is b  # Might be False
 
 Shows deeper understanding.
 
----
+</details>
 
-## 1️⃣8️⃣ What is string interning?
+<br>
+
+**Q18: What is string interning?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Python may reuse identical string objects to save memory.
 
@@ -306,7 +392,8 @@ a is b  # Often True
 
 Implementation detail, but good to know.
 
----
+</details>
+
 
 # 🔥 Common Traps in Fundamentals
 
@@ -341,39 +428,59 @@ Be explicit when checking None.
 ---
 
 ## Scenario 1:
+
 Code works differently when using tuple instead of list.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Possible cause:
 
 Immutability.
 
+</details>
 ---
 
 ## Scenario 2:
+
 Function behaves unexpectedly due to shared list.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 
 Mutable default argument.
 
+</details>
 ---
 
 ## Scenario 3:
+
 Unexpected behavior when comparing values using `is`.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Likely cause:
 
 Identity vs equality misunderstanding.
 
+</details>
 ---
 
 ## Scenario 4:
+
 Variable inside function not updating global variable.
+
+<details>
+<summary>💡 Show Answer</summary>
 
 Cause:
 
 Missing `global` declaration.
 
+</details>
 ---
 
 # 🧠 How to Answer Fundamentals Like Professional

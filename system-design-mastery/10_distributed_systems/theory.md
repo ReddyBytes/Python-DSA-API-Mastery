@@ -4,6 +4,8 @@
 > Understanding distributed systems is what separates senior engineers
 > from developers who "just use microservices."
 
+> 📝 **Practice:** [Q47 · distributed-idempotency](../system_design_practice_questions_100.md#q47--normal--distributed-idempotency) · [Q52 · distributed-locks](../system_design_practice_questions_100.md#q52--critical--distributed-locks)
+
 ---
 
 ## 📌 Learning Priority
@@ -358,6 +360,8 @@ Properties:
 Used by: etcd, CockroachDB, TiKV, Consul
 ```
 
+> 📝 **Practice:** [Q50 · distributed-consensus](../system_design_practice_questions_100.md#q50--thinking--distributed-consensus)
+
 ### Paxos
 
 ```
@@ -466,6 +470,8 @@ Use when: must have atomicity, can tolerate blocking, small number of participan
 Used by: databases with distributed transactions (PostgreSQL FDW, MySQL NDB)
 ```
 
+> 📝 **Practice:** [Q45 · two-phase-commit](../system_design_practice_questions_100.md#q45--critical--two-phase-commit)
+
 ### Saga Pattern
 
 ```
@@ -522,6 +528,8 @@ Guarantees: at-least-once delivery (idempotent consumers required)
 ## 8. Leader Election
 
 How distributed systems choose a single coordinator.
+
+> 📝 **Practice:** [Q51 · leader-election](../system_design_practice_questions_100.md#q51--normal--leader-election)
 
 ### Bully Algorithm
 
@@ -685,6 +693,12 @@ Sidecar              Add cross-cutting concerns        Extra process overhead
 ```
 
 ---
+
+---
+
+## 📝 Practice Questions
+
+> 📝 **Practice:** [Q73 · designing-for-failure](../system_design_practice_questions_100.md#q73--design--designing-for-failure)
 
 ## 🔁 Navigation
 

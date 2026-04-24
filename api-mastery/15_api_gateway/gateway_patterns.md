@@ -1,5 +1,9 @@
 # API Gateway Patterns
 
+> 📝 **Practice:** [Q57 · api-gateway-pattern](../api_practice_questions_100.md#q57--normal--api-gateway-pattern)
+
+> 📝 **Practice:** [Q84 · compare-gateway-vs-mesh](../api_practice_questions_100.md#q84--interview--compare-gateway-vs-mesh)
+
 ## The Copy-Paste Problem
 
 You've just shipped your first microservice — a user service. Auth logic, rate

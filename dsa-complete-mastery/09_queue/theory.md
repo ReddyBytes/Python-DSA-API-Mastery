@@ -224,6 +224,8 @@ Used in:
 - Monotonic queue
 - Cache algorithms
 
+> 📝 **Practice:** [Q34 · queue-deque-ops](../dsa_practice_questions_100.md#q34--normal--queue-deque-ops)
+
 ---
 
 # 🔟 Priority Queue (Concept Introduction)

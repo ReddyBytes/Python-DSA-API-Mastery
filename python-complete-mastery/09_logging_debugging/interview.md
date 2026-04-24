@@ -35,7 +35,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: Why is `logging` better than `print()` for production code?
+**Q1: Why is `logging` better than `print()` for production code?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Logging is more professional."
 
@@ -57,9 +60,14 @@ logger.error("Payment failed for order %s: %s", order_id, e)
 # 2025-03-08 14:30:00 | ERROR | myapp.payment:47 | Payment failed for order 4892: timeout
 ```
 
----
+</details>
 
-### Q2: What are the 5 logging levels? What does each mean?
+<br>
+
+**Q2: What are the 5 logging levels? What does each mean?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -75,9 +83,14 @@ CRITICAL (50)  System cannot function. Immediate alert required. Service down.
 > In production, use INFO (always-on) or WARNING (alert-only).
 > Never run DEBUG in high-traffic production — the I/O volume is massive.
 
----
+</details>
 
-### Q3: How do you log exceptions with the full traceback?
+<br>
+
+**Q3: How do you log exceptions with the full traceback?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** `logger.error(str(e))`
 
@@ -101,9 +114,14 @@ except Exception as e:
     logger.error(str(e))                  # same problem
 ```
 
----
+</details>
 
-### Q4: What is `basicConfig()` and what are its limitations?
+<br>
+
+**Q4: What is `basicConfig()` and what are its limitations?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -126,13 +144,17 @@ logging.basicConfig(
 >
 > For production: use `getLogger(__name__)` + manual `addHandler()` or `dictConfig()`.
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q5: Explain the Logger → Handler → Formatter architecture.
+**Q5: Explain the Logger → Handler → Formatter architecture.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -167,9 +189,14 @@ logger.addHandler(handler)
 # Only WARNING and above actually reaches the console (handler filters below WARNING)
 ```
 
----
+</details>
 
-### Q6: What is log rotation and why is it critical?
+<br>
+
+**Q6: What is log rotation and why is it critical?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -196,9 +223,14 @@ handler = TimedRotatingFileHandler(
 
 > In production, combine local rotation with a **log shipper** (Fluentd, Filebeat, CloudWatch agent) that sends logs to a centralized system. Don't rely on local files alone in distributed systems.
 
----
+</details>
 
-### Q7: What is structured logging and when would you use it?
+<br>
+
+**Q7: What is structured logging and when would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Logging in JSON format."
 
@@ -226,9 +258,14 @@ handler = TimedRotatingFileHandler(
 
 > Use structured logging for any system that needs to be monitored, alerted on, or has multiple services.
 
----
+</details>
 
-### Q8: What is the performance impact of logging? How do you mitigate it?
+<br>
+
+**Q8: What is the performance impact of logging? How do you mitigate it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -249,9 +286,14 @@ if logger.isEnabledFor(logging.DEBUG):
 # Rule: use % style in ALL logger.XXX() calls, not f-strings or + concatenation.
 ```
 
----
+</details>
 
-### Q9: How would you use pdb to debug a production issue locally?
+<br>
+
+**Q9: How would you use pdb to debug a production issue locally?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -281,9 +323,14 @@ except Exception:
     pdb.post_mortem()   # drops into debugger at the crash frame
 ```
 
----
+</details>
 
-### Q10: What logging data should you NEVER include? Why?
+<br>
+
+**Q10: What logging data should you NEVER include? Why?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -304,13 +351,17 @@ logger.info("Payment processed, ref=%s", payment_ref)  # reference not card
 logger.debug("API call authenticated, key_id=%s", key_id[:8] + "***")
 ```
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q11: What is a correlation ID and how do you implement it?
+**Q11: What is a correlation ID and how do you implement it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -343,9 +394,14 @@ def middleware(request, next_handler):
 # [abc123] service.payment:23 | Charging card for order 4892
 ```
 
----
+</details>
 
-### Q12: What is observability? How is it different from logging?
+<br>
+
+**Q12: What is observability? How is it different from logging?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -365,9 +421,14 @@ Tools:
   Traces:  Jaeger, Zipkin, AWS X-Ray, Datadog APM (OpenTelemetry standard)
 ```
 
----
+</details>
 
-### Q13: How would you design logging for a microservices architecture?
+<br>
+
+**Q13: How would you design logging for a microservices architecture?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -396,9 +457,14 @@ Tools:
    Log all ERROR/WARNING, sample DEBUG.
 ```
 
----
+</details>
 
-### Q14: Walk me through how you'd investigate a 500 error in production.
+<br>
+
+**Q14: Walk me through how you'd investigate a 500 error in production.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -433,7 +499,8 @@ STEP 7: Fix → test → deploy → verify
   → Add better logging so next incident is 10x faster to diagnose
 ```
 
----
+</details>
+
 
 ## ⚠️ Trap Questions
 

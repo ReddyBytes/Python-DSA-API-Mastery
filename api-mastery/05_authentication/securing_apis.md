@@ -93,6 +93,8 @@ Client makes request:
               → checks permissions → serves the response
 ```
 
+> 📝 **Practice:** [Q35 · api-key-vs-jwt](../api_practice_questions_100.md#q35--interview--api-key-vs-jwt)
+
 ### When to use API keys
 
 API keys are the right choice when:
@@ -175,6 +177,8 @@ Never log the raw key. Not in access logs, not in error logs, nowhere.
 
 ## OAuth 2.0 — The Delegation Protocol
 
+> 📝 **Practice:** [Q31 · http-auth-schemes](../api_practice_questions_100.md#q31--normal--http-auth-schemes)
+
 Here's a scenario you've lived a hundred times: you click "Sign in with Google" on
 some app. You get redirected to Google, you approve the app's permissions, and you're
 logged in — without ever giving the app your Google password.
@@ -186,6 +190,8 @@ The mental model: "You let Spotify access your Google contacts without giving
 Spotify your Google password."
 
 OAuth 2.0 has several "flows" (officially called grant types). Two matter most:
+
+> 📝 **Practice:** [Q87 · production-auth-bug](../api_practice_questions_100.md#q87--design--production-auth-bug)
 
 ### Authorization Code Flow — for web apps with a user
 
@@ -238,6 +244,8 @@ Key terms:
 - **auth_code** — temporary code, valid for ~10 minutes, one-time use
 - **access_token** — what you actually use to make API calls, short-lived (1 hour typ.)
 - **refresh_token** — long-lived token to get new access tokens without re-logging in
+
+> 📝 **Practice:** [Q34 · oauth2-authorization-code](../api_practice_questions_100.md#q34--normal--oauth2-authorization-code)
 
 ### Client Credentials Flow — for machine-to-machine
 
@@ -297,9 +305,19 @@ Flow when access_token expires:
   6. User never noticed anything
 ```
 
+> 📝 **Practice:** [Q33 · jwt-access-refresh-tokens](../api_practice_questions_100.md#q33--thinking--jwt-access-refresh-tokens)
+
 ---
 
 ## JWT — Stateless Auth Tokens
+
+> 📝 **Practice:** [Q91 · predict-jwt-expiry](../api_practice_questions_100.md#q91--logical--predict-jwt-expiry)
+
+> 📝 **Practice:** [Q82 · compare-jwt-vs-sessions](../api_practice_questions_100.md#q82--interview--compare-jwt-vs-sessions)
+
+> 📝 **Practice:** [Q78 · explain-jwt-vs-sessions](../api_practice_questions_100.md#q78--interview--explain-jwt-vs-sessions)
+
+> 📝 **Practice:** [Q32 · jwt-structure](../api_practice_questions_100.md#q32--normal--jwt-structure)
 
 Every time a user makes an API call, your server needs to verify who they are. The
 naive approach: store a session ID in a database, look it up on every request. Works
@@ -307,6 +325,8 @@ fine until you have 10 servers and need to share session state across all of the
 
 JWT (JSON Web Token, pronounced "jot") solves this differently: the token itself
 contains the user's identity. No database lookup needed.
+
+> 📝 **Practice:** [Q98 · design-jwt-vs-sessions-mobile](../api_practice_questions_100.md#q98--design--design-jwt-vs-sessions-mobile)
 
 ### Structure: header.payload.signature
 

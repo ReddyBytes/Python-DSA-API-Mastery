@@ -36,7 +36,10 @@ LEVEL 3 — Senior (5+ years)
 
 ---
 
-### Q1: What is the difference between a class and an object?
+**Q1: What is the difference between a class and an object?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "A class is like a blueprint and an object is an instance of it."
 
@@ -62,9 +65,14 @@ print(type(u1))      # <class 'User'>
 print(type(User))    # <class 'type'>  ← class itself is an object of 'type'
 ```
 
----
+</details>
 
-### Q2: What are the 4 pillars of OOP and what does each mean?
+<br>
+
+**Q2: What are the 4 pillars of OOP and what does each mean?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** Lists the names without a concrete example.
 
@@ -118,9 +126,14 @@ ABSTRACTION
       def area(self): return 3.14 * self.radius ** 2
 ```
 
----
+</details>
 
-### Q3: What is `self` and why is it needed?
+<br>
+
+**Q3: What is `self` and why is it needed?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "It refers to the current object."
 
@@ -150,9 +163,14 @@ print(u1.name)   # Alice
 print(u2.name)   # Bob   ← different data, same class
 ```
 
----
+</details>
 
-### Q4: What is the difference between `__init__` and `__new__`?
+<br>
+
+**Q4: What is the difference between `__init__` and `__new__`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "`__init__` is the constructor."
 
@@ -181,9 +199,14 @@ b = Singleton()
 print(a is b)    # True — same object
 ```
 
----
+</details>
 
-### Q5: What is the difference between `@classmethod`, `@staticmethod`, and a regular method?
+<br>
+
+**Q5: What is the difference between `@classmethod`, `@staticmethod`, and a regular method?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -223,13 +246,17 @@ Decision tree:
   Needs neither?                → @staticmethod
 ```
 
----
+</details>
+
 
 ## 🔵 Level 2 — Mid-Level Questions
 
 ---
 
-### Q6: Explain Python's [MRO](./13_mro_and_super.md) and how `super()` actually works.
+**Q6: Explain Python's [MRO](./13_mro_and_super.md) and how `super()` actually works.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "`super()` calls the parent class."
 
@@ -266,9 +293,14 @@ print([c.__name__ for c in D.__mro__])
 
 > Why this matters: cooperative multiple inheritance only works if every class in the chain calls `super()`. If any class breaks the chain, later classes in the MRO never get called.
 
----
+</details>
 
-### Q7: What is the difference between a class variable and an instance variable? What's the notorious trap?
+<br>
+
+**Q7: What is the difference between a class variable and an instance variable? What's the notorious trap?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "Class variables are shared, instance variables are per-object."
 
@@ -308,9 +340,14 @@ class Team:
         self.members = []   # ← each instance gets its own list
 ```
 
----
+</details>
 
-### Q8: What are dunder methods? Name 5 important ones and explain them.
+<br>
+
+**Q8: What are dunder methods? Name 5 important ones and explain them.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -354,9 +391,14 @@ print(v1[0])       # 3
 print(3 in v1)     # True
 ```
 
----
+</details>
 
-### Q9: When would you use `@property` instead of a plain attribute?
+<br>
+
+**Q9: When would you use `@property` instead of a plain attribute?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Weak answer:** "`@property` is for getter and setter."
 
@@ -401,9 +443,14 @@ c.radius = -1      # ← ValueError  (validation enforced)
 # They don't know (or care) whether it's stored or computed
 ```
 
----
+</details>
 
-### Q10: What is the difference between `__str__` and `__repr__`?
+<br>
+
+**Q10: What is the difference between `__str__` and `__repr__`?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -432,9 +479,14 @@ print(str(m))     # Team Sync at 02:30 PM    ← for users
 print(repr(m))    # Meeting(title='Team Sync', start=datetime.datetime(2025, 3, 8, 14, 30))
 ```
 
----
+</details>
 
-### Q11: When should you use composition over inheritance?
+<br>
+
+**Q11: When should you use composition over inheritance?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -461,9 +513,14 @@ electric    = Car(engine=ElectricEngine())
 test_car    = Car(engine=MockEngine())
 ```
 
----
+</details>
 
-### Q12: What is a Mixin? How is it different from regular inheritance?
+<br>
+
+**Q12: What is a Mixin? How is it different from regular inheritance?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -496,13 +553,17 @@ print(u.to_json())     # {"name": "Alice", "email": "alice@mail.com", "_changes"
 
 > **Key difference:** Inheritance says "what this IS." Mixin says "what this CAN DO." Mixins always come first in the class definition, and every mixin `__init__` MUST call `super().__init__(*args, **kwargs)` for cooperative chaining.
 
----
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
 ---
 
-### Q13: What are [descriptors](./17_descriptors.md)? How do they work?
+**Q13: What are [descriptors](./17_descriptors.md)? How do they work?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -544,9 +605,14 @@ p.price = -100   # ValueError: price must be a positive number
 >
 > This is why `@property` (a data descriptor) can't be bypassed by setting an instance attribute directly.
 
----
+</details>
 
-### Q14: Explain [`__slots__`](./15_slots.md). When would you use it?
+<br>
+
+**Q14: Explain [`__slots__`](./15_slots.md). When would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -574,9 +640,14 @@ print(sys.getsizeof(s))                               # ~56 bytes — 5× smalle
 >
 > **Gotcha:** For `__slots__` to be effective, ALL classes in the inheritance chain must define `__slots__`. If any parent lacks it, that parent's `__dict__` still exists.
 
----
+</details>
 
-### Q15: What is a Metaclass? Give a real use case.
+<br>
+
+**Q15: What is a Metaclass? Give a real use case.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -614,9 +685,14 @@ PluginMeta.registry["AudioPlugin"]().run()   # Processing audio
 
 > **Rule of thumb:** Try `__init_subclass__` first — it's simpler for 80% of metaclass use cases. Use metaclasses only when you need to deeply modify the class creation process.
 
----
+</details>
 
-### Q16: Explain the SOLID principles with Python examples.
+<br>
+
+**Q16: Explain the SOLID principles with Python examples.**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -653,9 +729,14 @@ D — Dependency Inversion
     → This makes testing (with mocks) and swapping easy.
 ```
 
----
+</details>
 
-### Q17: You have a class hierarchy where `super()` seems to call the wrong method. How do you debug this?
+<br>
+
+**Q17: You have a class hierarchy where `super()` seems to call the wrong method. How do you debug this?**
+
+<details>
+<summary>💡 Show Answer</summary>
 
 **Strong answer:**
 
@@ -684,7 +765,8 @@ class LogMixin:
         self._log = []
 ```
 
----
+</details>
+
 
 ## 🔥 Rapid-Fire Revision
 

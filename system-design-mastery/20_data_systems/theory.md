@@ -61,6 +61,8 @@ Column-oriented (Parquet, Redshift):
   Bad for:  fetch one full row — must read all columns separately
 ```
 
+> 📝 **Practice:** [Q40 · oltp-vs-olap](../system_design_practice_questions_100.md#q40--interview--oltp-vs-olap)
+
 ---
 
 ## 🏛️ Chapter 2: Data Warehouse — Analytics at Scale
@@ -202,6 +204,8 @@ JOIN users u ON o.user_id = u.user_id
 GROUP BY 1, 2
 ```
 
+> 📝 **Practice:** [Q41 · data-warehousing](../system_design_practice_questions_100.md#q41--normal--data-warehousing)
+
 ---
 
 ## 📁 Chapter 5: Columnar File Formats — Parquet and ORC
@@ -287,6 +291,8 @@ Spark on AWS: EMR (managed clusters) or Glue (serverless).
 **Kafka Streams (processing inside Kafka):**
 
 ```python
+
+
 # Python Kafka consumer acting as a stream processor
 from kafka import KafkaConsumer, KafkaProducer
 import json
@@ -303,6 +309,9 @@ for message in consumer:
         enriched = {**event, "processed_at": time.time()}
         producer.send("analytics-events", enriched)
 ```
+
+> 📝 **Practice:** [Q34 · time-series-databases](../system_design_practice_questions_100.md#q34--normal--time-series-databases)
+
 
 **Batch vs Stream processing decision:**
 
