@@ -297,11 +297,241 @@ df.memory_usage(deep=True).sum() / 1e6    # total in MB
 
 ---
 
+## Time Series
+
+```python
+# Parse dates
+df['date'] = pd.to_datetime(df['date'])
+df = pd.read_csv('data.csv', parse_dates=['date'])
+
+# .dt accessor
+df['date'].dt.year / .month / .day / .hour / .dayofweek
+df['date'].dt.is_weekend          # custom: (df['date'].dt.dayofweek >= 5)
+df['date'].dt.floor('H')          # round down to hour
+
+# Set as index for time operations
+df = df.set_index('date')
+
+# Resample — change time frequency
+df.resample('D').sum()            # daily totals
+df.resample('W').mean()           # weekly means
+df.resample('H').agg({'val': 'mean', 'count': 'sum'})
+
+# Rolling window
+df['col'].rolling(window=7).mean()           # 7-period moving average
+df['col'].rolling(window=7, min_periods=1).std()
+
+# Exponential weighted moving average
+df['col'].ewm(span=7).mean()                 # recent values weighted more
+
+# Shift / lag features
+df['lag1'] = df['col'].shift(1)              # previous period
+df['lead1'] = df['col'].shift(-1)            # next period
+df['pct_change'] = df['col'].pct_change()    # period-over-period %
+```
+
+---
+
+## String Operations
+
+```python
+# All via .str accessor — vectorized, no loops needed
+df['col'].str.lower() / .upper() / .strip() / .title()
+df['col'].str.len()                              # character count
+df['col'].str.replace('old', 'new', regex=False)
+df['col'].str.replace(r'\s+', ' ', regex=True)  # collapse whitespace
+
+# Filtering
+df[df['col'].str.contains('pattern', na=False)]
+df[df['col'].str.startswith('prefix')]
+df[df['col'].str.endswith('suffix')]
+
+# Extraction
+df['col'].str.extract(r'(\d{3}-\d{4})')         # first capture group → column
+df['col'].str.extractall(r'(\w+@\w+)')           # all matches → multi-index
+
+# Split and expand
+df['col'].str.split(',', expand=True)            # → separate columns
+df['col'].str.findall(r'#\w+')                   # all hashtags → list per row
+
+# Encoding check
+df['col'].str.contains(r'[^\x00-\x7F]', na=False)  # find non-ASCII
+```
+
+---
+
+## Pivot, Melt, and Reshape
+
+```python
+# melt — wide to long
+df_long = df.melt(
+    id_vars=['id', 'name'],              # keep these as identifiers
+    value_vars=['jan', 'feb', 'mar'],    # collapse these into rows
+    var_name='month',                    # column name for old headers
+    value_name='revenue'                 # column name for values
+)
+
+# pivot — long to wide (no aggregation, fails on duplicates)
+df_wide = df_long.pivot(index='id', columns='month', values='revenue')
+
+# pivot_table — long to wide with aggregation
+pd.pivot_table(df,
+    values='revenue', index='region',
+    columns='product', aggfunc='sum',
+    fill_value=0, margins=True          # margins=True adds row/column totals
+)
+
+# stack / unstack — move column labels into/out of index
+df.stack()                  # column labels → inner index level
+df.unstack()                # inner index level → column labels
+df.unstack(level=0)         # specify which level to unstack
+
+# Crosstab — frequency counts
+pd.crosstab(df['true_label'], df['pred_label'])           # confusion matrix
+pd.crosstab(df['a'], df['b'], normalize='all')            # proportions
+```
+
+---
+
+## query() and eval()
+
+```python
+# query() — readable row filtering
+df.query('age > 25 and city == "NYC"')
+df.query('score >= @threshold')        # @ prefix references Python variable
+df.query('col.str.contains("pattern")')
+
+# eval() — expression against DataFrame
+df.eval('revenue = price * quantity', inplace=True)
+df.eval('tax = revenue * 0.1', inplace=True)
+
+# When to use: > 100k rows, or chained conditions that need clarity
+# On small DataFrames standard boolean indexing is faster
+```
+
+---
+
+## SQL Integration
+
+```python
+from sqlalchemy import create_engine
+
+engine = create_engine('postgresql://user:pass@host:5432/db')
+
+# Read
+df = pd.read_sql('SELECT * FROM users WHERE active = true', engine)
+df = pd.read_sql_query('SELECT id, name FROM users LIMIT 100', engine)
+
+# Read in chunks (large tables)
+for chunk in pd.read_sql('SELECT * FROM logs', engine, chunksize=10_000):
+    process(chunk)
+
+# Write
+df.to_sql('table_name', engine, if_exists='append', index=False)
+# if_exists: 'fail' | 'replace' | 'append'
+
+# With pandas read_sql, dtype mapping is automatic
+# Force dtypes: dtype={'id': sqlalchemy.types.Integer()}
+```
+
+---
+
+## ML Data Preparation
+
+```python
+from sklearn.model_selection import train_test_split
+
+# Stratified split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y  # ← preserve class ratio
+)
+
+# Check class imbalance
+y.value_counts(normalize=True)     # class proportions
+
+# Label encoding
+df['label_enc'] = df['cat'].map({'A': 0, 'B': 1, 'C': 2})
+
+# One-hot encoding
+pd.get_dummies(df, columns=['city', 'product'], drop_first=True)
+
+# Normalization (fit on train, apply to test)
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled  = scaler.transform(X_test)   # ← transform only, do NOT fit_transform
+
+# Outlier clipping
+df['col'] = df['col'].clip(lower=df['col'].quantile(0.01),
+                            upper=df['col'].quantile(0.99))
+```
+
+---
+
+## Data Validation
+
+```python
+# Schema check
+assert set(['id', 'label', 'text']).issubset(df.columns), "Missing columns"
+assert df['label'].dtype == 'int64', f"Wrong dtype: {df['label'].dtype}"
+
+# Null audit
+null_rates = df.isnull().mean().sort_values(ascending=False)
+print(null_rates[null_rates > 0])
+
+# Range checks
+assert df['age'].between(0, 120).all(), "Invalid age values"
+assert df['prob'].between(0, 1).all(), "Probabilities out of range"
+
+# Duplicate check
+dupes = df.duplicated(subset=['id']).sum()
+assert dupes == 0, f"{dupes} duplicate IDs"
+
+# Value set validation
+valid = {'pending', 'active', 'cancelled'}
+assert df['status'].isin(valid).all(), f"Unknown statuses: {df['status'].unique()}"
+```
+
+---
+
+## Performance
+
+```python
+# SLOW — Python loop, avoid:
+for i, row in df.iterrows():
+    result = row['a'] * row['b']
+
+# FAST — vectorized:
+df['result'] = df['a'] * df['b']
+
+# SLOW — apply with lambda:
+df['col'].apply(lambda x: x.strip().lower())
+# FAST — .str accessor:
+df['col'].str.strip().str.lower()
+
+# Categorical dtype — compress low-cardinality string columns
+df['status'] = df['status'].astype('category')  # up to 50x less memory
+df = pd.read_csv('data.csv', dtype={'status': 'category'})
+
+# Downcast numerics
+df['age'] = pd.to_numeric(df['age'], downcast='integer')     # int64 → int8/16/32
+df['score'] = pd.to_numeric(df['score'], downcast='float')   # float64 → float32
+
+# Read only needed columns
+df = pd.read_csv('big.csv', usecols=['id', 'price', 'date'])
+
+# Profile memory
+df.memory_usage(deep=True).sum() / 1024**2  # MB
+df.info(memory_usage='deep')
+```
+
+---
+
 ## 🔁 Navigation
 
 | | |
 |---|---|
-| 📖 Theory | [theory.md](./theory.md) |
+| 📖 Theory | [theory.md](./README.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
@@ -310,6 +540,6 @@ df.memory_usage(deep=True).sum() / 1e6    # total in MB
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+**Prev:** [← Theory](./README.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./README.md) · [Interview Q&A](./interview.md)

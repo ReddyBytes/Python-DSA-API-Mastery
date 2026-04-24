@@ -770,6 +770,23 @@ It only cares that the data is clean.
 
 Pandas is how you get it there.
 
+
+---
+
+## 🗺️ Pandas Learning Path — Topic Files
+
+| Order | Topic | File |
+|---|---|---|
+| 01 | Time Series — DateTime parsing, resampling, rolling, ewm | [01_time_series.md](./01_time_series.md) |
+| 02 | String Operations — .str accessor, regex, extract | [02_string_operations.md](./02_string_operations.md) |
+| 03 | Advanced GroupBy — transform, window, cumulative ops | [03_groupby_advanced.md](./03_groupby_advanced.md) |
+| 04 | Pivot and Melt — pivot_table, melt, stack/unstack | [04_pivot_melt.md](./04_pivot_melt.md) |
+| 05 | Query and Eval — readable filtering, numexpr | [05_query_and_eval.md](./05_query_and_eval.md) |
+| 06 | SQL Integration — pd.read_sql, SQLAlchemy, to_sql | [06_sql_integration.md](./06_sql_integration.md) |
+| 07 | ML Data Preparation — splits, encoding, normalization | [07_ml_data_prep.md](./07_ml_data_prep.md) |
+| 08 | Data Validation — schema checks, null audits, quality | [08_data_validation.md](./08_data_validation.md) |
+| 09 | Performance Optimization — vectorize, categorical, memory | [09_performance_optimization.md](./09_performance_optimization.md) |
+
 ---
 
 # 🔁 Navigation
@@ -780,6 +797,20 @@ Pandas is how you get it there.
 | 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
+
+## Deep-Dive Topic Files
+
+| File | Topics Covered |
+|---|---|
+| [01_time_series.md](./01_time_series.md) | DateTime parsing, resampling, rolling, ewm, .dt accessor, shift/lag |
+| [02_string_operations.md](./02_string_operations.md) | .str.extract, .str.contains, .str.replace, .str.findall, .str.split |
+| [03_groupby_advanced.md](./03_groupby_advanced.md) | transform vs agg, cumsum/cumcount, rank within group, pd.Grouper |
+| [04_pivot_melt.md](./04_pivot_melt.md) | pivot_table, melt, stack/unstack, crosstab, wide↔long reshaping |
+| [05_query_and_eval.md](./05_query_and_eval.md) | df.query(), @ variables, df.eval(), numexpr backend |
+| [06_sql_integration.md](./06_sql_integration.md) | pd.read_sql, SQLAlchemy, to_sql, chunked reading, PostgreSQL |
+| [07_ml_data_prep.md](./07_ml_data_prep.md) | Stratified splits, class imbalance, outliers, encoding, normalization |
+| [08_data_validation.md](./08_data_validation.md) | Schema checks, null audits, range checks, validate_dataset() |
+| [09_performance_optimization.md](./09_performance_optimization.md) | vectorize vs apply, categorical dtype, memory reduction, profiling |
 
 ---
 

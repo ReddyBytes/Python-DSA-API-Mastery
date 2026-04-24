@@ -441,6 +441,232 @@ with open("chat_fine_tuning.jsonl", "w") as f:
 
 </details>
 
+<br>
+
+**Q14: How do you parse and work with datetime data in Pandas? What operations does it unlock?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+Convert string columns to datetime dtype with `pd.to_datetime()`. This unlocks the `.dt` accessor for extracting date components, and enables time-based operations like resampling and rolling windows.
+
+```python
+df['date'] = pd.to_datetime(df['date'])          # parse from string
+df = df.set_index('date')                         # set as index for time ops
+
+df['date'].dt.year / .month / .day / .hour        # extract components
+df['date'].dt.dayofweek                            # 0=Monday, 6=Sunday
+
+df.resample('D').sum()                             # aggregate to daily
+df['col'].rolling(window=7).mean()                 # 7-day moving average
+df['col'].ewm(span=7).mean()                       # exponential weighted
+df['col'].shift(1)                                 # lag by 1 period
+```
+
+**Why it matters:** Time series features (rolling means, lag values, hour-of-day) are among the most powerful features in production ML models.
+
+</details>
+
+<br>
+
+**Q15: What is the difference between `pivot_table()` and `melt()`? When would you use each?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+- **`melt()`** converts wide format (each variable is a column) to long format (one row per observation). Use it before groupby, merge, or any operation that needs all observations in rows.
+- **`pivot_table()`** converts long format to wide format with aggregation. Use it to summarize cross-dimensional data — equivalent to an Excel pivot table.
+
+```python
+# Wide → long (melt):
+df_long = df.melt(id_vars=['student'], value_vars=['math', 'science'],
+                  var_name='subject', value_name='score')
+
+# Long → wide with aggregation (pivot_table):
+pd.pivot_table(df, values='sales', index='region',
+               columns='product', aggfunc='sum', fill_value=0)
+
+# Confusion matrix using crosstab:
+pd.crosstab(y_true, y_pred, normalize='true')  # row-normalized
+```
+
+**Why it matters:** Feature engineering often requires reshaping between wide and long formats — ML model inputs are typically wide (one feature per column).
+
+</details>
+
+<br>
+
+**Q16: How does `df.query()` differ from boolean indexing? When is it faster?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+`df.query()` takes a filter expression as a readable string. It is equivalent to boolean indexing for correctness but uses the `numexpr` engine internally, which avoids creating intermediate boolean arrays.
+
+```python
+# Equivalent filters:
+df[(df['age'] > 25) & (df['city'] == 'NYC')]    # boolean indexing
+df.query('age > 25 and city == "NYC"')           # query string
+
+# Reference Python variable with @:
+threshold = 0.5
+df.query('score >= @threshold')                  # @ prefix for external vars
+
+# eval() for new columns:
+df.eval('revenue = price * quantity', inplace=True)
+```
+
+`query()` is faster on DataFrames with >100k rows due to numexpr's multi-threaded evaluation. On small DataFrames, the string-parsing overhead makes it slower.
+
+**Why it matters:** Large production datasets benefit from `query()`'s memory efficiency; it also produces cleaner code for complex multi-condition filters.
+
+</details>
+
+<br>
+
+**Q17: How do you read and write DataFrames to a SQL database?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+Use `pd.read_sql()` to pull query results into a DataFrame, and `df.to_sql()` to write back. Both require a SQLAlchemy connection engine.
+
+```python
+from sqlalchemy import create_engine
+engine = create_engine('postgresql://user:pass@host:5432/db')
+
+# Read
+df = pd.read_sql('SELECT * FROM users WHERE active = true', engine)
+
+# Read large table in chunks:
+chunks = []
+for chunk in pd.read_sql('SELECT * FROM logs', engine, chunksize=10_000):
+    chunks.append(chunk[chunk['status'] == 'active'])
+df = pd.concat(chunks)
+
+# Write
+df.to_sql('table_name', engine, if_exists='append', index=False)
+```
+
+`if_exists` options: `'fail'` (raise if table exists), `'replace'` (drop and recreate), `'append'` (add rows).
+
+**Why it matters:** Production ML pipelines pull training data from databases and write predictions back — `read_sql` / `to_sql` is the standard interface.
+
+</details>
+
+<br>
+
+**Q18: How do you create a stratified train/test split with Pandas?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+Use sklearn's `train_test_split` with `stratify=y` to preserve the class distribution in both splits.
+
+```python
+from sklearn.model_selection import train_test_split
+
+X = df.drop('label', axis=1)
+y = df['label']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42,
+    stratify=y   # ← ensures class proportion is same in train and test
+)
+
+# Verify class balance:
+y_train.value_counts(normalize=True)
+y_test.value_counts(normalize=True)
+```
+
+Without `stratify`, a random split may put 90% of the rare class in training, making the test set unrepresentative.
+
+**Why it matters:** Class imbalance is the default in real-world datasets (fraud, rare diseases, churn). Stratified splitting is the baseline practice for any classification problem.
+
+</details>
+
+<br>
+
+**Q19: How do you validate data quality in a Pandas pipeline before model training?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+Run checks on schema, nulls, ranges, duplicates, and value sets before any preprocessing step.
+
+```python
+def validate_dataset(df):
+    # Schema
+    assert {'id', 'label', 'text'}.issubset(df.columns), "Missing required columns"
+    assert df['label'].dtype == 'int64', f"Wrong label dtype: {df['label'].dtype}"
+
+    # Null rates
+    null_rates = df.isnull().mean()
+    high_null = null_rates[null_rates > 0.3]
+    if len(high_null):
+        raise ValueError(f"High null rate columns: {high_null.to_dict()}")
+
+    # Range
+    assert df['score'].between(0, 1).all(), "Scores out of [0, 1] range"
+
+    # Duplicates
+    dupes = df.duplicated(subset=['id']).sum()
+    assert dupes == 0, f"{dupes} duplicate IDs found"
+
+    # Value set
+    assert df['status'].isin({'active', 'inactive'}).all(), "Unknown status values"
+```
+
+**Why it matters:** Silent data quality issues (range violations, unexpected nulls, duplicate rows) cause model bugs that surface in production, not in offline evaluation.
+
+</details>
+
+<br>
+
+**Q20: What is categorical dtype and when should you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+**Categorical dtype** stores repeated string values as integer codes with a lookup table, instead of storing the full string per row.
+
+```python
+df['status'] = df['status'].astype('category')   # convert
+df['status'].cat.codes                            # integer codes
+df['status'].cat.categories                       # unique values lookup
+
+# Set at read time:
+df = pd.read_csv('data.csv', dtype={'status': 'category', 'region': 'category'})
+
+# Memory comparison:
+# 1M rows, 5 unique values:
+# object dtype:     ~50 MB (full string per row)
+# category dtype:   ~1 MB  (int8 codes + 5-string table)
+```
+
+Use categorical when:
+- The column has fewer than ~50 unique values relative to total rows
+- The column is used in groupby (categorical groupby is significantly faster)
+- Memory is a constraint and the cardinality is low
+
+**Why it matters:** The single most impactful Pandas memory optimization for most real-world datasets with region, status, or label columns.
+
+</details>
+
 
 # 🔥 Common Candidate Mistakes
 
@@ -510,7 +736,7 @@ Be ready to walk through the entire pipeline end-to-end.
 
 | | |
 |---|---|
-| 📖 Theory | [theory.md](./theory.md) |
+| 📖 Theory | [theory.md](./README.md) |
 | ⚡ Cheatsheet | [cheatsheet.md](./cheatsheet.md) |
 | 💻 Practice | [practice.py](./practice.py) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
@@ -521,4 +747,4 @@ Be ready to walk through the entire pipeline end-to-end.
 
 **Prev:** [← Cheat Sheet](./cheatsheet.md) &nbsp;|&nbsp; **Next:** [Async Python For Ai — Theory →](../24_async_python_for_ai/theory.md)
 
-**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheatsheet.md)
+**Related Topics:** [Theory](./README.md) · [Cheat Sheet](./cheatsheet.md)
