@@ -1,0 +1,7 @@
+# Local practice files — never pushed to GitHub
+**/practice_local.py
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

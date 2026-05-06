@@ -54,20 +54,103 @@ Two main areas:
 
 ---
 
-## 🔹 Stack
+## 🔹 Stack and Heap — Where Python Stores Things
 
-- Stores function calls
-- Stores local variable references
-- Fast access
-- Automatically cleaned when function returns
+Imagine you are sitting at a desk doing homework.
+
+Your desk has two areas:
+
+**Your whiteboard** — you scribble things here while you work. Quick notes, current calculations, temporary reminders. When you finish a task, you wipe it clean. It is fast to write on, but temporary.
+
+**Your drawer** — this is where you store the actual documents, books, and papers. Things that need to stick around longer. It takes slightly more effort to find something in there, but it holds much more.
+
+Python works the same way:
+
+```
+WHITEBOARD (Stack)     DRAWER (Heap)
+──────────────────     ─────────────────
+Holds variable names   Holds the actual values
+Fast access            Stores everything
+Cleared often          Kept until no longer needed
+```
 
 ---
 
-## 🔹 Heap
+## 🔹 Stack — The Whiteboard
 
-- Stores objects
-- Dynamic memory allocation
-- Managed by Python runtime
+The **stack** holds the **names** of your variables — the labels that point to your data.
+
+When you write:
+
+```python
+name = "Alice"
+age  = 25
+city = "London"
+```
+
+Python puts the labels `name`, `age`, and `city` on the stack (the whiteboard).
+
+The stack is:
+- **Fast** — looking up a label is instant
+- **Organised** — each label points to where the real data lives
+- **Temporary** — when labels are no longer needed, they are cleaned up
+
+---
+
+## 🔹 Heap — The Drawer
+
+The **heap** is where the actual **values** live — the real data.
+
+When you write `name = "Alice"`:
+- The text `"Alice"` is stored in the heap (the drawer)
+- The label `name` on the stack points to it
+
+```python
+name = "Alice"
+age  = 25
+city = "London"
+```
+
+What Python actually does in memory:
+
+```
+STACK (labels)          HEAP (actual values)
+──────────────          ──────────────────────
+name ──────────────────► "Alice"
+age  ──────────────────► 25
+city ──────────────────► "London"
+```
+
+The stack holds the arrows (labels).
+The heap holds the boxes (values).
+
+---
+
+## 🔹 Why Two Areas?
+
+You might wonder: why not just store everything in one place?
+
+Here is the reason:
+
+The same value can have many labels pointing to it.
+
+```python
+a = "Alice"
+b = a          # b points to the same "Alice" — not a copy
+```
+
+```
+STACK          HEAP
+──────         ──────────────
+a ─────────►  "Alice"
+b ─────────►  (same "Alice")
+```
+
+If Python stored everything in one flat list, it would have to copy the value every time you create a new variable. That wastes memory.
+
+Instead, Python stores the value once in the heap, and lets as many labels as you want point to it from the stack.
+
+This is the whole point. One value, many labels. No wasted copies.
 
 Almost all objects live in heap.
 
