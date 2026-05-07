@@ -205,6 +205,8 @@ The double `np.where` safe-divide pattern avoids a true division-by-zero (which 
 
 ---
 
+> 📝 **Practice:** [Q14–Q17 — conditional operations](./practice.md#q14--conditional-operations--npwhere-relu)
+
 ## 🔁 Navigation
 
 | | |

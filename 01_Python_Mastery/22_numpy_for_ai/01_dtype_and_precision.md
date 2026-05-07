@@ -155,6 +155,8 @@ The pattern — store small, compute with enough precision — is the same trade
 
 ---
 
+> 📝 **Practice:** [Q1–Q5 — dtype and precision](./practice.md#q1--dtype-and-precision--float32-vs-float64)
+
 ## 🔁 Navigation
 
 | | |

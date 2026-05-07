@@ -475,6 +475,64 @@ Limitation: writes are slow; not suitable for random-write patterns.
 
 <br>
 
+**Q19a: What is the difference between np.where and np.select?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+`np.where(condition, val_if_true, val_if_false)` handles a single binary condition — two possible outputs.
+
+`np.select(conditions, choices, default)` handles an ordered list of conditions, returning the corresponding choice for the first match — equivalent to an if/elif/elif/else chain.
+
+```python
+# np.where — binary
+labels = np.where(arr > 0.5, 'pos', 'neg')
+
+# np.select — multi-branch (first match wins)
+grades = np.select(
+    [scores >= 90, scores >= 70, scores >= 50],
+    ['A', 'B', 'C'],
+    default='F'
+)
+```
+
+**Why it matters:** Using `np.where` for multi-class label assignment requires nesting — `np.select` is cleaner and more readable. Interviewers check whether you know both tools exist.
+
+</details>
+
+<br>
+
+**Q19b: How does np.memmap work and how is it different from np.load(..., mmap_mode='r')?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Both create memory-mapped access to array data on disk, but they differ in purpose:
+
+`np.memmap` is the direct constructor — you specify the dtype, shape, and mode explicitly. It works with raw binary files (`.dat`, `.bin`). You can create new files, overwrite, or open in copy-on-write mode.
+
+```python
+# Create a new large file without loading into RAM
+fp = np.memmap("large.dat", dtype=np.float32, mode="w+", shape=(1_000_000, 256))
+fp[0:10000] = data_chunk   # write one chunk
+fp.flush()
+del fp
+
+# Open for reading — only pages you access load from disk
+fp_r = np.memmap("large.dat", dtype=np.float32, mode="r", shape=(1_000_000, 256))
+batch = np.array(fp_r[0:256])   # explicit copy to RAM
+```
+
+`np.load("file.npy", mmap_mode='r')` is a convenience wrapper — it reads the `.npy` header (shape, dtype) automatically, then memory-maps the data section.
+
+Mode summary: `"r"` read-only, `"r+"` read-write (disk), `"w+"` create/overwrite, `"c"` copy-on-write (writes stay in RAM).
+
+**Why it matters:** The standard pattern for datasets that don't fit in RAM. Sort your batch indices before access (`np.sort(idx)`) to improve sequential disk reads.
+
+</details>
+
+<br>
+
 **Q19: How do you compute percentiles and detect outliers with NumPy?**
 
 <details>

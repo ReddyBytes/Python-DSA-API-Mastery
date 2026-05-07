@@ -229,6 +229,8 @@ print(f"Top-3 components explain: {explained_var_ratio[:3].sum()*100:.1f}% of va
 
 ---
 
+> 📝 **Practice:** [Q22–Q25 — linear algebra](./practice.md#q22--linear-algebra--matmul-vs-dot)
+
 ## 🔁 Navigation
 
 | | |

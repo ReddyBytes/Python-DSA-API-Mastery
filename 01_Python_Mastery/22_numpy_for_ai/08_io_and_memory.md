@@ -220,6 +220,8 @@ else:
 
 ---
 
+> 📝 **Practice:** [Q31–Q35 — I/O and memory](./practice.md#q31--io-and-memory--save-and-load-npy)
+
 ## 🔁 Navigation
 
 | | |

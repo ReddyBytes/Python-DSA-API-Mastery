@@ -208,6 +208,8 @@ lecun_weights = rng.normal(0, lecun_std, size=(fan_in, fan_out))
 
 ---
 
+> 📝 **Practice:** [Q10–Q13 — random and sampling](./practice.md#q10--random-and-sampling--default_rng-and-reproducibility)
+
 ## 🔁 Navigation
 
 | | |

@@ -281,8 +281,12 @@ np.where(condition, val_if_true, val_if_false)
 np.where(x > 0, x, 0)                   # ReLU
 np.where(condition)                      # returns indices where True
 
-# np.select — multi-condition (first match wins)
+# np.select — multi-condition (first match wins, like if/elif/else)
 np.select([c >= 90, c >= 70, c >= 50], ['A', 'B', 'C'], default='F')
+
+# np.where vs np.select:
+# np.where — one condition, two outcomes
+# np.select — multiple conditions, matching choices, one default
 
 # np.clip — enforce min/max bounds
 np.clip(arr, -1.0, 1.0)                 # cap values
@@ -373,12 +377,28 @@ X, y = data['X'], data['y']
 np.savez_compressed('data.npz', X=X)  # smaller file, slower
 
 # Text formats (CSV interop)
-np.savetxt('arr.csv', arr, delimiter=',')
-arr = np.loadtxt('arr.csv', delimiter=',')
+np.savetxt('arr.csv', arr, delimiter=',', fmt='%.4f', header='a,b', comments='')
+arr = np.loadtxt('arr.csv', delimiter=',', skiprows=1)
+arr = np.genfromtxt('arr.csv', delimiter=',', skip_header=1, filling_values=0.0)
 
-# Memory-mapped — large arrays without loading into RAM
+# Memory-mapped via np.load (reads .npy header automatically)
 mmap = np.load('big.npy', mmap_mode='r')   # 'r'=read, 'r+'=read-write, 'w+'=new
 row = mmap[0]   # only loads row 0 from disk
+
+# np.memmap — direct constructor (raw binary files, full control)
+fp = np.memmap('large.dat', dtype=np.float32, mode='w+', shape=(N, D))  # create
+fp[0:chunk] = data; fp.flush(); del fp                                    # write + release
+fp_r = np.memmap('large.dat', dtype=np.float32, mode='r', shape=(N, D)) # read
+
+# memmap modes:
+# 'r'  — read-only (file must exist)
+# 'r+' — read-write, writes go to disk
+# 'w+' — create/overwrite
+# 'c'  — copy-on-write: reads from disk, writes stay in RAM only
+
+# Performance tip: sort batch indices before memmap access
+idx_sorted = np.sort(random_idx)   # sequential disk reads are faster
+batch = np.array(fp_r[idx_sorted]) # explicit copy to RAM for computation
 ```
 
 ---

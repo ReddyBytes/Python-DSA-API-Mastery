@@ -272,6 +272,8 @@ print(f"Skewness (should be ~0 for normal): {skewness.mean():.3f}")
 
 ---
 
+> 📝 **Practice:** [Q18–Q21 — statistics and distributions](./practice.md#q18--statistics-and-distributions--percentile-and-iqr)
+
 ## 🔁 Navigation
 
 | | |

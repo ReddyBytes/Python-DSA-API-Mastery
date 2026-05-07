@@ -174,6 +174,8 @@ a.T.strides # (8, 32) — transposed: column step is now the fast dimension
 
 ---
 
+> 📝 **Practice:** [Q6–Q9 — views and copies](./practice.md#q6--views-and-copies--identify-view-or-copy)
+
 ## 🔁 Navigation
 
 | | |

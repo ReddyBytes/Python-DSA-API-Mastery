@@ -247,6 +247,8 @@ print(A_c.flags["C_CONTIGUOUS"])   # True
 
 ---
 
+> 📝 **Practice:** [Q26–Q30 — einsum and performance](./practice.md#q26--einsum-and-performance--basic-notation)
+
 ## 🔁 Navigation
 
 | | |
