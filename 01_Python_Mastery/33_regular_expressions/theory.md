@@ -73,6 +73,8 @@ valid = re.fullmatch(r"\d{5}", "12345")    # ZIP code validation
 invalid = re.fullmatch(r"\d{5}", "1234")   # None — doesn't match fully
 ```
 
+> 📝 **Practice:** [Q1–Q5 — Core Functions](./practice.md#q1)
+
 ---
 
 ## 2️⃣ Pattern Building Blocks
@@ -114,6 +116,8 @@ GROUPS
 \1, \2        Backreference to group 1, 2
 |             Alternation: A|B (match A or B)
 ```
+
+> 📝 **Practice:** [Q6–Q10 — Pattern Building Blocks](./practice.md#q6)
 
 ---
 
@@ -157,6 +161,8 @@ HEX_COLOR = r"#(?:[0-9a-fA-F]{3}){1,2}\b"
 HTML_TAG = r"</?[a-zA-Z][a-zA-Z0-9]*(?:\s[^>]*)?\s*/?>"
 ```
 
+> 📝 **Practice:** [Q11–Q14 — Common Patterns](./practice.md#q11)
+
 ---
 
 ## 4️⃣ Named Groups and Complex Extraction
@@ -198,6 +204,8 @@ df = pd.DataFrame(entries)
 print(df)
 ```
 
+> 📝 **Practice:** [Q15–Q18 — Named Groups and Complex Extraction](./practice.md#q15)
+
 ---
 
 ## 5️⃣ Lookahead and Lookbehind
@@ -223,6 +231,8 @@ text = "python3 is better than python2"
 modern = re.findall(r"python(?!2)\d?", text)
 print(modern)   # ['python3']
 ```
+
+> 📝 **Practice:** [Q19–Q22 — Lookahead and Lookbehind](./practice.md#q19)
 
 ---
 
@@ -255,6 +265,8 @@ email_pattern = re.compile(r"""
 re.findall(r"^\w+", text, re.MULTILINE | re.IGNORECASE)
 ```
 
+> 📝 **Practice:** [Q23–Q25 — Flags](./practice.md#q23)
+
 ---
 
 ## 7️⃣ Pre-compiling for Performance
@@ -271,6 +283,8 @@ for line in lines:
     emails = pattern.findall(line)
     clean  = pattern.sub("[REDACTED]", line)
 ```
+
+> 📝 **Practice:** [Q26–Q28 — Pre-compiling for Performance](./practice.md#q26)
 
 ---
 
@@ -291,7 +305,7 @@ for line in lines:
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../32_streamlit_flask/theory.md](../32_streamlit_flask/theory.md) |
 | ➡️ Next Module | [../99_interview_master/README.md](../99_interview_master/README.md) |
 

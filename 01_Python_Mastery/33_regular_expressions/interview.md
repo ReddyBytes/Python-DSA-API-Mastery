@@ -2,6 +2,8 @@
 
 ---
 
+## Basic (0–2 years)
+
 **Q: What is the difference between `re.match()`, `re.search()`, and `re.fullmatch()`?**
 
 `re.match()` only succeeds if the pattern matches at the **start** of the string — it doesn't scan forward. `re.search()` scans through the entire string and returns the first match anywhere. `re.fullmatch()` requires the pattern to match the **entire** string, not just a part of it. In practice, `re.search()` is what you almost always want; `re.match()` is a common source of bugs because developers forget it anchors to the start. `re.fullmatch()` is useful for input validation — ZIP codes, phone numbers — where you need to confirm the whole string matches a format.
@@ -13,6 +15,8 @@
 Greedy quantifiers (`*`, `+`, `?`, `{n,m}`) consume **as much as possible** while still allowing the overall pattern to match. This causes problems with patterns like `<(.*)>` on `<a>click</a>`: instead of matching just `a`, the `.*` expands to grab `a>click</a`, giving you `a>click</a` as the group. The fix is the **non-greedy (lazy)** form `.*?`, which matches as little as possible: `<(.*?)>` correctly returns `a` and then `a`. Rule of thumb: use lazy quantifiers when you're matching delimited content where the delimiter can appear multiple times.
 
 ---
+
+## Intermediate (2–5 years)
 
 **Q: What are named groups and why use them over positional groups?**
 
@@ -32,6 +36,8 @@ Lookaheads and lookbehinds are **zero-width assertions** — they check what's a
 
 ---
 
+## Advanced (5+ years)
+
 **Q: What is catastrophic backtracking and how do you avoid it?**
 
 Catastrophic backtracking happens when a regex engine has to explore an exponential number of partial match possibilities before determining there's no match. The classic example: `(a+)+b` on the string `"aaaaaaaaaaaaaaac"`. Because `a+` can match varying numbers of `a`s and the outer `+` repeats it, the engine explores O(2^n) combinations trying to find a `b` that never appears. This can hang a server. Fixes: (1) avoid nested quantifiers on the same character class, (2) use atomic groups or possessive quantifiers if your engine supports them, (3) restructure to use a possessive `a++` which never backtracks, (4) test patterns on pathological inputs before deploying, (5) set a timeout on the match operation.
@@ -44,6 +50,12 @@ Both approaches work, but `re.compile()` caches the compiled pattern object and 
 
 ---
 
+**Q: What does `re.DOTALL` do and when is it essential?**
+
+By default, the `.` metacharacter matches any character **except a newline** (`\n`). This means a pattern like `<body>(.*?)</body>` will fail on multi-line HTML because `.*?` won't cross line boundaries. `re.DOTALL` (alias `re.S`) removes that exception, making `.` match truly any character including newlines. It is essential whenever you need to match content that spans multiple lines — HTML blocks, JSON payloads, docstrings, or multi-line log entries. Always pair it with a lazy quantifier (`.*?`) so the match stops at the first closing delimiter rather than the last.
+
+---
+
 ## 🔁 Navigation
 
 | | |
@@ -51,7 +63,7 @@ Both approaches work, but `re.compile()` caches the compiled pattern object and 
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../32_streamlit_flask/theory.md](../32_streamlit_flask/theory.md) |
 | ➡️ Next Module | [../99_interview_master/README.md](../99_interview_master/README.md) |
 

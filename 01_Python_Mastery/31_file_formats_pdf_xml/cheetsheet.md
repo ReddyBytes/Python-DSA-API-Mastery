@@ -189,3 +189,103 @@ for enc in encodings:
 3. For large CSVs, use `usecols` and `dtype` upfront — don't load then filter in memory
 4. Parquet is almost always better than CSV for analytics — use it whenever you control both reader and writer
 5. Never pickle untrusted data — use JSON or parquet for portable serialization
+
+---
+
+## pdfplumber vs pypdf
+
+| | pdfplumber | pypdf |
+|---|---|---|
+| Text extraction | Coordinate-aware, preserves layout | Raw stream — no layout |
+| Tables | `page.extract_tables()` — best for tables | No table support |
+| Speed | Slower (full parse) | Fast (lightweight) |
+| Use case | Tables, visual layout, column text | Page count, metadata, simple text |
+| Dependency | pdfminer.six (heavy) | Minimal |
+| Scanned PDFs | Returns `None` — needs OCR | Returns `None` — needs OCR |
+
+---
+
+## Parquet vs CSV Performance
+
+| | CSV | Parquet (snappy) |
+|---|---|---|
+| Storage | Plain text — no compression | Columnar + compressed: 5-10x smaller |
+| Column read | Full file scan | Only requested columns read from disk |
+| Type safety | All strings — types inferred on load | Types embedded in file |
+| Speed (analytics) | Baseline | 10-50x faster for column-selective reads |
+| Compatibility | Universal | Requires Arrow/Parquet reader |
+| Best for | Human-readable exchange, small files | Data pipelines, S3, Spark, analytics |
+
+---
+
+## Feather Format
+
+```python
+# Feather = Apache Arrow IPC on disk — near-zero serialization overhead
+df.to_feather("data.feather")          # fastest write
+df = pd.read_feather("data.feather")   # fastest read
+
+# Choose feather when:
+#   - Temporary in-process handoff (Python → Python, Python → R)
+#   - Maximum throughput matters more than file size
+#   - Data will NOT be archived long-term
+
+# Choose Parquet when:
+#   - Long-term storage or S3 data lake
+#   - Spark / Hive / Athena consumption
+#   - Compression is important
+```
+
+---
+
+## ElementTree XPath Quick Reference
+
+```python
+import xml.etree.ElementTree as ET
+
+root.findall("child")                      # direct children named "child"
+root.findall(".//child")                   # all descendants named "child"
+root.findall(".//child[@attr='value']")    # attribute filter
+root.findall(".//parent/child")            # child of named parent
+root.find("child")                         # first match only
+root.findtext("child")                     # text of first match
+el.get("attr")                             # read attribute (not element text)
+el.text                                    # element text content
+el.tag                                     # element tag name
+
+# ElementTree XPath LIMITS (not supported):
+#   - contains(), starts-with() functions
+#   - text() node selector
+#   - | union operator
+#   - parent:: / following-sibling:: axes
+# → Use lxml for full XPath 1.0 support
+```
+
+---
+
+## openpyxl Cell Formatting
+
+```python
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+
+# Font
+ws["A1"].font = Font(bold=True, size=14, italic=False, color="FF0000")
+
+# Background fill
+ws["A1"].fill = PatternFill(fgColor="FFFF00", fill_type="solid")
+
+# Alignment
+ws["A1"].alignment = Alignment(horizontal="center", vertical="top", wrap_text=True)
+
+# Border
+thin = Side(style="thin")
+ws["A1"].border = Border(left=thin, right=thin, top=thin, bottom=thin)
+
+# Column width / row height
+ws.column_dimensions["A"].width = 20
+ws.row_dimensions[1].height = 30
+
+# Tip: pandas to_excel() writes data only — no style support.
+# Pattern: write data with pandas, then load_workbook to apply styles.
+```
+

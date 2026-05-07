@@ -73,6 +73,8 @@ with col2:
         st.info("Click 'Predict Price' to get an estimate")
 ```
 
+> 📝 **Practice:** [Q1–Q4 — Streamlit basics](./practice.md#q1--streamlit-basics--stwrite-and-stmarkdown-)
+
 ---
 
 ## 2️⃣ Streamlit Key Widgets
@@ -129,6 +131,8 @@ for i in range(100):
     progress.progress(i + 1)
 ```
 
+> 📝 **Practice:** [Q5–Q8 — Streamlit widgets](./practice.md#q5--widgets--stslider-and-stnumber_input-)
+
 ---
 
 ## 3️⃣ Streamlit Session State and Caching
@@ -166,6 +170,8 @@ def load_model():
 df    = load_dataset("large_file.csv")   # cached after first call
 model = load_model()                     # cached after first load
 ```
+
+> 📝 **Practice:** [Q9–Q12 — Session state + caching](./practice.md#q9--session-state--counter-across-reruns-)
 
 ---
 
@@ -229,6 +235,8 @@ response = requests.post(
 print(response.json())   # {"prediction": 800000, "currency": "USD", ...}
 ```
 
+> 📝 **Practice:** [Q13–Q17 — Flask REST API](./practice.md#q13--flask-rest-api--app-factory-and-health-route-)
+
 ---
 
 ## 5️⃣ Flask with Environment Config
@@ -251,6 +259,8 @@ def secure():
         return jsonify({"error": "Unauthorized"}), 401
     return jsonify({"data": "secret"})
 ```
+
+> 📝 **Practice:** [Q18–Q21 — Flask config](./practice.md#q18--flask-config--osenviron-secrets-)
 
 ---
 
@@ -285,6 +295,8 @@ Use FastAPI (instead of Flask) when:
 - **Running Flask in debug mode in production**: `debug=True` exposes the interactive debugger and is a security vulnerability.
 - **Forgetting CORS in Flask APIs**: if a JavaScript frontend calls your Flask API from a different domain, you need `flask-cors` or the browser will block the requests.
 
+> 📝 **Practice:** [Q22–Q25 — Decision guide + common mistakes](./practice.md#q22--decision-guide--streamlit-vs-flask-)
+
 ---
 
 ## 🔁 Navigation
@@ -294,7 +306,7 @@ Use FastAPI (instead of Flask) when:
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../31_file_formats_pdf_xml/theory.md](../31_file_formats_pdf_xml/theory.md) |
 | ➡️ Next Module | [../33_regular_expressions/theory.md](../33_regular_expressions/theory.md) |
 

@@ -237,3 +237,93 @@ r = requests.get("http://localhost:5000/search", params={"q": "laptop"})
 3. Never use `debug=True` in Flask production — it exposes an interactive debugger
 4. Always read secrets from environment variables in Flask — never hardcode
 5. Use FastAPI over Flask for new projects — it's faster, has automatic docs, and type safety via Pydantic
+
+---
+
+## Flask App Factory + Blueprints
+
+```python
+# myapi/auth/routes.py
+from flask import Blueprint, jsonify
+auth_bp = Blueprint("auth", __name__)
+
+@auth_bp.route("/login", methods=["POST"])
+def login():
+    return jsonify({"token": "abc123"})
+
+# myapi/__init__.py
+from flask import Flask
+from .auth.routes import auth_bp
+from .items.routes import items_bp
+
+def create_app(env="production"):
+    app = Flask(__name__)
+    app.config["SECRET_KEY"] = "change-me"
+    app.register_blueprint(auth_bp,  url_prefix="/auth")   # /auth/login
+    app.register_blueprint(items_bp, url_prefix="/items")  # /items/
+    return app
+
+# app.py (entry point)
+from myapi import create_app
+app = create_app()
+```
+
+```
+myapi/
+├── app.py
+├── myapi/
+│   ├── __init__.py      ← create_app()
+│   ├── config.py        ← DevConfig, ProdConfig
+│   ├── auth/routes.py   ← auth_bp
+│   └── items/routes.py  ← items_bp
+└── .env                 ← gitignored
+```
+
+---
+
+## Flask Environment Config (.env)
+
+```bash
+# .env  (NEVER commit)
+SECRET_KEY=my-secret-key
+API_KEY=sk-prod-abc123
+DATABASE_URL=postgresql://user:pass@localhost/mydb
+```
+
+```python
+# pip install python-dotenv
+from dotenv import load_dotenv
+import os
+
+load_dotenv()   # reads .env, injects into os.environ
+
+SECRET_KEY   = os.environ["SECRET_KEY"]       # KeyError if missing — good!
+API_KEY      = os.environ.get("API_KEY")      # None if missing
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///dev.db")  # has default
+```
+
+---
+
+## Streamlit Multipage Apps
+
+```
+my_app/
+├── app.py          ← main entry point (shown in sidebar as "App")
+└── pages/
+    ├── 1_Dashboard.py    ← page 1
+    ├── 2_Upload.py       ← page 2
+    └── 3_Results.py      ← page 3
+```
+
+```bash
+streamlit run app.py   # Streamlit auto-discovers pages/ directory
+```
+
+```python
+# Navigate programmatically between pages
+import streamlit as st
+if st.button("Go to Results"):
+    st.switch_page("pages/3_Results.py")
+
+# st.session_state is shared across all pages in the same session
+```

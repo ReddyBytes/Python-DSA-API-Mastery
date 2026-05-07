@@ -62,6 +62,8 @@ df = pd.json_normalize(nested, sep=".")
 print(df)
 ```
 
+> 📝 **Practice:** [Q1–Q4 — JSON](./practice.md#q1--json--jsonloads--jsondumps-)
+
 ---
 
 ## 2️⃣ CSV — Comma-Separated Values
@@ -97,6 +99,8 @@ df = pd.read_csv("data.csv",
 
 df.to_csv("output.csv", index=False, encoding="utf-8")
 ```
+
+> 📝 **Practice:** [Q5–Q8 — CSV](./practice.md#q5--csv--csvreader-basics-)
 
 ---
 
@@ -143,6 +147,8 @@ ws["A1"].fill = PatternFill(fgColor="FFFF00", fill_type="solid")
 wb.save("styled_output.xlsx")
 ```
 
+> 📝 **Practice:** [Q9–Q12 — Excel](./practice.md#q9--excel--openpyxl-read-cells-)
+
 ---
 
 ## 4️⃣ PDF Extraction
@@ -184,6 +190,8 @@ for page_num, page in enumerate(doc):
 
 doc.close()
 ```
+
+> 📝 **Practice:** [Q13–Q16 — PDF Extraction](./practice.md#q13--pdf--pdfplumber-text-extraction-)
 
 ---
 
@@ -234,6 +242,8 @@ products = data["catalog"]["product"]
 print(products[0]["name"])
 ```
 
+> 📝 **Practice:** [Q17–Q20 — XML Parsing](./practice.md#q17--xml--elementtree-parse-from-string-)
+
 ---
 
 ## 6️⃣ High-Performance Formats
@@ -259,6 +269,8 @@ df.to_feather("data.feather")
 df = pd.read_feather("data.feather")
 ```
 
+> 📝 **Practice:** [Q21–Q25 — High-Performance Formats](./practice.md#q21--high-performance--parquet-readwrite-with-pandas-)
+
 ---
 
 ## Common Mistakes to Avoid ⚠️
@@ -277,7 +289,7 @@ df = pd.read_feather("data.feather")
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../30_sql_with_python/theory.md](../30_sql_with_python/theory.md) |
 | ➡️ Next Module | [../32_streamlit_flask/theory.md](../32_streamlit_flask/theory.md) |
 

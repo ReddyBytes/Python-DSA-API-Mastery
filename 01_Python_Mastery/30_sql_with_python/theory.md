@@ -97,6 +97,8 @@ print(row["name"])  # ← access by column name, not index
 print(row["age"])
 ```
 
+> 📝 **Practice:** [Q1–Q3 — sqlite3 Module](./practice.md#q1)
+
 ---
 
 ## 2️⃣ CRUD Operations
@@ -177,6 +179,8 @@ with sqlite3.connect("analytics.db") as conn:
     conn.execute("DELETE FROM products WHERE price < ?", (100.0,))
     conn.commit()
 ```
+
+> 📝 **Practice:** [Q4–Q7 — CRUD Operations](./practice.md#q4)
 
 ---
 
@@ -268,6 +272,8 @@ with sqlite3.connect("analytics.db") as conn:
     """).fetchall()
 ```
 
+> 📝 **Practice:** [Q8–Q10 — SQL Query Patterns](./practice.md#q8)
+
 ---
 
 ## 4️⃣ Parameterized Queries — Why They Matter
@@ -301,6 +307,8 @@ conn.execute(
 For SQLAlchemy and other libraries, the placeholder syntax differs:
 - sqlite3: `?`
 - SQLAlchemy / psycopg2: `:name` or `%(name)s`
+
+> 📝 **Practice:** [Q11–Q13 — Parameterized Queries](./practice.md#q11)
 
 ---
 
@@ -424,6 +432,8 @@ RIGHT JOIN  →  all right rows + matched left (right wins)
 FULL OUTER  →  everything from both (union)
 ```
 
+> 📝 **Practice:** [Q14–Q16 — JOINs](./practice.md#q14)
+
 ---
 
 ## 6️⃣ SQLAlchemy — Core vs ORM
@@ -531,6 +541,8 @@ with Session(engine) as session:
 - **Core**: data pipelines, ETL, analytics queries, bulk inserts. You want control.
 - **ORM**: web applications, REST APIs, when you're working with related objects.
 
+> 📝 **Practice:** [Q17–Q20 — SQLAlchemy](./practice.md#q17)
+
 ---
 
 ## 7️⃣ Pandas + SQL — Bidirectional Data Flow
@@ -607,6 +619,8 @@ df_agg = df.groupby("product_id")["revenue"].sum().reset_index()
 df_agg.to_sql("daily_revenue", engine, if_exists="append", index=False)
 ```
 
+> 📝 **Practice:** [Q21–Q23 — Pandas + SQL](./practice.md#q21)
+
 ---
 
 ## 8️⃣ DuckDB — Modern In-Process Analytics
@@ -674,6 +688,8 @@ DuckDB        →  analytics, DataFrames, Parquet, OLAP workloads
 
 DuckDB is increasingly used in ML pipelines: run feature engineering SQL on Parquet files before training, validate data without spinning up a full database server.
 
+> 📝 **Practice:** [Q24–Q26 — DuckDB](./practice.md#q24)
+
 ---
 
 ## 9️⃣ Transactions and ACID
@@ -729,6 +745,8 @@ with Session(engine) as session:
 
 The `with Session(engine) as session:` block rolls back automatically on unhandled exceptions.
 
+> 📝 **Practice:** [Q27–Q29 — Transactions and ACID](./practice.md#q27)
+
 ---
 
 ## 🔟 Indexes and Performance
@@ -774,6 +792,8 @@ with sqlite3.connect("analytics.db") as conn:
     # With index:    "SEARCH products USING INDEX idx_category"
 ```
 
+> 📝 **Practice:** [Q30–Q32 — Indexes and Performance](./practice.md#q30)
+
 ---
 
 ## 1️⃣1️⃣ Connection Pooling
@@ -812,6 +832,8 @@ with engine.connect() as conn:
 
 For sqlite3 (single-file, no concurrency), pooling isn't relevant. It matters for PostgreSQL, MySQL, and other server-based databases.
 
+> 📝 **Practice:** [Q33–Q35 — Connection Pooling](./practice.md#q33)
+
 ---
 
 ## Summary
@@ -840,4 +862,4 @@ Next: `../31_file_formats_pdf_xml/theory.md`
 
 **Prev:** [← Web Scraping](../29_web_scraping/theory.md) &nbsp;|&nbsp; **Next:** [File Formats: PDF & XML →](../31_file_formats_pdf_xml/theory.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.py)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md) · [Practice Local](./practice_local.py)

@@ -241,6 +241,115 @@ Always call `session.commit()` explicitly to persist changes.
 
 ---
 
+## Q14: How do you use DuckDB to run SQL directly on a pandas DataFrame?
+
+DuckDB references Python variables as virtual SQL tables by name — no file, no `to_sql()`, no intermediate step required.
+
+```python
+import duckdb, pandas as pd
+
+df = pd.DataFrame({
+    "category": ["audio", "audio", "laptops"],
+    "price":    [249.99, 549.99, 2499.99],
+})
+
+result = duckdb.execute(
+    "SELECT category, AVG(price) AS avg FROM df GROUP BY category"
+).df()   # ← .df() returns a pandas DataFrame
+```
+
+The variable name in the SQL (`df`) must match the Python variable name. This is DuckDB's killer feature for data science: SQL on in-memory DataFrames with zero serialization overhead.
+
+---
+
+## Q15: What is the SQLAlchemy 2.0 text() requirement and why was it introduced?
+
+In SQLAlchemy 2.0, raw SQL strings must be wrapped in `text()` before passing to `execute()`. Bare string execution was removed.
+
+```python
+from sqlalchemy import text
+
+# SQLAlchemy 2.0 — required
+with engine.connect() as conn:
+    result = conn.execute(
+        text("SELECT * FROM products WHERE price > :min"),
+        {"min": 500}
+    )
+
+# SQLAlchemy 1.x — bare string (now raises in 2.0)
+# conn.execute("SELECT * FROM products WHERE price > 500")
+```
+
+Why it was introduced: `text()` forces explicit parameterization and signals to the reader that raw SQL is intentional. It also enables SQLAlchemy to inspect and validate the statement before execution.
+
+---
+
+## Q16: What security checks should you do before deploying a Python app that queries SQL?
+
+Five checks:
+
+1. **No f-strings or .format() in SQL** — grep the codebase for `f"SELECT` or `"SELECT".format(` and flag every one
+2. **All user inputs go through placeholders** (`?` or `:name`) — never concatenated
+3. **ORM queries only** in web route handlers — `session.query(Model).filter(...)` parameterizes automatically
+4. **Principle of least privilege** — the DB user your app connects as should have only the permissions it needs (SELECT/INSERT/UPDATE, not DROP/CREATE)
+5. **EXPLAIN slow queries** — check for full table scans (`SCAN`) on production tables and add indexes
+
+```python
+# Automated grep check (run in CI):
+# grep -rn 'f"SELECT\|f"INSERT\|f"UPDATE\|f"DELETE' --include="*.py" .
+```
+
+---
+
+## Q17: How do you read EXPLAIN QUERY PLAN output in SQLite?
+
+```python
+import sqlite3
+
+with sqlite3.connect("mydb.db") as conn:
+    plan = conn.execute(
+        "EXPLAIN QUERY PLAN SELECT * FROM products WHERE category = 'laptops'"
+    ).fetchall()
+    for row in plan:
+        print(row)
+```
+
+Key output patterns:
+
+| Output | Meaning |
+|---|---|
+| `SCAN products` | Full table scan — reads every row. Slow at scale. |
+| `SEARCH products USING INDEX idx_category` | Index lookup — fast. |
+| `SEARCH products USING COVERING INDEX idx_cat_price` | Covering index — never touches the table. Fastest. |
+| `USE TEMP B-TREE FOR ORDER BY` | No index on the ORDER BY column — SQLite sorts in memory. |
+
+Run `EXPLAIN QUERY PLAN` any time a query feels slow. Add an index if you see `SCAN` on a large table.
+
+---
+
+## Q18: What are the recommended connection pool settings for a production web application?
+
+```python
+from sqlalchemy import create_engine
+
+engine = create_engine(
+    "postgresql://user:pass@host/db",
+    pool_size=10,        # persistent connections (start: match your thread/worker count)
+    max_overflow=20,     # burst capacity (2x pool_size is a safe starting point)
+    pool_timeout=30,     # seconds to wait for a free connection before raising TimeoutError
+    pool_recycle=1800,   # recycle connections every 30 min (prevents "server gone away")
+    pool_pre_ping=True,  # test connection health before use (handles DB restarts)
+)
+```
+
+Tuning guidance:
+- Start with `pool_size` equal to your web worker count (e.g., 4 Gunicorn workers = pool_size=4)
+- `max_overflow` absorbs traffic bursts; set it 2-3x pool_size
+- `pool_recycle` is critical on cloud DBs that aggressively close idle connections
+- `pool_pre_ping=True` prevents errors when the DB restarts or the connection goes stale
+
+---
+
 ## 🔁 Navigation
 
 Previous: `../29_web_scraping/theory.md`
@@ -252,4 +361,4 @@ Next: `../31_file_formats_pdf_xml/theory.md`
 
 **Prev:** [← Web Scraping](../29_web_scraping/theory.md) &nbsp;|&nbsp; **Next:** [File Formats: PDF & XML →](../31_file_formats_pdf_xml/theory.md)
 
-**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheetsheet.md) · [Practice](./practice.py)
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheetsheet.md) · [Practice](./practice.md)

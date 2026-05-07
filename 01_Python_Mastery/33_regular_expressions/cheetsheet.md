@@ -202,6 +202,7 @@ for line in lines:
 | match vs search | `re.match()` only at start | `re.search()` anywhere |
 | Missing raw string | `"\n"` = newline in regex | `r"\n"` = literal `\n` |
 | `-` in char class | `[a-z0-9-]` can be ambiguous | `[a-z0-9\-]` or `[a-z0-9-]` at end |
+| Catastrophic backtracking | `(a+)+b` on long strings = exponential | Flatten to `a+b`; avoid nested quantifiers on same class |
 
 ---
 
@@ -212,7 +213,7 @@ for line in lines:
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../32_streamlit_flask/theory.md](../32_streamlit_flask/theory.md) |
 | ➡️ Next Module | [../99_interview_master/README.md](../99_interview_master/README.md) |
 

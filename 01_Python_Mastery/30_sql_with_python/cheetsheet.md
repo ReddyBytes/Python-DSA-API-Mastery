@@ -329,6 +329,125 @@ D  Durability  — committed data survives crashes (written to disk)
 
 ---
 
+## Connection Pooling
+
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.pool import NullPool, QueuePool
+
+# Standard pool (production web apps)
+engine = create_engine(
+    "postgresql://user:pass@host/db",
+    pool_size=10,        # persistent connections kept open
+    max_overflow=20,     # extra connections under peak load
+    pool_timeout=30,     # seconds before TimeoutError
+    pool_recycle=1800,   # recycle after 30 min (avoid stale connections)
+    pool_pre_ping=True,  # health-check before use
+)
+
+# No pooling (serverless / multiprocessing / scripts)
+engine = create_engine("postgresql://...", poolclass=NullPool)
+```
+
+---
+
+## SQL Injection Prevention
+
+```python
+# NEVER — f-string interpolation enables SQL injection
+# query = f"SELECT * FROM users WHERE name = '{user_input}'"
+
+# ALWAYS — parameterized placeholders
+conn.execute("SELECT * FROM users WHERE name = ?", (user_input,))          # sqlite3
+session.query(User).filter(User.name == user_input)                         # SQLAlchemy ORM
+conn.execute(text("SELECT * FROM users WHERE name = :n"), {"n": user_input}) # SQLAlchemy Core
+
+# Placeholder syntax by library:
+# sqlite3      →  ?  or  :name
+# psycopg2     →  %s  or  %(name)s
+# SQLAlchemy   →  :name
+```
+
+---
+
+## EXPLAIN QUERY PLAN (sqlite3)
+
+```python
+import sqlite3
+
+with sqlite3.connect("mydb.db") as conn:
+    plan = conn.execute(
+        "EXPLAIN QUERY PLAN SELECT * FROM products WHERE category = 'laptops'"
+    ).fetchall()
+    for row in plan:
+        print(row)
+
+# Output guide:
+# SCAN products                              -> full table scan (slow at scale)
+# SEARCH products USING INDEX idx_category   -> index lookup (fast)
+# SEARCH products USING COVERING INDEX ...   -> covers all query columns (fastest)
+# USE TEMP B-TREE FOR ORDER BY               -> no index on ORDER BY column (add one)
+```
+
+---
+
+## DuckDB — DataFrame + CSV + Parquet
+
+```python
+import duckdb, pandas as pd
+
+con = duckdb.connect()   # in-memory
+
+# SQL on a pandas DataFrame (killer feature)
+df = pd.DataFrame({"category": ["audio","laptops"], "price": [249.99, 2499.99]})
+result = con.execute(
+    "SELECT category, AVG(price) AS avg FROM df GROUP BY category"
+).df()   # .df() returns a pandas DataFrame
+
+# SQL on a CSV file (no pd.read_csv needed)
+result = con.execute("SELECT * FROM read_csv_auto('data.csv') WHERE price > 500").df()
+
+# SQL on a Parquet file
+result = con.execute("SELECT * FROM read_parquet('data.parquet') LIMIT 100").df()
+
+# Persistent file (instead of in-memory)
+con = duckdb.connect("analytics.duckdb")
+
+# DuckDB vs sqlite3:
+# sqlite3  -> row-store, OLTP, transactions, no extra deps, small data
+# DuckDB   -> column-store, OLAP, analytics, DataFrames, Parquet, large aggregations
+```
+
+---
+
+## SQLAlchemy 2.0 text() — Raw SQL
+
+```python
+from sqlalchemy import create_engine, text
+
+engine = create_engine("sqlite:///mydb.db")
+
+# text() is required in SQLAlchemy 2.0 for raw SQL strings
+with engine.connect() as conn:
+    result = conn.execute(
+        text("SELECT name, price FROM products WHERE price > :min AND category = :cat"),
+        {"min": 500, "cat": "laptops"}   # named params, not ?
+    )
+    for row in result:
+        print(row.name, row.price)       # access by attribute
+
+# text() with session (ORM transactions)
+from sqlalchemy.orm import Session
+with Session(engine) as session:
+    session.execute(
+        text("UPDATE products SET price = :p WHERE name = :n"),
+        {"p": 1999.99, "n": "MacBook Pro"}
+    )
+    session.commit()
+```
+
+---
+
 ## 🔁 Navigation
 
 Previous: `../29_web_scraping/theory.md`
@@ -340,4 +459,4 @@ Next: `../31_file_formats_pdf_xml/theory.md`
 
 **Prev:** [← Web Scraping](../29_web_scraping/theory.md) &nbsp;|&nbsp; **Next:** [File Formats: PDF & XML →](../31_file_formats_pdf_xml/theory.md)
 
-**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md) · [Practice](./practice.py)
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

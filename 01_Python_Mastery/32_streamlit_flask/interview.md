@@ -26,6 +26,24 @@ Options by complexity: (1) **Streamlit Community Cloud** (free) — push your ap
 
 ---
 
+**Q: How do you structure a large Flask application using blueprints and the app factory pattern?**
+
+For anything beyond a small script, Flask's recommended architecture is the **app factory pattern** combined with **blueprints**. A blueprint is a collection of routes, error handlers, and templates that belong to one domain (e.g., `auth`, `items`, `predictions`). You define a blueprint in a submodule: `auth_bp = Blueprint("auth", __name__)`, attach routes to it with `@auth_bp.route(...)`, then register it on the app at startup: `app.register_blueprint(auth_bp, url_prefix="/auth")`. The app factory is a `create_app(config="production")` function that constructs and returns the Flask app, loading config and registering all blueprints inside. Benefits: (1) testable — `create_app("testing")` returns a fresh app per test with test config; (2) no circular imports — each blueprint imports nothing from the main app; (3) separation of concerns — each domain's code is entirely self-contained. The standard folder layout is one subfolder per domain, each with its own `__init__.py` (defining the blueprint) and `routes.py`.
+
+---
+
+**Q: How does `st.session_state` work and what are the common pitfalls?**
+
+`st.session_state` is a dictionary-like namespace that Streamlit preserves across reruns within a single browser session. It resets when the user closes or refreshes the tab. The core pattern: always initialize with a guard — `if "key" not in st.session_state: st.session_state.key = default_value`. Without the guard, the value resets to the default on every rerun, defeating the purpose. Common pitfalls: (1) **forgetting the guard** — the most common mistake, causes the counter/chat history/flag to reset on every widget interaction; (2) **mutating complex objects in-place** — assigning `st.session_state.list = []` works, but `st.session_state.list.append(x)` may not trigger a rerun — use `st.rerun()` explicitly if the UI doesn't update; (3) **sharing state across users** — `st.session_state` is per-user, per-session, never shared; use a database or Redis for cross-user state.
+
+---
+
+**Q: How do you build a multipage Streamlit app?**
+
+Streamlit supports multipage apps natively. Create a `pages/` directory alongside your main `app.py`. Any `.py` file in `pages/` becomes a page — Streamlit auto-generates a sidebar navigation entry for each one. File name determines the page name: `pages/1_Dashboard.py` → "Dashboard", `pages/2_Settings.py` → "Settings". The number prefix controls ordering. Each page is a full independent Streamlit script — `st.session_state` is shared across all pages within the same session. For programmatic navigation (redirect from one page to another via code), use `st.switch_page("pages/target.py")`. This pattern scales well for ML apps: one page for data upload, one for model training, one for results visualization.
+
+---
+
 ## 🔁 Navigation
 
 | | |
@@ -33,7 +51,7 @@ Options by complexity: (1) **Streamlit Community Cloud** (free) — push your ap
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../31_file_formats_pdf_xml/theory.md](../31_file_formats_pdf_xml/theory.md) |
 | ➡️ Next Module | [../33_regular_expressions/theory.md](../33_regular_expressions/theory.md) |
 
