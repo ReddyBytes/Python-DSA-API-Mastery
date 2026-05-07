@@ -218,6 +218,10 @@ Reading the output: cells close to +1 (deep red) flag redundant features — add
 
 ---
 
+> 📝 **Practice:** [Q11–Q15 — color and colormaps](./practice.md#q11)
+
+---
+
 ## Navigation
 
 | | |

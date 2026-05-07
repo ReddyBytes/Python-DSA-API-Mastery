@@ -447,6 +447,131 @@ That answer sounds like 5+ years experience.
 
 ---
 
+# 🔬 Deep-Dive Additions
+
+**Q18: What does `gc.get_count()` return and how do you interpret it?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+`gc.get_count()` returns a tuple `(n0, n1, n2)` — the number of tracked objects allocated since the last collection at each generation level.
+
+```python
+import gc
+gc.collect()
+print(gc.get_count())   # e.g. (45, 3, 0)
+# n0: new objects since last gen-0 collection
+# n1: how many times gen-0 was collected since last gen-1 collection
+# n2: how many times gen-1 was collected since last gen-2 collection
+```
+
+When `n0` reaches the threshold (default 700), gen 0 is scanned. When `n1` reaches 10, gen 1 is scanned. This tells you how close the GC is to triggering.
+
+</details>
+
+<br>
+
+**Q19: How does `tracemalloc` help find memory leaks in production?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+`tracemalloc` records which file and line number allocated each block of memory. The workflow is:
+
+```python
+import tracemalloc
+
+tracemalloc.start()
+baseline = tracemalloc.take_snapshot()
+
+# ... run suspect code ...
+
+after = tracemalloc.take_snapshot()
+diff = after.compare_to(baseline, "lineno")
+
+for stat in diff[:5]:
+    print(stat)   # shows file:line, count, size delta
+```
+
+The diff is sorted by size increase — the top entries are exactly the lines leaking memory. No guessing, no profiling overhead except when running.
+
+</details>
+
+<br>
+
+**Q20: What is `weakref.ref()` and when would you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+`weakref.ref()` creates a reference to an object that does NOT increment its reference count. If all strong references are removed, the object is garbage collected even while weak references exist — they return `None` after collection.
+
+```python
+import weakref
+
+obj = SomeHeavyObject()
+weak = weakref.ref(obj)
+
+print(weak())        # the object, if still alive
+del obj
+print(weak())        # None — object was collected
+```
+
+Primary use case: caches. A `weakref.WeakValueDictionary` lets cached objects be collected when nothing else needs them, without the cache itself being the reason they live forever. Prevents the "cache that never shrinks" memory leak pattern.
+
+</details>
+
+<br>
+
+**Q21: What is the memory difference between `__slots__` and `__dict__` in a class?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Every normal Python class instance carries a `__dict__` — a hash table mapping attribute names to values. This adds ~200–400 bytes of overhead per instance.
+
+`__slots__` replaces `__dict__` with pre-allocated fixed slots:
+
+```python
+class RegularUser:
+    def __init__(self, name, age):
+        self.name = name; self.age = age
+# Each instance: object (48B) + __dict__ (232B) = ~280B
+
+class SlottedUser:
+    __slots__ = ['name', 'age']
+    def __init__(self, name, age):
+        self.name = name; self.age = age
+# Each instance: ~112B — no __dict__
+```
+
+Trade-off: slotted objects cannot have arbitrary attributes added after creation (`AttributeError`). Use `__slots__` for value objects created in large quantities (embeddings, sensor readings, user records in data pipelines).
+
+</details>
+
+<br>
+
+**Q22: What is the `sys.getrefcount()` gotcha?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+`sys.getrefcount(obj)` always returns at least 1 more than you expect:
+
+```python
+import sys
+x = [1, 2, 3]
+print(sys.getrefcount(x))  # 2, not 1
+```
+
+The extra reference is the temporary reference created by passing `x` as the function argument. The call itself holds a reference during execution. Always subtract 1 from the result to get the "real" count.
+
+This is a common source of confusion when debugging reference counting behavior.
+
+</details>
+
+---
+
 # 🎯 Rapid-Fire Quick Checks
 
 - Variables store references, not values.

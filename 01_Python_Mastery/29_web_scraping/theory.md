@@ -66,6 +66,8 @@ img_url = soup.select_one("img.product-image")["src"]
 link    = soup.select_one("a.product-link")["href"]
 ```
 
+> 📝 **Practice:** [Q1–Q5 — requests + BeautifulSoup](./practice.md#q1)
+
 ---
 
 ## 2️⃣ Scraping Multiple Pages
@@ -111,6 +113,8 @@ df.to_csv("products.csv", index=False)
 print(f"Saved {len(df)} products")
 ```
 
+> 📝 **Practice:** [Q6–Q10 — Scraping Multiple Pages](./practice.md#q6)
+
 ---
 
 ## 3️⃣ Handling JavaScript-Rendered Pages
@@ -152,6 +156,8 @@ finally:
     driver.quit()   # always close the browser
 ```
 
+> 📝 **Practice:** [Q11–Q15 — JavaScript-Rendered Pages](./practice.md#q11)
+
 ---
 
 ## 4️⃣ Ethical and Legal Guidelines
@@ -174,6 +180,8 @@ Before scraping, always:
 
 6. Prefer official APIs when available
 ```
+
+> 📝 **Practice:** [Q16–Q18 — Ethical & Legal Guidelines](./practice.md#q16)
 
 ---
 
@@ -199,6 +207,8 @@ login_response = session.post("https://example.com/login", data={
 page = session.get("https://example.com/protected-page")
 soup = BeautifulSoup(page.text, "html.parser")
 ```
+
+> 📝 **Practice:** [Q19–Q21 — requests.Session](./practice.md#q19)
 
 ---
 
@@ -230,6 +240,8 @@ df = pd.DataFrame(rows, columns=["Column1", "Column2", "Column3"])
 df["price"] = df["price"].str.replace(r"[$,]", "", regex=True).astype(float)
 ```
 
+> 📝 **Practice:** [Q22–Q25 — Scraping Data into Structured Format](./practice.md#q22)
+
 ---
 
 ## Common Mistakes to Avoid ⚠️
@@ -249,7 +261,7 @@ df["price"] = df["price"].str.replace(r"[$,]", "", regex=True).astype(float)
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../28_eda_workflow/theory.md](../28_eda_workflow/theory.md) |
 | ➡️ Next Module | [../30_sql_with_python/theory.md](../30_sql_with_python/theory.md) |
 

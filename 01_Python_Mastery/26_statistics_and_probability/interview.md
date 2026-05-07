@@ -50,6 +50,30 @@ P-hacking (data dredging) is when analysts run multiple tests, look at multiple 
 
 ---
 
+**Q: What is the common misconception about p-values, and how should you interpret them correctly?**
+
+The most common misconception: "p = 0.03 means there is a 3% probability that the null hypothesis is true." This is wrong. The p-value is P(data this extreme | H₀ is true) — a conditional probability about the data, not about the hypothesis. It says nothing directly about whether H₀ is true. Three things p-value does NOT tell you: (1) the probability your result is real; (2) the probability H₀ is true; (3) whether the effect is practically important. For that last point, always report effect size (Cohen's d, relative lift) alongside p-value. A p = 0.001 with Cohen's d = 0.02 is statistically significant but practically meaningless. Conversely, a p = 0.08 with d = 0.8 might be worth acting on despite missing the threshold.
+
+---
+
+**Q: What is the trade-off between Type I and Type II errors, and how does it affect real ML systems?**
+
+Type I error (false positive, α) is rejecting H₀ when it's true — your system triggers an alert or makes a decision when it shouldn't. Type II error (false negative, β) is failing to reject H₀ when it's false — your system misses a real signal. They trade off: a more sensitive threshold catches more real effects (fewer Type II) but also triggers more false alarms (more Type I). In ML classification, this trade-off is controlled by the decision threshold. Lowering the threshold (from 0.5 to 0.3 for spam detection) catches more spam (fewer false negatives) but also blocks more legitimate mail (more false positives). Statistical power (1 - β) quantifies how well a test avoids Type II errors — standard target is 80%. Power increases with sample size, effect size, and significance level α.
+
+---
+
+**Q: What is Bayes' theorem and how does it apply to ML?**
+
+Bayes' theorem: P(A|B) = P(B|A) × P(A) / P(B). In words: posterior = likelihood × prior / evidence. Given new evidence B, it tells you how to update your prior belief P(A) into a posterior P(A|B). In ML: Naive Bayes classifiers implement this directly — each word in an email updates P(spam). The "naive" assumption is conditional independence of features given class, which is rarely true but works well in practice. More broadly, Bayesian thinking underlies: regularization (priors on weights), hyperparameter tuning (Bayesian optimization), anomaly detection (prior on normal behavior), and uncertainty quantification. The key practical insight: the prior P(A) matters enormously when A is rare. Even a 99% accurate test gives only ~50% posterior probability for a 1% prevalence disease — low base rates dominate.
+
+---
+
+**Q: When should you use Pearson vs Spearman correlation?**
+
+Pearson correlation measures the strength of a LINEAR relationship between two continuous variables. It's sensitive to outliers and assumes roughly normal data. Spearman correlation is rank-based — it measures the strength of a MONOTONIC relationship (whether they increase/decrease together, regardless of linearity). Use Spearman when: data is ordinal (rankings, satisfaction scores); distribution is non-normal; there are outliers that would distort Pearson; or the relationship is monotonic but not linear (e.g., exponential growth). Rule of thumb: if a scatterplot shows a curved (but consistently increasing or decreasing) relationship, Spearman will capture it but Pearson will underestimate it. For truly linear data with no outliers, both give similar results.
+
+---
+
 ## Practice Problems
 
 1. Given a list of salaries, compute mean, median, and identify which better describes the "typical" salary — then justify your answer.
@@ -66,7 +90,7 @@ P-hacking (data dredging) is when analysts run multiple tests, look at multiple 
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../25_python_ai_ecosystem/theory.md](../25_python_ai_ecosystem/theory.md) |
 | ➡️ Next Module | [../27_matplotlib_seaborn/theory.md](../27_matplotlib_seaborn/theory.md) |
 

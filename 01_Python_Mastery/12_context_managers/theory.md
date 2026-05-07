@@ -82,6 +82,8 @@ else:
 5. If __exit__() returns True, the exception is suppressed
 ```
 
+> 📝 **Practice:** [Q1 — with-statement-anatomy](./practice.md#q1--with-statement-anatomy--trace-the-5-steps)
+
 ---
 
 ## 🏗️ Chapter 2: The Context Manager Protocol
@@ -138,6 +140,8 @@ Return True:       exception suppressed (swallowed)
 Return False/None: exception propagates normally
 ```
 
+> 📝 **Practice:** [Q4 — class-based-cm](./practice.md#q4--class-based-cm--write-managedfile)
+
 ---
 
 ## ✨ Chapter 3: Suppressing Exceptions with `__exit__`
@@ -169,7 +173,7 @@ with SuppressErrors(KeyError):
     del cache[key]   # silently skip if key not present
 ```
 
-> 📝 **Practice:** [Q37 · context-manager-exception](../python_practice_questions_100.md#q37--thinking--context-manager-exception)
+> 📝 **Practice:** [Q5 — suppress-exceptions](./practice.md#q5--suppress-exceptions--write-suppresserrors)
 
 
 **The built-in equivalent:** `contextlib.suppress()`:
@@ -238,7 +242,7 @@ with transaction(db) as conn:
 # Commits if both succeed. Rolls back if either fails.
 ```
 
-> 📝 **Practice:** [Q38 · contextlib](../python_practice_questions_100.md#q38--normal--contextlib)
+> 📝 **Practice:** [Q7 — contextmanager-generator](./practice.md#q7--contextmanager--timer-using-generator)
 
 
 ---
@@ -354,6 +358,8 @@ with redirect_stdout(buffer):
 output = buffer.getvalue()   # "This goes to buffer, not console\n"
 ```
 
+> 📝 **Practice:** [Q11 — timing-context-manager](./practice.md#q11--timing-cm--measure-and-log-elapsed-time)
+
 ---
 
 ## 🔗 Chapter 6: Multiple Context Managers in One `with`
@@ -381,7 +387,7 @@ with (   # parenthesized form (Python 3.10+) — supports trailing comma
     c.write(a.read() + b.read())
 ```
 
-> 📝 **Practice:** [Q36 · context-managers](../python_practice_questions_100.md#q36--normal--context-managers)
+> 📝 **Practice:** [Q15 — multiple-cms](./practice.md#q15--multiple-cms--nested-vs-one-liner)
 
 
 **Each context manager's `__exit__` is called in reverse order** (last opened, first closed — LIFO):
@@ -429,6 +435,8 @@ with ExitStack() as stack:
     do_work(conn)
 ```
 
+> 📝 **Practice:** [Q17 — exitstack-n-files](./practice.md#q17--exitstack--merge-n-files-at-runtime)
+
 ---
 
 ## 🔄 Chapter 8: `contextlib.nullcontext` — Conditional Context Managers
@@ -450,6 +458,8 @@ def open_file(path=None):
     with ctx as content:
         process(content)
 ```
+
+> 📝 **Practice:** [Q20 — nullcontext-optional-lock](./practice.md#q20--nullcontext--optional-lock-pattern)
 
 ---
 
@@ -501,6 +511,8 @@ async with async_timer("fetch"):
     data = await fetch_data()
 ```
 
+> 📝 **Practice:** [Q21 — async-context-manager](./practice.md#q21--async-cm--write-asyncdbconnection)
+
 ---
 
 ## 🧰 Chapter 10: `contextlib` — The Full Toolkit
@@ -539,6 +551,8 @@ with closing(urlopen("http://example.com")) as response:
 with (lock if need_lock else nullcontext()):
     modify_shared_resource()
 ```
+
+> 📝 **Practice:** [Q26 — contextlib-closing](./practice.md#q26--contextlibclosing--wrap-legacy-object)
 
 ---
 
@@ -634,6 +648,8 @@ def __enter__(self):
         raise
 ```
 
+> 📝 **Practice:** [Q23 — gotcha-return-true](./practice.md#q23--gotcha-return-true--fix-accidental-suppression)
+
 ---
 
 ## 🧠 Chapter 12: The Full Mental Model
@@ -669,6 +685,8 @@ else:
 ─────────────────────────────────────────────────────────────────
 ```
 
+> 📝 **Practice:** [Q30 — capstone: ConnectionPool](./practice.md#q30--capstone--build-connectionpool-with-exitstack)
+
 ---
 
 ## 🔥 Summary
@@ -699,6 +717,7 @@ Multiple with               with A() as a, B() as b — exits in reverse order
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🛠️ contextlib Guide | [contextlib_guide.md](./contextlib_guide.md) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ➡️ Next | [13 — Concurrency](../13_concurrency/theory.md) |
 
 ---
@@ -707,4 +726,4 @@ Multiple with               with A() as a, B() as b — exits in reverse order
 
 **Prev:** [← Generators Iterators — Interview Q&A](../11_generators_iterators/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Contextlib Guide](./contextlib_guide.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Contextlib Guide](./contextlib_guide.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

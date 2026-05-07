@@ -118,6 +118,8 @@ hasattr(it, '__next__')    # True
 it is iter(it)             # True  ← idempotent
 ```
 
+> 📝 **Practice:** [Q1–Q2 →](./practice.md#q1--iteration-protocol--countdown-class)
+
 ---
 
 ## 🏗️ Chapter 2: Building a Custom Iterator Class
@@ -187,6 +189,8 @@ list(r)   # [1, 2, 3]
 list(r)   # [1, 2, 3]  ← works again! NumberRange creates a fresh iterator each time
 ```
 
+> 📝 **Practice:** [Q3–Q4 →](./practice.md#q3--iterator-class--numberrange-with-step)
+
 ---
 
 ## ✨ Chapter 3: Generator Functions — yield
@@ -235,7 +239,7 @@ next(g)   # → 2   (resumes from after first yield, pauses at second)
 next(g)   # → StopIteration (fell off the end of the function)
 ```
 
-> 📝 **Practice:** [Q33 · generators-basics](../python_practice_questions_100.md#q33--normal--generators-basics) · [Q34 · yield](../python_practice_questions_100.md#q34--thinking--yield) · [Q93 · predict-output-generator](../python_practice_questions_100.md#q93--logical--predict-output-generator)
+> 📝 **Practice:** [Q5–Q6 →](./practice.md#q5--yield--squares-generator)
 
 
 ---
@@ -312,7 +316,7 @@ Generator expression:
   → constant memory regardless of input size
 ```
 
-> 📝 **Practice:** [Q35 · generator-exhaustion](../python_practice_questions_100.md#q35--critical--generator-exhaustion)
+> 📝 **Practice:** [Q7 →](./practice.md#q7--frame-suspension--tracing-yield)
 
 ---
 
@@ -352,7 +356,7 @@ lazy = (x for x in range(1_000_000))
 print(sys.getsizeof(lazy))       # ~112 bytes
 ```
 
-> 📝 **Practice:** [Q76 · explain-generators](../python_practice_questions_100.md#q76--interview--explain-generators)
+> 📝 **Practice:** [Q8 →](./practice.md#q8--memory-benchmark--sysgetsizeof-comparison)
 
 
 **Why it matters in production:**
@@ -446,6 +450,8 @@ Processing 50GB CSV file:
   (row for row in csv.reader(f))  → ~1KB RAM constant
 ```
 
+> 📝 **Practice:** [Q9 →](./practice.md#q9--gen-expression--rewrite-a-list-comprehension)
+
 ---
 
 ## 🔀 Chapter 6: `yield from` — Delegation
@@ -477,6 +483,8 @@ list(flatten([1, [2, [3, 4], 5], 6]))
 ```
 
 **`yield from` also transparently forwards `send()` and `throw()`** — critical for coroutine chaining. More on this in Chapter 8.
+
+> 📝 **Practice:** [Q10–Q11 →](./practice.md#q10--yield-from--flatten-a-nested-list)
 
 ---
 
@@ -533,7 +541,7 @@ avg.send(20)   # → 15.0
 avg.send(30)   # → 20.0
 ```
 
-> 📝 **Practice:** [Q96 · debug-generator-send](../python_practice_questions_100.md#q96--debug--debug-generator-send)
+> 📝 **Practice:** [Q12–Q13 →](./practice.md#q12--send--running_average-coroutine)
 
 ---
 
@@ -592,7 +600,7 @@ def process_log(filepath):
         insert_to_db(record)
 ```
 
-> 📝 **Practice:** [Q89 · pipeline-scenario](../python_practice_questions_100.md#q89--design--pipeline-scenario)
+> 📝 **Practice:** [Q14–Q15 →](./practice.md#q14--pipeline--3-stage-csv-pipeline)
 
 
 **What happens in memory:**
@@ -703,6 +711,8 @@ list(combinations('ABC', 2))           # AB AC BC
 list(combinations_with_replacement('AB', 2))  # AA AB BB
 ```
 
+> 📝 **Practice:** [Q16–Q18 →](./practice.md#q16--itertoolschain--combine-two-lists-lazily)
+
 ---
 
 ## ♾️ Chapter 10: Infinite Sequences
@@ -745,6 +755,8 @@ list(islice(fibonacci(), 10))   # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 list(islice(primes(), 10))      # [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 ```
 
+> 📝 **Practice:** [Q19 →](./practice.md#q19--infinite-generator--fibonacci-with-islice)
+
 ---
 
 ## 🔁 Chapter 11: `return` Inside a Generator
@@ -784,6 +796,8 @@ def delegating():
 g = delegating()
 list(g)   # [1, 2, 3, 99]  — also prints "Sub-generator returned: finished"
 ```
+
+> 📝 **Practice:** [Q20 →](./practice.md#q20--return-value--stopiterationvalue)
 
 ---
 
@@ -828,6 +842,8 @@ async def process_all_users():
     async for user in fetch_in_batches("SELECT * FROM users"):
         await send_email(user)   # memory: O(1) at any time
 ```
+
+> 📝 **Practice:** [Q21 →](./practice.md#q21--async-generator--paginated-api-results)
 
 ---
 
@@ -905,6 +921,8 @@ gen.close()     # → "Cleanup!"  (injects GeneratorExit)
 # Without gen.close(), Python calls it on GC. Use try/finally for resources.
 ```
 
+> 📝 **Practice:** [Q22 →](./practice.md#q22--exhaustion--generator-exhaustion-demo)
+
 ---
 
 ## 🧠 Chapter 14: The Iterator Protocol in the Standard Library
@@ -927,6 +945,8 @@ enumerate       ✅           ✅
 map             ✅           ✅
 filter          ✅           ✅
 ```
+
+> 📝 **Practice:** [Q23 →](./practice.md#q23--collectionsabc--classify-iterables-and-iterators)
 
 ---
 
@@ -956,7 +976,8 @@ Async generator    async def with yield — for async iteration
 |---|---|
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🔧 Pipeline Patterns | [generator_patterns.md](./generator_patterns.md) |
+| 💻 Practice | [practice.md](./practice.md) |
+| 🔧 Pipeline Patterns | [04_generator_patterns.md](./04_generator_patterns.md) |
 | ➡️ Next | [12 — Context Managers](../12_context_managers/theory.md) |
 
 ---
@@ -965,4 +986,4 @@ Async generator    async def with yield — for async iteration
 
 **Prev:** [← Decorators — Interview Q&A](../10_decorators/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Generator Patterns](./generator_patterns.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Generator Patterns](./04_generator_patterns.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

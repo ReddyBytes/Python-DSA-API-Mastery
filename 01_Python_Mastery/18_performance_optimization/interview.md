@@ -290,6 +290,107 @@ Shows practical awareness.
 </details>
 
 
+**Q16: How do you use `cache_info()` with `lru_cache`?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+```python
+from functools import lru_cache
+
+@lru_cache(maxsize=128)
+def fib(n):
+    if n < 2: return n
+    return fib(n-1) + fib(n-2)
+
+fib(30)
+print(fib.cache_info())
+# CacheInfo(hits=28, misses=31, maxsize=128, currsize=31)
+```
+
+> `hits` = returned from cache. `misses` = actually computed.
+> High hits/misses ratio = cache working well.
+> Use `cache_clear()` in tests to avoid state leaking between test runs.
+
+</details>
+
+<br>
+
+**Q17: What memory benefit does `__slots__` provide?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> A normal Python instance stores attributes in a `__dict__` (a hash map) that costs ~200–400 bytes per object regardless of how many attributes you have. `__slots__` replaces this with fixed C-level memory slots — like a C struct — saving 40–60% memory per instance. At a million objects, this can mean hundreds of MB saved.
+
+Only use `__slots__` when creating thousands+ of small fixed-attribute objects. Avoid if you need dynamic attribute assignment or complex inheritance.
+
+</details>
+
+<br>
+
+**Q18: How do you use `tracemalloc` to detect a memory leak?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+```python
+import tracemalloc
+
+tracemalloc.start()
+snap1 = tracemalloc.take_snapshot()
+
+run_suspicious_code()   # call the code multiple times
+
+snap2 = tracemalloc.take_snapshot()
+tracemalloc.stop()
+
+top = snap2.compare_to(snap1, "lineno")
+for stat in top[:5]:
+    print(stat)   # shows file:line and how much memory grew
+```
+
+> Take a snapshot before and after. `compare_to()` shows which lines allocated memory that was not freed — the signature of a leak.
+
+</details>
+
+<br>
+
+**Q19: What does snakeviz show and how do you read a flamegraph?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> snakeviz reads a `.prof` file saved by `cProfile.run("...", "output.prof")` and renders an interactive icicle chart. Each box represents a function call. **Width equals cumulative time** — wider boxes are slower. Inner boxes are functions called from the outer function. To find the real bottleneck: follow the widest box downward until you reach a leaf. That leaf is where CPU time is actually spent.
+
+</details>
+
+<br>
+
+**Q20: Why should timeit benchmarks use `min()` instead of `mean()`?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> `timeit.repeat()` returns multiple timing measurements. The minimum represents the best-case CPU availability for your code — uninterrupted by OS scheduling, garbage collection, or background processes. Higher measurements are caused by those external events, which are noise, not your code's true performance. Using `mean()` includes this noise and makes code appear slower than it is.
+
+```python
+results = timeit.repeat("sum(range(1000))", repeat=7, number=10_000)
+best = min(results)   # ← always use min
+```
+
+</details>
+
+<br>
+
 # 🔥 Scenario-Based Questions
 
 ---
@@ -471,6 +572,6 @@ Next:
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Profiling](./profiling.md) &nbsp;|&nbsp; **Next:** [Production Best Practices — Coding Standards →](../19_production_best_practices/coding_standards.md)
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Production Best Practices — Coding Standards →](../19_production_best_practices/coding_standards.md)
 
-**Related Topics:** [Profiling](./profiling.md)
+**Related Topics:** [Theory](./theory.md) · [Practice](./practice.md) · [Cheatsheet](./cheetsheet.md)

@@ -45,6 +45,8 @@ Step 9: Outlier detection
 Step 10: Feature-target relationships
 ```
 
+> 📝 **Practice:** [Q1–Q2 — EDA Checklist](./practice.md#q1)
+
 ---
 
 ## 2️⃣ Phase 1 — Loading and Shape
@@ -69,6 +71,8 @@ print(df.sample(5))      # random rows (better for spotting patterns)
 print(df.describe())              # count, mean, std, quartiles — only numeric
 print(df.describe(include="all")) # include categoricals too
 ```
+
+> 📝 **Practice:** [Q3–Q6 — Loading & Shape](./practice.md#q3)
 
 ---
 
@@ -97,6 +101,8 @@ msno.heatmap(df)           # correlation of missingness between columns
 # > 30% missing: consider dropping the column or creating missingness indicator
 ```
 
+> 📝 **Practice:** [Q7–Q10 — Missing Values](./practice.md#q7)
+
 ---
 
 ## 4️⃣ Phase 3 — Distributions
@@ -120,6 +126,8 @@ ax1.set_title("Price Distribution")
 np.log1p(df["price"]).hist(bins=50, ax=ax2, color="coral")
 ax2.set_title("Log(1 + Price) Distribution")   # log transform often reveals structure
 ```
+
+> 📝 **Practice:** [Q11–Q14 — Distributions](./practice.md#q11)
 
 ---
 
@@ -149,6 +157,8 @@ for col in cat_cols:
         plt.tight_layout()
 ```
 
+> 📝 **Practice:** [Q15–Q18 — Categorical Features](./practice.md#q15)
+
 ---
 
 ## 6️⃣ Phase 5 — Target Variable
@@ -168,6 +178,8 @@ axes[1].set_title(f"Log({target})")
 print(df[target].value_counts(normalize=True))
 # Imbalance > 10:1 ratio → need SMOTE or class weights
 ```
+
+> 📝 **Practice:** [Q19–Q21 — Target Variable](./practice.md#q19)
 
 ---
 
@@ -198,6 +210,8 @@ outlier_counts = {col: flag_outliers(df[col]).sum()
 print(pd.Series(outlier_counts).sort_values(ascending=False))
 ```
 
+> 📝 **Practice:** [Q22–Q26 — Correlations & Outliers](./practice.md#q22)
+
 ---
 
 ## 8️⃣ Automated EDA
@@ -219,6 +233,8 @@ compare_report = sv.compare([df_train, "Train"], [df_test, "Test"])
 compare_report.show_html("comparison.html")
 ```
 
+> 📝 **Practice:** [Q27–Q30 — Automated EDA](./practice.md#q27)
+
 ---
 
 ## Common Mistakes to Avoid ⚠️
@@ -238,7 +254,7 @@ compare_report.show_html("comparison.html")
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../27_matplotlib_seaborn/theory.md](../27_matplotlib_seaborn/theory.md) |
 | ➡️ Next Module | [../29_web_scraping/theory.md](../29_web_scraping/theory.md) |
 

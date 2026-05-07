@@ -185,6 +185,65 @@ This confusion trips up almost every beginner at least once.
 
 ---
 
+## Getting Input from the User — input()
+
+So far your programs just run and finish.
+But real programs talk to the user.
+
+`input()` pauses your program and waits for the user to type something.
+
+```python
+name = input("What is your name? ")
+print("Hello,", name)
+```
+
+When this runs:
+```
+What is your name? Alice
+Hello, Alice
+```
+
+The text inside `input("...")` is the prompt — what the user sees.
+Whatever they type gets stored in the variable.
+
+**Important rule — input() always gives you text:**
+
+```python
+age = input("How old are you? ")
+print(age)        # looks like a number
+print(type(age))  # <class 'str'>  ← but it's actually text!
+```
+
+Even if the user types `25`, Python stores it as `"25"` (text), not `25` (number).
+
+To use it as a number, you must convert it:
+
+```python
+age = input("How old are you? ")
+age = int(age)          # convert text → whole number
+print(age + 1)          # now you can do maths with it
+```
+
+Or in one line:
+
+```python
+age = int(input("How old are you? "))
+print(age + 1)
+```
+
+**The three most common input patterns:**
+
+```python
+name = input("Enter name: ")           # text — no conversion needed
+age  = int(input("Enter age: "))       # whole number
+price = float(input("Enter price: "))  # decimal number
+```
+
+You will use `input()` in almost every beginner exercise.
+Always remember: convert it before doing any maths.
+
+---
+
 # 4️⃣ Programming vs Scripting — What's the Difference?
 
 > You've heard both words. Let's clear up the confusion once and for all.

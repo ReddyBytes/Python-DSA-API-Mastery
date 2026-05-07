@@ -331,7 +331,175 @@ Schema evolution is real production problem.
 </details>
 
 
-# 🔥 Scenario-Based Questions
+**Q16: Show the generator-based ETL pipeline pattern in code.**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+```python
+def extract(filepath):
+    with open(filepath, newline="") as f:
+        for row in csv.DictReader(f):
+            yield dict(row)           # one row at a time
+
+def transform(records):
+    for r in records:
+        try:
+            r["score"] = float(r["score"])
+            yield r
+        except Exception as e:
+            log.warning("bad row: %s", e)  # collect errors, never raise
+
+def load(records, out_path):
+    count = 0
+    with open(out_path, "w", newline="") as f:
+        writer = None
+        for r in records:
+            if writer is None:
+                writer = csv.DictWriter(f, fieldnames=r.keys())
+                writer.writeheader()
+            writer.writerow(r)
+            count += 1
+    return count
+
+count = load(transform(extract("source.csv")), "output.csv")
+```
+
+Key: each stage is a generator. Only one record exists in memory across all stages at once. O(1) memory regardless of file size.
+
+</details>
+
+<br>
+
+**Q17: What is a dead-letter queue in a pipeline? Show the pattern.**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+A dead-letter queue (DLQ) is a separate sink for records that fail validation or transformation. Instead of crashing the pipeline, bad rows are written to an error file for later inspection and replay.
+
+```python
+import json
+
+def pipeline_with_dlq(records, dlq_path):
+    with open(dlq_path, "a") as dlq:
+        for raw in records:
+            try:
+                yield validate_and_transform(raw)
+            except Exception as e:
+                dlq.write(json.dumps({"raw": raw, "error": str(e)}) + "\n")
+```
+
+Benefits: pipeline keeps running, errors are auditable, bad rows can be replayed after fixing the upstream issue.
+
+</details>
+
+<br>
+
+**Q18: How do you use asyncio.Semaphore for backpressure in an async collector?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+`asyncio.Semaphore(N)` limits how many coroutines run concurrently. Without it, firing 100 page requests at once can overwhelm the API and trigger rate limits.
+
+```python
+import asyncio, aiohttp
+
+async def collect_pages(url, total_pages, max_concurrent=5):
+    sem = asyncio.Semaphore(max_concurrent)
+
+    async def fetch(session, page):
+        async with sem:          # blocks if 5 already running
+            async with session.get(url, params={"page": page}) as r:
+                return (await r.json()).get("items", [])
+
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch(session, p) for p in range(1, total_pages + 1)]
+        pages = await asyncio.gather(*tasks)
+    return [item for page in pages for item in page]
+```
+
+For thread-based collectors, `queue.Queue(maxsize=N)` provides equivalent backpressure — the producer blocks when the queue is full.
+
+</details>
+
+<br>
+
+**Q19: Show the checkpoint + resume pattern for a long-running pipeline.**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+```python
+import json
+from pathlib import Path
+
+class Checkpoint:
+    def __init__(self, path):
+        self._path = Path(path)
+
+    def load(self):
+        if self._path.exists():
+            return json.loads(self._path.read_text())["last_id"]
+        return 0   # first run — start from beginning
+
+    def save(self, last_id):
+        self._path.write_text(json.dumps({"last_id": last_id}))
+
+cp = Checkpoint("checkpoint.json")
+start = cp.load()
+
+for row in read_csv("data.csv"):
+    if int(row["id"]) <= start:
+        continue               # skip already-processed rows
+    process(row)
+    cp.save(int(row["id"]))    # update after each successful row
+```
+
+Without checkpointing: a 10-hour job that crashes at hour 9 must restart from the beginning. With checkpointing: it resumes from the last saved row ID.
+
+</details>
+
+<br>
+
+**Q20: How does memory-efficient chunked processing differ from pure streaming?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Pure streaming (one item at a time) cannot do aggregations like GROUP BY without seeing all items. Chunked processing is the middle ground: process N rows at a time, merge partial aggregates.
+
+```python
+def chunk(iterable, size):
+    batch = []
+    for item in iterable:
+        batch.append(item)
+        if len(batch) >= size:
+            yield batch
+            batch = []       # clear to free memory
+    if batch:
+        yield batch
+
+# Memory at any time: O(chunk_size), not O(n)
+partial_results = []
+for batch in chunk(read_csv("data.csv"), size=1000):
+    partial_results.append(aggregate(batch))
+
+final_result = merge(partial_results)
+```
+
+| Approach | Memory | Can aggregate? |
+|---|---|---|
+| Generator pipeline | O(1) | No GROUP BY |
+| Chunked processing | O(chunk_size) | Yes, with merge step |
+| Eager list | O(n) | Yes | 
+
+</details>
+
+---
+
+
 
 ---
 

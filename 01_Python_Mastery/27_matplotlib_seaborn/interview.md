@@ -379,6 +379,98 @@ DPI guide:
 
 <br>
 
+**Q17: What is `Normalize` in Matplotlib and when would you use `TwoSlopeNorm`?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+`Normalize` objects control how data values map to colormap positions. By default, Matplotlib maps the min and max of your data to the full colormap range. Override this with explicit bounds:
+
+```python
+import matplotlib.colors as mcolors
+
+norm = mcolors.Normalize(vmin=0, vmax=100)      # ← linear mapping with explicit bounds
+norm_log = mcolors.LogNorm(vmin=1, vmax=10000)  # ← log-scale colors for count data
+
+# TwoSlopeNorm: asymmetric range where zero must stay neutral white
+norm_two = mcolors.TwoSlopeNorm(vmin=-0.5, vcenter=0, vmax=2.0)
+ax.imshow(residuals, cmap='RdBu_r', norm=norm_two)
+```
+
+`TwoSlopeNorm` is the right choice when data is asymmetric around a meaningful center — for example, residuals that range from -0.5 to +2.0. Without it, the colormap center would not correspond to zero, making the plot misleading.
+
+**Why it matters:** Colormap normalization directly determines what story the viewer reads from a heatmap. Wrong normalization = wrong story.
+
+</details>
+
+<br>
+
+**Q18: How do you create a calibration plot (reliability diagram) for a classifier?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+A calibration plot checks whether predicted probabilities are accurate — a model that predicts 0.8 should be right 80% of the time.
+
+```python
+from sklearn.calibration import calibration_curve
+import matplotlib.pyplot as plt
+
+fraction_of_positives, mean_predicted_value = calibration_curve(y_true, y_prob, n_bins=10)
+
+fig, ax = plt.subplots(figsize=(7, 6))
+ax.plot(mean_predicted_value, fraction_of_positives, 's-', label='Model')
+ax.plot([0, 1], [0, 1], 'k:', label='Perfectly calibrated')  # ← diagonal = perfect
+ax.set_xlabel('Mean predicted probability')
+ax.set_ylabel('Fraction of positives')
+ax.set_title('Calibration Plot (Reliability Diagram)')
+ax.legend()
+```
+
+Points above the diagonal = underconfident. Points below = overconfident. Platt scaling or isotonic regression can post-process the model to improve calibration.
+
+**Why it matters:** In medicine, finance, and risk scoring, the probability itself drives decisions — not just the class label.
+
+</details>
+
+<br>
+
+**Q19: How do you plot a decision boundary for a 2D classifier?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+Create a dense mesh grid, predict class labels at every point, and use `contourf` to shade the regions.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+xx, yy = np.meshgrid(np.linspace(x_min, x_max, 200),
+                     np.linspace(y_min, y_max, 200))
+Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.contourf(xx, yy, Z, alpha=0.3, cmap='RdYlBu')   # ← shaded class regions
+ax.scatter(X[:, 0], X[:, 1], c=y, cmap='RdYlBu', edgecolors='black', s=20)
+ax.set_title('Decision Boundary')
+plt.tight_layout()
+```
+
+`contourf` fills regions. `alpha=0.3` lets the data points show through. Use `cmap='RdBu'` for binary and `cmap='RdYlBu'` for three-class problems.
+
+**Why it matters:** Decision boundary plots are essential for teaching, debugging, and explaining classifier behavior — they show where the model draws the line between classes.
+
+</details>
+
+<br>
+
 **Q16: How do you use `FacetGrid` to compare plots across model groups?**
 
 <details>
@@ -421,7 +513,7 @@ sns.catplot(data=df, x='model', y='accuracy', col='dataset',
 | 📖 README | [README.md](./README.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../26_statistics_and_probability/theory.md](../26_statistics_and_probability/theory.md) |
 | ➡️ Next Module | [../28_eda_workflow/theory.md](../28_eda_workflow/theory.md) |
 

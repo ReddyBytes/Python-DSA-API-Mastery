@@ -206,6 +206,8 @@ print(summary)
 
 ---
 
+> 📝 **Practice:** [Q9–Q12 — groupby advanced](./practice.md#q9)
+
 ## 🔁 Navigation
 
 | | |

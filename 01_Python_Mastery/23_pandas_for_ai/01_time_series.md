@@ -195,6 +195,8 @@ print(hourly.head(24))
 
 ---
 
+> 📝 **Practice:** [Q1–Q4 — time series](./practice.md#q1)
+
 ## 🔁 Navigation
 
 | | |

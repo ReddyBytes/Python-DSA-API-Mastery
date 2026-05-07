@@ -247,6 +247,10 @@ What to look for: diagonal KDE curves that barely overlap (e.g., setosa vs the o
 
 ---
 
+> 📝 **Practice:** [Q16–Q20 — seaborn advanced](./practice.md#q16)
+
+---
+
 ## Navigation
 
 | | |

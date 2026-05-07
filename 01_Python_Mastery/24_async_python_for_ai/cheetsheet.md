@@ -282,6 +282,52 @@ async def chat(prompt: str) -> dict:
 
 ---
 
+## 🧱 TaskGroup — Structured Concurrency (Python 3.11+)
+
+```python
+import asyncio
+
+# TaskGroup: all tasks finish or are cancelled before block exits.
+# If any task raises, all siblings are cancelled automatically.
+async def run_tasks():
+    async with asyncio.TaskGroup() as tg:    # Python 3.11+
+        t1 = tg.create_task(call_llm("q1"))
+        t2 = tg.create_task(call_llm("q2"))
+        t3 = tg.create_task(call_llm("q3"))
+    # All 3 completed — access results with .result():
+    return [t1.result(), t2.result(), t3.result()]
+
+# vs gather — gather requires return_exceptions for safety;
+# TaskGroup guarantees structured cleanup automatically.
+```
+
+---
+
+## 🧵 asyncio.to_thread — Run Blocking Code Safely
+
+```python
+import asyncio
+
+# Run a blocking (sync) function without freezing the event loop:
+def blocking_io(path: str) -> str:
+    import time
+    time.sleep(1)    # simulates slow disk read or legacy library call
+    return f"data from {path}"
+
+async def async_wrapper(path: str) -> str:
+    return await asyncio.to_thread(blocking_io, path)   # runs in thread pool
+
+# Multiple blocking calls concurrently:
+async def parallel_blocking():
+    r1, r2 = await asyncio.gather(
+        asyncio.to_thread(blocking_io, "file1.txt"),
+        asyncio.to_thread(blocking_io, "file2.txt"),
+    )
+    return r1, r2
+```
+
+---
+
 ## 🔴 Common Gotchas
 
 ```python
@@ -316,6 +362,18 @@ for token in async_gen():       # TypeError — must use async for
     pass
 async for token in async_gen(): # correct
     pass
+
+# 6 — Swallowing CancelledError (breaks task cancellation):
+async def bad_cancel():
+    try:
+        await asyncio.sleep(10)
+    except asyncio.CancelledError:
+        pass                    # WRONG — swallowed, task appears to complete!
+async def good_cancel():
+    try:
+        await asyncio.sleep(10)
+    except asyncio.CancelledError:
+        raise                   # CORRECT — always re-raise CancelledError
 ```
 
 ---
@@ -360,7 +418,7 @@ A: It's ASGI/async-native. async def handlers let one process handle hundreds of
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
-| 🔧 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev | [13 — Concurrency](../13_concurrency/theory.md) |
 
 ---

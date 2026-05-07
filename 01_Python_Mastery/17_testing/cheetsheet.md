@@ -243,6 +243,14 @@ Mock     → records calls, verifies behavior (assert_called_with)
 Spy      → real object + records calls (wraps=real_object)
 ```
 
+| Double | Has logic? | Verifies calls? | When to use |
+|--------|-----------|-----------------|-------------|
+| Dummy  | No | No | Fill unused parameters |
+| Stub   | No | No | Return controlled data |
+| Fake   | Yes (simplified) | No | Realistic behavior, no I/O |
+| Mock   | No | Yes | Verify interactions at boundary |
+| Spy    | Yes (real) | Yes | Real + verify side effects |
+
 ---
 
 ## Testable Design
@@ -265,6 +273,30 @@ service = OrderService(
     db=InMemoryOrderRepository(),
     emailer=Mock()
 )
+```
+
+---
+
+## Hypothesis — Property-Based Testing
+
+```python
+from hypothesis import given, strategies as st
+
+@given(st.lists(st.integers()))
+def test_sort_length_preserved(lst):
+    assert len(sorted(lst)) == len(lst)
+
+@given(st.integers(min_value=1), st.integers(min_value=1))
+def test_addition_commutative(a, b):
+    assert a + b == b + a
+
+# Common strategies:
+st.integers(min_value=0, max_value=100)
+st.text(min_size=1)
+st.lists(st.integers(), min_size=0, max_size=50)
+st.floats(allow_nan=False, allow_infinity=False)
+st.one_of(st.none(), st.integers())
+st.builds(User, name=st.text(min_size=1), age=st.integers(18, 99))
 ```
 
 ---
@@ -302,6 +334,10 @@ service = OrderService(
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
+| 📝 Practice (35 Qs) | [practice.md](./practice.md) |
+| 🧪 pytest Deep Dive | [01_pytest/theory.md](./01_pytest/theory.md) |
+| 🔬 unittest Deep Dive | [02_unittest/theory.md](./02_unittest/theory.md) |
+| 🎭 Mocking Deep Dive | [03_mocking/theory.md](./03_mocking/theory.md) |
 | 🏠 Home | [README.md](../../01_Python_Mastery/README.md) |
 
 ---

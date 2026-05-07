@@ -49,6 +49,8 @@
 
 ## 1. Why Testing? The Safety Net Mental Model
 
+> 📝 **Practice:** [Q1 — Write a test function](./practice.md#q1--pytest--write-a-test-function)
+
 Imagine a high-wire acrobat. Without a safety net, every step is terrifying.
 With one: the act is still skillful, but the cost of a slip is recovery —
 not catastrophe.
@@ -86,6 +88,8 @@ Change line 47 in payments.py
 
 ## 2. Test Types and the Testing Pyramid
 
+> 📝 **Practice:** [Q2 — assert with multiple types](./practice.md#q2--pytest--assert-with-multiple-types)
+
 ```
               /\
              /  \
@@ -121,6 +125,9 @@ E2E:         ~10% of tests  → smoke test critical user journeys
 ---
 
 ## 3. `unittest` — The Standard Library Framework
+
+> 📝 **Practice:** [Q10 — TestCase and setUp](./practice.md#q10--unittest--testcase-and-setup)  
+> 📝 **Deep dive →** [02_unittest/theory.md](./02_unittest/theory.md)
 
 ```python
 import unittest
@@ -208,6 +215,9 @@ python -m unittest -v                     # verbose output
 
 ## 4. pytest — The Modern Way
 
+> 📝 **Practice:** [Q1 — Write a test function](./practice.md#q1--pytest--write-a-test-function)  
+> 📝 **Deep dive →** [01_pytest/theory.md](./01_pytest/theory.md)
+
 pytest is the industry standard. It's more expressive, has better output,
 and integrates with hundreds of plugins.
 
@@ -284,6 +294,9 @@ def test_dict():
 ---
 
 ## 5. Fixtures — The Heart of pytest
+
+> 📝 **Practice:** [Q3 — Fixtures as setup](./practice.md#q3--pytest--fixtures-as-setup)  
+> 📝 **Deep dive →** [01_pytest/theory.md](./01_pytest/theory.md)
 
 Fixtures provide reusable setup/teardown. They're injected by name into test
 functions as parameters.
@@ -410,6 +423,8 @@ def client(app):
 
 ## 6. Parametrize — Data-Driven Tests
 
+> 📝 **Practice:** [Q4 — parametrize basics](./practice.md#q4--pytest--parametrize-basics)
+
 ```python
 import pytest
 
@@ -448,6 +463,9 @@ def test_add_cases(x, y, expected):
 ---
 
 ## 7. Mocking — `unittest.mock` in Depth
+
+> 📝 **Practice:** [Q15 — Basic Mock and return_value](./practice.md#q15--mock--basic-mock-and-return_value)  
+> 📝 **Deep dive →** [03_mocking/theory.md](./03_mocking/theory.md)
 
 ### The Problem Mocking Solves
 
@@ -584,6 +602,8 @@ def test_with_monkeypatch(monkeypatch):
 
 ## 8. Test Doubles — Mock vs Stub vs Fake vs Spy
 
+> 📝 **Practice:** [Q25 — Mock vs Stub vs Fake](./practice.md#q25--doubles--mock-vs-stub-vs-fake)
+
 These terms come from Gerard Meszaros's *xUnit Test Patterns*:
 
 ```
@@ -638,6 +658,8 @@ def test_registration_sends_welcome_email():
 
 ## 9. Testing Exceptions and Edge Cases
 
+> 📝 **Practice:** [Q5 — pytest.raises](./practice.md#q5--pytest--pytestrasies)
+
 ```python
 import pytest
 
@@ -687,6 +709,8 @@ def test_overflow():
 ---
 
 ## 10. Testing Classes and Stateful Objects
+
+> 📝 **Practice:** [Q35 — Capstone end-to-end suite](./practice.md#q35--capstone--end-to-end-test-suite)
 
 ```python
 import pytest
@@ -767,6 +791,8 @@ class TestShoppingCart:
 
 ## 11. Async Testing — pytest-asyncio
 
+> 📝 **Practice:** [Q9 — Async testing](./practice.md#q9--pytest--async-testing)
+
 ```bash
 pip install pytest-asyncio
 ```
@@ -809,6 +835,8 @@ async def test_async_with_mock():
 ---
 
 ## 12. Code Coverage
+
+> 📝 **Practice:** [Q33 — Coverage analysis](./practice.md#q33--capstone--coverage-analysis)
 
 ```bash
 pip install pytest-cov
@@ -857,6 +885,8 @@ Coverage alone is not a quality metric — what matters is what you assert.
 ---
 
 ## 13. Test Organization and Naming
+
+> 📝 **Practice:** [Q34 — Test organization](./practice.md#q34--capstone--test-organization)
 
 ### File structure
 
@@ -919,6 +949,8 @@ import pytest
 
 ## 14. TDD — Test-Driven Development
 
+> 📝 **Practice:** [Q29 — TDD Red-Green-Refactor](./practice.md#q29--patterns--tdd-red-green-refactor)
+
 The Red-Green-Refactor cycle:
 
 ```
@@ -965,6 +997,8 @@ def fizzbuzz(n):
 ---
 
 ## 15. Property-Based Testing — Hypothesis
+
+> 📝 **Practice:** [Q32 — Property-based testing with Hypothesis](./practice.md#q32--patterns--property-based-testing-with-hypothesis)
 
 Standard tests use hand-picked examples. Hypothesis generates thousands of
 inputs automatically, finding edge cases you'd never think of.
@@ -1020,6 +1054,8 @@ def test_divide(a, b):
 ---
 
 ## 16. Common Pitfalls and Anti-Patterns
+
+> 📝 **Practice:** [Q31 — Test isolation](./practice.md#q31--patterns--test-isolation)
 
 ```python
 # ❌ ANTI-PATTERN 1: Testing implementation, not behavior
@@ -1092,6 +1128,8 @@ def test_scheduled_job():
 
 ## 17. CI/CD Integration
 
+> 📝 **Practice:** [Q35 — End-to-end test suite](./practice.md#q35--capstone--end-to-end-test-suite)
+
 ```yaml
 # .github/workflows/test.yml
 name: Tests
@@ -1144,7 +1182,10 @@ markers =
 |---|---|
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🧪 pytest Guide | [pytest_guide.md](./pytest_guide.md) |
+| 📝 Practice (35 Qs) | [practice.md](./practice.md) |
+| 🧪 pytest Deep Dive | [01_pytest/theory.md](./01_pytest/theory.md) |
+| 🔬 unittest Deep Dive | [02_unittest/theory.md](./02_unittest/theory.md) |
+| 🎭 Mocking Deep Dive | [03_mocking/theory.md](./03_mocking/theory.md) |
 | ⬅️ Previous | [16 — Design Patterns](../16_design_patterns/theory.md) |
 | ➡️ Next | [18 — Performance Optimization](../18_performance_optimization/theory.md) |
 

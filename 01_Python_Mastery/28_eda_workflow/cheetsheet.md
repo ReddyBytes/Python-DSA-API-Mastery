@@ -170,6 +170,72 @@ sv.compare([df_train, "Train"], [df_test, "Test"]).show_html("comparison.html")
 
 ---
 
+## Class Imbalance Detection and Strategies
+
+```python
+# Detect imbalance
+counts = df["target"].value_counts()
+ratio  = counts.max() / counts.min()
+print(f"Imbalance ratio: {ratio:.1f}:1")
+# > 5:1  → moderate; > 10:1 → severe
+
+# Strategy 1: algorithmic (no data change)
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression(class_weight="balanced")
+
+# Strategy 2: SMOTE (synthetic oversampling)
+from imblearn.over_sampling import SMOTE
+X_res, y_res = SMOTE(random_state=42).fit_resample(X_train, y_train)
+
+# Strategy 3: threshold tuning (post-hoc)
+y_pred = (model.predict_proba(X_test)[:, 1] >= 0.3).astype(int)
+
+# Always use F1 / AUC-ROC — never raw accuracy on imbalanced data
+```
+
+---
+
+## IQR vs Z-score Outlier Comparison
+
+```python
+# IQR — robust, use for skewed data
+Q1, Q3 = df["col"].quantile([0.25, 0.75])
+IQR = Q3 - Q1
+outliers_iqr = df[(df["col"] < Q1 - 1.5*IQR) | (df["col"] > Q3 + 1.5*IQR)]
+
+# Z-score — sensitive, use only for normal distributions
+from scipy import stats
+z = stats.zscore(df["col"].dropna())
+outliers_z = df[abs(z) > 3]
+
+# Rule: IQR first → Z-score only if confirmed normal
+# IQR fence factor: 1.5 (standard) / 3.0 (strict / financial data)
+```
+
+---
+
+## VIF — Multicollinearity Check
+
+```python
+# pip install statsmodels
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import pandas as pd
+
+def compute_vif(df):
+    X = df.select_dtypes(include="number").dropna().assign(const=1)
+    return pd.DataFrame({
+        "feature": df.select_dtypes(include="number").columns,
+        "VIF": [variance_inflation_factor(X.values, i)
+                for i in range(len(df.select_dtypes(include="number").columns))]
+    }).sort_values("VIF", ascending=False)
+
+# VIF > 10 → severe multicollinearity → consider dropping one of the pair
+# VIF 5–10 → high, monitor
+# VIF 1–5  → acceptable
+```
+
+---
+
 ## Common Data Quality Issues to Check
 
 | Issue | How to Detect |

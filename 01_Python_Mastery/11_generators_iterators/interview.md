@@ -545,6 +545,116 @@ list(p)   # [0, 4, 8, 12, 16]  second pass — works!
 </details>
 
 
+**Q14: How would you implement an infinite retry source using a generator?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Weak answer:** "Wrap it in a try/except and call it again."
+
+**Strong answer:**
+
+> The infinite retry pattern wraps a factory function in a generator that calls the factory, `yield from`s the result, and catches exceptions to retry with a delay. It's the generator equivalent of a circuit-breaker reconnect loop — useful for live message queues (Kafka, RabbitMQ) that may disconnect.
+
+```python
+import logging, time
+
+def retry_source(factory, delay=5.0, max_retries=None):
+    """
+    Call factory() to get an iterable. On exception, retry after delay.
+    factory must be a callable (not the iterable itself) so a fresh
+    connection is created on each retry.
+    """
+    retries = 0
+    while max_retries is None or retries <= max_retries:
+        try:
+            yield from factory()   # consume the source normally
+            return                 # source exhausted cleanly — stop
+        except Exception as e:
+            retries += 1
+            logging.warning("Source failed (attempt %d): %s — retrying in %.1fs",
+                            retries, e, delay)
+            time.sleep(delay)
+
+# Usage — Kafka consumer that auto-reconnects:
+def open_kafka_consumer():
+    consumer = KafkaConsumer("events", bootstrap_servers="kafka:9092")
+    yield from consumer
+
+for message in retry_source(open_kafka_consumer, delay=10.0):
+    process(message)
+```
+
+> **Key design decisions:**
+> - Accept a **factory** (callable), not the iterable directly — the factory creates a fresh connection on each retry
+> - `yield from factory()` consumes the entire source; a clean return exits the loop
+> - Exception restarts the loop, sleeping before re-calling the factory
+> - `max_retries=None` means infinite — appropriate for always-on consumers
+
+</details>
+
+<br>
+
+**Q15: How would you implement a fan-out generator that broadcasts one source to N consumers?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Weak answer:** "Use itertools.tee()."
+
+**Strong answer:**
+
+> There are two approaches: `itertools.tee()` for simple cases, and a buffered threading approach for production use. The interviewer usually wants you to discuss the tradeoff.
+
+```python
+# Approach 1 — itertools.tee() (simple, same-thread)
+import itertools
+
+source = (compute(x) for x in range(1000))
+stream1, stream2 = itertools.tee(source, 2)
+
+# WARNING: tee() buffers internally. If stream1 and stream2
+# are consumed at different rates, memory grows unboundedly.
+# Safe only when both consumers advance together (e.g. zip()).
+
+# Approach 2 — Buffered fan-out (production, multi-threaded)
+from collections import deque
+import threading, time
+
+def fan_out(source, n_consumers: int):
+    buffers = [deque() for _ in range(n_consumers)]
+
+    def fill():
+        for item in source:
+            for buf in buffers:
+                buf.append(item)   # broadcast to every buffer
+
+    t = threading.Thread(target=fill, daemon=True)
+    t.start()
+
+    def make_consumer(buf):
+        while t.is_alive() or buf:
+            if buf:
+                yield buf.popleft()
+            else:
+                time.sleep(0.001)   # brief spin-wait
+
+    return [make_consumer(buf) for buf in buffers]
+
+# Usage:
+stream_db, stream_s3 = fan_out(read_lines("events.log"), n_consumers=2)
+# stream_db → write to database
+# stream_s3 → archive to S3
+```
+
+> **Tradeoffs to state in an interview:**
+> - `tee()` is simpler but only safe when consumers are synchronized
+> - Buffered approach handles different consumer speeds but adds memory pressure if a slow consumer lags
+> - For true async fan-out at scale, prefer a message broker (Kafka, Redis pub/sub) over in-process buffering
+
+</details>
+
+
 ## ⚠️ Trap Questions
 
 ---
@@ -684,13 +794,13 @@ A: Coroutines are implemented on top of generators.
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🔧 Pipeline Patterns | [generator_patterns.md](./generator_patterns.md) |
+| 🔧 Pipeline Patterns | [04_generator_patterns.md](./04_generator_patterns.md) |
 | ➡️ Next | [12 — Context Managers](../12_context_managers/theory.md) |
 
 ---
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Generator Patterns](./generator_patterns.md) &nbsp;|&nbsp; **Next:** [Context Managers — Theory →](../12_context_managers/theory.md)
+**Prev:** [← Generator Patterns](./04_generator_patterns.md) &nbsp;|&nbsp; **Next:** [Context Managers — Theory →](../12_context_managers/theory.md)
 
-**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheetsheet.md) · [Generator Patterns](./generator_patterns.md)
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheetsheet.md) · [Generator Patterns](./04_generator_patterns.md)

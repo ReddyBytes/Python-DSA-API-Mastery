@@ -173,6 +173,8 @@ df[["prompt", "completion"]].to_json(
 
 ---
 
+> 📝 **Practice:** [Q5–Q8 — string operations](./practice.md#q5)
+
 ## 🔁 Navigation
 
 | | |

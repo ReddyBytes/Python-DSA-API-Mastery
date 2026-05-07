@@ -459,6 +459,63 @@ A: Set logger.propagate = False on the child logger,
 
 ---
 
+## 📊 Profiling & Memory Quick Reference
+
+```python
+# cProfile — find slow functions
+import cProfile
+cProfile.run('my_function()', sort='cumulative')
+
+# Save to file and analyze with pstats:
+cProfile.run('my_function()', filename='output.prof')
+import pstats
+p = pstats.Stats('output.prof')
+p.sort_stats('cumulative').print_stats(10)   # top 10 by cumulative time
+# Key columns: ncalls | tottime (self only) | cumtime (including callees)
+
+# CLI shortcut — no code changes needed:
+# python -m cProfile -s cumulative my_script.py
+
+# timeit — benchmark a specific expression:
+import timeit
+timeit.timeit('"-".join(str(n) for n in range(100))', number=10_000)
+
+# tracemalloc — find memory allocations:
+import tracemalloc
+tracemalloc.start()
+# ... your code ...
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics('lineno')
+for stat in top_stats[:3]:
+    print(stat)
+# → myapp/cache.py:47: size=24.3 MiB, count=8421, average=2.9 KiB
+
+# Compare snapshots to find memory GROWTH:
+snap1 = tracemalloc.take_snapshot()
+process_more()
+snap2 = tracemalloc.take_snapshot()
+for stat in snap2.compare_to(snap1, 'lineno')[:5]:
+    print(stat)
+
+# loguru — one-line setup, replaces Logger/Handler/Formatter trifecta:
+from loguru import logger
+logger.add("app.log", rotation="10 MB", retention="30 days", level="INFO")
+logger.bind(request_id="abc").info("Request received")
+logger.opt(exception=True).error("Payment failed for order {order_id}", order_id=4892)
+
+# debugpy — remote debugging (VS Code attach):
+import debugpy
+debugpy.listen(("0.0.0.0", 5678))
+debugpy.wait_for_client()   # blocks until VS Code attaches
+# docker-compose: expose port 5678; kubectl: port-forward pod/my-pod 5678:5678
+```
+
+**Profiling workflow:** `cProfile.run()` → `pstats.sort_stats('cumulative')` → identify hotspot → `pstats.sort_stats('tottime')` to find where time is actually spent → optimize → verify
+
+**Memory leak workflow:** `tracemalloc.start()` → run suspect code → `take_snapshot()` → `statistics('lineno')` → find growing allocations → check for module-level caches or reference cycles (`gc.get_objects()`)
+
+---
+
 ## 🔁 Navigation
 
 | | |

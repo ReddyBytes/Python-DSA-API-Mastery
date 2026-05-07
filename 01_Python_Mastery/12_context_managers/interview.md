@@ -511,7 +511,36 @@ with DistributedLock(redis, "order-4892", ttl=60):
 
 ---
 
-### Trap 1 — Returning `True` from `__exit__` accidentally
+### Trap 0 — `contextlib.closing` and when to use it
+
+```python
+# When an object has .close() but is NOT a context manager:
+class LegacyAPI:
+    def fetch(self): ...
+    def close(self): ...   # no __enter__ / __exit__
+
+# Without closing — must remember:
+api = LegacyAPI()
+try:
+    data = api.fetch()
+finally:
+    api.close()
+
+# With closing — idiomatic:
+from contextlib import closing
+with closing(LegacyAPI()) as api:
+    data = api.fetch()
+# api.close() guaranteed on exit
+
+# Common real-world use:
+from urllib.request import urlopen
+with closing(urlopen("http://example.com")) as response:
+    data = response.read()
+```
+
+> Use `closing` when you're working with legacy code or third-party libraries whose objects have `.close()` but predate the context manager protocol.
+
+---
 
 ```python
 class BadManager:

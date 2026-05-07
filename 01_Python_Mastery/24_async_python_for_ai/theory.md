@@ -101,6 +101,8 @@ async def main():
 
 LLM API calls are pure I/O (you send an HTTP request and wait for the model server to respond). That is exactly where async shines.
 
+> 📝 **Practice:** [Q1–Q2 — async/await basics](./practice.md#q1)
+
 ---
 
 ## 2️⃣ Why AI Apps Specifically Need Async
@@ -155,6 +157,8 @@ ThreadPoolExecutor:
 ```
 
 For AI services, asyncio is the standard choice.
+
+> 📝 **Practice:** [Q3–Q4 — why AI needs async](./practice.md#q3)
 
 ---
 
@@ -247,6 +251,8 @@ async def stream_and_collect(prompt: str):
     return "".join(full_response)
 ```
 
+> 📝 **Practice:** [Q5–Q7 — streaming LLM responses](./practice.md#q5)
+
 ---
 
 ## 4️⃣ Making Parallel LLM Calls — asyncio.gather and asyncio.create_task
@@ -329,6 +335,8 @@ Timing difference:
   result = await asyncio.gather(coro())  ← scheduled AND collected in one step
 ```
 
+> 📝 **Practice:** [Q8–Q10 — parallel LLM calls](./practice.md#q8)
+
 ---
 
 ## 5️⃣ Parallel Embeddings — Batch Processing with gather + Semaphore
@@ -404,6 +412,8 @@ async def embed_in_batches(
     return all_embeddings
 ```
 
+> 📝 **Practice:** [Q11–Q13 — parallel embeddings](./practice.md#q11)
+
 ---
 
 ## 6️⃣ Semaphores for Rate Limiting
@@ -469,6 +479,8 @@ async def call_with_retry(
                 print(f"Rate limited, waiting {wait:.1f}s...")
                 await asyncio.sleep(wait)
 ```
+
+> 📝 **Practice:** [Q14–Q16 — Semaphore rate limiting](./practice.md#q14)
 
 ---
 
@@ -542,6 +554,8 @@ async def main():
         result = await client.chat.completions.create(...)
 ```
 
+> 📝 **Practice:** [Q17–Q18 — async context managers](./practice.md#q17)
+
 ---
 
 ## 8️⃣ Async Queues — Producer-Consumer for Document Pipelines
@@ -611,6 +625,8 @@ async def process_with_multiple_consumers(paths: list[str], num_consumers: int =
     await asyncio.gather(*consumer_tasks)
     return results
 ```
+
+> 📝 **Practice:** [Q19–Q21 — async queues](./practice.md#q19)
 
 ---
 
@@ -699,6 +715,8 @@ async def process_with_deadline(prompts: list[str], total_timeout: float = 60.0)
         return []
 ```
 
+> 📝 **Practice:** [Q22–Q23 — error handling in async](./practice.md#q22)
+
 ---
 
 ## 🔟 Running Async from Sync Code
@@ -761,6 +779,8 @@ def call_async_from_sync(coro):
     future = asyncio.run_coroutine_threadsafe(coro, _loop)
     return future.result(timeout=60)
 ```
+
+> 📝 **Practice:** [Q24–Q25 — running async from sync code](./practice.md#q24)
 
 ---
 
@@ -862,6 +882,8 @@ async def summarize(text: str, client: AsyncOpenAI = Depends(get_llm_client)):
     )
     return {"summary": response.choices[0].message.content}
 ```
+
+> 📝 **Practice:** [Q26–Q27 — async in FastAPI](./practice.md#q26)
 
 ---
 
@@ -990,6 +1012,8 @@ async def batch_process(prompts: list[str], max_concurrent: int = 10) -> list[st
     return [None if isinstance(r, Exception) else r for r in results]
 ```
 
+> 📝 **Practice:** [Q28–Q30 — production async patterns](./practice.md#q28)
+
 ---
 
 ## 🔥 Summary
@@ -1031,7 +1055,7 @@ DECISION GUIDE:
 |---|---|
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🔧 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev | [13 — Concurrency](../13_concurrency/theory.md) |
 
 ---

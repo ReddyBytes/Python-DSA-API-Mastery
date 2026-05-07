@@ -164,6 +164,10 @@ plt.tight_layout()
 
 ---
 
+> 📝 **Practice:** [Q21–Q25 — ML visualization](./practice.md#q21)
+
+---
+
 ## Navigation
 
 | | |

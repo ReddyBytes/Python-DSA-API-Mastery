@@ -196,6 +196,12 @@ async with sem:  ...
 await event.wait()
 await q.put(item)
 item = await q.get()
+
+# TaskGroup (Python 3.11+) — structured concurrency:
+async with asyncio.TaskGroup() as tg:
+    t1 = tg.create_task(coro1())
+    t2 = tg.create_task(coro2())
+# All tasks complete; if any raises, others are cancelled → ExceptionGroup raised
 ```
 
 ---

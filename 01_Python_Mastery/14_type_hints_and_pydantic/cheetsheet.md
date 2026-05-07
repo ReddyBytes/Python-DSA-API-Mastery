@@ -393,7 +393,7 @@ A: field_validator: validates one field in isolation.
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Previous | [13 — Concurrency](../13_concurrency/theory.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
 
@@ -403,4 +403,4 @@ A: field_validator: validates one field in isolation.
 
 **Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./theory.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

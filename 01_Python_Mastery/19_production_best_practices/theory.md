@@ -4,9 +4,9 @@
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Performance Optimization](../18_performance_optimization/profiling.md) &nbsp;|&nbsp; **Next:** [Project Structure →](./project_structure.md)
+**Prev:** [← Performance Optimization](../18_performance_optimization/profiling.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Project Structure](./project_structure.md) · [Coding Standards](./coding_standards.md) · [Environment Management](./environment_management.md) · [Packaging](./packaging.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Coding Standards](./01_coding_standards/theory.md) · [Project Structure & Packaging](./02_project_structure_packaging/theory.md) · [Environment Management](./03_environment_management/theory.md) · [Interview Q&A](./interview.md) · [Cheatsheet](./cheetsheet.md)
 
 ---
 
@@ -23,6 +23,10 @@ Pydantic `Settings` · `pre-commit` hooks · `pyenv` + Poetry · JSON log format
 
 **Reference** — Know it exists, look up when needed:
 `bandit` security scanning · OpenTelemetry tracing · Vault secrets · readiness vs liveness probes
+
+---
+
+> 📝 **Deep dives:** [Coding Standards →](./01_coding_standards/theory.md) · [Project Structure & Packaging →](./02_project_structure_packaging/theory.md) · [Environment Management →](./03_environment_management/theory.md)
 
 ---
 
@@ -127,6 +131,10 @@ payment_service/
 
 ---
 
+> 📝 **Practice:** [Q9–Q14 — Project structure, pyproject.toml, packaging](./practice.md#project-structure-and-packaging) · [Deep dive →](./02_project_structure_packaging/theory.md)
+
+---
+
 ## 2. Configuration Management
 
 ### The Analogy
@@ -216,6 +224,10 @@ print(settings.debug)                    # ← bool, not the string "true"
 ```
 
 If `DATABASE_URL` is missing, Pydantic raises a `ValidationError` at startup with a clear message — not a cryptic `AttributeError` buried in your request handler.
+
+---
+
+> 📝 **Practice:** [Q21–Q22 — Logging, Pydantic Settings](./practice.md#production-patterns) · [Q15–Q20 — venv, .env, requirements](./practice.md#virtual-environments-and-requirements) · [Deep dive →](./03_environment_management/theory.md)
 
 ---
 
@@ -336,6 +348,10 @@ Poetry generates `poetry.lock` — the exact equivalent of a pinned `requirement
 
 ---
 
+> 📝 **Practice:** [Q15–Q20 — Virtual environments, requirements, .env](./practice.md#virtual-environments-and-requirements) · [Deep dive →](./03_environment_management/theory.md)
+
+---
+
 ## 4. Coding Standards
 
 ### The Analogy
@@ -446,6 +462,10 @@ pip install pre-commit
 pre-commit install                       # ← installs hooks into .git/hooks/
 pre-commit run --all-files               # ← run manually on everything
 ```
+
+---
+
+> 📝 **Practice:** [Q1–Q8 — PEP 8, type hints, formatters, linters](./practice.md#coding-standards) · [Deep dive →](./01_coding_standards/theory.md)
 
 ---
 
@@ -568,6 +588,10 @@ Never log sensitive data at any level: passwords, tokens, PII, card numbers.
 
 ---
 
+> 📝 **Practice:** [Q21 — Structured JSON logging](./practice.md#q21--logging--structured-json-logging-)
+
+---
+
 ## 6. Error Handling Patterns
 
 ### The Analogy
@@ -679,6 +703,10 @@ def fetch_exchange_rate(currency: str) -> float:
 
 ---
 
+> 📝 **Practice:** [Q23 — Graceful degradation](./practice.md#q23--error-handling--graceful-degradation-) · [Q24 — Retry with tenacity](./practice.md#q24--retry--exponential-backoff-with-tenacity-)
+
+---
+
 ## 7. Secrets Management
 
 ### The Analogy
@@ -765,6 +793,10 @@ Environment variables                   ← acceptable for non-critical config
           ↓
 Hardcoded in source                     ← NEVER
 ```
+
+---
+
+> 📝 **Practice:** [Q25 — Secrets hierarchy](./practice.md#q25--secrets--hierarchy-and-best-practices-)
 
 ---
 
@@ -864,6 +896,13 @@ Apply them consistently and your codebase becomes the kind that junior developer
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Performance Optimization](../18_performance_optimization/profiling.md) &nbsp;|&nbsp; **Next:** [Project Structure →](./project_structure.md)
+**Prev:** [← Performance Optimization](../18_performance_optimization/profiling.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Project Structure](./project_structure.md) · [Coding Standards](./coding_standards.md) · [Environment Management](./environment_management.md) · [Packaging](./packaging.md) · [Interview Q&A](./interview.md)
+**Practice:** [Root Practice — 30 Qs](./practice.md)
+
+**Subfolders:**
+- [01_coding_standards — Theory](./01_coding_standards/theory.md) · [Practice](./01_coding_standards/practice.md)
+- [02_project_structure_packaging — Theory](./02_project_structure_packaging/theory.md) · [Practice](./02_project_structure_packaging/practice.md)
+- [03_environment_management — Theory](./03_environment_management/theory.md) · [Practice](./03_environment_management/practice.md)
+
+**Related Topics:** [Cheatsheet](./cheetsheet.md) · [Interview Q&A](./interview.md)

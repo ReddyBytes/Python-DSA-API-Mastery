@@ -462,6 +462,108 @@ That is what this section evaluates.
 
 ---
 
+**Q16: What is pyproject.toml and what does it replace?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> `pyproject.toml` is the modern single-file standard for Python project configuration (PEP 517/518). It replaces `setup.py`, `setup.cfg`, `.flake8`, `pytest.ini`, and `.mypy.ini` — consolidating all project metadata, dependencies, and tool configuration into one file.
+
+Key sections: `[build-system]` (build backend), `[project]` (metadata + deps), `[tool.black]`, `[tool.ruff]`, `[tool.mypy]`, `[tool.pytest.ini_options]`.
+
+Modern awareness.
+
+</details>
+
+<br>
+
+**Q17: How do pre-commit hooks work in a CI/CD pipeline?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> Pre-commit hooks run locally before each `git commit`, blocking commits that fail formatting or lint checks. In CI, you run `pre-commit run --all-files` as an explicit CI step — this catches cases where developers bypassed local hooks with `--no-verify` or committed on machines without hooks installed.
+
+The pattern: pre-commit in CI is the safety net; pre-commit locally is the fast feedback loop.
+
+CI enforcement matters.
+
+</details>
+
+<br>
+
+**Q18: Poetry vs pip — when would you choose one over the other?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+| Scenario | Choose |
+|---|---|
+| Library to publish to PyPI | Poetry — handles build + publish |
+| Simple app, team knows pip | venv + pip-tools |
+| Need dev/prod dependency groups | Poetry |
+| Legacy project, large team | Keep existing tool |
+| Need editable installs quickly | pip (`pip install -e .`) |
+
+Poetry's advantage: unified tool for venv, deps, lock file, and publishing. pip's advantage: universal, always available, no install required.
+
+Pragmatic comparison.
+
+</details>
+
+<br>
+
+**Q19: What are .env file security best practices?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+- Never commit `.env` — add to `.gitignore` before creating the file
+- Always commit `.env.example` with placeholder values (no real secrets)
+- Never log env var values — log only their presence/absence
+- Validate all required vars at startup — fail fast, not mid-request
+- In production: inject secrets via your deployment platform (K8s Secrets, AWS Parameter Store), not `.env` files
+- Use `detect-private-key` pre-commit hook to catch accidental commits
+
+The `.env` file is for local development only.
+
+</details>
+
+<br>
+
+**Q20: What is ruff and how does it differ from flake8 + isort?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> Ruff is a fast Python linter written in Rust that implements the rules of flake8, isort, pyupgrade, flake8-bugbear, and more in a single tool. It is 10–100x faster than running them individually.
+
+Key differences:
+- Single tool replaces flake8 + isort + several plugins
+- Auto-fix support (`ruff check --fix`)
+- Written in Rust — minimal CI overhead
+- Configured in `pyproject.toml` under `[tool.ruff]`
+
+Many teams now use ruff instead of separate flake8/isort/pyupgrade.
+
+Modern tooling awareness.
+
+</details>
+
+<br>
+
+---
+
 # 🔁 Navigation
 
 Previous:  

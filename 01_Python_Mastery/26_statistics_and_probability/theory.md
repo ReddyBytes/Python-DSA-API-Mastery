@@ -65,6 +65,8 @@ print(s.describe())   # count, mean, std, min, 25%, 50%, 75%, max
 - Use **mean** when data is symmetric, no extreme outliers
 - Use **median** when data is skewed or has outliers (house prices, salaries, response times)
 
+> 📝 **Practice:** [Q1–Q5 — Descriptive Statistics](./practice.md#q1)
+
 ---
 
 ## 2️⃣ Probability Distributions
@@ -111,6 +113,8 @@ print(binom.cdf(7))         # 0.945 — P(at most 7 heads)
 samples = stats.norm.rvs(loc=170, scale=10, size=1000)  # 1000 heights
 ```
 
+> 📝 **Practice:** [Q6–Q10 — Probability Distributions](./practice.md#q6)
+
 ---
 
 ## 3️⃣ The Normal Distribution and Why It's Everywhere
@@ -144,6 +148,8 @@ print(f"Population skewness: {stats.skew(population):.2f}")   # ~2 — very skew
 sample_means = [np.mean(np.random.choice(population, size=50)) for _ in range(1000)]
 print(f"Sample means skewness: {stats.skew(sample_means):.2f}")   # ~0 — normal!
 ```
+
+> 📝 **Practice:** [Q11–Q13 — Normal Distribution](./practice.md#q11)
 
 ---
 
@@ -189,6 +195,8 @@ else:
 
 p-value of 0.03 means: only a 3% chance of seeing this result if nothing actually changed. We conclude something changed.
 
+> 📝 **Practice:** [Q14–Q19 — Hypothesis Testing](./practice.md#q14)
+
 ---
 
 ## 5️⃣ Type I and Type II Errors
@@ -219,6 +227,8 @@ analysis = NormalIndPower()
 n_required = analysis.solve_power(effect_size=effect_size, alpha=alpha, power=power)
 print(f"Required sample size per group: {int(np.ceil(n_required))}")
 ```
+
+> 📝 **Practice:** [Q20–Q22 — Type I and Type II Errors](./practice.md#q20)
 
 ---
 
@@ -256,6 +266,8 @@ print(f"P(disease | positive test): {p_disease_given_positive:.3f}")
 
 This result — that a positive test from a rare disease still only gives ~50% probability — illustrates why Naive Bayes classifiers work despite their independence assumption: prior probability matters enormously.
 
+> 📝 **Practice:** [Q23–Q25 — Bayes' Theorem](./practice.md#q23)
+
 ---
 
 ## 7️⃣ Correlation and Covariance
@@ -290,6 +302,8 @@ print(f"Spearman: {corr:.3f}, p-value: {p_val:.3f}")
 - A third variable C causes both (confounding)
 - Pure coincidence (spurious correlation)
 
+> 📝 **Practice:** [Q26–Q28 — Correlation and Covariance](./practice.md#q26)
+
 ---
 
 ## Common Mistakes to Avoid ⚠️
@@ -308,7 +322,7 @@ print(f"Spearman: {corr:.3f}, p-value: {p_val:.3f}")
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../25_python_ai_ecosystem/theory.md](../25_python_ai_ecosystem/theory.md) |
 | ➡️ Next Module | [../27_matplotlib_seaborn/theory.md](../27_matplotlib_seaborn/theory.md) |
 

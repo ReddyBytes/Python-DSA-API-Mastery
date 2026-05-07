@@ -527,13 +527,155 @@ df.info(memory_usage='deep')
 
 ---
 
+## Named Aggregation (pd.NamedAgg)
+
+```python
+# Preferred pattern — output column names are explicit in the agg() call
+summary = df.groupby("user_id").agg(
+    mean_score=("score",  "mean"),
+    max_score=("score",   "max"),
+    p25=("score",         lambda x: x.quantile(0.25)),
+    p75=("score",         lambda x: x.quantile(0.75)),
+    n_samples=pd.NamedAgg(column="score", aggfunc="count"),
+)
+# No renaming step needed — names are set at definition time
+```
+
+---
+
+## eval() — Large DataFrame Column Creation
+
+```python
+# Single column (avoids one intermediate array):
+df.eval("revenue = price * quantity", inplace=True)
+
+# Multi-step (all computed in one compiled pass — no temp arrays):
+df.eval("""
+    revenue = price * quantity
+    tax     = revenue * 0.1
+    total   = revenue + tax
+""", inplace=True)
+
+# Inject Python variable with @:
+baseline = 70
+df.eval("adjusted = score - @baseline", inplace=True)
+
+# Without inplace — returns a new DataFrame:
+df2 = df.eval("efficiency = output / input_cost")
+
+# Performance threshold: meaningful speedup at ~10k+ rows
+```
+
+---
+
+## query() — @variable Injection
+
+```python
+# @ prefix injects Python variables into query string
+min_score     = 85
+allowed       = ["active", "trial"]
+
+df.query("score >= @min_score and status in @allowed")
+df.query("score > @threshold")                    # single variable
+df.query("status not in @excluded_list")          # list injection
+
+# Column names with spaces need backtick quoting:
+df.query("`request count` > 100")
+
+# Method calls don't work inside query strings — use boolean indexing:
+# WRONG: df.query("name.str.startswith('A')")
+# RIGHT: df[df["name"].str.startswith("A")]
+
+# numexpr engine (explicit):
+df.query("a > 0 and b < 0.5", engine="numexpr")  # default when numexpr installed
+df.query("a > 0",              engine="python")   # fallback
+```
+
+---
+
+## pandera — Schema Validation
+
+```python
+import pandera as pa
+
+# Define schema as a declarative contract
+schema = pa.DataFrameSchema({
+    "score":  pa.Column(float, checks=[pa.Check.ge(0.0), pa.Check.le(100.0)],
+                        nullable=False),
+    "label":  pa.Column(int,   checks=[pa.Check.isin([0, 1])], nullable=False),
+    "source": pa.Column(str,   nullable=False),
+})
+
+# Validate — lazy=True collects ALL failures, not just first
+try:
+    schema.validate(df, lazy=True)
+except pa.errors.SchemaErrors as e:
+    print(e.failure_cases)   # DataFrame: row, column, check, failure value
+
+# Common checks:
+# pa.Check.ge(n)        — greater than or equal to n
+# pa.Check.le(n)        — less than or equal to n
+# pa.Check.isin([...])  — value must be in list
+# pa.Check.str_length(min_value=1, max_value=512)
+# pa.Check(lambda s: s.str.startswith("http"), element_wise=False)
+```
+
+---
+
+## astype('category') — Memory Savings
+
+```python
+# Convert after load:
+df["status"] = df["status"].astype("category")
+
+# Best practice — set at read time:
+df = pd.read_csv("data.csv", dtype={"status": "category", "region": "category"})
+
+# Inspect internals:
+df["status"].cat.categories    # Index of unique string values (the lookup table)
+df["status"].cat.codes         # Int8/Int16 code per row
+
+# Memory comparison (1M rows, 5 unique values):
+# object dtype:   ~50 MB (full Python string pointer per row)
+# category dtype: ~1 MB  (int8 codes + 5-string lookup table)
+
+# When to use:
+# - nunique() << total rows (< 50% unique is a rough rule)
+# - Column is used in groupby() (integer-code comparison is faster)
+# - Memory is a constraint and cardinality is low
+```
+
+---
+
+## Chunked read_csv
+
+```python
+# Returns an iterator of DataFrames, each chunksize rows
+for chunk in pd.read_csv("large_file.csv", chunksize=100_000):
+    # Filter BEFORE collecting — keeps memory = O(chunk), not O(file)
+    chunk = chunk[chunk["quality"] >= 3]
+    results.append(chunk)
+
+df = pd.concat(results, ignore_index=True)
+
+# For SQL tables — same pattern:
+for chunk in pd.read_sql("SELECT * FROM huge_table", engine, chunksize=50_000):
+    process(chunk)
+
+# Write each chunk directly to Parquet (no in-memory accumulation):
+for i, chunk in enumerate(pd.read_csv("huge.csv", chunksize=50_000)):
+    chunk.to_parquet(f"output/part_{i:04d}.parquet", index=False)
+```
+
+---
+
 ## 🔁 Navigation
 
 | | |
 |---|---|
 | 📖 Theory | [theory.md](./README.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
 
 ---

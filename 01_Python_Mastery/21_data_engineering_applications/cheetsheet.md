@@ -125,7 +125,138 @@ def fetch_all_cursor(url: str, page_size: int = 100) -> list:
 
 ---
 
-## 🏗 File Processing Pipeline Skeleton
+## 🏗 Generator-Based ETL Pipeline Pattern
+
+```python
+# Each stage is a generator — O(1) memory regardless of dataset size
+def extract(filepath):
+    with open(filepath, newline="") as f:
+        for row in csv.DictReader(f):
+            yield dict(row)
+
+def transform(records):
+    for r in records:
+        try:
+            r["score"] = float(r["score"])
+            yield r
+        except Exception as e:
+            log.warning("bad row: %s", e)   # collect, never raise
+
+def load(records, out_path):
+    count = 0
+    with open(out_path, "w", newline="") as f:
+        writer = None
+        for r in records:
+            if writer is None:
+                writer = csv.DictWriter(f, fieldnames=r.keys())
+                writer.writeheader()
+            writer.writerow(r)
+            count += 1
+    return count
+
+# Wire: nothing runs until load() consumes the chain
+count = load(transform(extract("source.csv")), "output.csv")
+```
+
+---
+
+## 💀 Dead-Letter Queue Pattern
+
+```python
+import json
+
+def pipeline_with_dlq(records, dlq_path):
+    """Yield clean records; write bad rows to dead-letter file."""
+    with open(dlq_path, "a") as dlq:
+        for raw in records:
+            try:
+                yield validate_and_transform(raw)
+            except Exception as e:
+                dlq.write(json.dumps({"raw": raw, "error": str(e)}) + "\n")
+
+# Usage
+valid_records = pipeline_with_dlq(read_csv("data.csv"), "errors.jsonl")
+count = load(valid_records, "output.csv")
+```
+
+---
+
+## 🔁 Checkpoint + Resume Pattern
+
+```python
+import json
+from pathlib import Path
+
+class Checkpoint:
+    def __init__(self, path):
+        self._path = Path(path)
+
+    def load(self):
+        if self._path.exists():
+            return json.loads(self._path.read_text())["last_id"]
+        return 0   # first run
+
+    def save(self, last_id):
+        self._path.write_text(json.dumps({"last_id": last_id}))
+
+cp = Checkpoint("checkpoint.json")
+start = cp.load()
+for row in read_csv("data.csv"):
+    if int(row["id"]) <= start:
+        continue           # skip already-processed
+    process(row)
+    cp.save(int(row["id"]))
+```
+
+---
+
+## 🌊 Backpressure with asyncio.Semaphore
+
+```python
+import asyncio, aiohttp
+
+async def collect_with_backpressure(url, total_pages, max_concurrent=5):
+    sem = asyncio.Semaphore(max_concurrent)   # at most 5 in-flight
+
+    async def fetch(session, page):
+        async with sem:                       # blocks when 5 running
+            async with session.get(url, params={"page": page}) as r:
+                return (await r.json()).get("items", [])
+
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch(session, p) for p in range(1, total_pages + 1)]
+        pages = await asyncio.gather(*tasks)
+    return [item for page in pages for item in page]
+
+# Thread-based: queue.Queue(maxsize=N) provides backpressure
+import queue
+q = queue.Queue(maxsize=100)   # producer blocks when full
+```
+
+---
+
+## 🔀 Memory-Efficient Chunked Processing
+
+```python
+def chunk(iterable, size):
+    """Split any iterator into lists of `size` items."""
+    batch = []
+    for item in iterable:
+        batch.append(item)
+        if len(batch) >= size:
+            yield batch
+            batch = []     # free memory
+    if batch:
+        yield batch
+
+# Max memory at any time: O(size), not O(n)
+for batch in chunk(read_csv("big.csv"), size=1000):
+    aggregate_batch(batch)
+```
+
+---
+
+
 
 ```python
 import logging

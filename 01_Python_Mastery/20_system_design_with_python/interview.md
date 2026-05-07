@@ -459,6 +459,132 @@ It is about structured reasoning.
 
 ---
 
+# 🔌 Additional Topics — Pattern Deep Dives
+
+---
+
+## Circuit Breaker Pattern (3 States)
+
+**Q: Explain the three states of a circuit breaker and when each transition happens.**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**CLOSED** (normal operation):
+Calls pass through. Failure counter increments on each failure. When `failure_count >= threshold` → transition to OPEN.
+
+**OPEN** (fast fail):
+All calls are rejected immediately without calling downstream — no waiting for timeouts. After `recovery_timeout` seconds have elapsed → transition to HALF_OPEN.
+
+**HALF_OPEN** (testing):
+One test request is allowed through. If it succeeds → back to CLOSED (reset failure count). If it fails → back to OPEN (reset timeout).
+
+```
+CLOSED → (failures >= threshold) → OPEN
+OPEN   → (timeout elapsed)       → HALF_OPEN
+HALF_OPEN → (success)            → CLOSED
+HALF_OPEN → (failure)            → OPEN
+```
+
+Why it matters: without a circuit breaker, a slow downstream service causes request threads to pile up and exhaust the thread pool, crashing your entire service.
+
+</details>
+
+<br>
+
+---
+
+## Token Bucket vs Sliding Window
+
+**Q: Compare token bucket and sliding window rate limiters. When would you choose each?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Token Bucket:**
+- A bucket holds N tokens (capacity = max burst size)
+- Tokens refill at `rate` tokens/second
+- Each request consumes 1 token
+- Allows short bursts (up to capacity) then enforces average rate
+- Memory: O(1) per client
+- Used by: AWS API Gateway, Stripe, GitHub
+
+**Sliding Window:**
+- Stores timestamp of every request in a deque
+- On each request: remove timestamps older than window, count remaining
+- More accurate — no boundary burst problem
+- Memory: O(max_requests) per client
+- Used for: strict per-second enforcement, no burst tolerance
+
+**Choose Token Bucket when:**
+You want to allow clients to burst (download a large file, batch requests) as long as their long-run average stays within limits.
+
+**Choose Sliding Window when:**
+You need strict enforcement — e.g., a free-tier API where every request above limit must be rejected regardless of timing.
+
+</details>
+
+<br>
+
+---
+
+## Cursor vs Offset Pagination
+
+**Q: What is cursor-based pagination and when should you use it over offset pagination?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Offset pagination:** `GET /items?offset=20&limit=10`
+- Simple: skip N rows, return next M
+- Problem: if a row is inserted before offset 20 while paginating, you skip a record on the next page
+- Problem: `OFFSET 10000 LIMIT 10` on a large DB forces a full table scan of 10,010 rows
+- Good for: small datasets, admin UIs where jumping to any page is needed
+
+**Cursor pagination:** `GET /items?cursor=eyJpZCI6IDIwfQ&limit=10`
+- Cursor = base64-encoded pointer to the last seen item (usually an ID or timestamp)
+- Stable: inserts/deletes don't affect pagination — the cursor anchors to a specific row
+- Efficient: `WHERE id > 20 LIMIT 10` uses an index, no full scan
+- Downside: can't jump to "page 5" — must follow cursor chain
+
+**Choose cursor when:** large datasets, data changes frequently, stable pagination matters (social feeds, payment history).
+
+**Choose offset when:** small datasets, the user needs to jump to a specific page number, or total count display is required.
+
+</details>
+
+<br>
+
+---
+
+## Idempotency Key Pattern
+
+**Q: What is an idempotency key and why is it important for payment APIs?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+An **idempotency key** is a unique client-generated ID sent with a mutating request (POST/PUT). The server stores the key + response. If the same key is submitted again (due to retry), the server returns the cached response instead of processing again.
+
+**Why payments:** A client sends `POST /payments` for $100. The network times out. Did the payment go through? The client retries. Without idempotency keys, the user is charged twice.
+
+**How it works:**
+1. Client generates a UUID: `Idempotency-Key: a3f9-12bc-4d88`
+2. Server checks: has this key been seen?
+   - Yes → return cached response (same payment_id, same status)
+   - No → process payment, store key + response in Redis
+3. Client can safely retry any number of times
+
+**Storage:** Use Redis with a TTL (e.g., 24 hours). Key = `idem:{key}`, Value = JSON response.
+
+Used by: Stripe, PayPal, AWS, every serious payment processor.
+
+</details>
+
+<br>
+
+---
+
 # 🔁 Navigation
 
 Previous:  

@@ -320,19 +320,56 @@ A: Generator: O(1). List: O(n). For 1M ints: ~200B vs ~8.5MB.
 
 ---
 
+## 🔧 Production Pattern Quick Reference
+
+```python
+# Paginated API iterator
+def paginated_api(url):
+    while url:
+        data = requests.get(url).json()
+        yield from data["results"]         # ← yield each item from page
+        url = data.get("next")             # ← None stops the loop
+
+# Batch/chunk generator
+from itertools import islice
+def batched(iterable, n):
+    it = iter(iterable)
+    while batch := list(islice(it, n)):    # ← walrus operator
+        yield batch
+
+# Pipeline with error sink
+def safe_parse(rows):
+    good, bad = [], []
+    for row in rows:
+        try:
+            good.append(parse(row))
+        except Exception as e:
+            bad.append((row, e))           # ← errors captured, not raised
+    return good, bad
+
+# Fan-out (broadcast one source to N consumers)
+import itertools
+def broadcast(source, n):
+    return itertools.tee(source, n)        # ← WARNING: memory grows if consumers lag
+```
+
+**Key rules:** `tee()` is only safe when consumers advance together · Always prefer `islice()` over manual counters for infinite generators · `yield from` replaces `for x in sub: yield x` exactly
+
+---
+
 ## 🔁 Navigation
 
 | | |
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
-| 🔧 Pipeline Patterns | [generator_patterns.md](./generator_patterns.md) |
+| 🔧 Pipeline Patterns | [04_generator_patterns.md](./04_generator_patterns.md) |
 | ➡️ Next | [12 — Context Managers](../12_context_managers/theory.md) |
 
 ---
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Generator Patterns →](./generator_patterns.md)
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Generator Patterns →](./04_generator_patterns.md)
 
-**Related Topics:** [Theory](./theory.md) · [Generator Patterns](./generator_patterns.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./theory.md) · [Generator Patterns](./04_generator_patterns.md) · [Interview Q&A](./interview.md)

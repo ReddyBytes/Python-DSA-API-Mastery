@@ -367,6 +367,10 @@ plt.show()
 
 ---
 
+> 📝 **Practice:** [Q6–Q10 — customization and styling](./practice.md#q6)
+
+---
+
 ## 📂 Navigation
 
 | | |

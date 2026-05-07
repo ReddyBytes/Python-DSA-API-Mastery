@@ -45,6 +45,8 @@ would have surfaced in 30 seconds.
 
 ## 💡 Chapter 1 — print() vs logging: The Real Difference
 
+📝 **Practice:** [Q1 →](./practice.md#q1--ch1--replace-print-with-logging)
+
 ```python
 # What a beginner does:
 print(f"Processing order {order_id}")
@@ -75,6 +77,8 @@ PRINT vs LOGGING COMPARISON:
 ---
 
 ## 📊 Chapter 2 — Log Levels: The Severity Scale
+
+📝 **Practice:** [Q2 →](./practice.md#q2--ch2--set-level-and-filter-messages)
 
 ```
 LEVEL      NUMERIC   WHEN TO USE
@@ -119,6 +123,8 @@ logging.critical("This shows")      # CRITICAL:root:This shows
 
 ## 🏗️ Chapter 3 — The Architecture: Logger → Handler → Formatter
 
+📝 **Practice:** [Q3 →](./practice.md#q3--ch3--attach-streamhandler--filehandler)
+
 Python's logging is built on three components working together:
 
 ```
@@ -152,6 +158,8 @@ YOUR CODE
 ---
 
 ## 🔧 Chapter 4 — From Quick Setup to Production Config
+
+📝 **Practice:** [Q4–Q5 →](./practice.md#q4--ch4--build-a-custom-formatter)
 
 ### The Quick Way: `basicConfig()`
 
@@ -255,6 +263,8 @@ logger.info("Application started")
 
 ## 🎨 Chapter 5 — Format Fields Reference
 
+📝 **Practice:** [Q6 →](./practice.md#q6--ch5--add-filename-and-lineno-to-format)
+
 ```python
 # All available format codes:
 FORMAT = (
@@ -286,6 +296,8 @@ JSON_FORMAT = '{"time":"%(asctime)s","level":"%(levelname)s","logger":"%(name)s"
 ---
 
 ## 🔄 Chapter 6 — Log Rotation: Preventing Disk Full
+
+📝 **Practice:** [Q7 →](./practice.md#q7--ch6--rotatingfilehandler)
 
 ```python
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
@@ -322,6 +334,8 @@ handler = TimedRotatingFileHandler(
 ---
 
 ## 🧠 Chapter 7 — The Logger Hierarchy: Parent-Child Propagation
+
+📝 **Practice:** [Q8–Q9 →](./practice.md#q8--ch7--logger-hierarchy-and-propagation)
 
 ```
 ROOT LOGGER ("")
@@ -365,6 +379,8 @@ logging.getLogger("mylib").addHandler(logging.NullHandler())
 ---
 
 ## 📋 Chapter 8 — Exception Logging: The Right Way
+
+📝 **Practice:** [Q10–Q11 →](./practice.md#q10--ch8--loggingexception-inside-except)
 
 ```python
 import logging
@@ -420,6 +436,8 @@ except Exception as e:
 ---
 
 ## 🗂️ Chapter 9 — Structured Logging (JSON)
+
+📝 **Practice:** [Q12–Q13 →](./practice.md#q12--ch9--json-formatter)
 
 Plain-text logs are hard to search. JSON logs are machine-readable.
 
@@ -492,6 +510,8 @@ log.info("payment_processed", order_id=4892, amount=499.00, currency="USD")
 
 ## 🔗 Chapter 10 — Correlation IDs: Tracing Requests
 
+📝 **Practice:** [Q14 →](./practice.md#q14--ch10--loggeradapter-for-request-id)
+
 When a user's request touches 5 microservices, how do you trace it across all logs?
 
 ```python
@@ -546,6 +566,8 @@ def request_middleware(request, next_handler):
 
 ## ⚡ Chapter 11 — Performance: Logging Without Slowing Down
 
+📝 **Practice:** [Q15 →](./practice.md#q15--ch11--lazy-formatting-with-percent-style)
+
 ```python
 import logging
 logger = logging.getLogger(__name__)
@@ -582,6 +604,8 @@ logging.disable(logging.NOTSET)     # re-enable all levels
 
 ## 🔒 Chapter 12 — Security: What Never Goes in Logs
 
+📝 **Practice:** [Q16 →](./practice.md#q16--ch12--pii-redaction-filter)
+
 ```python
 # ❌ NEVER LOG:
 logger.info("User %s logged in with password: %s", username, password)
@@ -617,6 +641,8 @@ class SensitiveDataFilter(logging.Filter):
 ---
 
 ## 🔧 Chapter 13 — dictConfig: Configuration as Data
+
+📝 **Practice:** [Q17 →](./practice.md#q17--ch13--dictconfig-with-two-handlers)
 
 For production systems, configure logging from a dict (or JSON/YAML file):
 
@@ -690,6 +716,8 @@ logging.config.dictConfig(LOGGING_CONFIG)
 
 ## 🐛 Chapter 14 — Debugging: The Mindset
 
+📝 **Practice:** [Q18 →](./practice.md#q18--ch14--assertion-with-descriptive-message)
+
 ```
 AMATEUR DEBUGGING:
   1. Add print everywhere
@@ -712,6 +740,8 @@ PROFESSIONAL DEBUGGING:
 ---
 
 ## 🐞 Chapter 15 — pdb: Python's Built-in Debugger
+
+📝 **Practice:** [Q19–Q20 →](./practice.md#q19--ch15--insert-breakpoint-survey) · [pdb deep dive →](./01_pdb_debugging/practice.md)
 
 ```python
 # ── Drop-in breakpoint (Python 3.7+) ────────────────────────────────
@@ -785,6 +815,8 @@ calculate_tax(499.0, 0.09)
 ---
 
 ## 🔬 Chapter 16 — Advanced Debugging Techniques
+
+📝 **Practice:** [Q21–Q22 →](./practice.md#q21--ch16--capture-traceback-string) · [Profiling deep dive →](./02_profiling_advanced/practice.md)
 
 ### Logging as Debugging (Better Than print)
 
@@ -917,7 +949,8 @@ DEBUGGING:
 | ⬅️ Previous | [08 — File Handling](../08_file_handling/theory.md) |
 | 📖 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🐛 PDB Guide | [pdb_guide.md](./pdb_guide.md) |
+| 🐛 pdb Deep Dive | [01_pdb_debugging/theory.md](./01_pdb_debugging/theory.md) |
+| 📊 Profiling & Advanced | [02_profiling_advanced/theory.md](./02_profiling_advanced/theory.md) |
 | ➡️ Next | [10 — Decorators](../10_decorators/theory.md) |
 
 ---
@@ -926,4 +959,4 @@ DEBUGGING:
 
 **Prev:** [← File Handling — Interview Q&A](../08_file_handling/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [PDB Debugging Guide](./pdb_guide.md) · [Interview Q&A](./interview.md) · [Profiling & Advanced Debugging](./profiling_and_advanced_debugging.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md) · [pdb →](./01_pdb_debugging/theory.md) · [Profiling & Advanced →](./02_profiling_advanced/theory.md)

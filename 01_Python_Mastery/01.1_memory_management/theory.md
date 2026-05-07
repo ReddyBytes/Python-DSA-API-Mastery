@@ -154,6 +154,8 @@ This is the whole point. One value, many labels. No wasted copies.
 
 Almost all objects live in heap.
 
+> 📝 **Practice:** [Q1–Q3 — stack vs heap, frame lifecycle, heap allocation](./practice.md#q1)
+
 ---
 
 # 🧱 2️⃣ Objects and References
@@ -184,6 +186,10 @@ y = x
 Now:
 
 x and y both refer to same object.
+
+---
+
+> 📝 **Practice:** [Q4–Q6 — sys.getrefcount(), increment/decrement, object freed](./practice.md#q4)
 
 ---
 
@@ -344,6 +350,8 @@ gc.disable()
 
 Disable automatic GC (rarely needed).
 
+> 📝 **Practice:** [Q7–Q9 — circular references, gc.collect(), gc.get_count()](./practice.md#q7)
+
 ---
 
 # 🧠 9️⃣ Memory Leaks in Python
@@ -399,6 +407,8 @@ Use:
 (x for x in range(1_000_000))
 ```
 
+> 📝 **Practice:** [Q10–Q11 — generator vs list memory, yield-based pipeline](./practice.md#q10)
+
 ---
 
 ## 🔹 Use [`__slots__`](../05_oops/15_slots.md) in Classes
@@ -420,6 +430,7 @@ Prevents dynamic attribute creation.
 Reduces memory usage.
 
 > 📝 **Practice:** [Q59 · __slots__](../python_practice_questions_100.md#q59--design--__slots__) · [Q75 · slots-optimization](../python_practice_questions_100.md#q75--design--slots-optimization)
+> 📝 **Practice:** [Q12–Q13 — add __slots__, measure savings](./practice.md#q12)
 
 ---
 
@@ -428,6 +439,8 @@ Reduces memory usage.
 Global large data persists forever.
 
 Prefer local scoping.
+
+> 📝 **Practice:** [Q22 — avoid large globals, cache lookups locally](./practice.md#q22)
 
 ---
 
@@ -442,6 +455,8 @@ import weakref
 Allows reference without increasing reference count.
 
 Used in caching systems.
+
+> 📝 **Practice:** [Q14–Q15 — weakref.ref(), WeakValueDictionary cache](./practice.md#q14)
 
 ---
 
@@ -478,6 +493,8 @@ tracemalloc.start()
 ```
 
 Used in debugging memory leaks.
+
+> 📝 **Practice:** [Q19–Q21 — tracemalloc snapshot, sys.getsizeof(), @profile decorator](./practice.md#q19)
 
 ---
 
@@ -522,6 +539,8 @@ Fix:
 
 - Stream processing
 - Chunk-based loading
+
+> 📝 **Practice:** [Q22–Q24 — avoid large globals, chunked processing, del + gc.collect()](./practice.md#q22)
 
 ---
 
@@ -639,6 +658,8 @@ Objects survive if their reference count is still > 0.
 │            │                           │  interpreter session       │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+> 📝 **Practice:** [Q16–Q18 — local vs global lifetime, closure cell, nonlocal](./practice.md#q16)
 
 ---
 
@@ -778,4 +799,11 @@ Next:
 
 **Prev:** — &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+
+| File | Link |
+|---|---|
+| 📖 Theory | [theory.md](./theory.md) |
+| 💻 Practice | [practice.md](./practice.md) |
+| ⚡ Cheat Sheet | [cheetsheet.md](./cheetsheet.md) |
+| 🎤 Interview Q&A | [interview.md](./interview.md) |

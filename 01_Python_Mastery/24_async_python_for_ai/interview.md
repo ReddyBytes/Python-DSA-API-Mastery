@@ -689,6 +689,32 @@ A: Runs a blocking (sync) function in a thread pool without freezing the event l
 Q: One process in FastAPI can handle how many concurrent LLM calls?
 A: Hundreds — limited by open file descriptors and memory, not thread count.
    Each concurrent call is a cheap coroutine frame (~1KB), not a thread (~8MB).
+
+Q: What is asyncio.TaskGroup and how does it differ from gather?
+A: TaskGroup (Python 3.11+) provides structured concurrency. All tasks created
+   inside the async with block are guaranteed to finish or be cancelled before
+   the block exits. If any task fails, all siblings are cancelled. gather leaves
+   tasks potentially dangling if not properly awaited.
+
+Q: When should you use asyncio.to_thread vs asyncio.sleep?
+A: asyncio.sleep: when you want a non-blocking delay (yield to event loop).
+   asyncio.to_thread: when you must call a blocking third-party function that
+   cannot be made async — it runs in a thread pool so the event loop stays free.
+
+Q: What happens if you swallow CancelledError instead of re-raising it?
+A: The task appears to complete normally even though it was cancelled. This
+   breaks structured concurrency — other tasks keep running when they should stop.
+   Always re-raise asyncio.CancelledError unless you have an explicit reason not to.
+
+Q: async generator vs regular generator for LLM token streaming?
+A: Regular generator uses yield but cannot await between yields — it blocks on I/O.
+   Async generator uses async def + yield, can await between each yield (e.g., next
+   network packet). Consumed with async for, not regular for.
+
+Q: Semaphore vs sleep-based throttle for API rate limiting?
+A: Semaphore: maximum throughput up to N concurrent — fast calls proceed immediately,
+   slow calls queue. Sleep throttle: adds a fixed delay per item regardless of API
+   speed — artificially slower. Semaphore is almost always better for API rate limiting.
 ```
 
 ---
@@ -699,7 +725,7 @@ A: Hundreds — limited by open file descriptors and memory, not thread count.
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🔧 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev | [13 — Concurrency](../13_concurrency/theory.md) |
 
 ---

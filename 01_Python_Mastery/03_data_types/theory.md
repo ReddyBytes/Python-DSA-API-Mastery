@@ -182,6 +182,8 @@ print(pow(2, 10))      # 1024      → same as 2**10
 print(divmod(17, 5))   # (3, 2)    → gives BOTH floor division AND remainder at once!
 ```
 
+> 📝 **Practice:** [Q1 — Leap Year Check](./practice.md#q1--int--leap-year-check) · [Q2 — Even or Odd](./practice.md#q2--int--even-or-odd) · [Q3 — Floor Division](./practice.md#q3--int--floor-division-and-remainder) · [Q4 — Power & abs()](./practice.md#q4--int--power-and-absolute-value)
+
 ---
 
 ## 🌊 Part 2: `float` — Decimal Numbers
@@ -274,6 +276,8 @@ print(round(1234, -2))      # 1200       → round to nearest hundred
 print(round(1678, -2))      # 1700
 ```
 
+> 📝 **Practice:** [Q5 — Restaurant Bill](./practice.md#q5--float--restaurant-bill) · [Q6 — BMI Calculator](./practice.md#q6--float--bmi-calculator) · [Q7 — Precision Trap](./practice.md#q7--float--precision-trap) · [Q8 — Temperature](./practice.md#q8--float--temperature-conversion)
+
 ---
 
 ## ✅ Part 3: `bool` — True or False
@@ -355,811 +359,72 @@ print(bool([]))      # False
 print(bool([0]))     # True  ← list has one item, even if that item is 0!
 ```
 
+> 📝 **Practice:** [Q9 — Truthiness](./practice.md#q9--bool--truthiness) · [Q10 — Bool Arithmetic](./practice.md#q10--bool--bool-arithmetic) · [Q11 — and/or Shortcuts](./practice.md#q11--bool--and--or-shortcuts)
+
 ---
 
 # 🔤 Part 4: `str` — Text
+> Full deep-dive: [01_str/theory.md](./01_str/theory.md)
 
-### What is it?
+Strings are immutable sequences of characters. Key operations: indexing · slicing · f-strings · `.strip()` `.split()` `.join()` `.replace()` `.lower()` `.upper()`
 
-`str` (string) stores text — any sequence of characters: letters, numbers, spaces, symbols, emojis. Strings are **immutable** — once created, they cannot be changed.
+| Order | Subfolder | Deep-dive |
+|---|---|---|
+| 1st — learn first | `01_str/` | [theory](./01_str/theory.md) · [practice](./01_str/practice.md) |
 
-### Creating Strings
-
-```python
-single   = 'hello'
-double   = "hello"                   # same thing, both work
-multi    = """This string
-spans multiple
-lines"""
-
-name = "Alice"
-age  = 25
-
-# f-strings — the best way to embed values in text (Python 3.6+)
-
-message = f"My name is {name} and I am {age} years old."
-print(message)   # My name is Alice and I am 25 years old.
-
-
-# You can put any expression inside {}:
-print(f"Next year I'll be {age + 1}")        # Next year I'll be 26
-print(f"2 + 2 = {2 + 2}")                   # 2 + 2 = 4
-print(f"Pi is about {3.14159:.2f}")          # Pi is about 3.14  (2 decimal places)
-print(f"Total: {1234567:,}")                 # Total: 1,234,567  (comma separator)
-```
-
-> 📝 **Practice:** [Q18 · f-strings](../python_practice_questions_100.md#q18--normal--f-strings)
-
-
-### Strings are Sequences — Indexing & Slicing
-
-A string is like a **train of carriages**. Each carriage holds one character and has a number (index) starting from 0.
-
-```
-  "P  y  t  h  o  n"
-   0  1  2  3  4  5     ← positive index (left to right)
-  -6 -5 -4 -3 -2 -1     ← negative index (right to left)
-```
-
-```python
-s = "Python"
-
-
-# Indexing — get ONE character:
-print(s[0])     # 'P'    first character
-print(s[1])     # 'y'
-print(s[-1])    # 'n'    last character
-print(s[-2])    # 'o'    second from last
-
-# Slicing — get a RANGE of characters:
-# Syntax: s[start : stop : step]
-# start is INCLUDED, stop is EXCLUDED
-
-print(s[0:3])   # 'Pyt'   → characters at index 0, 1, 2
-print(s[2:5])   # 'tho'   → characters at index 2, 3, 4
-print(s[2:])    # 'thon'  → from index 2 to the END
-print(s[:4])    # 'Pyth'  → from the START to index 3
-print(s[:])     # 'Python' → entire string (copy)
-print(s[::-1])  # 'nohtyP' → reversed! (step of -1 goes backwards)
-print(s[::2])   # 'Pto'   → every 2nd character
-```
-
-> 📝 **Practice:** [Q17 · string-slicing](../python_practice_questions_100.md#q17--logical--string-slicing)
-
-
-**Why does `s[0:3]` give characters 0, 1, 2 — not 0, 1, 2, 3?**
-
-Think of indices as positions BETWEEN characters, not on them:
-
-```
- P    y    t    h    o    n
-|    |    |    |    |    |    |
-0    1    2    3    4    5    6
-
-s[0:3] means: from position 0 to position 3
-= 'P', 'y', 't'   (everything between 0 and 3)
-```
-
-### String Methods — The Toolbox
-
-Strings come with dozens of built-in tools. Here are the most important ones:
-
-```python
-s = "  Hello, World!  "
-
-
-# ── CLEANING ──────────────────────────────────────────
-s.strip()           # "Hello, World!"     removes spaces from both ends
-s.lstrip()          # "Hello, World!  "   removes only from left
-s.rstrip()          # "  Hello, World!"   removes only from right
-
-# ── CASE ──────────────────────────────────────────────
-"hello".upper()         # "HELLO"
-"HELLO".lower()         # "hello"
-"hello world".title()   # "Hello World"    first letter of each word
-"hello".capitalize()    # "Hello"          only very first letter
-
-# ── SEARCHING ─────────────────────────────────────────
-"hello world".find("world")      # 6    → index where it starts
-                                 #       returns -1 if NOT found
-"hello world".find("xyz")        # -1   → not found
-"hello world".count("l")         # 3    → how many times 'l' appears
-"hello".startswith("hel")        # True
-"hello".endswith("llo")          # True
-
-# Check if something is IN the string (the easiest way):
-print("world" in "hello world")  # True
-print("xyz" in "hello world")    # False
-
-# ── REPLACING & SPLITTING ─────────────────────────────
-"hello world".replace("world", "python")   # "hello python"
-"a,b,c,d".split(",")   # ['a', 'b', 'c', 'd']   → splits into list
-"hello world".split()  # ['hello', 'world']       → splits on whitespace
-
-# Joining — the OPPOSITE of split:
-words = ["hello", "world", "python"]
-" ".join(words)         # "hello world python"
-",".join(words)         # "hello,world,python"
-"-".join(words)         # "hello-world-python"
-
-# ── CHECKING CONTENT ──────────────────────────────────
-"abc".isalpha()     # True   → all letters?
-"123".isdigit()     # True   → all digits?
-"abc123".isalnum()  # True   → all letters OR digits?
-"   ".isspace()     # True   → all whitespace?
-"abc".islower()     # True   → all lowercase?
-"ABC".isupper()     # True   → all uppercase?
-```
-
-> 📝 **Practice:** [Q16 · string-methods](../python_practice_questions_100.md#q16--normal--string-methods)
-
-
-### Strings are Immutable — What That Means
-
-```python
-s = "hello"
-
-
-# You CANNOT change a character:
-# s[0] = "H"   ← this would give a TypeError!
-
-# Instead, you create a NEW string:
-s = "H" + s[1:]    # "Hello"  — new string created
-s = s.replace("h", "H")   # also creates a new string
-
-# Every string operation RETURNS a new string — the original never changes.
-original = "hello"
-result   = original.upper()
-print(original)   # "hello"  ← unchanged!
-print(result)     # "HELLO"  ← the new string
-```
-
-> 📝 **Practice:** [Q3 · mutability](../python_practice_questions_100.md#q3--critical--mutability)
-
-
-### String Length and Counting
-
-```python
-s = "Python"
-print(len(s))   # 6  → len() works on ALL sequences (str, list, tuple, etc.)
-
-sentence = "The quick brown fox"
-print(len(sentence))   # 19   → includes spaces!
-
-# Count occurrences of a specific character:
-print(sentence.count("o"))   # 2   → 'brown' and 'fox'
-print(sentence.count("the")) # 0   → case-sensitive! 'The' ≠ 'the'
-print(sentence.lower().count("the"))  # 1  → case-insensitive count
-```
+> 📝 **Practice:** [str/practice.md](./01_str/practice.md) · [Q12–Q18 in master practice](./practice.md#q12--str--string-methods)
 
 ---
 
 # 📋 Part 5: `list` — Ordered Collection
+> Full deep-dive: [02_list/theory.md](./02_list/theory.md)
 
-### What is it?
+Lists are ordered, mutable sequences. Key operations: indexing · slicing · `.append()` `.remove()` `.sort()` · list comprehensions · copy trap.
 
-A list is an **ordered, changeable collection** that can hold any types of data — even mixed types, even other lists.
+| Order | Subfolder | Deep-dive |
+|---|---|---|
+| 2nd — learn after str | `02_list/` | [theory](./02_list/theory.md) · [practice](./02_list/practice.md) |
 
-Think of a list as a **numbered locker row**:
-
-```
-Index:  [  0   ]  [  1   ]  [  2   ]  [  3   ]  [  4   ]
-        ["apple"] ["banana"]["cherry"]["date"] ["elderberry"]
-
-- Each locker has a NUMBER (index), starting from 0
-- You can OPEN a locker, PUT something in, TAKE something out
-- The ORDER is preserved
-- Lockers can hold DIFFERENT things
-```
-
-### Creating Lists
-
-```python
-empty      = []
-fruits     = ["apple", "banana", "cherry"]
-numbers    = [10, 20, 30, 40, 50]
-mixed      = ["Alice", 25, True, 3.14]       # ← different types in one list!
-nested     = [[1, 2, 3], [4, 5, 6]]          # ← list inside a list
-from_range = list(range(5))                   # [0, 1, 2, 3, 4]
-```
-
-### Accessing Items (Same as Strings)
-
-```python
-fruits = ["apple", "banana", "cherry", "date", "elderberry"]
-
-print(fruits[0])    # "apple"        first item
-print(fruits[-1])   # "elderberry"   last item
-print(fruits[1:3])  # ["banana", "cherry"]   slicing works the same!
-print(fruits[::-1]) # reversed list
-
-# Unlike strings — you CAN change list items:
-fruits[0] = "avocado"
-print(fruits)  # ["avocado", "banana", "cherry", "date", "elderberry"]
-```
-
-### Adding Items
-
-```python
-fruits = ["apple", "banana"]
-
-fruits.append("cherry")        # add ONE item to the END
-print(fruits)  # ["apple", "banana", "cherry"]
-
-fruits.insert(1, "avocado")    # insert at a specific POSITION
-print(fruits)  # ["apple", "avocado", "banana", "cherry"]
-
-fruits.extend(["date", "fig"]) # add MULTIPLE items from another list
-print(fruits)  # ["apple", "avocado", "banana", "cherry", "date", "fig"]
-
-# What's the difference between append and extend?
-# append([4,5]) adds the LIST ITSELF as one item → [1,2,3, [4,5]]
-
-
-# extend([4,5]) adds each ITEM separately       → [1,2,3, 4, 5]
-
-a = [1, 2, 3]
-b = [1, 2, 3]
-a.append([4, 5])   # a = [1, 2, 3, [4, 5]]  ← nested!
-b.extend([4, 5])   # b = [1, 2, 3, 4, 5]    ← flat
-```
-
-> 📝 **Practice:** [Q4 · list-operations](../python_practice_questions_100.md#q4--logical--list-operations)
-
-
-### Removing Items
-
-```python
-fruits = ["apple", "banana", "cherry", "banana", "date"]
-
-fruits.remove("banana")       # removes the FIRST "banana" found by value
-print(fruits)  # ["apple", "cherry", "banana", "date"]
-
-last = fruits.pop()           # removes & returns the LAST item
-print(last)    # "date"
-print(fruits)  # ["apple", "cherry", "banana"]
-
-first = fruits.pop(0)         # removes & returns item at index 0
-print(first)   # "apple"
-
-del fruits[0]                 # delete by index (no return value)
-print(fruits)  # ["banana"]
-
-fruits.clear()                # remove EVERYTHING — empty list remains
-print(fruits)  # []
-```
-
-### Useful List Operations
-
-```python
-numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
-
-print(len(numbers))       # 10     → how many items?
-print(sum(numbers))       # 39     → add them all up (numbers only)
-print(min(numbers))       # 1      → smallest
-print(max(numbers))       # 9      → largest
-print(numbers.count(1))   # 2      → how many times does 1 appear?
-print(numbers.index(5))   # 4      → index of FIRST occurrence of 5
-
-# Sorting:
-numbers.sort()            # sorts IN PLACE — changes the original list!
-print(numbers)            # [1, 1, 2, 3, 3, 4, 5, 5, 6, 9]
-
-numbers.sort(reverse=True) # sort in descending order
-print(numbers)            # [9, 6, 5, 5, 4, 3, 3, 2, 1, 1]
-
-# sorted() creates a NEW list — original stays the same:
-original = [3, 1, 4, 1, 5]
-new_sorted = sorted(original)
-print(original)    # [3, 1, 4, 1, 5]  ← unchanged!
-print(new_sorted)  # [1, 1, 3, 4, 5]  ← new sorted copy
-
-# Reverse:
-numbers.reverse()          # reverses IN PLACE
-```
-
-### Checking Membership
-
-```python
-fruits = ["apple", "banana", "cherry"]
-
-print("apple" in fruits)    # True
-print("mango" in fruits)    # False
-print("mango" not in fruits) # True
-```
-
-### Copying Lists — The Trap!
-
-```python
-# WRONG WAY — this does NOT copy the list:
-a = [1, 2, 3]
-b = a          # b is NOT a copy — both a and b point to the SAME list!
-
-b.append(4)
-print(a)   # [1, 2, 3, 4]   ← a changed too! Surprised?
-
-# This happens because lists are mutable objects in memory.
-# When you do b = a, you're saying "b also points to that same list"
-# You're NOT creating a second list.
-
-# CORRECT WAYS to make a real copy:
-a = [1, 2, 3]
-b = a.copy()   # ✅ method 1 — creates a new independent list
-c = a[:]       # ✅ method 2 — slice the whole list (makes a copy)
-d = list(a)    # ✅ method 3 — create new list from a
-
-b.append(4)
-print(a)   # [1, 2, 3]   ← a is unchanged now!
-print(b)   # [1, 2, 3, 4]
-```
+> 📝 **Practice:** [list/practice.md](./02_list/practice.md) · [Q19–Q25 in master practice](./practice.md#q19--list--crud-operations)
 
 ---
 
 # 📦 Part 6: `tuple` — The Sealed List
+> Full deep-dive: [03_tuple/theory.md](./03_tuple/theory.md)
 
-> 📝 **Practice:** [Q81 · compare-list-tuple](../python_practice_questions_100.md#q81--interview--compare-list-tuple)
+Tuples are ordered, immutable sequences. Use when data should never change: coordinates, RGB values, DB rows. Supports unpacking, can be used as dict keys and set members.
 
-### What is it?
+| Order | Subfolder | Deep-dive |
+|---|---|---|
+| 3rd — learn after list | `03_tuple/` | [theory](./03_tuple/theory.md) · [practice](./03_tuple/practice.md) |
 
-A tuple is exactly like a list, **except you cannot change it after creation**. No adding, no removing, no modifying.
-
-```python
-coordinates = (10.5, 25.3)
-rgb_color   = (255, 128, 0)
-months      = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
-               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-```
-
-### Creating Tuples
-
-```python
-t = (1, 2, 3)         # with parentheses
-t = 1, 2, 3           # parentheses are OPTIONAL — still a tuple!
-
-# Single item tuple — the comma is REQUIRED!
-single = (42,)        # ← this IS a tuple: (42,)
-not_tuple = (42)      # ← this is just the number 42! Parentheses don't make tuples!
-print(type(single))   # <class 'tuple'>
-print(type(not_tuple)) # <class 'int'>  ← surprise!
-```
-
-### Accessing Tuples (Same as Lists)
-
-```python
-months = ("Jan", "Feb", "Mar", "Apr", "May", "Jun")
-
-print(months[0])    # "Jan"
-print(months[-1])   # "Jun"
-print(months[1:4])  # ("Feb", "Mar", "Apr")
-print(len(months))  # 6
-
-# But this would fail:
-# months[0] = "January"   ← TypeError: tuple does not support item assignment
-```
-
-### Tuple Unpacking — The Real Power
-
-Tuple unpacking is how you assign multiple variables from a tuple at once. It's clean, readable, and very Pythonic:
-
-```python
-coordinates = (10, 20)
-x, y = coordinates     # unpack — x gets 10, y gets 20
-print(x)   # 10
-print(y)   # 20
-
-# Works with any tuple:
-r, g, b = (255, 128, 0)   # r=255, g=128, b=0
-first, second, third = ("gold", "silver", "bronze")
-
-# Swap two variables using tuples:
-a = 10
-b = 20
-a, b = b, a    # this works via tuple! Python creates (b, a) then unpacks it
-print(a)  # 20
-print(b)  # 10
-```
-
-### When to Use Tuple vs List?
-
-```
-Use a LIST when:
-  → You need to add or remove items
-  → The data is a collection that will grow or change
-  → Order matters and data will be modified
-
-Use a TUPLE when:
-  → Data should NEVER change (coordinates, RGB values, dates)
-  → You're returning multiple values and want clarity
-  → You need to use it as a dictionary key (lists cannot be keys!)
-
-Memory note: Tuples are slightly FASTER and use slightly LESS memory than lists.
-Python can optimise them better because they never change.
-```
-
----
-
-### Memory Layout: List vs Tuple
-
-The memory difference between list and tuple is more than just mutability:
-
-```
-list  = dynamic array of POINTERS
-        ┌─────┬─────┬─────┬─────┬─────┐
-        │ptr 0│ptr 1│ptr 2│ ... │extra│  ← over-allocates to amortize append cost
-        └─────┴─────┴─────┴─────┴─────┘
-              ↓     ↓     ↓
-           heap  heap  heap  (actual objects)
-
-tuple = fixed-size array of POINTERS
-        ┌─────┬─────┬─────┐
-        │ptr 0│ptr 1│ptr 2│  ← exactly the right size, no extra
-        └─────┴─────┴─────┘
-```
-
-Practical implications:
-
-- **Tuple creation is faster** — no size calculation or over-allocation
-- **Tuple uses less memory** — no extra buffer slots
-- **List has O(1) amortized append** — pre-allocates extra space
-- **Tuples signal intent** — "this data does not change" (readable, prevents bugs)
-
-```python
-import sys
-a = [1, 2, 3, 4, 5]
-b = (1, 2, 3, 4, 5)
-print(sys.getsizeof(a))   # 104 bytes  (extra allocation)
-print(sys.getsizeof(b))   # 80 bytes   (exact size)
-```
+> 📝 **Practice:** [tuple/practice.md](./03_tuple/practice.md) · [Q26–Q30 in master practice](./practice.md#q26--tuple--immutability)
 
 ---
 
 # 🎯 Part 7: `set` — Only Unique Items
+> Full deep-dive: [04_set/theory.md](./04_set/theory.md)
 
-### What is it?
+Sets are unordered collections of unique, hashable items. Use for: deduplication, fast membership checks (O(1)), set math (intersection, union, difference).
 
-A set is a collection that **automatically removes duplicates**. It also has no order — items are stored internally in a way that makes lookup extremely fast.
+| Order | Subfolder | Deep-dive |
+|---|---|---|
+| 4th — learn after tuple | `04_set/` | [theory](./04_set/theory.md) · [practice](./04_set/practice.md) |
 
-Think of a set as a **bag where duplicates magically disappear**:
-
-```
-You put in:  [1, 2, 2, 3, 3, 3, 4]
-You get:     {1, 2, 3, 4}          ← duplicates gone!
-```
-
-### Creating Sets
-
-```python
-s = {1, 2, 3, 4}
-s = {1, 2, 2, 3, 3, 3}    # → {1, 2, 3}  duplicates removed automatically!
-
-# From a list — great for removing duplicates:
-s = set([1, 2, 2, 3, 3])   # → {1, 2, 3}
-
-# From a string — unique characters only:
-s = set("hello")            # → {'h', 'e', 'l', 'o'}  (only one 'l'!)
-
-# IMPORTANT: empty set must use set(), NOT {}:
-empty_set  = set()   # ✅ this is an empty set
-empty_dict = {}      # ❌ this is an empty DICTIONARY, not a set!
-```
-
-### Adding and Removing
-
-```python
-colors = {"red", "green", "blue"}
-
-colors.add("yellow")        # add one item
-print(colors)   # {'red', 'green', 'blue', 'yellow'}  (order may vary!)
-
-colors.discard("purple")    # remove — NO error even if "purple" doesn't exist
-colors.remove("red")        # remove — raises KeyError if item not in set
-colors.pop()                # remove and return a RANDOM item (order is not defined)
-
-# Check membership — this is where sets SHINE:
-print("green" in colors)   # True   → very fast! O(1)
-print("pink" in colors)    # False
-```
-
-### The Speed Advantage of Sets
-
-This is the most important practical reason to use sets:
-
-```python
-# Imagine you have 1 million items and want to check if something exists:
-
-# With a LIST:
-big_list = list(range(1_000_000))
-999_999 in big_list    # Python has to check every single item... slow!
-
-# With a SET:
-big_set = set(range(1_000_000))
-999_999 in big_set     # Python jumps straight to it using math... instant!
-
-# A set lookup is O(1) — constant time regardless of size
-# A list lookup is O(n) — slower as the list grows
-```
-
-### Set Math — Union, Intersection, Difference
-
-Sets support mathematical operations that are incredibly useful:
-
-```python
-python_students  = {"Alice", "Bob", "Charlie", "Diana"}
-java_students    = {"Bob", "Eve", "Charlie", "Frank"}
-
-
-# UNION — everyone who studies either Python OR Java (or both):
-all_students = python_students | java_students
-print(all_students)   # {'Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank'}
-
-# INTERSECTION — students who study BOTH Python AND Java:
-both = python_students & java_students
-print(both)    # {'Bob', 'Charlie'}
-
-# DIFFERENCE — students in Python but NOT in Java:
-only_python = python_students - java_students
-print(only_python)    # {'Alice', 'Diana'}
-
-# SYMMETRIC DIFFERENCE — students in one course but NOT both:
-exclusive = python_students ^ java_students
-print(exclusive)    # {'Alice', 'Diana', 'Eve', 'Frank'}
-```
-
-> 📝 **Practice:** [Q6 · set-operations](../python_practice_questions_100.md#q6--thinking--set-operations)
-
-
-```
-Visual diagram:
-      Python          Java
-  ┌───────────────────────────┐
-  │  Alice   ┌──────┐  Eve   │
-  │  Diana   │ Bob  │  Frank │
-  │          │Charlie        │
-  └──────────┴──────┴────────┘
-
-  |  means union (everything)
-  & means intersection (only middle)
-  - means difference (one side only)
-```
-
----
-
-### Why Sets Require Hashable Elements — The Hash Table Internals
-
-A set stores elements in a **hash table** — an array where the position of each element
-is determined by its hash value.
-
-```
-set = {10, 25, 42, 7}
-
-Hash table (simplified, size=8):
-  slot 0: empty
-  slot 1: empty
-  slot 2: 10  (10 % 8 = 2)
-  slot 3: 11  (not present)
-  slot 4: empty
-  slot 5: 13  (not present)
-  slot 6: 42  (42 % 8 = 2 → collision → probe to slot 6)
-  slot 7: 7   (7 % 8 = 7)
-  slot 1: 25  (25 % 8 = 1)
-```
-
-**Why lookup is O(1):**
-To check if `42` is in the set:
-1. Compute `hash(42)` → fixed position in array
-2. Check that slot → found or not found
-3. One or a few operations — regardless of set size
-
-**Why elements must be hashable:**
-The hash determines WHERE in the table to store/look up the element.
-Lists are mutable — if you mutate a list after adding it to a set, its hash would change,
-making it unfindable. That's why lists (mutable) cannot be set elements.
-
-```python
-s = {1, 2, 3}         # ints: hashable ✓
-s = {(1, 2), (3, 4)}  # tuples of ints: hashable ✓ (tuples are immutable)
-s = {[1, 2]}          # TypeError: unhashable type: 'list'
-```
-
-The same rule applies to dict keys.
+> 📝 **Practice:** [set/practice.md](./04_set/practice.md) · [Q31–Q35 in master practice](./practice.md#q31--set--remove-duplicates)
 
 ---
 
 # 🗂️ Part 8: `dict` — Key-Value Pairs
+> Full deep-dive: [05_dict/theory.md](./05_dict/theory.md)
 
-### What is it?
+Dicts are ordered (Python 3.7+) key-value stores. The most-used complex type in Python. Key operations: `.get()` · `.items()` · `.update()` · dict comprehensions · `collections.defaultdict`.
 
-A dictionary stores **pairs of information** — a key and its value. You look up a key, and instantly get the value. Like a real dictionary where you look up a word to get its meaning.
+| Order | Subfolder | Deep-dive |
+|---|---|---|
+| 5th — learn last | `05_dict/` | [theory](./05_dict/theory.md) · [practice](./05_dict/practice.md) |
 
-```
-A real dictionary:        A Python dict:
-"apple" → "a fruit"      "name"   → "Alice"
-"run"   → "to move fast" "age"    → 25
-"code"  → "instructions" "city"   → "Mumbai"
-```
-
-### Why Dictionaries are Special
-
-```
-List:   you look things up by POSITION (index 0, 1, 2...)
-Dict:   you look things up by NAME (any key you choose)
-```
-
-Imagine storing information about a student:
-
-```python
-# With a list — confusing, what does each position mean?
-student = ["Alice", 25, "Computer Science", 8.7]
-print(student[2])    # what is this? You have to remember index 2 = subject
-
-# With a dict — clear and self-documenting:
-student = {
-    "name":    "Alice",
-    "age":     25,
-    "subject": "Computer Science",
-    "gpa":     8.7
-}
-print(student["subject"])   # "Computer Science"  ← obvious what you're getting!
-```
-
-### Creating Dictionaries
-
-```python
-# Method 1: curly braces with key: value pairs
-person = {
-    "name":  "Alice",
-    "age":   25,
-    "city":  "Mumbai"
-}
-
-# Method 2: dict() with keyword arguments
-person = dict(name="Alice", age=25, city="Mumbai")
-
-# Empty dictionary:
-
-empty = {}
-empty = dict()
-```
-
-> 📝 **Practice:** [Q5 · dict-basics](../python_practice_questions_100.md#q5--normal--dict-basics)
-
-### Accessing Values
-
-```python
-person = {"name": "Alice", "age": 25, "city": "Mumbai"}
-
-# Method 1: Square brackets — gives KeyError if key doesn't exist!
-print(person["name"])    # "Alice"
-# print(person["phone"])  # ❌ KeyError: 'phone'
-
-# Method 2: .get() — safe, returns None if key doesn't exist:
-print(person.get("name"))      # "Alice"
-print(person.get("phone"))     # None    ← no crash!
-print(person.get("phone", "Not provided"))  # "Not provided"  ← custom default
-
-# RULE: Use .get() when a key might not exist. Use [] only when you're sure it exists.
-```
-
-### Adding, Updating, Removing
-
-```python
-person = {"name": "Alice", "age": 25}
-
-# Add a new key:
-person["email"] = "alice@example.com"
-print(person)   # {"name":"Alice","age":25,"email":"alice@example.com"}
-
-# Update existing key:
-person["age"] = 26
-print(person["age"])   # 26
-
-# Update multiple at once:
-person.update({"age": 27, "city": "Delhi"})
-
-# Remove a key:
-del person["email"]                     # deletes — KeyError if missing
-age = person.pop("age")                 # removes AND returns the value
-age = person.pop("phone", None)         # safe pop — returns None if missing
-
-# Remove everything:
-person.clear()
-```
-
-### Iterating (Looping) Over a Dict
-
-```python
-scores = {"Alice": 95, "Bob": 87, "Charlie": 92}
-
-# Loop through KEYS:
-for name in scores:
-    print(name)          # Alice, Bob, Charlie
-
-# Loop through VALUES:
-for score in scores.values():
-    print(score)         # 95, 87, 92
-
-# Loop through BOTH key and value (most common):
-for name, score in scores.items():
-    print(f"{name}: {score}")
-# Alice: 95
-# Bob: 87
-# Charlie: 92
-```
-
-### Checking if a Key Exists
-
-```python
-scores = {"Alice": 95, "Bob": 87}
-
-print("Alice" in scores)      # True   → checks KEYS by default
-print("Charlie" in scores)    # False
-print("Charlie" not in scores) # True
-print(95 in scores.values())   # True   → checks values (need .values())
-```
-
-### Nested Dictionaries
-
-Dictionaries can contain other dictionaries — great for structured data:
-
-```python
-school = {
-    "Alice": {
-        "grade": 10,
-        "subjects": ["Math", "Science", "English"],
-        "gpa": 9.2
-    },
-    "Bob": {
-        "grade": 11,
-        "subjects": ["Commerce", "Economics"],
-        "gpa": 8.5
-    }
-}
-
-# Accessing nested data:
-print(school["Alice"]["gpa"])          # 9.2
-print(school["Bob"]["subjects"][0])    # "Commerce"
-```
-
----
-
----
-
-### Dict Ordering Guarantee (Python 3.7+)
-
-Since Python 3.7, dicts are guaranteed to maintain **insertion order**.
-
-```python
-d = {}
-d['c'] = 3
-d['a'] = 1
-d['b'] = 2
-
-for key in d:
-    print(key)   # c, a, b — insertion order preserved
-```
-
-**Before Python 3.7:** Order was an implementation detail — you couldn't rely on it.
-**Python 3.7+:** Insertion order is part of the language spec.
-
-**Why it was added:**
-Python's dict was re-implemented in CPython 3.6 to be both faster and more compact.
-The new implementation naturally preserved insertion order as a side effect.
-It was made official in Python 3.7.
-
-**When it matters:**
-
-```python
-# Building an ordered response:
-response = {"status": "ok", "data": result, "timestamp": now}
-# Order in JSON output will match insertion order — predictable API responses
-
-# Configuration priority:
-config = {"host": "localhost", "port": 8080, "debug": True}
-# First key is first key — readability and predictability
-```
-
-**Note:** If you need sorted order, use `sorted(d.keys())` — dict preserves insertion order,
-not sort order.
+> 📝 **Practice:** [dict/practice.md](./05_dict/practice.md) · [Q36–Q42 in master practice](./practice.md#q36--dict--create-and-access)
 
 ---
 
@@ -1200,6 +465,8 @@ print(result)              # None  ← because print() has no return value
 d = {"a": 1}
 print(d.get("b"))   # None
 ```
+
+> 📝 **Practice:** [Q43 — Identity Check](./practice.md#q43--none--identity-check) · [Q44 — Optional Value](./practice.md#q44--none--optional-value)
 
 ---
 
@@ -1272,6 +539,8 @@ next_year = age + 1   # ❌ TypeError: can't add str and int
 age = int(input("Enter your age: "))   # ✅ now it's an integer
 next_year = age + 1   # ✅ works!
 ```
+
+> 📝 **Practice:** [Q45 — int and float](./practice.md#q45--type-conversion--int-and-float) · [Q46 — input() Trap](./practice.md#q46--type-conversion--the-input-trap) · [Q47 — bool conversion](./practice.md#q47--type-conversion--bool-conversion)
 
 ---
 
@@ -1529,8 +798,7 @@ frozenset    → set as dict key, immutable set membership
 | | |
 |---|---|
 | ⬅️ Previous | [02 — Control Flow](../02_control_flow/README.md) |
-| 💻 Practice | [practice.py](./practice.py) |
-| 🌍 Examples | [examples.py](./examples.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | ➡️ Next | [04 — Functions](../04_functions/README.md) |
@@ -1540,6 +808,6 @@ frozenset    → set as dict key, immutable set membership
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Control Flow — Interview Q&A](../02_control_flow/interview.md) &nbsp;|&nbsp; **Next:** [Complete Guide →](./complete_guide.md)
+**Prev:** [← Control Flow — Interview Q&A](../02_control_flow/interview.md) &nbsp;|&nbsp; **Next:** [Complexity Analysis →](./06_complexity/theory.md)
 
-**Related Topics:** [Complete Guide](./complete_guide.md) · [Complexity Analysis](./complexity_analysis.md) · [Cheat Sheet](./cheetsheet.md) · [Complexity Analysis Interview](./complexity_analysis_interview.md) · [Interview Q&A](./interview.md) · [Collections Module](./collections_module.md)
+**Related Topics:** [Complexity Analysis](./06_complexity/theory.md) · [Cheat Sheet](./cheetsheet.md) · [Complexity Analysis Interview](./06_complexity/interview.md) · [Interview Q&A](./interview.md) · [Collections Module](./07_collections/theory.md)

@@ -137,6 +137,10 @@ Multiple requests produce same result.
 
 Important in distributed systems.
 
+> 📝 **Practice:** [Q1 — Name REST endpoints](./practice.md#q1--rest-endpoints---name-rest-endpoints-for-a-blog-) · [Q2 — Status codes](./practice.md#q2--http-status-codes---match-operations-to-status-codes-) · [Q7 — Idempotency key](./practice.md#q7--idempotency-key---prevent-duplicate-orders-)
+>
+> **Deep dive →** [01_api_design_patterns/theory.md](./01_api_design_patterns/theory.md)
+
 ---
 
 # ⚡ 4️⃣ Rate Limiting
@@ -191,6 +195,10 @@ Used in APIs like:
 - Twitter
 - GitHub
 - Payment gateways
+
+> 📝 **Practice:** [Q16 — Token bucket](./practice.md#q16--token-bucket---implement-token-bucket-) · [Q17 — Sliding window](./practice.md#q17--sliding-window---implement-sliding-window-limiter-) · [Q8 — Rate limit headers](./practice.md#q8--rate-limit-headers---add-x-ratelimit--headers-)
+>
+> **Deep dive →** [02_scalability_caching_patterns/theory.md](./02_scalability_caching_patterns/theory.md)
 
 ---
 
@@ -249,6 +257,10 @@ Must define:
 
 - Expiration time (TTL)
 - Invalidation triggers
+
+> 📝 **Practice:** [Q9 — TTL cache](./practice.md#q9--dict-ttl-cache---implement-a-ttl-cache-class-) · [Q11 — LRU cache](./practice.md#q11--lru-cache---ordereddict-lru-) · [Q12 — Cache-aside](./practice.md#q12--cache-aside---write-cache-aside-with-mock-redis-)
+>
+> **Deep dive →** [02_scalability_caching_patterns/theory.md](./02_scalability_caching_patterns/theory.md)
 
 ---
 
@@ -392,6 +404,8 @@ Scale by:
 - Using sharded DB
 - Caching hot URLs
 
+> 📝 **Practice:** [Q24 — URL shortener design](./practice.md#q24--url-shortener-design---design-a-scalable-url-shortener-) · [Q25 — End-to-end service](./practice.md#q25--end-to-end-system---design-a-rate-limited-cached-python-service-)
+
 ---
 
 # 🏆 1️⃣3️⃣ Engineering Maturity Levels
@@ -449,6 +463,15 @@ Next:
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Production Best Practices — Interview Q&A](../19_production_best_practices/interview.md) &nbsp;|&nbsp; **Next:** [API Design Principles →](./api_design_principles.md)
+**Prev:** [← Production Best Practices — Interview Q&A](../19_production_best_practices/interview.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [API Design Principles](./api_design_principles.md) · [Scalable App Design](./scalable_app_design.md) · [Interview Q&A](./interview.md)
+| | |
+|---|---|
+| 💻 Practice (25 Qs) | [practice.md](./practice.md) |
+| 🔌 API Design Patterns | [01_api_design_patterns/theory.md](./01_api_design_patterns/theory.md) |
+| ⚡ Scalability & Caching | [02_scalability_caching_patterns/theory.md](./02_scalability_caching_patterns/theory.md) |
+| ⚡ Cheetsheet | [cheetsheet.md](./cheetsheet.md) |
+| 🎯 Interview | [interview.md](./interview.md) |
+
+**Related Topics:** [API Design Patterns](./01_api_design_patterns/theory.md) · [Scalability & Caching](./02_scalability_caching_patterns/theory.md) · [Interview Q&A](./interview.md)
+

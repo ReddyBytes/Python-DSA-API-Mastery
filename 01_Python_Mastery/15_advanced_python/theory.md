@@ -47,6 +47,8 @@ Dunder methods (`__repr__`, `__str__`, `__eq__`, `__hash__`, `__len__`, `__getit
 
 ## 🔑 Chapter 1: Dunder Methods — Python's Protocol System
 
+> 📝 **Practice:** [Q1–Q10 · dunder methods](./practice.md#q1--repr-and-str) &nbsp;|&nbsp; **Deep dive:** [01_dunder_methods/theory.md](./01_dunder_methods/theory.md)
+
 **Dunder** = **D**ouble **under**score. Python's way of defining object behaviour through well-known method names that the interpreter calls automatically.
 
 ### The Fundamental Insight
@@ -78,6 +80,8 @@ This table IS Python's object model. Learn it and Python becomes predictable.
 ---
 
 ## 📝 Chapter 2: Representation — `__str__`, `__repr__`, `__format__`
+
+> 📝 **Practice:** [Q1 · repr and str](./practice.md#q1--repr-and-str)
 
 These three serve different audiences:
 
@@ -148,6 +152,8 @@ f"{v:polar}"      # "|5.00|∠53.1°"
 ---
 
 ## ⚖️ Chapter 3: Comparison and Hashing
+
+> 📝 **Practice:** [Q3 · eq and hash](./practice.md#q3--eq-and-hash) · [Q4 · ordering](./practice.md#q4--total-ordering)
 
 ### The Comparison Protocol
 
@@ -228,6 +234,8 @@ p = Point(1, 2)
 
 ## ➕ Chapter 4: Numeric and Operator Overloading
 
+> 📝 **Practice:** [Q6 · add/radd](./practice.md#q6--add-and-radd) · [Q7 · mul/rmul](./practice.md#q7--mul-and-rmul)
+
 ### The Arithmetic Protocol — Three Versions of Each
 
 ```
@@ -284,6 +292,8 @@ abs(v1)    # 2.236...
 ---
 
 ## 📦 Chapter 5: Container Protocol
+
+> 📝 **Practice:** [Q2 · len/bool](./practice.md#q2--len-and-bool) · [Q5 · contains/iter](./practice.md#q5--contains-and-iter) · [Q10 · getitem/setitem](./practice.md#q10--getitem-and-setitem)
 
 Make your class behave like a sequence or mapping:
 
@@ -354,6 +364,8 @@ class Container:
 
 ## 🔧 Chapter 6: [`__slots__`](../05_oops/15_slots.md) — Memory Optimization
 
+> 📝 **Practice:** [Q25 · slots memory](./practice.md#q25--slots-memory) · [Q26 · restriction](./practice.md#q26--slots-restriction) · [Q27 · inheritance](./practice.md#q27--slots-inheritance) &nbsp;|&nbsp; **Deep dive:** [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md)
+
 By default, every Python object stores its attributes in a `__dict__` (a hash table). This is flexible but uses ~200-300 bytes per instance.
 
 `__slots__` replaces `__dict__` with a fixed-size array of descriptors:
@@ -405,6 +417,8 @@ __slots__ GIVES you:      __slots__ TAKES AWAY:
 ---
 
 ## 🔍 Chapter 7: Descriptors — The Power Behind Properties
+
+> 📝 **Practice:** [Q11–Q14 · descriptors](./practice.md#q11--descriptor-basics) &nbsp;|&nbsp; **Deep dive:** [02_descriptors/theory.md](./02_descriptors/theory.md)
 
 A **descriptor** is an object that defines how attribute access works. It implements one or more of: `__get__`, `__set__`, `__delete__`.
 
@@ -532,6 +546,8 @@ p.price = "free"   # TypeError: price: expected float, got str
 ---
 
 ## Descriptors — The Protocol Behind @property
+
+> 📝 **Practice:** [Q11–Q14 · descriptors](./practice.md#q11--descriptor-basics)
 
 A **descriptor** is any object that implements `__get__`, `__set__`, or `__delete__`.
 This protocol powers `@property`, `@classmethod`, `@staticmethod`, and more.
@@ -685,6 +701,8 @@ The descriptor protocol is why `foo.bar()` automatically passes `foo` as `self`.
 
 ## 🏭 Chapter 8: Metaclasses — Classes of Classes
 
+> 📝 **Practice:** [Q15–Q18 · metaclasses](./practice.md#q15--dynamic-class-creation) &nbsp;|&nbsp; **Deep dive:** [03_metaclasses/theory.md](./03_metaclasses/theory.md)
+
 **The mental model:** Everything in Python is an object. Functions are objects. Modules are objects. And classes are objects too. The "class" that creates class objects is called a **metaclass**.
 
 ```
@@ -824,6 +842,8 @@ Plugin._registry   # {'csv': CSVPlugin, 'json': JSONPlugin}
 
 ## 🗂️ Chapter 9: Dataclasses — Generated Boilerplate
 
+> 📝 **Practice:** [Q20–Q24 · dataclasses](./practice.md#q20--basic-dataclass) &nbsp;|&nbsp; **Deep dive:** [04_dataclasses/theory.md](./04_dataclasses/theory.md)
+
 `@dataclass` is a class decorator that inspects type annotations and auto-generates `__init__`, `__repr__`, `__eq__`, and optionally `__lt__`, `__hash__`, `__slots__`:
 
 ```python
@@ -871,6 +891,8 @@ field(kw_only=True)          # keyword-only argument
 ---
 
 ## 🧭 Chapter 10: Abstract Base Classes (ABCs)
+
+> 📝 **Practice:** [Q19 · ABCMeta](./practice.md#q19--abcmeta) · [Q33 · ABC interface](./practice.md#q33--abc-interface)
 
 ABCs define interfaces — they declare what methods a class MUST implement:
 
@@ -925,6 +947,8 @@ isinstance(MyLegacyDict(), Mapping)   # True
 
 ## 🎭 Chapter 11: Enums — Named Constants
 
+> 📝 **Practice:** [Q31 · Enum](./practice.md#q31--enum-basics) · [Q32 · IntEnum and Flag](./practice.md#q32--intenum)
+
 Enums prevent magic strings and integers scattered throughout code:
 
 ```python
@@ -977,6 +1001,8 @@ Permission.EXECUTE in user_perm  # False
 
 ## 🔎 Chapter 12: Introspection — Looking Inside Objects
 
+> 📝 **Practice:** [Q28 · dir/callable](./practice.md#q28--dir-and-callable) · [Q29 · dynamic attributes](./practice.md#q29--dynamic-attributes) · [Q30 · inspect.signature](./practice.md#q30--inspect-signature) &nbsp;|&nbsp; **Deep dive:** [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md)
+
 Python lets you inspect and modify objects at runtime:
 
 ```python
@@ -1025,6 +1051,8 @@ for name, param in sig.parameters.items():
 ---
 
 ## 📐 Chapter 13: Typing and Protocols
+
+> 📝 **Practice:** [Q34 · Protocol](./practice.md#q34--protocol)
 
 **Protocol** enables structural subtyping (duck typing with type-checker support):
 
@@ -1125,10 +1153,14 @@ Introspection      Runtime object inspection         Debug, frameworks, serializ
 
 | | |
 |---|---|
+| 📝 Practice | [practice.md](./practice.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🔮 Dunder Methods Guide | [dunder_guide.md](./dunder_guide.md) |
-| 🏭 Metaclasses & Descriptors | [metaclasses_descriptors_guide.md](./metaclasses_descriptors_guide.md) |
+| 📂 Dunder Methods | [01_dunder_methods/theory.md](./01_dunder_methods/theory.md) |
+| 📂 Descriptors | [02_descriptors/theory.md](./02_descriptors/theory.md) |
+| 📂 Metaclasses | [03_metaclasses/theory.md](./03_metaclasses/theory.md) |
+| 📂 Dataclasses | [04_dataclasses/theory.md](./04_dataclasses/theory.md) |
+| 📂 Advanced Patterns | [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md) |
 | ➡️ Next | [16 — Design Patterns](../16_design_patterns/theory.md) |
 
 ---

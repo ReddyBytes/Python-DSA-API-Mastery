@@ -255,6 +255,26 @@ with logger.catch():
 
 **Gotcha:** Unlike standard logging, loguru has no need for `getLogger(__name__)` — one global `logger` works everywhere.
 
+### Structured Context with bind()
+
+```python
+from loguru import logger
+
+# Attach context once — appears in every message from that logger
+log = logger.bind(request_id="a3f91c2b", model="gpt-4o")
+
+log.info("Processing started")     # request_id=a3f91c2b model=gpt-4o - Processing started
+log.warning("Token count high")    # request_id=a3f91c2b model=gpt-4o - Token count high
+
+# Useful in request handlers — bind at start, log throughout
+def handle_request(request_id: str, prompt: str):
+    log = logger.bind(request_id=request_id)
+    log.info("Request received")
+    log.debug(f"Prompt: {prompt[:50]}")
+    # ... process ...
+    log.info("Request complete")
+```
+
 ---
 
 ## rich
@@ -441,7 +461,7 @@ with jsonlines.open("out.jsonl", "w") as w:
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 
 ---
 

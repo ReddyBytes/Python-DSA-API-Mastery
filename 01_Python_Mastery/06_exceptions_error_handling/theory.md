@@ -45,6 +45,8 @@ That's what this chapter is about.
 **Reference** — Know it exists, look up when needed:
 `ExceptionGroup` (Python 3.11+) · Signal handlers · `warnings.filterwarnings`
 
+> 📝 **Practice:** [Q1 — Trace exception propagation](./practice.md#q1--call-stack--trace-exception-propagation-through-3-nested-calls)
+
 ---
 
 ## 🧠 Chapter 1 — What Actually Happens When Python Raises an Exception
@@ -96,6 +98,8 @@ ZeroDivisionError: division by zero
 > **Key insight:** Exceptions are **objects** — instances of exception classes.
 > They carry data: message, traceback, cause chain.
 > They're not just error messages.
+
+> 📝 **Practice:** [Q7 — Exception hierarchy matching](./practice.md#q7--exception-hierarchy--which-except-clause-catches-what) · [Deep dive →](./01_exception_mechanics/theory.md)
 
 ---
 
@@ -161,6 +165,8 @@ try:
 except (ValueError, TypeError) as e:   # ← specific, intentional
     handle(e)
 ```
+
+> 📝 **Practice:** [Q2 — Full try/except anatomy](./practice.md#q2--tryexceptelsefinally--write-the-full-four-block-pattern) · [Q3 — When does else run?](./practice.md#q3--else-clause--when-does-it-run)
 
 ---
 
@@ -317,6 +323,8 @@ The only way to prevent `finally` from running: `os._exit()` (hard kill, bypasse
   → They silently override the exception/flow control from try/except
 ```
 
+> 📝 **Practice:** [Q5 — Catch specific types](./practice.md#q5--specific-exception-types--catch-each-with-different-messages) · [Q8 — Tuple syntax](./practice.md#q8--tuple-catch-syntax--multiple-exceptions-one-handler) · [Q9 — Order bug](./practice.md#q9--except-order-bug--broad-before-specific)
+
 ---
 
 ## 🔧 Chapter 4 — Handling Exceptions: Patterns and Pitfalls
@@ -438,6 +446,8 @@ def get_user(user_id: int):
 raise NewError("context-free message") from None
 ```
 
+> 📝 **Practice:** [Q13 — Custom AppError](./practice.md#q13--custom-exceptions--define-apperror-with-message-and-code) · [Q14 — Hierarchy design](./practice.md#q14--exception-hierarchy--paymentinsufficientfunds-inheritance) · [Deep dive →](./02_custom_exceptions/theory.md)
+
 ---
 
 ## 🏗️ Chapter 6 — Custom Exceptions: Design Like a Pro
@@ -542,6 +552,8 @@ except Exception as e:
     logging.exception("Unexpected failure")        # unexpected — log + re-raise
     raise
 ```
+
+> 📝 **Practice:** [Q15 — Why use with?](./practice.md#q15--context-managers--why-with-beats-tryfinally) · [Q16 — __enter__/__exit__](./practice.md#q16--context-manager-class--database-transaction-with-__enter__--__exit__) · [Q17 — @contextmanager](./practice.md#q17--contextlibcontextmanager--timing-context-manager)
 
 ---
 
@@ -648,6 +660,8 @@ with open("input.txt") as infile, open("output.txt", "w") as outfile:
     outfile.write(infile.read())
 ```
 
+> 📝 **Practice:** [Q18 — LBYL → EAFP rewrite](./practice.md#q18--lbyl-vs-eafp--rewrite-the-lbyl-version-as-eafp)
+
 ---
 
 ## 🐍 Chapter 8 — LBYL vs EAFP: Python's Philosophy
@@ -689,6 +703,8 @@ EXAMPLE OF RACE CONDITION WITH LBYL:
       open("file.txt")             ← but another process deleted it here!
   # EAFP avoids this: just try open(), handle FileNotFoundError
 ```
+
+> 📝 **Practice:** [Q21 — Retry decorator](./practice.md#q21--retry-decorator--exponential-backoff-3-attempts) · [Deep dive →](./03_production_patterns/theory.md)
 
 ---
 
@@ -888,6 +904,8 @@ def should_retry(exc: Exception) -> bool:
     return isinstance(exc, (ConnectionError, TimeoutError))
 ```
 
+> 📝 **Practice:** [Q22 — Circuit breaker states](./practice.md#q22--circuit-breaker--explain-the-3-states) · [Q23 — Graceful degradation](./practice.md#q23--graceful-degradation--fallback-to-cache-on-failure) · [Deep dive →](./03_production_patterns/theory.md)
+
 ---
 
 ## 🔄 Chapter 9 — Production Patterns
@@ -1043,6 +1061,8 @@ def get_user_endpoint(user_id: int):
         # ← NEVER expose the real exception to the client!
 ```
 
+> 📝 **Practice:** [Q19 — logger.exception() vs logger.error()](./practice.md#q19--logging-exceptions--loggerexception-vs-loggererror)
+
 ---
 
 ## 📋 Chapter 10 — Logging Exceptions Correctly
@@ -1086,6 +1106,8 @@ except Exception as e:
     print(f"Error: {e}")    # ← lost in stdout, no traceback, not searchable
     pass                    # ← NEVER silently ignore exceptions
 ```
+
+> 📝 **Practice:** [Q24 — Fix bare except](./practice.md#q24--anti-pattern--fix-bare-except-with-pass) · [Q25 — Catching too broadly](./practice.md#q25--anti-pattern--catching-too-broadly-masks-bugs) · [Deep dive →](./03_production_patterns/theory.md)
 
 ---
 
@@ -1171,6 +1193,8 @@ except Exception:
     logger.exception("fetch_data failed")   # ← logs traceback
     raise                                    # ← OR return default AND document why
 ```
+
+> 📝 **Practice:** [Q28 — Thread exception loss](./practice.md#q28--thread-exceptions--silently-swallowed-show-and-fix)
 
 ---
 
@@ -1265,6 +1289,8 @@ for r in results:
     else:
         process(r)
 ```
+
+> 📝 **Practice:** [Q29 — Read a traceback](./practice.md#q29--reading-tracebacks--identify-root-cause-and-propagation-path)
 
 ---
 
@@ -1472,15 +1498,17 @@ def test_deprecation_warning():
 
 | | |
 |---|---|
-| ⬅️ Previous | [05 — OOP](../05_oops/README.md) |
-| 📖 Interview | [interview.md](./interview.md) |
+| 💻 Practice | [practice.md](./practice.md) |
+| 🛠️ Practice Local | [practice_local.py](./practice_local.py) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
+| 🎤 Interview | [interview.md](./interview.md) |
+| ⬅️ Previous | [05 — OOP](../05_oops/README.md) |
 | ➡️ Next | [07 — Modules & Packages](../07_modules_packages/theory.md) |
 
 ---
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Oops — Interview Q&A](../05_oops/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+**Prev:** [← OOP](../05_oops/README.md) &nbsp;|&nbsp; **Next:** [07 — Modules & Packages →](../07_modules_packages/theory.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [01 Exception Mechanics](./01_exception_mechanics/theory.md) · [02 Custom Exceptions](./02_custom_exceptions/theory.md) · [03 Production Patterns](./03_production_patterns/theory.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)

@@ -350,6 +350,8 @@ if report["passed"]:
 
 ---
 
+> 📝 **Practice:** [Q29–Q32 — data validation](./practice.md#q29)
+
 ## 🔁 Navigation
 
 | | |

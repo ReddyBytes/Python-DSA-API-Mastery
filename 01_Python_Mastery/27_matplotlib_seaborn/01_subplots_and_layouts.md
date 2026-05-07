@@ -258,6 +258,10 @@ plt.show()
 
 ---
 
+> 📝 **Practice:** [Q1–Q5 — subplots and layouts](./practice.md#q1)
+
+---
+
 ## 📂 Navigation
 
 | | |

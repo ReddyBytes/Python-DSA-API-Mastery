@@ -376,6 +376,33 @@ This repo is one track in a complete AI/ML/DevOps engineering curriculum.
 **Practice APIs?** → [100 API Questions](./03_API_Mastery/api_practice_questions_100.md) — HTTP basics to production architecture, FastAPI to GraphQL
 **Practice System Design?** → [100 System Design Questions](./04_System_Design_Mastery/system_design_practice_questions_100.md) — fundamentals to real-world distributed systems
 
+---
+
+## ⚡ Local Practice Setup
+
+After cloning, run this once to create your personal practice files:
+
+```bash
+python3 setup_practice.py
+```
+
+This creates a `practice_local.py` file in every module folder. These files are **gitignored** — they never get pushed, so you can write freely without affecting the repo.
+
+**What you get per module:**
+
+| Module has | practice_local.py contains |
+|---|---|
+| `practice.md` (e.g. `02_control_flow`) | All question numbers + problem statements + starter code. No hints, no answers. |
+| No `practice.md` | Blank scratch file with a header. |
+
+**Workflow:**
+1. Open `practice_local.py` in the module you're studying
+2. Read the problem, write your answer below it
+3. Stuck? Open `practice.md` — click the 💡 Hint dropdown
+4. Check your solution — click the ✅ Answer dropdown
+
+Re-run `setup_practice.py` any time a new module gets a `practice.md` — it will regenerate that file automatically.
+
 <img src="./assets/divider.svg" width="100%"/>
 
 <div align="center">

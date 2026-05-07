@@ -751,7 +751,7 @@ A: Yes — Pydantic auto-coerces {"prompt_tokens": 5} into a TokenUsage instance
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Previous | [13 — Concurrency](../13_concurrency/theory.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
 
@@ -761,4 +761,4 @@ A: Yes — Pydantic auto-coerces {"prompt_tokens": 5} into a TokenUsage instance
 
 **Prev:** [← Cheat Sheet](./cheetsheet.md) &nbsp;|&nbsp; **Next:** [Advanced Python — Theory →](../15_advanced_python/theory.md)
 
-**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheetsheet.md)
+**Related Topics:** [Theory](./theory.md) · [Cheat Sheet](./cheetsheet.md) · [Practice](./practice.md)

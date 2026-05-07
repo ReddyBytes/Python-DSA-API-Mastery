@@ -87,6 +87,8 @@ greet(999)   # runs fine — Python ignores the hint
 # error: Argument 1 to "greet" has incompatible type "int"; expected "str"
 ```
 
+> 📝 **Practice:** [Q1 — Why type hints exist — annotate a function](./practice.md#q1--why-type-hints-exist--annotate-a-function)
+
 ---
 
 ## 2️⃣ Basic Type Hints
@@ -127,6 +129,8 @@ result = fetch_data()
 result: str = fetch_data()
 result.split(",")   # IDE autocompletes correctly
 ```
+
+> 📝 **Practice:** [Q2 — Basic type hints — primitive annotations](./practice.md#q2--basic-type-hints--primitive-annotations)
 
 ---
 
@@ -194,6 +198,8 @@ def search(query: str, limit: int | None = None) -> list[str]:
     ...
 ```
 
+> 📝 **Practice:** [Q4 — Optional and Union — nullable fields](./practice.md#q4--optional-and-union--nullable-fields)
+
 ---
 
 ## 4️⃣ Type Hints in Functions
@@ -260,6 +266,8 @@ def read_lines(path: str) -> Iterator[str]:
         yield from f
 ```
 
+> 📝 **Practice:** [Q7 — Function type hints — parameters and return](./practice.md#q7--function-type-hints--parameters-and-return)
+
 ---
 
 ## 5️⃣ TypedDict and dataclasses
@@ -309,6 +317,8 @@ print(msg)          # ChatMessage(role='user', content='What is Python?', tokens
 # dataclass gives you: __init__, __repr__, __eq__ for free
 # No runtime validation — just structure + type hints
 ```
+
+> 📝 **Practice:** [Q10 — TypedDict — typed dictionary structure](./practice.md#q10--typeddict--typed-dictionary-structure)
 
 ---
 
@@ -379,6 +389,8 @@ def make_noise(animal: A) -> A:
 - When a function returns the same type it receives
 - When two parameters must have the same type
 - When building generic data structures
+
+> 📝 **Practice:** [Q13 — TypeVar — generic functions](./practice.md#q13--typevar--generic-functions)
 
 ---
 
@@ -478,6 +490,8 @@ def parse_binary(source: Readable) -> dict:
 - Use `ABC` when you want to enforce inheritance hierarchy
 - Protocol is the modern Pythonic choice for "accepts anything with these methods"
 
+> 📝 **Practice:** [Q14 — Protocol — duck typing with type hints](./practice.md#q14--protocol--duck-typing-with-type-hints)
+
 ---
 
 ## 6️⃣ What is Pydantic?
@@ -507,6 +521,8 @@ The key difference:
 # Install:
 # pip install pydantic   (gets v2 by default now)
 ```
+
+> 📝 **Practice:** [Q16 — Pydantic BaseModel — define a model](./practice.md#q16--pydantic-basemodel--define-a-model)
 
 ---
 
@@ -562,6 +578,8 @@ req1 = LLMRequest(prompt="Hello")
 req2 = LLMRequest(prompt="Hello", model="claude-3-5-sonnet-20241022", temperature=0.0)
 req3 = LLMRequest(prompt="Hello", stop_sequences=["END", "STOP"])
 ```
+
+> 📝 **Practice:** [Q17 — Pydantic instantiation — coercion and validation](./practice.md#q17--pydantic-instantiation--coercion-and-validation)
 
 ---
 
@@ -647,6 +665,8 @@ class LLMConfig(BaseModel):
         return self
 ```
 
+> 📝 **Practice:** [Q19 — Field constraints — gt/lt/ge/le/min_length](./practice.md#q19--field-constraints--gtltgele-min_length)
+
 ---
 
 ## 9️⃣ Pydantic for LLM Structured Outputs
@@ -685,6 +705,8 @@ print(type(result))        # <class 'SentimentResult'>
 ```
 
 **Why this matters:** without structured outputs, you're parsing free-text JSON with `json.loads()` and hoping the LLM followed your instructions. With structured outputs + Pydantic, the output is guaranteed to match your schema, and you get a typed Python object back.
+
+> 📝 **Practice:** [Q22 — Pydantic for LLM outputs — SentimentResult](./practice.md#q22--pydantic-for-llm-outputs--sentimentresult)
 
 ---
 
@@ -725,6 +747,8 @@ Model.schema()        # → use Model.model_json_schema() in v2
 # v2 performance: 5-50x faster validation than v1 (Rust core)
 # v2 is the standard — use it for all new projects
 ```
+
+> 📝 **Practice:** [Q24 — Pydantic v1 vs v2 — API differences](./practice.md#q24--pydantic-v1-vs-v2--api-differences)
 
 ---
 
@@ -800,6 +824,8 @@ print(json.dumps(ChatMessage.model_json_schema(), indent=2))
 
 This JSON Schema is exactly what you pass to OpenAI function calling, Anthropic tool use, or any JSON Schema validator.
 
+> 📝 **Practice:** [Q26 — model_validate — import from dict and JSON](./practice.md#q26--model_validate--import-from-dict-and-json)
+
 ---
 
 ## 1️⃣2️⃣ Nested Models
@@ -851,6 +877,8 @@ response.model_dump()
 #                 'finish_reason': 'stop'}],
 #    'usage': {'prompt_tokens': 10, 'completion_tokens': 5, 'total_tokens': 15}}
 ```
+
+> 📝 **Practice:** [Q28 — Nested Pydantic models — dict auto-coercion](./practice.md#q28--nested-pydantic-models--dict-auto-coercion)
 
 ---
 
@@ -952,6 +980,8 @@ def parse_openai_response(raw: dict, latency_ms: float) -> LLMResponse:
 
 With this pattern, every piece of data in your AI pipeline is validated, typed, and serializable. You get IDE autocomplete everywhere, `ValidationError` when bad data enters the system, and `model_json_schema()` ready to pass to any LLM structured output feature.
 
+> 📝 **Practice:** [Q30 — Capstone — ChatMessage, TokenUsage, LLMResponse](./practice.md#q30--capstone--chatmessage-tokenusage-llmresponse)
+
 ---
 
 ## 🔥 Summary
@@ -993,7 +1023,7 @@ AI ENGINEERING USE CASES:
 |---|---|
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Previous | [13 — Concurrency](../13_concurrency/theory.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
 
@@ -1003,4 +1033,4 @@ AI ENGINEERING USE CASES:
 
 **Prev:** [← Concurrency — Interview Q&A](../13_concurrency/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

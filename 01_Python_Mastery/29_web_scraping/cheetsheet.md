@@ -226,3 +226,112 @@ print(f"Can scrape /products: {allowed}")
 3. Check robots.txt and ToS before scraping
 4. Use `raise_for_status()` to catch HTTP errors immediately
 5. Use Selenium/Playwright only when necessary — static HTML scraping is 100x faster
+
+---
+
+## Playwright — Async Browser Automation
+
+```python
+# pip install playwright && playwright install chromium
+import asyncio
+from playwright.async_api import async_playwright
+
+async def scrape(url: str) -> str:
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page()
+        await page.goto(url)
+        await page.wait_for_selector(".price")        # ← wait for JS render
+        text = await page.text_content(".price")
+        await browser.close()
+        return text
+
+# asyncio.run(scrape("https://example.com"))
+```
+
+---
+
+## Playwright vs Selenium — Quick Comparison
+
+| Feature | Playwright | Selenium |
+|---|---|---|
+| Protocol | DevTools Protocol (direct) | WebDriver (via driver binary) |
+| Async support | Native async/await | Requires threading workarounds |
+| Auto-wait | Built-in (no WebDriverWait needed) | Manual WebDriverWait required |
+| Speed | Faster | Slower (driver overhead) |
+| Browser support | Chromium, Firefox, WebKit | Chrome, Firefox, Edge, Safari |
+| Driver binary | Not needed | Requires chromedriver/geckodriver |
+| Best for | New projects, async scraping | Legacy projects, existing infra |
+
+---
+
+## robots.txt Parsing
+
+```python
+from urllib.robotparser import RobotFileParser
+
+rp = RobotFileParser()
+rp.set_url("https://example.com/robots.txt")
+rp.read()
+
+# Check if your bot can fetch a path
+rp.can_fetch("*", "https://example.com/products")   # True/False
+rp.can_fetch("MyBot", "https://example.com/admin")  # check specific bot name
+
+# Get crawl delay (if specified in robots.txt)
+delay = rp.crawl_delay("*")   # returns float or None
+```
+
+---
+
+## CSS Selector vs XPath — When to Use Each
+
+```python
+from bs4 import BeautifulSoup
+from lxml import etree  # lxml supports XPath natively
+
+# CSS selectors — prefer for most cases
+soup.select("div.product > span.price")          # child combinator
+soup.select("a[href^='https']")                  # attribute starts-with
+soup.select("li:nth-child(2)")                   # nth child
+
+# XPath — use when you need to navigate upward or use complex positional logic
+# (BeautifulSoup does NOT support XPath natively — use lxml directly)
+tree = etree.fromstring(html_bytes)
+prices = tree.xpath("//span[@class='price']/text()")
+# Navigate up: find <tr> containing a cell with text "Price"
+row = tree.xpath("//td[text()='Price']/parent::tr")
+```
+
+---
+
+## Scrapy — Large-Scale Scraping (Framework)
+
+```bash
+pip install scrapy
+scrapy startproject myproject
+scrapy genspider products example.com
+scrapy crawl products -o output.json
+```
+
+```python
+# Basic Scrapy Spider
+import scrapy
+
+class ProductSpider(scrapy.Spider):
+    name = "products"
+    start_urls = ["https://example.com/products"]
+
+    def parse(self, response):
+        for card in response.css("div.product-card"):
+            yield {
+                "name":  card.css("h2::text").get(),
+                "price": card.css("span.price::text").get(),
+            }
+        # Follow pagination automatically
+        next_page = response.css("a.next-page::attr(href)").get()
+        if next_page:
+            yield response.follow(next_page, self.parse)
+```
+
+**When to use Scrapy:** 1000+ pages, need pipelines (clean → DB → S3), want built-in retry/dedup/rate-limiting middleware.

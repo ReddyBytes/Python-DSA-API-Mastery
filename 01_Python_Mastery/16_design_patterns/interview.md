@@ -1,6 +1,8 @@
 # 🎯 Design Patterns — Interview Preparation Guide  
 From Clean Code to Architectural Thinking
 
+> **Deep Dives:** [01 Creational](./01_creational/theory.md) · [02 Behavioral](./02_behavioral/theory.md) · [03 Dependency Injection](./03_dependency_injection/theory.md)
+
 ---
 
 # 🧠 What Interviewers Actually Test
@@ -256,6 +258,68 @@ Shows advanced system thinking.
 
 </details>
 
+<br>
+
+**Q13: What is the Borg (Monostate) pattern and when does it differ from Singleton?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> Borg pattern shares `__dict__` across all instances instead of sharing the instance itself. All `Logger()` calls return different objects, but they all see the same state because they all point to the same dictionary. The key difference: identity is separate from state.
+
+Use Borg when:
+- You want state sharing but need identity flexibility (e.g., subclasses, testing)
+- You want shared state without the `reset()` dance needed for classic Singleton
+
+Classic Singleton when:
+- You need `instance1 is instance2 == True` to be guaranteed
+- Resource must be provably single (DB connection pool)
+
+</details>
+
+<br>
+
+**Q14: What is the Template Method pattern and when would you use it over Strategy?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> Template Method defines the skeleton of an algorithm in a base class, letting subclasses fill in specific steps without changing the algorithm's structure. Strategy externalizes the entire algorithm via composition.
+
+Choose Template Method when:
+- Many subclasses share the same pipeline but differ in a few steps
+- You want to enforce the algorithm structure and prevent subclasses from skipping steps
+
+Choose Strategy when:
+- The algorithm as a whole is interchangeable
+- You want runtime switching without subclassing
+- The algorithm can be a simple function (no shared state)
+
+Real example: Django's `Class-Based Views` use Template Method — `get()`, `post()` are hooks inside a fixed request-handling pipeline.
+
+</details>
+
+<br>
+
+**Q15: What is the Command pattern and how does it enable undo?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+Strong answer:
+
+> Command encapsulates a request as an object with `execute()` and `undo()` methods. A history stack records executed commands. To undo, pop the last command and call `undo()`.
+
+Key implementation detail: the `undo()` method must capture enough state at `execute()` time to reverse the operation. For `DeleteTextCommand`, save the deleted text before removing it.
+
+Real examples: text editors (Ctrl+Z), database migrations (up/down), transactional systems.
+
+</details>
+
 
 # 🔥 Scenario-Based Questions
 
@@ -378,13 +442,17 @@ Interviewers prefer reasoning over memorization.
 
 # 🎯 Rapid-Fire Revision
 
-- Singleton → single instance
-- Factory → centralized object creation
-- Strategy → interchangeable behaviors
-- Observer → event notification
-- Dependency Injection → loose coupling
+- Singleton → single instance; `__new__` or module-level
+- Borg → shared state, multiple objects; `self.__dict__ = _shared_state`
+- Factory → centralized object creation; dict dispatch
+- Registration factory → self-registering classes via `@register` decorator
+- Strategy → interchangeable behaviors; function or ABC
+- Observer → event notification; subscribe/emit/unsubscribe
+- Command → encapsulate request with execute/undo; enables history stack
+- Template Method → fixed pipeline, variable steps via inheritance
+- Dependency Injection → inject dependencies; constructor > method > service locator
 - Patterns improve scalability and maintainability
-- Use patterns when complexity grows
+- Use patterns when complexity grows, not before
 - Avoid overengineering
 
 ---

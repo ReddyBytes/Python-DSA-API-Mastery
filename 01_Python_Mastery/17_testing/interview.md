@@ -838,6 +838,26 @@ A: When you want to verify invariants hold for arbitrary inputs — especially
 Q: What makes a test "brittle"?
 A: It tests implementation details — breaks on internal refactors even when
    observable behavior is unchanged
+
+Q: Difference between Stub and Fake?
+A: Stub returns canned data with no logic; Fake is a working but simplified
+   real implementation (e.g., in-memory database instead of real DB)
+
+Q: pytest-asyncio asyncio_mode = auto means?
+A: All async test functions are automatically treated as asyncio tests —
+   no need to mark each with @pytest.mark.asyncio
+
+Q: What is create_autospec?
+A: Creates a mock that validates both attribute existence (like spec=)
+   AND method signatures — raises TypeError on wrong arg count
+
+Q: When to use Mock(spec=Class)?
+A: Always when mocking injected dependencies — catches typos and API drift
+   when the real class changes
+
+Q: What is a property-based test invariant?
+A: A statement that must be true for ALL valid inputs, e.g.
+   "sorted output has the same length as input"
 ```
 
 ---
@@ -848,7 +868,10 @@ A: It tests implementation details — breaks on internal refactors even when
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🧪 pytest Guide | [pytest_guide.md](./pytest_guide.md) |
+| 📝 Practice (35 Qs) | [practice.md](./practice.md) |
+| 🧪 pytest Deep Dive | [01_pytest/theory.md](./01_pytest/theory.md) |
+| 🔬 unittest Deep Dive | [02_unittest/theory.md](./02_unittest/theory.md) |
+| 🎭 Mocking Deep Dive | [03_mocking/theory.md](./03_mocking/theory.md) |
 | ⬅️ Previous | [16 — Design Patterns](../16_design_patterns/theory.md) |
 | ➡️ Next | [18 — Performance Optimization](../18_performance_optimization/theory.md) |
 

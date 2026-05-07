@@ -3,13 +3,13 @@
 > *"A decorator is a function that takes a function, wraps new behavior around it,*
 > *and returns the enhanced version. One of Python's most elegant ideas."*
 
-> 📝 **Practice:** [Q77 · explain-decorators](../python_practice_questions_100.md#q77--interview--explain-decorators) · [Q94 · debug-decorator](../python_practice_questions_100.md#q94--debug--debug-decorator)
-
 ---
 
 ## 🎬 The Problem That Made Decorators Inevitable
 
 It's sprint review day. Your team just shipped a payment service with 40 endpoints. Now the product manager says:
+
+> **Prerequisite:** This module assumes you understand closures. Not familiar with them? Start here first: [04_functions — Closures](../04_functions/02_closures_decorators/01_closures_theory.md)
 
 > *"We need to log every function call — what was called, with what arguments, how long it took, and whether it succeeded or failed."*
 
@@ -79,6 +79,8 @@ Basic decorator pattern · `@functools.wraps` · `functools.lru_cache` · Class 
 
 ## 📦 Chapter 1: Functions Are First-Class Objects
 
+📝 **Practice:** [Q1 →](./practice.md#q1--first-class-functions--pass-a-function-as-argument)
+
 Before decorators make sense, you need to deeply understand this:
 
 **In Python, functions are objects — like integers, strings, or lists.**
@@ -123,6 +125,8 @@ print(triple(5))   # 15
 ---
 
 ## 🔒 Chapter 2: Closures — The Engine Inside Decorators
+
+📝 **Practice:** [Q2 →](./practice.md#q2--closures--make_counter-closure)
 
 A **[closure](../04_functions/theory.md#closure-cell-internals--how-captured-variables-actually-work)** is a function that captures variables from its enclosing scope, even after that scope has finished executing.
 
@@ -171,6 +175,8 @@ print(hey("Bob"))       # "Hey, Bob!"
 ```
 
 ## 🔬 Closure Internals — Where Captured Variables Live
+
+📝 **Practice:** [Q2 →](./practice.md#q2--closures--make_counter-closure)
 
 When a closure captures a variable, Python creates a **cell object** on the heap.
 The outer function's stack frame is destroyed on return, but the cell object survives.
@@ -252,6 +258,8 @@ print(get())    # 3 — same cell shared by inc and get
 
 ## 🎁 Chapter 3: Your First Decorator — Manual Form
 
+📝 **Practice:** [Q3 →](./practice.md#q3--manual-decorator--write-manual-form-from-scratch)
+
 A decorator is just a function that:
 1. Takes a function as its argument
 2. Defines a wrapper function inside
@@ -292,6 +300,8 @@ After  greet = my_decorator(greet):
 ---
 
 ## ✨ Chapter 4: The `@` Syntax — Syntactic Sugar
+
+📝 **Practice:** [Q4 →](./practice.md#q4---syntax--convert-manual-to--syntax)
 
 The `@` symbol is purely syntactic sugar. These two are **identical**:
 
@@ -334,6 +344,8 @@ func = A(B(C(func)))
 ---
 
 ## 🏷️ Chapter 5: `functools.wraps` — Preserving Identity
+
+📝 **Practice:** [Q5 →](./practice.md#q5--functoolswraps--show-what-breaks-without-wraps)
 
 Without `@wraps`, your wrapper loses the original function's metadata:
 
@@ -381,11 +393,11 @@ print(greet.__wrapped__)  # original function ← @wraps adds this too
 
 **Rule: Every wrapper function should have `@functools.wraps(func)`. No exceptions.**
 
-> 📝 **Practice:** [Q30 · functools-wraps](../python_practice_questions_100.md#q30--thinking--functools-wraps)
-
 ---
 
 ## ⚙️ Chapter 6: Decorators with Arguments — Decorator Factories
+
+📝 **Practice:** [Q6 →](./practice.md#q6--decorator-factory--repeat-n-times)
 
 What if you want `@retry(max_attempts=3)` instead of just `@retry`? You need a **decorator factory** — a function that takes arguments and *returns* a decorator.
 
@@ -432,11 +444,11 @@ decorator(fetch_data)   → returns wrapper  (at @-decoration time)
 wrapper(url)            → runs each time you call fetch_data(url)
 ```
 
-> 📝 **Practice:** [Q32 · parametrized-decorator](../python_practice_questions_100.md#q32--design--parametrized-decorator)
-
 ---
 
 ## 🏭 Chapter 7: Class-Based Decorators
+
+📝 **Practice:** [Q7 →](./practice.md#q7--class-decorator--callcounter-class) · [Deep dive →](./01_class_decorators/practice.md)
 
 You can also implement a decorator as a class by defining `__init__` and `__call__`:
 
@@ -490,6 +502,8 @@ print(greet.calls)   # 2  ← state is on the decorator object itself
 
 ## 🏷️ Chapter 8: Decorating Classes
 
+📝 **Practice:** [Q8 →](./practice.md#q8--decorating-classes--singleton-class-decorator) · [Deep dive →](./01_class_decorators/practice.md)
+
 Decorators can be applied to **classes**, not just functions:
 
 ```python
@@ -536,9 +550,9 @@ print(o)   # Order(order_id=1, user_id=42, total=99.99, status='pending')
 
 ## 🔑 Chapter 9: Built-in Decorators — @property, @classmethod, @staticmethod
 
-Python ships three essential decorators for classes:
+📝 **Practice:** [Q9–Q10 →](./practice.md#q9--property--convert-attribute-to-property)
 
-> 📝 **Practice:** [Q29 · decorators-basics](../python_practice_questions_100.md#q29--normal--decorators-basics)
+Python ships three essential decorators for classes:
 
 ### [`@property`](../05_oops/11_properties.md#-what-property-actually-is) — Computed attributes with validation
 
@@ -620,6 +634,8 @@ Regular method      self           instance       instance.method()
 
 ## 🔄 Chapter 10: Stacking Decorators — Order and Interaction
 
+📝 **Practice:** [Q11 →](./practice.md#q11--stacking--stack-timer-and-retry)
+
 When you stack decorators, order matters. A critical rule:
 
 **Applied bottom-up. Executed top-down.**
@@ -635,8 +651,6 @@ def fetch_data(url):
 # Equivalent to:
 fetch_data = timer(logger(retry(3)(fetch_data)))
 ```
-
-> 📝 **Practice:** [Q31 · stacked-decorators](../python_practice_questions_100.md#q31--logical--stacked-decorators)
 
 
 **Execution order when `fetch_data(url)` is called:**
@@ -684,6 +698,8 @@ def process():
 ---
 
 ## 🏗️ Chapter 11: Production Decorator Patterns
+
+📝 **Practice:** [Q12–Q13 →](./practice.md#q12--production-patterns--timer-decorator) · [Deep dive →](./02_production_patterns/practice.md)
 
 ### Timing
 
@@ -969,6 +985,8 @@ def create_order(user_id, price, notes=""):
 
 ## ⚡ Chapter 12: Decorators for Async Functions
 
+📝 **Practice:** [Q14 →](./practice.md#q14--async-decorator--works-on-sync-and-async)
+
 If you decorate an async function, your wrapper must also be async:
 
 ```python
@@ -1021,6 +1039,8 @@ def timed(func):
 
 ## 🧩 Chapter 13: Decorators with Optional Arguments
 
+📝 **Practice:** [Q15 →](./practice.md#q15--optional-arguments--validate-with-or-without-parens)
+
 The challenge: support `@retry` and `@retry(max=3)` with the same decorator.
 
 ```python
@@ -1065,6 +1085,8 @@ def op3(): ...
 
 ## 🔍 Chapter 14: Introspection — Looking Inside Decorators
 
+📝 **Practice:** [Q16 →](./practice.md#q16--introspection--use-inspectunwrap)
+
 ```python
 import functools, inspect
 
@@ -1094,6 +1116,8 @@ print(inspect.unwrap(greet))    # original function, all wrappers removed
 ---
 
 ## ⚠️ Chapter 15: Anti-Patterns and Gotchas
+
+📝 **Practice:** [Q17 →](./practice.md#q17--anti-patterns--fix-decorator-missing-return-and-wraps)
 
 ### Gotcha 1 — Forgetting `@functools.wraps`
 
@@ -1187,6 +1211,8 @@ class MyClass:
 
 ## 🧠 Chapter 16: How Python Executes Decorators — The Full Mental Model
 
+📝 **Practice:** [Q21 →](./practice.md#q21--full-mental-model--trace-python-decorator-execution)
+
 Understanding the execution timeline:
 
 ```
@@ -1259,7 +1285,8 @@ Async decorators        wrapper must be async if func is async
 |---|---|
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🏭 Pattern Library | [decorator_patterns.md](./decorator_patterns.md) |
+| 🏷️ Class Decorators | [01_class_decorators/theory.md](./01_class_decorators/theory.md) |
+| 🏭 Production Patterns | [02_production_patterns/theory.md](./02_production_patterns/theory.md) |
 | ➡️ Next | [11 — Iterators & Generators](../11_iterators_generators/theory.md) |
 
 ---
@@ -1268,4 +1295,4 @@ Async decorators        wrapper must be async if func is async
 
 **Prev:** [← Logging Debugging — Interview Q&A](../09_logging_debugging/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Decorator Patterns](./decorator_patterns.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md) · [Class Decorators →](./01_class_decorators/theory.md) · [Production Patterns →](./02_production_patterns/theory.md) · [Prerequisite: Closures](../04_functions/02_closures_decorators/01_closures_theory.md)

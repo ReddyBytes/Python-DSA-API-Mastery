@@ -44,6 +44,23 @@ assert a is b    # True — same object
 |---|---|
 | Shared config, logger, DB connection pool | State isolation needed, testing with mocks |
 
+**Borg (Monostate) variant** — shared state, multiple instances:
+
+```python
+class Logger:
+    _shared_state: dict = {}
+
+    def __init__(self):
+        self.__dict__ = Logger._shared_state   # all instances share one dict
+
+a = Logger(); b = Logger()
+a.level = "DEBUG"
+assert b.level == "DEBUG"   # shared state
+assert a is not b            # different objects
+```
+
+Use Borg when you need identity flexibility but shared state semantics. Easier to subclass and test than classic Singleton.
+
 ---
 
 ## 🏭 Factory — Centralized Object Creation
@@ -274,6 +291,55 @@ service = Service(db=MockDB())      # easily mockable
 service = Service(db=PostgresDB())
 ```
 
+**Service locator** — pull vs push:
+
+```python
+class ServiceLocator:
+    _services = {}
+    @classmethod
+    def register(cls, name, instance): cls._services[name] = instance
+    @classmethod
+    def get(cls, name): return cls._services[name]
+
+# Pull (service locator) — hidden dependency
+db = ServiceLocator.get("db")
+
+# Push (constructor injection) — visible dependency — preferred
+service = MyService(db=ServiceLocator.get("db"))
+```
+
+---
+
+## 📐 Template Method — Fixed Pipeline, Variable Steps
+
+```python
+from abc import ABC, abstractmethod
+
+class DataProcessor(ABC):
+    def process(self, data: list) -> list:          # template method
+        clean = self.validate(data)                  # step 1
+        return self.transform(clean)                 # step 2
+
+    def validate(self, data):                        # hook with default
+        return [x for x in data if x is not None]
+
+    @abstractmethod
+    def transform(self, data: list) -> list: ...     # must override
+
+class DoubleProcessor(DataProcessor):
+    def transform(self, data): return [x * 2 for x in data]
+```
+
+```
+DataProcessor.process()
+├── validate(data)     ← hook (default or override)
+└── transform(data)    ← abstract (must override)
+```
+
+| Use when | vs Strategy |
+|---|---|
+| Many shared steps, few variable steps | Template = inheritance; Strategy = composition |
+
 ---
 
 ## 📌 Learning Priority
@@ -344,6 +410,9 @@ A: DI = dependencies pushed in. Service Locator = dependencies pulled via lookup
 | 📖 Theory | [theory.md](./theory.md) |
 | 💉 Dependency Injection | [dependency_injection.md](./dependency_injection.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
+| 🏗 01 Creational | [01_creational/theory.md](./01_creational/theory.md) |
+| 🔄 02 Behavioral | [02_behavioral/theory.md](./02_behavioral/theory.md) |
+| 💉 03 DI Deep Dive | [03_dependency_injection/theory.md](./03_dependency_injection/theory.md) |
 | ⬅️ Previous | [15 — Advanced Python](../15_advanced_python/cheetsheet.md) |
 | ➡️ Next | [17 — Testing](../17_testing/cheetsheet.md) |
 

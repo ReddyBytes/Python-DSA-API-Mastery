@@ -448,11 +448,17 @@ A: Type safety, validation, single source of truth, auto-cast types, IDE autocom
 Q: What is the @logger.catch decorator in loguru?
 A: Wraps a function to catch and log any exception with full traceback instead of crashing silently.
 
+Q: What does logger.bind() do in loguru?
+A: Returns a child logger with extra key-value context attached — every message from that logger includes those fields automatically. Useful for attaching request_id or job_id to all logs in a function.
+
 Q: How do you write multiple records to a JSONL file?
 A: Open with mode "w" or "a", write json.dumps(record) + "\n" for each record.
 
 Q: What rich class do you use to display tabular data in the terminal?
 A: rich.table.Table, then console.print(table)
+
+Q: What encoding does tiktoken use for GPT-4o?
+A: o200k_base. For GPT-4/GPT-3.5-turbo use cl100k_base. Get it with tiktoken.get_encoding("o200k_base").
 ```
 
 </details>
@@ -478,7 +484,7 @@ Structured. Tool-aware. Production-minded.
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
 | 📋 Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 
 ---
 

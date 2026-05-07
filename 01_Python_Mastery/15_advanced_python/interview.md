@@ -950,9 +950,13 @@ A: Simpler hook run when class is subclassed; composes cleanly; no metaclass con
 | | |
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
-| 🔮 Dunder Guide | [dunder_guide.md](./dunder_guide.md) |
-| 🏭 Metaclasses & Descriptors | [metaclasses_descriptors_guide.md](./metaclasses_descriptors_guide.md) |
+| 📝 Practice | [practice.md](./practice.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
+| 📂 Dunder Methods | [01_dunder_methods/theory.md](./01_dunder_methods/theory.md) |
+| 📂 Descriptors | [02_descriptors/theory.md](./02_descriptors/theory.md) |
+| 📂 Metaclasses | [03_metaclasses/theory.md](./03_metaclasses/theory.md) |
+| 📂 Dataclasses | [04_dataclasses/theory.md](./04_dataclasses/theory.md) |
+| 📂 Advanced Patterns | [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md) |
 | ➡️ Next | [16 — Design Patterns](../16_design_patterns/theory.md) |
 
 ---

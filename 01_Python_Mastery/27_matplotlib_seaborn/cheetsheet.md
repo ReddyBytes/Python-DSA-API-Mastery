@@ -338,7 +338,121 @@ ax.contourf(xx, yy, Z, alpha=0.3, cmap='RdYlBu')
 
 ---
 
-## Saving Figures
+## GridSpec and subplot_mosaic
+
+```python
+# GridSpec — unequal panel sizes
+import matplotlib.gridspec as gridspec
+fig = plt.figure(figsize=(10, 6))
+gs = fig.add_gridspec(2, 3, hspace=0.4, wspace=0.3)
+
+ax_top   = fig.add_subplot(gs[0, :])    # ← row 0, all 3 columns (wide banner)
+ax_bot_l = fig.add_subplot(gs[1, 0])
+ax_bot_m = fig.add_subplot(gs[1, 1])
+ax_bot_r = fig.add_subplot(gs[1, 2])
+# Row span example: gs[0:2, 0]  ← tall left column
+
+# subplot_mosaic — named layout (most readable for complex figures)
+layout = """
+AAB
+CDB
+"""
+fig, axd = plt.subplot_mosaic(layout, figsize=(10, 6), layout='constrained')
+axd['A'].plot(x, y)   # ← access by letter key; repeated letters span that area
+axd['B'].set_title('Tall right panel')
+```
+
+---
+
+## FacetGrid — multi-panel seaborn
+
+```python
+# FacetGrid: same plot applied to each subset
+g = sns.FacetGrid(df, col='model', row='dataset', height=3, aspect=1.2, sharey=True)
+g.map(sns.histplot, 'accuracy', bins=20)
+g.add_legend()
+g.set_axis_labels('Accuracy', 'Count')
+g.set_titles(col_template='{col_name}', row_template='{row_name}')
+
+# map_dataframe: when plot function needs the full DataFrame
+g = sns.FacetGrid(df, col='split', hue='class', height=4)
+g.map_dataframe(sns.scatterplot, x='feature_1', y='feature_2', alpha=0.5)
+g.add_legend()
+```
+
+---
+
+## Colormap Normalization
+
+```python
+import matplotlib.colors as mcolors
+
+# Linear norm with explicit bounds
+norm = mcolors.Normalize(vmin=0, vmax=100)
+ax.scatter(x, y, c=values, cmap='plasma', norm=norm)
+
+# Log-scale color (count data spanning orders of magnitude)
+norm_log = mcolors.LogNorm(vmin=1, vmax=10000)   # ← values must be > 0
+ax.imshow(count_matrix, cmap='YlOrRd', norm=norm_log)
+
+# TwoSlopeNorm — asymmetric range: zero always maps to neutral white
+norm_two = mcolors.TwoSlopeNorm(vmin=-0.5, vcenter=0, vmax=2.0)
+ax.imshow(residuals, cmap='RdBu_r', norm=norm_two)  # ← use for asymmetric residuals
+```
+
+---
+
+## Confusion Matrix Heatmap Pattern
+
+```python
+# Auto-contrast text in confusion matrix cells
+cm = confusion_matrix(y_true, y_pred)
+n = len(class_names)
+
+fig, ax = plt.subplots(figsize=(6, 5))
+im = ax.imshow(cm, cmap='Blues')
+fig.colorbar(im, ax=ax)
+ax.set_xticks(range(n)); ax.set_xticklabels(class_names, rotation=45)
+ax.set_yticks(range(n)); ax.set_yticklabels(class_names)
+ax.set_xlabel('Predicted'); ax.set_ylabel('True')
+
+for i in range(n):
+    for j in range(n):
+        ax.text(j, i, cm[i, j], ha='center', va='center',
+                color='white' if cm[i, j] > cm.max() / 2 else 'black')  # ← auto-contrast
+
+plt.tight_layout()
+
+# sklearn shortcut (less control but fast):
+from sklearn.metrics import ConfusionMatrixDisplay
+ConfusionMatrixDisplay.from_predictions(y_true, y_pred, cmap='Blues').plot()
+```
+
+---
+
+## savefig bbox_inches='tight' — Critical Gotcha
+
+```python
+# WRONG — labels will be clipped
+fig.savefig('out.png', dpi=150)
+
+# CORRECT — always use bbox_inches='tight'
+fig.savefig('out.png', dpi=150, bbox_inches='tight')
+
+# Full parameter set for publication quality:
+fig.savefig('figure.pdf',
+    bbox_inches='tight',   # ← #1 most important: prevents label clipping
+    pad_inches=0.1,        # ← small padding around the tight bbox
+    facecolor='white',     # ← explicit background
+    transparent=False)
+
+# Pixel dimensions = figsize (inches) × DPI
+# figsize=(6, 4), dpi=150  → 900 × 600 pixels
+# figsize=(6, 4), dpi=300  → 1800 × 1200 pixels
+# Vector formats (PDF, SVG): DPI is irrelevant — they scale without loss
+```
+
+---
 
 ```python
 # Always use fig.savefig (not plt.savefig) when you have multiple figs

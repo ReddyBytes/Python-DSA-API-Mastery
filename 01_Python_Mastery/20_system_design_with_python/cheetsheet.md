@@ -322,8 +322,9 @@ A: Recycles connections older than N seconds to avoid using stale DB connections
 | | |
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
-| 🔌 API Design | [api_design_principles.md](./api_design_principles.md) |
-| 📐 Scalable Design | [scalable_app_design.md](./scalable_app_design.md) |
+| 💻 Practice (25 Qs) | [practice.md](./practice.md) |
+| 🔌 API Design Patterns | [01_api_design_patterns/theory.md](./01_api_design_patterns/theory.md) |
+| ⚡ Scalability & Caching | [02_scalability_caching_patterns/theory.md](./02_scalability_caching_patterns/theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⬅️ Previous | [19 — Production Best Practices](../19_production_best_practices/packaging.md) |
 | ➡️ Next | [21 — Data Engineering Applications](../21_data_engineering_applications/cheetsheet.md) |
@@ -334,4 +335,4 @@ A: Recycles connections older than N seconds to avoid using stale DB connections
 
 **Prev:** [← Production Best Practices](../19_production_best_practices/packaging.md) &nbsp;|&nbsp; **Next:** [Data Engineering →](../21_data_engineering_applications/cheetsheet.md)
 
-**Related Topics:** [Theory](./theory.md) · [API Design Principles](./api_design_principles.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./theory.md) · [API Design Patterns](./01_api_design_patterns/theory.md) · [Interview Q&A](./interview.md)

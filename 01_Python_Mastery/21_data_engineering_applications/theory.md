@@ -72,6 +72,8 @@ Core concepts:
 
 Classic data engineering pattern.
 
+> 📝 Practice: [01_etl_pipelines/practice.md](./01_etl_pipelines/practice.md) · [Subfolder Theory](./01_etl_pipelines/theory.md)
+
 ---
 
 ## 🔹 Extract
@@ -118,6 +120,8 @@ Store into:
 # 📁 3️⃣ File Processing Pipelines
 
 Processing large files efficiently is critical.
+
+> 📝 Practice: [01_etl_pipelines/practice.md — Q1–Q3](./01_etl_pipelines/practice.md)
 
 ---
 
@@ -167,6 +171,8 @@ Useful for:
 
 Data pipelines often pull data from APIs.
 
+> 📝 Practice: [02_streaming_api_collection/practice.md — Q2–Q6](./02_streaming_api_collection/practice.md) · [Subfolder Theory](./02_streaming_api_collection/theory.md)
+
 Challenges:
 
 - Rate limits
@@ -205,6 +211,8 @@ Use:
 
 Streaming systems process data continuously.
 
+> 📝 Practice: [02_streaming_api_collection/practice.md — Q1, Q9](./02_streaming_api_collection/practice.md) · [Subfolder Theory](./02_streaming_api_collection/theory.md)
+
 Example:
 
 - Real-time event processing
@@ -235,6 +243,8 @@ Process data continuously in near real-time.
 # 🧠 6️⃣ Memory-Efficient ETL
 
 Large-scale ETL must consider:
+
+> 📝 Practice: [01_etl_pipelines/practice.md — Q3, Q5, Q11](./01_etl_pipelines/practice.md)
 
 - Memory limits
 - Data chunking
@@ -272,6 +282,8 @@ Store intermediate data only if needed.
 
 Long-running jobs must:
 
+> 📝 Practice: [01_etl_pipelines/practice.md — Q6](./01_etl_pipelines/practice.md)
+
 - Resume after failure
 - Avoid reprocessing everything
 
@@ -307,6 +319,8 @@ Reliable periodic execution.
 # ⚙️ 9️⃣ Data Validation
 
 Never trust input data.
+
+> 📝 Practice: [01_etl_pipelines/practice.md — Q4](./01_etl_pipelines/practice.md)
 
 Validate:
 
@@ -429,10 +443,18 @@ Previous:
 Next:  
 [21_data_engineering_applications/interview.md](./interview.md)
 
+| | |
+|---|---|
+| 📝 Practice | [practice.md](./practice.md) |
+| 🏭 ETL Pipelines | [01_etl_pipelines/theory.md](./01_etl_pipelines/theory.md) |
+| ⚡ Streaming & API | [02_streaming_api_collection/theory.md](./02_streaming_api_collection/theory.md) |
+| 🎯 Interview | [interview.md](./interview.md) |
+| ⚡ Cheetsheet | [cheetsheet.md](./cheetsheet.md) |
+
 ---
 
 **[🏠 Back to README](../README.md)**
 
 **Prev:** [← System Design With Python — Interview Q&A](../20_system_design_with_python/interview.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Interview Q&A](./interview.md)
+**Related Topics:** [Interview Q&A](./interview.md) · [ETL Pipelines](./01_etl_pipelines/theory.md) · [Streaming & API Collection](./02_streaming_api_collection/theory.md)

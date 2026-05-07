@@ -185,6 +185,8 @@ print(f"Rows after filtering: {len(df_final):,}")
 
 ---
 
+> 📝 **Practice:** [Q17–Q20 — query and eval](./practice.md#q17)
+
 ## 🔁 Navigation
 
 | | |

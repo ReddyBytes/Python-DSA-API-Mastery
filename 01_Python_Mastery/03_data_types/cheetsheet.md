@@ -198,6 +198,6 @@ Lookup in dict   → O(1)  — instant via hash
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Complexity Analysis](./complexity_analysis.md) &nbsp;|&nbsp; **Next:** [Complexity Analysis Interview →](./complexity_analysis_interview.md)
+**Prev:** [← Complexity Analysis](./06_complexity/theory.md) &nbsp;|&nbsp; **Next:** [Complexity Analysis Interview →](./06_complexity/interview.md)
 
-**Related Topics:** [Theory](./theory.md) · [Complete Guide](./complete_guide.md) · [Complexity Analysis](./complexity_analysis.md) · [Complexity Analysis Interview](./complexity_analysis_interview.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./theory.md) · [Complexity Analysis](./06_complexity/theory.md) · [Complexity Analysis Interview](./06_complexity/interview.md) · [Interview Q&A](./interview.md)

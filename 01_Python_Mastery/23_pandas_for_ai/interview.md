@@ -635,6 +635,199 @@ def validate_dataset(df):
 
 <br>
 
+**Q20: What is named aggregation syntax (`pd.NamedAgg`) and why prefer it?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+Named aggregation lets you specify the output column name and aggregation function together in a single `.agg()` call. Before it existed, you had to rename columns in a separate step.
+
+```python
+# Old style — requires renaming afterwards:
+summary = df.groupby("user_id")["score"].agg(["mean", "max"])
+summary.columns = ["mean_score", "max_score"]
+
+# Named aggregation — output names are explicit upfront:
+summary = df.groupby("user_id").agg(
+    mean_score=("score", "mean"),
+    max_score=("score",  "max"),
+    p75=("score", lambda x: x.quantile(0.75)),
+    n_samples=pd.NamedAgg(column="score", aggfunc="count"),
+)
+```
+
+**Why it matters:** Named aggregation is the standard pattern in production pipelines — it reads like a contract and makes intent obvious without requiring a follow-up rename step.
+
+</details>
+
+<br>
+
+**Q21: How does `query()` with `@variable` syntax work, and when is it faster?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+The `@` prefix inside a `query()` string injects a Python variable from the local scope. This avoids string formatting and makes queries reusable with different threshold values.
+
+```python
+min_score = 85
+allowed  = ["active", "trial"]
+
+# @ injects the Python variable — not a column reference
+result = df.query("score >= @min_score and status in @allowed")
+
+# Performance: query() uses the numexpr engine (C-based)
+# which avoids creating intermediate boolean arrays.
+# It's faster than boolean indexing for DataFrames > ~100k rows
+# with multi-condition filters. On small DataFrames, string-parsing
+# overhead makes it slower.
+```
+
+**Why it matters:** `@variable` syntax is the safe, readable alternative to f-string injection — and the numexpr backend gives meaningful speed gains on large production DataFrames.
+
+</details>
+
+<br>
+
+**Q22: What is `pd.eval()` and when does it help performance?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+`pd.eval()` compiles an expression string into an optimized internal form and executes it without creating intermediate arrays. For large DataFrames, this reduces both time and memory.
+
+```python
+# Standard: creates a temporary array for each operation
+df["revenue"] = df["price"] * df["quantity"]
+df["tax"]     = df["revenue"] * 0.1
+
+# eval(): single compiled pass, no intermediate arrays
+df.eval("""
+    revenue = price * quantity
+    tax     = revenue * 0.1
+    total   = revenue + tax
+""", inplace=True)
+
+# @ for Python variables:
+baseline = 70
+df.eval("score_above = score - @baseline", inplace=True)
+```
+
+The benefit is meaningful at ~10k+ rows. On small DataFrames, the compilation overhead outweighs the gain.
+
+**Why it matters:** In large training pipelines, avoiding intermediate array allocation reduces peak memory usage — sometimes the difference between a job that fits in RAM and one that doesn't.
+
+</details>
+
+<br>
+
+**Q23: How does pandera work for schema validation, and why is it better than `assert` statements?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+`pandera` lets you define a DataFrame schema as a declarative object. When you validate a DataFrame against it, pandera collects all violations (with `lazy=True`) rather than stopping at the first one.
+
+```python
+import pandera as pa
+
+schema = pa.DataFrameSchema({
+    "score": pa.Column(float, checks=[pa.Check.ge(0.0), pa.Check.le(100.0)]),
+    "label": pa.Column(int,   checks=[pa.Check.isin([0, 1])]),
+    "source": pa.Column(str,  nullable=False),
+})
+
+try:
+    schema.validate(df, lazy=True)  # collects ALL failures, not just first
+except pa.errors.SchemaErrors as e:
+    print(e.failure_cases)          # DataFrame: which rows, which checks failed
+```
+
+Compared to scattered `assert` statements:
+- Checks are defined once and reusable across modules
+- `lazy=True` gives all failures at once rather than stopping at first
+- Failure cases are a structured DataFrame, not just an error message
+- Schema objects can be serialized and versioned
+
+**Why it matters:** In production ML pipelines, pandera schemas serve as executable documentation of your data contract — the same object validates data at ingestion, after preprocessing, and before training.
+
+</details>
+
+<br>
+
+**Q24: How does `astype('category')` save memory, and when should you use it?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+`category` dtype stores unique string values once in a lookup table, then records a small integer code per row. For a 1M-row column with 5 unique values, this means storing 5 strings once plus 1M integers, versus `object` which stores 1M full string pointers (each pointing to a heap-allocated Python object).
+
+```python
+df["status"] = df["status"].astype("category")
+
+# Access the internals:
+df["status"].cat.categories   # the lookup table (Index of unique values)
+df["status"].cat.codes        # the integer code per row
+
+# Set at read time (most efficient — avoids object allocation entirely):
+df = pd.read_csv("data.csv", dtype={"status": "category", "region": "category"})
+
+# Check savings:
+before = df["status"].astype("object").memory_usage(deep=True)
+after  = df["status"].memory_usage(deep=True)
+print(f"Reduction: {(1 - after/before):.1%}")
+```
+
+Use categorical when:
+- `nunique()` is small relative to total rows (< 50% unique as a rough rule)
+- The column is used in `groupby()` — integer-code comparison is faster than string comparison
+
+**Why it matters:** The single most impactful memory optimization for datasets with region, status, label, or source columns — often 10–50x reduction in column memory.
+
+</details>
+
+<br>
+
+**Q25: How do you process a CSV file larger than RAM using `chunksize`?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Answer:**
+
+Pass `chunksize` to `pd.read_csv()`. It returns an iterator of DataFrames, each with at most `chunksize` rows. Filter and transform each chunk before collecting to keep peak memory usage constant regardless of file size.
+
+```python
+results = []
+
+for chunk in pd.read_csv("large_file.csv", chunksize=100_000):
+    # Process and filter BEFORE appending — keeps memory = O(chunk), not O(file)
+    chunk = chunk[chunk["quality_score"] >= 3]
+    chunk["text_len"] = chunk["text"].str.len()
+    chunk = chunk[chunk["text_len"] > 50]
+    results.append(chunk)
+
+df = pd.concat(results, ignore_index=True)
+```
+
+For very large outputs where even collecting chunks would exceed memory, write each chunk directly to Parquet files instead.
+
+**Why it matters:** Production datasets are routinely too large for RAM. `chunksize` is the built-in Pandas answer — no external tools needed for moderate file sizes.
+
+</details>
+
+<br>
+
 **Q20: What is categorical dtype and when should you use it?**
 
 <details>
@@ -738,7 +931,7 @@ Be ready to walk through the entire pipeline end-to-end.
 |---|---|
 | 📖 Theory | [theory.md](./README.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Previous | [../21_data_engineering_applications/theory.md](../21_data_engineering_applications/theory.md) |
 
 ---

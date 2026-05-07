@@ -135,6 +135,10 @@ Save both a vector and a raster copy when you need the figure for multiple outpu
 
 ---
 
+> 📝 **Practice:** [Q26–Q30 — saving and exporting](./practice.md#q26)
+
+---
+
 ## Navigation
 
 | | |

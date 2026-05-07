@@ -76,6 +76,8 @@ send confirmation (there)          process_transaction()   ← reuse
 ...50 more times...
 ```
 
+> 📝 **Practice:** [Q1 — Refactor duplicated code](./practice.md#q1--ch1--refactor-duplicated-code) · [Q2 — Function anatomy](./practice.md#q2--ch2--function-anatomy)
+
 ---
 
 # 📖 Chapter 2 — Anatomy of a Function
@@ -110,6 +112,8 @@ def send_email(to, subject, body="No content"):
     print(f"Sending to {to}: {subject}")
     return True                                 # return value
 ```
+
+> 📝 **Practice:** [Q2 — Function anatomy](./practice.md#q2--ch2--function-anatomy)
 
 ---
 
@@ -221,6 +225,8 @@ def show(items):
 show(x)
 print(x)            # [1, 2, 3, 4] — heap object was mutated
 ```
+
+> 📝 **Practice:** [Q3 — Call stack trace](./practice.md#q3--ch3--call-stack-trace)
 
 ---
 
@@ -539,6 +545,8 @@ Is the number of values unknown?
                     └── Flexible → regular parameter  def f(x)
 ```
 
+> 📝 **Practice:** [Q4 — Positional/keyword args](./practice.md#q4--ch4--positional--keyword-args) · [Q5 — Mutable default trap](./practice.md#q5--ch4--mutable-default-arg-trap) · [Q6 — *args](./practice.md#q6--ch4--args) · [Q7 — **kwargs](./practice.md#q7--ch4--kwargs) · [Q8 — All 7 param types](./practice.md#q8--ch4--all-7-parameter-types)
+
 ---
 
 # 📖 Chapter 5 — The Return Statement — All Behaviors
@@ -619,6 +627,8 @@ def add_good(a, b):
 total = add_good(3, 4)      # total = 7
 print(total * 2)            # 14  ✓
 ```
+
+> 📝 **Practice:** [Q9 — Return with early returns](./practice.md#q9--ch5--return-with-early-returns) · [Q10 — Return vs Print](./practice.md#q10--ch5--return-vs-print)
 
 ---
 
@@ -830,6 +840,8 @@ add5 = make_adder(5)
 
 > 📝 **Practice:** [Q26 · closures](../python_practice_questions_100.md#q26--thinking--closures)
 
+> 📝 **Practice:** [Q11 — LEGB prediction](./practice.md#q11--ch6--legb-prediction) · [Q12 — global and nonlocal](./practice.md#q12--ch6--global-and-nonlocal)
+
 ---
 
 # 📖 Chapter 7 — Functions Are Objects (First-Class Citizens)
@@ -909,6 +921,8 @@ print(double(5))    # 10
 print(triple(5))    # 15
 print(times10(5))   # 50
 ```
+
+> 📝 **Practice:** [Q13 — First-class functions](./practice.md#q13--ch7--first-class-functions) · [Q14 — apply_twice](./practice.md#q14--ch7--apply_twice) · [Q15 — compose()](./practice.md#q15--ch7--compose)
 
 ---
 
@@ -999,6 +1013,8 @@ def sort_key(x):
     return (x.age, -x.score, x.name.lower())
 result = sorted(items, key=sort_key)
 ```
+
+> 📝 **Practice:** [Q16 — Lambda sort](./practice.md#q16--ch8--lambda-sort) · [Q17 — Lambda map/filter](./practice.md#q17--ch8--lambda-with-mapfilter)
 
 ---
 
@@ -1215,6 +1231,8 @@ inc()   # 2
 rst()   # resets to 0
 inc()   # 1  — shared cell, reset worked
 ```
+
+> 📝 **Practice:** [Q18 — Basic closure](./practice.md#q18--ch9--basic-closure) · [Deep dive →](./02_closures_decorators/01_closures_theory.md)
 
 ---
 
@@ -1443,6 +1461,8 @@ def fetch_data(url):
 # 3. Cache/Memoize decorator (next chapter shows functools.lru_cache)
 ```
 
+> 📝 **Practice:** [Q19 — Basic decorator](./practice.md#q19--ch10--basic-decorator) · [Q31 — retry decorator](./practice.md#q31--mixed--retry-decorator) · [Deep dive →](./02_closures_decorators/02_decorators_theory.md)
+
 ---
 
 # 📖 Chapter 11 — Recursion — Functions That Call Themselves
@@ -1540,6 +1560,8 @@ deep(0)    # RecursionError: maximum recursion depth exceeded
 └────────────────────────────────────────────────────────────┘
 ```
 
+> 📝 **Practice:** [Q20 — Recursion: factorial](./practice.md#q20--ch11--recursion-factorial) · [Q21 — Fix broken recursion](./practice.md#q21--ch11--fix-broken-recursion)
+
 ---
 
 # 📖 Chapter 12 — Generator Functions
@@ -1626,6 +1648,8 @@ print(sys.getsizeof(gen_ver))   # 200 bytes (almost nothing!)
 └──────────────────────────────────────────────────────────┘
 ```
 
+> 📝 **Practice:** [Q22 — Generator: lazy squares](./practice.md#q22--ch12--generator-lazy-squares) · [Q23 — Generator pipeline](./practice.md#q23--ch12--generator-pipeline)
+
 ---
 
 # 📖 Chapter 13 — Type Annotations
@@ -1684,6 +1708,8 @@ def find(x: int | None) -> str | None:
     ...
 ```
 
+> 📝 **Practice:** [Q24 — Type annotations](./practice.md#q24--ch13--type-annotations)
+
 ---
 
 # 📖 Chapter 14 — Docstrings
@@ -1722,6 +1748,8 @@ Accessing the docstring:
 print(calculate_tax.__doc__)
 help(calculate_tax)    # formatted output with full docstring
 ```
+
+> 📝 **Practice:** [Q25 — Google-style docstring](./practice.md#q25--ch14--google-style-docstring)
 
 ---
 
@@ -1776,6 +1804,8 @@ CONCURRENCY: pure functions can run in parallel safely — no shared state
 CACHING:     pure functions can be safely memoized — same input → same output
 RELIABILITY: pure functions are predictable — no surprises
 ```
+
+> 📝 **Practice:** [Q26 — Pure vs impure](./practice.md#q26--ch15--pure-vs-impure) · [Deep dive →](./01_functional_programming/practice.md)
 
 ---
 
@@ -1850,6 +1880,8 @@ debug_print("User logged in")    # [DEBUG] User logged in
                                   # (with double newline)
 ```
 
+> 📝 **Practice:** [Q27 — lru_cache](./practice.md#q27--ch16--lru_cache) · [Q28 — partial](./practice.md#q28--ch16--functools.partial) · [Itertools/Functools deep dive →](./03_itertools_functools/practice.md)
+
 ---
 
 # 📖 Chapter 17 — Function Attributes & Introspection
@@ -1875,6 +1907,8 @@ sig = inspect.signature(greet)
 for name, param in sig.parameters.items():
     print(f"{name}: default={param.default}, kind={param.kind.name}")
 ```
+
+> 📝 **Practice:** [Q29 — Introspection](./practice.md#q29--ch17--introspection)
 
 ---
 
@@ -1976,6 +2010,36 @@ f = lambda x: (x**2 if x>0 else abs(x)*3 + x/2)  # USE def for clarity
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
+> 📝 **Practice:** [Q30 — Capstone](./practice.md#q30--ch18--capstone) · [Q34 — Debug TypeError](./practice.md#q34--mixed--debug-typeerror) · [Q35 — Rate limiter](./practice.md#q35--mixed--rate-limiter-using-closures)
+
+---
+
+## ⚡ What's Next — Generator Functions
+
+A **generator function** is a special function that uses `yield` instead of `return`. Every concept you've learned here — closures, first-class functions, LEGB scope — applies directly to generators. The difference: a generator function returns a lazy iterator that produces values one at a time instead of all at once.
+
+```python
+# Regular function — returns all values at once
+def squares(n):
+    return [x**2 for x in range(n)]   # ← builds entire list in memory
+
+# Generator function — produces one value at a time
+def squares_lazy(n):
+    for x in range(n):
+        yield x**2                     # ← suspends here, resumes on next()
+
+# 1 million items: list = 8MB, generator = 200 bytes
+```
+
+This is a major Python topic — streaming ETL, infinite sequences, pipelines, async generators, and the full iterator protocol all live there.
+
+**[→ Deep dive: 11_generators_iterators](../11_generators_iterators/theory.md)**
+- Iterator protocol (`__iter__` / `__next__`)
+- `yield from` and delegation
+- `send()` — generators as coroutines
+- Generator pipelines for O(1) memory processing
+- 15 production patterns
+
 ---
 
 # 🔁 Navigation
@@ -1985,7 +2049,7 @@ f = lambda x: (x**2 if x>0 else abs(x)*3 + x/2)  # USE def for clarity
 | ⬅️ Previous | [03 — Data Types](../03_data_types/theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview Prep | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ➡️ Next | [05 — OOP](../05_oops/theory.md) |
 | 🏠 Home | [README](../README.md) |
 
@@ -1995,4 +2059,4 @@ f = lambda x: (x**2 if x>0 else abs(x)*3 + x/2)  # USE def for clarity
 
 **Prev:** [← Data Types — Interview Q&A](../03_data_types/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Itertools & Functools](./itertools_functools.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Functional Programming](./01_functional_programming/theory.md) · [Closures & Decorators](./02_closures_decorators/01_closures_theory.md) · [Itertools & Functools](./03_itertools_functools/theory.md) · [Generators & Iterators →](../11_generators_iterators/theory.md)

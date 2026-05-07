@@ -647,6 +647,21 @@ A: Both work. ProcessPoolExecutor has Future API, works as context manager.
 
 Q: Default max_workers for ThreadPoolExecutor?
 A: min(32, os.cpu_count() + 4) — Python 3.8+
+
+Q: What is asyncio.TaskGroup (Python 3.11+)?
+A: Structured concurrency primitive. Tasks created inside the group are cancelled
+   as a unit if any raises an exception. ExceptionGroup is raised at group exit.
+   Safer than gather() for managing related task lifetimes.
+   ```python
+   async with asyncio.TaskGroup() as tg:
+       t1 = tg.create_task(coro1())
+       t2 = tg.create_task(coro2())
+   # If t1 fails, t2 is cancelled; ExceptionGroup raised
+   ```
+
+Q: asyncio.Semaphore use case?
+A: Limit concurrency — e.g. max 10 simultaneous HTTP requests to avoid overloading
+   a server. `async with sem:` blocks (cooperatively) until a slot is free.
 ```
 
 ---

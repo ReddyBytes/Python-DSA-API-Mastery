@@ -216,6 +216,8 @@ print("Written to processed_training_v2")
 
 ---
 
+> 📝 **Practice:** [Q21–Q24 — SQL integration](./practice.md#q21)
+
 ## 🔁 Navigation
 
 | | |

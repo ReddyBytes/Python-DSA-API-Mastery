@@ -224,6 +224,70 @@ Reach for Cython when: building a library, need type declarations, embedding in 
 
 ---
 
+## 🔬 tracemalloc — Memory Leak Detection
+
+```python
+import tracemalloc
+
+# Single snapshot: measure peak memory of a block
+tracemalloc.start()
+result = [float(i) for i in range(100_000)]
+current, peak = tracemalloc.get_traced_memory()
+tracemalloc.stop()
+print(f"Peak: {peak / 1024:.1f} KiB")
+
+# Compare two snapshots: find what grew (leak detection)
+tracemalloc.start()
+snap1 = tracemalloc.take_snapshot()
+run_suspicious_code()
+snap2 = tracemalloc.take_snapshot()
+tracemalloc.stop()
+
+top_diff = snap2.compare_to(snap1, "lineno")
+for stat in top_diff[:5]:
+    print(stat)   # file:line: size_KB KiB (+N allocations)
+```
+
+---
+
+## 🐍 snakeviz — Flamegraph Visualization
+
+```python
+# Step 1: save profile to file
+import cProfile
+cProfile.run("my_function()", "profile_output.prof")
+
+# Step 2: visualize in browser
+# pip install snakeviz
+# snakeviz profile_output.prof
+```
+
+Reading the icicle chart:
+- Width = cumulative time (wider = slower)
+- Inner boxes = functions called from the outer function
+- Follow the widest box down to find the actual hotspot leaf
+- Click any box to zoom in on that call subtree
+
+---
+
+## ⏱️ timeit Best Practices
+
+```python
+import timeit
+
+# Always use min() not mean() — min = best CPU availability
+best = min(timeit.repeat("sorted(range(100))", repeat=5, number=10_000))
+per_call_us = best / 10_000 * 1e6
+
+# Pass globals for benchmarking your own functions
+def my_func(n): return sum(range(n))
+t = min(timeit.repeat("my_func(1000)", globals=globals(), repeat=5, number=1000))
+
+# Rule of thumb: enough iterations for total time > 100ms (reduces noise)
+```
+
+---
+
 ## 🔥 Rapid-Fire
 
 ```
@@ -247,6 +311,17 @@ A: O(n) — shifts all elements. Use collections.deque.popleft() → O(1).
 
 Q: When NOT to optimize?
 A: When not measured, in early prototypes, when it adds complexity without clear gain.
+Q: lru_cache.cache_info() — what does it show?
+A: CacheInfo(hits, misses, maxsize, currsize) — check hits >> misses for effectiveness.
+
+Q: tracemalloc to find a leak?
+A: Take snap1, run suspicious code, take snap2. snap2.compare_to(snap1, "lineno") shows growth.
+
+Q: snakeviz — what does width represent?
+A: Cumulative time. Follow the widest box downward to find the real hotspot leaf.
+
+Q: timeit — use mean or min?
+A: Always min(timeit.repeat(...)). Mean is skewed by OS interrupts and GC pauses.
 ```
 
 ---
@@ -255,7 +330,10 @@ A: When not measured, in early prototypes, when it adds complexity without clear
 
 | | |
 |---|---|
-| 📖 Theory | [theory.md](./theory.md) [profiling.md](./profiling.md) |
+| 📖 Theory | [theory.md](./theory.md) |
+| 💻 Practice | [practice.md](./practice.md) |
+| 🔍 Profiling Tools | [01_profiling_tools/theory.md](./01_profiling_tools/theory.md) |
+| ⚡ Optimization Patterns | [02_optimization_patterns/theory.md](./02_optimization_patterns/theory.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⬅️ Previous | [17 — Testing](../17_testing/cheetsheet.md) |
 | ➡️ Next | [19 — Production Best Practices](../19_production_best_practices/packaging.md) |
@@ -266,4 +344,4 @@ A: When not measured, in early prototypes, when it adds complexity without clear
 
 **Prev:** [← Testing](../17_testing/cheetsheet.md) &nbsp;|&nbsp; **Next:** [Production Best Practices →](../19_production_best_practices/packaging.md)
 
-**Related Topics:** [Theory](./theory.md) · [Profiling Guide](./profiling.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./theory.md) · [Practice](./practice.md) · [Interview Q&A](./interview.md)

@@ -30,7 +30,43 @@ Pearson correlation measures linear association: it computes how well the relati
 
 ---
 
-## Advanced
+**Q: How do you detect and handle class imbalance in a classification dataset?**
+
+Detection: `df["target"].value_counts(normalize=True)` — flag any class below 10% of the majority. Compute the imbalance ratio (majority count / minority count); ratios above 5:1 are moderate, above 10:1 are severe.
+
+Handling strategies:
+- **class_weight="balanced"** (algorithmic): tells the model to penalize minority misclassifications more heavily. Zero data change, works with sklearn classifiers. Best starting point.
+- **SMOTE** (data-level): generates synthetic minority samples by interpolating between real minority examples. Increases dataset size; risk is that synthetic samples may not reflect real distribution boundaries. Apply only to training data, never to test.
+- **Threshold tuning** (post-hoc): lower the classification threshold from 0.5 to 0.3 so more samples are predicted as minority. No retraining needed, but requires calibrated probabilities.
+- **Metric change**: switch from accuracy to F1, precision-recall AUC, or Matthews Correlation Coefficient — accuracy is meaningless on imbalanced data.
+
+---
+
+**Q: What is VIF and when would you compute it during EDA?**
+
+VIF (Variance Inflation Factor) measures how much the variance of a regression coefficient is inflated due to multicollinearity with other features. A VIF of 10 for feature X means its variance is 10x larger than it would be if X were uncorrelated with all other features — this makes coefficient estimates unstable.
+
+Compute VIF when: (1) you're using linear or logistic regression (tree models are less affected by multicollinearity); (2) the correlation heatmap shows pairs with |r| > 0.8; (3) you notice that adding/removing one feature drastically changes another's coefficient. VIF > 10 is the standard threshold to flag a feature for potential removal. Implementation uses `statsmodels.stats.outliers_influence.variance_inflation_factor`.
+
+---
+
+**Q: What is the difference between IQR and Z-score outlier detection?**
+
+IQR (Interquartile Range) method defines outliers as values below Q1 − 1.5×IQR or above Q3 + 1.5×IQR. It is **robust** — the quartiles are not affected by extreme values, so existing outliers don't influence where the fence sits.
+
+Z-score method defines outliers as values where |(x − mean) / std| > 3. It is **sensitive** — the mean and standard deviation are themselves pulled by extreme values, which can make the fence too wide and miss real outliers in highly skewed data.
+
+Rule of thumb: use IQR first, especially for skewed distributions (income, price, count data). Use Z-score only when you've confirmed the distribution is approximately normal.
+
+---
+
+**Q: When would you use sweetviz instead of ydata-profiling?**
+
+Use sweetviz when you need a **comparison** between two datasets — typically train vs test, or pre-treatment vs post-treatment. sweetviz places both distributions side by side for every feature so you can spot distribution shift at a glance. It also highlights the target variable prominently across all feature views.
+
+Use ydata-profiling when you need a **deep single-dataset report**: it provides Pearson, Spearman, and Kendall correlation matrices, a missing value matrix, interaction plots, and automated warnings (skewness, high cardinality, constant columns) — all in one HTML file.
+
+---
 
 **Q: How would you conduct EDA on a dataset with 500 features?**
 
@@ -45,7 +81,7 @@ With 500 features, manual inspection per column is impractical. Strategy: (1) **
 | 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
-| 💻 Practice | [practice.py](./practice.py) |
+| 💻 Practice | [practice.md](./practice.md) |
 | ⬅️ Prev Module | [../27_matplotlib_seaborn/theory.md](../27_matplotlib_seaborn/theory.md) |
 | ➡️ Next Module | [../29_web_scraping/theory.md](../29_web_scraping/theory.md) |
 

@@ -156,6 +156,10 @@ user2_age = 30                       u1 = User("Alice", "a@mail.com", 25)
 
 | | |
 |---|---|
+| 💻 Practice | [practice.md](./practice.md) |
+| 🛠️ Practice Local | [practice_local.py](./practice_local.py) |
+| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
+| 🎤 Interview | [interview.md](./interview.md) |
 | ⬅️ Previous Module | [04 — Functions](../04_functions/theory.md) |
 | ➡️ Next Module | [06 — Exceptions](../06_exceptions_error_handling/theory.md) |
 | 🏠 Home | [01_Python_Mastery](../README.md) |

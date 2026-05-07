@@ -206,3 +206,71 @@ Small sample (n < 30), non-normal?
 3. A p-value tells you significance, not importance — always report effect size too
 4. n < 30: check normality before using t-tests; consider non-parametric alternatives
 5. Multiple tests: use Bonferroni (α/n) or Benjamini-Hochberg FDR control
+
+---
+
+## P-Value Interpretation
+
+```
+p-value = P(data this extreme | H₀ is true)
+
+p < α (e.g. 0.05): reject H₀ — "statistically significant"
+p >= α:            fail to reject H₀ — "insufficient evidence"
+
+p-value is NOT:
+  - P(H₀ is true)
+  - P(the effect is real)
+  - a measure of practical importance
+
+Always pair p-value with effect size (Cohen's d, relative lift, R²)
+```
+
+---
+
+## Type I vs Type II Error Summary
+
+```
+                   Reality
+                   H₀ True         H₀ False
+Test    Reject H₀  Type I Error ✗   Correct ✓
+Result  Keep H₀    Correct ✓        Type II Error ✗
+
+Type I  (α): False Positive — lower α to reduce
+Type II (β): False Negative — increase power (sample size) to reduce
+Power (1-β): probability of correctly detecting a real effect (target: 0.80)
+
+Trade-off: stricter α → fewer Type I, more Type II
+```
+
+---
+
+## Central Limit Theorem
+
+```
+For any distribution, as n → ∞:
+  sample means ~ N(μ, σ²/n)
+
+Practical rule: n > 30 is usually sufficient
+Key uses:
+  - Justifies t-tests / z-tests on non-normal populations
+  - Explains why averages are normally distributed
+  - Enables confidence intervals on any distribution
+```
+
+---
+
+## Pearson vs Spearman
+
+| | Pearson | Spearman |
+|---|---|---|
+| Measures | Linear correlation | Monotonic correlation |
+| Data type | Continuous, normal | Ordinal or non-normal |
+| Outlier sensitivity | High | Low (rank-based) |
+| Range | -1 to +1 | -1 to +1 |
+| Use when | Linear relationship expected | Non-linear but monotonic, or outliers present |
+
+```python
+from scipy import stats
+r_pearson,  p = stats.pearsonr(x, y)    # linear
+r_spearman, p = stats.spearmanr(x, y)   # rank-based
+```

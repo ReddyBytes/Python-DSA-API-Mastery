@@ -441,6 +441,8 @@ print(f"Train: {len(df_train):,} | Val: {len(df_val):,} | Test: {len(df_test):,}
 
 ---
 
+> 📝 **Practice:** [Q25–Q28 — ML data prep](./practice.md#q25)
+
 ## 🔁 Navigation
 
 | | |

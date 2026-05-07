@@ -398,15 +398,19 @@ A: Python 3.10+ — generates __slots__ automatically
 | | |
 |---|---|
 | 📖 Theory | [theory.md](./theory.md) |
+| 📝 Practice | [practice.md](./practice.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
-| 🔮 Dunder Guide | [dunder_guide.md](./dunder_guide.md) |
-| 🏭 Metaclasses & Descriptors | [metaclasses_descriptors_guide.md](./metaclasses_descriptors_guide.md) |
+| 📂 Dunder Methods | [01_dunder_methods/theory.md](./01_dunder_methods/theory.md) |
+| 📂 Descriptors | [02_descriptors/theory.md](./02_descriptors/theory.md) |
+| 📂 Metaclasses | [03_metaclasses/theory.md](./03_metaclasses/theory.md) |
+| 📂 Dataclasses | [04_dataclasses/theory.md](./04_dataclasses/theory.md) |
+| 📂 Advanced Patterns | [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md) |
 | ➡️ Next | [16 — Design Patterns](../16_design_patterns/theory.md) |
 
 ---
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Dunder Methods Guide →](./dunder_guide.md)
+**Prev:** [← Theory](./theory.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Theory](./theory.md) · [Dunder Methods Guide](./dunder_guide.md) · [Metaclasses & Descriptors](./metaclasses_descriptors_guide.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./theory.md) · [Practice](./practice.md) · [Interview Q&A](./interview.md)

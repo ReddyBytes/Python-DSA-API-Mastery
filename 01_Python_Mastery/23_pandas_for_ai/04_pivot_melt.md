@@ -301,6 +301,8 @@ df_melted.groupby(['region', 'month'])['revenue'].sum()  # ← now this works cl
 
 ---
 
+> 📝 **Practice:** [Q13–Q16 — pivot and melt](./practice.md#q13)
+
 ## 🔁 Navigation
 
 | | |

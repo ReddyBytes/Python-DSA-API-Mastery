@@ -76,6 +76,8 @@ print(dir(math_utils))           # ['PI', '__builtins__', '__doc__', '__file__',
 > A module is a **namespace** — a container that holds names (variables, functions, classes).
 > `math_utils.PI` means: "look up `PI` inside the `math_utils` namespace."
 
+> 📝 **Practice:** [Q1 — Module vs Package](./practice.md#q1--ch1--module-vs-package)
+
 ---
 
 ## 🔍 Chapter 2 — The Import Machinery (What Really Happens)
@@ -130,6 +132,8 @@ import math_utils   # second import: step 1 returns cache immediately!
 print("math_utils" in sys.modules)   # True
 print(sys.modules["math_utils"])      # <module 'math_utils' from '...'>
 ```
+
+> 📝 **Practice:** [Q2 — Import machinery](./practice.md#q2--ch2--import-machinery) · [Q3 — sys.modules](./practice.md#q3--ch2--sysmodules)
 
 ---
 
@@ -218,6 +222,8 @@ from posixpath import *   # both export 'join' — which one did you get?!
                           # namespace pollution + silent shadowing bugs
 ```
 
+> 📝 **Practice:** [Q4 — import styles](./practice.md#q4--ch3--import-style-1) · [Q5 — import *](./practice.md#q5--ch3--import-star) · [Q6 — all 5 styles](./practice.md#q6--ch3--all-5-styles)
+
 ---
 
 ## 🏗️ Chapter 4 — Packages: Organizing Modules Into a System
@@ -267,6 +273,8 @@ from myapp.models import User       # if models/__init__.py exports User
 
 
 > 📝 **Practice:** [Q41 · __all__](../python_practice_questions_100.md#q41--normal--__all__)
+
+> 📝 **Practice:** [Q7 — Package structure](./practice.md#q7--ch4--package-structure)
 
 ---
 
@@ -327,6 +335,8 @@ from .services import UserService
 from .config   import Settings
 ```
 
+> 📝 **Practice:** [Q8–Q10 — __init__.py jobs](./practice.md#q8--ch5--__init__py-job-1) · [Deep dive →](./01_sys_module/theory.md)
+
 ---
 
 ## 🔄 Chapter 6 — Absolute vs Relative Imports
@@ -369,6 +379,8 @@ ABSOLUTE vs RELATIVE — when to use:
 │             Don't use from scripts — only from inside a pkg  │
 └──────────────────────────────────────────────────────────────┘
 ```
+
+> 📝 **Practice:** [Q11 — Relative imports](./practice.md#q11--ch6--relative-imports)
 
 ---
 
@@ -424,6 +436,8 @@ if __name__ == "__main__":
 
     print(f"Result: {add(args.a, args.b)}")
 ```
+
+> 📝 **Practice:** [Q12 — __name__ guard](./practice.md#q12--ch7--__name__-guard) · [Q13 — dual-use file](./practice.md#q13--ch7--dual-use-file)
 
 ---
 
@@ -505,6 +519,8 @@ def use_b():
 
 > **Circular imports are a design smell.** They mean your module boundaries are wrong. If A and B need each other, they probably belong in the same module, or their shared logic belongs in a third module.
 
+> 📝 **Practice:** [Q14 — circular import](./practice.md#q14--ch8--circular-import) · [Q15 — fix circular](./practice.md#q15--ch8--fix-circular)
+
 ---
 
 ## 🔧 Chapter 9 — `__all__`: Defining the Public API
@@ -533,6 +549,8 @@ def _normalize_phone(phone: str) -> str:    # ← private helper
 # from validators import * → only gets validate_email, validate_phone, validate_age
 # _normalize_phone is excluded (starts with _ and not in __all__)
 ```
+
+> 📝 **Practice:** [Q16 — __all__](./practice.md#q16--ch9--__all__) · [Q17 — without __all__](./practice.md#q17--ch9--without-__all__)
 
 ---
 
@@ -572,6 +590,8 @@ plugin.run()
 # Reload a module (useful in development, hot-reload):
 importlib.reload(module)   # re-executes module code, updates sys.modules
 ```
+
+> 📝 **Practice:** [Q18 — importlib](./practice.md#q18--ch10--importlib) · [Q19 — plugin registry](./practice.md#q19--ch10--plugin-registry) · [Q31 — reload](./practice.md#q31--ch10--importlibreload)
 
 ---
 
@@ -621,6 +641,8 @@ DON'T USE FOR:
   ✗ Modules used in every call (overhead adds up)
   ✗ As a permanent solution for circular imports (fix the design instead)
 ```
+
+> 📝 **Practice:** [Q20 — lazy import](./practice.md#q20--ch11--lazy-import) · [Q21 — class-level lazy](./practice.md#q21--ch11--class-level-lazy)
 
 ---
 
@@ -687,6 +709,8 @@ my_project/
     └── integration/
         └── test_api.py
 ```
+
+> 📝 **Practice:** [Q22 — project layout](./practice.md#q22--ch12--project-layout)
 
 ---
 
@@ -755,6 +779,8 @@ poetry add numpy  # adds dependency + updates pyproject.toml
 poetry run python main.py
 ```
 
+> 📝 **Practice:** [Q23 — venv creation](./practice.md#q23--ch13--venv-creation) · [Q24 — why venv](./practice.md#q24--ch13--why-venv) · [Deep dive →](./04_virtual_environments/theory.md)
+
 ---
 
 ## 📤 Chapter 14 — `sys.path`: How Python Finds Modules
@@ -790,6 +816,8 @@ import my_library
 > **Better approach:** Install your project properly so it's on `sys.path` automatically:
 > `pip install -e .` (editable install) registers your package in site-packages.
 
+> 📝 **Practice:** [Q25 — sys.path order](./practice.md#q25--ch14--syspath-order) · [Q26 — modify sys.path](./practice.md#q26--ch14--modify-syspath) · [Deep dive →](./01_sys_module/theory.md)
+
 ---
 
 ## 🌐 Chapter 15 — Namespace Packages (Python 3.3+)
@@ -815,6 +843,8 @@ REGULAR PACKAGES vs NAMESPACE PACKAGES:
   Regular (with __init__.py):    explicit, full-featured, runs init code
   Namespace (no __init__.py):    implicit, lightweight, split across locations
 ```
+
+> 📝 **Practice:** [Q29 — namespace packages](./practice.md#q29--ch15--namespace-packages)
 
 ---
 
@@ -846,6 +876,8 @@ REGULAR PACKAGES vs NAMESPACE PACKAGES:
 | | |
 |---|---|
 | ⬅️ Previous | [06 — Exceptions](../06_exceptions_error_handling/theory.md) |
+| 💻 Practice | [practice.md](./practice.md) |
+| 🛠️ Practice Local | [practice_local.py](./practice_local.py) |
 | 📖 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | ➡️ Next | [08 — File Handling](../08_file_handling/theory.md) |
@@ -854,6 +886,8 @@ REGULAR PACKAGES vs NAMESPACE PACKAGES:
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Exceptions Error Handling — Interview Q&A](../06_exceptions_error_handling/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+**Prev:** [← Exceptions Error Handling](../06_exceptions_error_handling/theory.md) &nbsp;|&nbsp; **Next:** [File Handling →](../08_file_handling/theory.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Subprocess Module](./subprocess_module.md) · [Argparse Module](./argparse_module.md) · [Sys Module](./sys_module.md) · [Virtual Environments](./virtual_environments.md)
+**Subfolders:** [01_sys_module](./01_sys_module/theory.md) · [02_argparse](./02_argparse/theory.md) · [03_subprocess](./03_subprocess/theory.md) · [04_virtual_environments](./04_virtual_environments/theory.md)
+
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)

@@ -151,6 +151,41 @@ logging.basicConfig(
 
 ---
 
+**Q: What is loguru and why use it over standard logging?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Weak answer:** "It's a third-party logging library."
+
+**Strong answer:**
+
+> `loguru` replaces the Logger/Handler/Formatter trifecta with a single `logger` object that is ready to use with zero configuration. It adds rotation, structured output, colorized console, and async support out of the box.
+
+```python
+from loguru import logger
+
+# Zero setup needed — works immediately:
+logger.info("Server started on port {port}", port=8080)
+
+# File rotation in one line (no RotatingFileHandler boilerplate):
+logger.add("app.log", rotation="10 MB", retention="30 days", level="INFO")
+
+# Bind context to all subsequent log calls:
+request_logger = logger.bind(request_id="abc-123", user_id=42)
+request_logger.info("Request received")
+# → "Request received" | request_id=abc-123 | user_id=42
+
+# Exception tracing with full variable values (not just message):
+logger.opt(exception=True).error("Payment failed for order {order_id}", order_id=4892)
+```
+
+> Use loguru for new services or scripts where the standard library's setup overhead isn't justified. For large production apps with existing logging infrastructure, stick with the standard library — loguru requires a shim to integrate with third-party libraries that use `logging`.
+
+</details>
+
+<br>
+
 **Q5: Explain the Logger → Handler → Formatter architecture.**
 
 <details>
@@ -353,6 +388,83 @@ logger.debug("API call authenticated, key_id=%s", key_id[:8] + "***")
 
 </details>
 
+<br>
+
+**Q: How do you profile a Python script to find performance bottlenecks?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Weak answer:** "I add print statements with timestamps."
+
+**Strong answer:**
+
+> The workflow is: use `cProfile` to find which functions take the most time, then use `pstats` to sort and filter the results, then use `line_profiler` to drill into the specific lines inside the hotspot function.
+
+```python
+# Step 1 — cProfile: find slow functions
+import cProfile
+cProfile.run('my_function()', filename='output.prof', sort='cumulative')
+
+# Step 2 — pstats: readable output
+import pstats
+p = pstats.Stats('output.prof')
+p.sort_stats('cumulative').print_stats(10)   # top 10 by cumulative time
+# Output shows: ncalls, tottime (self), cumtime (including callees), filename:lineno
+
+# Step 3 — timeit: benchmark a specific expression
+import timeit
+timeit.timeit('"-".join(str(n) for n in range(100))', number=10_000)
+
+# CLI shortcut (no code changes):
+# python -m cProfile -s cumulative my_script.py
+```
+
+> Key stats to read: `tottime` = time IN the function (excluding callees). `cumtime` = total time including callees. Sort by `cumulative` to find the top-level bottleneck, then sort by `tottime` to find where time is actually spent.
+
+</details>
+
+<br>
+
+**Q: How do you find memory leaks in Python?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Strong answer:**
+
+> Python can leak memory through: reference cycles that the GC misses (common with `__del__`), large objects held in module-level caches, and C extension leaks. The workflow uses `tracemalloc` to find where allocations are growing.
+
+```python
+# tracemalloc — stdlib, zero overhead when not active:
+import tracemalloc
+
+tracemalloc.start()
+
+# ... run the code you want to inspect ...
+process_thousand_requests()
+
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics('lineno')
+
+print("Top 5 memory allocations:")
+for stat in top_stats[:5]:
+    print(stat)
+# → myapp/cache.py:47: size=24.3 MiB, count=8421, average=2.9 KiB
+
+# Compare two snapshots to find GROWTH:
+snapshot1 = tracemalloc.take_snapshot()
+process_more_requests()
+snapshot2 = tracemalloc.take_snapshot()
+
+for stat in snapshot2.compare_to(snapshot1, 'lineno')[:5]:
+    print(stat)   # shows lines whose allocation GREW between snapshots
+```
+
+> Also check: `gc.get_objects()` for reference cycles, and `objgraph.show_most_common_types()` (third-party) for a histogram of live objects by type.
+
+</details>
+
 
 ## 🔴 Level 3 — Senior Questions
 
@@ -498,6 +610,55 @@ STEP 7: Fix → test → deploy → verify
   → Add regression test for the specific case
   → Add better logging so next incident is 10x faster to diagnose
 ```
+
+</details>
+
+<br>
+
+**Q: How do you debug a Python service running in a Docker container remotely?**
+
+<details>
+<summary>💡 Show Answer</summary>
+
+**Strong answer:**
+
+> The standard approach is `debugpy` — Microsoft's debug adapter protocol (DAP) server for Python. The container runs the service with `debugpy` listening on a port, and VS Code (or any DAP-compatible editor) attaches to it from outside.
+
+```python
+# In your service entrypoint (or a debug wrapper):
+import debugpy
+
+debugpy.listen(("0.0.0.0", 5678))   # listen on all interfaces, port 5678
+debugpy.wait_for_client()           # BLOCKS until VS Code attaches — remove in production!
+
+# Then your normal application code:
+from myapp import create_app
+app = create_app()
+app.run(host="0.0.0.0", port=8080)
+```
+
+```yaml
+# docker-compose.yml — expose the debug port:
+services:
+  api:
+    ports:
+      - "8080:8080"
+      - "5678:5678"   # ← debugpy port
+    environment:
+      - DEBUG_MODE=true
+```
+
+```json
+// VS Code .vscode/launch.json:
+{
+  "type": "python",
+  "request": "attach",
+  "connect": {"host": "localhost", "port": 5678},
+  "pathMappings": [{"localRoot": "${workspaceFolder}", "remoteRoot": "/app"}]
+}
+```
+
+> For Kubernetes: use `kubectl port-forward pod/my-pod 5678:5678` to tunnel the port locally, then attach VS Code as above. Never leave `wait_for_client()` in production builds — gate it behind an environment variable.
 
 </details>
 

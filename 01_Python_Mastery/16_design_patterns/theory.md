@@ -72,6 +72,7 @@ It is a structured idea.
 # 🧩 2️⃣ Singleton Pattern
 
 > 📝 **Practice:** [Q69 · singleton-pattern](../python_practice_questions_100.md#q69--design--singleton-pattern)
+> 📖 **Deep Dive:** [01_creational/theory.md](./01_creational/theory.md) — `__new__`, thread-safe, Borg, DI alternative
 
 ---
 
@@ -136,6 +137,7 @@ Singleton often overused.
 # 🏭 3️⃣ Factory Pattern
 
 > 📝 **Practice:** [Q70 · factory-pattern](../python_practice_questions_100.md#q70--normal--factory-pattern)
+> 📖 **Deep Dive:** [01_creational/theory.md](./01_creational/theory.md) — simple factory, factory method, registration pattern, abstract factory
 
 ---
 
@@ -186,6 +188,8 @@ class PaymentFactory:
 ---
 
 # 🧠 4️⃣ Strategy Pattern
+
+> 📖 **Deep Dive:** [02_behavioral/theory.md](./02_behavioral/theory.md) — function-based strategy, registry, sort and payment examples
 
 ---
 
@@ -248,6 +252,7 @@ Used heavily in:
 # 👀 5️⃣ Observer Pattern
 
 > 📝 **Practice:** [Q71 · observer-pattern](../python_practice_questions_100.md#q71--thinking--observer-pattern)
+> 📖 **Deep Dive:** [02_behavioral/theory.md](./02_behavioral/theory.md) — event bus, weak refs, Command, Template Method
 
 ---
 
@@ -290,6 +295,8 @@ Observers implement update().
 ---
 
 # 🔄 6️⃣ Dependency Injection (DI)
+
+> 📖 **Deep Dive:** [03_dependency_injection/theory.md](./03_dependency_injection/theory.md) — constructor injection, service locator, testing with DI, Protocol-based injection
 
 ---
 
@@ -464,3 +471,5 @@ Next:
 **Prev:** [← Advanced Python — Interview Q&A](../15_advanced_python/interview.md) &nbsp;|&nbsp; **Next:** [Dependency Injection →](./dependency_injection.md)
 
 **Related Topics:** [Dependency Injection](./dependency_injection.md) · [Interview Q&A](./interview.md)
+
+**Subfolders:** [01 Creational](./01_creational/theory.md) · [02 Behavioral](./02_behavioral/theory.md) · [03 Dependency Injection](./03_dependency_injection/theory.md)

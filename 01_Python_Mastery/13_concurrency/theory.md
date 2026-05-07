@@ -241,6 +241,10 @@ START: What is your task?
 └──────────────────┴──────────────────────┴──────────────────────┘
 ```
 
+> 📝 **Practice:** [Q2 — GIL: I/O-bound vs CPU-bound](./practice.md#q2--gil--io-bound-threads-speed-up-cpu-bound-dont)
+> 📝 **Practice:** [Q9 — GIL explanation](./practice.md#q9--threading--gil-why-threading-doesnt-help-cpu-work)
+> 📝 **Deep dive →** [01_threading/theory.md](./01_threading/theory.md)
+
 ---
 
 ## asyncio Event Loop — Cooperative, Not Preemptive
@@ -628,6 +632,9 @@ q.get()        # receives from queue
 
 **asyncio** is the third model: single-threaded, event-driven, cooperative multitasking. No threads, no processes — just one thread that switches between tasks when they `await`.
 
+> 📝 **Practice:** [Q13–Q19 — asyncio fundamentals](./practice.md#asyncio-basics-q13q19)
+> 📝 **Deep dive →** [03_asyncio/theory.md](./03_asyncio/theory.md)
+
 ### Core Concepts
 
 ```python
@@ -744,6 +751,10 @@ event.set()
 ## 🔧 Chapter 9: `concurrent.futures` — Unified Interface
 
 `concurrent.futures` provides a single API for both threads and processes:
+
+> 📝 **Practice:** [Q20–Q24 — concurrent.futures](./practice.md#concurrentfutures-q20q24)
+> 📝 **Practice:** [Q3 — ThreadPoolExecutor](./practice.md#q3--threadpoolexecutor--submit-map-context-manager)
+> 📝 **Practice:** [Q8 — ProcessPoolExecutor](./practice.md#q8--processpoolexecutor--parallel-cpu-work)
 
 ```python
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed, wait
@@ -1012,9 +1023,12 @@ PATTERNS:
 
 | | |
 |---|---|
+| 💻 Practice | [practice.md](./practice.md) |
 | 🎯 Interview | [interview.md](./interview.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🔧 Async Guide | [async_guide.md](./async_guide.md) |
+| 🧵 Threading Deep Dive | [01_threading/theory.md](./01_threading/theory.md) |
+| 🔥 Multiprocessing Deep Dive | [02_multiprocessing/theory.md](./02_multiprocessing/theory.md) |
+| ⚡ Asyncio Deep Dive | [03_asyncio/theory.md](./03_asyncio/theory.md) |
 | ➡️ Next | [15 — Advanced Python](../15_advanced_python/theory.md) |
 
 ---
@@ -1023,4 +1037,4 @@ PATTERNS:
 
 **Prev:** [← Context Managers — Interview Q&A](../12_context_managers/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Async Guide](./async_guide.md) · [Threading Guide](./threading_guide.md) · [Multiprocessing Guide](./multiprocessing_guide.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Practice](./practice.md) · [Interview Q&A](./interview.md) · [Threading](./01_threading/theory.md) · [Multiprocessing](./02_multiprocessing/theory.md) · [Asyncio](./03_asyncio/theory.md)

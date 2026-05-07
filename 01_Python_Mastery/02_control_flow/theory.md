@@ -109,6 +109,7 @@ Important:
 
 - Condition must evaluate to True or False.
 - Indentation defines the block.
+> 📝 **Practice:** [Q1 — Age Check](./practice.md#q1--if-statement--age-check) · [Q2 — Password Check](./practice.md#q2--if-statement--password-check) · [Q3 — Multiple Conditions](./practice.md#q3--if-statement--multiple-conditions)
 
 ---
 
@@ -136,6 +137,7 @@ True? ---- Yes → Block A
 ```
 
 Only one block runs.
+> 📝 **Practice:** [Q4 — Even or Odd](./practice.md#q4--if-else--even-or-odd) · [Q5 — Temperature](./practice.md#q5--if-else--temperature) · [Q6 — Positive or Negative](./practice.md#q6--if-else--positive-or-negative)
 
 ---
 
@@ -181,6 +183,7 @@ Python stops checking once it finds True.
 Professional Tip:
 Order matters.
 Place most specific conditions first.
+> 📝 **Practice:** [Q7 — Grade Checker](./practice.md#q7--if-elif-else--grade-checker) · [Q8 — Day Name](./practice.md#q8--if-elif-else--day-name) · [Q9 — Positive/Negative/Zero](./practice.md#q9--if-elif-else--positive--negative--zero)
 
 ---
 
@@ -214,6 +217,8 @@ Eligible
 Avoid too much nesting.
 It reduces readability.
 
+> 📝 **Practice:** [Q10 — Voter Eligibility](./practice.md#q10--nested-conditions--voter-eligibility) · [Q11 — Login + Role](./practice.md#q11--nested-conditions--login--role)
+
 ---
 
 # 🔹 3. Ternary Operator (Inline Condition)
@@ -227,6 +232,8 @@ status = "Adult" if age >= 18 else "Minor"
 
 Readable when simple.
 Avoid complex nested ternaries.
+
+> 📝 **Practice:** [Q12 — Even/Odd one-liner](./practice.md#q12--ternary-operator--evenodd-one-liner) · [Q13 — Max of Two](./practice.md#q13--ternary-operator--max-of-two)
 
 ---
 
@@ -251,6 +258,8 @@ Use when:
 - Cleaner than many elif
 
 Not replacement for all if-else logic.
+
+> 📝 **Practice:** [Q14 — HTTP Status](./practice.md#q14--match-case--http-status)
 
 ---
 
@@ -293,7 +302,7 @@ if m := re.search(r"\d+", text):
     print(f"Found number: {m.group()}")   # m is already bound
 ```
 
-> 📝 **Practice:** [Q7 · loop-else](../python_practice_questions_100.md#q7--logical--loop-else)
+> 📝 **Practice:** [Q15 — Length Check](./practice.md#q15--walrus-operator--length-check)
 
 
 **The rule:** Use walrus when you'd otherwise compute the same value twice.
@@ -353,6 +362,7 @@ Used with:
 - dictionaries
 - sets
 - [generators](../11_generators_iterators/theory.md#-chapter-3-generator-functions--yield)
+> 📝 **Practice:** [Q16 — Print 1 to 10](./practice.md#q16--for-loop--print-1-to-10) · [Q17 — Sum of a List](./practice.md#q17--for-loop--sum-of-a-list) · [Q18 — Even Numbers Only](./practice.md#q18--for-loop--even-numbers-only)
 
 ---
 
@@ -383,6 +393,7 @@ Back to condition
 Danger:
 
 Infinite loop if condition never becomes False.
+> 📝 **Practice:** [Q19 — Countdown](./practice.md#q19--while-loop--countdown) · [Q21 — Repeat Until Valid](./practice.md#q21--while-loop--repeat-until-valid)
 
 ---
 
@@ -401,6 +412,8 @@ Used when:
 - Early exit needed
 - Search found
 - Error condition met
+
+> 📝 **Practice:** [Q22 — Find First Negative](./practice.md#q22--break--find-first-negative) · [Q23 — Stop at Keyword](./practice.md#q23--break--stop-at-keyword)
 
 ---
 
@@ -432,7 +445,9 @@ for i in range(rows):
         break
 ```
 
-**Pattern 2: Use a function with return**
+**Pattern 2: Use a function with return** *(covered in Module 04 — Functions)*
+
+> If you haven't learned functions yet, skip this pattern and use Pattern 1. Come back after Module 04.
 
 ```python
 def find_in_grid(grid, target):
@@ -444,6 +459,7 @@ def find_in_grid(grid, target):
 ```
 
 The function approach is the cleanest — `return` exits all loops at once.
+> 📝 **Practice:** [Q22 — Find First Negative](./practice.md#q22--break--find-first-negative) · [Q23 — Stop at Keyword](./practice.md#q23--break--stop-at-keyword)
 
 ---
 
@@ -459,6 +475,7 @@ for i in range(5):
 ```
 
 Skips printing 2.
+> 📝 **Practice:** [Q24 — Skip Negatives](./practice.md#q24--continue--skip-negatives) · [Q21 — Repeat Until Valid](./practice.md#q21--while-loop--repeat-until-valid)
 
 ---
 
@@ -477,6 +494,8 @@ Useful in:
 - Empty functions
 - Class definitions
 - Future implementations
+
+> 📝 **Practice:** [Q26 — Placeholder](./practice.md#q26--pass--placeholder)
 
 ---
 
@@ -497,6 +516,8 @@ The `else` runs ONLY if loop did NOT break.
 Professional Use:
 Used in search algorithms.
 
+> 📝 **Practice:** [Q27 — Search in List](./practice.md#q27--loop-else--search-in-list) · [Q28 — All Positive Check](./practice.md#q28--loop-else--all-positive-check)
+
 ---
 
 # 🔹 10. enumerate()
@@ -511,6 +532,8 @@ for index, value in enumerate(names):
 ```
 
 Cleaner than manual counter.
+
+> 📝 **Practice:** [Q29 — Index and Value](./practice.md#q29--enumerate--index-and-value) · [Q30 — Find Index of Item](./practice.md#q30--enumerate--find-index-of-item)
 
 ---
 
@@ -527,6 +550,8 @@ for name, score in zip(names, scores):
 ```
 
 Stops at shortest list.
+
+> 📝 **Practice:** [Q31 — Pair Two Lists](./practice.md#q31--zip--pair-two-lists) · [Q32 — Compare Lists](./practice.md#q32--zip--compare-lists)
 
 ---
 
@@ -547,7 +572,7 @@ evens = [x for x in range(10) if x % 2 == 0]
 Readable when simple.
 Avoid very complex ones.
 
-> 📝 **Practice:** [Q8 · list-comprehension](../python_practice_questions_100.md#q8--normal--list-comprehension)
+> 📝 **Practice:** [Q33 — Squares](./practice.md#q33--list-comprehension--squares) · [Q34 — Filter Evens](./practice.md#q34--list-comprehension--filter-evens) · [Q35 — Uppercase](./practice.md#q35--list-comprehension--uppercase)
 
 ---
 
@@ -590,7 +615,7 @@ result = [n for n in range(3)]
 # accidentally shadow outer variables
 ```
 
-> 📝 **Practice:** [Q9 · dict-comprehension](../python_practice_questions_100.md#q9--thinking--dict-comprehension)
+> 📝 **Practice:** [Q36 — Number Squares](./practice.md#q36--dict-comprehension--number-squares) · [Q37 — Invert a Dict](./practice.md#q37--dict-comprehension--invert-a-dict)
 
 
 ---
@@ -748,8 +773,71 @@ you understand how programs think.
 
 ---
 
+
+# 🎲 The random Module — Adding Chance to Your Code
+
+> Sometimes you want your program to make a random decision — like a computer opponent in a game.
+> Python's built-in `random` module does exactly that.
+
+You don't need to install anything. Just import it:
+
+```python
+import random
+```
+
+## The Two Functions You'll Use Most
+
+**Pick a random whole number between two values:**
+
+```python
+import random
+
+number = random.randint(1, 6)   # like rolling a dice — gives 1, 2, 3, 4, 5, or 6
+print(number)
+```
+
+`randint(a, b)` includes both `a` and `b`. So `randint(1, 6)` can return 1, 2, 3, 4, 5, or 6.
+
+**Pick a random item from a list:**
+
+```python
+import random
+
+colours = ["red", "green", "blue", "yellow"]
+picked = random.choice(colours)   # picks one at random
+print(picked)
+```
+
+`random.choice()` picks one item from the list. Every item has an equal chance.
+
+## Quick Reference
+
+```python
+import random
+
+random.randint(1, 10)          # random whole number from 1 to 10 (inclusive)
+random.choice(["a", "b", "c"]) # random item from a list
+random.random()                # random decimal between 0.0 and 1.0
+random.shuffle(my_list)        # shuffle a list in place
+```
+
+## Used in Rock Paper Scissors
+
+```python
+import random
+
+choices = ["rock", "paper", "scissors"]
+computer_pick = random.choice(choices)   # computer picks randomly
+print("Computer chose:", computer_pick)
+```
+
+This is exactly how a computer opponent works in a simple game — it picks randomly from the options.
+> 📝 **Practice:** [Q21 — Repeat Until Valid](./practice.md#q21--while-loop--repeat-until-valid)
+
+---
+
 **[🏠 Back to README](../README.md)**
 
 **Prev:** [← Python Fundamentals — Interview Q&A](../01_python_fundamentals/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice Problems](./practice.md)

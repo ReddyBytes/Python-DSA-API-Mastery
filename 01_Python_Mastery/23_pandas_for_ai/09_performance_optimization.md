@@ -186,6 +186,8 @@ def df_report(df):
 
 ---
 
+> 📝 **Practice:** [Q33–Q36 — performance optimization](./practice.md#q33)
+
 ## 🔁 Navigation
 
 | | |

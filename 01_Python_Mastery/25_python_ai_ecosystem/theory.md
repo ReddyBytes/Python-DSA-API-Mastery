@@ -120,6 +120,8 @@ if not api_key:
 pip install python-dotenv
 ```
 
+> 📝 **Practice:** [Q1–Q2 — python-dotenv](./practice.md#q1)
+
 ---
 
 ## 2️⃣ httpx — Modern HTTP Client for AI Work
@@ -220,6 +222,8 @@ async with httpx.AsyncClient() as client:
 pip install httpx
 ```
 
+> 📝 **Practice:** [Q3–Q5 — httpx](./practice.md#q3)
+
 ---
 
 ## 3️⃣ tenacity — Automatic Retries for Flaky LLM APIs
@@ -319,6 +323,8 @@ def flaky_call():
 pip install tenacity
 ```
 
+> 📝 **Practice:** [Q6–Q8 — tenacity](./practice.md#q6)
+
 ---
 
 ## 4️⃣ tiktoken — Count Tokens Before Sending
@@ -408,6 +414,8 @@ enc = tiktoken.get_encoding("p50k_base")    # GPT-3 family
 ```bash
 pip install tiktoken
 ```
+
+> 📝 **Practice:** [Q9–Q11 — tiktoken](./practice.md#q9)
 
 ---
 
@@ -502,6 +510,8 @@ for epoch in tqdm(range(10), desc="Epochs"):
 pip install tqdm
 ```
 
+> 📝 **Practice:** [Q12–Q14 — tqdm](./practice.md#q12)
+
 ---
 
 ## 6️⃣ loguru — Structured Logging for AI Apps
@@ -588,6 +598,8 @@ if os.getenv("ENV") == "production":
 pip install loguru
 ```
 
+> 📝 **Practice:** [Q15–Q17 — loguru](./practice.md#q15)
+
 ---
 
 ## 7️⃣ rich — Beautiful Terminal Output for AI CLI Tools
@@ -661,6 +673,8 @@ console.print(syntax)
 ```bash
 pip install rich
 ```
+
+> 📝 **Practice:** [Q18–Q19 — rich](./practice.md#q18)
 
 ---
 
@@ -742,6 +756,8 @@ class Settings(BaseSettings):
 pip install pydantic-settings
 ```
 
+> 📝 **Practice:** [Q20–Q22 — pydantic-settings](./practice.md#q20)
+
 ---
 
 ## 9️⃣ pathlib — Modern File Path Handling
@@ -810,6 +826,8 @@ for f in Path("data").rglob("*.jsonl"):
 # Get file size
 size_mb = path.stat().st_size / 1_000_000
 ```
+
+> 📝 **Practice:** [Q23–Q24 — pathlib](./practice.md#q23)
 
 ---
 
@@ -907,6 +925,8 @@ with jsonlines.open("output.jsonl", mode="w") as writer:
 pip install jsonlines
 ```
 
+> 📝 **Practice:** [Q25–Q26 — json/jsonlines](./practice.md#q25)
+
 ---
 
 ## 1️⃣1️⃣ Project Structure for AI Apps
@@ -961,6 +981,8 @@ Load prompts from files, not hardcoded strings. Prompts change often.
 Separate `raw/` from `processed/` data. Always reproducible.
 
 One `settings.py` as single source of truth for config.
+
+> 📝 **Practice:** [Q27–Q28 — Project Structure](./practice.md#q27)
 
 ---
 
@@ -1050,6 +1072,8 @@ uv pip install -r requirements.txt
 # 10-100x faster than pip
 ```
 
+> 📝 **Practice:** [Q29–Q30 — requirements/pyproject](./practice.md#q29)
+
 ---
 
 # 🧠 Final Mental Model
@@ -1091,4 +1115,4 @@ Next:
 
 **Prev:** [← Async Python For Ai — Interview Q&A](../24_async_python_for_ai/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

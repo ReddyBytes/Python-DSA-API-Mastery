@@ -44,6 +44,8 @@ and designing code that survives the real world.
 
 ## 🧠 Chapter 1 — What Is a File, Really?
 
+📝 **Practice:** [Q1 →](./practice.md#q1--open--the-three-modes-you-use-every-day)
+
 At the OS level, a file is a sequence of bytes on disk.
 When you "open" a file in Python, you're creating a **file descriptor** —
 a handle the OS gives you to read/write that byte sequence.
@@ -71,6 +73,8 @@ print(f"Max open files: {soft}")   # typically 1024 on Linux
 ---
 
 ## 📌 Chapter 2 — File Modes: The Complete Picture
+
+📝 **Practice:** [Q2 →](./practice.md#q2--file-modes--classify-what-each-mode-does)
 
 ```
 MODE    MEANING                  FILE EXISTS?    POSITION   TRUNCATES?
@@ -115,6 +119,8 @@ except FileExistsError:
 
 ## 🔧 Chapter 3 — The Context Manager: Your Safety Net
 
+📝 **Practice:** [Q3 →](./practice.md#q3--context-manager--always-use-with)
+
 Always use `with` for file operations. It guarantees cleanup.
 
 ```python
@@ -149,6 +155,8 @@ finally:
 ---
 
 ## 📖 Chapter 4 — Reading Strategies: Choose Wisely
+
+📝 **Practice:** [Q4 →](./practice.md#q4--reading--all-4-strategies)
 
 ```
 METHOD          RETURNS         LOADS INTO MEMORY      USE WHEN
@@ -198,6 +206,8 @@ read(8192)     → 8KB in RAM     (controlled chunks)
 
 ## ✍️ Chapter 5 — Writing: Getting Data to Disk
 
+📝 **Practice:** [Q5 →](./practice.md#q5--write--append--build-a-log-file)
+
 ```python
 # ── write() — write a string ─────────────────────────────────────────
 with open("output.txt", "w") as f:
@@ -243,6 +253,8 @@ with open("critical.log", "a") as f:
 
 ## 🎯 Chapter 6 — File Pointer: `seek()` and `tell()`
 
+📝 **Practice:** [Q6 →](./practice.md#q6--seekand-tell--random-access)
+
 The file pointer tracks your current position in the file.
 
 ```python
@@ -285,6 +297,8 @@ def tail(filename, n=10):
 ---
 
 ## 🔤 Chapter 7 — Encoding: The Silent Killer
+
+📝 **Practice:** [Q7 →](./practice.md#q7--encoding--read-and-write-unicode)
 
 Computers store bytes. Humans read characters.
 **Encoding** is the mapping between them.
@@ -337,6 +351,8 @@ with open("mystery.txt", encoding=result["encoding"]) as f:
 ---
 
 ## 📊 Chapter 8 — CSV Files: The Right Way
+
+📝 **Practice:** [Q14–Q15 →](./practice.md#q14--csv--dictreader-and-dictwriter)
 
 Never parse CSV manually with `split(",")` — quoted fields contain commas!
 
@@ -398,6 +414,8 @@ csv.reader(f, quotechar="'")         # custom quote character
 ---
 
 ## 📦 Chapter 9 — JSON Files
+
+📝 **Practice:** [Q16–Q17 →](./practice.md#q16--json--read-and-write-a-json-file)
 
 ```python
 import json
@@ -465,6 +483,8 @@ with open("large.json", "rb") as f:
 ---
 
 ## 🏠 Chapter 10 — `pathlib`: The Modern Way to Handle Paths
+
+📝 **Practice:** [Q10–Q11 →](./practice.md#q10--pathlib--basic-path-operations)
 
 `pathlib.Path` (Python 3.4+) is the modern, OO replacement for `os.path`.
 
@@ -537,6 +557,8 @@ path = Path("data") / "users" / filename   # uses \\ on Windows, / on Unix
 
 ## ⚡ Chapter 11 — Large Files: Memory-Efficient Patterns
 
+📝 **Practice:** [Q19–Q20 →](./practice.md#q19--large-files--chunk-reading)
+
 ### Pattern 1 — Line-by-Line Iteration
 
 ```python
@@ -604,6 +626,8 @@ with open("huge_binary.dat", "r+b") as f:
 
 ## 🔒 Chapter 12 — Atomic Writes: Preventing Corruption
 
+📝 **Practice:** [Q23 →](./practice.md#q23--atomic-write--safe-file-replacement)
+
 What happens if your program crashes mid-write?
 
 ```python
@@ -647,6 +671,8 @@ def atomic_write(path: Path, content: str) -> None:
 
 ## 🛡️ Chapter 13 — Temporary Files
 
+📝 **Practice:** [Q25 →](./practice.md#q25--tempfile--safe-scratch-files)
+
 ```python
 import tempfile
 from pathlib import Path
@@ -687,6 +713,8 @@ finally:
 
 ## 🛡️ Chapter 14 — Security: Path Traversal
 
+📝 **Practice:** [Q26 →](./practice.md#q26--security--path-traversal-guard)
+
 When file paths come from users, **always validate them**.
 
 ```python
@@ -722,6 +750,8 @@ def serve_file_safe(user_filename: str) -> str:
 
 ## 🔁 Chapter 15 — File Locking for Concurrent Access
 
+📝 **Practice:** [Q27 →](./practice.md#q27--file-locking--safe-concurrent-writes)
+
 When multiple processes write to the same file simultaneously:
 
 ```python
@@ -754,6 +784,8 @@ with open("shared.log", "a") as f:
 ---
 
 ## 📦 Chapter 16 — `shutil`: High-Level File Operations
+
+📝 **Practice:** [Q28–Q29 →](./practice.md#q28--shutil--copy-move-delete)
 
 ```python
 import shutil
@@ -790,6 +822,8 @@ shutil.unpack_archive("backup_2025.zip", "restored/")
 ---
 
 ## 🧪 `io.StringIO` and `io.BytesIO` — In-Memory Files
+
+📝 **Practice:** [Q18 →](./practice.md#q18--iostringio--in-memory-file)
 
 Sometimes you need something that **behaves like a file** but lives entirely in memory — no disk I/O.
 
@@ -905,4 +939,4 @@ content = buf.getvalue()   # "line 1\nline 2\n"
 
 **Prev:** [← Modules Packages — Interview Q&A](../07_modules_packages/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Pathlib Guide](./pathlib_guide.md) · [Interview Q&A](./interview.md) · [OS Module](./os_module.md) · [Datetime Module](./datetime_module.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md) · [OS Module →](./01_os_module/theory.md) · [pathlib →](./02_pathlib/theory.md) · [datetime →](./03_datetime/theory.md)
