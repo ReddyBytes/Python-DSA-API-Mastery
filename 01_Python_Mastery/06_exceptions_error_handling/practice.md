@@ -8,47 +8,51 @@
 
 | Q# | Concept | Chapter | Difficulty |
 |----|---------|---------|------------|
-| Q1 | Exception propagation through nested calls | Ch1 | 🟢 Beginner |
-| Q2 | try/except/else/finally for file open | Ch3 | 🟢 Beginner |
-| Q3 | else vs except — when each runs | Ch3 | 🟢 Beginner |
-| Q4 | finally edge case: return swallows exception | Ch3 | 🟡 Intermediate |
-| Q5 | Catch ZeroDivisionError and ValueError separately | Ch4 | 🟢 Beginner |
-| Q6 | Fix bare except with pass | Ch11 | 🟡 Intermediate |
-| Q7 | Exception hierarchy — why ValueError catches int("x") | Ch2 | 🟡 Intermediate |
-| Q8 | Catch multiple exceptions in one clause | Ch4 | 🟡 Intermediate |
-| Q9 | Order of except clauses — fix shadowing bug | Ch4 | 🟡 Intermediate |
-| Q10 | Re-raise original exception after logging | Ch5 | 🟡 Intermediate |
-| Q11 | raise...from — exception chaining | Ch5 | 🟡 Intermediate |
-| Q12 | raise from None — suppress the chain | Ch5 | 🟡 Intermediate |
-| Q13 | Define AppError with message and code attributes | Ch6 | 🟡 Intermediate |
-| Q14 | Custom exception hierarchy (3 classes) | Ch6 | 🟡 Intermediate |
-| Q15 | Why use with open() instead of try/finally | Ch7 | 🟢 Beginner |
-| Q16 | Context manager with __enter__ / __exit__ | Ch7 | 🟡 Intermediate |
-| Q17 | @contextlib.contextmanager — timing manager | Ch7 | 🟡 Intermediate |
-| Q18 | LBYL vs EAFP — rewrite + trade-off | Ch8 | 🟡 Intermediate |
-| Q19 | logger.exception() vs logger.error() | Ch10 | 🟡 Intermediate |
-| Q20 | Include traceback in log without crashing | Ch10 | 🟡 Intermediate |
-| Q21 | Retry with exponential backoff decorator | Ch9 | 🟠 Advanced |
-| Q22 | Circuit breaker — 3 states | Ch9 | 🟠 Advanced |
-| Q23 | Graceful degradation — return cached result | Ch9 | 🟡 Intermediate |
-| Q24 | Fix silent except Exception: pass | Ch11 | 🟡 Intermediate |
-| Q25 | Catching too broadly masks a bug | Ch11 | 🟡 Intermediate |
-| Q26 | Exceptions for normal control flow anti-pattern | Ch11 | 🟡 Intermediate |
-| Q27 | Losing the original exception — raise from e fix | Ch11 | 🟡 Intermediate |
-| Q28 | Exception silently lost in a thread | Ch12 | 🟠 Advanced |
-| Q29 | Read a traceback — root cause vs propagation | Ch13 | 🟡 Intermediate |
-| Q30 | as e scope: when does the binding get cleared? | Ch4 | 🟡 Intermediate |
-| Q31 | Exception translation: HTTPError → ApiError | Ch5 | 🟠 Advanced |
-| Q32 | finally always runs — resource release example | Ch3 | 🟡 Intermediate |
-| Q33 | ExceptionGroup (Python 3.11+) | Ch12 | 🟡 Intermediate |
-| Q34 | Capstone: safe_api_call with retries and fallback | Ch9 | 🟠 Advanced |
-| Q35 | Capstone: payment system exception hierarchy | Ch6 | 🟠 Advanced |
+| [Q1](#q1) | Exception propagation through nested calls | Ch1 | 🟢 Beginner |
+| [Q2](#q2) | try/except/else/finally for file open | Ch3 | 🟢 Beginner |
+| [Q3](#q3) | else vs except — when each runs | Ch3 | 🟢 Beginner |
+| [Q4](#q4) | finally edge case: return swallows exception | Ch3 | 🟡 Intermediate |
+| [Q5](#q5) | Catch ZeroDivisionError and ValueError separately | Ch4 | 🟢 Beginner |
+| [Q6](#q6) | Fix bare except with pass | Ch11 | 🟡 Intermediate |
+| [Q7](#q7) | Exception hierarchy — why ValueError catches int("x") | Ch2 | 🟡 Intermediate |
+| [Q8](#q8) | Catch multiple exceptions in one clause | Ch4 | 🟡 Intermediate |
+| [Q9](#q9) | Order of except clauses — fix shadowing bug | Ch4 | 🟡 Intermediate |
+| [Q10](#q10) | Re-raise original exception after logging | Ch5 | 🟡 Intermediate |
+| [Q11](#q11) | raise...from — exception chaining | Ch5 | 🟡 Intermediate |
+| [Q12](#q12) | raise from None — suppress the chain | Ch5 | 🟡 Intermediate |
+| [Q13](#q13) | Define AppError with message and code attributes | Ch6 | 🟡 Intermediate |
+| [Q14](#q14) | Custom exception hierarchy (3 classes) | Ch6 | 🟡 Intermediate |
+| [Q15](#q15) | Why use with open() instead of try/finally | Ch7 | 🟢 Beginner |
+| [Q16](#q16) | Context manager with __enter__ / __exit__ | Ch7 | 🟡 Intermediate |
+| [Q17](#q17) | @contextlib.contextmanager — timing manager | Ch7 | 🟡 Intermediate |
+| [Q18](#q18) | LBYL vs EAFP — rewrite + trade-off | Ch8 | 🟡 Intermediate |
+| [Q19](#q19) | logger.exception() vs logger.error() | Ch10 | 🟡 Intermediate |
+| [Q20](#q20) | Include traceback in log without crashing | Ch10 | 🟡 Intermediate |
+| [Q21](#q21) | Retry with exponential backoff decorator | Ch9 | 🟠 Advanced |
+| [Q22](#q22) | Circuit breaker — 3 states | Ch9 | 🟠 Advanced |
+| [Q23](#q23) | Graceful degradation — return cached result | Ch9 | 🟡 Intermediate |
+| [Q24](#q24) | Fix silent except Exception: pass | Ch11 | 🟡 Intermediate |
+| [Q25](#q25) | Catching too broadly masks a bug | Ch11 | 🟡 Intermediate |
+| [Q26](#q26) | Exceptions for normal control flow anti-pattern | Ch11 | 🟡 Intermediate |
+| [Q27](#q27) | Losing the original exception — raise from e fix | Ch11 | 🟡 Intermediate |
+| [Q28](#q28) | Exception silently lost in a thread | Ch12 | 🟠 Advanced |
+| [Q29](#q29) | Read a traceback — root cause vs propagation | Ch13 | 🟡 Intermediate |
+| [Q30](#q30) | as e scope: when does the binding get cleared? | Ch4 | 🟡 Intermediate |
+| [Q31](#q31) | Exception translation: HTTPError → ApiError | Ch5 | 🟠 Advanced |
+| [Q32](#q32) | finally always runs — resource release example | Ch3 | 🟡 Intermediate |
+| [Q33](#q33) | ExceptionGroup (Python 3.11+) | Ch12 | 🟡 Intermediate |
+| [Q34](#q34) | Capstone: safe_api_call with retries and fallback | Ch9 | 🟠 Advanced |
+| [Q35](#q35) | Capstone: payment system exception hierarchy | Ch6 | 🟠 Advanced |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 · Exception Propagation — Trace the Call Stack
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 🟢 Beginner
 
@@ -100,9 +104,13 @@ Think of the **call stack** as a stack of plates. When an exception is raised, P
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · try/except/else/finally — File Open
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 🟢 Beginner
 
@@ -140,9 +148,13 @@ def read_config(path):
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · else vs except — When Each Runs
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 🟢 Beginner
 
@@ -190,9 +202,13 @@ Think of `else` as "the code that should only run if the risky operation actuall
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · finally Edge Case — return Inside finally
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -230,9 +246,13 @@ Think of the exception as a ball rolling toward the exit. `finally` is a room it
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Catching Multiple Exceptions Separately
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 🟢 Beginner
 
@@ -269,9 +289,13 @@ parse_and_divide("10", 2)   # success → 5.0
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Anti-pattern Fix — Bare except with pass
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -318,9 +342,13 @@ The original had three problems: it used bare `except:` (catches `KeyboardInterr
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Exception Hierarchy — Why ValueError Catches int("x")
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -370,9 +398,13 @@ except Animal:                  # ← catches Dog because Dog is-a Animal
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Tuple Syntax for Multiple Exceptions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -423,9 +455,13 @@ except TypeError as e:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Order of except Clauses — Fix the Shadowing Bug
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -473,9 +509,13 @@ int("x") raises ValueError
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Re-raise — Log Then Re-raise
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -521,9 +561,13 @@ except SomeError as e:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · raise...from — Exception Chaining
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -569,9 +613,13 @@ Think of it as a translation layer: you receive a low-level library error and ha
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · raise from None — Suppress the Chain
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -615,9 +663,13 @@ The `KeyError` leaks the internal data structure (`_INTERNAL_CONFIG` is a `dict`
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Custom Exception with Attributes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -661,9 +713,13 @@ Calling `super().__init__(message)` ensures that `str(e)` and `repr(e)` work as 
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Custom Exception Hierarchy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -715,9 +771,13 @@ except PaymentError as e:
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Why use with open() Instead of try/finally
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 🟢 Beginner
 
@@ -755,9 +815,13 @@ The `with` version is shorter, but more importantly it is **correct by construct
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Context Manager with __enter__ / __exit__
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -810,9 +874,13 @@ with DatabaseTransaction():
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · @contextlib.contextmanager — Timing Context Manager
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -866,9 +934,13 @@ def managed():
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · LBYL vs EAFP
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -918,9 +990,13 @@ def get_value(d, key):
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · logger.exception() vs logger.error()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -974,9 +1050,13 @@ logger.error("Failed", exc_info=True)
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Include Traceback in Log Without Crashing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1024,9 +1104,13 @@ except Exception as e:
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Retry with Exponential Backoff
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 🟠 Advanced
 
@@ -1083,9 +1167,13 @@ The `exceptions` parameter makes the decorator configurable: you can limit it to
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Circuit Breaker — The 3 States
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 🟠 Advanced
 
@@ -1160,9 +1248,13 @@ class CircuitBreaker:
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Graceful Degradation — Return Cached Result
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1215,9 +1307,13 @@ def get_recommendations(user_id: str) -> list:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Anti-pattern Fix — Silent except Exception: pass
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1266,9 +1362,13 @@ Never option 4: `pass`.
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Catching Too Broadly Masks a Bug
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1324,9 +1424,13 @@ The original returned `[20, 0, 40]`. The caller sees a list of numbers and assum
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · Anti-pattern — Exceptions for Control Flow
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1380,9 +1484,13 @@ The cost of raising and catching exceptions in Python is non-trivial (stack unwi
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · Anti-pattern — Losing the Original Exception
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1431,9 +1539,13 @@ RuntimeError: Failed to load user            ← translated error
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Exceptions in Threads — Silently Lost
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 
 🟠 Advanced
 
@@ -1507,9 +1619,13 @@ with ThreadPoolExecutor() as executor:
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · Read a Traceback
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1558,9 +1674,13 @@ handle_request (no handler, or this is where the traceback was printed)
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · as e Scope — When Does the Binding Get Cleared?
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1612,9 +1732,13 @@ This also applies to the `except (TypeError, ValueError) as e` form — `e` is d
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · Exception Translation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
+
 
 🟠 Advanced
 
@@ -1671,9 +1795,13 @@ Exception translation is the **anti-corruption layer** pattern from DDD: the dom
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · finally Always Runs — Resource Release
 
 > 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1720,9 +1848,13 @@ Without `finally`, a single call with a bad `item` permanently deadlocks every t
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 · ExceptionGroup (Python 3.11+)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
+
 
 🟡 Intermediate
 
@@ -1774,9 +1906,13 @@ except* ValueError as eg:
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · Capstone — safe_api_call
 
 > 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
+
 
 🟠 Advanced
 
@@ -1849,9 +1985,13 @@ print(result)
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · Capstone — Payment System Exception Hierarchy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
+
 
 🟠 Advanced
 

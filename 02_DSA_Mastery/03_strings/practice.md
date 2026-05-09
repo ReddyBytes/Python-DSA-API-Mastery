@@ -39,6 +39,9 @@
 <a id="q1"></a>
 ### Q1 · string-immutability-explain — Why can't you modify `s[0]`? 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 ```python
 s = "hello"
 s[0] = "H"   # what happens and why?
@@ -85,6 +88,9 @@ Time: O(n) · Space: O(n)
 <a id="q2"></a>
 ### Q2 · build-string-join-vs-concat — Build a string from a list of chars 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 Given a list of characters, build a single string. Show the O(n²) approach,
 explain why it is slow, and write the O(n) approach.
 
@@ -127,6 +133,9 @@ Time: O(n²) for `+=` loop · O(n) for `join` · Space: O(n)
 
 <a id="q3"></a>
 ### Q3 · reverse-string — Reverse a string in-place (no extra string) 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write a function that reverses a string. The interviewer asks for two
 approaches: one using Python slicing, one using two pointers on a list
@@ -174,6 +183,9 @@ Time: O(n) · Space: O(n) both (because strings are immutable in Python)
 <a id="q4"></a>
 ### Q4 · count-vowels — Count vowels in a string 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 ```python
 count_vowels("hello world")  # 3
 count_vowels("aeiou")        # 5
@@ -208,6 +220,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q5"></a>
 ### Q5 · first-non-repeating-char — Find the first non-repeating character 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 ```python
 first_non_repeating("leetcode")     # "l"
@@ -251,6 +266,9 @@ Time: O(n) · Space: O(1) (at most 26 lowercase letters in the counter)
 <a id="q6"></a>
 ### Q6 · split-join-strip — Know your string methods 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 What does each of the following print? Explain why.
 
 ```python
@@ -291,6 +309,9 @@ Time: O(n) for all operations · Space: O(n)
 
 <a id="q7"></a>
 ### Q7 · char-frequency-array — Build a frequency array for lowercase letters 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 ```python
 char_freq("hello")   # {'h':1, 'e':1, 'l':2, 'o':1}
@@ -337,6 +358,9 @@ Time: O(n) · Space: O(1) (26 fixed)
 <a id="q8"></a>
 ### Q8 · caesar-cipher — Shift every letter by k positions 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 ```python
 caesar("hello", 3)   # "khoor"
 caesar("khoor", -3)  # "hello"
@@ -382,6 +406,9 @@ Time: O(n) · Space: O(n)
 <a id="q9"></a>
 ### Q9 · palindrome-two-pointer — Check if a string is a palindrome 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 Use the two-pointer approach. Do not use slicing.
 
 ```python
@@ -426,6 +453,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q10"></a>
 ### Q10 · palindrome-with-nonalnum — Valid palindrome ignoring punctuation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 LeetCode 125. A string is a valid palindrome if, after keeping only
 alphanumeric characters and lowercasing, it reads the same forwards and
@@ -476,6 +506,9 @@ Time: O(n) · Space: O(1)
 <a id="q11"></a>
 ### Q11 · anagram-detection-counter — Are two strings anagrams? 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 ```python
 is_anagram("listen", "silent")   # True
 is_anagram("hello", "world")     # False
@@ -518,6 +551,9 @@ Time: O(n) · Space: O(1) (at most 26 lowercase letters)
 <a id="q12"></a>
 ### Q12 · anagram-detection-freq-array — Anagram check without Counter 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 Implement anagram detection using a 26-element frequency array. No imports.
 
 ```python
@@ -558,6 +594,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q13"></a>
 ### Q13 · group-anagrams — Group a list of words by their anagram family 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 ```python
 group_anagrams(["eat","tea","tan","ate","nat","bat"])
@@ -602,6 +641,9 @@ Time: O(n * k log k) where k = average word length · Space: O(n * k)
 
 <a id="q14"></a>
 ### Q14 · longest-no-repeat-substring — Sliding window, no repeats 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 LeetCode 3. Find the length of the longest substring without repeating characters.
 
@@ -650,6 +692,9 @@ Time: O(n) · Space: O(min(n, alphabet_size))
 
 <a id="q15"></a>
 ### Q15 · minimum-window-substring — Cover all chars of t in s 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 LeetCode 76. Find the minimum window in `s` that contains all characters of `t`.
 
@@ -715,6 +760,9 @@ Time: O(n + m) · Space: O(m) where m = len(t)
 <a id="q16"></a>
 ### Q16 · string-compression — Run-length encode a string 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 ```python
 compress("aabcccccaaa")  # "a2b1c5a3"
 compress("abcd")         # "abcd"  (compressed is not shorter — return original)
@@ -763,6 +811,9 @@ Time: O(n) · Space: O(n)
 
 <a id="q17"></a>
 ### Q17 · valid-palindrome-ii — Palindrome with at most one deletion 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 LeetCode 680. Given a string, return True if it can be a palindrome after
 deleting at most one character.
@@ -817,6 +868,9 @@ Time: O(n) · Space: O(1)
 <a id="q18"></a>
 ### Q18 · word-frequency-counter — Count word frequencies 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 ```python
 word_freq("to be or not to be")
 # {'to': 2, 'be': 2, 'or': 1, 'not': 1}
@@ -864,6 +918,9 @@ Time: O(n) · Space: O(unique words)
 
 <a id="q19"></a>
 ### Q19 · find-all-anagrams-in-string — Sliding window anagram search 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 LeetCode 438. Find all start indices in string `s` where an anagram of
 string `p` begins.
@@ -922,6 +979,9 @@ Time: O(n) · Space: O(1) (counters bounded by alphabet size)
 <a id="q20"></a>
 ### Q20 · string-comparison-sort — Sort strings and numbers correctly 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 ```python
 sort_numerically(["10", "9", "2", "100", "21"])
 # ["2", "9", "10", "21", "100"]
@@ -965,6 +1025,9 @@ Time: O(n log n) · Space: O(n)
 
 <a id="q21"></a>
 ### Q21 · longest-common-prefix — Find the longest common prefix 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 ```python
 longest_common_prefix(["flower","flow","flight"])   # "fl"
@@ -1016,6 +1079,9 @@ Time: O(n * m) where m = shortest word length · Space: O(1)
 
 <a id="q22"></a>
 ### Q22 · kmp-lps-build — Build the KMP failure (LPS) array 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Given a pattern string, build its **LPS array** (Longest Proper Prefix
 which is also a Suffix). This is the preprocessing step in KMP.
@@ -1074,6 +1140,9 @@ Time: O(m) · Space: O(m)
 
 <a id="q23"></a>
 ### Q23 · kmp-full-search — Full KMP pattern search 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Use the LPS array to search for all occurrences of `pattern` inside `text`.
 
@@ -1144,6 +1213,9 @@ Time: O(n + m) · Space: O(m)
 <a id="q24"></a>
 ### Q24 · longest-palindromic-substring — Expand around center 🟠
 
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 LeetCode 5. Find the longest palindromic substring.
 
 ```python
@@ -1203,6 +1275,9 @@ Time: O(n²) · Space: O(1)
 
 <a id="q25"></a>
 ### Q25 · minimum-window-hard-variant — Window with at most k distinct chars 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Find the length of the longest substring with at most `k` distinct characters.
 

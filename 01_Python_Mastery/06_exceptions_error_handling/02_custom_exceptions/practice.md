@@ -9,24 +9,28 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1 | Define `AppError(Exception)` with message and code | 🟢 |
-| Q2 | Build hierarchy: `PaymentError`, `InsufficientFundsError`, `CardDeclinedError` | 🟢 |
-| Q3 | Custom `__init__`: add `transaction_id`, `amount`, `http_status` | 🟡 |
-| Q4 | Catch at different levels: specific → broad | 🟡 |
-| Q5 | `raise PaymentError from original_error` — traceback behavior | 🟡 |
-| Q6 | `raise PaymentError from None` — when to suppress the chain | 🟡 |
-| Q7 | Exception translation layer: `IntegrityError` → `UserAlreadyExists` | 🟡 |
-| Q8 | `user_message` vs `dev_message` distinction | 🟡 |
-| Q9 | Full `ValidationError` hierarchy with `field_name` and `constraint` | 🟠 |
-| Q10 | REST API exceptions: HTTP status + `error_type` + `details` dict | 🟠 |
-| Q11 | Retry-aware exceptions: `RetriableError` vs `NonRetriableError` | 🟠 |
-| Q12 | Capstone: full 3-tier hierarchy for a microservices API | 🟠 |
+| [Q1](#q1) | Define `AppError(Exception)` with message and code | 🟢 |
+| [Q2](#q2) | Build hierarchy: `PaymentError`, `InsufficientFundsError`, `CardDeclinedError` | 🟢 |
+| [Q3](#q3) | Custom `__init__`: add `transaction_id`, `amount`, `http_status` | 🟡 |
+| [Q4](#q4) | Catch at different levels: specific → broad | 🟡 |
+| [Q5](#q5) | `raise PaymentError from original_error` — traceback behavior | 🟡 |
+| [Q6](#q6) | `raise PaymentError from None` — when to suppress the chain | 🟡 |
+| [Q7](#q7) | Exception translation layer: `IntegrityError` → `UserAlreadyExists` | 🟡 |
+| [Q8](#q8) | `user_message` vs `dev_message` distinction | 🟡 |
+| [Q9](#q9) | Full `ValidationError` hierarchy with `field_name` and `constraint` | 🟠 |
+| [Q10](#q10) | REST API exceptions: HTTP status + `error_type` + `details` dict | 🟠 |
+| [Q11](#q11) | Retry-aware exceptions: `RetriableError` vs `NonRetriableError` | 🟠 |
+| [Q12](#q12) | Capstone: full 3-tier hierarchy for a microservices API | 🟠 |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 · Define AppError with message and code
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:**
 Define `AppError(Exception)` with two attributes: `message` and `code`. Both should be set via `__init__`. Make sure `str(e)` returns something readable. Raise it and verify both attributes are accessible.
@@ -72,9 +76,13 @@ print(e.args[0]) # something went wrong
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Build the PaymentError hierarchy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:**
 Using `AppError` from Q1 as root, create this hierarchy:
@@ -134,9 +142,13 @@ except AppError:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Custom __init__ with transaction_id, amount, http_status
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:**
 Give `PaymentError` a custom `__init__` that accepts `message`, `transaction_id`, `amount`, and `http_status` (default `402`). Override `__str__` to include the transaction ID.
@@ -187,9 +199,13 @@ print(e.http_status)     # 402
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Catch at different specificity levels
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:**
 Raise `CardDeclinedError` and show how three separate `except` clauses at different levels all catch it. Then show that order matters — put `AppError` first and observe what happens.
@@ -245,9 +261,13 @@ except CardDeclinedError:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · raise PaymentError from original_error
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:**
 Simulate a Stripe API call that raises a `requests.HTTPError`. In an exception handler, catch it and raise `CardDeclinedError` using `raise X from Y`. Print the traceback and identify where `__cause__` is set.
@@ -324,9 +344,13 @@ CardDeclinedError: CardDeclinedError: Card declined by Stripe [txn=txn_sim_001, 
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · raise from None — suppress the chain
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:**
 You're building a public library. Your internal storage uses Redis, but callers should not see `redis.exceptions.ConnectionError` in their tracebacks. Raise a `StorageUnavailableError` using `from None` to produce a clean traceback.
@@ -386,9 +410,13 @@ except StorageUnavailableError as e:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Exception translation layer
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:**
 Write a `create_user(email)` function that catches `psycopg2.IntegrityError` (simulate it) and raises a `UserAlreadyExists` domain exception. This is the repository-layer translation pattern.
@@ -451,9 +479,13 @@ except UserAlreadyExists as e:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · user_message vs dev_message
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:**
 Extend `AppError` to carry both a developer-facing `dev_message` (full detail, safe to log) and a `user_message` (safe to show end users). The default `user_message` should be `"An unexpected error occurred."`.
@@ -514,9 +546,13 @@ print(e.code)          # CARD_DECLINED
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Full ValidationError hierarchy with field_name and constraint
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:**
 Build a complete `ValidationError` hierarchy with custom attributes. Each validation error should carry `field_name`. Specific errors add their own context.
@@ -593,9 +629,13 @@ for payload in [{"name": "Alice"}, {"email": "not-an-email"}, {"email": "alice@e
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · REST API exceptions with HTTP status, error_type, details dict
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:**
 Design an exception hierarchy for a REST API. Every exception should carry:
@@ -682,9 +722,13 @@ except AppError as e:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Retry-aware exceptions: RetriableError vs NonRetriableError
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:**
 Design an exception hierarchy that tells retry logic whether an error is worth retrying. A `RetriableError` (e.g., temporary network timeout) should be retried. A `NonRetriableError` (e.g., invalid credentials) should not.
@@ -783,9 +827,13 @@ print(result)  # success
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Capstone: full 3-tier exception hierarchy for a microservices API
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:**
 Design the complete exception hierarchy for a microservices order management API. It must support:

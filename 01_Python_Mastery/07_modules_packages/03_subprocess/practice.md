@@ -25,7 +25,6 @@
 
 ## Q1 🟢 · Basic run — Run echo and print output
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 Run `echo "hello world"` using `subprocess.run()` and print its captured output.
 
@@ -58,7 +57,6 @@ print(result.stdout)   # hello world
 
 ## Q2 🟢 · Check returncode — Run a failing command without raising
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 Run `ls /nonexistent` and inspect the `returncode` without letting the program crash.
 
@@ -97,7 +95,6 @@ if result.returncode != 0:
 
 ## Q3 🟢 · capture_output — Capture git --version as a string
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 Run `git --version` and capture its stdout as a Python string (not bytes).
 
@@ -134,7 +131,6 @@ Without `text=True`, you would get `b'git version 2.x.x\n'` (bytes) and need to 
 
 ## Q4 🟡 · check=True — Catch CalledProcessError from a failing command
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 Use `check=True` to run a command that will fail. Catch the `CalledProcessError` and print the returncode and stderr.
 
@@ -171,7 +167,6 @@ When `check=True` triggers, you never see the `CompletedProcess` object — the 
 
 ## Q5 🟡 · Working directory — Run ls in a specific directory using cwd=
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 Run `ls` and have it list the contents of `/tmp` by setting the working directory, not by passing the path as an argument.
 
@@ -207,7 +202,6 @@ This is equivalent to `cd /tmp && ls` in the shell, but without `shell=True`. Us
 
 ## Q6 🟡 · Passing env vars — Inject a custom environment variable
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 Run a Python one-liner subprocess that reads and prints a custom environment variable you inject via `env=`.
 
@@ -247,7 +241,6 @@ The child process inherits all system env vars plus the one you added. Without `
 
 ## Q7 🟡 · timeout — Run a command with a timeout and catch TimeoutExpired
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 Run a command that sleeps for 30 seconds. Set a 2-second timeout. Catch `TimeoutExpired` and print a message.
 
@@ -283,7 +276,6 @@ Always set a timeout on commands that could hang (network calls, long-running bu
 
 ## Q8 🟡 · check_output — Capture the output of date using check_output()
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 Use `subprocess.check_output()` to capture the current date. Handle `CalledProcessError` if it arises.
 
@@ -315,7 +307,6 @@ except subprocess.CalledProcessError as e:
 
 ## Q9 🟡 · shell=True dangers — Explain the risk and rewrite safely
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 Given this code:
 
@@ -370,7 +361,6 @@ With `shell=False` (the default), `user_input` is passed as a single literal arg
 
 ## Q10 🟠 · Popen streaming — Stream output line by line as it arrives
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 Use `subprocess.Popen` to run a command that produces output over time and print each line as it arrives, rather than waiting for the full output.
 
@@ -411,7 +401,6 @@ Each iteration of `for line in proc.stdout` blocks until the subprocess writes a
 
 ## Q11 🟠 · Pipe between processes — echo into wc -w without shell=True
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 Reproduce `echo "hello world" | wc -w` using two `Popen` objects and `stdout=PIPE` / `stdin=`.
 
@@ -454,7 +443,6 @@ Why `proc1.stdout.close()`? The parent process holds an open file descriptor to 
 
 ## Q12 🟠 · Capstone — Write a run_command() helper that never raises
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 Write a function `run_command(cmd, cwd=None, env=None, timeout=30)` that:
 - Runs the command

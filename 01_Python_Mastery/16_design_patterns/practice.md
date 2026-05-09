@@ -8,9 +8,46 @@
 
 ## Singleton (Q1–Q5)
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | singleton · Module-Level Singleton | 🟢 |
+| [Q2](#q2) | singleton · `__new__`-Based Singleton | 🟡 |
+| [Q3](#q3) | singleton · Thread-Safe Singleton | 🟡 |
+| [Q4](#q4) | singleton · Borg Pattern | 🟡 |
+| [Q5](#q5) | singleton · Singleton Decorator | 🟡 |
+| [Q6](#q6) | factory · Simple Factory with Dict Dispatch | 🟡 |
+| [Q7](#q7) | factory · Factory Method Pattern | 🟡 |
+| [Q8](#q8) | factory · Registration Factory | 🟡 |
+| [Q9](#q9) | observer · Basic Event Subscription | 🟢 |
+| [Q10](#q10) | observer · `@bus.on` Decorator | 🟡 |
+| [Q11](#q11) | observer · Classic Observer with ABC | 🟡 |
+| [Q12](#q12) | observer · Weak Reference Bus | 🟡 |
+| [Q13](#q13) | strategy · Class-Based Strategy | 🟡 |
+| [Q14](#q14) | strategy · Function-Based Strategy | 🟡 |
+| [Q15](#q15) | strategy · Payment Processor with Registry | 🟡 |
+| [Q16](#q16) | strategy · Sort Strategy Comparison | 🟡 |
+| [Q17](#q17) | command · Basic Command Execute/Undo | 🟡 |
+| [Q18](#q18) | command · Text Editor with Undo Stack | 🟡 |
+| [Q19](#q19) | command · Macro Command (Batch) | 🟠 |
+| [Q20](#q20) | template method · Data Processor | 🟡 |
+| [Q21](#q21) | template method · Report Generator | 🟡 |
+| [Q22](#q22) | chain · Middleware Pipeline | 🟠 |
+| [Q23](#q23) | di · Constructor Injection Basics | 🟢 |
+| [Q24](#q24) | di · Service Locator | 🟡 |
+| [Q25](#q25) | di · Capstone: Testable Data Pipeline | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 🟢 · singleton · Module-Level Singleton
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Create a module-level `config` singleton with `env="production"` and `debug=False`. Show that two variables assigned from the same import point to the same object (`a is b == True`).
 
@@ -41,9 +78,13 @@ assert a is b   # True
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · singleton · `__new__`-Based Singleton
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Implement a `Config` class using `__new__`. Include `_initialized` guard. `Config("prod")` followed by `Config("staging")` should both return the same instance with `env="prod"`.
 
@@ -85,9 +126,13 @@ assert b.env == "prod"
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · singleton · Thread-Safe Singleton
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Add double-checked locking to a singleton. Launch 5 threads that call the constructor simultaneously. Assert only one instance is ever created.
 
@@ -126,9 +171,13 @@ assert len(set(ids)) == 1
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · singleton · Borg Pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Implement a `Settings` Borg class. Create two instances. Writing an attribute via one should be immediately visible through the other, but `s1 is s2` should be `False`.
 
@@ -159,9 +208,13 @@ assert s1 is not s2
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · singleton · Singleton Decorator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a `@singleton` decorator that turns any class into a singleton. Apply it to a `Cache` class. Include a `_reset` helper for tests.
 
@@ -207,9 +260,13 @@ assert c2.get("x") == 42
 
 ## Factory (Q6–Q8)
 
+<a id="q6"></a>
+
 ### Q6 🟡 · factory · Simple Factory with Dict Dispatch
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write `create_serializer(format)` that returns a JSON, CSV, or YAML serializer. Use dict dispatch. Raise `ValueError` for unknown formats. Each serializer has a `.serialize(data)` method.
 
@@ -249,9 +306,13 @@ assert s.serialize({"key": "val"}) == '{"key": "val"}'
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · factory · Factory Method Pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Build a `NotificationSender` abstract class with `create_transport()` factory method and a `send(message, recipient)` template method. Implement `EmailSender` and `SMSSender`.
 
@@ -301,9 +362,13 @@ assert result["via"] == "email"
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · factory · Registration Factory
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Build a `ParserFactory` with `@ParserFactory.register("json")` decorator. Implement `JSONParser` and `CSVParser`. `ParserFactory.create("json")` returns an instance.
 
@@ -358,9 +423,13 @@ assert result == [{"id": 1}]
 
 ## Observer (Q9–Q12)
 
+<a id="q9"></a>
+
 ### Q9 🟢 · observer · Basic Event Subscription
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Build `EventBus` with `subscribe`, `unsubscribe`, `emit`. Subscribe two handlers to `"data.ready"`. Unsubscribe one. Emit and verify only the remaining handler fires.
 
@@ -401,9 +470,13 @@ assert fired == ["A"]
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · observer · `@bus.on` Decorator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Add an `on(*events)` decorator method to `EventBus`. Register a single function for `"user.login"` and `"user.logout"`. Emit both and verify the function is called twice total.
 
@@ -449,9 +522,13 @@ assert len(calls) == 2
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · observer · Classic Observer with ABC
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Implement `Subject` and `Observer` ABC. Create `StockPrice(Subject)` that notifies observers when `.price` is set via a property setter. Create `AlertObserver` that prints when price moves more than 5%.
 
@@ -512,9 +589,13 @@ assert len(alert.alerts) == 1
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · observer · Weak Reference Bus
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Build a `WeakEventBus`. Subscribe a handler object. Delete it. Emit and verify no crash and the dead handler is pruned from the internal list.
 
@@ -563,9 +644,13 @@ assert len(bus._h["x"]) == 0   # pruned
 
 ## Strategy (Q13–Q16)
 
+<a id="q13"></a>
+
 ### Q13 🟡 · strategy · Class-Based Strategy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Build `CompressionStrategy` ABC with `compress(data: bytes) -> bytes`. Implement `GzipStrategy` and `NoOpStrategy`. Build a `Compressor` that swaps strategies via `set_strategy`.
 
@@ -611,9 +696,13 @@ assert gzip.decompress(compressed) == data
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · strategy · Function-Based Strategy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Write three tax calculation functions: `us_tax(price)` = 8%, `eu_tax(price)` = 20%, `no_tax(price)` = 0%. Build a `checkout(price, tax_fn)` function that applies the injected strategy.
 
@@ -645,9 +734,13 @@ assert checkout(100.0, no_tax)["tax"] == 0.0
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟡 · strategy · Payment Processor with Registry
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Build a `PaymentRegistry` with `@register("stripe")` decorator. Implement `StripeStrategy` (2.9% + $0.30) and `PayPalStrategy` (3.4% + $0.30). `Checkout(method).pay(amount)` selects the right strategy.
 
@@ -697,9 +790,13 @@ assert stripe_result["fee"]       == 3.19
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · strategy · Sort Strategy Comparison
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Implement `BubbleSortStrategy` and `TimSortStrategy`. Build `Sorter`. Sort the same list with both strategies and assert the results are identical.
 
@@ -749,9 +846,13 @@ assert r1 == r2 == [1, 2, 5, 8, 9]
 
 ## Command (Q17–Q19)
 
+<a id="q17"></a>
+
 ### Q17 🟡 · command · Basic Command Execute/Undo
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Implement a `Counter` with `IncrementCommand` and `DecrementCommand`. Each has `execute()` and `undo()`. Build an `invoker` list. Execute 3 increments and 1 decrement. Undo twice. Verify final state.
 
@@ -806,9 +907,13 @@ history.pop().undo(); assert counter.value == 2
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · command · Text Editor with Undo Stack
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Build a `TextEditor` with `InsertTextCommand`. `execute(cmd)` runs the command and pushes to history. `undo()` pops and reverses. Show "Hello World" → undo " World" → "Hello".
 
@@ -872,9 +977,13 @@ assert editor.text == "Hello"
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟠 · command · Macro Command (Batch)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Implement a `MacroCommand` that holds a list of commands and executes/undoes them as a unit. Build a batch of 3 counter increments as a single macro. Execute and undo the macro atomically.
 
@@ -935,9 +1044,13 @@ assert counter.value == 0
 
 ## Template Method and Chain of Responsibility (Q20–Q22)
 
+<a id="q20"></a>
+
 ### Q20 🟡 · template method · Data Processor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Build `DataProcessor` ABC with `process(data)` template method that calls `validate(data)` then `transform(data)`. Provide a default `validate` (removes Nones). Implement `DoubleTransformer` that doubles each value.
 
@@ -977,9 +1090,13 @@ assert result == [2, 4, 6]
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟡 · template method · Report Generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Build `ReportGenerator` with `generate(data)` template method. Abstract: `build_header`, `build_body`. Default hook: `build_footer` returns `"--- End ---"`. Implement `HTMLReport` that overrides footer too.
 
@@ -1030,9 +1147,13 @@ assert "--- End ---" in text   # default footer used
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟠 · chain · Middleware Pipeline
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Build a three-stage middleware pipeline: `auth_middleware` (checks `request["token"]`), `rate_limit_middleware` (checks `request["calls"] < 10`), `handler` (returns 200). If any middleware fails, return an error without calling later stages.
 
@@ -1080,9 +1201,13 @@ assert pipeline({"token": "abc", "calls": 15})["status"] == 429
 
 ## Dependency Injection (Q23–Q25)
 
+<a id="q23"></a>
+
 ### Q23 🟢 · di · Constructor Injection Basics
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Refactor a `ReportService` that creates its own `Database` internally. Use constructor injection. Write a `MockDatabase` that returns a fixed dataset. Assert the service works with the mock.
 
@@ -1124,9 +1249,13 @@ assert report["data"][0]["name"] == "Alice"
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟡 · di · Service Locator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Build `ServiceLocator` with `register(name, instance)` and `get(name)`. Register a `"cache"` and `"db"` service. Retrieve them. Raise `KeyError` for unregistered names.
 
@@ -1180,9 +1309,13 @@ except KeyError:
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟠 · di · Capstone: Testable Data Pipeline
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Build `DataPipeline(source, sink, transform=None)`. `source` has `read() -> list`. `sink` has `write(data) -> int`. `transform` is an optional callable. `pipeline.run()` returns `{"rows_read": N, "rows_written": M}`. Test with stubs.
 

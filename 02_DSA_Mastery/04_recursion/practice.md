@@ -44,6 +44,9 @@
 <a id="q1"></a>
 ### Q1 · identify-base-case
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 **What is a base case in recursion? Identify the base case(s) in the following function. Explain what would happen if you removed it.**
 
 ```python
@@ -81,6 +84,9 @@ The function recurses into negative integers forever, eventually crashing with `
 
 <a id="q2"></a>
 ### Q2 · trace-factorial-stack
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Trace the exact call stack for `factorial(4)`. Show: (a) all frames when the stack is at peak depth, (b) the order in which frames are popped, (c) what value each frame returns.**
 
@@ -126,6 +132,9 @@ factorial(4) receives 6, computes 4*6=24, returns 24
 <a id="q3"></a>
 ### Q3 · write-factorial
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 **Write a recursive factorial function that handles `n = 0` as well as `n >= 1`. Then write the same function iteratively. When would you prefer each version?**
 
 <details>
@@ -161,6 +170,9 @@ def factorial_iter(n):
 
 <a id="q4"></a>
 ### Q4 · countdown-base-case
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **The following function is broken. Add the correct base case and explain why the original fails.**
 
@@ -199,6 +211,9 @@ The original crashes with `RecursionError` because `n` decreases through 0, -1, 
 <a id="q5"></a>
 ### Q5 · sum-list-recursively
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 **Write a recursive function `sum_list(nums)` that returns the sum of all integers in a list. Do not use Python's built-in `sum()`. Then explain the recurrence relation.**
 
 <details>
@@ -233,6 +248,9 @@ Recurrence relation: `T(n) = T(n-1) + O(1)` which solves to O(n).
 
 <a id="q6"></a>
 ### Q6 · reverse-string
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Write a recursive function `reverse_str(s)` that reverses a string. Trace the call for `reverse_str("abc")`.**
 
@@ -270,6 +288,9 @@ reverse_str("abc") = "c" + reverse_str("ab")
 
 <a id="q7"></a>
 ### Q7 · power-function
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Implement `power(base, exp)` recursively. Then implement an optimized version using fast exponentiation (exponentiation by squaring). Show the time complexity of each.**
 
@@ -311,6 +332,9 @@ Example: `power(2, 8)` — naive makes 8 calls; fast makes `log₂(8) = 3` calls
 <a id="q8"></a>
 ### Q8 · recursion-vs-iteration-tradeoff
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 **For each scenario below, decide whether recursion or iteration is the better choice and justify your answer.**
 
 1. Compute the sum of integers 1 to n.
@@ -344,6 +368,9 @@ Consider stack depth, code clarity, and Python's recursion limit of ~1000 frames
 
 <a id="q9"></a>
 ### Q9 · linear-vs-binary-recursion
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Classify each function as linear recursion, binary recursion, or divide-and-conquer. State the time complexity of each.**
 
@@ -388,6 +415,9 @@ Count how many recursive calls each function makes per invocation. Divide-and-co
 <a id="q10"></a>
 ### Q10 · naive-fibonacci
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 **Explain why naive Fibonacci is O(2^n). Draw the partial recursion tree for `fib(5)` and count the number of times `fib(2)` is called. Then state what optimization fixes this.**
 
 ```python
@@ -431,6 +461,9 @@ The fix is **memoization**: cache each result the first time it is computed. Eve
 
 <a id="q11"></a>
 ### Q11 · memoized-fibonacci
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Implement Fibonacci with memoization using a dictionary. Then implement it again using `@lru_cache`. Show the time complexity of each.**
 
@@ -477,6 +510,9 @@ def fib(n):
 <a id="q12"></a>
 ### Q12 · binary-search-recursively
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 **Implement binary search recursively. It should return the index of `target` in `nums`, or -1 if not found.**
 
 <details>
@@ -516,6 +552,9 @@ Example: `binary_search([1, 3, 5, 7, 9], 7)` → searches indices 0..4, then 3..
 
 <a id="q13"></a>
 ### Q13 · flatten-nested-list
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Write `flatten(nested)` that recursively flattens a list of arbitrarily nested lists into a single flat list.**
 
@@ -560,6 +599,9 @@ def flatten_gen(nested):
 
 <a id="q14"></a>
 ### Q14 · tree-traversal
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Write recursive functions for all three depth-first tree traversals: inorder, preorder, and postorder. Demonstrate the output for the tree below.**
 
@@ -615,6 +657,9 @@ For the example tree:
 <a id="q15"></a>
 ### Q15 · tree-height
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 **Write `tree_height(root)` that returns the height of a binary tree (number of nodes on the longest root-to-leaf path). Then explain the recurrence relation.**
 
 <details>
@@ -649,6 +694,9 @@ For a leaf's parent: `1 + max(1, 0) = 2`.
 
 <a id="q16"></a>
 ### Q16 · count-tree-nodes
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 **Write `count_nodes(root)` that returns the total number of nodes in a binary tree. Then write a version that avoids global state (no global variable, no nonlocal).**
 
@@ -691,6 +739,9 @@ The bad version returns 14 on the second call to the same tree because `count` i
 
 <a id="q17"></a>
 ### Q17 · flood-fill
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 **Implement `flood_fill(grid, row, col, new_color)`. Starting from `(row, col)`, change all connected cells of the same original color to `new_color` (4-directional). This is the algorithm behind the paint bucket tool.**
 
@@ -748,6 +799,9 @@ def flood_fill(grid, row, col, new_color):
 <a id="q18"></a>
 ### Q18 · tail-recursion-rewrite
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 **Rewrite `factorial(n)` as a tail-recursive function using an accumulator. Then explain whether Python benefits from this change and why.**
 
 ```python
@@ -795,6 +849,9 @@ def factorial_iter(n):
 <a id="q19"></a>
 ### Q19 · missing-return-bug
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 **The following function always returns `None`. Identify the bug and fix it.**
 
 ```python
@@ -831,6 +888,9 @@ Without `return`, Python executes `sum_digits(n // 10) + (n % 10)`, computes a n
 
 <a id="q20"></a>
 ### Q20 · wrong-base-case-bug
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 **The following function returns 0 for any input. Identify the bug and fix it.**
 
@@ -874,6 +934,9 @@ The base case value is the **seed** of the entire computation. Every recursive c
 
 <a id="q21"></a>
 ### Q21 · divide-and-conquer-merge-sort
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 **Implement merge sort from scratch. Label the three recursive phases: divide, conquer, combine. Derive the time complexity using the recurrence relation.**
 
@@ -934,6 +997,9 @@ Recursion tree: log n levels, each level processes O(n) total elements across al
 <a id="q22"></a>
 ### Q22 · backtracking-subsets
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 **Implement `subsets(nums)` that returns all 2^n subsets of a list using backtracking. Walk through the execution for `[1, 2, 3]` and explain the choose-explore-unchoose pattern.**
 
 <details>
@@ -987,6 +1053,9 @@ Result: `[[], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]]` — all 8 subsets.
 <a id="q23"></a>
 ### Q23 · backtracking-permutations
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 **Implement `permutations(nums)` that returns all n! orderings of the input list. Use the swap-based approach. Show why it is more space-efficient than the copy approach.**
 
 <details>
@@ -1028,6 +1097,9 @@ Why swap-based is more efficient: the copy approach creates a new `remaining` li
 
 <a id="q24"></a>
 ### Q24 · tree-recursion-count-paths
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 **Write `path_sum(root, target)` that returns the count of all root-to-leaf paths whose values sum to `target`. Walk through the recursion for the tree below with target = 22.**
 
@@ -1088,6 +1160,9 @@ Total: 1
 
 <a id="q25"></a>
 ### Q25 · memoization-vs-tabulation
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Implement Fibonacci three ways: (1) naive recursion, (2) top-down memoization, (3) bottom-up tabulation (iterative DP). Compare time and space for each. Explain when you would choose each approach in production.**
 

@@ -4,9 +4,31 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | observer · Basic Event System | 🟢 |
+| [Q2](#q2) | observer · Multiple Event Types | 🟡 |
+| [Q3](#q3) | observer · Weak References | 🟡 |
+| [Q4](#q4) | strategy · Function-Based Strategy | 🟡 |
+| [Q5](#q5) | strategy · Sort Algorithm Selector | 🟡 |
+| [Q6](#q6) | strategy · Discount Calculator | 🟡 |
+| [Q7](#q7) | command · Text Editor with Undo | 🟡 |
+| [Q8](#q8) | template method · Report Generator | 🟡 |
+| [Q9](#q9) | behavioral · Chain of Responsibility: Middleware Pipeline | 🟠 |
+| [Q10](#q10) | observer + command · Capstone: Event Bus with Command Queue | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 🟢 · observer · Basic Event System
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Build a simple `EventBus` with `subscribe(event, handler)`, `unsubscribe(event, handler)`, and `emit(event, **kwargs)`. Demonstrate: two handlers subscribed to "order.placed", one unsubscribed, only the remaining one fires on the next emit.
 
@@ -53,9 +75,13 @@ assert fired == [("A", {"order_id": 1})]
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · observer · Multiple Event Types
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Extend `EventBus` with an `@bus.on(*events)` decorator that registers a function as a handler for one or more event names. Register `audit_log` for both `"user.created"` and `"user.updated"`. Verify it fires for both.
 
@@ -104,9 +130,13 @@ assert called == [1, 2]
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · observer · Weak References
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Build a `WeakEventBus` that holds weak references to handlers. Create a handler object, subscribe it, delete it, then emit. Verify the emit does not crash and the dead handler is silently pruned.
 
@@ -159,9 +189,13 @@ bus.emit("event", x=2)   # no crash — dead ref pruned silently
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · strategy · Function-Based Strategy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Implement an `Order` dataclass with a `_shipping_fn` callable field. Write three shipping strategies as plain functions: `standard_shipping`, `express_shipping`, `free_shipping`. Demonstrate swapping strategies at runtime via `order.set_shipping(fn)`.
 
@@ -211,9 +245,13 @@ assert order.shipping_cost() == 0.0
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · strategy · Sort Algorithm Selector
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Build a `Sorter` class that accepts a `SortStrategy` ABC. Implement `BubbleSortStrategy` and `TimSortStrategy`. Verify that swapping strategies via `set_strategy()` produces identical sorted output.
 
@@ -269,9 +307,13 @@ assert r1 == r2 == [1, 2, 3, 5, 8, 9]
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · strategy · Discount Calculator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Build a `calculate_price(price, tier)` function that applies the right discount based on customer tier. Use a dict of functions: `gold` = 20% off, `silver` = 10% off, `free` = 0% off. Unknown tiers default to no discount.
 
@@ -308,9 +350,13 @@ assert calculate_price(100.0, "unknown") == 100.0
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · command · Text Editor with Undo
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Implement a `TextEditor` with `InsertTextCommand` and `DeleteTextCommand`. The editor should maintain a history stack. `execute(command)` runs the command and pushes it. `undo()` pops and reverses the last command.
 
@@ -392,9 +438,13 @@ assert editor.text == ""
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · template method · Report Generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Implement a `ReportGenerator` abstract class with a `generate(data)` template method. It calls `build_header()`, `build_body(data)`, and `build_footer()` in sequence. Provide a default `build_footer()`. Implement `HTMLReport` and `TextReport` subclasses.
 
@@ -455,9 +505,13 @@ assert "--- End of Report ---" in text   # default footer used
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟠 · behavioral · Chain of Responsibility: Middleware Pipeline
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Build a `MiddlewarePipeline` where each middleware is a callable that receives `(request, next_handler)`. Chain: `AuthMiddleware` (checks `request["token"]`) → `LoggingMiddleware` (prints request) → `HandlerMiddleware` (returns response). If auth fails, short-circuit and return an error.
 
@@ -507,9 +561,13 @@ assert r2["status"] == 401
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · observer + command · Capstone: Event Bus with Command Queue
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Build an `EventBus` where handlers are `Command` objects (with `execute()`) instead of plain functions. The bus queues commands and `flush()` executes them all. This allows deferred execution and batching.
 

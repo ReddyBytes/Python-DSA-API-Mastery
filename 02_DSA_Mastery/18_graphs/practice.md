@@ -46,6 +46,9 @@
 <a id="q1"></a>
 ### Q1 · Basic · Adjacency List vs Matrix
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 **Question:** You have a sparse graph with 1000 nodes and 1200 edges. Your friend has a dense graph with 50 nodes and 2400 edges. Which representation would you recommend for each, and why?
 
 <details>
@@ -90,6 +93,9 @@ for u, v in edges:
 <a id="q2"></a>
 ### Q2 · Basic · Build Adjacency List
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 **Question:** Given `n` nodes (0 to n-1) and a list of undirected edges, build an adjacency list. Then print all neighbors of node 2.
 
 Input: `n=5, edges=[(0,1),(0,2),(1,3),(2,3),(3,4)]`
@@ -131,6 +137,9 @@ print("Neighbors of 3:", graph[3])  # [1, 2, 4]
 <a id="q3"></a>
 ### Q3 · Basic · Directed vs Undirected Representation
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 **Question:** You have these directed edges: `A→B, B→C, C→A` (a cycle). Build the adjacency list. Then explain what happens if you mistakenly treat this as undirected.
 
 <details>
@@ -161,6 +170,9 @@ undirected = {'A': ['B', 'C'], 'B': ['A', 'C'], 'C': ['B', 'A']}
 
 <a id="q4"></a>
 ### Q4 · Basic · Weighted Graph Representation
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Question:** Build an adjacency list for a weighted directed graph. Edges: `(0→1, weight=4), (0→2, weight=1), (2→1, weight=2), (1→3, weight=3)`. What is the cheapest path from 0 to 1?
 
@@ -200,6 +212,9 @@ print(graph[2])  # [(1, 2)]
 
 <a id="q5"></a>
 ### Q5 · Basic · BFS Traversal
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Question:** Implement BFS on this graph starting from node 1. List the visit order.
 
@@ -251,6 +266,9 @@ Visit order: 1 → 2 → 3 → 4 → 5 → 6 (level by level).
 <a id="q6"></a>
 ### Q6 · Basic · DFS Traversal Recursive
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 **Question:** Implement recursive DFS on the same graph from Q5, starting from node 1.
 
 <details>
@@ -288,6 +306,9 @@ Visit order: 1 → 2 → 4 → 5 → 3 → 6 (goes deep before exploring sibling
 
 <a id="q7"></a>
 ### Q7 · Basic · DFS Traversal Iterative
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Question:** Implement iterative DFS using an explicit stack. Why might you prefer this over recursive DFS in production?
 
@@ -332,6 +353,9 @@ print(dfs_iterative(graph, 1))   # [1, 3, 6, 2, 5, 4] — order depends on push 
 
 <a id="q8"></a>
 ### Q8 · Basic · Path Exists Between Two Nodes
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Question:** Given a graph and two nodes `src` and `dst`, return `True` if any path exists from `src` to `dst`.
 
@@ -385,6 +409,9 @@ print(has_path(graph, 3, 0))  # False — directed graph, can't go backwards
 <a id="q9"></a>
 ### Q9 · Intermediate · BFS Shortest Path Unweighted
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 **Question:** Find the shortest path (fewest edges) between two nodes in an unweighted graph. Return the path, not just the distance.
 
 Input: `graph = {0:[1,2], 1:[0,3], 2:[0,3,4], 3:[1,2,5], 4:[2,5], 5:[3,4]}`, `start=0, end=5`
@@ -434,6 +461,9 @@ print(bfs_shortest_path(graph, 0, 5))  # [0, 2, 4, 5] or [0, 2, 3, 5] — length
 
 <a id="q10"></a>
 ### Q10 · Intermediate · Connected Components Count
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Question:** Given an undirected graph with `n` nodes (0 to n-1), count the number of connected components.
 
@@ -487,6 +517,9 @@ print(count_components(6, [(0,1),(1,2),(3,4)]))  # 3
 
 <a id="q11"></a>
 ### Q11 · Intermediate · Number of Islands
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Question:** Given a 2D grid of `'1'` (land) and `'0'` (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
 
@@ -555,6 +588,9 @@ print(num_islands(grid))  # 3
 <a id="q12"></a>
 ### Q12 · Intermediate · Cycle Detection Undirected
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 **Question:** Detect whether an undirected graph contains a cycle. Use DFS with parent tracking.
 
 Input: `graph = {0:[1,2], 1:[0,2], 2:[0,1]}` → True (0-1-2-0)
@@ -604,6 +640,9 @@ print(has_cycle_undirected(graph2, 3)) # False
 
 <a id="q13"></a>
 ### Q13 · Intermediate · Cycle Detection Directed
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Question:** Detect a cycle in a DIRECTED graph. Why can't you use the same parent-tracking approach as undirected?
 
@@ -661,6 +700,9 @@ print(has_cycle_directed(diamond, 4)) # False
 <a id="q14"></a>
 ### Q14 · Intermediate · Topological Sort Kahn's BFS
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 **Question:** Implement Kahn's algorithm to topologically sort a DAG. Return empty list if a cycle exists.
 
 `n=6, edges=[(5,2),(5,0),(4,0),(4,1),(2,3),(3,1)]`
@@ -711,6 +753,9 @@ print(topo_sort_kahn(6, edges))  # [4, 5, 0, 2, 3, 1] (one valid ordering)
 
 <a id="q15"></a>
 ### Q15 · Intermediate · Topological Sort DFS
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Question:** Implement DFS-based topological sort. How does this differ from Kahn's, and when would you choose one over the other?
 
@@ -772,6 +817,9 @@ print(topo_sort_dfs(6, edges))  # valid topological order
 <a id="q16"></a>
 ### Q16 · Intermediate · Course Schedule I
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 **Question (LeetCode 207):** Given `numCourses` and a list of `prerequisites` where `[a,b]` means "take b before a", return `True` if you can finish all courses.
 
 Input: `numCourses=2, prerequisites=[[1,0]]` → True
@@ -824,6 +872,9 @@ print(can_finish(2, [[1,0],[0,1]])) # False — cycle
 <a id="q17"></a>
 ### Q17 · Intermediate · Course Schedule II
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 **Question (LeetCode 210):** Same as Q16, but return the order in which to take courses (or `[]` if impossible).
 
 <details>
@@ -872,6 +923,9 @@ print(find_order(2, [[1,0],[0,1]]))               # []
 
 <a id="q18"></a>
 ### Q18 · Intermediate · Bipartite Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 **Question:** Determine if a graph is bipartite (can be 2-colored such that no two adjacent nodes share a color).
 
@@ -926,6 +980,9 @@ print(is_bipartite([[1,2,3],[0,2],[0,1,3],[0,2]]))       # False
 <a id="q19"></a>
 ### Q19 · Intermediate · Clone Graph
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 **Question (LeetCode 133):** Given a node in a connected undirected graph, return a deep copy of the graph. Each node has `val` and `neighbors`.
 
 <details>
@@ -973,6 +1030,9 @@ def clone_graph(node):
 <a id="q20"></a>
 ### Q20 · Intermediate · Find All Paths Source to Target
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 **Question (LeetCode 797):** Given a DAG (nodes 0 to n-1, node n-1 is target), find all paths from node 0 to node n-1.
 
 Input: `graph = [[1,2],[3],[3],[]]` → `[[0,1,3],[0,2,3]]`
@@ -1019,6 +1079,9 @@ print(all_paths_source_target([[1,2],[3],[3],[]]))  # [[0,1,3],[0,2,3]]
 
 <a id="q21"></a>
 ### Q21 · Advanced · Dijkstra's Algorithm
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 **Question:** Implement Dijkstra's algorithm to find shortest distances from a source node to all other nodes. Graph has non-negative weights.
 
@@ -1073,6 +1136,9 @@ print(dijkstra(graph, 0))   # {0:0, 1:3, 2:1, 3:4}
 <a id="q22"></a>
 ### Q22 · Advanced · Network Delay Time
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 **Question (LeetCode 743):** Given a network of `n` nodes (1 to n) and directed weighted edges `times[i] = [u, v, w]` (signal travels from u to v in w milliseconds), find the minimum time for a signal sent from `k` to reach ALL nodes. Return -1 if impossible.
 
 <details>
@@ -1122,6 +1188,9 @@ print(network_delay_time([[1,2,1]], 2, 2))                    # -1 (2 can't reac
 
 <a id="q23"></a>
 ### Q23 · Advanced · When BFS vs DFS
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 **Question:** For each scenario, choose BFS or DFS and explain your reasoning:
 1. Find the shortest route in a maze (unweighted)
@@ -1177,6 +1246,9 @@ BFS: shortest path, level-order, proximity. DFS: all paths, cycle detection, top
 
 <a id="q24"></a>
 ### Q24 · Advanced · Mark Visited Before or After Queue
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 **Question:** Show with a concrete graph why marking visited when POPPING from the BFS queue (instead of when PUSHING) leads to incorrect or slow behavior. Fix the code.
 
@@ -1244,6 +1316,9 @@ print("Correct BFS counts:", bfs_correct(graph, 1)) # each node processed exactl
 
 <a id="q25"></a>
 ### Q25 · Advanced · Detect Cycle Visited Set Trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Question:** This code claims to detect a cycle in a directed graph, but has a critical bug. Identify it, show a concrete graph that exposes it, and write the correct version.
 

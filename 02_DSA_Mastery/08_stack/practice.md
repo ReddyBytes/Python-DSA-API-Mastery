@@ -44,6 +44,9 @@
 <a id="q1"></a>
 ### Q1 — What comes out first from a stack?
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 You push the numbers 10, 20, 30 onto a stack (in that order). You then call pop() three times. What is the output order, and why?
 
 <details>
@@ -81,6 +84,9 @@ print(stack.pop())  # 10
 
 <a id="q2"></a>
 ### Q2 — Implement push / pop / peek with a Python list
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Write a `Stack` class backed by a Python list. It must support:
 - `push(val)` — add to top
@@ -142,6 +148,9 @@ print(s.pop())    # None — empty, no IndexError
 <a id="q3"></a>
 ### Q3 — Implement a stack using `collections.deque`
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 Rewrite the same push/pop/peek interface using `collections.deque` instead of a plain list. Why might you choose `deque` over a list for a stack?
 
 <details>
@@ -197,6 +206,9 @@ print(s.pop())    # a
 <a id="q4"></a>
 ### Q4 — Safe peek — handle empty stack
 
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 Write a standalone `safe_peek(stack)` function that returns the top element or raises a custom `StackUnderflowError` with a meaningful message instead of a generic `IndexError`.
 
 <details>
@@ -242,6 +254,9 @@ except StackUnderflowError as e:
 <a id="q5"></a>
 ### Q5 — Reverse a list using a stack
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Given a list `[1, 2, 3, 4, 5]`, use a stack to produce `[5, 4, 3, 2, 1]`. Do not use Python's built-in `reversed()` or list slicing.
 
 <details>
@@ -283,6 +298,9 @@ print(reverse_with_stack([42]))             # [42]
 <a id="q6"></a>
 ### Q6 — Palindrome check using a stack
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 Write `is_palindrome(s)` that uses a stack to determine whether a string is a palindrome (reads the same forwards and backwards). Ignore case and spaces.
 
 <details>
@@ -323,6 +341,9 @@ print(is_palindrome(""))            # True
 
 <a id="q7"></a>
 ### Q7 — Count elements without destroying the stack
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Given a stack (Python list), return the number of elements without calling `len()` on the list directly — use only `push`, `pop`, and `is_empty` operations. The original stack must be intact after the call.
 
@@ -368,6 +389,9 @@ print(s)                   # [10, 20, 30, 40] — unchanged
 
 <a id="q8"></a>
 ### Q8 — Stack vs Queue: spot the difference
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 You have two data structures. Structure A processes tasks in the order: `[job1, job2, job3]` — job1 is processed first. Structure B processes tasks in the order: `[job3, job2, job1]` — job3 (last added) is processed first.
 
@@ -416,6 +440,9 @@ print(s.pop())       # job3 — last added, first served
 <a id="q9"></a>
 ### Q9 — Balanced parentheses (single type)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 Write `is_balanced(s)` that returns `True` if every `(` has a matching `)` in the correct order. Input contains only `(` and `)`.
 
 <details>
@@ -458,6 +485,9 @@ assert is_balanced("")          == True
 
 <a id="q10"></a>
 ### Q10 — Balanced brackets (multi-type `(){}[]`)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Extend the solution to handle `(`, `)`, `{`, `}`, `[`, `]`. Each opener must be closed by its exact partner.
 
@@ -505,6 +535,9 @@ assert is_valid("")         == True
 
 <a id="q11"></a>
 ### Q11 — Min Stack: O(1) getMin()
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Design a stack that supports `push`, `pop`, `top`, and `get_min` — all in O(1) time. `get_min` returns the minimum element currently in the stack.
 
@@ -567,6 +600,9 @@ print(ms.get_min())   # 5
 <a id="q12"></a>
 ### Q12 — Daily temperatures
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 Given a list of daily temperatures, return a list where `result[i]` is the number of days you have to wait after day `i` to get a warmer temperature. If no future day is warmer, use `0`.
 
 Example: `[73, 74, 75, 71, 69, 72, 76, 73]` → `[1, 1, 4, 2, 1, 1, 0, 0]`
@@ -616,6 +652,9 @@ print(daily_temperatures([30, 20, 10]))
 <a id="q13"></a>
 ### Q13 — Next greater element
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 Given an array, return an array where `result[i]` is the next element to the right that is strictly greater than `nums[i]`. If none exists, use `-1`.
 
 Example: `[2, 1, 5, 3, 6]` → `[5, 5, 6, 6, -1]`
@@ -660,6 +699,9 @@ print(next_greater_element([1, 3, 2, 4]))      # [3, 4, 4, -1]
 
 <a id="q14"></a>
 ### Q14 — Browser history with back/forward
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Implement a `Browser` class with:
 - `navigate(url)` — go to a new page (clears forward history)
@@ -728,6 +770,9 @@ print(b.forward())       # openai.com (no forward — stays)
 <a id="q15"></a>
 ### Q15 — Undo/redo with a command stack
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 Implement a simple text buffer with `write(text)`, `undo()`, and `redo()`. Each write is undoable. After an undo, redo restores it. Writing new text clears the redo history.
 
 <details>
@@ -791,6 +836,9 @@ print(buf.text)    # Hello, World
 <a id="q16"></a>
 ### Q16 — Evaluate Reverse Polish Notation (RPN)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 Evaluate an arithmetic expression in Reverse Polish Notation. Tokens are integers or one of `+`, `-`, `*`, `/` (truncate toward zero on division).
 
 Example: `["2","1","+","3","*"]` → `9` because `(2 + 1) * 3 = 9`
@@ -843,6 +891,9 @@ print(eval_rpn(["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", 
 <a id="q17"></a>
 ### Q17 — Simplify file path
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 Given a Unix file path like `"/a/./b/../c/"`, return the simplified canonical path `"/a/c"`. Rules: `.` means current dir, `..` means parent dir, multiple slashes are ignored.
 
 <details>
@@ -886,6 +937,9 @@ print(simplify_path("/a/b/c/../../../"))   # /
 
 <a id="q18"></a>
 ### Q18 — Trace the recursion call stack for `factorial(4)`
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Without running code, draw the call stack when `factorial(4)` is executing at its deepest point. Then describe how it unwinds.
 
@@ -942,6 +996,9 @@ print(sys.getrecursionlimit())   # 1000
 <a id="q19"></a>
 ### Q19 — Decode nested string `3[a2[b]]`
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 Given an encoded string like `"3[a2[b]]"`, return its decoded form. The rule: `k[encoded_string]` means `encoded_string` repeated `k` times.
 
 <details>
@@ -991,6 +1048,9 @@ print(decode_string("2[abc]3[cd]e")) # abcabccdcdcde
 
 <a id="q20"></a>
 ### Q20 — Stock span problem
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 For each day's stock price, compute the "span": the number of consecutive days immediately before (and including) today where the price was less than or equal to today's price.
 
@@ -1043,6 +1103,9 @@ print(stock_span([10, 4, 5, 90, 120, 80]))
 <a id="q21"></a>
 ### Q21 — Largest rectangle in histogram
 
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 Given an array of bar heights representing a histogram, find the area of the largest rectangle that can be formed within the histogram.
 
 Example: `[2, 1, 5, 6, 2, 3]` → `10` (bars of height 5 and 6, width 2)
@@ -1090,6 +1153,9 @@ print(largest_rectangle([6, 2, 5, 4, 5, 1, 6]))# 12
 <a id="q22"></a>
 ### Q22 — Next greater element II (circular array)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 Same as Q13, but the array is circular — after the last element, wrap around to the first. Return `-1` only if no greater element exists anywhere in the array.
 
 Example: `[1, 2, 1]` → `[2, -1, 2]`
@@ -1135,6 +1201,9 @@ print(next_greater_circular([5, 4, 3, 2, 1]))   # [-1, 5, 5, 5, 5]
 
 <a id="q23"></a>
 ### Q23 — Trapping rain water
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Given an elevation map as an array of non-negative integers, compute how much water can be trapped after a rain.
 
@@ -1185,6 +1254,9 @@ print(trap([3, 0, 2, 0, 4]))                           # 7
 
 <a id="q24"></a>
 ### Q24 — Diagnose and fix a stack overflow
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 The following code crashes with `RecursionError` for large inputs. Explain why, then rewrite it iteratively using an explicit stack.
 
@@ -1256,6 +1328,9 @@ assert sum_nested_iterative([1, 2, 3])           == 6
 
 <a id="q25"></a>
 ### Q25 — Design a stack with O(1) push, pop, and `get_max()`
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Design a stack supporting `push`, `pop`, `top`, and `get_max()` — all O(1). `get_max` returns the maximum element currently in the stack.
 

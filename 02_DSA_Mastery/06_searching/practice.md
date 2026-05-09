@@ -53,6 +53,9 @@
 <a id="q1"></a>
 ### Q1 — Linear Search — Return Index
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 Given an unsorted list and a target, return the index of the first occurrence of
 target, or -1 if not found.
 
@@ -93,6 +96,9 @@ wrong answers on shuffled input.
 <a id="q2"></a>
 ### Q2 — Linear Search — All Occurrences
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 Return a list of all indices where target appears. Return an empty list if none.
 
 ```
@@ -128,6 +134,9 @@ side, which is worse in duplicated data.
 
 <a id="q3"></a>
 ### Q3 — Binary Search — Iterative
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Implement iterative binary search. Return the index of target in the sorted array,
 or -1 if absent.
@@ -174,6 +183,9 @@ the single-element window correctly — that last element might be the answer.
 
 <a id="q4"></a>
 ### Q4 — Binary Search — Recursive
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Implement the same binary search using recursion.
 
@@ -223,6 +235,9 @@ limit; iterative is preferred for large arrays.
 <a id="q5"></a>
 ### Q5 — Count Occurrences in Sorted Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Given a sorted array with possible duplicates, count how many times `target` appears.
 
 ```
@@ -263,6 +278,9 @@ linear scan through duplicates.
 
 <a id="q6"></a>
 ### Q6 — Insertion Point
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Given a sorted array and a target, return the index where target should be inserted
 to keep the array sorted. Do not insert — just return the index.
@@ -314,6 +332,9 @@ after loop exit is essential for many boundary problems.
 <a id="q7"></a>
 ### Q7 — Complexity Analysis — When to Choose What
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 No code required. Answer these four sub-questions:
 
 1. Array has 1 million elements, unsorted. Single one-time lookup needed. What do you use?
@@ -361,6 +382,9 @@ Think about: (a) cost of preprocessing vs savings on repeated lookups,
 <a id="q8"></a>
 ### Q8 — Linear Search on 2D List
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 Given a 2D list (unsorted, rows unsorted), find the (row, col) of target.
 Return (-1, -1) if not found.
 
@@ -404,6 +428,9 @@ ARE sorted, Q14/Q15 show dramatically better approaches.
 
 <a id="q9"></a>
 ### Q9 — First Occurrence
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Find the index of the **first** occurrence of target in a sorted array with duplicates.
 Return -1 if absent.
@@ -455,6 +482,9 @@ wrong index silently.
 <a id="q10"></a>
 ### Q10 — Last Occurrence
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 Find the index of the **last** occurrence of target. Return -1 if absent.
 
 ```
@@ -501,6 +531,9 @@ confirmed match before the pointers cross.
 <a id="q11"></a>
 ### Q11 — Count of Target in Sorted Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 Using first/last occurrence (no bisect module), return how many times target
 appears in a sorted array.
 
@@ -541,6 +574,9 @@ but implemented from scratch, which is what interviewers want to see.
 
 <a id="q12"></a>
 ### Q12 — Search in Rotated Sorted Array
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 A sorted array was rotated at an unknown pivot. Search for target.
 Return its index or -1.
@@ -596,6 +632,9 @@ half. Note the `<=` in `arr[lo] <= arr[mid]` handles the case where `lo == mid`.
 <a id="q13"></a>
 ### Q13 — Find Minimum in Rotated Sorted Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 Given a rotated sorted array with distinct elements, return the minimum value.
 
 ```
@@ -640,6 +679,9 @@ the minimum is at `mid` or to the left.
 
 <a id="q14"></a>
 ### Q14 — Search a 2D Matrix
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Matrix where each row is sorted, and the first element of each row is greater than
 the last element of the previous row (effectively a sorted 1D array folded into rows).
@@ -697,6 +739,9 @@ The index mapping `mid // cols` (row) and `mid % cols` (col) is the key insight.
 <a id="q15"></a>
 ### Q15 — Search a 2D Matrix II (sorted rows + cols)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 Each row is sorted left to right. Each column is sorted top to bottom.
 Rows do not need to start after the previous row ends.
 Return True if target exists.
@@ -753,6 +798,9 @@ sorted relative to each other.
 <a id="q16"></a>
 ### Q16 — Find Peak Element
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 A peak element is greater than its neighbors. Find any peak index.
 Assume `arr[-1] = arr[n] = -infinity`.
 
@@ -797,6 +845,9 @@ is binary search on a property (the slope direction) rather than a value.
 
 <a id="q17"></a>
 ### Q17 — Floor and Ceiling
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Given a sorted array and target, return:
 - **floor**: the largest element ≤ target (or None if all > target)
@@ -850,6 +901,9 @@ extremely common.
 <a id="q18"></a>
 ### Q18 — Square Root via Binary Search
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 Return the integer floor of `sqrt(n)` without using `math.sqrt`.
 
 ```
@@ -898,6 +952,9 @@ values below the true sqrt satisfy it, all above do not. After the loop,
 
 <a id="q19"></a>
 ### Q19 — Koko Eating Bananas
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Koko has piles of bananas. She has `h` hours. Each hour she picks one pile and
 eats up to `k` bananas from it. Find the minimum integer `k` such that she can
@@ -950,6 +1007,9 @@ search valid. The Template 2 (`lo < hi`) loop converges to the first True value.
 
 <a id="q20"></a>
 ### Q20 — Ship Packages Within D Days
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Given package weights and a number of days `d`, find the minimum ship capacity
 such that all packages can be shipped within `d` days (maintaining order).
@@ -1011,6 +1071,9 @@ painter partition — all the same template.
 
 <a id="q21"></a>
 ### Q21 — Median of Two Sorted Arrays
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Given two sorted arrays, find their median in O(log(min(n, m))) time.
 
@@ -1079,6 +1142,9 @@ up the partition invariant correctly.
 <a id="q22"></a>
 ### Q22 — Smallest Divisor Given Threshold
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 Given an array of integers and a threshold, find the smallest divisor such that
 the sum of `ceil(arr[i] / divisor)` for all i is ≤ threshold.
 
@@ -1130,6 +1196,9 @@ the monotone property.
 <a id="q23"></a>
 ### Q23 — Find Duplicate in Array (Binary Search on Value Range)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 Given an array of n+1 integers where each value is in [1, n], find the duplicate
 without modifying the array and using O(1) extra space.
 
@@ -1178,6 +1247,9 @@ harder to derive under pressure.
 
 <a id="q24"></a>
 ### Q24 — Allocate Minimum Pages
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Given `n` books with page counts and `m` students, allocate contiguous books
 to each student such that the maximum pages assigned to any student is minimized.
@@ -1239,6 +1311,9 @@ If you need more students than m, the limit is too tight.
 
 <a id="q25"></a>
 ### Q25 — Off-by-One Bug Hunt
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Each of the four functions below has exactly one off-by-one or boundary bug.
 Identify and fix each one.

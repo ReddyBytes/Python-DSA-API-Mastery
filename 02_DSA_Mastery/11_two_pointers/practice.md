@@ -39,6 +39,9 @@
 <a id="q1"></a>
 ### Q1 · valid-palindrome — Valid Palindrome 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 Given a string `s`, return `True` if it reads the same forwards and backwards (ignore case and non-alphanumeric characters), `False` otherwise.
 
 ```
@@ -81,6 +84,9 @@ Time: O(n) · Space: O(1)
 <a id="q2"></a>
 ### Q2 · two-sum-sorted — Two Sum in Sorted Array 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 Given a sorted array `numbers` (1-indexed) and a `target`, return the 1-indexed positions of the two numbers that add to `target`. Exactly one solution guaranteed.
 
 ```
@@ -122,6 +128,9 @@ Time: O(n) · Space: O(1)
 <a id="q3"></a>
 ### Q3 · remove-duplicates — Remove Duplicates from Sorted Array 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 Given a sorted array `nums`, remove duplicates in-place and return the count of unique elements. The first k elements of the array should hold the unique values.
 
 ```
@@ -161,6 +170,9 @@ Time: O(n) · Space: O(1)
 <a id="q4"></a>
 ### Q4 · move-zeros — Move Zeros to End 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 Given an array `nums`, move all `0`s to the end while maintaining the relative order of non-zero elements. Do it in-place.
 
 ```
@@ -196,6 +208,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q5"></a>
 ### Q5 · reverse-array — Reverse an Array In-Place 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Given an array `arr`, reverse it in-place and return it.
 
@@ -233,6 +248,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q6"></a>
 ### Q6 · cycle-detection — Linked List Cycle Detection 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Given the head of a linked list, return `True` if there is a cycle, `False` otherwise.
 
@@ -277,6 +295,9 @@ Time: O(n) · Space: O(1)
 <a id="q7"></a>
 ### Q7 · middle-of-linked-list — Middle of Linked List 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 Given the head of a singly linked list, return the middle node. If two middle nodes exist, return the second one.
 
 ```
@@ -312,6 +333,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q8"></a>
 ### Q8 · when-two-pointers-beats-brute-force — Why O(n) Beats O(n²) 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Given a sorted array of 100,000 integers, you want to find if any two elements sum to a target `T`. Your teammate wrote a nested loop solution. Explain the problem and show the two-pointer version.
 
@@ -360,6 +384,9 @@ Time: O(n) · Space: O(1)
 <a id="q9"></a>
 ### Q9 · container-with-most-water — Container With Most Water 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 Given an array `height` where `height[i]` is the height of a wall at position `i`, find two walls that together form a container holding the most water.
 
 ```
@@ -400,6 +427,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q10"></a>
 ### Q10 · three-sum — Three Sum 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Given an integer array `nums`, return all unique triplets `[a, b, c]` such that `a + b + c == 0`. The solution set must not contain duplicate triplets.
 
@@ -453,6 +483,9 @@ Time: O(n²) · Space: O(1) (excluding output)
 <a id="q11"></a>
 ### Q11 · remove-element-in-place — Remove Element In-Place 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 Given an array `nums` and a value `val`, remove all occurrences of `val` in-place. Return the count of elements not equal to `val`.
 
 ```
@@ -490,6 +523,9 @@ Time: O(n) · Space: O(1)
 <a id="q12"></a>
 ### Q12 · partition-around-value — Partition Array Around a Pivot 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 Given an array `nums` and a `pivot`, rearrange so all elements less than `pivot` come before elements greater than or equal to `pivot`. Order within each partition does not need to be preserved.
 
 ```
@@ -523,6 +559,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q13"></a>
 ### Q13 · sort-colors-dutch-flag — Sort Colors (Dutch National Flag) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Given an array `nums` containing only 0, 1, and 2, sort it in-place without using any built-in sort. One pass only.
 
@@ -567,6 +606,9 @@ Time: O(n) · Space: O(1)
 <a id="q14"></a>
 ### Q14 · merge-sorted-arrays — Merge Two Sorted Arrays 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 Given two sorted arrays `arr1` and `arr2`, return a new sorted array containing all elements from both.
 
 ```
@@ -609,6 +651,9 @@ Time: O(n + m) · Space: O(n + m)
 
 <a id="q15"></a>
 ### Q15 · intersection-sorted-arrays — Intersection of Two Sorted Arrays 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Given two sorted arrays, return the elements that appear in both arrays (no duplicates in output).
 
@@ -653,6 +698,9 @@ Time: O(n + m) · Space: O(min(n, m))
 <a id="q16"></a>
 ### Q16 · choosing-pointer-direction — Choosing Pointer Movement Direction 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 For each of the following scenarios, state which pointer to move and why:
 
 1. Sorted array two-sum: `nums[left] + nums[right] > target`
@@ -695,6 +743,9 @@ Time: O(1) per decision · Space: O(1)
 
 <a id="q17"></a>
 ### Q17 · cycle-entry-point — Cycle Entry Point in Linked List 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Given a linked list with a cycle, return the node where the cycle begins. If there is no cycle, return `None`.
 
@@ -739,6 +790,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q18"></a>
 ### Q18 · valid-palindrome-ii — Valid Palindrome II (One Deletion Allowed) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Given a string `s`, return `True` if it can become a palindrome by removing at most one character.
 
@@ -786,6 +840,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q19"></a>
 ### Q19 · two-pointers-vs-hashmap — Two Pointers vs Hash Map Decision 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 You are given an unsorted array `nums` and a target. Your teammate says "just use two pointers." Explain when they are wrong and implement both the correct two-pointer solution (if applicable) and the hash map fallback.
 
@@ -840,6 +897,9 @@ Time: O(n log n) sort + O(n) scan vs O(n) hash map · Space: O(1) vs O(n)
 
 <a id="q20"></a>
 ### Q20 · wrong-stop-condition — Wrong Stop Condition Bug 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 The following code is supposed to check if a string is a palindrome, but it has a bug in the stop condition. Identify the bug and explain what goes wrong on a specific input.
 
@@ -905,6 +965,9 @@ Time: O(n) · Space: O(1)
 <a id="q21"></a>
 ### Q21 · four-sum — Four Sum 🟠
 
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 Given an integer array `nums` and a target integer `target`, return all unique quadruplets `[a, b, c, d]` such that `a + b + c + d == target`.
 
 ```
@@ -963,6 +1026,9 @@ Time: O(n³) · Space: O(1) (excluding output)
 <a id="q22"></a>
 ### Q22 · trapping-rain-water — Trapping Rain Water 🟠
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 Given an elevation map as an array `height`, compute how much water can be trapped after it rains.
 
 ```
@@ -1013,6 +1079,9 @@ Time: O(n) · Space: O(1)
 <a id="q23"></a>
 ### Q23 · three-sum-closest — Three Sum Closest 🟠
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 Given an integer array `nums` and an integer `target`, find three integers whose sum is closest to `target`. Return the sum.
 
 ```
@@ -1058,6 +1127,9 @@ Time: O(n²) · Space: O(1)
 
 <a id="q24"></a>
 ### Q24 · not-moving-both-pointers-bug — The "Not Moving Both Pointers" Bug 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 The following 3Sum implementation has a subtle bug that causes either an infinite loop or duplicate results. Find both bugs and explain the fix.
 
@@ -1138,6 +1210,9 @@ Time: O(n²) · Space: O(1)
 
 <a id="q25"></a>
 ### Q25 · nth-node-from-end — Nth Node From End of Linked List 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Given the head of a linked list and an integer `n`, remove the nth node from the end and return the head.
 

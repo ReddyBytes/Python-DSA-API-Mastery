@@ -4,41 +4,45 @@
 
 | # | Chapter | Topic | Difficulty |
 |---|---------|-------|------------|
-| Q1 | Ch1 requests + BS4 | Basic GET request with headers | 🟢 Basic |
-| Q2 | Ch1 requests + BS4 | Parse HTML — find and find_all | 🟢 Basic |
-| Q3 | Ch1 requests + BS4 | CSS selectors | 🟢 Basic |
-| Q4 | Ch1 requests + BS4 | Extract text vs attributes | 🟢 Basic |
-| Q5 | Ch1 requests + BS4 | raise_for_status and response properties | 🟢 Basic |
-| Q6 | Ch2 Multiple Pages | Pagination loop with query params | 🟡 Intermediate |
-| Q7 | Ch2 Multiple Pages | Relative URL construction | 🟡 Intermediate |
-| Q8 | Ch2 Multiple Pages | Rate limiting with time.sleep | 🟢 Basic |
-| Q9 | Ch2 Multiple Pages | Error handling 404 and 500 | 🟡 Intermediate |
-| Q10 | Ch2 Multiple Pages | Retry with exponential backoff | 🟠 Advanced |
-| Q11 | Ch3 JavaScript Pages | Why requests fails on JS pages | 🟢 Basic |
-| Q12 | Ch3 JavaScript Pages | Selenium headless Chrome setup | 🟡 Intermediate |
-| Q13 | Ch3 JavaScript Pages | WebDriverWait — wait for selector | 🟡 Intermediate |
-| Q14 | Ch3 JavaScript Pages | Playwright async basics | 🟠 Advanced |
-| Q15 | Ch3 JavaScript Pages | Extract rendered page via BS4 | 🟡 Intermediate |
-| Q16 | Ch4 Ethical & Legal | robots.txt parsing | 🟢 Basic |
-| Q17 | Ch4 Ethical & Legal | User-Agent etiquette | 🟢 Basic |
-| Q18 | Ch4 Ethical & Legal | When scraping is and isn't legal | 🟢 Basic |
-| Q19 | Ch5 requests.Session | Session for cookie persistence | 🟡 Intermediate |
-| Q20 | Ch5 requests.Session | Shared headers on a Session | 🟢 Basic |
-| Q21 | Ch5 requests.Session | Connection pooling benefit | 🟡 Intermediate |
-| Q22 | Ch6 Structured Data | Scrape to list of dicts | 🟡 Intermediate |
-| Q23 | Ch6 Structured Data | pandas DataFrame from scraped data | 🟡 Intermediate |
-| Q24 | Ch6 Structured Data | Save to CSV and JSON | 🟢 Basic |
-| Q25 | Ch6 Structured Data | Deduplication of scraped records | 🟡 Intermediate |
+| [Q1](#q1) | Ch1 requests + BS4 | Basic GET request with headers | 🟢 Basic |
+| [Q2](#q2) | Ch1 requests + BS4 | Parse HTML — find and find_all | 🟢 Basic |
+| [Q3](#q3) | Ch1 requests + BS4 | CSS selectors | 🟢 Basic |
+| [Q4](#q4) | Ch1 requests + BS4 | Extract text vs attributes | 🟢 Basic |
+| [Q5](#q5) | Ch1 requests + BS4 | raise_for_status and response properties | 🟢 Basic |
+| [Q6](#q6) | Ch2 Multiple Pages | Pagination loop with query params | 🟡 Intermediate |
+| [Q7](#q7) | Ch2 Multiple Pages | Relative URL construction | 🟡 Intermediate |
+| [Q8](#q8) | Ch2 Multiple Pages | Rate limiting with time.sleep | 🟢 Basic |
+| [Q9](#q9) | Ch2 Multiple Pages | Error handling 404 and 500 | 🟡 Intermediate |
+| [Q10](#q10) | Ch2 Multiple Pages | Retry with exponential backoff | 🟠 Advanced |
+| [Q11](#q11) | Ch3 JavaScript Pages | Why requests fails on JS pages | 🟢 Basic |
+| [Q12](#q12) | Ch3 JavaScript Pages | Selenium headless Chrome setup | 🟡 Intermediate |
+| [Q13](#q13) | Ch3 JavaScript Pages | WebDriverWait — wait for selector | 🟡 Intermediate |
+| [Q14](#q14) | Ch3 JavaScript Pages | Playwright async basics | 🟠 Advanced |
+| [Q15](#q15) | Ch3 JavaScript Pages | Extract rendered page via BS4 | 🟡 Intermediate |
+| [Q16](#q16) | Ch4 Ethical & Legal | robots.txt parsing | 🟢 Basic |
+| [Q17](#q17) | Ch4 Ethical & Legal | User-Agent etiquette | 🟢 Basic |
+| [Q18](#q18) | Ch4 Ethical & Legal | When scraping is and isn't legal | 🟢 Basic |
+| [Q19](#q19) | Ch5 requests.Session | Session for cookie persistence | 🟡 Intermediate |
+| [Q20](#q20) | Ch5 requests.Session | Shared headers on a Session | 🟢 Basic |
+| [Q21](#q21) | Ch5 requests.Session | Connection pooling benefit | 🟡 Intermediate |
+| [Q22](#q22) | Ch6 Structured Data | Scrape to list of dicts | 🟡 Intermediate |
+| [Q23](#q23) | Ch6 Structured Data | pandas DataFrame from scraped data | 🟡 Intermediate |
+| [Q24](#q24) | Ch6 Structured Data | Save to CSV and JSON | 🟢 Basic |
+| [Q25](#q25) | Ch6 Structured Data | Deduplication of scraped records | 🟡 Intermediate |
 
 ---
 
 ## Ch1 — requests + BeautifulSoup
 
+<a id="q1"></a>
+
 ### Q1 · Ch1 — Basic GET Request with Headers 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write a function `fetch_page(url)` that sends a GET request with a browser-like User-Agent header, a 10-second timeout, and returns the response text. Raise an exception for any HTTP error status.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use requests.get() with headers={"User-Agent": "..."} and call raise_for_status() before returning response.text</details>
 <details><summary>✅ Answer</summary>
@@ -60,7 +64,12 @@ def fetch_page(url: str) -> str:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Ch1 — Parse HTML with find and find_all 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Given the HTML string below, use BeautifulSoup to (a) find the first `<h1>` tag text, and (b) collect a list of all `<a>` href values.
 
@@ -72,7 +81,6 @@ Given the HTML string below, use BeautifulSoup to (a) find the first `<h1>` tag 
 </body></html>
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>soup.find("h1").get_text() and [a["href"] for a in soup.find_all("a")]</details>
 <details><summary>✅ Answer</summary>
@@ -99,7 +107,12 @@ print(links)   # ["/item/1", "/item/2"]
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Ch1 — CSS Selectors 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Using the product HTML below, use `soup.select()` to extract all product names and prices into a list of dicts.
 
@@ -114,7 +127,6 @@ Using the product HTML below, use `soup.select()` to extract all product names a
 </div>
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>soup.select("div.product-card") then select_one("h2.product-name") inside each card</details>
 <details><summary>✅ Answer</summary>
@@ -148,7 +160,12 @@ print(products)
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Ch1 — Extract Text vs Attributes 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Given this HTML, extract (a) the image `src` attribute, (b) the link `href`, and (c) the `data-id` from the div — all using BeautifulSoup.
 
@@ -159,7 +176,6 @@ Given this HTML, extract (a) the image `src` attribute, (b) the link `href`, and
 </div>
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use el["attr"] for attribute access or el.get("attr", default) for safe access</details>
 <details><summary>✅ Answer</summary>
@@ -188,11 +204,15 @@ print(data_id)   # "42"
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Ch1 — raise_for_status and Response Properties 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write code that fetches a URL and prints the status code, content type, and first 100 characters of the response body. Handle HTTP errors explicitly and print a friendly message.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>response.status_code, response.headers["Content-Type"], response.text[:100], catch requests.HTTPError</details>
 <details><summary>✅ Answer</summary>
@@ -223,11 +243,15 @@ def inspect_response(url: str) -> None:
 
 ## Ch2 — Scraping Multiple Pages
 
+<a id="q6"></a>
+
 ### Q6 · Ch2 — Pagination Loop with Query Params 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write a `scrape_all_pages(base_url, max_pages)` function that loops through pages using `?page=N` query params, collects items from each page, and stops early if a page returns no items.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use base_url.format(page) or f-string, check len(items) == 0 to break, always time.sleep(1)</details>
 <details><summary>✅ Answer</summary>
@@ -270,11 +294,15 @@ def scrape_all_pages(base_url: str, max_pages: int = 50) -> list[dict]:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Ch2 — Relative URL Construction 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 A scraper finds product links like `/products/42` on `https://shop.example.com`. Write a function that takes a base URL and a relative href and returns the full absolute URL. Handle both relative paths (starting with `/`) and already-absolute URLs.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use urllib.parse.urljoin — it handles both relative and absolute URLs correctly</details>
 <details><summary>✅ Answer</summary>
@@ -297,11 +325,15 @@ print(make_absolute(base, "https://other.com/x")) # https://other.com/x (absolut
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Ch2 — Rate Limiting with time.sleep 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 You're scraping 100 pages. Show two patterns: (a) a fixed 1-second delay after every request, and (b) a randomized delay between 1 and 3 seconds to appear more human-like.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>time.sleep(1) for fixed; random.uniform(1, 3) for randomized</details>
 <details><summary>✅ Answer</summary>
@@ -327,11 +359,15 @@ for page in range(1, 101):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Ch2 — Error Handling for 404 and 500 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write a `safe_fetch(url)` function that handles HTTP 404 (return None and log), HTTP 500 (raise a custom exception), and connection errors (return None and log).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Catch requests.HTTPError and check e.response.status_code to differentiate 404 from 500</details>
 <details><summary>✅ Answer</summary>
@@ -373,11 +409,15 @@ def safe_fetch(url: str) -> str | None:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Ch2 — Retry with Exponential Backoff 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Configure a `requests.Session` with automatic retry logic that retries up to 3 times on status codes 429, 500, 502, 503, 504 with exponential backoff (1s, 2s, 4s delays).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use requests.adapters.HTTPAdapter and urllib3.util.retry.Retry with backoff_factor</details>
 <details><summary>✅ Answer</summary>
@@ -414,11 +454,15 @@ session.headers.update({"User-Agent": "Mozilla/5.0"})
 
 ## Ch3 — Handling JavaScript-Rendered Pages
 
+<a id="q11"></a>
+
 ### Q11 · Ch3 — Why requests Fails on JS Pages 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Explain why `requests.get()` returns incomplete data for JavaScript-rendered pages. What does `requests` actually receive, and what would you see if you used `View Page Source` vs the browser DevTools inspector?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>requests gets the raw HTML the server sends before any JavaScript executes</details>
 <details><summary>✅ Answer</summary>
@@ -453,11 +497,15 @@ soup = BeautifulSoup(r.text, "html.parser")
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Ch3 — Selenium Headless Chrome Setup 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Write the setup code to launch Chrome in headless mode using Selenium, navigate to a URL, and safely close the browser even if an exception occurs.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use Options() with --headless, wrap driver.get() in try/finally with driver.quit()</details>
 <details><summary>✅ Answer</summary>
@@ -486,11 +534,15 @@ finally:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Ch3 — WebDriverWait — Wait for Selector 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 A product page loads its price via JavaScript 2–3 seconds after page load. Write code using `WebDriverWait` to wait up to 10 seconds for an element with class `price` to appear, then extract its text.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "price")))</details>
 <details><summary>✅ Answer</summary>
@@ -524,11 +576,15 @@ finally:
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Ch3 — Playwright Async Basics 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Rewrite the Selenium example from Q12 using async Playwright. Launch Chromium headlessly, navigate to a URL, wait for a `.price` selector, extract its text, and close the browser.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>async with async_playwright() as p, await p.chromium.launch(headless=True), await page.wait_for_selector(".price")</details>
 <details><summary>✅ Answer</summary>
@@ -557,11 +613,15 @@ async def scrape_with_playwright(url: str) -> str:
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Ch3 — Extract After Render via BeautifulSoup 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 After using Selenium to load a JavaScript page, extract the rendered HTML and parse it with BeautifulSoup. Show the pattern that combines both tools.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>driver.page_source gives you the fully rendered HTML — pass it to BeautifulSoup as usual</details>
 <details><summary>✅ Answer</summary>
@@ -603,11 +663,15 @@ finally:
 
 ## Ch4 — Ethical and Legal Guidelines
 
+<a id="q16"></a>
+
 ### Q16 · Ch4 — robots.txt Parsing 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Write code using `urllib.robotparser` to check whether your scraper is allowed to access `/products` and `/private/data` on a given website.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>RobotFileParser.set_url(), .read(), then .can_fetch("*", url)</details>
 <details><summary>✅ Answer</summary>
@@ -637,7 +701,12 @@ check_robots("https://example.com", ["/products", "/private/data"])
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Ch4 — User-Agent Etiquette 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 What is the difference between these two User-Agent headers, and which is more ethical for a research scraper? Write the better one and explain why.
 
@@ -652,7 +721,6 @@ headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0) Chrome/120.0"}
 headers = {"User-Agent": "ResearchBot/1.0 (university project; contact@uni.edu)"}
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think about transparency vs disguise — which option lets the server owner identify and contact you?</details>
 <details><summary>✅ Answer</summary>
@@ -680,11 +748,15 @@ headers = {
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Ch4 — When Scraping Is and Isn't Legal 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 List the key factors that determine whether scraping a site is legal/ethical, and identify which of these scenarios would be a red flag.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: robots.txt, Terms of Service, public vs private data, bypassing authentication, data use</details>
 <details><summary>✅ Answer</summary>
@@ -721,11 +793,15 @@ can still result in civil lawsuits.
 
 ## Ch5 — requests.Session
 
+<a id="q19"></a>
+
 ### Q19 · Ch5 — Session for Cookie Persistence 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Write code that uses a `requests.Session` to log in to a site and then fetch a protected page, showing that the session automatically carries the authentication cookie.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>session.post() to login, then session.get() to protected page — cookies are stored automatically</details>
 <details><summary>✅ Answer</summary>
@@ -756,11 +832,15 @@ soup = BeautifulSoup(protected.text, "html.parser")
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Ch5 — Shared Headers on a Session 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Create a `requests.Session` with shared headers (User-Agent, Accept, Accept-Language) that apply to every request made through the session — without repeating them on each call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>session.headers.update({...}) sets defaults; individual requests can still override them</details>
 <details><summary>✅ Answer</summary>
@@ -791,11 +871,15 @@ r4 = session.get("https://example.com/api", headers={"Accept": "application/json
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Ch5 — Connection Pooling Benefit 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Explain what connection pooling is in `requests.Session` and write a benchmark comparison showing why Session is faster than plain `requests.get()` for scraping the same domain 10 times.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>TCP handshake + TLS handshake cost ~100ms per connection — Session reuses established connections</details>
 <details><summary>✅ Answer</summary>
@@ -834,7 +918,12 @@ print(f"With Session:    {with_session:.2f}s")
 
 ## Ch6 — Scraping Data into Structured Format
 
+<a id="q22"></a>
+
 ### Q22 · Ch6 — Scrape to List of Dicts 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Using the HTML below, scrape all products into a list of dicts with keys `name`, `price`, `rating`. Handle missing ratings gracefully (use `None`).
 
@@ -850,7 +939,6 @@ Using the HTML below, scrape all products into a list of dicts with keys `name`,
 </div>
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>rating_el = card.select_one("span.rating"); rating = rating_el.get_text() if rating_el else None</details>
 <details><summary>✅ Answer</summary>
@@ -890,11 +978,15 @@ print(products)
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Ch6 — pandas DataFrame from Scraped Data 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Take the list of product dicts from Q22 and convert it to a pandas DataFrame. Then clean the `price` column by stripping the `$` sign and converting to float.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pd.DataFrame(list_of_dicts), then df["price"].str.replace("$", "", regex=False).astype(float)</details>
 <details><summary>✅ Answer</summary>
@@ -931,11 +1023,15 @@ print(f"Most expensive: {df.loc[df['price_usd'].idxmax(), 'name']}")
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Ch6 — Save to CSV and JSON 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Given a pandas DataFrame of scraped products, save it to both `products.csv` and `products.json`. Show the correct pandas methods for each and explain one gotcha for each format.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>df.to_csv(index=False) and df.to_json(orient="records", indent=2)</details>
 <details><summary>✅ Answer</summary>
@@ -967,11 +1063,15 @@ print("Saved to products.csv and products.json")
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Ch6 — Deduplication of Scraped Records 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 You've scraped 500 products across 10 pages and suspect some products appear on multiple pages. Write code to deduplicate the list of product dicts by product `name`, keeping the first occurrence.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use df.drop_duplicates(subset=["name"]) or a seen set for in-memory dedup during scraping</details>
 <details><summary>✅ Answer</summary>

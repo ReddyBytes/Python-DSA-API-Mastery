@@ -6,11 +6,33 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | venv — Create and Activate a Virtual Environment | 🟢 |
+| [Q2](#q2) | Requirements — Freeze and Reproduce | 🟢 |
+| [Q3](#q3) | .env Files — Load with python-dotenv | 🟡 |
+| [Q4](#q4) | pyenv — Install a Specific Python Version | 🟡 |
+| [Q5](#q5) | Poetry — Write the Dependency Section | 🟡 |
+| [Q6](#q6) | Dependencies — Dev vs Prod | 🟡 |
+| [Q7](#q7) | Docker — Write a Minimal Dockerfile | 🟡 |
+| [Q8](#q8) | Pinning — Lock Transitive Dependencies | 🟡 |
+| [Q9](#q9) | tox — Multi-version Testing | 🟠 |
+| [Q10](#q10) | Capstone — Migrate requirements.txt to Poetry | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · venv — Create and Activate a Virtual Environment 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Show all commands to: create a venv called `.venv`, activate it on Mac/Linux, confirm Python is from the venv, install `requests`, and deactivate.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use python -m venv; which python confirms the active interpreter.</details>
 <details><summary>✅ Answer</summary>
@@ -37,11 +59,15 @@ deactivate
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Requirements — Freeze and Reproduce 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Show the workflow to: install three packages, freeze to `requirements.txt`, delete the venv, recreate it, and reinstall from the lockfile.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pip freeze captures all installed packages including transitive deps.</details>
 <details><summary>✅ Answer</summary>
@@ -68,11 +94,15 @@ pip list  # verify same versions
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · .env Files — Load with python-dotenv 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write a `.env` file with `DATABASE_URL`, `SECRET_KEY`, and `DEBUG=true`. Write Python code to load it and read all three variables with correct types.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>All env var values are strings; DEBUG needs explicit bool conversion.</details>
 <details><summary>✅ Answer</summary>
@@ -102,11 +132,15 @@ print(debug)         # → True (bool, not "true")
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · pyenv — Install a Specific Python Version 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Show all commands to install Python 3.12.3 using pyenv, pin it for a project directory, verify it is active, then create a venv with that version.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pyenv local creates a .python-version file in the current directory.</details>
 <details><summary>✅ Answer</summary>
@@ -133,11 +167,15 @@ python --version           # → Python 3.12.3
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Poetry — Write the Dependency Section 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write the Poetry `pyproject.toml` section for a web service that depends on `fastapi ^0.110`, `pydantic-settings ^2.0`, `sqlalchemy ^2.0`, and has dev deps: `pytest ^8.0`, `black ^24.0`, `httpx ^0.27` (for testing).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Dev deps go in [tool.poetry.group.dev.dependencies].</details>
 <details><summary>✅ Answer</summary>
@@ -168,11 +206,15 @@ build-backend = "poetry.core.masonry.api"
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Dependencies — Dev vs Prod 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Explain the difference between dev and prod dependencies. List which of these belong in dev vs prod: `flask`, `pytest`, `black`, `sqlalchemy`, `mypy`, `gunicorn`, `ruff`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Ask: is this needed when the application is running in production?</details>
 <details><summary>✅ Answer</summary>
@@ -201,11 +243,15 @@ poetry install
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Docker — Write a Minimal Dockerfile 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a Dockerfile for a Python 3.12 web service. It should: use a slim base, copy and install dependencies before source (for layer caching), run as a non-root user, and use CMD to start the app.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Copy requirements.txt first, pip install, then copy src. This maximizes cache hits.</details>
 <details><summary>✅ Answer</summary>
@@ -234,11 +280,15 @@ CMD ["python", "-m", "my_package.main"]
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Pinning — Lock Transitive Dependencies 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 What is a transitive dependency and why must it be pinned? Show the difference between a `requirements.in` and the compiled `requirements.txt`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Transitive deps are deps of your deps — you don't list them directly but they still get installed.</details>
 <details><summary>✅ Answer</summary>
@@ -272,11 +322,15 @@ pip-sync requirements.txt     # install exactly those versions
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · tox — Multi-version Testing 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write a `tox.ini` that runs pytest against Python 3.10, 3.11, and 3.12, with a separate `lint` environment that runs ruff and mypy.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>tox envlist defines which envs to run; each env gets its own deps.</details>
 <details><summary>✅ Answer</summary>
@@ -321,7 +375,12 @@ tox -e lint           # run only lint
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Capstone — Migrate requirements.txt to Poetry 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 You have a project with this `requirements.txt`. Migrate it to Poetry: identify direct vs transitive deps, write the `pyproject.toml`, and show the migration commands.
 
@@ -336,7 +395,6 @@ pytest==8.1.1
 black==24.4.2
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Direct deps are the ones you actually use; transitive deps (werkzeug, urllib3, certifi) are managed by Poetry automatically.</details>
 <details><summary>✅ Answer</summary>

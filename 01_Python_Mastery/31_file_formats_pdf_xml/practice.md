@@ -4,39 +4,43 @@
 
 | # | Chapter | Topic | Difficulty |
 |---|---------|-------|------------|
-| Q1 | JSON | json.loads / json.dumps | 🟢 Basic |
-| Q2 | JSON | Nested JSON + pd.json_normalize | 🟡 Intermediate |
-| Q3 | JSON | json.JSONDecodeError handling | 🟢 Basic |
-| Q4 | JSON | json.dump to file + json.load | 🟢 Basic |
-| Q5 | CSV | csv.reader basics | 🟢 Basic |
-| Q6 | CSV | csv.DictReader row access | 🟢 Basic |
-| Q7 | CSV | csv.writer output | 🟡 Intermediate |
-| Q8 | CSV | Dialect and delimiter handling | 🟡 Intermediate |
-| Q9 | Excel | openpyxl read cells | 🟡 Intermediate |
-| Q10 | Excel | openpyxl write and style cells | 🟡 Intermediate |
-| Q11 | Excel | pandas read_excel with sheet_name | 🟢 Basic |
-| Q12 | Excel | pandas ExcelWriter multiple sheets | 🟡 Intermediate |
-| Q13 | PDF | pdfplumber text extraction | 🟡 Intermediate |
-| Q14 | PDF | pypdf page count | 🟢 Basic |
-| Q15 | PDF | pdfplumber table extraction | 🟠 Advanced |
-| Q16 | PDF | Scanned PDF — what to do | 🟡 Intermediate |
-| Q17 | XML | ElementTree parse from string | 🟢 Basic |
-| Q18 | XML | find / findall element navigation | 🟡 Intermediate |
-| Q19 | XML | XPath attribute filter | 🟠 Advanced |
-| Q20 | XML | Write XML with ElementTree | 🟡 Intermediate |
-| Q21 | High-Perf | Parquet read/write with pandas | 🟢 Basic |
-| Q22 | High-Perf | Feather vs Parquet use cases | 🟡 Intermediate |
-| Q23 | High-Perf | HDF5 key store with pandas | 🟡 Intermediate |
-| Q24 | High-Perf | CSV vs Parquet file size comparison | 🟠 Advanced |
-| Q25 | High-Perf | Pickle round-trip and security warning | 🟡 Intermediate |
+| [Q1](#q1) | JSON | json.loads / json.dumps | 🟢 Basic |
+| [Q2](#q2) | JSON | Nested JSON + pd.json_normalize | 🟡 Intermediate |
+| [Q3](#q3) | JSON | json.JSONDecodeError handling | 🟢 Basic |
+| [Q4](#q4) | JSON | json.dump to file + json.load | 🟢 Basic |
+| [Q5](#q5) | CSV | csv.reader basics | 🟢 Basic |
+| [Q6](#q6) | CSV | csv.DictReader row access | 🟢 Basic |
+| [Q7](#q7) | CSV | csv.writer output | 🟡 Intermediate |
+| [Q8](#q8) | CSV | Dialect and delimiter handling | 🟡 Intermediate |
+| [Q9](#q9) | Excel | openpyxl read cells | 🟡 Intermediate |
+| [Q10](#q10) | Excel | openpyxl write and style cells | 🟡 Intermediate |
+| [Q11](#q11) | Excel | pandas read_excel with sheet_name | 🟢 Basic |
+| [Q12](#q12) | Excel | pandas ExcelWriter multiple sheets | 🟡 Intermediate |
+| [Q13](#q13) | PDF | pdfplumber text extraction | 🟡 Intermediate |
+| [Q14](#q14) | PDF | pypdf page count | 🟢 Basic |
+| [Q15](#q15) | PDF | pdfplumber table extraction | 🟠 Advanced |
+| [Q16](#q16) | PDF | Scanned PDF — what to do | 🟡 Intermediate |
+| [Q17](#q17) | XML | ElementTree parse from string | 🟢 Basic |
+| [Q18](#q18) | XML | find / findall element navigation | 🟡 Intermediate |
+| [Q19](#q19) | XML | XPath attribute filter | 🟠 Advanced |
+| [Q20](#q20) | XML | Write XML with ElementTree | 🟡 Intermediate |
+| [Q21](#q21) | High-Perf | Parquet read/write with pandas | 🟢 Basic |
+| [Q22](#q22) | High-Perf | Feather vs Parquet use cases | 🟡 Intermediate |
+| [Q23](#q23) | High-Perf | HDF5 key store with pandas | 🟡 Intermediate |
+| [Q24](#q24) | High-Perf | CSV vs Parquet file size comparison | 🟠 Advanced |
+| [Q25](#q25) | High-Perf | Pickle round-trip and security warning | 🟡 Intermediate |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · JSON — json.loads / json.dumps 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 You receive a JSON string from an API response. Parse it into a Python dict, then convert a Python dict back into a formatted JSON string with 2-space indentation.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use json.loads() for string-to-dict and json.dumps(obj, indent=2) for dict-to-string.</details>
 
@@ -67,11 +71,15 @@ print(formatted)
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · JSON — Nested JSON + pd.json_normalize 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 You have a list of records where each record contains a nested `metrics` dict. Flatten it into a DataFrame so that `metrics.accuracy` and `metrics.f1` become separate columns.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use pd.json_normalize(records, sep=".") — the sep argument controls how nested keys are joined.</details>
 
@@ -96,11 +104,15 @@ print(df)
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · JSON — json.JSONDecodeError handling 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write a function `safe_parse(text)` that returns a Python object if the input is valid JSON, or `None` if it is not — without crashing the program.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Catch json.JSONDecodeError (which is a subclass of ValueError) inside a try/except block.</details>
 
@@ -125,11 +137,15 @@ print(safe_parse("42"))             # 42   ← valid JSON (bare number)
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · JSON — json.dump to file + json.load 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write a config dict to a file called `config.json` using `json.dump`, then read it back with `json.load` and verify the round-trip.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Open the file in write mode ("w") for dump and read mode ("r") for load. Pass the file object, not the filename.</details>
 
@@ -157,11 +173,15 @@ print(loaded["host"])   # localhost
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · CSV — csv.reader basics 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Use `csv.reader` (not pandas) to read a CSV string and print each row as a list. The CSV has a header row.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Wrap the string in io.StringIO so csv.reader can iterate over it line by line.</details>
 
@@ -185,11 +205,15 @@ for row in reader:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · CSV — csv.DictReader row access 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Use `csv.DictReader` to read the same CSV and access each row by column name instead of index.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>DictReader uses the first row as keys automatically. Each row is an OrderedDict (Python 3.8+ just a dict).</details>
 
@@ -212,11 +236,15 @@ for row in reader:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · CSV — csv.writer output 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a list of employee records to a CSV file using `csv.writer`. Include a header row. Then verify the file content.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Always open the file with newline="" on Windows/Mac to prevent double newlines. Use writerow() for one row and writerows() for many.</details>
 
@@ -243,11 +271,15 @@ print(buffer.getvalue())
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · CSV — Dialect and delimiter handling 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Read a tab-separated values (TSV) file using pandas. Then register a custom CSV dialect with `csv.register_dialect` that uses semicolons as the delimiter.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pandas: use sep="\t". For custom dialect: csv.register_dialect("myformat", delimiter=";").</details>
 
@@ -274,11 +306,15 @@ for row in reader:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Excel — openpyxl read cells 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Use `openpyxl` to open a workbook and read a specific cell value, a full row, and iterate over all rows in a sheet.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>ws["B2"].value reads a cell. ws[3] returns all cells in row 3. ws.iter_rows() iterates over row tuples.</details>
 
@@ -316,11 +352,15 @@ for row in ws2.iter_rows(values_only=True):
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Excel — openpyxl write and style cells 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a header cell to an Excel sheet, make it bold size-14, and fill the cell background yellow. Save the workbook.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Import Font and PatternFill from openpyxl.styles. Apply them via ws["A1"].font and ws["A1"].fill.</details>
 
@@ -350,11 +390,15 @@ print("Saved styled.xlsx")
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Excel — pandas read_excel with sheet_name 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Read a specific sheet by name from an Excel file using pandas. Then read ALL sheets at once as a dict of DataFrames.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>sheet_name="Sales" reads one sheet; sheet_name=None reads all sheets and returns a dict keyed by sheet name.</details>
 
@@ -391,11 +435,15 @@ for name, df in all_sheets.items():
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Excel — pandas ExcelWriter multiple sheets 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Write two DataFrames to separate sheets in the same Excel file using `pd.ExcelWriter`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use pd.ExcelWriter as a context manager with engine="openpyxl". Call df.to_excel(writer, sheet_name=...) for each DataFrame.</details>
 
@@ -419,11 +467,15 @@ print("Written: Sales + Costs sheets")
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · PDF — pdfplumber text extraction 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Use `pdfplumber` to open a PDF and extract all text from every page, concatenating page text with newlines between pages.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use pdfplumber.open() as a context manager. page.extract_text() returns None for blank/image pages — guard with "if text".</details>
 
@@ -451,11 +503,15 @@ def extract_all_text(pdf_path):
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · PDF — pypdf page count 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Use `pypdf` to open a PDF and print the total number of pages. Show how to access the text of the first page.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pypdf uses PdfReader. len(reader.pages) gives the page count. reader.pages[0].extract_text() gets the first page's text.</details>
 
@@ -480,11 +536,15 @@ def inspect_pdf(path):
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · PDF — pdfplumber table extraction 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Use `pdfplumber` to extract the first table from the first page of a PDF and convert it into a pandas DataFrame.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>page.extract_tables() returns a list of tables. Each table is a list of rows; each row is a list of cell strings. Use table[0] as the header and table[1:] as data rows.</details>
 
@@ -517,11 +577,15 @@ def extract_first_table(pdf_path):
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · PDF — Scanned PDF — what to do 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Explain (in code comments) what happens when you call `pdfplumber.page.extract_text()` on a scanned PDF and what the correct approach is.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Scanned PDFs are images. No text layer = extract_text() returns None. You need OCR (pytesseract or a cloud service).</details>
 
@@ -558,11 +622,15 @@ print("Scanned PDFs require OCR — pdfplumber alone is not enough.")
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · XML — ElementTree parse from string 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Parse an XML string using `xml.etree.ElementTree` and print the root tag and all direct child tag names.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use ET.fromstring(xml_string) for a string. root.tag gives the tag name. Iterate root directly to get direct children.</details>
 
@@ -592,11 +660,15 @@ for child in root:                      # ← direct children
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · XML — find / findall element navigation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Given an XML catalog, use `findall` to get all products, then use `findtext` to get the name and `find().get()` to read an attribute from a child element.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>product.findtext("name") reads element text. product.find("price").get("currency") reads an attribute of a child element.</details>
 
@@ -633,11 +705,15 @@ for product in root.findall("product"):         # ← all <product> children
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · XML — XPath attribute filter 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Use XPath inside `findall` to select only `<price>` elements where the `currency` attribute equals `"USD"`. Then use a more complex path to find all items inside orders.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>XPath filter syntax: ".//element[@attr='value']". The "./" prefix means "anywhere in the tree".</details>
 
@@ -676,11 +752,15 @@ for item in all_items:
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · XML — Write XML with ElementTree 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Build an XML document programmatically using `ElementTree`, add elements and attributes, then serialize it to a string and write it to a file.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use ET.Element() for the root, ET.SubElement(parent, tag) for children. ET.tostring(root, encoding="unicode") converts to string. ET.indent() adds pretty-printing (Python 3.9+).</details>
 
@@ -721,11 +801,15 @@ tree.write("/tmp/catalog.xml", encoding="unicode", xml_declaration=True)
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · High-Performance — Parquet read/write with pandas 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Write a DataFrame to a Parquet file with snappy compression, then read it back reading only specific columns.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>df.to_parquet("file.parquet", compression="snappy", index=False). pd.read_parquet("file.parquet", columns=["col1"]) reads only the requested columns from disk.</details>
 
@@ -758,11 +842,15 @@ print(df_partial)
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · High-Performance — Feather vs Parquet use cases 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Show the feather read/write API with pandas. Explain in comments when you would choose feather over parquet.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>df.to_feather() / pd.read_feather(). Feather is faster for in-process handoffs (Python to R or Python to Python); Parquet is better for long-term storage and cross-system portability.</details>
 
@@ -797,11 +885,15 @@ print(df2.shape)    # (1000, 2)
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · High-Performance — HDF5 key store with pandas 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Write two DataFrames to different keys in the same HDF5 file using `pd.HDFStore`, then list all keys and read one back.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use pd.HDFStore("file.h5") as a context manager. store["/key"] = df writes; store.keys() lists; store["/key"] reads.</details>
 
@@ -830,11 +922,15 @@ with pd.HDFStore("/tmp/data.h5", mode="r") as store:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · High-Performance — CSV vs Parquet file size comparison 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Write the same 10,000-row DataFrame to CSV and Parquet, then compare their file sizes in bytes. Explain why the sizes differ.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use os.path.getsize() to check file sizes. Parquet uses column-level compression; CSV stores everything as plain text with no compression.</details>
 
@@ -879,11 +975,15 @@ print(f"Ratio:   {csv_size / parquet_size:.1f}x smaller as parquet")
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · High-Performance — Pickle round-trip and security warning 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Demonstrate pickling and unpickling a Python object. Add comments explaining when pickle is appropriate and when it is dangerous.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Open in "wb" (write binary) for pickle.dump, "rb" (read binary) for pickle.load. Never unpickle data from untrusted sources.</details>
 

@@ -45,6 +45,9 @@ fractional knapsack, Huffman, jump games, gas station, task assignment, meeting 
 <a id="q1"></a>
 ### Q1. What Is the Greedy Choice Property?
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 Explain the greedy choice property in your own words. Give one example of a problem that has it
 and one that does not.
 
@@ -93,6 +96,9 @@ solution (proven by exchange argument). Coin change — picking 4 blocks the 3+3
 <a id="q2"></a>
 ### Q2. Optimal Substructure in Greedy
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 What is optimal substructure? Explain how it relates to greedy algorithms, and how it differs
 from the DP use of optimal substructure.
 
@@ -137,6 +143,9 @@ same greedy rule.
 
 <a id="q3"></a>
 ### Q3. Activity Selection — Maximum Non-Overlapping Meetings
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Given a list of meetings `(start, end)`, return the maximum number of non-overlapping meetings
 you can attend.
@@ -187,6 +196,9 @@ the solution remains valid with the same or better count.
 
 <a id="q4"></a>
 ### Q4. Does Greedy Always Work? Coin Change Counterexample
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 You have coins `[1, 3, 4]` and need to make amount `6`. The greedy approach picks the
 largest coin each time. Show why it fails and give the correct solution.
@@ -241,6 +253,9 @@ The greedy choice property does NOT hold for arbitrary coin denominations.
 <a id="q5"></a>
 ### Q5. Merge Overlapping Intervals
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Given `intervals = [[1,3],[2,6],[8,10],[15,18]]`, merge all overlapping intervals.
 
 <details>
@@ -288,6 +303,9 @@ Sorting by end would miss cases where a later-starting interval extends an earli
 <a id="q6"></a>
 ### Q6. Jump Game I — Can You Reach the End?
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 Given `nums = [2,3,1,1,4]`, each element is the max jump from that index.
 Can you reach the last index?
 
@@ -330,6 +348,9 @@ unreachable index would give a false positive.
 
 <a id="q7"></a>
 ### Q7. Fractional Knapsack
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Items have `(value, weight)`. Capacity is `W`. You can take fractions of items.
 Maximize total value.
@@ -382,6 +403,9 @@ choice if it fits exactly.
 <a id="q8"></a>
 ### Q8. Assign Cookies — Maximize Content Children
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 Each child `i` has greed factor `g[i]`. Each cookie `j` has size `s[j]`. A child is content
 if `s[j] >= g[i]`. Maximize number of content children.
 
@@ -433,6 +457,9 @@ reassigning the smallest sufficient cookie never makes the solution worse.
 <a id="q9"></a>
 ### Q9. Jump Game II — Minimum Number of Jumps
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 Given `nums = [2,3,1,1,4]`, return the minimum number of jumps to reach the last index.
 
 <details>
@@ -479,6 +506,9 @@ cannot extend the frontier.
 
 <a id="q10"></a>
 ### Q10. Gas Station — Can You Complete the Circuit?
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 There are `n` gas stations on a circular route. `gas[i]` is the fuel available at station `i`.
 `cost[i]` is the fuel needed to travel from station `i` to `i+1`. Find the starting station
@@ -529,6 +559,9 @@ is feasible globally), and the last reset position is it.
 <a id="q11"></a>
 ### Q11. Meeting Rooms II — Minimum Rooms Needed
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 Given `intervals = [(0,30),(5,10),(15,20)]`, find the minimum number of conference rooms needed
 to host all meetings simultaneously.
 
@@ -577,6 +610,9 @@ concurrent meeting count = minimum rooms needed.
 <a id="q12"></a>
 ### Q12. Task Scheduler with Cooldown
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 Given tasks `["A","A","A","B","B","B"]` and cooldown `n=2`, return the minimum number of
 intervals (including idle time) to complete all tasks.
 
@@ -619,6 +655,9 @@ tasks exist to fill gaps, no idle is needed and the answer is just len(tasks).
 
 <a id="q13"></a>
 ### Q13. Minimum Intervals to Remove (Non-Overlapping)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Given `intervals = [[1,2],[2,3],[3,4],[1,3]]`, remove the minimum number of intervals so
 the rest are non-overlapping.
@@ -666,6 +705,9 @@ choice from activity selection.
 
 <a id="q14"></a>
 ### Q14. Huffman Encoding — Build the Optimal Prefix Tree
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Given character frequencies `{'a':5, 'b':9, 'c':12, 'd':13, 'e':16, 'f':45}`,
 build the Huffman tree and return the codes.
@@ -728,6 +770,9 @@ nodes in the tree only increases or maintains total cost.
 <a id="q15"></a>
 ### Q15. Coin Change — When Greedy Fails, Use DP
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 For `coins=[1,5,6,9]` and `amount=11`:
 1. Show why greedy fails.
 2. Write the correct DP solution.
@@ -786,6 +831,9 @@ combination of smaller coins for a larger coin without increasing count.
 <a id="q16"></a>
 ### Q16. Partition Labels
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 Given `s = "ababcbacadefegdehijhklij"`, partition it into as many parts as possible such that
 each letter appears in at most one part. Return the size of each partition.
 
@@ -829,6 +877,9 @@ character in this partition appears later, so we can safely cut here.
 
 <a id="q17"></a>
 ### Q17. Minimum Number of Arrows to Burst Balloons
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Balloons are represented by intervals `[x_start, x_end]`. An arrow shot at position `x` bursts
 all balloons with `x_start <= x <= x_end`. Find the minimum arrows needed.
@@ -877,6 +928,9 @@ earliest, shoot there.
 
 <a id="q18"></a>
 ### Q18. Minimum Platforms for Train Station
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Given arrival times `[900,940,950,1100,1500,1800]` and departure times
 `[910,1200,1120,1130,1900,2000]`, find the minimum platforms needed.
@@ -927,6 +981,9 @@ departure, so we do need a new platform. Separate sorted arrays preserve this se
 <a id="q19"></a>
 ### Q19. Largest Number from Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 Given `nums = [10, 2]`, arrange them to form the largest number: `"210"`.
 Given `nums = [3,30,34,5,9]`, answer is `"9534330"`.
 
@@ -968,6 +1025,9 @@ transitivity (can be proven), making it a valid total order for sorting.
 
 <a id="q20"></a>
 ### Q20. Task Assignment — Minimize Maximum Completion Time
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Given `workers = [3,1]` and `tasks = [0,3,5,3]` with 2 workers each doing 2 tasks,
 assign each task to a worker to minimize the maximum total time any worker spends.
@@ -1037,6 +1097,9 @@ assignments only makes the maximum larger or equal.
 
 <a id="q21"></a>
 ### Q21. Prove Activity Selection Correctness — Exchange Argument
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Write out the formal exchange argument proof for why "always pick earliest finish time"
 is optimal for activity selection.
@@ -1113,6 +1176,9 @@ swap — this means the new solution has more remaining time, which can only hel
 
 <a id="q22"></a>
 ### Q22. When Does Coin Change Greedy Work? Prove It
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 State and prove the condition under which greedy (always pick the largest coin) is
 provably correct for coin change.
@@ -1201,6 +1267,9 @@ print(f"[1,3,4] greedy correct: {ok}, first fail at amount={fail_amt}: greedy={g
 <a id="q23"></a>
 ### Q23. Minimum Cost to Connect All Ropes
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 Given ropes of lengths `[4, 3, 2, 6]`, you can combine two ropes at a cost equal to their sum.
 Find the minimum total cost to combine all ropes into one.
 
@@ -1257,6 +1326,9 @@ increases total cost. This is identical to building a Huffman tree.
 <a id="q24"></a>
 ### Q24. Candy Distribution
 
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 Children stand in a line with ratings. Each child must get ≥1 candy. Children with a higher
 rating than their neighbor must get more candy. Minimize total candies.
 
@@ -1312,6 +1384,9 @@ both. No sub-problem overlap requires memoization.
 
 <a id="q25"></a>
 ### Q25. Greedy vs DP — Full Decision Framework
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Given the following problems, classify each as "greedy is correct," "greedy fails — use DP,"
 or "greedy fails — use other." Justify each.

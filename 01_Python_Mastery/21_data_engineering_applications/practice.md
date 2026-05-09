@@ -5,11 +5,48 @@
 
 ## Q1–Q8: ETL Flow, File Processing, Generators
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | etl-mental-model — Describe the three stages of ETL in plain English | 🟢 |
+| [Q2](#q2) | csv-generator — Write a generator that reads a CSV file row by row | 🟢 |
+| [Q3](#q3) | generator-chain — Chain three transform generators into one pipeline | 🟢 |
+| [Q4](#q4) | pathlib-glob — Use pathlib to process all CSV files in a directory | 🟢 |
+| [Q5](#q5) | chunked-processing — Process a CSV in chunks of 500 rows | 🟡 |
+| [Q6](#q6) | jsonl-reader — Read a JSONL file as a generator, skipping bad lines | 🟡 |
+| [Q7](#q7) | eager-vs-lazy — Prove generator uses less memory than a list | 🟡 |
+| [Q8](#q8) | parallel-files — Process 8 CSV files in parallel using ThreadPoolExecutor | 🟡 |
+| [Q9](#q9) | pydantic-model — Define a Pydantic model for a CSV row with a range validator | 🟡 |
+| [Q10](#q10) | dead-letter-queue — Route bad rows to a dead-letter JSONL file | 🟡 |
+| [Q11](#q11) | fail-fast-vs-soft — Compare fail-fast vs soft-fail strategies | 🟡 |
+| [Q12](#q12) | checkpoint-row — Implement checkpoint + resume for a row-based pipeline | 🟡 |
+| [Q13](#q13) | schema-migration — Migrate rows from old schema to new schema | 🟡 |
+| [Q14](#q14) | idempotency — Implement idempotent file processing with a content-hash registry | 🟡 |
+| [Q15](#q15) | pagination-loop — Write a cursor-based paginated collector | 🟢 |
+| [Q16](#q16) | retry-backoff — Write fetch_with_retry with exponential backoff | 🟡 |
+| [Q17](#q17) | token-bucket — Implement a token bucket rate limiter | 🟡 |
+| [Q18](#q18) | async-gather — Fetch 10 API pages concurrently with asyncio.gather | 🟡 |
+| [Q19](#q19) | semaphore-limit — Limit concurrent API requests to 3 using asyncio.Semaphore | 🟡 |
+| [Q20](#q20) | partial-failures — Return successes and failures separately from a batch fetch | 🟡 |
+| [Q21](#q21) | producer-consumer — Implement producer/consumer with Queue backpressure | 🟡 |
+| [Q22](#q22) | sliding-window — Implement a sliding window rate limiter | 🟠 |
+| [Q23](#q23) | stream-processor — Build a streaming processor with tumbling windows | 🟠 |
+| [Q24](#q24) | capstone-etl — Full ETL: CSV → validate → SQLite + error log | 🟠 |
+| [Q25](#q25) | capstone-collector — Async paginated collector with Semaphore + retry + checkpoint | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · etl-mental-model — Describe the three stages of ETL in plain English 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 What does each stage do? Which stage should be a generator? Which stage should never raise?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Extract reads raw data, Transform cleans it, Load writes output. Transform is the stage that should never crash the pipeline.</details>
 <details><summary>✅ Answer</summary>
@@ -40,11 +77,15 @@ def load(records, out):
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · csv-generator — Write a generator that reads a CSV file row by row 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Write `read_csv(filepath)` that yields one `dict` per row without loading the full file.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `csv.DictReader` inside `with open(...)` and `yield dict(row)` for each row.</details>
 <details><summary>✅ Answer</summary>
@@ -62,11 +103,15 @@ def read_csv(filepath):
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · generator-chain — Chain three transform generators into one pipeline 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write `strip_fields`, `cast_score`, and `add_grade` as three generator functions. Chain them and collect the output into a list.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Each function takes an iterator and yields from it. Chain them: `add_grade(cast_score(strip_fields(records)))`.</details>
 <details><summary>✅ Answer</summary>
@@ -93,11 +138,15 @@ result = list(add_grade(cast_score(strip_fields(read_csv("data.csv")))))
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · pathlib-glob — Use pathlib to process all CSV files in a directory 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write code that iterates over all `.csv` files in a directory and counts total rows across all files.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `Path(dir).glob("*.csv")` to get file paths, then `read_csv` from Q2 inside a loop.</details>
 <details><summary>✅ Answer</summary>
@@ -116,11 +165,15 @@ def count_all_rows(data_dir):
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · chunked-processing — Process a CSV in chunks of 500 rows 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write `chunk(iterable, size)` and use it to process rows in batches of 500. Print the chunk number and count for each batch.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Accumulate items in a list; `yield` it when it reaches `size`, then reset to empty list.</details>
 <details><summary>✅ Answer</summary>
@@ -144,11 +197,15 @@ for i, batch in enumerate(chunk(read_csv("big.csv"), 500), 1):
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · jsonl-reader — Read a JSONL file as a generator, skipping bad lines 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write `read_jsonl(filepath)` that yields one parsed dict per line, silently skipping lines that are not valid JSON.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Iterate over lines, call `json.loads(line)` inside `try/except json.JSONDecodeError`.</details>
 <details><summary>✅ Answer</summary>
@@ -172,11 +229,15 @@ def read_jsonl(filepath):
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · eager-vs-lazy — Prove generator uses less memory than a list 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write two versions of "count rows with score >= 70": one that loads all rows into a list first (eager), one that uses a generator (lazy). Use `tracemalloc` to measure peak memory for each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Call `tracemalloc.start()`, run the function, call `tracemalloc.take_snapshot()`, then sum `s.size` over all statistics.</details>
 <details><summary>✅ Answer</summary>
@@ -208,11 +269,15 @@ print(f"Eager: {m1/1024:.0f} KB | Lazy: {m2/1024:.0f} KB | Ratio: {m1/m2:.1f}x")
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · parallel-files — Process 8 CSV files in parallel using ThreadPoolExecutor 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write `process_files_parallel(paths, max_workers=4)` that processes each file in a thread and returns a list of row counts.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `ThreadPoolExecutor.map()`. CSV reading is I/O-bound so threads (not processes) are appropriate.</details>
 <details><summary>✅ Answer</summary>
@@ -234,11 +299,15 @@ def process_files_parallel(paths, max_workers=4):
 
 ## Q9–Q14: Schema Validation, Error Handling, Checkpointing
 
+<a id="q9"></a>
+
 ### Q9 · pydantic-model — Define a Pydantic model for a CSV row with a range validator 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Define `SaleRow` with `sale_id: int`, `product: str`, `amount: float` (must be > 0), `region: str`. Write a function that validates a list of dicts and returns `(valid, errors)`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `@field_validator("amount")` to check the range. Catch `ValidationError` in the function.</details>
 <details><summary>✅ Answer</summary>
@@ -273,11 +342,15 @@ def validate_rows(rows):
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · dead-letter-queue — Route bad rows to a dead-letter JSONL file 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write `pipeline_with_dlq(records, dlq_path)` — a generator that yields clean records and writes bad rows to `dlq_path` as JSON lines.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Open the DLQ file in append mode inside the generator. Use `try/except` around the transform call.</details>
 <details><summary>✅ Answer</summary>
@@ -298,11 +371,15 @@ def pipeline_with_dlq(records, dlq_path):
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · fail-fast-vs-soft — Compare fail-fast vs soft-fail strategies 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write two versions of a transform pipeline: `strict_pipeline` raises immediately on the first bad row, `lenient_pipeline` logs and skips bad rows. Show when you would use each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>In strict mode, let exceptions propagate. In lenient mode, catch all exceptions and continue.</details>
 <details><summary>✅ Answer</summary>
@@ -327,11 +404,15 @@ def lenient_pipeline(records):
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · checkpoint-row — Implement checkpoint + resume for a row-based pipeline 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Write a `Checkpoint` class and use it to skip already-processed rows when a pipeline restarts.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Save the last processed `id` to a JSON file. On startup, load it and skip rows with id <= last_id.</details>
 <details><summary>✅ Answer</summary>
@@ -363,11 +444,15 @@ for row in read_csv("data.csv"):
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · schema-migration — Migrate rows from old schema to new schema 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Write `migrate(records)` that converts `{"UserId": str, "FullName": str, "Pts": str}` to `{"user_id": int, "name": str, "score": float}`, using defaults for missing fields.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `.get(key, default)` for each field. Wrap type conversions in `try/except`.</details>
 <details><summary>✅ Answer</summary>
@@ -389,11 +474,15 @@ def migrate(records):
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · idempotency — Implement idempotent file processing with a content-hash registry 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Write a `ProcessedRegistry` that tracks file content hashes. Provide `is_processed(filepath)` and `mark_processed(filepath)` methods. Use MD5 to hash file contents.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Store hashes in a JSON file on disk. Compute `hashlib.md5(path.read_bytes()).hexdigest()` as the key.</details>
 <details><summary>✅ Answer</summary>
@@ -424,11 +513,15 @@ class ProcessedRegistry:
 
 ## Q15–Q20: API Collection, Async Fetching, Rate Limiting
 
+<a id="q15"></a>
+
 ### Q15 · pagination-loop — Write a cursor-based paginated collector 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Write `paginate_cursor(url)` — a generator that follows `next_cursor` links until the API returns no cursor. Yield one list of items per page.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Start with `cursor = None`. In each loop, pass it as a param if set. Update cursor from the response. Break when `next_cursor` is absent.</details>
 <details><summary>✅ Answer</summary>
@@ -453,11 +546,15 @@ def paginate_cursor(url, page_size=10):
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · retry-backoff — Write fetch_with_retry with exponential backoff 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Write `fetch_with_retry(url, max_retries=3, backoff_base=2.0)`. Retry on HTTP 429/500/503. Raise after exhausting retries.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `for attempt in range(1, max_retries + 1)`. Sleep `backoff_base ** attempt` seconds on retryable errors.</details>
 <details><summary>✅ Answer</summary>
@@ -481,11 +578,15 @@ def fetch_with_retry(url, max_retries=3, backoff_base=2.0):
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · token-bucket — Implement a token bucket rate limiter 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Write `TokenBucket(rate)` with an `acquire()` method that blocks until a token is available. Rate is in requests per second.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Track `_tokens` and `_last_refill` time. On each `acquire()`, compute tokens earned since last call. Sleep if tokens < 1.</details>
 <details><summary>✅ Answer</summary>
@@ -517,11 +618,15 @@ class TokenBucket:
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · async-gather — Fetch 10 API pages concurrently with asyncio.gather 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Write `async def fetch_all_pages(url, n_pages)` that fetches pages 1 to n_pages concurrently using `aiohttp` and `asyncio.gather`. Return a flat list of all items.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create a single `ClientSession`, build one coroutine per page, then `await asyncio.gather(*tasks)`.</details>
 <details><summary>✅ Answer</summary>
@@ -545,11 +650,15 @@ async def fetch_all_pages(url, n_pages=10):
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · semaphore-limit — Limit concurrent API requests to 3 using asyncio.Semaphore 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Modify `fetch_all_pages` so that at most 3 pages are fetched simultaneously, even when n_pages is large.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create `sem = asyncio.Semaphore(3)` outside the task functions. Use `async with sem:` inside each fetch coroutine.</details>
 <details><summary>✅ Answer</summary>
@@ -576,11 +685,15 @@ async def fetch_limited(url, n_pages=20, max_concurrent=3):
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · partial-failures — Return successes and failures separately from a batch fetch 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Write `fetch_batch(urls)` that fetches all URLs and returns `(successes, failures)` — never raising even if some URLs fail.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Wrap each `requests.get` in `try/except`. Use `resp.raise_for_status()` to surface HTTP errors as exceptions.</details>
 <details><summary>✅ Answer</summary>
@@ -606,11 +719,15 @@ def fetch_batch(urls):
 
 ## Q21–Q23: Streaming, Backpressure, Retry
 
+<a id="q21"></a>
+
 ### Q21 · producer-consumer — Implement producer/consumer with Queue backpressure 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Write a producer that puts 100 events onto a `queue.Queue(maxsize=10)` and a consumer that processes them. Run both in threads. Confirm all 100 events are processed.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`queue.Queue(maxsize=10)` automatically blocks the producer when the queue is full — that IS backpressure.</details>
 <details><summary>✅ Answer</summary>
@@ -642,11 +759,15 @@ assert len(results) == 100
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · sliding-window — Implement a sliding window rate limiter 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Write `SlidingWindowLimiter(max_calls, period)` with an `acquire()` method. Use a `deque` to track call timestamps and sleep when the limit is reached.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>On `acquire()`: evict timestamps older than `period`, check the count, sleep until the oldest call falls outside the window if at the limit.</details>
 <details><summary>✅ Answer</summary>
@@ -675,11 +796,15 @@ class SlidingWindowLimiter:
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · stream-processor — Build a streaming processor with tumbling windows 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Write `TumblingWindow(size)` with `add(event)` and `flush(current_time)` methods. `flush` returns all windows that ended before `current_time` and removes them from state.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Key each bucket by `(timestamp // size) * size`. In `flush`, pop buckets whose key < `(current_time // size) * size`.</details>
 <details><summary>✅ Answer</summary>
@@ -708,11 +833,15 @@ class TumblingWindow:
 
 ## Q24–Q25: Capstone Problems
 
+<a id="q24"></a>
+
 ### Q24 · capstone-etl — Full ETL: CSV → validate → SQLite + error log 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Build a complete pipeline: read a CSV, validate with Pydantic, write valid rows to SQLite (`users` table), write invalid rows to `errors.jsonl`. Print stats at the end.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `sqlite3.connect(":memory:")`, create the table with `CREATE TABLE IF NOT EXISTS`, batch-insert with `executemany`.</details>
 <details><summary>✅ Answer</summary>
@@ -749,11 +878,15 @@ def run_etl(csv_path, db=":memory:", dlq="errors.jsonl"):
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · capstone-collector — Async paginated collector with Semaphore + retry + checkpoint 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Build `async def resilient_collect(url, total_pages, checkpoint_path, max_concurrent=5, max_retries=3)`. It should load a starting page from `checkpoint_path`, fetch remaining pages with concurrency limit and retry, save checkpoint after each page, and return all collected records.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Load the starting page from JSON on disk. Use `asyncio.Semaphore` to cap concurrency. Retry with `asyncio.sleep(2**attempt)`. Save checkpoint after each successful page.</details>
 <details><summary>✅ Answer</summary>

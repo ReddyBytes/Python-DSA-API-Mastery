@@ -8,24 +8,28 @@
 
 | # | Difficulty | Topic | Skill |
 |---|---|---|---|
-| [Q1](#q1--osenviron--read-set-get-with-default) | 🟢 | os.environ | Read, set, get with default |
-| [Q2](#q2--osgetcwd--oschdir--navigate-the-working-directory) | 🟢 | os.getcwd / os.chdir | Navigate the working directory |
-| [Q3](#q3--oslistdir--osmakedirs--list-and-create-directories) | 🟢 | os.listdir / os.makedirs | List and create directories |
-| [Q4](#q4--ospathjoin--cross-platform-path-builder) | 🟡 | os.path.join | Cross-platform path builder |
-| [Q5](#q5--ospathexists--isfile--isdir--path-classifier) | 🟡 | os.path.exists/isfile/isdir | Path classifier |
-| [Q6](#q6--ospathdirname--basename--splitext--decompose-a-path) | 🟡 | os.path.dirname/basename/splitext | Decompose a path |
-| [Q7](#q7--oswalk--find-all-py-files-recursively) | 🟡 | os.walk | Find all .py files recursively |
-| [Q8](#q8--osrename--osremove--safe-rename-and-delete) | 🟡 | os.rename / os.remove | Safe rename and delete |
-| [Q9](#q9--osstat--ospathgetsize--file-metadata) | 🟡 | os.stat / os.path.getsize | File metadata |
-| [Q10](#q10--ospath-vs-pathlib--rewrite-with-pathlib) | 🟡 | os.path vs pathlib | Rewrite with pathlib |
-| [Q11](#q11--osscandir--find-large-files-efficiently) | 🟠 | os.scandir | Find large files efficiently |
-| [Q12](#q12--capstone--archive-old-log-files) | 🟠 | Capstone | Archive old log files |
+| [Q1](#q1) | 🟢 | os.environ | Read, set, get with default |
+| [Q2](#q2) | 🟢 | os.getcwd / os.chdir | Navigate the working directory |
+| [Q3](#q3) | 🟢 | os.listdir / os.makedirs | List and create directories |
+| [Q4](#q4) | 🟡 | os.path.join | Cross-platform path builder |
+| [Q5](#q5) | 🟡 | os.path.exists/isfile/isdir | Path classifier |
+| [Q6](#q6) | 🟡 | os.path.dirname/basename/splitext | Decompose a path |
+| [Q7](#q7) | 🟡 | os.walk | Find all .py files recursively |
+| [Q8](#q8) | 🟡 | os.rename / os.remove | Safe rename and delete |
+| [Q9](#q9) | 🟡 | os.stat / os.path.getsize | File metadata |
+| [Q10](#q10) | 🟡 | os.path vs pathlib | Rewrite with pathlib |
+| [Q11](#q11) | 🟠 | os.scandir | Find large files efficiently |
+| [Q12](#q12) | 🟠 | Capstone | Archive old log files |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · os.environ — Read, Set, Get with Default
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Read the `HOME` environment variable. Then set a custom variable called `APP_ENV` to `"production"`. Finally, use `os.environ.get()` to read a variable called `DB_PORT` that doesn't exist, returning `"5432"` as the default. Print all three results.
 
@@ -59,9 +63,13 @@ print(f"DB_PORT: {db_port}")
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · os.getcwd / os.chdir — Navigate the Working Directory
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Print the current working directory. Change to `/tmp`. Print the new working directory. Then change back to the original directory.
 
@@ -95,9 +103,13 @@ print(f"Restored: {os.getcwd()}")
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · os.listdir / os.makedirs — List and Create Directories
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** List all entries in `/tmp`. Then create the nested directory structure `/tmp/myapp/data/raw` using a single call. Use `exist_ok=True` so the call is safe to run more than once.
 
@@ -130,9 +142,13 @@ print(os.path.isdir("/tmp/myapp/data/raw"))  # → True
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · os.path.join — Cross-Platform Path Builder
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Build the path `/data/projects/myapp/config/settings.yaml` by joining its components with `os.path.join()`. Then build the same path starting from `__file__` (the current script), going up one level to a `config` folder, and targeting `settings.yaml`.
 
@@ -165,9 +181,13 @@ print(config_path)
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · os.path.exists/isfile/isdir — Path Classifier
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a function `classify_path(path)` that returns `"file"`, `"dir"`, or `"missing"` depending on what the path points to. Test it on `/etc/hosts`, `/tmp`, and `/tmp/does_not_exist_xyz`.
 
@@ -202,9 +222,13 @@ print(classify_path("/tmp/does_not_exist_xyz"))# → missing
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · os.path.dirname/basename/splitext — Decompose a Path
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Given the path `"/data/reports/q3.csv"`, use `os.path` functions to extract: the directory, the full filename, the filename without extension, and the extension alone. Print each component on its own line.
 
@@ -237,9 +261,13 @@ print(f"Extension : {ext}")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · os.walk — Find All .py Files Recursively
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write a function `find_python_files(root)` that walks a directory tree and prints the full path of every `.py` file found. Skip any directories named `__pycache__` or `.git`. Test it on a real directory on your machine.
 
@@ -276,9 +304,13 @@ find_python_files(".")
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · os.rename / os.remove — Safe Rename and Delete
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write two functions: `safe_rename(src, dst)` that renames a file only if the source exists, and `safe_delete(path)` that deletes a file only if it exists. Both should print a message indicating what happened.
 
@@ -320,9 +352,13 @@ safe_delete("/tmp/new.txt")                    # only deletes if new.txt exists
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · os.stat / os.path.getsize — File Metadata
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Write a function `file_info(path)` that prints the file size in KB and the last-modified timestamp as a human-readable datetime string. Use both `os.path.getsize()` and `os.stat()` to demonstrate both approaches.
 
@@ -366,9 +402,13 @@ file_info("/etc/hosts")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · os.path vs pathlib — Rewrite with pathlib
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** The snippet below uses `os.path` throughout. Rewrite it using `pathlib.Path` to produce identical results.
 
@@ -407,9 +447,13 @@ print(base, config, name, ext, exists)
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · os.scandir — Find Large Files Efficiently
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Write a function `find_large_files(directory, min_bytes)` that returns a list of `(name, size_in_MB)` tuples for every file in `directory` (non-recursive) that exceeds `min_bytes` in size. Use `os.scandir()` rather than `os.listdir()` + `os.stat()`. Explain why `scandir` is faster.
 
@@ -450,9 +494,13 @@ for name, size_mb in large[:5]:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Capstone — Archive Old Log Files
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a function `archive_old_logs(log_dir, archive_dir, days=7)` that:
 1. Walks `log_dir` recursively

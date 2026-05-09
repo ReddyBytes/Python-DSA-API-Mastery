@@ -44,6 +44,9 @@
 <a id="q1"></a>
 ### Q1 · array-indexing — Why Is Indexing O(1)? 🔢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 Explain why `arr[i]` runs in constant time regardless of array size.
 Then write a function that returns the element at a given index, and explain what happens at the memory level.
 
@@ -79,6 +82,9 @@ Time: O(1) · Space: O(1)
 
 <a id="q2"></a>
 ### Q2 · dynamic-resize — Dynamic Array Resizing 📦
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Answer both parts:
 1. When does Python's list trigger a resize, and what happens internally?
@@ -116,6 +122,9 @@ Time: O(1) amortized per append · Space: O(n)
 
 <a id="q3"></a>
 ### Q3 · insert-delete-complexity — Insert vs Delete Complexity 🔀
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Given the array below, perform the following operations and state the exact number of element shifts required for each:
 
@@ -158,6 +167,9 @@ Time: O(n) worst case · Space: O(1) (in-place)
 
 <a id="q4"></a>
 ### Q4 · 2d-grid-init — Initialize a 2D Grid Correctly 🗂️
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Create a 3×4 grid of zeros. Then write code that demonstrates why `[[0]*4]*3` is a trap and `[[0]*4 for _ in range(3)]` is correct.
 
@@ -205,6 +217,9 @@ Time: O(n*m) to build · Space: O(n*m)
 <a id="q5"></a>
 ### Q5 · reverse-in-place — Reverse an Array In-Place ↩️
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Reverse the array `[1, 2, 3, 4, 5]` in-place using the two-pointer technique. No built-in `.reverse()` or slicing.
 
 ```
@@ -242,6 +257,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q6"></a>
 ### Q6 · contains-duplicate — Contains Duplicate 🔍
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Given an integer array, return `True` if any value appears at least twice, `False` if all elements are distinct.
 
@@ -284,6 +302,9 @@ Time: O(n) · Space: O(n)
 <a id="q7"></a>
 ### Q7 · move-zeros — Move Zeros to End 🚶
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 Given an array, move all zeros to the end while maintaining the relative order of non-zero elements. Do it in-place.
 
 ```
@@ -325,6 +346,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q8"></a>
 ### Q8 · remove-duplicates-sorted — Remove Duplicates from Sorted Array 📋
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Given a sorted array, remove duplicates in-place and return the length of the unique portion. Elements beyond that length do not matter.
 
@@ -371,6 +395,9 @@ Time: O(n) · Space: O(1)
 <a id="q9"></a>
 ### Q9 · prefix-sum-build — Build a Prefix Sum Array 📊
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 Build a prefix sum array using the 1-indexed (exclusive) convention where `prefix[0] = 0` and `prefix[i] = sum of arr[0..i-1]`.
 
 ```
@@ -406,6 +433,9 @@ Time: O(n) to build · Space: O(n)
 
 <a id="q10"></a>
 ### Q10 · range-sum-query — Range Sum Query ⚡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Using the prefix array built in Q9, answer range sum queries in O(1). Demonstrate with two queries.
 
@@ -449,6 +479,9 @@ Time: O(1) per query after O(n) build · Space: O(n)
 
 <a id="q11"></a>
 ### Q11 · subarray-sum-k — Count Subarrays with Sum K 🗂️
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Given an array of integers and a value `k`, return the number of contiguous subarrays whose sum equals `k`.
 
@@ -494,6 +527,9 @@ Time: O(n) · Space: O(n)
 <a id="q12"></a>
 ### Q12 · max-subarray-kadane — Maximum Subarray (Kadane's) 📈
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 Find the contiguous subarray with the largest sum. Your solution must handle all-negative arrays correctly.
 
 ```
@@ -537,6 +573,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q13"></a>
 ### Q13 · two-pointer-pair-sum — Two-Pointer Pair Sum 👆👆
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Given a **sorted** array, find all unique pairs that sum to a target value.
 
@@ -587,6 +626,9 @@ Time: O(n) after sorting · Space: O(1)
 
 <a id="q14"></a>
 ### Q14 · three-sum — Three Sum (Triplets to Zero) 🎯
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Given an array, find all unique triplets that sum to zero. Return as a list of sorted triplets (no duplicates in the output).
 
@@ -640,6 +682,9 @@ Time: O(n²) · Space: O(1) excluding output
 <a id="q15"></a>
 ### Q15 · rotate-array — Rotate Array Right by K 🔄
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 Rotate the array to the right by `k` positions in-place using O(1) extra space.
 
 ```
@@ -688,6 +733,9 @@ Time: O(n) · Space: O(1)
 <a id="q16"></a>
 ### Q16 · dutch-flag — Dutch National Flag Sort 🚩
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 Sort an array containing only 0s, 1s, and 2s in a single pass without using any sorting function.
 
 ```
@@ -731,6 +779,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q17"></a>
 ### Q17 · product-except-self — Product of Array Except Self 🔢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Return an array where each element is the product of all other elements. No division allowed. O(1) extra space (excluding output).
 
@@ -779,6 +830,9 @@ Time: O(n) · Space: O(1) extra (output array not counted)
 <a id="q18"></a>
 ### Q18 · sliding-window-max-avg — Sliding Window Maximum Average 🪟
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 Find the maximum average of any contiguous subarray of length `k`.
 
 ```
@@ -820,6 +874,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q19"></a>
 ### Q19 · two-pointer-without-sort — Why Two-Pointer Requires Sorting 🚫
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Demonstrate with a concrete example why applying two-pointer to an unsorted array produces a wrong answer. Then fix it.
 
@@ -885,6 +942,9 @@ Time (wrong): O(n) but incorrect · Time (correct): O(n log n) + O(n) · Space: 
 <a id="q20"></a>
 ### Q20 · shallow-vs-deep-copy — Shallow vs Deep Copy Trap 📋
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 Demonstrate the shallow copy trap on a 2D grid. Show the bug and three ways to fix it.
 
 ```
@@ -935,6 +995,9 @@ Time: O(n*m) for deepcopy/comprehension · Space: O(n*m)
 
 <a id="q21"></a>
 ### Q21 · numpy-vs-list — NumPy vs Python List Tradeoffs 🔬
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Answer the following:
 1. Why is `np.array([1,2,3])` roughly 9x more memory-efficient than `[1, 2, 3]` for integers?
@@ -990,6 +1053,9 @@ Time: O(n) for both, but NumPy's constant factor is ~50-100x smaller · Space: O
 
 <a id="q22"></a>
 ### Q22 · circular-buffer — Implement a Circular Buffer 🔁
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Implement a fixed-size circular buffer (ring buffer) with O(1) write and read. Support detecting full and empty states.
 
@@ -1058,6 +1124,9 @@ Time: O(1) per read/write · Space: O(capacity)
 <a id="q23"></a>
 ### Q23 · merge-intervals — Merge Overlapping Intervals 📅
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 Given a list of intervals, merge all overlapping intervals.
 
 ```
@@ -1105,6 +1174,9 @@ Time: O(n log n) for sort + O(n) for scan · Space: O(n) for output
 
 <a id="q24"></a>
 ### Q24 · trapping-rain-water — Trapping Rain Water 🌧️
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Given an array where each element represents the height of a bar, compute how much rainwater can be trapped between the bars.
 
@@ -1161,6 +1233,9 @@ Time: O(n) · Space: O(1)
 
 <a id="q25"></a>
 ### Q25 · subarray-with-target-sum — Find Subarray with Exact Sum (HashMap + Prefix) 🗺️
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Given an integer array (may contain negatives) and a target sum `k`, return the start and end indices of the first subarray with sum equal to `k`. Return `(-1, -1)` if none exists.
 

@@ -9,39 +9,43 @@
 
 | # | Difficulty | Topic | Skill |
 |---|---|---|---|
-| Q1 | 🟢 Basic | Ch1 — logging basics | Replace print() with logging |
-| Q2 | 🟢 Basic | Ch2 — log levels | Set level and filter messages |
-| Q3 | 🟡 Intermediate | Ch3 — handlers | Attach StreamHandler + FileHandler |
-| Q4 | 🟡 Intermediate | Ch4 — formatters | Build a timestamp formatter |
-| Q5 | 🟡 Intermediate | Ch4 — basicConfig | Configure logging in one call |
-| Q6 | 🟢 Basic | Ch5 — format fields | Add filename and lineno |
-| Q7 | 🟡 Intermediate | Ch6 — RotatingFileHandler | Rotate at 1MB, keep 3 backups |
-| Q8 | 🟡 Intermediate | Ch7 — hierarchy | Parent/child loggers + propagation |
-| Q9 | 🟡 Intermediate | Ch7 — propagate | Disable propagation on child |
-| Q10 | 🟡 Intermediate | Ch8 — logging.exception | Log with full traceback |
-| Q11 | 🟡 Intermediate | Ch8 — exc_info | error() vs exception() |
-| Q12 | 🟡 Intermediate | Ch9 — JSON logging | Write a JSONFormatter |
-| Q13 | 🟡 Intermediate | Ch9 — extra fields | Inject extra context fields |
-| Q14 | 🟡 Intermediate | Ch10 — LoggerAdapter | Inject request_id automatically |
-| Q15 | 🟡 Intermediate | Ch11 — lazy formatting | % style vs f-string performance |
-| Q16 | 🟡 Intermediate | Ch12 — PII redaction | Filter to mask credit card numbers |
-| Q17 | 🟠 Advanced | Ch13 — dictConfig | Two handlers via dictConfig |
-| Q18 | 🟢 Basic | Ch14 — assertions | Precondition check with assert |
-| Q19 | 🟢 Basic | Ch15 — breakpoint | Insert breakpoint(), 5 key commands |
-| Q20 | 🟡 Intermediate | Ch15 — post-mortem | pdb.pm() after unhandled exception |
-| Q21 | 🟡 Intermediate | Ch16 — traceback | Capture traceback string without re-raising |
-| Q22 | 🟡 Intermediate | Ch16 — warnings | Emit a DeprecationWarning |
-| Q23 | 🟠 Advanced | Mixed — production logger | Factory function create_logger() |
-| Q24 | 🟠 Advanced | Mixed — timing decorator | @log_timing logs function duration |
-| Q25 | 🟡 Intermediate | Mixed — caplog in tests | pytest caplog fixture |
-| Q26 | 🟠 Advanced | Mixed — QueueHandler | Async logging to avoid blocking |
-| Q27 | 🟠 Advanced | Mixed — Capstone | Request logging middleware |
+| [Q1](#q1) | 🟢 Basic | Ch1 — logging basics | Replace print() with logging |
+| [Q2](#q2) | 🟢 Basic | Ch2 — log levels | Set level and filter messages |
+| [Q3](#q3) | 🟡 Intermediate | Ch3 — handlers | Attach StreamHandler + FileHandler |
+| [Q4](#q4) | 🟡 Intermediate | Ch4 — formatters | Build a timestamp formatter |
+| [Q5](#q5) | 🟡 Intermediate | Ch4 — basicConfig | Configure logging in one call |
+| [Q6](#q6) | 🟢 Basic | Ch5 — format fields | Add filename and lineno |
+| [Q7](#q7) | 🟡 Intermediate | Ch6 — RotatingFileHandler | Rotate at 1MB, keep 3 backups |
+| [Q8](#q8) | 🟡 Intermediate | Ch7 — hierarchy | Parent/child loggers + propagation |
+| [Q9](#q9) | 🟡 Intermediate | Ch7 — propagate | Disable propagation on child |
+| [Q10](#q10) | 🟡 Intermediate | Ch8 — logging.exception | Log with full traceback |
+| [Q11](#q11) | 🟡 Intermediate | Ch8 — exc_info | error() vs exception() |
+| [Q12](#q12) | 🟡 Intermediate | Ch9 — JSON logging | Write a JSONFormatter |
+| [Q13](#q13) | 🟡 Intermediate | Ch9 — extra fields | Inject extra context fields |
+| [Q14](#q14) | 🟡 Intermediate | Ch10 — LoggerAdapter | Inject request_id automatically |
+| [Q15](#q15) | 🟡 Intermediate | Ch11 — lazy formatting | % style vs f-string performance |
+| [Q16](#q16) | 🟡 Intermediate | Ch12 — PII redaction | Filter to mask credit card numbers |
+| [Q17](#q17) | 🟠 Advanced | Ch13 — dictConfig | Two handlers via dictConfig |
+| [Q18](#q18) | 🟢 Basic | Ch14 — assertions | Precondition check with assert |
+| [Q19](#q19) | 🟢 Basic | Ch15 — breakpoint | Insert breakpoint(), 5 key commands |
+| [Q20](#q20) | 🟡 Intermediate | Ch15 — post-mortem | pdb.pm() after unhandled exception |
+| [Q21](#q21) | 🟡 Intermediate | Ch16 — traceback | Capture traceback string without re-raising |
+| [Q22](#q22) | 🟡 Intermediate | Ch16 — warnings | Emit a DeprecationWarning |
+| [Q23](#q23) | 🟠 Advanced | Mixed — production logger | Factory function create_logger() |
+| [Q24](#q24) | 🟠 Advanced | Mixed — timing decorator | @log_timing logs function duration |
+| [Q25](#q25) | 🟡 Intermediate | Mixed — caplog in tests | pytest caplog fixture |
+| [Q26](#q26) | 🟠 Advanced | Mixed — QueueHandler | Async logging to avoid blocking |
+| [Q27](#q27) | 🟠 Advanced | Mixed — Capstone | Request logging middleware |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · logging basics — Replace print() with logging
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** You have this script that uses `print()` for diagnostics. Replace it with the `logging` module using `basicConfig()` to output `INFO`-level messages to the console. Show the log level name in the output.
 
@@ -90,9 +94,13 @@ connect("db.prod.internal", 5432)
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · log levels — Set level and filter messages (DEBUG through CRITICAL)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Create a root logger configured to `DEBUG` level. Fire one message at each of the five standard levels. Then reconfigure the level to `WARNING` and show which messages are suppressed.
 
@@ -139,9 +147,13 @@ logging.critical("critical: this appears")    # shown
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · handlers — Attach StreamHandler + FileHandler to a named logger
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Create a named logger `"myapp"` with two handlers: a `StreamHandler` that writes `WARNING`+ to the console, and a `FileHandler` that writes `DEBUG`+ to `app.log`. Both handlers should share the same formatter. Do not use `basicConfig()`.
 
@@ -194,9 +206,13 @@ logger.error("payment failed — goes to console AND file")
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · formatters — Build a formatter with timestamp, level, name, message
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Create a `logging.Formatter` that produces output in this exact format:
 
@@ -242,9 +258,13 @@ logger.error("Payment failed")
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · basicConfig — Configure logging with filename, level, and format in one call
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Use a single `logging.basicConfig()` call to: write to `service.log`, set level to `INFO`, use the production format `"%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"`, append to the file, and encode as UTF-8. Then emit one test message.
 
@@ -282,9 +302,13 @@ logger.info("Service started on port 8080")
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟢 · format fields — Add %(filename)s and %(lineno)d to format string
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Build a formatter that includes the source filename and line number in every log line, so output looks like:
 
@@ -327,9 +351,13 @@ logger.error("Card charge failed")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · RotatingFileHandler — Rotate at 1MB, keep 3 backups
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Configure a logger named `"rotator"` that writes to `rotate_demo.log`, rotates when the file reaches 1 MB, and keeps 3 backup files (`rotate_demo.log.1`, `rotate_demo.log.2`, `rotate_demo.log.3`). Attach a standard formatter.
 
@@ -380,9 +408,13 @@ for i in range(100):
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · hierarchy — Create parent/child loggers and observe propagation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Create three loggers: `"app"` (parent), `"app.services"` (child), and `"app.services.payment"` (grandchild). Attach a handler only to `"app"`. Log a message from `"app.services.payment"` and show that it reaches the `"app"` handler via propagation.
 
@@ -428,9 +460,13 @@ svc_logger.warning("Service response time above threshold")
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · propagate — Disable propagation on a child logger
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** You have a noisy child logger `"app.metrics"` whose `DEBUG` messages are flooding the root handler. Attach a dedicated `FileHandler` to `"app.metrics"` and disable propagation so its records stay there.
 
@@ -479,9 +515,13 @@ logging.getLogger("app.api").warning("High latency on /checkout")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · logging.exception — Log exception with full traceback inside except block
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write a function `safe_divide(a, b)` that catches `ZeroDivisionError` and logs the full traceback using `logger.exception()`. The log message should read `"Division failed"`.
 
@@ -531,9 +571,13 @@ print("Result:", result)
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · exc_info — Difference between logging.error() and logging.exception()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Demonstrate the difference between `logger.error("msg")`, `logger.error("msg", exc_info=True)`, and `logger.exception("msg")` inside an `except` block. When would you choose `error()` over `exception()`?
 
@@ -585,9 +629,13 @@ except ValueError as e:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · JSON logging — Write a JSONFormatter that outputs log records as JSON
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a `JSONFormatter` class that subclasses `logging.Formatter`. Its `format()` method should return a JSON string with keys: `timestamp`, `level`, `logger`, `module`, `line`, `message`. Include the exception as an `"exception"` key when present.
 
@@ -649,9 +697,13 @@ except ZeroDivisionError:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · extra fields — Use logger.info("msg", extra={...}) pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Log a payment event with `logger.info()` that includes `request_id`, `user_id`, and `amount` as structured fields via the `extra=` parameter. Show them in the formatted output.
 
@@ -699,9 +751,13 @@ logger.info(
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · LoggerAdapter — Inject request_id into every log line using LoggerAdapter
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Create a `logging.LoggerAdapter` that automatically prepends `[req_id=<value>]` to every log message. Instantiate it with a request ID and use it to log two messages — neither call should pass `extra=` manually.
 
@@ -751,9 +807,13 @@ logger.error("Payment gateway timeout")
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟡 · lazy formatting — Explain why logger.debug("val=%s", val) beats f-string
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Write a benchmark that demonstrates that `logger.debug("items: %s", large_list)` avoids string formatting when DEBUG is disabled, while `logger.debug(f"items: {large_list}")` does the formatting work regardless of level.
 
@@ -809,9 +869,13 @@ if logger.isEnabledFor(logging.DEBUG):
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · PII redaction — Write a filter that masks credit card numbers in log messages
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Write a `logging.Filter` subclass called `CreditCardFilter` that replaces any 16-digit sequence in log messages with `****-****-****-****`. Attach it to a handler and verify it fires.
 
@@ -871,9 +935,13 @@ logger.warning("Retry for card number: 4111-1111-1111-1111")
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟠 · dictConfig — Configure two handlers (console + file) using logging.config.dictConfig
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Use `logging.config.dictConfig()` to configure: a `"standard"` formatter, a `console` handler (INFO+, stdout), a `file` handler (DEBUG+, `app.log`, rotating at 5MB, 3 backups), and a `"myapp"` logger that uses both handlers with `propagate=False`.
 
@@ -948,9 +1016,13 @@ logger.error("Payment failed — goes to console and file")
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟢 · assertions — Write an assert with a descriptive message for a precondition check
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Write a function `process_order(order_id, amount)` that uses `assert` statements to enforce two preconditions: `order_id` must be a positive integer, and `amount` must be greater than 0. Each assert must include a descriptive error message.
 
@@ -1000,9 +1072,13 @@ except AssertionError as e:
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟢 · breakpoint — Insert breakpoint() and describe the 5 commands you'd use first
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Insert `breakpoint()` into the function below at the point where `total` is computed. Then describe the first 5 pdb commands you would run and what each shows.
 
@@ -1064,9 +1140,13 @@ calculate_discount(499.00, 10)
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟡 · post-mortem — Use pdb.pm() after an unhandled exception in a script
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Write a script that calls a function with a bug. Wrap the call in a try/except that invokes `pdb.post_mortem()` to start an interactive debug session at the exact frame where the exception originated.
 
@@ -1114,9 +1194,13 @@ except Exception:
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟡 · traceback — Capture and log a formatted traceback string without re-raising
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Write a function that catches an exception, captures the full traceback as a string using the `traceback` module, logs it at `ERROR` level, and returns a user-friendly message — without re-raising the exception.
 
@@ -1167,9 +1251,13 @@ print("Result:", result)   # Result: None
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · warnings — Use warnings.warn() to emit a DeprecationWarning from a function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Write a function `old_api(data)` that is being deprecated. When called, it should emit a `DeprecationWarning` telling callers to use `new_api(data)` instead. The warning should point to the caller's line, not the line inside `old_api`.
 
@@ -1222,9 +1310,13 @@ print(result)
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟠 · production logger — Build a create_logger(name, level, log_file) factory function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Write a `create_logger(name, level="INFO", log_file=None)` factory that returns a configured `Logger`. It should: use the standard production format, always add a `StreamHandler` (console), optionally add a `RotatingFileHandler` if `log_file` is given (10MB, 5 backups), and guard against adding duplicate handlers on repeated calls.
 
@@ -1312,9 +1404,13 @@ assert log is log2
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟠 · timing decorator — Write a @log_timing decorator that logs function duration
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Write a `@log_timing` decorator that logs the function name, arguments (truncated to 80 chars), return value type, and elapsed time in milliseconds. Use `logging.INFO` for normal runs and `logging.WARNING` if execution exceeds a configurable threshold (default 500ms).
 
@@ -1405,9 +1501,13 @@ total = add(3, 4)
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟡 · caplog in tests — Explain how pytest's caplog fixture captures log output
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Write a pytest test for a function that logs a `WARNING` message. Use the `caplog` fixture to assert that the warning was emitted with the correct message and level. Show how to set the capture level.
 
@@ -1476,9 +1576,13 @@ def test_process_order_info_not_captured_at_warning_level(caplog):
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 🟠 · QueueHandler — Explain async logging with QueueHandler to avoid blocking
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 **Problem:** Set up a non-blocking logging pipeline using `QueueHandler` and `QueueListener`. The main logger should enqueue records instantly, while a background thread drains the queue and writes to a file. Demonstrate that the main thread is never blocked by I/O.
 
@@ -1547,9 +1651,13 @@ print("Listener stopped — all records flushed to async_app.log")
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 🟠 · Capstone — Build a request logging middleware
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Build a `RequestLoggingMiddleware` class that wraps a simple WSGI-like callable. For every request, it must log: HTTP method, path, response status code, elapsed time (ms), and a request ID (from the `X-Request-ID` header or auto-generated). Log at `INFO` on success (2xx/3xx) and `WARNING` on client/server errors (4xx/5xx).
 

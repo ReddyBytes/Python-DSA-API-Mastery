@@ -4,9 +4,31 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | singleton · Module-Level Singleton | 🟢 |
+| [Q2](#q2) | singleton · Class-Based Singleton Using `__new__` | 🟡 |
+| [Q3](#q3) | singleton · Thread-Safe Singleton | 🟡 |
+| [Q4](#q4) | singleton · Borg Pattern | 🟡 |
+| [Q5](#q5) | factory · Simple Factory Function | 🟡 |
+| [Q6](#q6) | factory · Factory Method with ABC | 🟡 |
+| [Q7](#q7) | factory · Registration Factory (Dict-Based Dispatch) | 🟡 |
+| [Q8](#q8) | factory · Abstract Factory for Cross-Platform UI | 🟠 |
+| [Q9](#q9) | factory · When to Use Each Factory Variant | 🟡 |
+| [Q10](#q10) | factory + singleton · Capstone: Plugin Registry | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 🟢 · singleton · Module-Level Singleton
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Create a module-level singleton for application configuration. The config object should have `env`, `debug`, and `db_url` attributes. Demonstrate that importing it from two places gives the same object.
 
@@ -39,9 +61,13 @@ assert cfg1 is cfg2   # True — same object
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · singleton · Class-Based Singleton Using `__new__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Implement a `DatabasePool` singleton using `__new__`. It should store `max_connections`. Calling `DatabasePool(20)` after `DatabasePool(5)` should return the original instance with `max_connections=5`. Include a `reset()` classmethod for testing.
 
@@ -85,9 +111,13 @@ assert pool2.max_connections == 5
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · singleton · Thread-Safe Singleton
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Implement a thread-safe singleton using double-checked locking. Launch 10 threads that all call the constructor simultaneously and verify that only one instance is ever created.
 
@@ -131,9 +161,13 @@ assert len(set(results)) == 1   # all threads got the same instance
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · singleton · Borg Pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Implement a `Logger` using the Borg (Monostate) pattern. Create two Logger instances and verify: `log1 is log2` is `False` (different objects), but a log entry written via `log1` is visible via `log2` (shared state).
 
@@ -176,9 +210,13 @@ assert log2._level == "DEBUG"
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · factory · Simple Factory Function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a `create_notification(channel)` factory function that returns `EmailNotification`, `SMSNotification`, or `PushNotification` based on the string argument. Use a dict for dispatch. Raise `ValueError` for unknown channels.
 
@@ -225,9 +263,13 @@ def create_notification(channel: str) -> Notification:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · factory · Factory Method with ABC
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Implement a `DataParser` abstract class with a `create_reader()` factory method. Create `JSONParser` and `CSVParser` subclasses. The base `process(raw)` method calls `create_reader()` and uses the returned reader's `.read()` method.
 
@@ -278,9 +320,13 @@ class CSVParser(DataParser):
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · factory · Registration Factory (Dict-Based Dispatch)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Build a `ReportFactory` with a `@register(name)` class decorator. Implement `CSVReport` and `JSONReport` that self-register. Factory's `create(report_type)` should return the right instance without any if/elif.
 
@@ -335,9 +381,13 @@ class JSONReport(Report):
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟠 · factory · Abstract Factory for Cross-Platform UI
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Build a `UIFactory` abstract factory with `create_button(label)` and `create_dialog(title)` methods. Implement `LightThemeFactory` and `DarkThemeFactory`. Write a `build_login_form(factory)` function that uses only the factory interface.
 
@@ -402,9 +452,13 @@ def build_login_form(factory: UIFactory) -> None:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · factory · When to Use Each Factory Variant
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Given these three scenarios, choose the right factory variant and justify your answer:
 
@@ -455,9 +509,13 @@ class PostgresFactory(DBFactory):
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · factory + singleton · Capstone: Plugin Registry
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Build a `PluginRegistry` that is a Singleton and acts as a registration factory. It should support `@PluginRegistry.register("name")` to register plugin classes. `PluginRegistry.get("name")` returns an instance. The registry itself must be the same object no matter how many times it is constructed.
 

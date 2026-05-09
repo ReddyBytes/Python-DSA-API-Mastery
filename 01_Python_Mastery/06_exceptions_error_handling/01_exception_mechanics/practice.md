@@ -9,27 +9,31 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1 | Call stack propagation — trace where the handler is | 🟢 |
-| Q2 | Full try/except/else/finally for division with cleanup | 🟢 |
-| Q3 | Predict output — else only on no-exception path | 🟡 |
-| Q4 | Predict output — return in finally swallows exception | 🟡 |
-| Q5 | Predict output — return in try vs return in finally | 🟡 |
-| Q6 | Exception hierarchy — which clause catches int("x")? | 🟡 |
-| Q7 | Order bug — broad except before specific, fix it | 🟡 |
-| Q8 | Catch multiple exceptions in one clause | 🟡 |
-| Q9 | Log and re-raise without swallowing | 🟡 |
-| Q10 | raise ValueError from KeyError — traceback shape | 🟡 |
-| Q11 | raise X from None — when to suppress the chain | 🟡 |
-| Q12 | Rewrite LBYL as EAFP | 🟡 |
-| Q13 | When LBYL is actually better — race condition scenario | 🟡 |
-| Q14 | Read a traceback — root cause, path, fix | 🟠 |
-| Q15 | Multiple handlers — ZeroDivisionError, ValueError, fallthrough | 🟠 |
+| [Q1](#q1) | Call stack propagation — trace where the handler is | 🟢 |
+| [Q2](#q2) | Full try/except/else/finally for division with cleanup | 🟢 |
+| [Q3](#q3) | Predict output — else only on no-exception path | 🟡 |
+| [Q4](#q4) | Predict output — return in finally swallows exception | 🟡 |
+| [Q5](#q5) | Predict output — return in try vs return in finally | 🟡 |
+| [Q6](#q6) | Exception hierarchy — which clause catches int("x")? | 🟡 |
+| [Q7](#q7) | Order bug — broad except before specific, fix it | 🟡 |
+| [Q8](#q8) | Catch multiple exceptions in one clause | 🟡 |
+| [Q9](#q9) | Log and re-raise without swallowing | 🟡 |
+| [Q10](#q10) | raise ValueError from KeyError — traceback shape | 🟡 |
+| [Q11](#q11) | raise X from None — when to suppress the chain | 🟡 |
+| [Q12](#q12) | Rewrite LBYL as EAFP | 🟡 |
+| [Q13](#q13) | When LBYL is actually better — race condition scenario | 🟡 |
+| [Q14](#q14) | Read a traceback — root cause, path, fix | 🟠 |
+| [Q15](#q15) | Multiple handlers — ZeroDivisionError, ValueError, fallthrough | 🟠 |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · propagation — Where does it land?
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:**
 Three functions are nested: `main` calls `middle`, `middle` calls `inner`. `inner` raises a `ValueError`. A `try/except ValueError` block exists only in `main`. Trace the propagation path and explain where the exception is caught and why.
@@ -76,9 +80,13 @@ Output: `caught in main: bad input`
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · try/except/else/finally — Division with cleanup
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:**
 Write a function `safe_divide(a, b)` that:
@@ -132,9 +140,13 @@ safe_divide(10, 0)
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · predict output — else only on success path
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:**
 What does this print? Predict before running.
@@ -171,9 +183,13 @@ parsed: 5
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · predict output — return in finally swallows exception
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:**
 What does this print? Does it raise?
@@ -210,9 +226,13 @@ No exception is raised. The `RuntimeError` is silently discarded.
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · predict output — return in try vs return in finally
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:**
 Which `return` wins?
@@ -251,9 +271,13 @@ from finally
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · exception hierarchy — which clause catches int("x")?
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:**
 `int("x")` raises an exception. Which of the following `except` clauses would catch it? Explain why using the hierarchy.
@@ -295,9 +319,13 @@ except Exception: ...
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · order bug — broad except before specific
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:**
 This code has a bug. The specific handler never runs. Identify the bug and fix it.
@@ -338,9 +366,13 @@ def parse(value):
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · catch multiple in one clause — tuple syntax
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:**
 Write a function `read_value(d, key)` that catches both `KeyError` (key not in dict) and `TypeError` (d is not subscriptable) in a single `except` clause and returns `None` for both cases.
@@ -379,9 +411,13 @@ print(read_value(None, "a"))        # None  (TypeError)
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · re-raise — log and re-raise without swallowing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:**
 Write a function `fetch_data(url)` that calls `requests.get(url)`, logs any `requests.exceptions.RequestException` to stderr, and then re-raises it — without swallowing the original traceback. (You don't need to actually import requests — write the structure.)
@@ -427,9 +463,13 @@ def fetch_data(url):
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · raise X from Y — what does the traceback look like?
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:**
 Run this code mentally and describe the traceback output shape. What two exceptions appear, and in what order?
@@ -477,9 +517,13 @@ ValueError: config key not found: timeout
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · raise X from None — when to suppress the chain
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:**
 You're building a database abstraction layer. Your internal implementation uses `psycopg2`. You want callers to see only your clean `DatabaseError`, not psycopg2 internals. Write the function and explain why `from None` is the right choice here.
@@ -532,9 +576,13 @@ No psycopg2 details, no internal stack frames from the DB driver.
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · LBYL → rewrite as EAFP
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:**
 Rewrite this LBYL code as idiomatic Python EAFP style.
@@ -575,9 +623,13 @@ def read_config(path):
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · EAFP → when LBYL is actually better
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:**
 You have a form that asks users to enter a port number (1–65535). Before making a network connection, you want to validate the input. A colleague wrote this:
@@ -634,9 +686,13 @@ def connect(port_str):
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟠 · read this traceback — root cause, path, fix
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:**
 Read this traceback. Identify: (a) the root cause exception, (b) the propagation path from inner to outer, (c) the most likely fix.
@@ -706,9 +762,13 @@ def process_batch(records):
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟠 · multiple handlers — ZeroDivisionError, ValueError, fallthrough
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:**
 Write a function `evaluate(expr_str)` that:

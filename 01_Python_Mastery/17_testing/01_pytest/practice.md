@@ -31,6 +31,8 @@
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
+
+
 **Problem:** Write a function `add(a, b)` that returns the sum of two numbers. Write a pytest test function `test_add` that verifies: `add(2, 3) == 5`, `add(-1, 1) == 0`, and `add(0, 0) == 0`. Run it with `pytest -v`.
 
 <details>
@@ -61,6 +63,8 @@ def test_add():
 ### Q2 🟢 · assert — Test Multiple Conditions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write `is_palindrome(s)` that returns `True` if `s` (case-insensitive, ignore spaces) is a palindrome. Write `test_palindrome` that checks at least 4 different inputs including at least one False case.
 
@@ -95,6 +99,8 @@ def test_palindrome():
 ### Q3 🟡 · fixture — setUp Equivalent for a Database
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a pytest fixture `db` that creates an in-memory SQLite database with a `users` table (`id INTEGER, name TEXT`), yields the connection for the test, then closes it. Write two tests that use this fixture: one inserts a user and checks count, one checks the table starts empty.
 
@@ -138,6 +144,8 @@ def test_insert_user(db):
 ### Q4 🟡 · fixture scope — Module-Level Fixture
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write a module-scoped fixture `expensive_user` that creates a `User` dataclass instance with `name="alice smith"`, `email="alice@example.com"`, `age=25`. Write three tests using this fixture that verify: `display_name()` returns `"Alice Smith"`, `is_adult()` returns `True`, and `email` is lowercase.
 
@@ -189,6 +197,8 @@ def test_email_lowercase(expensive_user):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
+
+
 **Problem:** Write `celsius_to_fahrenheit(c)`. Use `@pytest.mark.parametrize` to test it with 5 (Celsius, Fahrenheit) pairs: (0, 32), (100, 212), (-40, -40), (37, 98.6), (20, 68).
 
 <details>
@@ -227,6 +237,8 @@ def test_celsius_to_fahrenheit(celsius, fahrenheit):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
+
+
 **Problem:** Rewrite Q5 using `pytest.param(..., id="name")` to give each case a readable ID: "freezing", "boiling", "same-in-both", "body-temp", "room-temp".
 
 <details>
@@ -259,6 +271,8 @@ def test_celsius_to_fahrenheit_named(celsius, fahrenheit):
 ### Q7 🟡 · pytest.raises — Assert an Exception Is Raised
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write `validate_age(age)` that raises `TypeError` if age is not an int, and `ValueError` if age is outside [0, 150]. Write tests that: (1) verify the happy path, (2) check `TypeError` is raised for a string input, (3) check `ValueError` is raised for -1, and (4) check `ValueError` is raised for 999 with a `match` on the message.
 
@@ -309,6 +323,8 @@ def test_out_of_range_message():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
+
+
 **Problem:** Describe (in code + explanation) how you would share a `db` fixture between `tests/test_users.py` and `tests/test_orders.py` without importing it in each file.
 
 <details>
@@ -356,6 +372,8 @@ def test_order_count(db):         # same fixture, no import
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
+
+
 **Problem:** Write three tests: (1) a test marked `@pytest.mark.skip` with a reason, (2) a test marked `@pytest.mark.xfail` for a known bug, (3) a test marked with `skipif` that skips on Windows. Show the correct output description for each.
 
 <details>
@@ -394,6 +412,8 @@ def test_unix_config_path():
 ### Q10 🟡 · tmp_path — Write and Read Test Files
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write `read_config(path)` that reads a `KEY=VALUE` config file (one per line, skip `#` comments) and returns a dict. Use the built-in `tmp_path` fixture to write a temp config file and test that the function parses it correctly.
 
@@ -444,6 +464,8 @@ def test_empty_config(tmp_path):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
+
+
 **Problem:** Write `get_api_key()` that reads `os.environ["API_KEY"]` and raises `EnvironmentError` if missing. Use `monkeypatch.setenv` to test the happy path and test the error path (with the env var absent).
 
 <details>
@@ -484,6 +506,8 @@ def test_api_key_missing(monkeypatch):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
+
+
 **Problem:** Write `async def fetch_user(repo, user_id)` that calls `await repo.find_user(user_id)` and returns the result. Write an async test using `pytest-asyncio` and `AsyncMock` to verify the function calls `repo.find_user` with the correct id and returns the expected data.
 
 <details>
@@ -522,6 +546,8 @@ async def test_fetch_user():
 ### Q13 🟠 · fixture teardown — yield vs return
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Write a fixture `managed_file` that creates a temp file (using `tempfile`), writes "initial content", yields the file path, then deletes the file. Write a test that appends to the file and verifies content. Show that teardown runs even if the test fails.
 
@@ -568,6 +594,8 @@ def test_append_to_managed_file(managed_file):
 ### Q14 🟠 · parametrize + fixture — Combined
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Write a `BankAccount` class with `deposit(amount)` and `balance` property. Create a fixture `empty_account` and a parametrized test that uses both — testing that valid deposit amounts (1, 50, 999.99, 1000) set the balance correctly, and invalid amounts (0, -1, -100) raise `ValueError`.
 
@@ -620,6 +648,8 @@ def test_invalid_deposit_raises(empty_account, amount):
 ### Q15 🟠 · Capstone — Test a CSV Parser with Fixtures and parametrize
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Write `parse_csv(path)` that reads a CSV file and returns a list of dicts (using the header row as keys). Write:
 - A fixture `csv_file(tmp_path)` that creates a temp CSV with 3 data rows.

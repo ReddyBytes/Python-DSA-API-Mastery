@@ -37,11 +37,15 @@
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · python-dotenv — Load API Key from .env 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 You have a `.env` file with `OPENAI_API_KEY=sk-abc123`. Write the minimal code to load it and print the key.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -66,11 +70,15 @@ print(api_key)                        # sk-abc123
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · python-dotenv — Raise if Key is Missing 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Load `.env` and raise a clear `ValueError` if `OPENAI_API_KEY` is not set. Show the pattern used in production code.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -100,11 +108,15 @@ print("Key loaded:", api_key[:8] + "...")  # show first 8 chars safely
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · httpx — Sync GET with Authorization Header 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Make a synchronous GET request to `https://api.example.com/models` using httpx. Include a Bearer token header and print the status code.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -135,11 +147,15 @@ data = response.json()        # ← parse JSON body
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · httpx — Async POST with AsyncClient 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Send an async POST to an LLM endpoint using `httpx.AsyncClient`. Wrap it in an `async with` block and return the JSON response.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -176,11 +192,15 @@ result = asyncio.run(call_llm("sk-demo", "Hello"))
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · httpx — Configure a Custom Timeout Object 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 LLM APIs can take 60 seconds to respond. Create an `httpx.Timeout` that allows 5s to connect, 60s to read, and 10s to write. Apply it to an AsyncClient.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -210,11 +230,15 @@ async with httpx.AsyncClient(timeout=timeout) as client:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · tenacity — @retry with stop_after_attempt 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Use tenacity to make a function retry up to 3 times before giving up. Show the minimal decorator.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -243,11 +267,15 @@ result = call_llm("Hello")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · tenacity — wait_exponential Backoff 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Add exponential backoff to an LLM call: start at 2 seconds, double each retry, cap at 60 seconds. Use 5 max attempts.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -278,11 +306,15 @@ async def call_llm(prompt: str) -> dict:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · tenacity — retry_if_exception_type for Specific Errors 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Retry only on `httpx.TimeoutException` and `httpx.NetworkError` — not on auth errors (401) or bad requests (400). Show the decorator.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -316,11 +348,15 @@ async def call_api(client: httpx.AsyncClient, url: str):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · tiktoken — Encode a String and Count Tokens 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Count how many GPT-4o tokens are in the string `"Hello, how are you today?"` using tiktoken.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -350,11 +386,15 @@ print(enc.decode(tokens))          # "Hello, how are you today?"
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · tiktoken — Truncate Text to a Token Limit 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a function `truncate_to_limit(text, max_tokens, model)` that returns the text truncated so it fits within `max_tokens` for the given model.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -388,11 +428,15 @@ print(len(tiktoken.encoding_for_model("gpt-4o").encode(short)))  # ≤ 100
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · tiktoken — Count Tokens in a Chat Messages List 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 OpenAI chat messages have 4 tokens of overhead per message plus 3 tokens for reply priming. Write a function that counts total tokens for a messages list.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -427,11 +471,15 @@ print(count_message_tokens(messages))  # ~26
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · tqdm — Wrap a List with a Progress Bar 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 You have a list of 1000 documents to embed. Wrap the loop with tqdm showing the description "Embedding documents".
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -459,11 +507,15 @@ for doc in tqdm(documents, desc="Embedding documents"):
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · tqdm — Manual pbar with update() 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 You process documents in variable-sized batches (not a fixed list). Use a manual `tqdm` progress bar with `total=` and `update()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -493,11 +545,15 @@ progress.close()                 # ← always close manually-created bars
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · tqdm — Async Gather with tqdm_asyncio 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 You have 100 async coroutines. Use `tqdm_asyncio.gather` to run them all with a progress bar showing "Calling LLM".
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -531,11 +587,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · loguru — Basic logger.info / warning / error 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Replace three `print()` statements with loguru: one for a startup message, one for a token warning, one for an API failure.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -567,11 +627,15 @@ logger.error("API call failed: 429 Rate Limited")  # ← ERROR, red
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · loguru — Add a File Sink with Rotation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Configure loguru to write DEBUG+ logs to `logs/app.log` with 10 MB rotation and 7-day retention. Also add a separate sink for ERROR+ only.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -605,11 +669,15 @@ logger.error("This goes to BOTH app.log and errors.log")
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · loguru — bind() Structured Context 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 You are processing a batch of requests. Use `logger.bind()` to attach a `request_id` to every log message inside a function, without passing the ID to every call manually.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -645,11 +713,15 @@ process_request("Explain quantum computing")
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · rich — Print Colored Markup to Terminal 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Use rich to print: a bold green "Success!" message, a red "Error:" prefix, and a yellow "Warning:" prefix.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -678,11 +750,15 @@ rprint("[bold cyan]Using rich print[/bold cyan]")
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · rich — Build and Print a Table 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Build a rich `Table` showing LLM benchmark results: columns for Model, Latency (ms), and Cost per 1k tokens. Add three rows of data.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -715,11 +791,15 @@ console.print(table)   # ← renders as a formatted box table in terminal
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · pydantic-settings — BaseSettings with Env Vars 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Define a `Settings` class that reads `OPENAI_API_KEY` (required string), `MAX_TOKENS` (int, default 4096), and `DEBUG` (bool, default False) from environment variables or a `.env` file.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -751,11 +831,15 @@ print(settings.debug)              # False (bool, not string)
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · pydantic-settings — lru_cache Singleton Pattern 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Wrap `Settings()` in an `lru_cache` so the `.env` file is only read once per process, no matter how many modules call `get_settings()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -791,11 +875,15 @@ print(settings is settings2)     # True — same object
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · pydantic-settings — Field with Validated Range 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Add a `temperature` field to Settings that must be a float between 0.0 and 2.0 (inclusive). Use `pydantic.Field` with constraints.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -832,11 +920,15 @@ print(settings.temperature)     # 0.7
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · pathlib — Build Paths and mkdir with parents 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Given `__file__` as your starting point, build a path to `../../data/outputs/results.jsonl`. Create the `outputs` directory (and any parents) if it does not exist.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -867,11 +959,15 @@ print(result_file.suffix)   # .jsonl
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · pathlib — Glob for .jsonl Files in a Directory 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Find all `.jsonl` files in a `data/` directory (and all subdirectories). Print their names and sizes in MB.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -902,11 +998,15 @@ top_level_only = list(data_dir.glob("*.jsonl"))
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · json/jsonlines — Read a .jsonl File Line by Line 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Write a generator function `read_jsonl(filepath)` that reads a JSONL file one record at a time without loading the whole file into memory.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -938,11 +1038,15 @@ for record in read_jsonl("training_data.jsonl"):
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · json/jsonlines — Write and Append to .jsonl 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Write a `write_jsonl(filepath, records)` function and an `append_jsonl(filepath, record)` function. Each record should be one line of valid JSON.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -977,11 +1081,15 @@ append_jsonl("output.jsonl", {"id": 99, "text": "added later"})
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · Project Structure — Describe the Standard AI App Layout 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Describe the standard folder layout for a production AI application. Name each directory and its purpose.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1027,11 +1135,15 @@ my-ai-app/
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Project Structure — Where Do Prompts and Config Live? 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Where should system prompts and app configuration live in a production AI project? Why should they NOT be hardcoded strings in Python files?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1068,11 +1180,15 @@ system_prompt = (PROMPTS_DIR / "system.txt").read_text(encoding="utf-8")
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · requirements.txt — Pin AI Library Versions 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Write a `requirements.txt` with pinned versions for the core AI utility belt: httpx, tenacity, tiktoken, tqdm, loguru, python-dotenv, pydantic-settings, rich, openai, anthropic.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1106,11 +1222,15 @@ pip install -r requirements.txt
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · pyproject.toml — Optional Dev Extras 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Write a `pyproject.toml` for an AI app. Core dependencies use `>=` (minimum version). Add a `[dev]` optional group with pytest and pytest-asyncio.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

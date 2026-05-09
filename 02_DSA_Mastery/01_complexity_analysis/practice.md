@@ -39,6 +39,9 @@
 <a id="q1"></a>
 ### Q1 · big-o-definition — What does Big-O actually measure? 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 You have two functions that both produce correct output. Your colleague says "one is O(n) and the other is O(n²)." What exactly does that mean? What is Big-O NOT measuring?
 
 <details>
@@ -72,6 +75,9 @@ def quadratic(arr):     # O(n²) — operations grow with n squared
 
 <a id="q2"></a>
 ### Q2 · constant-time — Identify all O(1) operations 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Which of the following are O(1) and which are not? Explain each.
 
@@ -110,6 +116,9 @@ y = 42 in [1,2,3]    # O(n) — scans each element until found or exhausted
 
 <a id="q3"></a>
 ### Q3 · linear-time — Write a function and predict its complexity 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 What is the time and space complexity of this function? Justify both.
 
@@ -151,6 +160,9 @@ Total time: n × O(1) = O(n). Total extra space: 1 variable = O(1).
 
 <a id="q4"></a>
 ### Q4 · quadratic-time — Spot O(n²) in nested loops 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 What is the complexity of each snippet below?
 
@@ -197,6 +209,9 @@ Snippet C: O(n)  — inner loop runs exactly 10 times (constant), not n times
 <a id="q5"></a>
 ### Q5 · logarithmic-time — Trace through binary search 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Binary search on a sorted array of 1,000 elements. How many comparisons in the worst case? What about 1,000,000 elements?
 
 ```python
@@ -238,6 +253,9 @@ Going from 1,000 to 1,000,000 elements (1,000x more data) adds only 10 more comp
 <a id="q6"></a>
 ### Q6 · drop-constants — Simplify these Big-O expressions 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 Simplify each expression to its proper Big-O form:
 
 ```
@@ -272,6 +290,9 @@ e) O(2ⁿ + n³)          → O(2ⁿ)  — exponential always dominates polynomi
 <a id="q7"></a>
 ### Q7 · lower-order-terms — What does "dominant term" mean? 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 A function does three things: sorts an array O(n log n), then scans it once O(n), then does a hash lookup O(1). What is the total time complexity?
 
 <details>
@@ -301,6 +322,9 @@ At n=1,000,000:
 <a id="q8"></a>
 ### Q8 · best-worst-average — Phone book search analysis 🟢
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 You search for "Williams" in a phone book with n entries using linear scan. Describe the best case, worst case, and average case. Which one does Big-O refer to by default?
 
 <details>
@@ -326,6 +350,9 @@ Big-O **by default refers to the worst case** — it is a guarantee that perform
 
 <a id="q9"></a>
 ### Q9 · space-complexity — Classify these by space usage 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 State the space complexity of each function and why:
 
@@ -377,6 +404,9 @@ def factorial(n):          # Space: O(n)
 <a id="q10"></a>
 ### Q10 · consecutive-vs-nested — Add vs multiply loops 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 What is the complexity of each? Explain whether you add or multiply the loop costs.
 
 ```python
@@ -421,6 +451,9 @@ func_b:
 
 <a id="q11"></a>
 ### Q11 · recognize-log-n — Spot logarithmic patterns in code 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Which of these code patterns indicates O(log n) and why?
 
@@ -469,6 +502,9 @@ The **halving fingerprint**: whenever you see `n //= 2`, `n >>= 1`, or `mid = (l
 <a id="q12"></a>
 ### Q12 · recursion-space — Stack frames and space complexity 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 What is the time and space complexity of this countdown function? Draw the call stack for `countdown(4)`.
 
 ```python
@@ -510,6 +546,9 @@ All 5 frames exist simultaneously in memory. At n=100,000, this is 100,000 frame
 <a id="q13"></a>
 ### Q13 · n-log-n — Where does O(n log n) come from? 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 Merge sort splits an array in half recursively, then merges. Explain intuitively why merge sort is O(n log n), not O(n) or O(n²).
 
 ```
@@ -543,6 +582,9 @@ Level 3 (8 arrays of 1):  [5][3][8][1][9][2][7][4]    — merge work: 8
 <a id="q14"></a>
 ### Q14 · exponential-growth — Why O(2ⁿ) is practically unusable 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 The naive recursive Fibonacci is O(2ⁿ). Calculate the number of calls for n=10, n=20, n=40. At 10⁹ operations/second, how long does fib(40) take?
 
 <details>
@@ -569,6 +611,9 @@ Each increase of 1 in `n` **doubles** the work. This is the definition of explos
 
 <a id="q15"></a>
 ### Q15 · amortized-analysis — list.append is O(1)... sometimes O(n) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Python's `list.append()` is described as "O(1) amortized." What does that mean? When is it actually O(n), and why does the average still come out to O(1)?
 
@@ -603,6 +648,9 @@ So n appends cost O(n) total → O(1) amortized per append.
 
 <a id="q16"></a>
 ### Q16 · hidden-costs — The invisible O(n) in your code 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 A developer writes this to build a queue. What is wrong with it, and what is the actual total complexity?
 
@@ -650,6 +698,9 @@ for item in data:
 <a id="q17"></a>
 ### Q17 · input-size-constraints — Pick the right algorithm from constraints 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 An interviewer gives you these problems. For each, state the maximum acceptable complexity and whether O(n²) is viable.
 
 ```
@@ -683,6 +734,9 @@ n ≤ 10,000,000: O(n) = 10,000,000 ops     → fine
 
 <a id="q18"></a>
 ### Q18 · time-space-tradeoff — When to trade memory for speed 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 You need to find if any two numbers in an array sum to a target value.
 
@@ -733,6 +787,9 @@ Choose B (hash set) for every practical scenario in interviews and production.
 <a id="q19"></a>
 ### Q19 · string-concatenation — Why `s += c` in a loop is O(n²) 🟡
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 This code builds a reversed string. What is its actual time complexity? Rewrite it to be O(n).
 
 ```python
@@ -779,6 +836,9 @@ def reverse_string_pythonic(s):
 
 <a id="q20"></a>
 ### Q20 · pattern-recognition — Match code patterns to complexity 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 For each pattern, state the Big-O:
 
@@ -833,6 +893,9 @@ Pattern 5: O(n)      — recurrence T(n) = 2T(n/2) + O(1)
 
 <a id="q21"></a>
 ### Q21 · recursive-fibonacci — Analyze naive vs memoized Fibonacci 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Analyze the time and space complexity of all three implementations. Explain why naive recursive Fibonacci is O(2ⁿ) using the call tree.
 
@@ -903,6 +966,9 @@ Space: O(1) — only two variables a, b regardless of n
 <a id="q22"></a>
 ### Q22 · complex-analysis — Derive complexity for mixed structures 🟠
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 Analyze the time complexity of this function precisely. Justify each term.
 
 ```python
@@ -972,6 +1038,9 @@ Total space: O(n²) for flat list
 <a id="q23"></a>
 ### Q23 · dynamic-array-doubling — Prove O(1) amortized for append 🟠
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 Prove rigorously that n appends to a Python list cost O(n) total, making each append O(1) amortized. Use the aggregate method.
 
 <details>
@@ -1020,6 +1089,9 @@ Per-append amortized cost: O(n) / n = **O(1)**
 <a id="q24"></a>
 ### Q24 · database-index — Real-world O(log n) vs O(n) 🟠
 
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 A `users` table has 10,000,000 rows. You run:
 
 ```sql
@@ -1063,6 +1135,9 @@ Theoretical speedup:
 
 <a id="q25"></a>
 ### Q25 · master-theorem — Derive merge sort's complexity formally 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Use the Master Theorem to formally derive the time complexity of merge sort. State the recurrence relation, identify a, b, d, and apply the correct case.
 

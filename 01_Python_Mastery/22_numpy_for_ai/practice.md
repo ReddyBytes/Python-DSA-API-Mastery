@@ -4,51 +4,55 @@
 
 | Q | Topic | Difficulty |
 |---|---|---|
-| [Q1](#q1--dtype-and-precision--float32-vs-float64) | dtype and precision — float32 vs float64 | 🟢 |
-| [Q2](#q2--dtype-and-precision--inspecting-memory) | dtype and precision — inspecting memory | 🟢 |
-| [Q3](#q3--dtype-and-precision--safe-downcast-pattern) | dtype and precision — safe downcast pattern | 🟡 |
-| [Q4](#q4--dtype-and-precision--astype-and-overflow) | dtype and precision — astype and overflow | 🟡 |
-| [Q5](#q5--dtype-and-precision--ai-pipeline-dtypes) | dtype and precision — AI pipeline dtypes | 🟡 |
-| [Q6](#q6--views-and-copies--identify-view-or-copy) | views and copies — identify view or copy | 🟢 |
-| [Q7](#q7--views-and-copies--base-attribute) | views and copies — .base attribute | 🟢 |
-| [Q8](#q8--views-and-copies--accidental-mutation-fix) | views and copies — accidental mutation fix | 🟡 |
-| [Q9](#q9--views-and-copies--writeable-flag-and-memory-layout) | views and copies — writeable flag and memory layout | 🟠 |
-| [Q10](#q10--random-and-sampling--default_rng-and-reproducibility) | random and sampling — default_rng and reproducibility | 🟢 |
-| [Q11](#q11--random-and-sampling--integers-and-normal) | random and sampling — integers and normal | 🟢 |
-| [Q12](#q12--random-and-sampling--choice-with-and-without-replacement) | random and sampling — choice with and without replacement | 🟡 |
-| [Q13](#q13--random-and-sampling--shuffle-paired-arrays) | random and sampling — shuffle paired arrays | 🟡 |
-| [Q14](#q14--conditional-operations--npwhere-relu) | conditional operations — np.where ReLU | 🟢 |
-| [Q15](#q15--conditional-operations--npselect-multi-branch) | conditional operations — np.select multi-branch | 🟡 |
-| [Q16](#q16--conditional-operations--npclip-safe-cross-entropy) | conditional operations — np.clip safe cross-entropy | 🟡 |
-| [Q17](#q17--conditional-operations--safe-divide-pattern) | conditional operations — safe divide pattern | 🟠 |
-| [Q18](#q18--statistics-and-distributions--percentile-and-iqr) | statistics and distributions — percentile and IQR | 🟢 |
-| [Q19](#q19--statistics-and-distributions--nan-safe-functions) | statistics and distributions — nan-safe functions | 🟡 |
-| [Q20](#q20--statistics-and-distributions--histogram-bins) | statistics and distributions — histogram bins | 🟡 |
-| [Q21](#q21--statistics-and-distributions--correlation-matrix) | statistics and distributions — correlation matrix | 🟠 |
-| [Q22](#q22--linear-algebra--matmul-vs-dot) | linear algebra — matmul vs dot | 🟢 |
-| [Q23](#q23--linear-algebra--solve-linear-system) | linear algebra — solve linear system | 🟡 |
-| [Q24](#q24--linear-algebra--svd-and-low-rank-approximation) | linear algebra — SVD and low-rank approximation | 🟠 |
-| [Q25](#q25--linear-algebra--lstsq-regression) | linear algebra — lstsq regression | 🟠 |
-| [Q26](#q26--einsum-and-performance--basic-notation) | einsum and performance — basic notation | 🟢 |
-| [Q27](#q27--einsum-and-performance--trace-and-outer-product) | einsum and performance — trace and outer product | 🟡 |
-| [Q28](#q28--einsum-and-performance--batch-matrix-multiply) | einsum and performance — batch matrix multiply | 🟡 |
-| [Q29](#q29--einsum-and-performance--attention-scores) | einsum and performance — attention scores | 🟠 |
-| [Q30](#q30--einsum-and-performance--optimizeTrue-and-path-precompute) | einsum and performance — optimize=True and path precompute | 🟠 |
-| [Q31](#q31--io-and-memory--save-and-load-npy) | I/O and memory — save and load .npy | 🟢 |
-| [Q32](#q32--io-and-memory--savez-multiple-arrays) | I/O and memory — savez multiple arrays | 🟡 |
-| [Q33](#q33--io-and-memory--savetxt-and-loadtxt) | I/O and memory — savetxt and loadtxt | 🟡 |
-| [Q34](#q34--io-and-memory--memmap-for-large-arrays) | I/O and memory — memmap for large arrays | 🟠 |
-| [Q35](#q35--io-and-memory--cache-pattern-with-npz) | I/O and memory — cache pattern with npz | 🟠 |
+| [Q1](#q1) | dtype and precision — float32 vs float64 | 🟢 |
+| [Q2](#q2) | dtype and precision — inspecting memory | 🟢 |
+| [Q3](#q3) | dtype and precision — safe downcast pattern | 🟡 |
+| [Q4](#q4) | dtype and precision — astype and overflow | 🟡 |
+| [Q5](#q5) | dtype and precision — AI pipeline dtypes | 🟡 |
+| [Q6](#q6) | views and copies — identify view or copy | 🟢 |
+| [Q7](#q7) | views and copies — .base attribute | 🟢 |
+| [Q8](#q8) | views and copies — accidental mutation fix | 🟡 |
+| [Q9](#q9) | views and copies — writeable flag and memory layout | 🟠 |
+| [Q10](#q10) | random and sampling — default_rng and reproducibility | 🟢 |
+| [Q11](#q11) | random and sampling — integers and normal | 🟢 |
+| [Q12](#q12) | random and sampling — choice with and without replacement | 🟡 |
+| [Q13](#q13) | random and sampling — shuffle paired arrays | 🟡 |
+| [Q14](#q14) | conditional operations — np.where ReLU | 🟢 |
+| [Q15](#q15) | conditional operations — np.select multi-branch | 🟡 |
+| [Q16](#q16) | conditional operations — np.clip safe cross-entropy | 🟡 |
+| [Q17](#q17) | conditional operations — safe divide pattern | 🟠 |
+| [Q18](#q18) | statistics and distributions — percentile and IQR | 🟢 |
+| [Q19](#q19) | statistics and distributions — nan-safe functions | 🟡 |
+| [Q20](#q20) | statistics and distributions — histogram bins | 🟡 |
+| [Q21](#q21) | statistics and distributions — correlation matrix | 🟠 |
+| [Q22](#q22) | linear algebra — matmul vs dot | 🟢 |
+| [Q23](#q23) | linear algebra — solve linear system | 🟡 |
+| [Q24](#q24) | linear algebra — SVD and low-rank approximation | 🟠 |
+| [Q25](#q25) | linear algebra — lstsq regression | 🟠 |
+| [Q26](#q26) | einsum and performance — basic notation | 🟢 |
+| [Q27](#q27) | einsum and performance — trace and outer product | 🟡 |
+| [Q28](#q28) | einsum and performance — batch matrix multiply | 🟡 |
+| [Q29](#q29) | einsum and performance — attention scores | 🟠 |
+| [Q30](#q30) | einsum and performance — optimize=True and path precompute | 🟠 |
+| [Q31](#q31) | I/O and memory — save and load .npy | 🟢 |
+| [Q32](#q32) | I/O and memory — savez multiple arrays | 🟡 |
+| [Q33](#q33) | I/O and memory — savetxt and loadtxt | 🟡 |
+| [Q34](#q34) | I/O and memory — memmap for large arrays | 🟠 |
+| [Q35](#q35) | I/O and memory — cache pattern with npz | 🟠 |
 
 Difficulty: 🟢 Basic / 🟡 Intermediate / 🟠 Advanced
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · dtype and precision — float32 vs float64 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Create two arrays containing the values `[1.0, 2.0, 3.0]` — one as `float32` and one as `float64`. Print the `dtype`, `itemsize`, and `nbytes` for each. Confirm that `float32` uses half the memory of `float64`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -73,11 +77,15 @@ print(arr64.dtype, arr64.itemsize, arr64.nbytes)   # float64  8  24
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · dtype and precision — inspecting memory 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Create a `float32` array of shape `(1000, 768)` (typical embedding batch). Print its total size in megabytes. Then do the same for `float64` and `float16`. Confirm the 2x ratio between consecutive precisions.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -103,11 +111,15 @@ for dt in [np.float64, np.float32, np.float16]:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · dtype and precision — safe downcast pattern 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 You have a `float32` array with values ranging from -500 to 500. Write the safe downcast pattern using `np.finfo` and `np.can_cast` to decide whether it is safe to cast to `float16`. Then try an array with a value of 70000 and show what happens if you cast unsafely.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -139,11 +151,15 @@ print("Unsafe cast:", bad)  # inf
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · dtype and precision — astype and overflow 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Create an array `[1.5, 2.7, 3.9]` as `float32`. Cast it to `int32` and observe what happens to the decimal parts. Also demonstrate `np.can_cast(np.float32, np.float16)` and `np.can_cast(np.int32, np.int64)`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -169,11 +185,15 @@ print(np.can_cast(np.float32, np.float64))  # True  — safe upcast
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · dtype and precision — AI pipeline dtypes 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write code showing three dtype decisions from a real AI pipeline: (a) a boolean attention mask for a batch of 4 sequences of length 8, (b) token IDs for a vocabulary of 100k tokens as `int32`, and (c) the store-small / compute-big pattern — store embeddings as `float16` but upcast to `float32` before computing cosine similarity.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -207,11 +227,15 @@ print(f"Cosine sim: {sim:.4f}")
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · views and copies — identify view or copy 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Given `a = np.arange(10)`, create `b = a[2:7]` and `c = a[[2, 4, 6]]`. For each: (1) check `.base` to determine view vs copy, (2) mutate the first element, and (3) print `a` to confirm whether it changed.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -243,11 +267,15 @@ print(a)           # unchanged
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · views and copies — .base attribute 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Create a chain: `a = np.arange(12)`, `b = a[::2]` (every other element), `c = b[1:]` (drop first). Check `c.base is a` and `c.base is b`. What does this tell you about multi-level view chains?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -273,7 +301,12 @@ print(c.base is b)  # False — b is not the root
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · views and copies — accidental mutation fix 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 The function below silently modifies the caller's array. Identify the bug, then write two fixed versions: one using a non-in-place operator, one copying at the start.
 
@@ -283,7 +316,6 @@ def normalize(arr):
     return arr
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -321,11 +353,15 @@ print(data2)   # unchanged: [1. 2. 4. 8.]
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · views and copies — writeable flag and memory layout 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Create a 2D `float64` array `a` of shape `(3, 4)`. Check its `C_CONTIGUOUS` and `F_CONTIGUOUS` flags. Then take `a.T` and check again. Explain why `a.T` is not C-contiguous. Finally, create a C-contiguous copy of `a.T` using `np.ascontiguousarray` and verify.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -360,11 +396,15 @@ print(t.strides)    # (8, 32) — transposed: column step is now fast
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · random and sampling — default_rng and reproducibility 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Create two separate `default_rng` generators with seeds 0 and 99. Generate 5 floats from each. Show that calling them in any order does not affect the other generator's sequence (isolated state). Then confirm the same seed always produces the same output.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -395,11 +435,15 @@ print(np.allclose(a1, a_repro))  # True — same seed, same output
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · random and sampling — integers and normal 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Using `rng = np.random.default_rng(42)`, generate: (a) 50 random class labels in [0, 10), (b) weight initialisation values for a layer with `fan_in=512, fan_out=256` using He init (normal with `std = sqrt(2/fan_in)`), and (c) a dropout mask (80% keep rate) using `binomial`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -434,11 +478,15 @@ print(f"Keep rate: {mask.mean():.2f}")  # approx 0.80
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · random and sampling — choice with and without replacement 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Given a population array `[10, 20, 30, 40, 50, 60, 70, 80]`, demonstrate: (a) sampling 4 elements without replacement, (b) sampling 10 elements with replacement (showing repeats are possible), and (c) weighted sampling where the first two elements are 5x more likely than the rest.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -473,11 +521,15 @@ print("Weighted:", s3)
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · random and sampling — shuffle paired arrays 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 You have `X` (10 samples × 2 features) and `y` (10 labels). Show the wrong way to shuffle (independently, breaking pairing), then the correct way using a shared index permutation. Verify the pairing is preserved after the correct shuffle.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -513,11 +565,15 @@ print("Pairing preserved.")
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · conditional operations — np.where ReLU 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Implement ReLU two ways: (a) using `np.where(x > 0, x, 0)` and (b) using `np.maximum(x, 0)`. Apply both to `x = np.array([-2.0, 1.5, -0.3, 0.0, 4.0])`. Confirm results match and explain which is preferred.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -545,11 +601,15 @@ print(np.allclose(relu_where, relu_max))   # True
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · conditional operations — np.select multi-branch 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Given a scores array `[45, 72, 88, 55, 93, 60]`, use `np.select` to assign letter grades: A (≥90), B (≥70), C (≥50), else F. Then do the same for class confidence labels: high_conf (≥0.8), medium_conf (≥0.5), low_conf (≥0.3), else very_low.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -584,11 +644,15 @@ print(labels)  # ['very_low' 'low_conf' 'medium_conf' 'high_conf' 'low_conf']
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · conditional operations — np.clip safe cross-entropy 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Implement stable binary cross-entropy loss. The trap: `log(0)` produces `-inf`, breaking training. Use `np.clip` to keep probabilities in `(1e-7, 1 - 1e-7)`, then compute loss. Also demonstrate gradient clipping by capping a gradient array at `[-1.0, 1.0]`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -618,11 +682,15 @@ print(clipped_grads)   # [-1.   0.2  1.  -1.   0.7]
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · conditional operations — safe divide pattern 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Implement safe element-wise division that avoids `inf`/`NaN` when the denominator is zero, using the double `np.where` pattern (no Python loop, fully vectorized). Test with `num = [1, 2, 3, 4]`, `denom = [0, 2, 0, 4]`. Result should be `[0, 1, 0, 1]`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -650,11 +718,15 @@ print(result)   # [0. 1. 0. 1.]
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · statistics and distributions — percentile and IQR 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Generate 10,000 samples from an exponential distribution (scale=2.0, seed=42). Compute: the median, IQR (Q75 - Q25), the five-number summary, and identify outliers using Tukey fences (Q1 - 1.5×IQR, Q3 + 1.5×IQR).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -687,11 +759,15 @@ print(f"Outlier count: {len(outliers)} ({len(outliers)/len(data)*100:.1f}%)")
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · statistics and distributions — nan-safe functions 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Create an array `[1.0, 2.0, np.nan, 4.0, np.nan, 6.0]`. Show what happens when you call `np.mean` on it (NaN propagation). Then use `np.nanmean`, `np.nanstd`, and `np.nanpercentile` to get results that ignore NaNs. Finally, check with `np.isnan` and `np.isfinite`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -720,11 +796,15 @@ print(np.isfinite(arr).all())  # False — not all finite
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · statistics and distributions — histogram bins 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Generate 10,000 samples from a standard normal distribution (seed=0). Compute a 50-bin histogram and extract bin centers. Then compute a normalised density histogram (`density=True`) and verify it integrates to approximately 1.0. Show the 2D histogram signature for two correlated features.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -759,11 +839,15 @@ print(f"2D histogram shape: {H.shape}")  # (20, 20)
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · statistics and distributions — correlation matrix 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Create three features: `x1` (500 normal samples), `x2 = x1 * 0.9 + noise` (highly correlated with x1), and `x3` (independent normal). Compute the Pearson correlation matrix with `np.corrcoef`. Extract the upper-triangle correlations with `np.triu_indices`. Flag any pair with |corr| > 0.8.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -797,11 +881,15 @@ for i, j in zip(*idx):
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · linear algebra — matmul vs dot 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Explain and demonstrate the difference between `np.dot`, `np.matmul` (`@`), and `np.einsum("ij,jk->ik", A, B)` for 2D matrix multiplication. Use `A` of shape `(3, 4)` and `B` of shape `(4, 5)`. Confirm all three give the same result. Then show how `np.dot` behaves differently for higher-dimensional arrays.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -837,11 +925,15 @@ print(np.matmul(C3, D3).shape)  # (2, 3, 5) — batch matmul
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · linear algebra — solve linear system 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Solve the system `Ax = b` where `A = [[3, 1], [1, 2]]` and `b = [9, 8]` using `np.linalg.solve`. Verify the solution by computing `A @ x` and checking it matches `b`. Also compute `det(A)` and explain what a zero determinant would mean.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -875,11 +967,15 @@ print(f"det(B) ≈ {np.linalg.det(B):.6f}")  # ≈ 0.0 — singular
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · linear algebra — SVD and low-rank approximation 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Create a `(50, 10)` matrix `A`. Compute the full SVD with `np.linalg.svd`. Reconstruct `A` from `U`, `s`, `Vt` and verify with `np.allclose`. Then build a rank-3 approximation and print the percentage of variance explained by the top 3 singular values.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -913,11 +1009,15 @@ print(f"Top-{k} explain {var_explained*100:.1f}% of variance")
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · linear algebra — lstsq regression 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Generate 100 training samples with 3 features plus a bias column. True weights are `[0, 2.0, -1.5, 0.8]` (bias + 3 feature weights). Solve with `np.linalg.lstsq`. Print recovered weights and compare to true weights. Explain why `lstsq` is preferred over computing `(XᵀX)⁻¹ Xᵀy` directly.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -948,11 +1048,15 @@ print(f"Rank:      {rank}")
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · einsum and performance — basic notation 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Use `np.einsum` to perform: (a) dot product of two 1D vectors `a` and `b`, (b) matrix multiplication of `A (3×4)` and `B (4×5)`, (c) transpose of `A`. For each, verify against the equivalent NumPy function (`np.dot`, `@`, `.T`).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -989,11 +1093,15 @@ print(np.allclose(At_ein, A.T))            # True
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · einsum and performance — trace and outer product 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Use `np.einsum` to compute: (a) the trace of a 4×4 matrix (sum of diagonal), (b) the outer product of two vectors of length 4, and (c) element-wise (Hadamard) product of two 3×4 matrices. Verify all three against NumPy equivalents.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1031,11 +1139,15 @@ print(np.allclose(had_ein, A * B))              # True
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · einsum and performance — batch matrix multiply 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Implement batch matrix multiply for 32 pairs of matrices: `A_batch (32, 64, 128)` and `B_batch (32, 128, 64)`. Use `np.einsum("bmk,bkn->bmn", ...)` and verify it matches `np.matmul(A_batch, B_batch)`. Explain which index gets contracted and which is preserved.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1065,11 +1177,15 @@ print(np.allclose(C_ein, C_np))      # True
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · einsum and performance — attention scores 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Implement the first step of scaled dot-product attention: compute attention scores for `Q` and `K` of shape `(batch=2, heads=4, seq=16, head_dim=32)`. Use einsum `"bhqd,bhkd->bhqk"` to get scores of shape `(2, 4, 16, 16)`. Scale by `1/sqrt(head_dim)` and verify output shape.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1099,11 +1215,15 @@ print(scores.shape)   # (2, 4, 16, 16) — each of 2 batches, 4 heads, 16q x 16k
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · einsum and performance — optimize=True and path precompute 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Compare einsum with and without `optimize=True` for a chain of three matrices: `A (100×200)`, `B (200×300)`, `C (300×50)`. Then demonstrate precomputing the contraction path with `np.einsum_path` and reusing it in a loop of 100 iterations.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1141,11 +1261,15 @@ for _ in range(100):
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · I/O and memory — save and load .npy 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
 
 Create a `float32` array of shape `(1000, 128)`. Save it to `test_embeddings.npy` with `np.save`. Load it back and verify shape, dtype, and values match. Also demonstrate `allow_pickle=False` for safer loading of untrusted files.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1174,11 +1298,15 @@ print(np.allclose(embeddings, loaded))       # True
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · I/O and memory — savez multiple arrays 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
 
 Save four arrays (`X_train`, `y_train`, `X_val`, `y_val`) in a single `.npz` archive. Load it back using both direct access and a context manager. Show `archive.files` to list stored array names. Then show `savez_compressed` and explain the trade-off.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1217,11 +1345,15 @@ np.savez_compressed("/tmp/dataset_c.npz", X_train=X_train, y_train=y_train,
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 · I/O and memory — savetxt and loadtxt 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
 
 Save a `(3, 4)` float array as a CSV with `np.savetxt` (comma delimiter, 4 decimal places, with a header). Load it back with `np.loadtxt` (skip header row). Also show `np.genfromtxt` with a missing value filled as 0.0.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1255,11 +1387,15 @@ print(data2.shape)   # (3, 4)
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · I/O and memory — memmap for large arrays 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
 
 Create a `np.memmap` file at `/tmp/large.dat` with shape `(100000, 128)` of `float32` in write mode. Write random data in chunks of 10000 rows. Then open it in read mode, access one row and a batch of 1000 rows. Explain what "copy-on-write" mode (`"c"`) does.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1299,11 +1435,15 @@ fp_cow[0, :] = 999.0   # in RAM only — file on disk unchanged
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · I/O and memory — cache pattern with npz 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
 
 Implement a cache-or-compute function that: on first run, generates a `float32` feature matrix of shape `(5000, 512)` and labels (simulating expensive preprocessing) and saves them to `features_cache.npz`; on subsequent runs, loads from the cache. Use `os.path.exists` to check. Add a cache-hit message and verify loaded shapes.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

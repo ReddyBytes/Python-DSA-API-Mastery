@@ -8,26 +8,30 @@
 
 | # | Concept | Difficulty |
 |---|---------|-----------|
-| Q1 | Convert list search to dict lookup (O(n) → O(1)) | 🟢 Basic |
-| Q2 | Rewrite list comprehension as generator expression | 🟢 Basic |
-| Q3 | Local variable optimization in hot loop | 🟡 Intermediate |
-| Q4 | Add `__slots__` to a class | 🟡 Intermediate |
-| Q5 | Apply `lru_cache` to recursive fibonacci | 🟡 Intermediate |
-| Q6 | Fix string concatenation in loop → use join() | 🟡 Intermediate |
-| Q7 | Explain why generator beats list for large pipeline | 🟡 Intermediate |
-| Q8 | Replace Python for-loop sum with NumPy vectorized op | 🟡 Intermediate |
-| Q9 | Design a cache with TTL using lru_cache + wrapper | 🟠 Advanced |
-| Q10 | Identify bottleneck in provided code and fix it | 🟠 Advanced |
-| Q11 | Rewrite class with `__slots__` and compare memory | 🟠 Advanced |
-| Q12 | Capstone: profile slow function, fix top hotspot | 🟠 Advanced |
+| [Q1](#q1) | Convert list search to dict lookup (O(n) → O(1)) | 🟢 Basic |
+| [Q2](#q2) | Rewrite list comprehension as generator expression | 🟢 Basic |
+| [Q3](#q3) | Local variable optimization in hot loop | 🟡 Intermediate |
+| [Q4](#q4) | Add `__slots__` to a class | 🟡 Intermediate |
+| [Q5](#q5) | Apply `lru_cache` to recursive fibonacci | 🟡 Intermediate |
+| [Q6](#q6) | Fix string concatenation in loop → use join() | 🟡 Intermediate |
+| [Q7](#q7) | Explain why generator beats list for large pipeline | 🟡 Intermediate |
+| [Q8](#q8) | Replace Python for-loop sum with NumPy vectorized op | 🟡 Intermediate |
+| [Q9](#q9) | Design a cache with TTL using lru_cache + wrapper | 🟠 Advanced |
+| [Q10](#q10) | Identify bottleneck in provided code and fix it | 🟠 Advanced |
+| [Q11](#q11) | Rewrite class with `__slots__` and compare memory | 🟠 Advanced |
+| [Q12](#q12) | Capstone: profile slow function, fix top hotspot | 🟠 Advanced |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · Convert List Search to Dict Lookup 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 You have a list of user records: `users = [{"id": 1, "name": "Alice"}, ...]`. You look up users by id in a hot loop. Rewrite the lookup to use O(1) instead of O(n).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -59,11 +63,15 @@ def find_user_fast(target_id):
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Rewrite List Comprehension as Generator Expression 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 You have `squared = [x*x for x in range(1_000_000)]` and then do `total = sum(squared)`. Rewrite this so the full list is never held in memory.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -94,7 +102,12 @@ print(sys.getsizeof(gen))           # ~200 bytes
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Local Variable Optimization in Hot Loop 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Rewrite this function to avoid the repeated global attribute lookup of `math.sqrt` inside the loop:
 
@@ -104,7 +117,6 @@ def compute(points):
     return [math.sqrt(x*x + y*y) for x, y in points]
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -135,7 +147,12 @@ print(f"Speedup: {t_slow/t_fast:.2f}x")
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Add `__slots__` to a Class 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Rewrite this class to use `__slots__`. Confirm that `__dict__` is no longer present on instances.
 
@@ -147,7 +164,6 @@ class Particle:
         self.mass = mass
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -176,11 +192,15 @@ print(p.x, p.y, p.mass)         # attributes still work normally
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Apply lru_cache to Recursive Fibonacci 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 The naive recursive `fibonacci(n)` recomputes the same subproblems exponentially. Add one decorator to make it O(n). Then use `cache_info()` to show how many cache hits occurred.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -211,7 +231,12 @@ print(f"Cache hits: {info.hits}, misses: {info.misses}")
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Fix String Concatenation in Loop 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 This function has an O(n²) string building bug. Rewrite it to be O(n):
 
@@ -223,7 +248,6 @@ def make_csv(rows):
     return result
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -254,11 +278,15 @@ assert make_csv_slow(rows) == make_csv_fast(rows)
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Explain Why Generator Beats List for Large Pipelines 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 A data pipeline applies three steps to one million records: filter even numbers → square them → sum. Explain why chaining generator expressions uses O(1) memory while chaining list comprehensions uses O(n) memory. No code needed — write the explanation.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -290,7 +318,12 @@ total    = sum(squares)                           # peak: O(1) bytes
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Replace Python for-loop with NumPy Vectorized Operation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Rewrite this function using NumPy so the loop runs in C rather than Python:
 
@@ -302,7 +335,6 @@ def sum_of_squares(n):
     return total
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -337,11 +369,15 @@ print(f"Python: {t_py/5*1000:.1f} ms  NumPy: {t_np/5*1000:.1f} ms  "
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Design a Cache with TTL Using lru_cache + Wrapper 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 `lru_cache` has no built-in TTL (time-to-live). Write a decorator `ttl_cache(seconds)` that wraps a function with caching that expires entries after the given number of seconds.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -384,7 +420,12 @@ print(get_price("AAPL"))  # cached
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Identify Bottleneck and Fix It 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Profile this code, identify the top hotspot, and fix it:
 
@@ -397,7 +438,6 @@ list2 = list(range(5_000, 15_000))
 result = find_common(list1, list2)
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -433,11 +473,15 @@ print(f"Speedup: {t_slow/t_fast:.0f}x")
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Rewrite Class with `__slots__` and Compare Memory 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Create two versions of a `Vector3D` class (with and without `__slots__`). Create 500,000 instances of each, measure memory usage with `tracemalloc`, and report the difference.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -483,7 +527,12 @@ print(f"Savings: {(1 - peak_slots/peak_normal)*100:.0f}%")
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Capstone: Profile Slow Function, Fix Top Hotspot 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Profile the function below, identify the single biggest hotspot from the `tottime` column, fix it, and verify the speedup:
 
@@ -498,7 +547,6 @@ def process_records(records):
 records = [{"id": i, "score": i % 60} for i in range(50_000)]
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

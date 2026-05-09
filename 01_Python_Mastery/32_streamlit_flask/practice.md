@@ -4,39 +4,43 @@
 
 | # | Topic | Difficulty |
 |---|-------|-----------|
-| [Q1](#q1--streamlit-basics--stwrite-and-stmarkdown-) | Streamlit basics — `st.write` and `st.markdown` | 🟢 Basic |
-| [Q2](#q2--streamlit-basics--stdataframe-and-sttable-) | Streamlit basics — `st.dataframe` and `st.table` | 🟢 Basic |
-| [Q3](#q3--streamlit-basics--stpyplot-matplotlib-figure-) | Streamlit basics — `st.pyplot` matplotlib figure | 🟢 Basic |
-| [Q4](#q4--streamlit-basics--run-command-and-page-config-) | Streamlit basics — run command and page config | 🟢 Basic |
-| [Q5](#q5--widgets--stslider-and-stnumber_input-) | Widgets — `st.slider` and `st.number_input` | 🟢 Basic |
-| [Q6](#q6--widgets--stselectbox-and-stmultiselect-) | Widgets — `st.selectbox` and `st.multiselect` | 🟢 Basic |
-| [Q7](#q7--widgets--stfile_uploader-csv-parsing-) | Widgets — `st.file_uploader` CSV parsing | 🟡 Intermediate |
-| [Q8](#q8--widgets--stbutton-conditional-display-) | Widgets — `st.button` conditional display | 🟡 Intermediate |
-| [Q9](#q9--session-state--counter-across-reruns-) | Session state — counter across reruns | 🟡 Intermediate |
-| [Q10](#q10--session-state--chat-history-list-) | Session state — chat history list | 🟡 Intermediate |
-| [Q11](#q11--caching--stcache_data-for-data-loading-) | Caching — `@st.cache_data` for data loading | 🟡 Intermediate |
-| [Q12](#q12--caching--stcache_resource-for-model-loading-) | Caching — `@st.cache_resource` for model loading | 🟡 Intermediate |
-| [Q13](#q13--flask-rest-api--app-factory-and-health-route-) | Flask REST API — app factory and health route | 🟢 Basic |
-| [Q14](#q14--flask-rest-api--get-route-with-path-variable-) | Flask REST API — GET route with path variable | 🟢 Basic |
-| [Q15](#q15--flask-rest-api--post-route-with-requestjson-) | Flask REST API — POST route with `request.json` | 🟡 Intermediate |
-| [Q16](#q16--flask-rest-api--jsonify-and-status-codes-) | Flask REST API — `jsonify` and status codes | 🟡 Intermediate |
-| [Q17](#q17--flask-rest-api--error-handlers-) | Flask REST API — error handlers | 🟡 Intermediate |
-| [Q18](#q18--flask-config--osenviron-secrets-) | Flask config — `os.environ` secrets | 🟡 Intermediate |
-| [Q19](#q19--flask-config--env-with-python-dotenv-) | Flask config — `.env` with `python-dotenv` | 🟡 Intermediate |
-| [Q20](#q20--flask-config--blueprints-) | Flask config — blueprints | 🟠 Advanced |
-| [Q21](#q21--flask-config--app-context-and-g-) | Flask config — app context and `g` | 🟠 Advanced |
-| [Q22](#q22--decision-guide--streamlit-vs-flask-) | Decision guide — Streamlit vs Flask | 🟢 Basic |
-| [Q23](#q23--common-mistakes--re-run-model-on-every-interaction-) | Common mistakes — re-run model on every interaction | 🟡 Intermediate |
-| [Q24](#q24--common-mistakes--flask-thread-safety-) | Common mistakes — Flask thread safety | 🟠 Advanced |
-| [Q25](#q25--decision-guide--blueprint-structure-for-large-apps-) | Decision guide — blueprint structure for large apps | 🟠 Advanced |
+| [Q1](#q1) | Streamlit basics — `st.write` and `st.markdown` | 🟢 Basic |
+| [Q2](#q2) | Streamlit basics — `st.dataframe` and `st.table` | 🟢 Basic |
+| [Q3](#q3) | Streamlit basics — `st.pyplot` matplotlib figure | 🟢 Basic |
+| [Q4](#q4) | Streamlit basics — run command and page config | 🟢 Basic |
+| [Q5](#q5) | Widgets — `st.slider` and `st.number_input` | 🟢 Basic |
+| [Q6](#q6) | Widgets — `st.selectbox` and `st.multiselect` | 🟢 Basic |
+| [Q7](#q7) | Widgets — `st.file_uploader` CSV parsing | 🟡 Intermediate |
+| [Q8](#q8) | Widgets — `st.button` conditional display | 🟡 Intermediate |
+| [Q9](#q9) | Session state — counter across reruns | 🟡 Intermediate |
+| [Q10](#q10) | Session state — chat history list | 🟡 Intermediate |
+| [Q11](#q11) | Caching — `@st.cache_data` for data loading | 🟡 Intermediate |
+| [Q12](#q12) | Caching — `@st.cache_resource` for model loading | 🟡 Intermediate |
+| [Q13](#q13) | Flask REST API — app factory and health route | 🟢 Basic |
+| [Q14](#q14) | Flask REST API — GET route with path variable | 🟢 Basic |
+| [Q15](#q15) | Flask REST API — POST route with `request.json` | 🟡 Intermediate |
+| [Q16](#q16) | Flask REST API — `jsonify` and status codes | 🟡 Intermediate |
+| [Q17](#q17) | Flask REST API — error handlers | 🟡 Intermediate |
+| [Q18](#q18) | Flask config — `os.environ` secrets | 🟡 Intermediate |
+| [Q19](#q19) | Flask config — `.env` with `python-dotenv` | 🟡 Intermediate |
+| [Q20](#q20) | Flask config — blueprints | 🟠 Advanced |
+| [Q21](#q21) | Flask config — app context and `g` | 🟠 Advanced |
+| [Q22](#q22) | Decision guide — Streamlit vs Flask | 🟢 Basic |
+| [Q23](#q23) | Common mistakes — re-run model on every interaction | 🟡 Intermediate |
+| [Q24](#q24) | Common mistakes — Flask thread safety | 🟠 Advanced |
+| [Q25](#q25) | Decision guide — blueprint structure for large apps | 🟠 Advanced |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · Streamlit basics — `st.write` and `st.markdown` 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write a minimal Streamlit page that shows a title, a markdown sentence with bold text, and a Python dict displayed with `st.write`. No widgets needed.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`st.title`, `st.markdown`, and `st.write` all accept strings; `st.write` auto-renders dicts as formatted JSON.</details>
 
@@ -55,11 +59,15 @@ st.write({"model": "LinearRegression", "version": "v1.0", "accuracy": 0.93})
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Streamlit basics — `st.dataframe` and `st.table` 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Create a small DataFrame with three columns (`name`, `score`, `grade`) and display it both as an interactive table and a static table. Explain the difference.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`st.dataframe` is interactive (sortable, scrollable); `st.table` is static HTML — use `use_container_width=True` on `st.dataframe`.</details>
 
@@ -87,11 +95,15 @@ st.table(df)                                  # ← no sorting, pure HTML
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Streamlit basics — `st.pyplot` matplotlib figure 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Generate a simple scatter plot with matplotlib (x = [1,2,3,4,5], y = squares) and render it inside a Streamlit app using `st.pyplot`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create the figure with `fig, ax = plt.subplots()`, draw on `ax`, then pass `fig` to `st.pyplot(fig)`.</details>
 
@@ -117,11 +129,15 @@ st.pyplot(fig)                               # ← render matplotlib figure
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Streamlit basics — run command and page config 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write the correct terminal command to run a Streamlit file called `app.py` on port 8080. Also write the `st.set_page_config` call that sets the title to "ML Dashboard", icon to "🤖", and layout to wide.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`st.set_page_config` must be the very first Streamlit call in the script — before any other `st.*` call.</details>
 
@@ -148,11 +164,15 @@ st.title("ML Dashboard")
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Widgets — `st.slider` and `st.number_input` 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Build a mini BMI calculator: use `st.slider` for height (150–210 cm) and `st.number_input` for weight (40–200 kg), then display the computed BMI with `st.metric`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>BMI = weight / (height_m ** 2). `st.slider` returns the current value immediately — no button needed.</details>
 
@@ -175,11 +195,15 @@ st.metric("BMI", f"{bmi:.1f}")    # ← KPI display widget
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Widgets — `st.selectbox` and `st.multiselect` 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Show a `st.selectbox` for choosing a single ML model (Linear Regression, Random Forest, XGBoost) and a `st.multiselect` for choosing feature columns from `["age", "income", "score", "region"]` with `"age"` and `"income"` pre-selected. Print the selections with `st.write`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use the `default` parameter on `st.multiselect` for pre-selected values.</details>
 
@@ -208,11 +232,15 @@ st.write(f"Features: {features}")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Widgets — `st.file_uploader` CSV parsing 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a Streamlit snippet that lets the user upload a CSV file. If a file is uploaded, read it into a DataFrame and display it. If not, show an `st.info` message asking them to upload a file.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`st.file_uploader` returns `None` until a file is chosen — always check before calling `pd.read_csv`.</details>
 
@@ -237,11 +265,15 @@ else:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Widgets — `st.button` conditional display 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Create a Streamlit form with a text input for a user's name and a "Greet" button. When the button is clicked, show `st.success("Hello, {name}!")`. Before clicking, show `st.info("Enter your name and click Greet")`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`st.button` returns `True` only on the rerun triggered by the click — wrap your display logic in `if clicked:`.</details>
 
@@ -266,11 +298,15 @@ else:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Session state — counter across reruns 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Build a click counter with two buttons: "+" and "−". The count should persist across reruns. Display the current count between the two buttons.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Initialize `st.session_state.count = 0` inside an `if "count" not in st.session_state:` guard — without this guard it resets on every rerun.</details>
 
@@ -302,11 +338,15 @@ with col3:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Session state — chat history list 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Implement a minimal chat interface: store messages in `st.session_state.messages`. On each submission, append the user message and an echo reply, then display all messages in order.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `st.chat_input` for the input box and `st.chat_message` for display; call `st.rerun()` after appending to refresh the view.</details>
 
@@ -336,11 +376,15 @@ if prompt := st.chat_input("Say something"):
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Caching — `@st.cache_data` for data loading 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write a cached function `load_csv(path: str)` that reads a CSV. Demonstrate that calling it twice with the same path skips the second file read. Also show how to set a 1-hour TTL.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`@st.cache_data` caches by function arguments — the same `path` returns the cached DataFrame without re-reading the file.</details>
 
@@ -366,11 +410,15 @@ st.write("DataFrames are identical:", df1.equals(df2))
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Caching — `@st.cache_resource` for model loading 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Write a cached function `get_model()` that loads a scikit-learn model from disk. Explain why you use `@st.cache_resource` instead of `@st.cache_data` here. Show what happens without caching.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`@st.cache_resource` stores the object as a shared singleton (not pickled) — all users share the same model object in memory.</details>
 
@@ -397,11 +445,15 @@ st.write("Model loaded:", type(model).__name__)
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Flask REST API — app factory and health route 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Write the minimal Flask app setup with a `GET /health` endpoint that returns `{"status": "ok"}` as JSON. Include the `if __name__ == "__main__"` block to run on port 5000.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`Flask(__name__)` creates the app; `@app.route("/health")` registers the route; `jsonify` serializes the dict to a JSON response.</details>
 
@@ -425,11 +477,15 @@ if __name__ == "__main__":
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Flask REST API — GET route with path variable 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Add a `GET /items/<int:item_id>` route to a Flask app. If the item exists in a dict, return it. If not, return a 404 JSON error.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Flask converts `<int:item_id>` to a Python int automatically — use `.get(item_id)` on the dict and check for `None`.</details>
 
@@ -455,11 +511,15 @@ def get_item(item_id):                    # ← Flask passes item_id as int
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Flask REST API — POST route with `request.json` 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Write a `POST /items` route that reads `name` and `price` from the JSON body. Validate both fields are present and `price` is a positive number. Return the created item with status 201.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`request.get_json()` returns `None` if the body is not valid JSON or `Content-Type` is not `application/json` — always check before accessing fields.</details>
 
@@ -496,11 +556,15 @@ def create_item():
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Flask REST API — `jsonify` and status codes 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Explain the difference between returning `jsonify(data)` and `jsonify(data), 200`. Write a route that returns different status codes: 200 for success, 400 for bad input, and 404 for not found.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`jsonify(data)` alone defaults to 200 — the two-element tuple `(response, status_code)` overrides the status.</details>
 
@@ -532,11 +596,15 @@ def demo():
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Flask REST API — error handlers 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Register global error handlers for 404 and 500 errors that return JSON instead of Flask's default HTML error pages.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `@app.errorhandler(404)` and `@app.errorhandler(500)` — the decorated function receives the error object as its first argument.</details>
 
@@ -567,11 +635,15 @@ def server_error(e):
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Flask config — `os.environ` secrets 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Show how to load three config values from environment variables: `SECRET_KEY`, `API_KEY`, and `DATABASE_URL`. Use a fallback default only for non-sensitive values. Demonstrate an auth check using `API_KEY`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Sensitive values (API keys) should have no fallback — `os.environ.get("API_KEY")` returns `None` if unset, which you then guard against at startup.</details>
 
@@ -603,11 +675,15 @@ def secure():
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · Flask config — `.env` with `python-dotenv` 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Show the complete setup for loading a `.env` file in a Flask app using `python-dotenv`. Include the `.env` file contents, the Python code to load it, and the correct `.gitignore` entry.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Call `load_dotenv()` before reading `os.environ` — it injects the `.env` file variables into the process environment.</details>
 
@@ -638,11 +714,15 @@ app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]   # ← raises KeyError if m
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Flask config — blueprints 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Split a Flask app into two blueprints: `items_bp` (routes under `/items`) and `users_bp` (routes under `/users`). Show the blueprint definition, route registration, and how to register them on the main app.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create a `Blueprint("name", __name__)` in each module, add routes to it with `@bp.route(...)`, then `app.register_blueprint(bp, url_prefix="/prefix")` in the factory.</details>
 
@@ -690,11 +770,15 @@ app = create_app()
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Flask config — app context and `g` 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Explain Flask's application context. Show how to use `flask.g` to store per-request data (e.g., a database connection) and clean it up after the request with `@app.teardown_appcontext`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>`flask.g` is a namespace object that lives for one request — fresh for each request, automatically discarded after the response is sent.</details>
 
@@ -729,11 +813,15 @@ def get_data():
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Decision guide — Streamlit vs Flask 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 A data scientist wants to build a tool where teammates can upload a CSV, choose columns, and see a chart. A backend team wants to expose a trained model for a mobile app to call. Which framework fits each case? Give three reasons each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think about the consumer: is it a human clicking widgets (Streamlit) or a machine calling an endpoint (Flask)?</details>
 
@@ -760,11 +848,15 @@ Rule of thumb:
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Common mistakes — re-run model on every interaction 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 A Streamlit app loads a 500 MB model with `joblib.load("model.pkl")` at the top of the script. It becomes unbearably slow. Diagnose and fix the problem.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Streamlit reruns the entire script on every widget interaction — any code at the top level runs on every click.</details>
 
@@ -793,11 +885,15 @@ st.write(f"Model: {type(model).__name__}, threshold: {threshold}")
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Common mistakes — Flask thread safety 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 A Flask app stores a prediction counter in a global Python variable and increments it on every `/predict` request. Under concurrent load, the counter gives wrong results. Explain why and show the fix.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Flask's development server is single-threaded, but production WSGI servers (Gunicorn) run multiple threads or workers — a plain `counter += 1` is a read-modify-write race condition.</details>
 
@@ -836,11 +932,15 @@ def predict():
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Decision guide — blueprint structure for large apps 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Sketch the folder structure for a production Flask API with three domains: `auth`, `items`, and `predictions`. Show where blueprints live, how the app factory assembles them, and where configuration is loaded.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>The app factory pattern (`create_app()`) is the standard Flask pattern for large apps — it enables testing with different configs and avoids circular imports.</details>
 

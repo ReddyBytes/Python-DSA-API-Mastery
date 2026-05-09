@@ -53,6 +53,9 @@
 <a id="q1"></a>
 ### Q1 — Classic Binary Search — Exact Match
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 Given a sorted array and a target, return its index. Return -1 if not found.
 
 ```
@@ -101,6 +104,9 @@ If you write `<`, you miss it.
 
 <a id="q2"></a>
 ### Q2 — Binary Search — Recursive
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Implement binary search using recursion. Same signature: return index or -1.
 
@@ -151,6 +157,9 @@ signature — callers just pass `(arr, target)`.
 <a id="q3"></a>
 ### Q3 — Search Insert Position
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 Given a sorted array with no duplicates and a target, return the index if found,
 or the index where it would be inserted to keep the array sorted.
 
@@ -198,6 +207,9 @@ strictly less than `target` — the correct insertion point. This is identical t
 
 <a id="q4"></a>
 ### Q4 — bisect_left vs bisect_right
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Using Python's `bisect` module, find the first and last positions of `target`
 in `arr = [1, 2, 2, 2, 3]` for `target = 2`.
@@ -249,6 +261,9 @@ handles the case where target is absent but `left` points to a different value.
 <a id="q5"></a>
 ### Q5 — Count Occurrences with bisect
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Given a sorted array, count how many times `target` appears. Use the `bisect`
 module.
 
@@ -287,6 +302,9 @@ gives the count in O(log n) — no scan needed.
 
 <a id="q6"></a>
 ### Q6 — First Occurrence of Target
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 In a sorted array with duplicates, return the index of the first occurrence of
 `target`. Return -1 if absent. Do not use the `bisect` module.
@@ -338,6 +356,9 @@ index as the current best answer and shrink the window leftward with
 <a id="q7"></a>
 ### Q7 — Last Occurrence of Target
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 In a sorted array with duplicates, return the index of the last occurrence of
 `target`. Return -1 if absent. Do not use the `bisect` module.
 
@@ -386,6 +407,9 @@ the rightmost occurrence.
 
 <a id="q8"></a>
 ### Q8 — Floor and Ceiling
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Given a sorted array and a target, return `(floor, ceiling)` where:
 - floor = largest element `<= target` (or `None` if all elements are larger)
@@ -440,6 +464,9 @@ so floor equals ceiling.
 
 <a id="q9"></a>
 ### Q9 — Off-by-One: `lo <= hi` vs `lo < hi`
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Explain the difference between `while lo <= hi` and `while lo < hi`. When does
 each one cause a bug? Give a concrete failing test case for each misuse.
@@ -499,6 +526,9 @@ Use `lo < hi` when the answer is the pointer position after the loop.
 
 <a id="q10"></a>
 ### Q10 — Off-by-One: `mid+1` vs `mid`, `mid-1` vs `mid`
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Explain when to use `lo = mid + 1` vs `lo = mid`, and `hi = mid - 1` vs
 `hi = mid`. What goes wrong if you choose incorrectly?
@@ -565,6 +595,9 @@ def first_true_broken(arr, target):
 
 <a id="q11"></a>
 ### Q11 — Template Comparison — Three Templates
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Implement all three binary search templates for the same problem: find the first
 index `i` where `arr[i] >= target` in a sorted array. Show that all three give
@@ -638,6 +671,9 @@ candidate or past the end. Template 3 is the built-in implementation.
 <a id="q12"></a>
 ### Q12 — Search in Rotated Sorted Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 A sorted array has been rotated at an unknown pivot. Given a target, return its
 index, or -1.
 
@@ -697,6 +733,9 @@ those boundaries, search there; otherwise search the other side. The `<=` in
 <a id="q13"></a>
 ### Q13 — Find Minimum in Rotated Sorted Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 Given a rotated sorted array with no duplicates, find the minimum element.
 
 ```
@@ -746,6 +785,9 @@ candidate.
 
 <a id="q14"></a>
 ### Q14 — Find Peak Element
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 A peak element is one that is strictly greater than its neighbors. Assume
 `arr[-1] = arr[n] = -∞`. Find the index of any peak element.
@@ -797,6 +839,9 @@ Setting `hi = mid` preserves `mid` as a candidate.
 <a id="q15"></a>
 ### Q15 — Square Root via Binary Search (Integer)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 Return `floor(sqrt(n))` for a non-negative integer `n`. Do not use `math.sqrt`.
 
 ```
@@ -845,6 +890,9 @@ because `floor(sqrt(n)) <= n//2` for all `n >= 4`.
 
 <a id="q16"></a>
 ### Q16 — Square Root via Binary Search (Float)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Compute `sqrt(n)` to 10 decimal places using epsilon-based binary search.
 
@@ -900,6 +948,9 @@ the answer is the midpoint. The `max(1.0, n)` bound is essential: `sqrt(0.25) =
 <a id="q17"></a>
 ### Q17 — Koko Eating Bananas
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 Koko has `piles` of bananas and `h` hours to eat them. She eats at speed `k`
 bananas/hour (one pile per hour). Find the minimum speed `k`.
 
@@ -954,6 +1005,9 @@ total hours `= len(piles) <= h`.
 
 <a id="q18"></a>
 ### Q18 — Capacity to Ship Packages
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Given package weights and `days`, find the minimum ship capacity to deliver
 all packages in order within `days` days.
@@ -1013,6 +1067,9 @@ must stay in order — split whenever the next package would overflow the day.
 <a id="q19"></a>
 ### Q19 — Minimize Maximum (Split Array Largest Sum)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 Split array into `m` non-empty contiguous subarrays to minimize the largest
 subarray sum. Return that minimum possible largest sum.
 
@@ -1069,6 +1126,9 @@ structure to Q18 — recognizing this family of problems is the key skill.
 
 <a id="q20"></a>
 ### Q20 — Maximize Minimum (Allocate Minimum Pages)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 `n` books with page counts `pages[i]` must be allocated to `m` students in
 order (each student gets a contiguous block). Minimize the maximum pages any
@@ -1137,6 +1197,9 @@ loops when one book alone exceeds the candidate answer.
 <a id="q21"></a>
 ### Q21 — Search in Rotated Array with Duplicates
 
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 Same as Q12 but the array may have duplicate values. Return `True` if target
 exists, `False` otherwise.
 
@@ -1200,6 +1263,9 @@ This is the key difference from the no-duplicates version.
 <a id="q22"></a>
 ### Q22 — Smallest Divisor Given Threshold
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 Given an integer array and a threshold, find the smallest positive integer
 divisor such that the sum of `ceil(num / divisor)` for all nums is `<= threshold`.
 
@@ -1251,6 +1317,9 @@ shape as Koko (speed replaces divisor) shows pattern mastery.
 
 <a id="q23"></a>
 ### Q23 — Find Bad Version (First True in Answer Space)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 There are `n` versions `[1, 2, ..., n]`. Versions from some version `k` onward
 are "bad" (monotonic). Given a function `is_bad(version) -> bool`, find the
@@ -1313,6 +1382,9 @@ The minimize template finds the left boundary of the T region. Each call to
 
 <a id="q24"></a>
 ### Q24 — Median of Two Sorted Arrays
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Given two sorted arrays `nums1` and `nums2` of sizes `m` and `n`, find the
 median of their merged sorted array in O(log(m+n)) time.
@@ -1384,6 +1456,9 @@ O(log(min(m, n))). This is the hardest binary search problem in interviews.
 
 <a id="q25"></a>
 ### Q25 — Off-by-One Bug Hunt
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Each function below has one binary search bug. Identify and fix it.
 

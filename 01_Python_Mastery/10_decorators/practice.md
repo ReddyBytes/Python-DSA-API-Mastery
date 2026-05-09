@@ -9,35 +9,39 @@
 
 | # | Difficulty | Topic | Skill |
 |---|---|---|---|
-| Q1 | 🟢 Easy | First-class functions | Pass and return functions |
-| Q2 | 🟢 Easy | Closures | make_counter() + captured variable |
-| Q3 | 🟢 Easy | Manual decorator | Write decorator manually |
-| Q4 | 🟢 Easy | @ syntax | Convert manual → @ sugar |
-| Q5 | 🟢 Easy | functools.wraps | Broken vs fixed identity |
-| Q6 | 🟡 Medium | Decorator factory | @repeat(n) |
-| Q7 | 🟡 Medium | Class decorator | CallCounter with __init__ + __call__ |
-| Q8 | 🟡 Medium | Decorating classes | @singleton class decorator |
-| Q9 | 🟡 Medium | @property | Getter + setter + validation |
-| Q10 | 🟢 Easy | @classmethod / @staticmethod | When to use each |
-| Q11 | 🟡 Medium | Stacking | @timer + @retry order and execution |
-| Q12 | 🟡 Medium | Production: timing | @timer with logging |
-| Q13 | 🟡 Medium | Production: retry | @retry(max_attempts=3) |
-| Q14 | 🟡 Medium | Async decorator | Works on sync + async |
-| Q15 | 🟡 Medium | Optional arguments | @validate works both ways |
-| Q16 | 🟡 Medium | Introspection | inspect.unwrap() |
-| Q17 | 🟠 Hard | Anti-patterns | Fix missing return + missing @wraps |
-| Q18 | 🟡 Medium | @lru_cache | Fibonacci benchmark |
-| Q19 | 🟡 Medium | @cached_property | Expensive computed attribute |
-| Q20 | 🟡 Medium | @singledispatch | format_value() by type |
-| Q21 | 🟠 Hard | Full mental model | Trace import vs call time |
-| Q22 | 🟠 Hard | Circuit breaker | Concept + when to use |
-| Q23 | 🟠 Hard | Capstone | @require_auth(roles=["admin"]) |
+| [Q1](#q1) | 🟢 Easy | First-class functions | Pass and return functions |
+| [Q2](#q2) | 🟢 Easy | Closures | make_counter() + captured variable |
+| [Q3](#q3) | 🟢 Easy | Manual decorator | Write decorator manually |
+| [Q4](#q4) | 🟢 Easy | @ syntax | Convert manual → @ sugar |
+| [Q5](#q5) | 🟢 Easy | functools.wraps | Broken vs fixed identity |
+| [Q6](#q6) | 🟡 Medium | Decorator factory | @repeat(n) |
+| [Q7](#q7) | 🟡 Medium | Class decorator | CallCounter with __init__ + __call__ |
+| [Q8](#q8) | 🟡 Medium | Decorating classes | @singleton class decorator |
+| [Q9](#q9) | 🟡 Medium | @property | Getter + setter + validation |
+| [Q10](#q10) | 🟢 Easy | @classmethod / @staticmethod | When to use each |
+| [Q11](#q11) | 🟡 Medium | Stacking | @timer + @retry order and execution |
+| [Q12](#q12) | 🟡 Medium | Production: timing | @timer with logging |
+| [Q13](#q13) | 🟡 Medium | Production: retry | @retry(max_attempts=3) |
+| [Q14](#q14) | 🟡 Medium | Async decorator | Works on sync + async |
+| [Q15](#q15) | 🟡 Medium | Optional arguments | @validate works both ways |
+| [Q16](#q16) | 🟡 Medium | Introspection | inspect.unwrap() |
+| [Q17](#q17) | 🟠 Hard | Anti-patterns | Fix missing return + missing @wraps |
+| [Q18](#q18) | 🟡 Medium | @lru_cache | Fibonacci benchmark |
+| [Q19](#q19) | 🟡 Medium | @cached_property | Expensive computed attribute |
+| [Q20](#q20) | 🟡 Medium | @singledispatch | format_value() by type |
+| [Q21](#q21) | 🟠 Hard | Full mental model | Trace import vs call time |
+| [Q22](#q22) | 🟠 Hard | Circuit breaker | Concept + when to use |
+| [Q23](#q23) | 🟠 Hard | Capstone | @require_auth(roles=["admin"]) |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · first-class functions — Pass and Return Functions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Write a function `apply_twice(func, value)` that calls `func(value)` twice, feeding the output of the first call into the second. Then write a second function `make_adder(n)` that returns a function which adds `n` to its argument. Demonstrate both.
 
@@ -73,9 +77,13 @@ print(apply_twice(str.upper, "hello"))  # TypeError — str.upper returns a str
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · closures — Write make_counter() and explain captured variables
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write `make_counter()` that returns a counter function. Each call to the returned function should increment and return a count starting at 1. Create two independent counters `c1` and `c2` and show they do not share state. Then inspect `c1.__closure__` to see where the count lives.
 
@@ -117,9 +125,13 @@ print(c1.__closure__[0].cell_contents)       # 3
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · manual decorator — Write the manual form from scratch
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a decorator `shout` that uppercases the string returned by any decorated function. Apply it to `greet(name)` using the **manual form** — no `@` syntax. Show the memory model comment.
 
@@ -162,9 +174,13 @@ print(greet.__name__)    # "greet" — preserved by @wraps
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟢 · @ syntax — Convert manual form to @ syntax
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Take the `shout` decorator from Q3. Rewrite the application using `@` syntax. Then demonstrate that `@decorator` runs **at definition time** (import time), not at call time, by printing inside the decorator's outer body.
 
@@ -210,9 +226,13 @@ print(greet("alice"))
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟢 · functools.wraps — Show what breaks without @wraps, fix it
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a `timer` decorator WITHOUT `@functools.wraps`. Apply it to `process()`. Show that `__name__` and `__doc__` are wrong. Then fix it by adding `@functools.wraps(func)` and show the corrected output, including `__wrapped__`.
 
@@ -270,9 +290,13 @@ print(process.__wrapped__)  # <function process> ← original function
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · decorator factory — Write @repeat(n)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write a `@repeat(n)` decorator factory that calls the decorated function `n` times. The wrapper should collect all return values into a list and return it. Show the three-layer structure in a comment.
 
@@ -323,9 +347,13 @@ print(greet("Alice"))
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · class decorator — Build CallCounter with __init__ + __call__
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Implement a `CallCounter` class-based decorator. It should track how many times the decorated function has been called and expose that count via a `.calls` attribute. Use `functools.update_wrapper` to preserve the original function's identity. Show `@CallCounter` without parentheses.
 
@@ -370,9 +398,13 @@ print(greet.__doc__)   # 'Greet someone.'
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · decorating classes — Write a @singleton class decorator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write a `@singleton` decorator that can be applied to a **class** to ensure only one instance ever exists. Calling the class a second time should return the cached instance, not create a new one. Prove it works with `is`.
 
@@ -420,9 +452,13 @@ print(id(db1) == id(db2))  # True
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · @property — Convert attribute to property with validation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Write a `BankAccount` class with a `balance` attribute. Convert `balance` to a `@property` with: a getter that returns the balance, a setter that raises `ValueError` if the new balance is negative, and a read-only `status` computed property that returns `"positive"`, `"zero"`, or `"overdrawn"` depending on the balance.
 
@@ -478,9 +514,13 @@ except ValueError as e:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟢 · @classmethod / @staticmethod — Write both and explain when to use each
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write an `Order` class with: a regular `__init__`, a `@classmethod from_dict(cls, data)` that constructs an Order from a dictionary, and a `@staticmethod is_valid_status(status)` that returns True/False without needing the class or instance. Show all three in a table comment explaining when to use each.
 
@@ -539,9 +579,13 @@ print(Order.is_valid_status("lost"))    # False
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · stacking — Stack @timer and @retry, predict order
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Write minimal `timer` and `retry` decorators. Stack them as `@timer` over `@retry(3)` on a `fetch_data` function. Draw the wrapper nesting in a comment. Then describe exactly what happens when `fetch_data()` is called: which layer runs first, which runs last.
 
@@ -607,9 +651,13 @@ fetch_data("https://api.example.com")
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · production patterns — Write @timer with logging
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a production-grade `@timed` decorator that uses the `logging` module (not `print`) to log execution time. Use `time.perf_counter()` for accuracy. The log message should include the function name and elapsed time in seconds with 3 decimal places. Use `try/finally` so timing is recorded even if the function raises.
 
@@ -670,9 +718,13 @@ except RuntimeError:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · production patterns — Write @retry(max_attempts=3)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Write a `@retry(max_attempts=3, delay=0.1, backoff=2.0, exceptions=(Exception,))` decorator factory. On each failure it should log a warning with the attempt number and wait time, then sleep before the next attempt. On the final failure it should re-raise. Show it working with a function that fails twice then succeeds.
 
@@ -732,9 +784,13 @@ print(result)   # {'id': 42, 'name': 'Alice'}
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · async decorator — Works on both sync and async functions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Write a `timed` decorator that works transparently on **both** synchronous and asynchronous functions. Use `asyncio.iscoroutinefunction(func)` to branch between an async wrapper and a sync wrapper. Demonstrate on one sync function and one async function.
 
@@ -799,9 +855,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟡 · optional arguments — Write @validate that works both ways
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Write a `@validate` decorator that can be used as both `@validate` (no parens) and `@validate(strict=True)` (with parens). When `strict=True`, raise `TypeError` if any argument is `None`. When `strict=False` (default), just print a warning.
 
@@ -867,9 +927,13 @@ except TypeError as e:
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · introspection — Use inspect.unwrap() to reach the original
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Stack three decorators on a single function. Use `inspect.unwrap()` to retrieve the original undecorated function. Show that `__wrapped__` forms a chain you can follow manually, and that `inspect.unwrap()` traverses the entire chain automatically.
 
@@ -928,9 +992,13 @@ print(original(name="Bob"))  # 'Hello, Bob!' — called directly, no wrappers
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟠 · anti-patterns — Fix a broken decorator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** The decorator below has two bugs. Identify both, explain what each breaks, and write the corrected version.
 
@@ -993,9 +1061,13 @@ print(add.__doc__)   # 'Add two numbers.'
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · @lru_cache — Apply to recursive fibonacci, measure the difference
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Write a naive recursive `fibonacci_slow(n)` without caching. Write `fibonacci(n)` with `@functools.lru_cache(maxsize=128)`. Time both for `n=35` using `time.perf_counter()`. Then call `fibonacci.cache_info()` to inspect hits and misses, and `fibonacci.cache_clear()` to reset it.
 
@@ -1054,9 +1126,13 @@ print(fibonacci.cache_info())
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟡 · @cached_property — Expensive computed attribute cached on instance
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Write a `Document` class that has a `content` attribute (a large string). Add a `@cached_property` called `word_count` that counts words by splitting the content. Show that it only computes once (add a `print` inside). Then inspect `instance.__dict__` to confirm the cached value is stored there directly.
 
@@ -1109,9 +1185,13 @@ print(doc.word_count)   # [computing word_count] → 9 (recomputes)
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟡 · @singledispatch — Write format_value() that handles multiple types
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Write a `format_value(value)` function using `@functools.singledispatch` that handles: `int` (formats as `"integer: N"`), `str` (formats as `"text: 'S'"`), `list` (formats as `"list[N items]: [...]"`), and falls back to `"unknown: TYPE"` for any other type. Register `float` to use the same handler as `int`.
 
@@ -1164,9 +1244,13 @@ print(format_value.registry.keys())
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟠 · full mental model — Trace what Python does when it sees @decorator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Write a module that demonstrates the full execution timeline — what happens at **import time** versus **call time**. Include a decorator factory that prints when it runs each phase. Then write out the six-step execution order as a comment tracing each phase from module load to function call.
 
@@ -1241,9 +1325,13 @@ print(f"[call] result: {result}")
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟠 · circuit breaker — Explain and sketch the concept
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Explain what a circuit breaker decorator does, what problem it solves, and sketch a minimal implementation outline (state machine with states: CLOSED, OPEN, HALF-OPEN). When would you use it over a `@retry` decorator?
 
@@ -1338,9 +1426,13 @@ def call_payment_service(amount):
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟠 · Capstone — Build @require_auth(roles=["admin"])
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Build a `@require_auth(roles=["admin"])` decorator factory for a Flask-style web application. It should: accept a `roles` list, check the current user's role (passed via a `current_user` keyword argument or a global context), raise `PermissionError` if the role is not in the allowed list, and pass through to the original function if authorized. Write a complete working example with multiple role checks.
 

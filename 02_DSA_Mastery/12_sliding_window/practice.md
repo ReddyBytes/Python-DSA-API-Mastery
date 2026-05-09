@@ -47,6 +47,9 @@
 <a id="q1"></a>
 ### Q1 — Max Sum Subarray of Size K
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 Given `arr = [2, 1, 5, 1, 3, 2]` and `k = 3`, find the maximum sum of any contiguous subarray of size `k`.
 
 <details>
@@ -84,6 +87,9 @@ def max_sum_k(arr: list[int], k: int) -> int:
 <a id="q2"></a>
 ### Q2 — Average of All Subarrays of Size K
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 Given `arr = [1, 3, 2, 6, -1, 4, 1, 8, 2]` and `k = 5`, return a list of the average of each contiguous subarray of size `k`.
 
 <details>
@@ -118,6 +124,9 @@ def avg_subarrays(arr: list[int], k: int) -> list[float]:
 <a id="q3"></a>
 ### Q3 — Identify the Sliding Window Pattern
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 For each problem below, say whether sliding window applies and which type (fixed, variable-longest, variable-shortest, or does not apply):
 
 1. "Find max sum of any 5 consecutive elements."
@@ -149,6 +158,9 @@ Ask: is the answer always a contiguous block? Can the window property be maintai
 
 <a id="q4"></a>
 ### Q4 — Fixed Window Off-by-One
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Why does `if right - left > k:` produce wrong results for a fixed window of size `k`? What is the correct condition?
 
@@ -186,6 +198,9 @@ if right - left + 1 > k:
 <a id="q5"></a>
 ### Q5 — Why O(n) Not O(nk)?
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Explain in plain English why sliding window is O(n) even though it processes windows of size k.
 
 <details>
@@ -217,6 +232,9 @@ Total: n enters + n leaves = 2n operations → O(n)
 
 <a id="q6"></a>
 ### Q6 — First Negative in Each Window of Size K
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Given `arr = [12, -1, -7, 8, -15, 30, 16, 28]` and `k = 3`, return the first negative element in each window of size `k`. Return 0 if no negative exists in a window.
 
@@ -257,6 +275,9 @@ def first_negative_window(arr: list[int], k: int) -> list[int]:
 
 <a id="q7"></a>
 ### Q7 — Sliding Window vs Two Pointers
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 What is the difference between sliding window and two pointers? Give one example of each.
 
@@ -308,6 +329,9 @@ def longest_unique(s):
 <a id="q8"></a>
 ### Q8 — When Sliding Window Fails
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 Give two concrete cases where sliding window cannot solve the problem. Explain why.
 
 <details>
@@ -345,6 +369,9 @@ arr = [2, -1, 2], target = 3
 
 <a id="q9"></a>
 ### Q9 — Longest Substring Without Repeating Characters
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Given a string `s`, return the length of the longest substring that contains no repeated characters.
 
@@ -388,6 +415,9 @@ def length_of_longest_substring(s: str) -> int:
 
 <a id="q10"></a>
 ### Q10 — Minimum Window Substring
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Given strings `s` and `t`, return the shortest substring of `s` that contains all characters of `t` (including duplicates). Return `""` if impossible.
 
@@ -441,6 +471,9 @@ def min_window(s: str, t: str) -> str:
 <a id="q11"></a>
 ### Q11 — Longest Subarray with Sum ≤ K
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 Given `arr = [3, 1, 2, 7, 4, 2, 1, 1, 5]` and `k = 8`, find the length of the longest contiguous subarray with sum ≤ k.
 
 <details>
@@ -480,6 +513,9 @@ def longest_subarray_sum_leq_k(arr: list[int], k: int) -> int:
 
 <a id="q12"></a>
 ### Q12 — Find All Anagrams in a String
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Given strings `s` and `p`, return all starting indices of `p`'s anagrams in `s`.
 
@@ -534,6 +570,9 @@ def find_anagrams(s: str, p: str) -> list[int]:
 <a id="q13"></a>
 ### Q13 — Permutation in String
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 Given strings `s1` and `s2`, return `True` if `s2` contains any permutation of `s1`.
 
 Example: `s1 = "ab"`, `s2 = "eidbaooo"` → `True` (window `"ba"`)
@@ -584,6 +623,9 @@ def check_inclusion(s1: str, s2: str) -> bool:
 <a id="q14"></a>
 ### Q14 — Longest Repeating Character Replacement
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 Given string `s` and integer `k`, you can replace at most `k` characters in a window. Return the length of the longest substring you can form where all characters are the same.
 
 Example: `s = "AABABBA"`, `k = 1` → `4`
@@ -629,6 +671,9 @@ def character_replacement(s: str, k: int) -> int:
 <a id="q15"></a>
 ### Q15 — Minimum Size Subarray Sum
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 Given a positive integer `target` and array `nums`, find the minimal length of a contiguous subarray whose sum ≥ `target`. Return 0 if none exists.
 
 Example: `nums = [2,3,1,2,4,3]`, `target = 7` → `2` (subarray `[4,3]`)
@@ -664,6 +709,9 @@ def min_subarray_len(target: int, nums: list[int]) -> int:
 
 <a id="q16"></a>
 ### Q16 — Longest Substring with At Most K Distinct Characters
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Given string `s` and integer `k`, return the length of the longest substring with at most `k` distinct characters.
 
@@ -712,6 +760,9 @@ def longest_k_distinct(s: str, k: int) -> int:
 
 <a id="q17"></a>
 ### Q17 — Shrink vs Expand — Which Loop?
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Explain the difference between these two shrink patterns:
 
@@ -768,6 +819,9 @@ while window_sum >= target:
 <a id="q18"></a>
 ### Q18 — Max Consecutive Ones III
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 Given binary array `nums` and integer `k`, return the max number of consecutive 1s if you can flip at most `k` zeros.
 
 Example: `nums = [1,1,1,0,0,0,1,1,1,1,0]`, `k = 2` → `6`
@@ -809,6 +863,9 @@ def longest_ones(nums: list[int], k: int) -> int:
 
 <a id="q19"></a>
 ### Q19 — Subarray Product Less Than K
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Given `nums` and `k`, count the number of contiguous subarrays where the product of all elements is strictly less than `k`.
 
@@ -854,6 +911,9 @@ def num_subarray_product_less_than_k(nums: list[int], k: int) -> int:
 
 <a id="q20"></a>
 ### Q20 — Count Distinct Characters in Every Window
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Given string `s = "aabacbebebe"` and `k = 5`, return the maximum number of distinct characters in any window of size `k`.
 
@@ -907,6 +967,9 @@ def max_distinct_in_window(s: str, k: int) -> int:
 <a id="q21"></a>
 ### Q21 — Sliding Window Maximum (Deque)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 Given `nums = [1, 3, -1, -3, 5, 3, 6, 7]` and `k = 3`, return the maximum value in each window of size `k`.
 
 Expected output: `[3, 3, 5, 5, 6, 7]`
@@ -955,6 +1018,9 @@ def sliding_window_maximum(nums: list[int], k: int) -> list[int]:
 
 <a id="q22"></a>
 ### Q22 — Minimum Window Substring with Duplicates in T
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Why does using `set(t)` instead of `Counter(t)` fail for `t = "AA"`? Show the bug and the fix.
 
@@ -1028,6 +1094,9 @@ def min_window_correct(s: str, t: str) -> str:
 <a id="q23"></a>
 ### Q23 — Longest Subarray After Deleting One Element
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 Given a binary array `nums`, return the length of the longest subarray of 1s after deleting exactly one element.
 
 Example: `nums = [1,1,0,1]` → `3`
@@ -1071,6 +1140,9 @@ def longest_subarray(nums: list[int]) -> int:
 
 <a id="q24"></a>
 ### Q24 — Sliding Window + Binary Search
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 The array `nums` is sorted. Find the smallest window size `w` such that there exists a contiguous subarray of length `w` with sum ≥ target. Use binary search on `w`, with a fixed sliding window to check feasibility.
 
@@ -1124,6 +1196,9 @@ def smallest_window_size(nums: list[int], target: int) -> int:
 
 <a id="q25"></a>
 ### Q25 — Number of Subarrays with Bounded Maximum
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Given `nums`, `left_bound`, and `right_bound`, count subarrays where the maximum element is between `left_bound` and `right_bound` inclusive.
 

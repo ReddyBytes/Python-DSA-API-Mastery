@@ -2,24 +2,48 @@
 
 | # | Topic | Difficulty |
 |---|---|---|
-| [Q1](#q1--creating-datetimes--today-now-specific-date) | Creating datetimes | 🟢 Beginner |
-| [Q2](#q2--strftime--formatting-dates-as-strings) | strftime | 🟢 Beginner |
-| [Q3](#q3--strptime--parsing-strings-to-datetimes) | strptime | 🟢 Beginner |
-| [Q4](#q4--timedelta--date-arithmetic) | timedelta | 🟡 Intermediate |
-| [Q5](#q5--unix-timestamps--converting-to-and-from) | Unix timestamps | 🟡 Intermediate |
-| [Q6](#q6--fromisoformat--iso-8601-parsing) | fromisoformat | 🟡 Intermediate |
-| [Q7](#q7--timezone-aware-datetimes) | Timezone-aware | 🟡 Intermediate |
-| [Q8](#q8--datetimeutcnow-pitfall) | utcnow() pitfall | 🟡 Intermediate |
-| [Q9](#q9--date-arithmetic-on-a-list) | Date arithmetic | 🟡 Intermediate |
-| [Q10](#q10--time-module--benchmarking) | time module | 🟡 Intermediate |
-| [Q11](#q11--production-logging-with-timestamps) | Production logging | 🟠 Advanced |
-| [Q12](#q12--capstone--normalize-mixed-date-formats) | Capstone | 🟠 Advanced |
+| [Q1](#q1) | Creating datetimes | 🟢 Beginner |
+| [Q2](#q2) | strftime | 🟢 Beginner |
+| [Q3](#q3) | strptime | 🟢 Beginner |
+| [Q4](#q4) | timedelta | 🟡 Intermediate |
+| [Q5](#q5) | Unix timestamps | 🟡 Intermediate |
+| [Q6](#q6) | fromisoformat | 🟡 Intermediate |
+| [Q7](#q7) | Timezone-aware | 🟡 Intermediate |
+| [Q8](#q8) | utcnow() pitfall | 🟡 Intermediate |
+| [Q9](#q9) | Date arithmetic | 🟡 Intermediate |
+| [Q10](#q10) | time module | 🟡 Intermediate |
+| [Q11](#q11) | Production logging | 🟠 Advanced |
+| [Q12](#q12) | Capstone | 🟠 Advanced |
 
 ---
+
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | Creating datetimes — today, now, specific date | 🟢 |
+| [Q2](#q2) | strftime — Formatting dates as strings | 🟢 |
+| [Q3](#q3) | strptime — Parsing strings to datetimes | 🟢 |
+| [Q4](#q4) | timedelta — Date arithmetic | 🟡 |
+| [Q5](#q5) | Unix timestamps — Converting to and from | 🟡 |
+| [Q6](#q6) | fromisoformat — ISO 8601 parsing | 🟡 |
+| [Q7](#q7) | Timezone-aware datetimes | 🟡 |
+| [Q8](#q8) | datetime.utcnow() pitfall | 🟡 |
+| [Q9](#q9) | Date arithmetic on a list | 🟡 |
+| [Q10](#q10) | time module — Benchmarking | 🟡 |
+| [Q11](#q11) | Production logging with timestamps | 🟠 |
+| [Q12](#q12) | Capstone — Normalize mixed date formats | 🟠 |
+
+---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · Creating datetimes — today, now, specific date
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 > Create three datetime objects: today's date only, the current datetime, and a specific datetime of 2024-03-15 at 09:30:00.
 
@@ -55,9 +79,13 @@ print(specific)                 # → 2024-03-15 09:30:00
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · strftime — Formatting dates as strings
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 > Format `datetime(2024, 3, 15, 9, 30, 0, tzinfo=timezone.utc)` as three different strings: `"March 15, 2024"`, `"2024-03-15T09:30:00"`, and `"15/03/24 09:30"`.
 
@@ -87,9 +115,13 @@ print(dt.strftime("%d/%m/%y %H:%M"))     # → 15/03/24 09:30
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · strptime — Parsing strings to datetimes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 > Parse these three strings into datetime objects: `"2024-03-15"`, `"15 Mar 2024 09:30"`, `"03/15/2024"`.
 
@@ -122,9 +154,13 @@ print(dt3)  # → 2024-03-15 00:00:00
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · timedelta — Date arithmetic
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 > Using `timedelta`: (1) calculate the date 30 days from now, (2) calculate the number of days between `2024-01-01` and `2024-03-15`, (3) find the date of the next Monday from today.
 
@@ -168,9 +204,13 @@ print(f"Next Monday: {next_monday}")
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · Unix timestamps — Converting to and from
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 > Convert `datetime.now()` to a Unix timestamp and convert `1705334400` back to a UTC datetime. Explain why you should use UTC when converting.
 
@@ -207,9 +247,13 @@ print(dt_wrong)   # → varies depending on server timezone
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · fromisoformat — ISO 8601 parsing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 > Parse `"2024-03-15T09:30:00+05:30"` using `fromisoformat()`. Then explain the difference between `fromisoformat()` and `strptime()`.
 
@@ -248,9 +292,13 @@ print(dt_z)         # → 2024-03-15 09:30:00+00:00
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · Timezone-aware datetimes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 > Create a UTC datetime for `2024-03-15 09:30:00`, then convert it to `US/Eastern`. Explain what naive and aware datetimes are and why mixing them causes errors.
 
@@ -294,9 +342,13 @@ except TypeError as e:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · datetime.utcnow() pitfall
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 > Explain why `datetime.utcnow()` is dangerous. Demonstrate the problem with a code example and show what to use instead.
 
@@ -339,9 +391,13 @@ print(correct_utc.tzinfo)   # → UTC
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · Date arithmetic on a list
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 > Given a list of ISO date strings, sort them chronologically and find the date range (max date - min date in days).
 
@@ -398,9 +454,13 @@ print(f"Range: {earliest} to {latest} = {span} days")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · time module — Benchmarking
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 > Use `time.perf_counter()` to benchmark two approaches to building a large string: (1) concatenation with `+=`, (2) `"".join()`. Print the elapsed time for each.
 
@@ -443,9 +503,13 @@ print(f"Join is {elapsed_concat / elapsed_join:.1f}x faster")
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · Production logging with timestamps
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 > Write a `log_event(event: str)` function that prints a log line with: (1) UTC timestamp in ISO format, (2) the local time offset from UTC. Example output: `[2024-03-15T09:30:00Z | local offset: -05:00] user_login`.
 
@@ -489,9 +553,13 @@ log_event("user_login")
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Capstone — Normalize mixed date formats
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 > Parse a list of dates in mixed formats, normalize them all to ISO 8601 UTC strings (`"YYYY-MM-DDT00:00:00Z"`), and return them sorted chronologically.
 

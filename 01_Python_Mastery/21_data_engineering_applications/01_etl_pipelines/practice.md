@@ -3,11 +3,35 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | csv-reader — Write a simple CSV reader that yields rows | 🟢 |
+| [Q2](#q2) | etl-functions — Write Extract, Transform, Load as 3 separate functions | 🟢 |
+| [Q3](#q3) | chunked-csv — Process a large CSV in chunks of 1000 rows | 🟡 |
+| [Q4](#q4) | pydantic-validation — Validate rows with Pydantic, collect validation errors | 🟡 |
+| [Q5](#q5) | generator-pipeline — Write a full generator pipeline: extract → filter → transform → load | 🟡 |
+| [Q6](#q6) | checkpointing — Add checkpointing: save the last-processed row ID to a file | 🟡 |
+| [Q7](#q7) | dead-letter-queue — Write a dead-letter queue: send bad rows to an error log | 🟡 |
+| [Q8](#q8) | jsonl-reader — Read a JSON Lines (.jsonl) file as a generator | 🟡 |
+| [Q9](#q9) | parallel-processor — Write a parallel file processor using ProcessPoolExecutor | 🟠 |
+| [Q10](#q10) | schema-migration — Build ETL with schema migration: old format → new format | 🟠 |
+| [Q11](#q11) | memory-profile — Memory profile the ETL pipeline: generator vs list | 🟠 |
+| [Q12](#q12) | capstone-etl — Capstone: full ETL from CSV to SQLite with error handling | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · csv-reader — Write a simple CSV reader that yields rows 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write a function `read_csv(filepath)` that opens a CSV file and **yields** one row as a `dict` at a time. Do not load the whole file into a list.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `csv.DictReader` inside a `with open(...)` block and `yield` each row.</details>
 <details><summary>✅ Answer</summary>
@@ -26,11 +50,15 @@ def read_csv(filepath):
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · etl-functions — Write Extract, Transform, Load as 3 separate functions 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Write three functions: `extract(filepath)` that yields raw dicts from a CSV, `transform(records)` that strips whitespace from all string values, and `load(records, out_path)` that writes them to a new CSV. Wire them together.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Each function should be a generator except `load`, which consumes the stream and writes output.</details>
 <details><summary>✅ Answer</summary>
@@ -65,11 +93,15 @@ count = load(transform(extract("source.csv")), "output.csv")
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · chunked-csv — Process a large CSV in chunks of 1000 rows 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write a `chunk(iterable, size)` generator that splits any iterator into lists of `size` items. Then use it to process a CSV in batches of 1000, printing a count per chunk.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Accumulate items in a local list; `yield` it when it hits `size`, then reset the list.</details>
 <details><summary>✅ Answer</summary>
@@ -93,11 +125,15 @@ for i, batch in enumerate(chunk(read_csv("big.csv"), 1000), 1):
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · pydantic-validation — Validate rows with Pydantic, collect validation errors 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Define a Pydantic `UserRow` model with fields `user_id: int`, `name: str`, `email: str`, `score: float` (0–100). Write a function that processes a list of raw dicts, returning `(valid_rows, error_rows)`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Wrap `UserRow(**raw)` in `try/except ValidationError` and append to the appropriate list.</details>
 <details><summary>✅ Answer</summary>
@@ -132,11 +168,15 @@ def validate_batch(rows):
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · generator-pipeline — Write a full generator pipeline: extract → filter → transform → load 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Chain four generator functions into a single pipeline: `extract` reads CSV rows, `filter_active` keeps only rows where `active == "true"`, `enrich` adds a `grade` field based on `score`, and `load_to_list` collects results.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Each middle stage takes an iterator and yields from it. Nothing runs until you consume the final stage.</details>
 <details><summary>✅ Answer</summary>
@@ -161,11 +201,15 @@ result = load_to_list(enrich(filter_active(extract("data.csv"))))
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · checkpointing — Add checkpointing: save the last-processed row ID to a file 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write a `Checkpoint` class with `load() -> int` (returns last ID, or 0 on first run) and `save(last_id: int)`. Use it in a processing loop to skip already-processed rows on restart.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Store state as JSON on disk. On load, return 0 if the file does not exist.</details>
 <details><summary>✅ Answer</summary>
@@ -200,11 +244,15 @@ for row in read_csv("data.csv"):
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · dead-letter-queue — Write a dead-letter queue: send bad rows to an error log 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write `transform_with_dlq(records, dlq_path)` — a generator that yields clean records and writes failed rows to a `.jsonl` dead-letter file instead of crashing.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Open the DLQ file in append mode inside the generator. Write bad rows as JSON lines.</details>
 <details><summary>✅ Answer</summary>
@@ -226,11 +274,15 @@ def transform_with_dlq(records, dlq_path):
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · jsonl-reader — Read a JSON Lines (.jsonl) file as a generator 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write `read_jsonl(filepath)` that yields one parsed dict per line, skipping lines that are not valid JSON.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Iterate over lines in the file; wrap `json.loads` in `try/except json.JSONDecodeError`.</details>
 <details><summary>✅ Answer</summary>
@@ -254,11 +306,15 @@ def read_jsonl(filepath):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · parallel-processor — Write a parallel file processor using ProcessPoolExecutor 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write `process_files_parallel(file_list, max_workers=4)` that processes each file in a separate process, returns a list of `{"file": name, "count": N}` results. Define a simple `process_one_file(path)` function that counts rows.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `ProcessPoolExecutor` with `executor.map()`. Note: the target function must be importable (module-level, not lambda).</details>
 <details><summary>✅ Answer</summary>
@@ -282,11 +338,15 @@ def process_files_parallel(file_list, max_workers=4):
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · schema-migration — Build ETL with schema migration: old format → new format 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a transform that converts old-format rows `{"UserId": str, "FullName": str, "Pts": str}` to new format `{"user_id": int, "name": str, "score": float}`. Handle missing fields with defaults.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Map old key names to new ones explicitly. Use `.get()` with defaults to handle missing fields.</details>
 <details><summary>✅ Answer</summary>
@@ -305,11 +365,15 @@ def migrate_schema(records):
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · memory-profile — Memory profile the ETL pipeline: generator vs list 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Using `tracemalloc`, measure peak memory of two approaches to count rows with `score >= 70` in a 10,000-row CSV: (a) load all rows into a list first, (b) use a generator. Print the peak memory for each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Call `tracemalloc.start()`, run the function, call `tracemalloc.take_snapshot()`, then `tracemalloc.stop()`. Sum `s.size` over all statistics.</details>
 <details><summary>✅ Answer</summary>
@@ -342,11 +406,15 @@ print(f"Eager: {m1/1024:.1f} KB  |  Lazy: {m2/1024:.1f} KB  |  Ratio: {m1/m2:.1f
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · capstone-etl — Capstone: full ETL from CSV to SQLite with error handling 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Build a complete ETL pipeline that reads a CSV (`user_id, name, email, score`), validates each row with Pydantic, writes valid rows to a SQLite table `users`, writes invalid rows to `errors.jsonl`, and prints final stats.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `sqlite3.connect(":memory:")` for an in-memory DB. Create the table first. Use `executemany` for batch inserts.</details>
 <details><summary>✅ Answer</summary>

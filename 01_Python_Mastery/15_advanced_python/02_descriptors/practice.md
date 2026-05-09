@@ -2,22 +2,44 @@
 
 | Q | Difficulty | Topic |
 |---|-----------|-------|
-| [Q1](#q1--property-under-the-hood) | 🟢 | How `@property` uses descriptors |
-| [Q2](#q2--type-validator-descriptor) | 🟡 | Validator descriptor |
-| [Q3](#q3--data-vs-non-data) | 🟡 | Data vs non-data descriptors |
-| [Q4](#q4--set_name) | 🟡 | `__set_name__` auto-registration |
-| [Q5](#q5--cached-descriptor) | 🟡 | Cached lazy descriptor |
-| [Q6](#q6--typechecked-descriptor) | 🟡 | TypeChecked descriptor |
-| [Q7](#q7--read-only-descriptor) | 🟠 | Read-only descriptor |
-| [Q8](#q8--range-validation-descriptor) | 🟠 | Range validation descriptor |
-| [Q9](#q9--rewrite-property) | 🟠 | Rewrite `@property` as a descriptor |
-| [Q10](#q10--logging-descriptor) | 🟠 | Access logging descriptor |
+| [Q1](#q1) | 🟢 | How `@property` uses descriptors |
+| [Q2](#q2) | 🟡 | Validator descriptor |
+| [Q3](#q3) | 🟡 | Data vs non-data descriptors |
+| [Q4](#q4) | 🟡 | `__set_name__` auto-registration |
+| [Q5](#q5) | 🟡 | Cached lazy descriptor |
+| [Q6](#q6) | 🟡 | TypeChecked descriptor |
+| [Q7](#q7) | 🟠 | Read-only descriptor |
+| [Q8](#q8) | 🟠 | Range validation descriptor |
+| [Q9](#q9) | 🟠 | Rewrite `@property` as a descriptor |
+| [Q10](#q10) | 🟠 | Access logging descriptor |
 
 ---
+
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | property internals — How `@property` uses descriptors under the hood | 🟢 |
+| [Q2](#q2) | validation — write a Validator descriptor that checks type on set | 🟡 |
+| [Q3](#q3) | lookup priority — data vs non-data descriptor | 🟡 |
+| [Q4](#q4) | naming — `__set_name__` auto-register descriptor attribute name | 🟡 |
+| [Q5](#q5) | caching — write a Cached descriptor that computes once and stores | 🟡 |
+| [Q6](#q6) | type enforcement — TypeChecked descriptor using `__set__` | 🟡 |
+| [Q7](#q7) | read-only — write a read-only descriptor (only `__get__`, no `__set__`) | 🟠 |
+| [Q8](#q8) | range validation — descriptor for range validation | 🟠 |
+| [Q9](#q9) | build from scratch — rewrite `@property` using a custom descriptor | 🟠 |
+| [Q10](#q10) | observability — descriptor that logs all access | 🟠 |
+
+---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · property internals — How `@property` uses descriptors under the hood
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Explain (in code) how `@property` is implemented as a descriptor. What does `Circle.radius` return when accessed on the class? What does `circle.radius` return when accessed on an instance?
 
@@ -60,9 +82,13 @@ print(hasattr(type(Circle.radius), '__set__'))   # True
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · validation — write a Validator descriptor that checks type on set
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write a `Typed` descriptor that enforces a specific type when an attribute is set. Use `__set_name__` to auto-configure the attribute name. Demonstrate it on a `Person` class with `name: str` and `age: int`.
 
@@ -119,9 +145,13 @@ except TypeError as e:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · lookup priority — data vs non-data descriptor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Demonstrate the difference between a data descriptor and a non-data descriptor. Show that a data descriptor (with `__set__`) takes priority over instance `__dict__`, while a non-data descriptor (only `__get__`) loses to instance `__dict__`.
 
@@ -168,9 +198,13 @@ print(d.nondata)   # 'in dict'  ← instance __dict__ beats non-data descriptor
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · naming — `__set_name__` auto-register descriptor attribute name
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Create a `LoggedAttribute` descriptor that prints every read and write, including the attribute name. Use `__set_name__` so the descriptor knows its name without you having to pass it manually.
 
@@ -215,9 +249,13 @@ _ = cfg.host   # prints: READ host = 'localhost'
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · caching — write a Cached descriptor that computes once and stores
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a `cached_property` descriptor (non-data, no `__set__`) that computes an expensive value once and caches it in the instance's `__dict__`. Verify the computation only runs once.
 
@@ -270,9 +308,13 @@ print(m.total)           # No print — cached
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · type enforcement — TypeChecked descriptor using `__set__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write a `TypeChecked` descriptor that accepts a `type` in its constructor and validates every assignment. Also support type coercion: if `coerce=True`, call `type_(value)` instead of raising.
 
@@ -329,9 +371,13 @@ except TypeError as e:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟠 · read-only — write a read-only descriptor (only `__get__`, no `__set__`)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write a `ReadOnly` descriptor that stores a value at class definition time and raises `AttributeError` on any attempt to set it. Verify that it cannot be overwritten.
 
@@ -388,9 +434,13 @@ print(cfg.VERSION)  # 1.0.0  — data descriptor wins over __dict__
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟠 · range validation — descriptor for range validation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write a `Bounded` descriptor that accepts `min_val` and `max_val`. On set, clamp the value to `[min_val, max_val]` (no error, just clamp). Use it on a `Slider` class with `value` bounded to 0-100.
 
@@ -444,9 +494,13 @@ print(s.value)   # 75   (within range)
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟠 · build from scratch — rewrite `@property` using a custom descriptor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Implement `MyProperty` — a full equivalent of Python's built-in `property`. It should support getter, setter, and deleter via chaining (`.getter()`, `.setter()`, `.deleter()` methods). Use it to wrap `Circle.radius`.
 
@@ -518,9 +572,13 @@ print(c.radius)     # 10
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · observability — descriptor that logs all access
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write an `Audited` descriptor that logs every read and write (with a timestamp and instance id) to an internal log. The log should be accessible via `MyClass.field.get_log()`. Apply it to a `BankAccount.balance` field.
 

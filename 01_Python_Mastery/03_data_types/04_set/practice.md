@@ -9,14 +9,19 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1–Q3 | Creating · add/remove · {} trap | 🟢 |
-| Q4–Q6 | Membership · deduplication · iteration | 🟢 |
-| Q7–Q9 | Set math operations | 🟡 |
-| Q10–Q12 | Real-world patterns | 🟡 |
+| [Q1](#q1)–Q3 | Creating · add/remove · {} trap | 🟢 |
+| [Q4](#q4)–Q6 | Membership · deduplication · iteration | 🟢 |
+| [Q7](#q7)–Q9 | Set math operations | 🟡 |
+| [Q10](#q10)–Q12 | Real-world patterns | 🟡 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · set — Creating Sets
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Show 3 ways to create a set. Then demonstrate the `{}` trap — show that `{}` creates a dict, not a set. Show how to create an empty set correctly.
@@ -73,7 +78,12 @@ print(type(empty))  # <class 'set'>  ✅
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · set — Add and Remove
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 `tags = {"python", "web", "api"}`. Add `"ml"` to it. Remove `"web"` safely. Then try to remove `"java"` safely — it does not exist. Print the set after each step.
@@ -116,7 +126,12 @@ print(tags)            # {'python', 'api', 'ml'}
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · set — Immutable Elements
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Why can you add `"hello"` and `42` to a set but not `[1, 2, 3]`? Show the error you get when you try to add a list. Then show what you can use instead.
@@ -159,7 +174,12 @@ print(s)          # {'hello', 42, (1, 2, 3)}
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · set — Membership Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 `valid_domains = {"gmail.com", "yahoo.com", "outlook.com"}`. Check if `"gmail.com"` and `"hotmail.com"` are valid. Then demonstrate in a comment why `in` on a set is much faster than `in` on a list.
@@ -217,7 +237,12 @@ print(f"Set:  {time.time() - start:.6f}s")  # nearly instant
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · set — Deduplication
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 `visits = ["home", "about", "home", "contact", "about", "home"]`. Remove all duplicates and print the unique pages. Print how many unique pages there are.
@@ -253,7 +278,12 @@ print(f"Unique page count: {len(unique_pages)}")   # 3
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · set — Iteration
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `colors = {"red", "green", "blue", "yellow"}`. Iterate over the set and print each color. Note the important difference from iterating over a list.
@@ -294,7 +324,12 @@ for color in colors:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · set — Union
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 `python_devs = {"Alice", "Bob", "Charlie"}` and `js_devs = {"Bob", "Diana", "Charlie", "Eve"}`. Find all unique developers across both teams.
@@ -335,7 +370,12 @@ all_devs = python_devs.union(js_devs)
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · set — Intersection
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 Using the same `python_devs` and `js_devs` sets from Q7, find developers who know BOTH Python and JavaScript.
@@ -376,7 +416,12 @@ both = python_devs.intersection(js_devs)
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · set — Difference and Symmetric Difference
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 Using the same developer sets, find two things:
@@ -420,7 +465,12 @@ print(one_language)  # {'Alice', 'Diana', 'Eve'}
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · set — Permission Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 `permissions_user = {"read", "write"}`, `permissions_role = {"read", "write", "delete", "admin"}`. A task requires `{"read", "write"}`. Check if the user has all the required permissions for the task.
@@ -468,7 +518,12 @@ print(f"Role can perform task: {role_access}")  # True
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · set — Unique Characters
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 Given the string `"hello world"`, find all unique characters using a set. Print them sorted. Count how many unique characters there are (including the space).
@@ -505,7 +560,12 @@ print(f"Unique characters: {len(unique_chars)}")   # 8
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · set — frozenset as Dict Key
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 Store color palettes using `frozenset` as dictionary keys. Create entries for `{"red", "blue"}` mapping to `"purple-ish"` and `{"red", "yellow"}` mapping to `"orange-ish"`. Then look up the palette for a given combination of colors.

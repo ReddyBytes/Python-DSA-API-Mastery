@@ -9,20 +9,25 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1–Q4 | `int` | 🟢 |
-| Q5–Q8 | `float` | 🟢 |
-| Q9–Q11 | `bool` | 🟢 |
-| Q12–Q18 | `str` | 🟢 |
-| Q19–Q25 | `list` | 🟡 |
-| Q26–Q30 | `tuple` | 🟡 |
-| Q31–Q35 | `set` | 🟡 |
-| Q36–Q42 | `dict` | 🟡 |
-| Q43–Q44 | `None` | 🟢 |
-| Q45–Q47 | Type Conversion | 🟡 |
+| [Q1](#q1)–Q4 | `int` | 🟢 |
+| [Q5](#q5)–Q8 | `float` | 🟢 |
+| [Q9](#q9)–Q11 | `bool` | 🟢 |
+| [Q12](#q12)–Q18 | `str` | 🟢 |
+| [Q19](#q19)–Q25 | `list` | 🟡 |
+| [Q26](#q26)–Q30 | `tuple` | 🟡 |
+| [Q31](#q31)–Q35 | `set` | 🟡 |
+| [Q36](#q36)–Q42 | `dict` | 🟡 |
+| [Q43](#q43)–Q44 | `None` | 🟢 |
+| [Q45](#q45)–Q47 | Type Conversion | 🟡 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · int — Leap Year Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 `year = 2024`. Print `"Leap year"` if the year is divisible by 4, otherwise print `"Not a leap year"`.
@@ -58,7 +63,12 @@ else:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · int — Even or Odd
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 `number = 37`. Print `"Even"` if it is divisible by 2, otherwise print `"Odd"`.
@@ -94,7 +104,12 @@ else:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · int — Floor Division and Remainder
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 `total_minutes = 145`. Print how many full hours and remaining minutes are in that total. Expected output: `"2 hours and 25 minutes"`.
@@ -129,7 +144,12 @@ print(f"{hours} hours and {mins} minutes")
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · int — Power and Absolute Value
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 `base = 2`, `exponent = 8`. Print the result of 2 to the power of 8. Then print the absolute value of `-42`.
@@ -165,7 +185,12 @@ print(abs(-42))           # 42
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · float — Restaurant Bill
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 `price = 250.00`, `gst_rate = 0.18` (18% GST). Calculate and print the total bill rounded to 2 decimal places.
@@ -202,7 +227,12 @@ print(round(total, 2))   # 295.0
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · float — BMI Calculator
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `weight = 70.0` kg, `height = 1.75` m. Calculate BMI using the formula `weight / height²`. Print it rounded to 1 decimal place.
@@ -238,7 +268,12 @@ print(round(bmi, 1))   # 22.9
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · float — Precision Trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 Run `print(0.1 + 0.2 == 0.3)`. What does it print? Then fix the comparison using `round()`.
@@ -271,7 +306,12 @@ print(round(0.1 + 0.2, 1) == round(0.3, 1)) # True
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · float — Temperature Conversion
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 `celsius = 100.0`. Convert it to Fahrenheit using the formula `F = (C × 9/5) + 32`. Print the result.
@@ -305,7 +345,12 @@ print(fahrenheit)   # 212.0
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · bool — Truthiness
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 For each value below, predict `True` or `False` before running. Then run the code to check.
@@ -346,7 +391,12 @@ print(bool(None))    # False
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · bool — Bool Arithmetic
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 `answers = [True, False, True, True, False]`. Use `sum()` to count how many are `True`. Print `"3 out of 5 correct"`.
@@ -380,7 +430,12 @@ print(f"{correct} out of {len(answers)} correct")
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · bool — and / or Shortcuts
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 `name = ""`. Use `or` to print the name if it is set, or `"Anonymous"` if it is empty.
@@ -413,7 +468,12 @@ print(name or "Anonymous")   # Anonymous
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · str — String Methods
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 `email = "  Alice.SHARMA@Gmail.Com  "`. Clean it up: strip the whitespace from both ends and convert everything to lowercase. Print the result.
@@ -447,7 +507,12 @@ print(email.strip().lower())
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · str — Slicing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 `text = "Hello, World!"`. Print just `"World"` using slicing.
@@ -480,7 +545,12 @@ print(text[7:12])   # World
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · str — f-strings
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 `name = "Alice"`, `age = 25`, `city = "Mumbai"`. Print: `"Alice is 25 years old and lives in Mumbai"` using an f-string.
@@ -517,7 +587,12 @@ print(f"{name} is {age} years old and lives in {city}")
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · str — split and join
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 `sentence = "apple,banana,cherry,date"`. Split it into a list, then join it back together with ` | ` as the separator.
@@ -552,7 +627,12 @@ print(" | ".join(parts))
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · str — Immutability
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 **Problem:**
 `word = "hello"`. Try to change the first letter to `"H"` using `word[0] = "H"`. What error do you get? Then fix it the correct way.
@@ -590,7 +670,12 @@ print(word)   # Hello
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · str — find and replace
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 **Problem:**
 `message = "I love cats. Cats are amazing!"`. Replace all occurrences of `"cats"` with `"dogs"` and `"Cats"` with `"Dogs"`. Print the result.
@@ -625,7 +710,12 @@ print(message)
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · str — Checking Content
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 **Problem:**
 `phone = "9876543210"`. Check if it is a valid phone number: it must be all digits and exactly 10 characters long. Print `"Valid"` or `"Invalid"`.
@@ -661,7 +751,12 @@ else:
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · list — CRUD Operations
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 **Problem:**
 Start with `cart = []`. Add `"Apples"`, `"Milk"`, and `"Bread"` to it. Then remove `"Milk"`. Print the cart and its length.
@@ -699,7 +794,12 @@ print(len(cart))  # 2
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · list — Slicing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 **Problem:**
 `scores = [88, 92, 75, 96, 83, 70, 91]`. Print the first 3 scores, the last 2 scores, and a reversed copy — all using slicing.
@@ -734,7 +834,12 @@ print(scores[::-1])  # [91, 70, 83, 96, 75, 92, 88]
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · list — Sort and Find
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 **Problem:**
 `temps = [34, 28, 39, 22, 31, 41, 27]`. Find and print the highest temperature, the lowest, and the average.
@@ -769,7 +874,12 @@ print(round(sum(temps) / len(temps), 1))  # 31.7
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · list — Copy Trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 **Problem:**
 `a = [1, 2, 3]`. Do `b = a`, then append `4` to `b`. Print both `a` and `b`. What happens? Then fix it so that `a` does not change.
@@ -815,7 +925,12 @@ print(b)   # [1, 2, 3, 4]
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · list — List Comprehension
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 **Problem:**
 `numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`. Create a new list containing only the even numbers using a list comprehension.
@@ -849,7 +964,12 @@ print(evens)   # [2, 4, 6, 8, 10]
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · list — Nested List
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 **Problem:**
 `matrix = [[1,2,3],[4,5,6],[7,8,9]]`. Print the value `6` by accessing it using its row and column index.
@@ -882,7 +1002,12 @@ print(matrix[1][2])   # 6
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · list — Count and Index
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Problem:**
 `fruits = ["apple", "banana", "apple", "cherry", "apple"]`. Count how many times `"apple"` appears, and find the index of `"cherry"`.
@@ -916,7 +1041,12 @@ print(fruits.index("cherry"))   # 3
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · tuple — Immutability
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 **Problem:**
 `coords = (19.07, 72.87)`. Try to change the first value to `18.0`. What error do you get? Then show the correct way to update a tuple.
@@ -954,7 +1084,12 @@ print(coords)   # (18.0, 72.87)
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · tuple — Unpacking
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 **Problem:**
 `person = ("Alice", 25, "Engineer", "Mumbai")`. Unpack all 4 values into separate variables and print each one.
@@ -991,7 +1126,12 @@ print(city)   # Mumbai
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · tuple — Swap Variables
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 **Problem:**
 `a = 10`, `b = 20`. Swap their values using Python's tuple unpacking in a single line. Print both after the swap.
@@ -1028,7 +1168,12 @@ print(b)   # 10
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · tuple — When to Use Tuple
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 **Problem:**
 `rgb_red = [255, 0, 0]` is stored as a list. Is this the right type? Convert it to a tuple and explain why a tuple is better here.
@@ -1062,7 +1207,12 @@ print(rgb_red)   # (255, 0, 0)
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · tuple — Tuple in a Set
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 **Problem:**
 Try adding a list `[1, 2]` to a set. Then try adding a tuple `(1, 2)`. Which one works? Why?
@@ -1098,7 +1248,12 @@ print(s)          # {(1, 2)}
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · set — Remove Duplicates
+
+> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
 
 **Problem:**
 `emails = ["a@x.com","b@x.com","a@x.com","c@x.com","b@x.com"]`. Remove duplicates and print the unique emails as a list.
@@ -1133,7 +1288,12 @@ print(unique)
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · set — Membership Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
 
 **Problem:**
 `valid_countries = {"India", "USA", "UK", "Germany", "Japan"}`. Check if `"Australia"` and `"India"` are in the set. Print `True` or `False` for each.
@@ -1167,7 +1327,12 @@ print("India" in valid_countries)       # True
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 · set — Set Math
+
+> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
 
 **Problem:**
 `python_students = {"Alice","Bob","Charlie","Diana"}`, `sql_students = {"Bob","Eve","Charlie","Frank"}`. Find: who is in both classes, who is in either class, and who is only in the Python class.
@@ -1205,7 +1370,12 @@ print(python_students - sql_students)   # {'Alice', 'Diana'}
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · set — discard vs remove
+
+> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
 
 **Problem:**
 `tags = {"python", "web", "api", "ml"}`. Remove `"ml"` safely. Also try to remove `"java"` safely even though it does not exist. Which method should you use?
@@ -1240,7 +1410,12 @@ print(tags)            # {'python', 'web', 'api'}
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · set — frozenset
+
+> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
 
 **Problem:**
 Create a `frozenset` from `["red", "green", "blue"]`. Try to add `"yellow"` to it. What error do you get? When would you use a frozenset?
@@ -1275,7 +1450,12 @@ print(colors)   # frozenset({'red', 'green', 'blue'})
 
 ---
 
+<a id="q36"></a>
+
 ### Q36 · dict — Create and Access
+
+> 🛠️ **Solve locally:** [practice_local.py → Q36](./practice_local.py)
+
 
 **Problem:**
 Create a dictionary for a book with these fields: title `"Python Crash Course"`, author `"Eric Matthes"`, year `2019`, pages `544`. Print the author and the year.
@@ -1313,7 +1493,12 @@ print(book["year"])     # 2019
 
 ---
 
+<a id="q37"></a>
+
 ### Q37 · dict — Safe Access with .get()
+
+> 🛠️ **Solve locally:** [practice_local.py → Q37](./practice_local.py)
+
 
 **Problem:**
 `config = {"host": "localhost", "port": 5432}`. Get the value of `"timeout"` without crashing — return a default of `30` if it does not exist.
@@ -1346,7 +1531,12 @@ print(config.get("timeout", 30))   # 30
 
 ---
 
+<a id="q38"></a>
+
 ### Q38 · dict — Update and Delete
+
+> 🛠️ **Solve locally:** [practice_local.py → Q38](./practice_local.py)
+
 
 **Problem:**
 `user = {"name": "Alice", "age": 25, "city": "Delhi"}`. Update the age to `26`. Add a new key `"email"` with value `"alice@gmail.com"`. Delete the `"city"` key. Print the final dict.
@@ -1383,7 +1573,12 @@ print(user)
 
 ---
 
+<a id="q39"></a>
+
 ### Q39 · dict — Iterating
+
+> 🛠️ **Solve locally:** [practice_local.py → Q39](./practice_local.py)
+
 
 **Problem:**
 `scores = {"Alice": 92, "Bob": 78, "Charlie": 85, "Diana": 96}`. Loop through and print each name and score. Then print only the names where the score is above 85.
@@ -1423,7 +1618,12 @@ for name, score in scores.items():
 
 ---
 
+<a id="q40"></a>
+
 ### Q40 · dict — Word Counter
+
+> 🛠️ **Solve locally:** [practice_local.py → Q40](./practice_local.py)
+
 
 **Problem:**
 `text = "the cat sat on the mat the cat"`. Count how many times each word appears and store the counts in a dict. Print the result.
@@ -1460,7 +1660,12 @@ print(freq)
 
 ---
 
+<a id="q41"></a>
+
 ### Q41 · dict — Nested Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q41](./practice_local.py)
+
 
 **Problem:**
 `student = {"name": "Alice", "grades": {"math": 90, "science": 85, "english": 92}}`. Print the science grade. Then add `"history": 88` to the grades.
@@ -1496,7 +1701,12 @@ print(student["grades"])
 
 ---
 
+<a id="q42"></a>
+
 ### Q42 · dict — Dict Comprehension
+
+> 🛠️ **Solve locally:** [practice_local.py → Q42](./practice_local.py)
+
 
 **Problem:**
 `names = ["Alice", "Bob", "Charlie"]`, `scores = [92, 78, 85]`. Create a dict `{name: score}` using a dict comprehension and `zip`.
@@ -1533,7 +1743,12 @@ print(result)
 
 ---
 
+<a id="q43"></a>
+
 ### Q43 · None — Identity Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q43](./practice_local.py)
+
 
 **Problem:**
 `result = None`. Check if it is `None` using both `==` and `is`. Which is the correct way? Print the result of both checks.
@@ -1567,7 +1782,12 @@ print(result is None)   # True  ← prefer this
 
 ---
 
+<a id="q44"></a>
+
 ### Q44 · None — Optional Value
+
+> 🛠️ **Solve locally:** [practice_local.py → Q44](./practice_local.py)
+
 
 **Problem:**
 `middle_name = None`. Print `"No middle name"` if it is `None`, otherwise print the name.
@@ -1603,7 +1823,12 @@ else:
 
 ---
 
+<a id="q45"></a>
+
 ### Q45 · Type Conversion — int and float
+
+> 🛠️ **Solve locally:** [practice_local.py → Q45](./practice_local.py)
+
 
 **Problem:**
 `price_str = "199.99"`. Convert it to a float, add 18% GST, and print the total rounded to 2 decimal places.
@@ -1638,7 +1863,12 @@ print(round(total, 2))   # 235.99
 
 ---
 
+<a id="q46"></a>
+
 ### Q46 · Type Conversion — The input() Trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q46](./practice_local.py)
+
 
 **Problem:**
 Ask for a number using `input()` and try to add 10 to it. Show the error first, then fix it.
@@ -1677,7 +1907,12 @@ print(number + 10)
 
 ---
 
+<a id="q47"></a>
+
 ### Q47 · Type Conversion — bool conversion
+
+> 🛠️ **Solve locally:** [practice_local.py → Q47](./practice_local.py)
+
 
 **Problem:**
 Convert each value in the list to `bool` and print the result. Predict first, then verify by running it.

@@ -26,6 +26,8 @@
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
+
+
 **Problem:** Write a `TemperatureConverter` class with a static method `celsius_to_fahrenheit(c)`. Write a `unittest.TestCase` subclass with three test methods: freezing point (0°C = 32°F), boiling point (100°C = 212°F), and body temperature (37°C ≈ 98.6°F).
 
 <details>
@@ -71,6 +73,8 @@ if __name__ == "__main__":
 ### Q2 🟡 · setUp/tearDown — File-Based Test
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write a `TestCase` with `setUp` that creates a temp file and writes "line one\nline two\n" to it, and `tearDown` that deletes the file. Write two test methods: one checks that `count_lines(path)` returns 2, another checks that appending a line makes it 3.
 
@@ -122,6 +126,8 @@ class TestFileOperations(unittest.TestCase):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
+
+
 **Problem:** Write `validate_grade(grade)` that raises `ValueError` if grade is outside [0, 100]. Write a `TestCase` with four tests: valid grade (85) passes, grade -1 raises `ValueError`, grade 101 raises `ValueError`, and the error message for -1 contains "out of range" (use `assertRaisesRegex`).
 
 <details>
@@ -169,6 +175,8 @@ class TestValidateGrade(unittest.TestCase):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
+
+
 **Problem:** Write a `TestCase` that demonstrates `assertIn`, `assertNotIn`, `assertIsNone`, `assertIsNotNone`, `assertAlmostEqual`, and `assertIsInstance` using simple data structures and computations.
 
 <details>
@@ -214,6 +222,8 @@ class TestAssertions(unittest.TestCase):
 ### Q5 🟡 · setUpClass — Shared Expensive Resource
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Simulate an "expensive" database setup (a dict-based FakeDatabase that takes time to populate). Write a `TestCase` that uses `setUpClass` to create it once and `tearDownClass` to destroy it. Write three tests that read from the shared database without modifying it.
 
@@ -276,6 +286,8 @@ class TestSharedDatabase(unittest.TestCase):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
+
+
 **Problem:** Write a `TestCase` that demonstrates: `@unittest.skip("reason")`, `@unittest.skipIf(condition, reason)`, `@unittest.skipUnless(condition, reason)`, and `@unittest.expectedFailure`. Include a comment explaining when each is appropriate.
 
 <details>
@@ -329,6 +341,8 @@ class TestSkippingExamples(unittest.TestCase):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
+
+
 **Problem:** Write a `TestCase` that tests `celsius_to_fahrenheit` with 5 cases using `subTest`. Show that if one case fails, the others still run. Compare what happens without `subTest`.
 
 <details>
@@ -374,6 +388,8 @@ class TestWithSubtests(unittest.TestCase):
 ### Q8 🟠 · test suite — Run a Specific Subset of Tests
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write two `TestCase` classes (`TestMath` and `TestString`). Write a `suite()` function that builds a `TestSuite` with: all tests from `TestMath`, and only one specific test from `TestString`. Run it programmatically with `TextTestRunner`.
 
@@ -427,6 +443,8 @@ if __name__ == "__main__":
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
+
+
 **Problem:** Given this `unittest.TestCase` class, rewrite it as pytest-style tests (no class required). Preserve all test logic; replace `assertEqual` with `assert`, `assertRaises` with `pytest.raises`, and `setUp` with a pytest fixture.
 
 ```python
@@ -477,6 +495,8 @@ def test_pop_empty_raises(stack):
 ### Q10 🟠 · Capstone — Full TestCase for a Stack Data Structure
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Implement a `Stack` class with `push(item)`, `pop()`, `peek()`, `is_empty()`, `is_full()`, `size()`, and a bounded `capacity`. Write a complete `TestCase` that covers: empty stack behavior, push/pop/peek operations, LIFO order, overflow (`OverflowError`), underflow (`IndexError`), and capacity edge cases. Use `setUp` for fresh state per test.
 

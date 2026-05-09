@@ -30,6 +30,9 @@
 <a id="q1"></a>
 ### Q1 · DSU Structure — Initialize the Parent Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 🟢 Easy
 
 **Problem:** You have `n` nodes labeled `0` to `n-1`. Write the `__init__` method for a DSU class that gives every node its own component at startup. What does `parent` look like for `n=5`? Why is `parent = [0] * n` wrong?
@@ -65,6 +68,9 @@ For `n=5`: `parent = [0, 1, 2, 3, 4]` — each node is its own root.
 
 <a id="q2"></a>
 ### Q2 · Find Operation — Naive Root Traversal
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 🟢 Easy
 
@@ -102,6 +108,9 @@ For a chain of `n` nodes, `find` takes O(n) steps — as slow as a linked list.
 
 <a id="q3"></a>
 ### Q3 · Union Operation — Basic Merge
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 🟢 Easy
 
@@ -146,6 +155,9 @@ def union_basic(parent, a, b):
 
 <a id="q4"></a>
 ### Q4 · Connected Components — Count Distinct Roots
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 🟢 Easy
 
@@ -211,6 +223,9 @@ Node 5 is isolated — it was never mentioned in any edge, so it stays as its ow
 <a id="q5"></a>
 ### Q5 · Path Compression — Flatten on Find
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 🟢 Easy
 
 **Problem:** Given the chain `parent = [0, 0, 1, 2, 3]` (representing 4→3→2→1→0), call `find(4)` with path compression. What does `parent` look like after the call? Why does this make future finds faster?
@@ -252,6 +267,9 @@ print(parent)  # [0, 0, 0, 0, 0] — all nodes now point directly to root
 
 <a id="q6"></a>
 ### Q6 · Union by Rank — Attach Smaller Under Larger
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 🟢 Easy
 
@@ -304,6 +322,9 @@ def union_by_rank(parent, rank, x, y):
 <a id="q7"></a>
 ### Q7 · Cycle Detection — Undirected Graph
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Given `n=4` and edges `[[0,1],[1,2],[2,0],[0,3]]`, detect whether a cycle exists using DSU. Return the first edge that creates the cycle. Why does this approach work for undirected graphs but NOT for directed graphs?
@@ -345,6 +366,9 @@ print(has_cycle_and_find_it(4, [[0,1],[1,2],[2,0],[0,3]]))
 
 <a id="q8"></a>
 ### Q8 · Redundant Connection — Last Cycle-Creating Edge
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 🟡 Medium
 
@@ -393,6 +417,9 @@ print(find_redundant_connection([[1,2],[2,3],[3,4],[1,4],[1,5]]))  # [1, 4]
 
 <a id="q9"></a>
 ### Q9 · Component Size Tracking — Union by Size
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 🟡 Medium
 
@@ -454,6 +481,9 @@ print(dsu.component_size(6))  # 1 — node 6 still isolated
 
 <a id="q10"></a>
 ### Q10 · Number of Islands — 2D Grid with DSU
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 🟡 Medium
 
@@ -522,6 +552,9 @@ print(num_islands(grid))  # 3
 <a id="q11"></a>
 ### Q11 · DSU vs BFS/DFS — When to Choose Which
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** For each scenario below, state whether you should use DSU or BFS/DFS and why:
@@ -577,6 +610,9 @@ DSU's strengths: online edge additions, many connectivity queries, undirected gr
 
 <a id="q12"></a>
 ### Q12 · Kruskal's MST — Greedy Edge Selection
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 🟡 Medium
 
@@ -645,6 +681,9 @@ print(mst)  # [(1,0,1), (2,1,3), (3,1,2)]
 
 <a id="q13"></a>
 ### Q13 · Accounts Merge — Email Grouping
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 🟡 Medium
 
@@ -717,6 +756,9 @@ for acc in result:
 <a id="q14"></a>
 ### Q14 · Similar String Groups — Pairwise Similarity
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Two strings are "similar" if they differ in exactly 0 or 2 positions (a valid swap). Given `strs = ["tars","rats","arts","star"]`, find the number of groups of mutually similar strings.
@@ -767,6 +809,9 @@ print(num_similar_groups(["tars","rats","arts","star"]))  # 2
 
 <a id="q15"></a>
 ### Q15 · Dynamic Grid — Islands II (Online Additions)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 🟠 Hard
 
@@ -855,6 +900,9 @@ print(num_islands_2(3, 3, [[0,0],[0,1],[1,2],[2,1],[1,1]]))
 <a id="q16"></a>
 ### Q16 · Bipartite Check — Virtual Node Trick
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 🟠 Hard
 
 **Problem:** Determine if a graph is bipartite using DSU (not BFS 2-coloring). A graph is bipartite if you can split its nodes into two groups where every edge goes between groups.
@@ -910,6 +958,9 @@ print(is_bipartite([[1,2,3],[0,2],[0,1],[0]]))  # False
 
 <a id="q17"></a>
 ### Q17 · Weighted DSU — Evaluate Division
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1001,6 +1052,9 @@ print(calc_equation([["a","b"],["b","c"]], [2.0, 3.0],
 <a id="q18"></a>
 ### Q18 · Largest Component — Track Max Size Live
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 🟠 Hard
 
 **Problem:** Given `n` nodes and edges added one at a time, return the size of the largest component after each edge is added. You must answer in O(α(n)) per edge addition — not by scanning all components.
@@ -1054,6 +1108,9 @@ print(largest_component_online(5, [(0,1),(1,2),(3,4),(2,3)]))
 
 <a id="q19"></a>
 ### Q19 · Min Cost to Connect All Points — Manhattan MST
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1119,6 +1176,9 @@ The MST connects `[0,0]↔[7,0]` (dist 7), `[7,0]↔[5,2]` (dist 4), `[5,2]↔[2
 
 <a id="q20"></a>
 ### Q20 · DSU Correctness — Spot the Five Bugs
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 🟠 Hard
 

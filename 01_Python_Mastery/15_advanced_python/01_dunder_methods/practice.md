@@ -2,24 +2,28 @@
 
 | Q | Difficulty | Topic |
 |---|-----------|-------|
-| [Q1](#q1--str-and-repr) | 🟢 | `__str__` and `__repr__` |
-| [Q2](#q2--len-and-bool) | 🟢 | `__len__` and `__bool__` |
-| [Q3](#q3--eq-and-hash) | 🟡 | `__eq__` and `__hash__` |
-| [Q4](#q4--comparison-with-total_ordering) | 🟡 | `__lt__`, `__le__`, `@total_ordering` |
-| [Q5](#q5--add-and-radd) | 🟡 | `__add__` and `__radd__` |
-| [Q6](#q6--getitem-and-setitem) | 🟡 | `__getitem__` and `__setitem__` |
-| [Q7](#q7--iter-and-next) | 🟡 | `__iter__` and `__next__` |
-| [Q8](#q8--contains) | 🟡 | `__contains__` |
-| [Q9](#q9--context-manager) | 🟡 | `__enter__` and `__exit__` |
-| [Q10](#q10--mul-and-rmul) | 🟠 | `__mul__` and `__rmul__` |
-| [Q11](#q11--callable-counter) | 🟠 | `__call__` |
-| [Q12](#q12--matrix-class) | 🟠 | Operator overloading capstone |
+| [Q1](#q1) | 🟢 | `__str__` and `__repr__` |
+| [Q2](#q2) | 🟢 | `__len__` and `__bool__` |
+| [Q3](#q3) | 🟡 | `__eq__` and `__hash__` |
+| [Q4](#q4) | 🟡 | `__lt__`, `__le__`, `@total_ordering` |
+| [Q5](#q5) | 🟡 | `__add__` and `__radd__` |
+| [Q6](#q6) | 🟡 | `__getitem__` and `__setitem__` |
+| [Q7](#q7) | 🟡 | `__iter__` and `__next__` |
+| [Q8](#q8) | 🟡 | `__contains__` |
+| [Q9](#q9) | 🟡 | `__enter__` and `__exit__` |
+| [Q10](#q10) | 🟠 | `__mul__` and `__rmul__` |
+| [Q11](#q11) | 🟠 | `__call__` |
+| [Q12](#q12) | 🟠 | Operator overloading capstone |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · representation — implement `__str__` and `__repr__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Create a `Book` class with `title`, `author`, and `year`. Implement `__repr__` so that `eval(repr(b))` would recreate it, and `__str__` for a human-readable display like `"The Hobbit by J.R.R. Tolkien (1937)"`.
 
@@ -53,9 +57,13 @@ print(b)        # The Hobbit by J.R.R. Tolkien (1937)
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · sizing — implement `__len__` and `__bool__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Create a `Playlist` class that wraps a list of song titles. Implement `__len__` and `__bool__`. A playlist with no songs should be falsy.
 
@@ -99,9 +107,13 @@ else:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · equality — `__eq__` and `__hash__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Create a `Point` class with `x` and `y`. Implement `__eq__` (two Points are equal if their coordinates are equal) and `__hash__` (so Points can be used in sets and as dict keys). Demonstrate both work correctly.
 
@@ -149,9 +161,13 @@ print(labels[Point(1, 2)])  # "origin area"  (same hash + equal)
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · ordering — `__lt__`, `__le__` with `@total_ordering`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Create a `Version` class representing a semantic version (`major.minor.patch`). Use `@total_ordering` to provide full comparison support from just `__eq__` and `__lt__`. Demonstrate that `sorted()` works.
 
@@ -198,9 +214,13 @@ print(sorted([v1, v2, v3]))   # [0.9.5, 1.0.0, 1.1.0]
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · arithmetic — `__add__` and `__radd__` for a Vector
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Create a `Vector2D` class. Implement `__add__` (Vector + Vector and Vector + scalar) and `__radd__` (so that `5 + v` also works). Test all three cases.
 
@@ -243,9 +263,13 @@ print(10 + v1)   # Vector2D(11, 12)  — uses __radd__
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · subscript — `__getitem__` and `__setitem__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Create a `Grid` class representing a 2D grid. Support `grid[row, col]` for reading and `grid[row, col] = value` for writing. Initialize all cells to `0`.
 
@@ -290,9 +314,13 @@ print(g[1, 1])   # 5
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · iteration — `__iter__` and `__next__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Create a `FibSequence` class that generates Fibonacci numbers up to a limit. Make it iterable by implementing `__iter__` and `__next__`. It should be re-usable (looping twice should yield the same results).
 
@@ -338,9 +366,13 @@ print(list(fibs))   # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]  — works again!
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · membership — `__contains__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Create an `IPRange` class representing a range of IP addresses (given as a start and end integer). Implement `__contains__` so that `"192.168.1.5" in ip_range` works, converting the string to an integer first.
 
@@ -381,9 +413,13 @@ print("192.168.2.1"   in lan)   # False
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · context manager — `__enter__` and `__exit__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Build a `ManagedFile` context manager class from scratch (without `contextlib`). It should open a file in `__enter__`, return the file object, and close it in `__exit__`. It should also suppress `FileNotFoundError` and print a warning instead.
 
@@ -428,9 +464,13 @@ print("Still running")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · scalar multiplication — `__mul__` and `__rmul__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Extend `Vector2D` with `__mul__` (scalar multiplication: `v * 3`) and `__rmul__` (so `3 * v` also works), plus `__abs__` for magnitude. Verify `3 * v == v * 3`.
 
@@ -480,9 +520,13 @@ print(abs(v))   # 5.0
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · callable — make a class callable (callable counter)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Create a `CallCounter` class that wraps any function. When called, it increments an internal counter and delegates to the wrapped function. It should have a `.count` attribute and a `.reset()` method.
 
@@ -532,9 +576,13 @@ print(callable(add))   # True — __call__ is defined on type(add)
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · capstone — Matrix class with `+`, `*`, `==`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Build a `Matrix` class supporting element-wise `+`, scalar `*` (from both sides), element-wise `==`, and `__repr__`. Raise `ValueError` for shape mismatches in `+`.
 

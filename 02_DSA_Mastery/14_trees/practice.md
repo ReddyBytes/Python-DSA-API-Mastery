@@ -47,6 +47,9 @@
 <a id="q1"></a>
 ### Q1 — Tree Node Definition
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 Write the Python `TreeNode` class used for binary trees. Then manually build this tree:
 
 ```
@@ -88,6 +91,9 @@ root.right = TreeNode(3)
 
 <a id="q2"></a>
 ### Q2 — Inorder Traversal Recursive
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Implement recursive inorder traversal. Return a list of values.
 
@@ -141,6 +147,9 @@ def inorder_v2(root):
 <a id="q3"></a>
 ### Q3 — Preorder Traversal Recursive
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 Implement recursive preorder traversal. Return a list of values.
 
 ```
@@ -191,6 +200,9 @@ def preorder_v2(root):
 
 <a id="q4"></a>
 ### Q4 — Postorder Traversal Recursive
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Implement recursive postorder traversal. Return a list of values.
 
@@ -243,6 +255,9 @@ def postorder_v2(root):
 <a id="q5"></a>
 ### Q5 — Inorder Traversal Iterative
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Implement inorder traversal without recursion. Use an explicit stack.
 
 <details>
@@ -279,6 +294,9 @@ def inorder_iterative(root):
 
 <a id="q6"></a>
 ### Q6 — Preorder Traversal Iterative
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Implement preorder traversal without recursion.
 
@@ -318,6 +336,9 @@ def preorder_iterative(root):
 <a id="q7"></a>
 ### Q7 — Postorder Traversal Iterative
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 Implement postorder traversal without recursion.
 
 <details>
@@ -355,6 +376,9 @@ def postorder_iterative(root):
 
 <a id="q8"></a>
 ### Q8 — Level-Order Traversal (BFS)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Implement level-order traversal. Return a list of lists — one sublist per level.
 
@@ -415,6 +439,9 @@ def level_order(root):
 <a id="q9"></a>
 ### Q9 — Tree Height
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 Implement `max_depth(root)` — return the number of nodes on the longest root-to-leaf path (height in nodes, not edges).
 
 ```
@@ -455,6 +482,9 @@ def max_depth(root):
 <a id="q10"></a>
 ### Q10 — Count Nodes
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 Implement `count_nodes(root)` — return the total number of nodes in the tree.
 
 <details>
@@ -484,6 +514,9 @@ def count_nodes(root):
 
 <a id="q11"></a>
 ### Q11 — Check Symmetric Tree
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 A tree is symmetric if it is a mirror of itself around the root (left subtree is a mirror of the right subtree).
 
@@ -530,6 +563,9 @@ def is_symmetric(root):
 <a id="q12"></a>
 ### Q12 — Check Balanced Tree
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 A height-balanced binary tree is one where the height difference between left and right subtrees is at most 1 at every node.
 
 <details>
@@ -569,6 +605,9 @@ def is_balanced(root):
 
 <a id="q13"></a>
 ### Q13 — Lowest Common Ancestor
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Given a binary tree and two nodes `p` and `q`, find their lowest common ancestor (LCA). The LCA is the deepest node that has both p and q as descendants (a node is considered a descendant of itself).
 
@@ -618,6 +657,9 @@ def lowest_common_ancestor(root, p, q):
 <a id="q14"></a>
 ### Q14 — Path Sum (Root to Leaf)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 Given a root and a target sum, return `True` if any root-to-leaf path has node values that sum to `target`.
 
 ```
@@ -664,6 +706,9 @@ def has_path_sum(root, target):
 <a id="q15"></a>
 ### Q15 — All Root-to-Leaf Paths With Sum
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 Return all root-to-leaf paths whose node values sum to `target`.
 
 <details>
@@ -702,6 +747,9 @@ def path_sum_all(root, target):
 
 <a id="q16"></a>
 ### Q16 — DFS vs BFS on Trees: When to Use Each
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Explain when you would choose DFS over BFS for a tree problem, and vice versa. Give a concrete example for each.
 
@@ -742,6 +790,9 @@ Think about what information each traversal naturally produces. DFS digs deep on
 <a id="q17"></a>
 ### Q17 — When Does Inorder Give Sorted Output?
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 True or False: inorder traversal of ANY binary tree gives a sorted result.
 
 If False, correct the statement and explain why the misconception is dangerous in interviews.
@@ -780,6 +831,9 @@ Inorder: [5, 3, 1] — NOT sorted.
 
 <a id="q18"></a>
 ### Q18 — Right Side View
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Given a binary tree, return the values of nodes you can see from the right side, ordered top to bottom.
 
@@ -834,6 +888,9 @@ def right_side_view(root):
 
 <a id="q19"></a>
 ### Q19 — Minimum Depth
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Return the minimum depth of the tree — the number of nodes on the shortest path from root to a leaf.
 
@@ -897,6 +954,9 @@ def min_depth_bfs(root):
 <a id="q20"></a>
 ### Q20 — Max Path Sum (Any Node to Any Node)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 Find the maximum path sum where the path can start and end at any node. Node values may be negative.
 
 ```
@@ -947,6 +1007,9 @@ def max_path_sum(root):
 <a id="q21"></a>
 ### Q21 — Serialize a Binary Tree
 
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 Convert a binary tree into a string that uniquely encodes its structure. Null nodes must be represented.
 
 <details>
@@ -990,6 +1053,9 @@ def serialize(root):
 <a id="q22"></a>
 ### Q22 — Deserialize a Binary Tree
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 Given the string produced by Q21's serialize function, reconstruct the exact original tree.
 
 <details>
@@ -1028,6 +1094,9 @@ def deserialize(data):
 
 <a id="q23"></a>
 ### Q23 — Build Tree From Preorder + Inorder
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Given preorder and inorder traversal arrays, reconstruct the binary tree.
 
@@ -1082,6 +1151,9 @@ def build_tree_pre_in(preorder, inorder):
 <a id="q24"></a>
 ### Q24 — Build Tree From Inorder + Postorder
 
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 Given inorder and postorder traversal arrays, reconstruct the binary tree.
 
 ```
@@ -1129,6 +1201,9 @@ def build_tree_in_post(inorder, postorder):
 
 <a id="q25"></a>
 ### Q25 — Which Traversal Pairs Can Uniquely Reconstruct a Tree?
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Three traversals exist: preorder, inorder, postorder. Which pairs can uniquely reconstruct a binary tree? Which cannot?
 

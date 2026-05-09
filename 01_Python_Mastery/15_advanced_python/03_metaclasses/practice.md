@@ -2,22 +2,44 @@
 
 | Q | Difficulty | Topic |
 |---|-----------|-------|
-| [Q1](#q1--dynamic-class-creation) | 🟢 | `type()` to create a class dynamically |
-| [Q2](#q2--auto-uppercase-methods) | 🟡 | Metaclass auto-converts method names |
-| [Q3](#q3--new-vs-init-on-metaclass) | 🟡 | `__new__` vs `__init__` on metaclass |
-| [Q4](#q4--singleton-via-metaclass) | 🟡 | Singleton metaclass |
-| [Q5](#q5--auto-registration) | 🟡 | Auto-registration metaclass |
-| [Q6](#q6--prepare) | 🟡 | `__prepare__` — ordered namespace |
-| [Q7](#q7--enforce-docstrings) | 🟠 | Metaclass enforcing docstrings |
-| [Q8](#q8--abcmeta) | 🟠 | ABCMeta and `@abstractmethod` |
-| [Q9](#q9--metaclass-vs-init_subclass) | 🟠 | Metaclass vs `__init_subclass__` |
-| [Q10](#q10--validate-class-attributes) | 🟠 | Metaclass validates class-level attributes |
+| [Q1](#q1) | 🟢 | `type()` to create a class dynamically |
+| [Q2](#q2) | 🟡 | Metaclass auto-converts method names |
+| [Q3](#q3) | 🟡 | `__new__` vs `__init__` on metaclass |
+| [Q4](#q4) | 🟡 | Singleton metaclass |
+| [Q5](#q5) | 🟡 | Auto-registration metaclass |
+| [Q6](#q6) | 🟡 | `__prepare__` — ordered namespace |
+| [Q7](#q7) | 🟠 | Metaclass enforcing docstrings |
+| [Q8](#q8) | 🟠 | ABCMeta and `@abstractmethod` |
+| [Q9](#q9) | 🟠 | Metaclass vs `__init_subclass__` |
+| [Q10](#q10) | 🟠 | Metaclass validates class-level attributes |
 
 ---
+
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | dynamic class — call `type()` to create a class dynamically | 🟢 |
+| [Q2](#q2) | name transformation — metaclass that auto-converts all method names to uppercase | 🟡 |
+| [Q3](#q3) | creation flow — metaclass `__new__` vs `__init__` | 🟡 |
+| [Q4](#q4) | singleton — singleton via metaclass | 🟡 |
+| [Q5](#q5) | registration — auto-registration metaclass tracks all subclasses | 🟡 |
+| [Q6](#q6) | namespace — `__prepare__` return an OrderedDict to preserve method order | 🟡 |
+| [Q7](#q7) | enforcement — metaclass that enforces all methods are documented | 🟠 |
+| [Q8](#q8) | ABCMeta — abstract base class with `@abstractmethod` | 🟠 |
+| [Q9](#q9) | comparison — metaclass vs `__init_subclass__` | 🟠 |
+| [Q10](#q10) | validation — metaclass that validates class-level attributes at definition time | 🟠 |
+
+---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · dynamic class — call `type()` to create a class dynamically
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Use `type()` (three-argument form) to create a `Rectangle` class dynamically, with `width` and `height` attributes, an `area()` method, and a `__repr__`. Do not write a class statement.
 
@@ -54,9 +76,13 @@ print(type(Rectangle))  # <class 'type'>
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · name transformation — metaclass that auto-converts all method names to uppercase
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write a metaclass `UpperMethodMeta` that converts all method names to uppercase. A class using it where you define `def get_user(self)` should have that method accessible as `GET_USER`.
 
@@ -96,9 +122,13 @@ print(client.LIST_USERS())   # []
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · creation flow — metaclass `__new__` vs `__init__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a metaclass that has both `__new__` and `__init__`. Add a `_created` timestamp in `__new__` (to the namespace) and print a log message in `__init__`. Show which runs when and demonstrate the difference.
 
@@ -141,9 +171,13 @@ print(f"MyService._created_by = {MyService._created_by}")
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · singleton — singleton via metaclass
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write a `SingletonMeta` metaclass that ensures each class using it can only have one instance. Calling `MyClass()` a second time should return the same instance, not create a new one.
 
@@ -189,9 +223,13 @@ print(db1 is cache1)    # False — different classes, different singletons
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · registration — auto-registration metaclass tracks all subclasses
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a `RegistryMeta` that automatically registers every concrete subclass in a class-level dict `_registry`. The root class itself should NOT be registered. Provide a `dispatch(name, *args)` classmethod that instantiates by name.
 
@@ -241,9 +279,13 @@ print(Serializer.dispatch("CSVSerializer",  [1, 2, 3]))
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · namespace — `__prepare__` return an OrderedDict to preserve method order
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write a metaclass with `__prepare__` that returns an `OrderedDict`. After class creation, store the list of method names (in definition order) as `cls._method_order`. Demonstrate that order is preserved.
 
@@ -286,9 +328,13 @@ print(MyAPI._method_order)
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟠 · enforcement — metaclass that enforces all methods are documented
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write a `DocumentedMeta` metaclass that raises `TypeError` at class definition time if any public method lacks a docstring. Allow opting out with `__no_docs_check__ = True` on the class.
 
@@ -335,9 +381,13 @@ print("GoodService passed validation!")
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟠 · ABCMeta — abstract base class with `@abstractmethod`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Create an abstract `StorageBackend` class using `ABC` with abstract methods `save(key, value)`, `load(key)`, and `delete(key)`. Create a concrete `MemoryBackend`. Show that `StorageBackend()` raises `TypeError`.
 
@@ -410,9 +460,13 @@ print(store.exists("y"))    # False
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟠 · comparison — metaclass vs `__init_subclass__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Implement the same plugin registry pattern twice: once using a metaclass and once using `__init_subclass__`. Both should auto-register subclasses by name. Compare the two approaches.
 
@@ -470,9 +524,13 @@ print(PluginBase2._registry)   # {'PluginB': ...}
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · validation — metaclass that validates class-level attributes at definition time
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write a `ValidatedModelMeta` metaclass that requires every subclass to declare `__tablename__` (a non-empty string) and `__fields__` (a non-empty list). Raise `TypeError` at class definition if they're missing or wrong type.
 

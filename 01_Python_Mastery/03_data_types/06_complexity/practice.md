@@ -5,7 +5,30 @@ problem, attempt it, then open the hint or answer.
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | pick-structure — Pick the Right Structure for O(1) Membership | 🟢 |
+| [Q2](#q2) | hash-vs-scan — Why `in` is O(n) for list but O(1) for set | 🟡 |
+| [Q3](#q3) | find-the-slow-op — Predict Which Operation is O(n) | 🟡 |
+| [Q4](#q4) | swap-to-set — Fix Slow Code by Swapping list → set | 🟡 |
+| [Q5](#q5) | string-concat-loop — Why `+=` in a Loop is O(n²) and How to Fix It | 🟡 |
+| [Q6](#q6) | key-in-dict — `key in dict` vs `key in dict.keys()` | 🟡 |
+| [Q7](#q7) | benchmark-timeit — Benchmark Set vs List Membership | 🟡 |
+| [Q8](#q8) | amortized-append — When is list.append Actually O(n)? | 🟡 |
+| [Q9](#q9) | frequency-counter — Pick the Right Structure for a Frequency Counter | 🟢 |
+| [Q10](#q10) | o-n-squared-to-o-n — Rewrite Duplicate Detection from O(n²) to O(n) | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · pick-structure — Pick the Right Structure for O(1) Membership 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 You receive a list of 2 million banned user IDs. Your API must check whether an incoming request ID
 is banned on every single request. Which Python data structure gives you O(1) lookup? Show the
@@ -41,7 +64,12 @@ the query and jumps directly to the right bucket — no scanning.
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · hash-vs-scan — Why `in` is O(n) for list but O(1) for set 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Explain, in plain terms, why `x in my_list` is O(n) while `x in my_set` is O(1). No code
 required — a clear written explanation or a diagram is the goal.
@@ -77,7 +105,12 @@ redeem that investment — O(1) lookup in exchange for extra memory.
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · find-the-slow-op — Predict Which Operation is O(n) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Each snippet below contains one operation. Identify which one is O(n) and explain why. All others
 are O(1).
@@ -124,7 +157,12 @@ elements after the insertion point — cost grows linearly with list length.
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · swap-to-set — Fix Slow Code by Swapping list → set 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 The function below checks which items in `cart` are out-of-stock. It is slow when `out_of_stock`
 is large. Rewrite it to run in O(n) instead of O(n²).
@@ -160,7 +198,12 @@ membership check against the same collection.
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · string-concat-loop — Why `+=` in a Loop is O(n²) and How to Fix It 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Explain why this code is O(n²) in time complexity, then rewrite it correctly.
 
@@ -203,7 +246,12 @@ single buffer of exactly that size, and fills it in one pass. One allocation, on
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · key-in-dict — `key in dict` vs `key in dict.keys()` 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Which is faster: `"age" in my_dict` or `"age" in my_dict.keys()`? Why? Does it matter in practice?
 
@@ -242,7 +290,12 @@ because they share the hash table. Values views are O(n) because values are not 
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · benchmark-timeit — Benchmark Set vs List Membership 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a script using `timeit` that measures the difference in membership-check speed between a list
 and a set for n = 100, 10_000, and 1_000_000 elements. The target element should be one that does
@@ -283,7 +336,12 @@ linearly. The gap widens as n grows — this is O(1) vs O(n) made visible.
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · amortized-append — When is list.append Actually O(n)? 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 `list.append` is described as O(1) average. Explain the edge case where a single `append` call
 costs O(n), why this still gives O(1) amortized, and what "amortized" means in plain terms.
@@ -330,7 +388,12 @@ even if individual operations occasionally cost more.
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · frequency-counter — Pick the Right Structure for a Frequency Counter 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 You need to count how many times each word appears in a document (a list of strings). What is the
 cleanest and most Pythonic solution? Write it.
@@ -372,7 +435,12 @@ complexity cost compared to a plain dict.
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · o-n-squared-to-o-n — Rewrite Duplicate Detection from O(n²) to O(n) 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 The function below detects duplicate values in a list. It runs in O(n²). Rewrite it in O(n).
 

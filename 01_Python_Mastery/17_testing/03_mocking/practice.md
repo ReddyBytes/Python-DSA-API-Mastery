@@ -28,6 +28,8 @@
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
+
+
 **Problem:** Create a `Mock` object. Call `m.connect("localhost", 5432)` twice and `m.query("SELECT 1")` once. Assert: `connect` was called, `connect` was called with `("localhost", 5432)`, `connect.call_count == 2`, `query` was called with `"SELECT 1"`, and `close` was never called.
 
 <details>
@@ -63,6 +65,8 @@ m.close.assert_not_called()                        # never called
 ### Q2 🟡 · MagicMock vs Mock — Dunder Methods
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Demonstrate the difference: show that `len(Mock())` raises `TypeError` but `len(MagicMock())` returns `0`. Then configure a `MagicMock` so that `len(m) == 5`, `list(m) == [1, 2, 3]`, and using it as a context manager (`with m:`) calls `__enter__` and `__exit__`.
 
@@ -114,6 +118,8 @@ m.__exit__.assert_called_once()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
+
+
 **Problem:** Given a `get_weather(city)` function in `mymodule` that calls `requests.get(url)`, write a test using `@patch("mymodule.requests.get")` that: (1) sets up the mock response, (2) calls `get_weather("London")`, (3) asserts the correct URL was called, (4) asserts the return value is the mocked data.
 
 <details>
@@ -162,6 +168,8 @@ def test_get_weather(mock_get):
 ### Q4 🟡 · return_value — Control What a Mock Returns
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write a `NotificationService` with `notify_user(user_id, message)` that calls `repo.find_by_id(user_id)` and `emailer.send(to=..., subject=..., body=...)`. Write a test using `Mock` objects for both dependencies where `find_by_id` returns a user dict and `send` returns `True`. Assert the return value and that `send` was called with the right arguments.
 
@@ -223,6 +231,8 @@ def test_notify_user():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
+
+
 **Problem:** Write a test for `notify_user` where `repo.find_by_id` raises a `DatabaseError` (custom exception). Assert that `notify_user` propagates the exception and that `emailer.send` is never called.
 
 <details>
@@ -264,6 +274,8 @@ def test_notify_user_propagates_db_error():
 ### Q6 🟡 · side_effect as list — Return Different Values Each Call
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write `send_welcome_emails(repo, emailer, user_ids)` that loops over `user_ids`, calls `repo.find_by_id(uid)` for each, and emails those found. Write a test where `find_by_id` returns `user_data` for id 1, `None` for id 2, and `user_data` for id 3 (using `side_effect` as a list). Assert that only 2 emails were sent.
 
@@ -315,6 +327,8 @@ def test_welcome_emails_skips_missing_users():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
+
+
 **Problem:** Given a `Counter` class with `increment()` and `reset()` methods, write a test that uses `patch.object` to patch the `reset` method on an instance, verifies it was called, then verifies the real method works after the context exits.
 
 <details>
@@ -363,6 +377,8 @@ def test_patch_object():
 ### Q8 🟡 · assert_called_once_with — Verify Exact Arguments
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Build a comprehensive test for `notify_user` that verifies: `find_by_id` was called once with `user_id=1`, `send` was called once with exactly `to="alice@example.com"`, `subject="Notification"`, `body="Order ready"`. Show the difference between `assert_called_with` and `assert_called_once_with`.
 
@@ -420,6 +436,8 @@ def test_exact_arguments():
 ### Q9 🟡 · spec — Mock That Respects the Real Interface
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Define a `UserRepository` class with methods `find_by_id(user_id)`, `save(user)`, `count()`. Write a test that: (1) creates `Mock(spec=UserRepository)`, (2) shows a valid method works, (3) shows that calling a non-existent method raises `AttributeError`, (4) creates `create_autospec(UserRepository, instance=True)` and shows it raises `TypeError` on wrong argument count.
 
@@ -480,6 +498,8 @@ def test_autospec_checks_signatures():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
+
+
 **Problem:** Write `get_database_config()` that reads `os.environ["DB_HOST"]`, `os.environ["DB_PORT"]`, `os.environ["DB_NAME"]` and returns a dict. Write two tests: one using `patch.dict` to set all three env vars and verify the config, another verifying that after the test the environment is restored to its original state.
 
 <details>
@@ -533,6 +553,8 @@ def test_env_restored_after_test():
 ### Q11 🟠 · patch the right target — Where to Patch
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Demonstrate the "patch where it's used" rule with two examples: (1) `mymodule.py` does `import requests` — show the correct and wrong patch target, (2) `mymodule.py` does `from os.path import exists` — show the correct and wrong patch target. Explain why each is right or wrong.
 
@@ -595,6 +617,8 @@ def test_check_file_right(mock_exists):
 ### Q12 🟠 · Capstone — Test a Payment Service with Mocked External API
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Implement `PaymentService` with `charge(user_id, amount)` that: (1) fetches the user from `UserRepository.find_by_id(user_id)`, (2) calls `PaymentGateway.charge(card_token, amount)`, (3) returns `{"status": "ok", "transaction_id": tx_id}` on success, (4) returns `{"status": "failed"}` if user not found, (5) propagates `PaymentError` from the gateway. Write a complete test suite using `Mock(spec=...)` for both dependencies covering all 3 scenarios.
 

@@ -13,43 +13,47 @@
 
 | Q# | Chapter | Concept | Difficulty |
 |---|---|---|---|
-| [Q1](#q1--ch1--module-vs-package) | Ch1 | Module vs Package | 🟢 |
-| [Q2](#q2--ch2--import-machinery) | Ch2 | Import machinery | 🟢 |
-| [Q3](#q3--ch2--sysmodules) | Ch2 | sys.modules | 🟢 |
-| [Q4](#q4--ch3--import-style-1) | Ch3 | Import style 1 | 🟢 |
-| [Q5](#q5--ch3--import-star) | Ch3 | Import star | 🟢 |
-| [Q6](#q6--ch3--all-5-styles) | Ch3 | All 5 styles | 🟢 |
-| [Q7](#q7--ch4--package-structure) | Ch4 | Package structure | 🟡 |
-| [Q8](#q8--ch5--__init__py-job-1) | Ch5 | `__init__.py` job 1 | 🟡 |
-| [Q9](#q9--ch5--__init__py-job-2) | Ch5 | `__init__.py` job 2 | 🟡 |
-| [Q10](#q10--ch5--__init__py-job-3) | Ch5 | `__init__.py` job 3 | 🟡 |
-| [Q11](#q11--ch6--relative-imports) | Ch6 | Relative imports | 🟡 |
-| [Q12](#q12--ch7--__name__-guard) | Ch7 | `__name__` guard | 🟡 |
-| [Q13](#q13--ch7--dual-use-file) | Ch7 | Dual-use file | 🟡 |
-| [Q14](#q14--ch8--circular-import) | Ch8 | Circular import | 🟡 |
-| [Q15](#q15--ch8--fix-circular) | Ch8 | Fix circular | 🟡 |
-| [Q16](#q16--ch9--__all__) | Ch9 | `__all__` | 🟡 |
-| [Q17](#q17--ch9--without-__all__) | Ch9 | Without `__all__` | 🟡 |
-| [Q18](#q18--ch10--importlib) | Ch10 | importlib | 🟡 |
-| [Q19](#q19--ch10--plugin-registry) | Ch10 | Plugin registry | 🟡 |
-| [Q20](#q20--ch11--lazy-import) | Ch11 | Lazy import | 🟡 |
-| [Q21](#q21--ch11--class-level-lazy) | Ch11 | Class-level lazy | 🟡 |
-| [Q22](#q22--ch12--project-layout) | Ch12 | Project layout | 🟡 |
-| [Q23](#q23--ch13--venv-creation) | Ch13 | venv creation | 🟡 |
-| [Q24](#q24--ch13--why-venv) | Ch13 | Why venv | 🟡 |
-| [Q25](#q25--ch14--syspath-order) | Ch14 | sys.path order | 🟡 |
-| [Q26](#q26--ch14--modify-syspath) | Ch14 | Modify sys.path | 🟡 |
-| [Q27](#q27--ch8ch10--safe-optional-import) | Ch8+Ch10 | Safe optional import | 🟠 |
-| [Q28](#q28--ch5ch9--api-design) | Ch5+Ch9 | API design | 🟠 |
-| [Q29](#q29--ch15--namespace-packages) | Ch15 | Namespace packages | 🟠 |
-| [Q30](#q30--capstone) | Capstone | Full package design | 🟠 |
-| [Q31](#q31--ch10--importlibreload) | Ch10 | importlib.reload | 🟡 |
+| [Q1](#q1) | Ch1 | Module vs Package | 🟢 |
+| [Q2](#q2) | Ch2 | Import machinery | 🟢 |
+| [Q3](#q3) | Ch2 | sys.modules | 🟢 |
+| [Q4](#q4) | Ch3 | Import style 1 | 🟢 |
+| [Q5](#q5) | Ch3 | Import star | 🟢 |
+| [Q6](#q6) | Ch3 | All 5 styles | 🟢 |
+| [Q7](#q7) | Ch4 | Package structure | 🟡 |
+| [Q8](#q8) | Ch5 | `__init__.py` job 1 | 🟡 |
+| [Q9](#q9) | Ch5 | `__init__.py` job 2 | 🟡 |
+| [Q10](#q10) | Ch5 | `__init__.py` job 3 | 🟡 |
+| [Q11](#q11) | Ch6 | Relative imports | 🟡 |
+| [Q12](#q12) | Ch7 | `__name__` guard | 🟡 |
+| [Q13](#q13) | Ch7 | Dual-use file | 🟡 |
+| [Q14](#q14) | Ch8 | Circular import | 🟡 |
+| [Q15](#q15) | Ch8 | Fix circular | 🟡 |
+| [Q16](#q16) | Ch9 | `__all__` | 🟡 |
+| [Q17](#q17) | Ch9 | Without `__all__` | 🟡 |
+| [Q18](#q18) | Ch10 | importlib | 🟡 |
+| [Q19](#q19) | Ch10 | Plugin registry | 🟡 |
+| [Q20](#q20) | Ch11 | Lazy import | 🟡 |
+| [Q21](#q21) | Ch11 | Class-level lazy | 🟡 |
+| [Q22](#q22) | Ch12 | Project layout | 🟡 |
+| [Q23](#q23) | Ch13 | venv creation | 🟡 |
+| [Q24](#q24) | Ch13 | Why venv | 🟡 |
+| [Q25](#q25) | Ch14 | sys.path order | 🟡 |
+| [Q26](#q26) | Ch14 | Modify sys.path | 🟡 |
+| [Q27](#q27) | Ch8+Ch10 | Safe optional import | 🟠 |
+| [Q28](#q28) | Ch5+Ch9 | API design | 🟠 |
+| [Q29](#q29) | Ch15 | Namespace packages | 🟠 |
+| [Q30](#q30) | Capstone | Full package design | 🟠 |
+| [Q31](#q31) | Ch10 | importlib.reload | 🟡 |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · Ch1 · Module vs Package
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** What is the difference between a module and a package? What makes a directory a package?
 
@@ -97,9 +101,13 @@ from myapp import utils
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · Ch2 · Import Machinery
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** List the 6 steps Python takes when you write `import math` for the first time.
 
@@ -148,9 +156,13 @@ Step 6: RETURN the module object
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · Ch2 · sys.modules
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** What is `sys.modules` and why does it mean module code runs only once per process?
 
@@ -201,9 +213,13 @@ The first `import counter` executes the file and registers the result in `sys.mo
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟢 · Ch3 · Import Style 1
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** When would you use `import math` vs `from math import sqrt`?
 
@@ -257,9 +273,13 @@ area = pi * sqrt(radius)
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟢 · Ch3 · Import Star
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Why is `from module import *` dangerous in production code? When is it acceptable?
 
@@ -317,9 +337,13 @@ from .constants import *    # __all__ = ["PI", "E"]
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟢 · Ch3 · All 5 Styles
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write an example of each of the 5 import styles.
 
@@ -380,9 +404,13 @@ from math import *           | adds EVERYTHING         | dangerous in prod
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · Ch4 · Package Structure
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Draw the directory tree for a Flask-style web app package with models, services, api, utils sub-packages.
 
@@ -441,9 +469,13 @@ myapp/
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · Ch5 · `__init__.py` Job 1
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Rewrite an `__init__.py` for a `models/` package that re-exports User, Product, Order so callers can do `from myapp.models import User`.
 
@@ -489,9 +521,13 @@ from myapp.models import User, Product, Order
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · Ch5 · `__init__.py` Job 2
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Add `__all__` to an `__init__.py` to control what `from models import *` exports.
 
@@ -546,9 +582,13 @@ from myapp.models import ProductDraft   # explicit import ignores __all__
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · Ch5 · `__init__.py` Job 3
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Add `__version__` and a NullHandler logging setup to a package `__init__.py`.
 
@@ -615,9 +655,13 @@ proc = mylib.DataProcessor()
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · Ch6 · Relative Imports
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Inside `myapp/services/user_service.py`, write relative imports for: the sibling `payment.py`, the parent `models/user.py`, and the parent's `utils/validators.py`.
 
@@ -679,9 +723,13 @@ from myapp.utils.validators import validate_email
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · Ch7 · `__name__` Guard
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Explain why `if __name__ == "__main__":` is important. What happens without it when the file is imported?
 
@@ -754,9 +802,13 @@ safe_utils.helper()    # works fine
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · Ch7 · Dual-Use File
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Write a `calculator.py` that is both importable (exposes `add`, `subtract`) and runnable as a CLI script.
 
@@ -849,9 +901,13 @@ python calculator.py 10 divide 0     # ValueError: Cannot divide by zero
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · Ch8 · Circular Import
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Explain why `a.py imports b` and `b.py imports a` causes an `ImportError`. What does the error message say?
 
@@ -910,9 +966,13 @@ ImportError: cannot import name 'A_VALUE' from 'a' (/path/to/a.py)
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟡 · Ch8 · Fix Circular
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Show all 3 ways to fix a circular import. Which one fixes the root design problem?
 
@@ -1016,9 +1076,13 @@ GOOD: base <--- user
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · Ch9 · `__all__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Write a `validators.py` with `__all__` that exports only public validators and hides 3 private helper functions.
 
@@ -1115,9 +1179,13 @@ from validators import _strip_phone_formatting   # works, just unconventional
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟡 · Ch9 · Without `__all__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** If a module has no `__all__`, what does `from module import *` export?
 
@@ -1190,9 +1258,13 @@ from utils import *
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · Ch10 · importlib
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Use `importlib.import_module()` to load a module by string name. When would you need this over a regular import?
 
@@ -1262,9 +1334,13 @@ handler = handler_class()
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟡 · Ch10 · Plugin Registry
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Write a `register_plugin(name, module_path, class_name)` function that loads a plugin class dynamically.
 
@@ -1351,9 +1427,13 @@ result = parser.parse("data.csv")
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟡 · Ch11 · Lazy Import
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Rewrite a top-level `import pandas as pd` as a lazy import inside the function that uses it. Why does this help CLI startup time?
 
@@ -1424,9 +1504,13 @@ For tools like `pip`, `aws-cli`, or `kubectl`-style tools, lazy imports are esse
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟡 · Ch11 · Class-Level Lazy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Write a `DataProcessor` class that imports numpy lazily on first use and caches it as a class attribute.
 
@@ -1508,9 +1592,13 @@ mean2 = proc2.mean([10, 20, 30])            # instant, cache shared
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · Ch12 · Project Layout
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** What is the difference between a "flat layout" and "src layout" for a Python project? When would you use src layout?
 
@@ -1587,9 +1675,13 @@ pytest tests/             # tests import the installed package
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟡 · Ch13 · venv Creation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Write the command sequence to create, activate, install deps, and freeze a virtual environment.
 
@@ -1670,9 +1762,13 @@ pip install -r requirements.txt -r requirements-dev.txt
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟡 · Ch13 · Why venv
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Two projects need different versions of Django. Without venv, what breaks? With venv, how is it solved?
 
@@ -1745,9 +1841,13 @@ Each project has its own `site-packages` directory. They never interact. Install
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟡 · Ch14 · sys.path Order
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** What is the search order in `sys.path`? What happens if you have a `math.py` file in your current directory?
 
@@ -1824,9 +1924,13 @@ print(math.__file__)   # shows which math.py Python is actually using
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 🟡 · Ch14 · Modify sys.path
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 **Problem:** Show two ways to add a custom directory to `sys.path`. Which is the "better" production approach and why?
 
@@ -1913,9 +2017,13 @@ env:
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 🟠 · Ch8+Ch10 · Safe Optional Import
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Write a `try_import(name)` function that returns the module or `None` if not installed. Show the feature detection pattern.
 
@@ -2013,9 +2121,13 @@ The key: fail gracefully with a helpful message, never with `AttributeError: 'No
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 🟠 · Ch5+Ch9 · API Design
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 
 **Problem:** You are building a `mylib` package. Write the `__init__.py` that exposes a clean public API with `__all__`, `__version__`, and proper logging setup.
 
@@ -2107,9 +2219,13 @@ from mylib import *
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 🟠 · Ch15 · Namespace Packages
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 **Problem:** What is a namespace package? How does it differ from a regular package? Give a real-world use case.
 
@@ -2195,9 +2311,13 @@ from acme.billing import Invoice
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 🟠 · Capstone
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 
 **Problem:** Design the complete package structure for a data pipeline application with: ingestion, transformation, storage, API, and CLI layers. Write the directory tree, one `__init__.py`, and the main entry point.
 
@@ -2402,11 +2522,14 @@ cli/api  →  transform/Pipeline  →  ingestion, transform, storage
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 🟡 · Ch10 · importlib.reload — Hot-reload a module
 
 > 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
 
-> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
+
 
 **Problem:** Use `importlib.reload()` to reload a module that has already been imported. Explain:
 1. What reload does vs a second `import` statement

@@ -25,7 +25,6 @@
 
 ## Q1 🟢 · Minimum Parser — Positional Filename Argument
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 Build an `ArgumentParser` with a single positional argument called `filename`. Parse the list `["data.csv"]` and print `args.filename`.
 
@@ -60,7 +59,6 @@ Key points:
 
 ## Q2 🟢 · Optional Flag — store_true and Default Value
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 Add two optional arguments to a parser:
 - `--verbose` flag that stores `True` when present (no value needed)
@@ -101,7 +99,6 @@ Key points:
 
 ## Q3 🟢 · Type Validation — int, float, Invalid Input
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 Add `--count` (type `int`) and `--rate` (type `float`) arguments. Show:
 1. Successful parse of `["--count", "5", "--rate", "0.75"]`
@@ -148,7 +145,6 @@ Key points:
 
 ## Q4 🟡 · choices= — Restricted Values with Auto Error
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 Add a `--format` argument restricted to `['json', 'csv', 'yaml']`. Demonstrate:
 1. A valid parse with `["--format", "json"]`
@@ -197,7 +193,6 @@ Key points:
 
 ## Q5 🟡 · nargs — One or More Filenames
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 Add a `--files` argument that accepts one or more filenames. Parse `["--files", "a.txt", "b.txt", "c.txt"]` and show that `args.files` is a list.
 
@@ -245,7 +240,6 @@ Key points:
 
 ## Q6 🟡 · required= — Mandatory Optional Argument
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 Build a parser where `--api-key` is required. Show:
 1. Successful parse when `--api-key` is provided
@@ -289,7 +283,6 @@ Key points:
 
 ## Q7 🟡 · Argument Groups — Visual Organization in --help
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 Organize a parser into two named groups: "Input options" (with `filename` and `--encoding`) and "Output options" (with `--format` and `--output`). Print the help to show the grouped output.
 
@@ -349,7 +342,6 @@ Key points:
 
 ## Q8 🟡 · Mutually Exclusive — --quiet vs --verbose
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 Build a parser where `--quiet` and `--verbose` cannot both be set. Show the error when both are passed.
 
@@ -398,7 +390,6 @@ Key points:
 
 ## Q9 🟡 · metavar and dest — Display vs Attribute Name
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 Add a `--output` argument where:
 - The help text shows `FILE` as the placeholder (not `OUTPUT`)
@@ -444,7 +435,6 @@ Key points:
 
 ## Q10 🟠 · Subcommands — upload and download Sub-parsers
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 Build a parser with two subcommands:
 - `upload <file>` — positional `file` argument
@@ -501,7 +491,6 @@ Key points:
 
 ## Q11 🟠 · Custom Type — positive_int with ArgumentTypeError
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 Write a custom type function `positive_int` that:
 - Converts the string to an integer
@@ -567,7 +556,6 @@ Key points:
 
 ## Q12 🟠 · Capstone — Complete File Converter CLI
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 Build a CLI for a file converter tool with all of the following:
 - Positional `source` argument (the file to convert)

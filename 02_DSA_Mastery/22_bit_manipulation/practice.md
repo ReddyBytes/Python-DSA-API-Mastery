@@ -35,6 +35,9 @@
 <a id="q1"></a>
 ### Q1 · binary-representation · Read a Bit
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Given integer `n = 42`, write it in binary by hand. How many bits are set? What is the value of bit 3 (position 3, 0-indexed from the right)?
@@ -76,6 +79,9 @@ print(f"Bit 3: {bit_3_value}")   # 1
 <a id="q2"></a>
 ### Q2 · bitwise-and · Mask Out Lower Bits
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** You have `n = 0b11011011` (219 in decimal). Use a **bitmask** with `&` to extract only the lower 4 bits (bits 0-3). What is the result?
@@ -113,6 +119,9 @@ print(bin(result))  # 0b1011 = 11
 
 <a id="q3"></a>
 ### Q3 · bitwise-or · Set a Specific Bit
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 🟢 Basic
 
@@ -156,6 +165,9 @@ print(flags)          # 7
 <a id="q4"></a>
 ### Q4 · bitwise-xor · Flip Bits Selectively
 
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Given `n = 0b1010` (10), use `^` (XOR) to flip bits 0 and 2. What is the result?
@@ -196,6 +208,9 @@ print(bin(result))  # 0b1111 = 15
 
 <a id="q5"></a>
 ### Q5 · shifts · Multiply and Divide by Powers of 2
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 🟢 Basic
 
@@ -240,6 +255,9 @@ print(9 >> 2)   # 2 (= 9 // 4)
 <a id="q6"></a>
 ### Q6 · even-odd · Parity Check Without Modulo
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Write `is_even(n)` and `is_odd(n)` without using `%`. Why does the last bit determine parity?
@@ -282,6 +300,9 @@ for n in [-5, -4, 0, 3, 100]:
 <a id="q7"></a>
 ### Q7 · check-bit · Is Bit i Set?
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Implement `check_bit(n, i)` that returns `1` if bit `i` is set in `n`, else `0`. Test with `n=42`, `i=3` and `n=42`, `i=4`.
@@ -323,6 +344,9 @@ print(check_bit(42, 0))   # 0 (42 is even, bit 0 is off)
 <a id="q8"></a>
 ### Q8 · set-bit · Turn Bit i ON
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Implement `set_bit(n, i)` that returns `n` with bit `i` forced to 1. Then implement `clear_bit(n, i)` that forces bit `i` to 0. Test both on `n=42`, `i=4`.
@@ -363,6 +387,9 @@ print(set_bit(42, 3))    # 42 (bit 3 was already set)
 
 <a id="q9"></a>
 ### Q9 · clear-bit · Turn Bit i OFF
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -410,6 +437,9 @@ print(clear_bit(42, 4))   # 42 (bit 4 was already 0)
 <a id="q10"></a>
 ### Q10 · toggle-bit · Flip Bit i
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Implement `toggle_bit(n, i)`. Then call it twice on the same bit — what do you get? Why?
@@ -452,6 +482,9 @@ print(n)   # 42 — idempotent when applied twice
 
 <a id="q11"></a>
 ### Q11 · power-of-2 · One Bit Trick
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -504,6 +537,9 @@ print(is_power_of_two(-4))   # False  (guard catches negatives)
 <a id="q12"></a>
 ### Q12 · count-set-bits · Brian Kernighan
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Implement `count_set_bits(n)` using Brian Kernighan's algorithm. Count the set bits in `n = 0b10110100`. Explain why this is faster than the naive loop.
@@ -555,6 +591,9 @@ print(bin(0b10110100).count('1'))  # 4
 <a id="q13"></a>
 ### Q13 · count-set-bits-dp · Count Bits 0..n DP
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Given `n = 5`, return an array `result` where `result[i]` = number of set bits in `i`, for all `i` from 0 to 5. Solve in O(n) time with a DP recurrence.
@@ -602,6 +641,9 @@ print(count_bits_range_v2(5))   # [0, 1, 1, 2, 1, 2]
 
 <a id="q14"></a>
 ### Q14 · xor-cancellation · Single Number I
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -653,6 +695,9 @@ print(single_number([1]))                # 1
 <a id="q15"></a>
 ### Q15 · xor-swap · No Temp Variable
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Swap `a = 10` and `b = 20` using only XOR operations — no temp variable. Prove step-by-step why it works. What edge case must you avoid?
@@ -702,6 +747,9 @@ x = 5
 <a id="q16"></a>
 ### Q16 · xor-missing-number · Find the Gap
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** An array contains `n` distinct values from `[0, n]` — one number is missing. Find the missing number using XOR in O(n) time, O(1) space. Test on `[3, 0, 1]`.
@@ -749,6 +797,9 @@ print(missing_number([1, 2, 3]))           # 0  (missing 0)
 <a id="q17"></a>
 ### Q17 · isolate-lsb · Isolate Lowest Set Bit
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Given `n = 42 = 0b101010`, use a bit trick to extract only its lowest set bit. What is the result? What formula gives the lowest set bit, and how does it work in two's complement?
@@ -792,6 +843,9 @@ print(lowest_set_bit(12))   # 4  (12=1100,   lowest set bit is bit 2 = value 4)
 
 <a id="q18"></a>
 ### Q18 · hamming-distance · Bits That Differ
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -843,6 +897,9 @@ print(hamming_distance_kernighan(1, 4))   # 2
 
 <a id="q19"></a>
 ### Q19 · xor-two-unique · Single Number III — Two Unique Elements
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -901,6 +958,9 @@ print(single_number_iii([1, 2, 1, 3, 2, 5]))   # [3, 5] (order may vary)
 <a id="q20"></a>
 ### Q20 · bitwise-complement · Flip Only Significant Bits
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** The **bitwise complement** of `n` flips only its significant bits (not infinite leading 0s). Compute `complement(5)` — the answer should be `2` (`101 → 010`), not Python's `~5 = -6`. Why is naive `~n` wrong here?
@@ -948,6 +1008,9 @@ print(~5)               # -6  (Python: ...111111111010, not just 010)
 
 <a id="q21"></a>
 ### Q21 · bit-masking · Subset Enumeration
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -1002,6 +1065,9 @@ def add_to_subset(mask: int, i: int) -> int:
 <a id="q22"></a>
 ### Q22 · subset-sum · Brute Force via Bitmask
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** Given `nums = [3, 1, 4, 2]` and `target = 6`, use bitmask enumeration to determine if any subset sums to the target. Return the first such subset found.
@@ -1055,6 +1121,9 @@ print(count_subset_sum([3, 1, 4, 2], 6))   # 2 (3+1+2=6 and 4+2=6)
 <a id="q23"></a>
 ### Q23 · xor-mod3 · Single Number II — Appears Three Times
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** Given `nums = [2, 2, 3, 2]`, find the element that appears exactly once. All others appear exactly three times. XOR alone won't work — explain why, and implement the correct solution.
@@ -1107,6 +1176,9 @@ print(single_number_ii([0, 1, 0, 1, 0, 1, 99])) # 99
 
 <a id="q24"></a>
 ### Q24 · bit-adder · Add Without Arithmetic
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -1168,6 +1240,9 @@ print(add_no_arithmetic(100, 200)) # 300
 
 <a id="q25"></a>
 ### Q25 · bitmask-dp · Traveling Salesman Skeleton
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 🟠 Advanced
 

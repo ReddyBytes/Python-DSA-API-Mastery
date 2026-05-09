@@ -9,25 +9,30 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1 | Closure — make_multiplier factory | 🟢 |
-| Q2 | Closure — make_counter with shared state | 🟢 |
-| Q3 | Closure — make_adder + compose | 🟢 |
-| Q4 | Closure — late-binding bug (show it) | 🟡 |
-| Q5 | Closure — late-binding fix (wrapper fn) | 🟡 |
-| Q6 | Decorator — @logger (name + result) | 🟢 |
-| Q7 | Decorator — add @functools.wraps | 🟢 |
-| Q8 | Decorator — @timer (verify no behavior change) | 🟡 |
-| Q9 | Decorator — stack @timer + @logger, trace order | 🟡 |
-| Q10 | Decorator args — @retry(max_attempts=3) | 🟡 |
-| Q11 | Decorator args — @repeat(n) | 🟡 |
-| Q12 | Decorator args — @validate_input(min_val, max_val) | 🟡 |
-| Q13 | Decorator args — @cache_result(ttl_seconds) | 🔴 |
-| Q14 | Real-world — @rate_limit(calls_per_second) | 🔴 |
-| Q15 | Real-world — @singleton for classes | 🔴 |
+| [Q1](#q1) | Closure — make_multiplier factory | 🟢 |
+| [Q2](#q2) | Closure — make_counter with shared state | 🟢 |
+| [Q3](#q3) | Closure — make_adder + compose | 🟢 |
+| [Q4](#q4) | Closure — late-binding bug (show it) | 🟡 |
+| [Q5](#q5) | Closure — late-binding fix (wrapper fn) | 🟡 |
+| [Q6](#q6) | Decorator — @logger (name + result) | 🟢 |
+| [Q7](#q7) | Decorator — add @functools.wraps | 🟢 |
+| [Q8](#q8) | Decorator — @timer (verify no behavior change) | 🟡 |
+| [Q9](#q9) | Decorator — stack @timer + @logger, trace order | 🟡 |
+| [Q10](#q10) | Decorator args — @retry(max_attempts=3) | 🟡 |
+| [Q11](#q11) | Decorator args — @repeat(n) | 🟡 |
+| [Q12](#q12) | Decorator args — @validate_input(min_val, max_val) | 🟡 |
+| [Q13](#q13) | Decorator args — @cache_result(ttl_seconds) | 🔴 |
+| [Q14](#q14) | Real-world — @rate_limit(calls_per_second) | 🔴 |
+| [Q15](#q15) | Real-world — @singleton for classes | 🔴 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · Closure — make_multiplier factory
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Write `make_multiplier(factor)` that returns a function. The returned function takes a number and multiplies it by `factor`. Create `double` and `triple` from the factory and verify them.
@@ -76,7 +81,12 @@ print(double(7))   # 14
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Closure — make_counter with shared state
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 Write `make_counter()` that returns three functions: `increment`, `decrement`, and `reset`. All three share the same `count` variable. Each function should return the new count value.
@@ -137,7 +147,12 @@ print(inc())   # 1
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Closure — make_adder + compose
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Write `make_adder(n)` that returns a function adding `n` to its argument. Then create `add5` and `add10`. Finally, create `add15` by composing them — without writing a new factory.
@@ -187,7 +202,12 @@ print(add15(7))          # 22
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Closure — Late-binding trap: show the bug
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 Write a list comprehension that creates 3 lambdas — one for each value `i` in `range(3)`. Each lambda should return its corresponding `i`. Print the results. Show the bug (all return the same value), then explain why.
@@ -220,7 +240,12 @@ print([f() for f in funcs])   # [2, 2, 2]  ← all print 2!
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Closure — Late-binding trap: fix with wrapper function
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 Fix the late-binding bug from Q4 using a wrapper function (not the default-argument trick). Each lambda must correctly return 0, 1, and 2.
@@ -261,7 +286,12 @@ print([f() for f in funcs2])  # [0, 1, 2]
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Decorator — Build @logger
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 Write a `logger` decorator that prints `"Calling {function_name}"` before the call and `"Done: {result}"` after. Apply it to an `add(a, b)` function.
@@ -312,7 +342,12 @@ add(3, 4)
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Decorator — Add @functools.wraps
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 Take the `logger` decorator from Q6. Before adding `@functools.wraps`, print `add.__name__` and `add.__doc__`. Then add `@functools.wraps(func)` to the wrapper and print again. Show the difference.
@@ -380,7 +415,12 @@ print(add.__doc__)    # Add two numbers.
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Decorator — Build @timer
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 Write a `timer` decorator that measures and prints execution time. Verify that the decorated function still returns the correct result — the timer must not change behavior, only observe it.
@@ -435,7 +475,12 @@ print(result)   # 499999500000  ← correct sum, behavior unchanged
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Decorator — Stack @timer + @logger, trace execution order
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 Apply both `@timer` (from Q8) and `@logger` (from Q7) to a `multiply(a, b)` function, with `@timer` on top. Trace exactly which wrapper runs first when `multiply(3, 4)` is called and why.
@@ -492,7 +537,12 @@ multiply(3, 4)
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Decorator args — @retry(max_attempts=3)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 Write `@retry(max_attempts=3)` that retries a function up to `max_attempts` times if it raises an exception. Print the attempt number on each failure. After all attempts are exhausted, re-raise the last exception.
@@ -553,7 +603,12 @@ print(result)
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Decorator args — @repeat(n)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 Write `@repeat(n)` that calls the decorated function `n` times when invoked. The decorator should work with any function signature.
@@ -611,7 +666,12 @@ greet("Alice")
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Decorator args — @validate_input(min_val, max_val)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 Write `@validate_input(min_val, max_val)` that checks the first positional argument. If it is outside `[min_val, max_val]`, raise `ValueError` with a descriptive message. Otherwise call the function normally.
@@ -669,7 +729,12 @@ set_volume(150)          # ValueError: 150 is out of range [0, 100]
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Decorator args — @cache_result(ttl_seconds)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 Write `@cache_result(ttl_seconds)` that caches the return value of a function. If the same arguments are passed again within `ttl_seconds`, return the cached result without calling the function. After the TTL expires, call the function again and refresh the cache.
@@ -728,7 +793,12 @@ fetch_price("AAPL")   # cache expired → calls function again
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Real-world — @rate_limit(calls_per_second)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 Write `@rate_limit(calls_per_second)` that enforces a maximum call rate. If the function is called faster than the limit, block (sleep) until the minimum interval has passed. Use `time.time()` and `time.sleep()`.
@@ -783,7 +853,12 @@ for _ in range(4):
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Real-world — @singleton for classes
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 Write a `@singleton` decorator that can be applied to a class. After the first instantiation, every subsequent call to the class constructor returns the same instance.

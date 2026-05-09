@@ -3,11 +3,35 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | event-stream — Write a generator that simulates an event stream | 🟢 |
+| [Q2](#q2) | paginated-collector — Write a paginated API collector (loop until no next page) | 🟢 |
+| [Q3](#q3) | rate-limiting — Add rate limiting to an API collector | 🟡 |
+| [Q4](#q4) | async-collector — Write an async API collector with asyncio.gather | 🟡 |
+| [Q5](#q5) | semaphore — Add a Semaphore to limit concurrent requests to 5 | 🟡 |
+| [Q6](#q6) | retry-backoff — Add retry with exponential backoff to an HTTP request | 🟡 |
+| [Q7](#q7) | sliding-window-ratelimit — Implement a sliding window rate limiter for a collector | 🟡 |
+| [Q8](#q8) | multi-endpoint — Collect from multiple endpoints concurrently | 🟡 |
+| [Q9](#q9) | backpressure-queue — Add backpressure: pause producer when consumer is slow | 🟠 |
+| [Q10](#q10) | checkpoint-cursor — Implement a checkpoint that saves the last cursor to a file | 🟠 |
+| [Q11](#q11) | partial-failures — Handle partial failures: collect success and failed URLs | 🟠 |
+| [Q12](#q12) | capstone-collector — Capstone: build an async paginated collector with rate limit + retry | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · event-stream — Write a generator that simulates an event stream 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write `event_stream(total)` — a generator that yields dicts with `id`, `type` (one of `["click","view","buy"]`), and `value` (random float). It should yield exactly `total` events.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `random.choice` for the type, `random.uniform` for the value, and `yield` inside a `for` loop.</details>
 <details><summary>✅ Answer</summary>
@@ -29,11 +53,15 @@ def event_stream(total=50):
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · paginated-collector — Write a paginated API collector (loop until no next page) 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Write `paginate(url, page_size=10)` — a generator that yields one list of items per page. Stop when the response's `has_more` field is `False`. Use `requests.get` (you can mock or stub the HTTP call).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Keep a `page` counter. In each iteration, fetch the page, yield `data["items"]`, then check `data["has_more"]`.</details>
 <details><summary>✅ Answer</summary>
@@ -56,11 +84,15 @@ def paginate(url, page_size=10):
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · rate-limiting — Add rate limiting to an API collector 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Modify the `paginate` function to sleep `delay` seconds between requests. The delay should be configurable (default 0.1s).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Call `time.sleep(delay)` at the bottom of the loop, after yielding but before incrementing the page counter.</details>
 <details><summary>✅ Answer</summary>
@@ -85,11 +117,15 @@ def paginate_ratelimited(url, page_size=10, delay=0.1):
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · async-collector — Write an async API collector with asyncio.gather 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write `async def collect_all(url, total_pages)` using `aiohttp`. Fetch all pages concurrently with `asyncio.gather` and return a flat list of all records.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create a list of coroutine tasks (one per page), then `await asyncio.gather(*tasks)`.</details>
 <details><summary>✅ Answer</summary>
@@ -114,11 +150,15 @@ async def collect_all(url, total_pages=5):
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · semaphore — Add a Semaphore to limit concurrent requests to 5 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Modify the async collector so that at most 5 page requests run at the same time, even if `total_pages` is 50. Use `asyncio.Semaphore`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create `sem = asyncio.Semaphore(5)` and wrap each `fetch_page` call with `async with sem:`.</details>
 <details><summary>✅ Answer</summary>
@@ -146,11 +186,15 @@ async def collect_with_limit(url, total_pages=50, max_concurrent=5):
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · retry-backoff — Add retry with exponential backoff to an HTTP request 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write `fetch_with_retry(url, max_retries=3, backoff_base=2.0)` that retries on HTTP 429, 500, and 503 status codes. Wait `backoff_base ** attempt` seconds between retries.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use a `for attempt in range(1, max_retries + 1)` loop. Break on success; sleep on retryable errors.</details>
 <details><summary>✅ Answer</summary>
@@ -179,11 +223,15 @@ def fetch_with_retry(url, max_retries=3, backoff_base=2.0):
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · sliding-window-ratelimit — Implement a sliding window rate limiter for a collector 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a `RateLimiter` class with an `acquire()` method that allows at most `max_calls` requests per `period` seconds. Use a `collections.deque` to track request timestamps.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>On each `acquire()` call, evict timestamps older than `period`, check the count, and sleep if at the limit.</details>
 <details><summary>✅ Answer</summary>
@@ -213,11 +261,15 @@ class RateLimiter:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · multi-endpoint — Collect from multiple endpoints concurrently 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write `async def collect_from_endpoints(urls)` that fetches the first page from each URL concurrently and returns a dict mapping each URL to its items list.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create one task per URL. Use `asyncio.gather` and `zip(urls, results)` to build the mapping.</details>
 <details><summary>✅ Answer</summary>
@@ -242,11 +294,15 @@ async def collect_from_endpoints(urls):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · backpressure-queue — Add backpressure: pause producer when consumer is slow 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Implement a producer/consumer pair using `threading.Thread` and `queue.Queue(maxsize=20)`. The producer yields events; the consumer sleeps 0.01s per event (slow). Verify the queue blocks the producer when full.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use `q.put(event)` (blocks when queue is full) in the producer. Use `q.get()` in the consumer. End with a `None` sentinel.</details>
 <details><summary>✅ Answer</summary>
@@ -283,11 +339,15 @@ print(f"Consumed {len(results)} items")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · checkpoint-cursor — Implement a checkpoint that saves the last cursor to a file 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a cursor-based collector that saves its `last_cursor` to disk after each page. On restart, it loads the saved cursor and continues from where it left off instead of page 1.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>The API returns a `next_cursor` string. Save it to a JSON file after each page. Load it at startup.</details>
 <details><summary>✅ Answer</summary>
@@ -322,11 +382,15 @@ def collect_with_cursor_checkpoint(url, checkpoint_path="cursor.json"):
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · partial-failures — Handle partial failures: collect success and failed URLs 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write `collect_batch(urls)` that fetches all URLs, returns `(successes, failures)` where `successes` is a list of parsed JSON bodies and `failures` is a list of `{"url": ..., "error": ...}` dicts.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Wrap each `requests.get` in `try/except`. Append to `successes` on 200, `failures` on anything else.</details>
 <details><summary>✅ Answer</summary>
@@ -351,11 +415,15 @@ def collect_batch(urls):
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · capstone-collector — Capstone: build an async paginated collector with rate limit + retry 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Build `async def full_collector(url, total_pages, max_concurrent=5, max_retries=3)`. It should: fetch pages concurrently (bounded by Semaphore), retry each page up to `max_retries` times with exponential backoff, and return all records as a flat list.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Combine the Semaphore pattern from Q5 with the retry loop from Q6. Make `fetch_page` async with its own retry logic.</details>
 <details><summary>✅ Answer</summary>

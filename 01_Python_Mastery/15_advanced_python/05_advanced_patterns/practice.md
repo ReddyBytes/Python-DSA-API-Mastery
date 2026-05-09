@@ -2,20 +2,40 @@
 
 | Q | Difficulty | Topic |
 |---|-----------|-------|
-| [Q1](#q1--slots-memory) | 🟡 | `__slots__` memory savings |
-| [Q2](#q2--callable-with-state) | 🟡 | `__call__` with state |
-| [Q3](#q3--introspection-methods) | 🟡 | Introspect with `dir()` + `callable()` |
-| [Q4](#q4--dynamic-attributes) | 🟡 | `getattr` / `setattr` / `hasattr` / `delattr` |
-| [Q5](#q5--vars) | 🟡 | `vars()` — instance vs class `__dict__` |
-| [Q6](#q6--inspect-signature) | 🟠 | `inspect.signature` at runtime |
-| [Q7](#q7--all) | 🟠 | `__all__` — control module exports |
-| [Q8](#q8--capstone-plugin-system) | 🟠 | Capstone: plugin system using `__subclasses__()` |
+| [Q1](#q1) | 🟡 | `__slots__` memory savings |
+| [Q2](#q2) | 🟡 | `__call__` with state |
+| [Q3](#q3) | 🟡 | Introspect with `dir()` + `callable()` |
+| [Q4](#q4) | 🟡 | `getattr` / `setattr` / `hasattr` / `delattr` |
+| [Q5](#q5) | 🟡 | `vars()` — instance vs class `__dict__` |
+| [Q6](#q6) | 🟠 | `inspect.signature` at runtime |
+| [Q7](#q7) | 🟠 | `__all__` — control module exports |
+| [Q8](#q8) | 🟠 | Capstone: plugin system using `__subclasses__()` |
 
 ---
+
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | memory — `__slots__`: define a class with slots, measure memory savings | 🟡 |
+| [Q2](#q2) | state — callable objects: `__call__` with state (function with memory) | 🟡 |
+| [Q3](#q3) | discovery — introspection: list all methods of an object with `dir()` + `callable()` | 🟡 |
+| [Q4](#q4) | dynamic access — `getattr` / `setattr` / `hasattr` / `delattr` | 🟡 |
+| [Q5](#q5) | inspection — `vars()` — inspect `__dict__` of instance vs class | 🟡 |
+| [Q6](#q6) | signatures — `inspect.signature` — get function signature at runtime | 🟠 |
+| [Q7](#q7) | exports — `__all__` — control what gets exported from a module | 🟠 |
+| [Q8](#q8) | capstone — plugin system using `__subclasses__()` | 🟠 |
+
+---
+
+<a id="q1"></a>
 
 ### Q1 🟡 · memory — `__slots__`: define a class with slots, measure memory savings
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Create two versions of a `Sensor` class (with and without `__slots__`), each with `sensor_id: int`, `value: float`, `unit: str`. Compare memory using `sys.getsizeof`. Try to add a new attribute to the slots version.
 
@@ -69,9 +89,13 @@ except AttributeError as e:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · state — callable objects: `__call__` with state (function with memory)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Create a `Throttle` callable class that limits a function to at most N calls. After N calls, it raises `RuntimeError`. It should have a `.remaining` property and a `.reset()` method.
 
@@ -134,9 +158,13 @@ print(t.remaining)  # 3
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · discovery — introspection: list all methods of an object with `dir()` + `callable()`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a `list_methods(obj)` function that returns all public, callable attributes of an object (no dunder methods). Test it on a list, a dict, and a custom class.
 
@@ -185,9 +213,13 @@ print("Service methods:", list_methods(svc))   # ['start', 'status', 'stop']
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · dynamic access — `getattr` / `setattr` / `hasattr` / `delattr`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write a `ConfigLoader` class that takes `**kwargs` in `__init__` and stores each key as an attribute using `setattr`. Add `get(name, default)`, `has(name)`, `remove(name)`, and `to_dict()` methods.
 
@@ -242,9 +274,13 @@ print(cfg.to_dict())               # {'host': 'localhost', 'port': 8080, 'ssl': 
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · inspection — `vars()` — inspect `__dict__` of instance vs class
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Create a class with a class variable, instance variables, and a class method. Use `vars()` to inspect both the instance's `__dict__` and the class's `__dict__`. Show what appears in each and explain the difference.
 
@@ -294,9 +330,13 @@ print("c.instances_created:", c.instances_created)   # 1 — found via class loo
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟠 · signatures — `inspect.signature` — get function signature at runtime
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write a `validate_call(func)` decorator that uses `inspect.signature` to check that all arguments match their type annotations at call time. Raise `TypeError` with a clear message if a type doesn't match.
 
@@ -358,9 +398,13 @@ except TypeError as e:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟠 · exports — `__all__` — control what gets exported from a module
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Demonstrate `__all__` by creating a module-like namespace using a class. Define `__all__` as a list and write a function that simulates `from module import *` by only returning names listed in `__all__`. Include both public and private items.
 
@@ -420,9 +464,13 @@ print("CONSTANT:", exported["CONSTANT"])   # 42
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟠 · capstone — plugin system using `__subclasses__()`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Build a plugin system where:
 1. A `Formatter` base class uses `__subclasses__()` to auto-discover all subclasses.

@@ -9,27 +9,32 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1–Q3 | `if` statement | 🟢 |
-| Q4–Q6 | `if-else` | 🟢 |
-| Q7–Q9 | `if-elif-else` | 🟢 |
-| Q10–Q11 | Nested conditions | 🟡 |
-| Q12–Q13 | Ternary operator | 🟡 |
-| Q14 | `match-case` | 🟡 |
-| Q15 | Walrus operator `:=` | 🟠 |
-| Q16–Q18 | `for` loop | 🟢 |
-| Q19–Q21 | `while` loop | 🟢 |
-| Q22–Q23 | `break` | 🟡 |
-| Q24–Q25 | `continue` | 🟡 |
-| Q26 | `pass` | 🟢 |
-| Q27–Q28 | Loop `else` | 🟠 |
-| Q29–Q30 | `enumerate()` | 🟡 |
-| Q31–Q32 | `zip()` | 🟡 |
-| Q33–Q35 | List comprehension | 🟡 |
-| Q36–Q37 | Dict comprehension | 🟡 |
+| [Q1](#q1)–Q3 | `if` statement | 🟢 |
+| [Q4](#q4)–Q6 | `if-else` | 🟢 |
+| [Q7](#q7)–Q9 | `if-elif-else` | 🟢 |
+| [Q10](#q10)–Q11 | Nested conditions | 🟡 |
+| [Q12](#q12)–Q13 | Ternary operator | 🟡 |
+| [Q14](#q14) | `match-case` | 🟡 |
+| [Q15](#q15) | Walrus operator `:=` | 🟠 |
+| [Q16](#q16)–Q18 | `for` loop | 🟢 |
+| [Q19](#q19)–Q21 | `while` loop | 🟢 |
+| [Q22](#q22)–Q23 | `break` | 🟡 |
+| [Q24](#q24)–Q25 | `continue` | 🟡 |
+| [Q26](#q26) | `pass` | 🟢 |
+| [Q27](#q27)–Q28 | Loop `else` | 🟠 |
+| [Q29](#q29)–Q30 | `enumerate()` | 🟡 |
+| [Q31](#q31)–Q32 | `zip()` | 🟡 |
+| [Q33](#q33)–Q35 | List comprehension | 🟡 |
+| [Q36](#q36)–Q37 | Dict comprehension | 🟡 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · if statement — Age Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Write an `if` statement that prints `"You can vote"` only if `age` is 18 or more.
@@ -63,7 +68,12 @@ if age >= 18:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · if statement — Password Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 Write an `if` that prints `"Access granted"` only if `password` equals `"secret123"`.
@@ -97,7 +107,12 @@ if password == "secret123":
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · if statement — Multiple Conditions
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Write an `if` that prints `"Welcome admin"` only if `username` is `"admin"` AND `password` is `"1234"`. Both must be true at the same time.
@@ -133,7 +148,12 @@ if username == "admin" and password == "1234":
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · if-else — Even or Odd
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 Given `number = 7`, print `"Even"` if it is divisible by 2, otherwise print `"Odd"`.
@@ -169,7 +189,12 @@ else:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · if-else — Temperature
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 `temp = 35`. Print `"Hot"` if `temp` is greater than 30, otherwise print `"Cool"`.
@@ -205,7 +230,12 @@ else:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · if-else — Positive or Negative
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `number = -5`. Print `"Positive"` if greater than 0, else print `"Negative"`. You can ignore zero for now.
@@ -241,7 +271,12 @@ else:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · if-elif-else — Grade Checker
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 `marks = 72`. Print `"A"` if marks are 90 or above, `"B"` if 75 or above, `"C"` if 50 or above, otherwise print `"Fail"`.
@@ -281,7 +316,12 @@ else:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · if-elif-else — Day Name
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 `day = 3`. Print the matching day name: 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday, 7 = Sunday. Any other number should print `"Invalid"`.
@@ -329,7 +369,12 @@ else:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · if-elif-else — Positive / Negative / Zero
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 `number = 0`. Print `"Positive"` if greater than 0, `"Negative"` if less than 0, or `"Zero"` if it equals 0.
@@ -367,7 +412,12 @@ else:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Nested conditions — Voter Eligibility
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 `age = 20`, `citizen = True`. Print `"Can vote"` only if age is 18 or more AND citizen is `True`. Use nested `if` statements (not the `and` keyword).
@@ -404,7 +454,12 @@ if age >= 18:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Nested conditions — Login + Role
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 `logged_in = True`, `role = "admin"`. Print `"Admin panel"` only if the user is logged in AND their role is `"admin"`. Use nested `if` statements.
@@ -441,7 +496,12 @@ if logged_in:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Ternary operator — Even/Odd one-liner
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 Rewrite the code below as a single line using the ternary operator. `number = 8`.
@@ -477,7 +537,12 @@ print(result)  # Even
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Ternary operator — Max of Two
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 `a = 10`, `b = 25`. Use a ternary operator to set `max_val` to whichever number is larger.
@@ -513,7 +578,12 @@ print(max_val)  # 25
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · match-case — HTTP Status
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 `status = 404`. Use `match-case` to print a message for each status code: `200` → `"OK"`, `404` → `"Not Found"`, `500` → `"Server Error"`. Any other code should print `"Unknown"`.
@@ -554,7 +624,12 @@ match status:
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Walrus operator — Length Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 Rewrite the code below so `len(data)` is only called once. Use the walrus operator (`:=`).
@@ -589,7 +664,12 @@ if (n := len(data)) > 3:
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · for loop — Print 1 to 10
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 **Problem:**
 Use a `for` loop to print every number from 1 through 10, one per line.
@@ -621,7 +701,12 @@ for i in range(1, 11):
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · for loop — Sum of a List
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 **Problem:**
 `numbers = [10, 20, 30, 40, 50]`. Use a `for` loop to add up all the numbers and print the total.
@@ -657,7 +742,12 @@ print(total)  # 150
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · for loop — Even Numbers Only
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 **Problem:**
 Use a `for` loop over `range(1, 21)` and print only the even numbers.
@@ -690,7 +780,12 @@ for i in range(1, 21):
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · while loop — Countdown
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 **Problem:**
 Print numbers from 10 down to 1 using a `while` loop.
@@ -724,7 +819,12 @@ while count >= 1:
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · while loop — Sum Until Zero
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 **Problem:**
 Keep asking the user for a number. Add each number to a running total. Stop when the user enters `0`. Print the total at the end.
@@ -761,7 +861,12 @@ print(f"Total: {total}")
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · while loop — Repeat Until Valid
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 **Problem:**
 Keep asking for a password until the user types `"open123"`. Once they get it right, print `"Access granted"` and stop.
@@ -796,7 +901,12 @@ while True:
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · break — Find First Negative
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 **Problem:**
 `numbers = [4, 7, 2, -3, 8, -1]`. Loop through the list, print the first negative number you find, then stop immediately.
@@ -832,7 +942,12 @@ for n in numbers:
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · break — Stop at Keyword
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 **Problem:**
 `words = ["apple", "banana", "STOP", "cherry", "date"]`. Print each word, but stop as soon as you reach `"STOP"`. Do not print `"STOP"` itself.
@@ -868,7 +983,12 @@ for word in words:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · continue — Skip Negatives
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 **Problem:**
 `numbers = [1, -2, 3, -4, 5]`. Print only the positive numbers. Use `continue` to skip the negatives.
@@ -904,7 +1024,12 @@ for n in numbers:
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · continue — Skip Vowels
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Problem:**
 `word = "python"`. Print each letter on its own line, but skip any vowels (`a, e, i, o, u`). Use `continue`.
@@ -940,7 +1065,12 @@ for letter in word:
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · pass — Placeholder
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 **Problem:**
 You are planning logic for three times of day but only have the morning part ready. Write the structure for all three cases using `pass` for the ones not yet implemented, so the code runs without errors.
@@ -978,7 +1108,12 @@ elif time == "evening":
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · loop else — Search in List
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 **Problem:**
 `fruits = ["apple", "banana", "cherry"]`. Search for `"mango"`. Print `"Found it"` if it is in the list. If the loop finishes without finding it, print `"Not in list"`. Use `for-else`.
@@ -1016,7 +1151,12 @@ else:
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · loop else — All Positive Check
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 **Problem:**
 `numbers = [3, 7, 2, 5]`. Check if all numbers are positive. Print `"All positive"` if they are. Print `"Found a non-positive"` as soon as you find one that is not. Use `for-else`.
@@ -1054,7 +1194,12 @@ else:
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · enumerate() — Index and Value
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 **Problem:**
 `fruits = ["apple", "banana", "cherry"]`. Print each item with its position number, starting from 1 (not 0). Output should look like:
@@ -1093,7 +1238,12 @@ for i, fruit in enumerate(fruits, start=1):
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · enumerate() — Find Index of Item
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 **Problem:**
 `colours = ["red", "green", "blue", "yellow"]`. Find and print the index of `"blue"` using `enumerate`.
@@ -1129,7 +1279,12 @@ for i, c in enumerate(colours):
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · zip() — Pair Two Lists
+
+> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
 
 **Problem:**
 `names = ["Alice", "Bob", "Charlie"]` and `scores = [85, 92, 78]`. Print each name with their score on one line, like `"Alice: 85"`.
@@ -1165,7 +1320,12 @@ for name, score in zip(names, scores):
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · zip() — Compare Lists
+
+> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
 
 **Problem:**
 `predicted = [1, 0, 1, 1]` and `actual = [1, 1, 1, 0]`. Count how many positions have the same value in both lists. Print the count.
@@ -1204,7 +1364,12 @@ print(matches)  # 2
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 · List comprehension — Squares
+
+> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
 
 **Problem:**
 Create a list of the squares of numbers 1 to 10 using a list comprehension. The result should be `[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]`.
@@ -1236,7 +1401,12 @@ print(squares)
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · List comprehension — Filter Evens
+
+> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
 
 **Problem:**
 `numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`. Use a list comprehension to create a new list containing only the even numbers.
@@ -1270,7 +1440,12 @@ print(evens)  # [2, 4, 6, 8, 10]
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · List comprehension — Uppercase
+
+> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
 
 **Problem:**
 `words = ["hello", "world", "python"]`. Use a list comprehension to create a new list where every word is in uppercase.
@@ -1304,7 +1479,12 @@ print(upper_words)  # ['HELLO', 'WORLD', 'PYTHON']
 
 ---
 
+<a id="q36"></a>
+
 ### Q36 · Dict comprehension — Number Squares
+
+> 🛠️ **Solve locally:** [practice_local.py → Q36](./practice_local.py)
+
 
 **Problem:**
 Create a dictionary where the keys are numbers 1 to 5 and the values are their squares. Expected result: `{1: 1, 2: 4, 3: 9, 4: 16, 5: 25}`.
@@ -1336,7 +1516,12 @@ print(squares)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
 
 ---
 
+<a id="q37"></a>
+
 ### Q37 · Dict comprehension — Invert a Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q37](./practice_local.py)
+
 
 **Problem:**
 `original = {"a": 1, "b": 2, "c": 3}`. Create a new dictionary with the keys and values swapped: `{1: "a", 2: "b", 3: "c"}`.

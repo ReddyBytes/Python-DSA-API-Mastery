@@ -8,27 +8,31 @@
 
 | # | Topic | Difficulty |
 |---|---|---|
-| Q1 | Basic retry decorator | 🟡 Medium |
-| Q2 | Exponential backoff | 🟡 Medium |
-| Q3 | Add jitter | 🟠 Hard |
-| Q4 | Retry on specific exceptions only | 🟡 Medium |
-| Q5 | CircuitBreaker class | 🟠 Hard |
-| Q6 | Graceful degradation (3-tier fallback) | 🟡 Medium |
-| Q7 | Exception translation | 🟡 Medium |
-| Q8 | logger.exception vs logger.error | 🟡 Medium |
-| Q9 | Fix bare except with pass | 🟡 Medium |
-| Q10 | Fix overly broad Exception catch | 🟡 Medium |
-| Q11 | Anti-pattern: exception for control flow | 🟡 Medium |
-| Q12 | Anti-pattern: losing original exception | 🟡 Medium |
-| Q13 | Thread exception silently swallowed | 🟠 Hard |
-| Q14 | Capstone: safe_call() | 🟠 Hard |
-| Q15 | Capstone: resilient API client | 🟠 Hard |
+| [Q1](#q1) | Basic retry decorator | 🟡 Medium |
+| [Q2](#q2) | Exponential backoff | 🟡 Medium |
+| [Q3](#q3) | Add jitter | 🟠 Hard |
+| [Q4](#q4) | Retry on specific exceptions only | 🟡 Medium |
+| [Q5](#q5) | CircuitBreaker class | 🟠 Hard |
+| [Q6](#q6) | Graceful degradation (3-tier fallback) | 🟡 Medium |
+| [Q7](#q7) | Exception translation | 🟡 Medium |
+| [Q8](#q8) | logger.exception vs logger.error | 🟡 Medium |
+| [Q9](#q9) | Fix bare except with pass | 🟡 Medium |
+| [Q10](#q10) | Fix overly broad Exception catch | 🟡 Medium |
+| [Q11](#q11) | Anti-pattern: exception for control flow | 🟡 Medium |
+| [Q12](#q12) | Anti-pattern: losing original exception | 🟡 Medium |
+| [Q13](#q13) | Thread exception silently swallowed | 🟠 Hard |
+| [Q14](#q14) | Capstone: safe_call() | 🟠 Hard |
+| [Q15](#q15) | Capstone: resilient API client | 🟠 Hard |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 — Basic Retry Decorator 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 Write a `@retry(max_attempts=3)` decorator that calls the wrapped function up to `max_attempts` times. On final failure, re-raise the last exception.
 
@@ -69,9 +73,13 @@ def flaky():
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 — Exponential Backoff 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 Extend the retry decorator to add exponential backoff between attempts: `delay = base_delay * (2 ** attempt)`.
 
@@ -111,9 +119,13 @@ def retry(max_attempts=3, base_delay=1.0):
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 — Add Jitter 🟠
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 Add jitter to the backoff: `delay = base * (2 ** attempt) + random.uniform(0, base_delay)`. Explain why jitter is needed.
 
@@ -155,9 +167,13 @@ def retry(max_attempts=3, base_delay=1.0):
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 — Retry on Specific Exceptions 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 Modify the retry decorator to accept an `exceptions` tuple. Only retry if the raised exception is one of those types. Propagate all others immediately.
 
@@ -198,9 +214,13 @@ def fetch(url):
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 — Implement CircuitBreaker 🟠
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 Implement a `CircuitBreaker` class with:
 - `failure_threshold` — how many failures before opening
@@ -267,9 +287,13 @@ class CircuitBreaker:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 — Graceful Degradation 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 Write `get_product_price(product_id)` that:
 1. Tries a live pricing service
@@ -316,9 +340,13 @@ def get_product_price(product_id):
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 — Exception Translation 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 Write `create_user(email)` that catches `psycopg2.IntegrityError` (simulated) and raises a `UserAlreadyExistsError`. Use `raise ... from e` to preserve the chain.
 
@@ -364,9 +392,13 @@ except UserAlreadyExistsError as e:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 — logger.exception vs logger.error 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 Show the difference in log output between `logger.error(str(e))` and `logger.exception(msg)` for a `ValueError`. Which should you use inside an `except` block?
 
@@ -412,9 +444,13 @@ def demonstrate():
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 — Fix: Bare Except with Pass 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 The following code silently swallows all errors including `KeyboardInterrupt`. Show three different ways to fix it depending on intent.
 
@@ -465,9 +501,13 @@ for record in records:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 — Fix: Catching Exception Too Broadly 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 A library function catches `Exception` and returns a fallback, hiding bugs in the pipeline. Fix it.
 
@@ -513,9 +553,13 @@ def run_pipeline(data):
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 — Anti-pattern: Exception for Control Flow 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 Rewrite the following to not use an exception for normal control flow.
 
@@ -560,9 +604,13 @@ def get_config(key):
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 — Anti-pattern: Losing the Original Exception 🟡
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 Fix the following so the original exception is preserved in the chain.
 
@@ -603,9 +651,13 @@ except psycopg2.OperationalError as e:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 — Thread Exception Silently Swallowed 🟠
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 Show that a thread exception is silently lost. Then fix it using `concurrent.futures.ThreadPoolExecutor`.
 
@@ -667,9 +719,13 @@ if result["error"]:
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 — Capstone: safe_call() 🟠
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 Implement `safe_call(fn, *args, retries=3, fallback=None, **kwargs)` that:
 - Retries the function up to `retries` times with exponential backoff + jitter
@@ -724,9 +780,13 @@ result = safe_call(fetch_user, user_id=42, retries=3, fallback={"name": "Unknown
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 — Capstone: Resilient API Client 🟠
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 Build a `ResilientAPIClient` class that combines:
 - Retry with exponential backoff + jitter

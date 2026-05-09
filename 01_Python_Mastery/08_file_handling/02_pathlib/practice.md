@@ -19,7 +19,6 @@
 
 ## Q1 🟢 · Path creation — 4 ways to create a Path object
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -61,7 +60,6 @@ print(p4)  # /var/log/app/errors.log
 
 ## Q2 🟢 · Path properties — extract the parts of a path
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 Given `Path("/data/reports/q3_2024.csv")`, extract `.name`, `.stem`, `.suffix`, `.parent`, `.parts`.
 
@@ -95,7 +93,6 @@ print(p.parts)   # ('/', 'data', 'reports', 'q3_2024.csv')
 
 ## Q3 🟢 · exists / is_file / is_dir — describe a path
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 Write a function `describe_path(p)` that returns `"file"`, `"directory"`, or `"missing"`.
 
@@ -136,7 +133,6 @@ print(describe_path("/no/such/path"))  # "missing"
 
 ## Q4 🟡 · read_text / write_text — uppercase a file in place
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 Read a file, uppercase its content, write it back — using pathlib only (no `open()`).
 
@@ -173,7 +169,6 @@ print(tmp.read_text(encoding="utf-8"))  # "HELLO PATHLIB\n"
 
 ## Q5 🟡 · mkdir — create nested directories with flags
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 Create `output/2024/reports/` using `mkdir`. Demonstrate what `parents=True` and `exist_ok=True` each do.
 
@@ -214,7 +209,6 @@ print(target.is_dir())  # True
 
 ## Q6 🟡 · glob / rglob — find .py files
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 Find all `.py` files in a directory (non-recursive), then all `.py` files recursively with `rglob`.
 
@@ -258,7 +252,6 @@ for f in sorted(all_py):
 
 ## Q7 🟡 · iterdir — list files sorted by size descending
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 List all files (not subdirectories) in a directory, sorted by size descending.
 
@@ -294,7 +287,6 @@ for f in files_by_size("."):
 
 ## Q8 🟡 · rename / unlink — safe rename and delete
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 Rename a file to add a `.bak` extension. Delete a file only if it exists.
 
@@ -341,7 +333,6 @@ safe_delete(bak)       # True — no error even though it's gone
 
 ## Q9 🟡 · with_suffix / with_name — produce variant paths
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 Given `Path("output/report.txt")`, produce `"output/report.md"` and `"output/summary.txt"`.
 
@@ -381,7 +372,6 @@ print(renamed)      # output/quarterly_report.txt
 
 ## Q10 🟡 · stat — file size and last modified time
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 Get a file's size in KB and its last modified time as a formatted string.
 
@@ -426,7 +416,6 @@ print(info)
 
 ## Q11 🟠 · resolve — prevent path traversal
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 Use `.resolve()` to canonicalize a path with `../` components and validate it stays inside a safe base directory.
 
@@ -479,7 +468,6 @@ print(safe_join("images/avatar.png"))          # /var/www/uploads/images/avatar.
 
 ## Q12 🟠 · Capstone — organize_downloads
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 Write `organize_downloads(downloads_dir)` that moves files into subdirectories by extension — `.pdf` → `PDFs/`, `.jpg`/`.jpeg`/`.png` → `Images/`, anything else → `Other/`.
 

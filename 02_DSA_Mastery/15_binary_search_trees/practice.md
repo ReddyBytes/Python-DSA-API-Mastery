@@ -44,6 +44,9 @@
 <a id="q1"></a>
 ### Q1 — BST property: left < root < right
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 You have a BST with the following inorder values: `[2, 4, 6, 8, 10]`. The root is `6`. Draw the tree and verify the BST property holds. What must be true for every node — not just for the root?
 
 <details>
@@ -99,6 +102,9 @@ print(verify_bst_property(root))  # True
 
 <a id="q2"></a>
 ### Q2 — BST property is subtree-wide, not just direct children
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 The following tree passes a naive "check only parent-child" validation but is NOT a valid BST. Identify why and fix the validation.
 
@@ -163,6 +169,9 @@ print(is_valid_bst(root))     # False — CORRECT
 
 <a id="q3"></a>
 ### Q3 — Search in a BST: trace the path
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Given this BST, trace the path taken to search for the value `7`:
 
@@ -229,6 +238,9 @@ Trace:
 <a id="q4"></a>
 ### Q4 — Insert into a BST: step by step
 
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 Insert the values `[5, 3, 7, 1, 4, 6, 8]` into an empty BST in that order. Draw the final tree. Then write the insert function.
 
 <details>
@@ -288,6 +300,9 @@ print(inorder(root))  # [1, 3, 4, 5, 6, 7, 8]
 <a id="q5"></a>
 ### Q5 — Find minimum and maximum
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 Write functions to find the minimum and maximum values in a BST without traversing every node.
 
 <details>
@@ -332,6 +347,9 @@ def find_max(root):
 
 <a id="q6"></a>
 ### Q6 — Inorder traversal gives sorted output
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Perform an inorder traversal of the BST below. Explain why the output is always sorted for any valid BST.
 
@@ -386,6 +404,9 @@ def inorder_gen(root):
 <a id="q7"></a>
 ### Q7 — BST vs sorted array vs hash map
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 Your team is designing a salary lookup system. Requirements: fast search, fast insert/delete, and support for "find all salaries between $60K and $90K". Which data structure do you choose and why?
 
 <details>
@@ -429,6 +450,9 @@ print(in_range)  # [62000, 70000, 75000, 80000, 90000]
 
 <a id="q8"></a>
 ### Q8 — Worst-case O(n): when does a BST degrade?
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Insert the values `[1, 2, 3, 4, 5]` into an empty BST in that order. Draw the result. What is the search time? How do self-balancing trees fix this?
 
@@ -496,6 +520,9 @@ print(height(root))   # 5 — same as n, degenerate
 
 <a id="q9"></a>
 ### Q9 — Delete a leaf node
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Delete the value `1` from this BST. Verify the BST property is preserved.
 
@@ -566,6 +593,9 @@ print(inorder(root))  # [3, 5, 7]
 <a id="q10"></a>
 ### Q10 — Delete a node with one child
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 Delete the value `3` from this BST (node 3 has only one child: node 2).
 
 ```
@@ -628,6 +658,9 @@ print(inorder(root))  # [2, 5, 7]
 
 <a id="q11"></a>
 ### Q11 — Delete a node with two children
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Delete the value `5` (the root) from this BST. Explain the inorder successor strategy.
 
@@ -703,6 +736,9 @@ print(inorder(root))  # [2, 3, 4, 6, 7, 8]
 <a id="q12"></a>
 ### Q12 — Validate BST using min/max bounds
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 Write a function to validate whether a given binary tree is a valid BST. Use the min/max bounds approach. Show a case where checking only immediate children fails.
 
 <details>
@@ -756,6 +792,9 @@ print(is_valid_bst(valid))    # True — correct
 
 <a id="q13"></a>
 ### Q13 — Find the kth smallest element
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Given a BST, find the kth smallest element. The BST has n nodes. Implement with O(h + k) time and O(h) space.
 
@@ -821,6 +860,9 @@ print(kth_smallest(root, 5))  # 6
 <a id="q14"></a>
 ### Q14 — Lowest common ancestor in a BST
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 Find the LCA of nodes 2 and 8 in this BST. Then find the LCA of 0 and 4. Implement using the BST property (not general tree LCA).
 
 ```
@@ -883,6 +925,9 @@ print(lca_bst(root, 7, 9))  # 8
 <a id="q15"></a>
 ### Q15 — Convert BST to sorted array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 Convert a BST to a sorted array. What is the minimum possible time complexity, and why?
 
 <details>
@@ -940,6 +985,9 @@ print(list(bst_to_sorted_gen(root)))      # [2, 3, 4, 5, 6, 7, 8]
 
 <a id="q16"></a>
 ### Q16 — Range query: collect all values in [low, high]
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Given a BST, collect all values in the range `[6, 10]`. Use BST-aware pruning — do not visit nodes that are guaranteed to be outside the range.
 
@@ -1006,6 +1054,9 @@ print(range_query(root, 13, 18))  # [13, 15, 18]
 <a id="q17"></a>
 ### Q17 — Range sum with pruning
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 Find the sum of all values in a BST that fall within `[low, high]`. Implement with BST pruning and compare against a naive full traversal.
 
 <details>
@@ -1066,6 +1117,9 @@ print(range_sum_naive(root, 7, 15))  # same result, visits all nodes
 
 <a id="q18"></a>
 ### Q18 — Floor and ceiling in a BST
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Find the floor (largest value ≤ target) and ceiling (smallest value ≥ target) for target = 9 in this BST: `[8, 12, 3, 14, 5, 10]`.
 
@@ -1138,6 +1192,9 @@ print(floor_bst(root, 3))    # 3 (exact match)
 <a id="q19"></a>
 ### Q19 — Inorder successor of a node
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 Find the inorder successor (next larger element in BST ordering) of node 4 in this BST:
 
 ```
@@ -1208,6 +1265,9 @@ print(inorder_successor(root, 8))  # None (8 is max)
 
 <a id="q20"></a>
 ### Q20 — Convert sorted array to height-balanced BST
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Convert `[-10, -3, 0, 5, 9]` to a height-balanced BST. Verify the result is balanced.
 
@@ -1282,6 +1342,9 @@ Result tree:
 <a id="q21"></a>
 ### Q21 — LCA: BST-specific O(h) vs general tree O(n)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 Explain why using the general binary tree LCA algorithm on a BST problem is a red flag in an interview. Implement both versions, compare the complexity, and show what the BST version exploits.
 
 <details>
@@ -1355,6 +1418,9 @@ For balanced BST: h = O(log n), so BST LCA is O(log n) vs O(n)
 <a id="q22"></a>
 ### Q22 — Self-balancing trees: AVL vs Red-Black (conceptual)
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 You need to implement a production leaderboard that supports O(log n) insert, delete, and rank queries. You are told to use a self-balancing BST. Explain AVL vs Red-Black trade-offs conceptually. When would you choose one over the other?
 
 <details>
@@ -1415,6 +1481,9 @@ print(list(leaderboard)[-2:])  # [4200, 5100]
 <a id="q23"></a>
 ### Q23 — BST iterator with O(h) space
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 Implement a `BSTIterator` class that returns the next smallest element on each call to `next()`. Use O(h) space, not O(n). Each `next()` call must be O(1) amortized.
 
 <details>
@@ -1474,6 +1543,9 @@ print(output)  # [1, 3, 5, 7, 9, 15, 20]
 
 <a id="q24"></a>
 ### Q24 — Two approaches to BST validation: which is better?
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 There are two correct approaches to validating a BST: (1) bounds propagation and (2) inorder traversal strictly increasing check. Implement both. When does each have an advantage?
 
@@ -1555,6 +1627,9 @@ Both: O(n) time, O(h) space.
 
 <a id="q25"></a>
 ### Q25 — Common mistake: treating BST like a general tree
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 A junior engineer writes a function to count nodes with values in `[low, high]`. Their solution always visits every node in the tree. Identify the mistake and rewrite it to exploit the BST property.
 

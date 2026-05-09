@@ -4,9 +4,29 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | di · Constructor Injection: Decouple Database from Service | 🟢 |
+| [Q2](#q2) | di · Method Injection: Inject Logger Per Call | 🟡 |
+| [Q3](#q3) | di · Service Locator: Simple Registry | 🟡 |
+| [Q4](#q4) | di · DI for Testing: Inject Mock vs Real DB | 🟡 |
+| [Q5](#q5) | di · Parameter Injection: Inject Config at Call Time | 🟡 |
+| [Q6](#q6) | di · DI with ABC: Interface-Based Injection | 🟠 |
+| [Q7](#q7) | di · Compare Tight vs Loose Coupling | 🟠 |
+| [Q8](#q8) | di · Capstone: Data Pipeline with Injected Source and Sink | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 🟢 · di · Constructor Injection: Decouple Database from Service
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Refactor this tightly coupled code to use constructor injection:
 
@@ -57,9 +77,13 @@ assert result == {"id": 1, "name": "Alice"}
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · di · Method Injection: Inject Logger Per Call
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Build a `DataProcessor.process(data, logger)` where the logger is injected per call (method injection). Define a `Logger` ABC with `log(message)`. Write a `CapturingLogger` that stores messages for assertions.
 
@@ -105,9 +129,13 @@ assert "Processing 4 items" in logger.messages[0]
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · di · Service Locator: Simple Registry
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Build a `ServiceLocator` with `register(name, instance)` and `get(name)`. Raise `KeyError` for unregistered services. Register a `database` and `logger` service. Retrieve and use them.
 
@@ -161,9 +189,13 @@ except KeyError as e:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · di · DI for Testing: Inject Mock vs Real DB
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Build a `UserRepository` that takes a `Database` dependency. Write a full test scenario: `MockDatabase` returns a fixed user, spy on how many queries were made, and assert the `UserRepository.find_by_email(email)` method returns the right result.
 
@@ -223,9 +255,13 @@ assert mock_db.query_count == 2
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · di · Parameter Injection: Inject Config at Call Time
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Build an `EmailSender.send(to, subject, config)` where `config` is injected per call. `config` is a dict with `smtp_host`, `smtp_port`, `from_address`. Write a test that verifies the sender uses the injected config values.
 
@@ -275,9 +311,13 @@ assert test_result["from"]      == "test@localhost"
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟠 · di · DI with ABC: Interface-Based Injection
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Define `StorageBackend` and `CompressionStrategy` ABCs. Build a `FileUploader` that accepts both via constructor injection. Implement `S3Backend`, `LocalBackend`, `GzipCompression`, and `NoCompression`. Wire them up in two configurations: prod (S3 + Gzip) and test (Local + NoCompression).
 
@@ -347,9 +387,13 @@ assert b"col1,col2" in local_backend.stored["data.csv"]
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟠 · di · Compare Tight vs Loose Coupling
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** You are given tightly coupled code. Identify the problems, then rewrite it with constructor injection. Show that the refactored version is testable without external dependencies.
 
@@ -433,9 +477,13 @@ assert emailer.sent[0]["to"] == "user_42@example.com"
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟠 · di · Capstone: Data Pipeline with Injected Source and Sink
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Build a `DataPipeline` with injected `DataSource` (has `read() -> list`) and `DataSink` (has `write(data: list) -> int`). Add an optional `transform` callable parameter (default: identity). Run the pipeline and return a summary `{"rows_read": N, "rows_written": M}`.
 

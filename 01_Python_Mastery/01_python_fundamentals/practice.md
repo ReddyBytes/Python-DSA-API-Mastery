@@ -9,40 +9,45 @@
 
 | # | Concept | Difficulty |
 |---|---------|-----------|
-| Q1 | print() — sep= and end= | 🟢 |
-| Q2 | input() and type conversion | 🟢 |
-| Q3 | Indentation and syntax | 🟢 |
-| Q4 | Variables as references (labels, not boxes) | 🟢 |
-| Q5 | Shared reference — spot the mutation | 🟢 |
-| Q6 | Rebinding vs mutation — predict output | 🟡 |
-| Q7 | Shallow copy vs deep copy | 🟡 |
-| Q8 | Config mutation bug — find and fix | 🟡 |
-| Q9 | Reference counting and del | 🟡 |
-| Q10 | Mutable default argument trap | 🟡 |
-| Q11 | Pass-by-assignment — mutate vs rebind | 🟡 |
-| Q12 | += on mutable vs immutable | 🟡 |
-| Q13 | is vs == — object identity trap | 🟡 |
-| Q14 | Single-element tuple — trailing comma | 🟢 |
-| Q15 | Falsy values — when 0 and "" are valid data | 🟡 |
-| Q16 | Exception variable scope | 🟡 |
-| Q17 | Chained comparisons | 🟢 |
-| Q18 | Multiple assignment and swap | 🟢 |
-| Q19 | Extended unpacking (*args) | 🟡 |
-| Q20 | Mutable objects inside tuples | 🟡 |
-| Q21 | Late binding closures — predict output | 🟠 |
-| Q22 | Late binding closure — fix the bug | 🟠 |
-| Q23 | UnboundLocalError — why it happens | 🟡 |
-| Q24 | Truthiness — classify values | 🟢 |
-| Q25 | Deep copy necessity | 🟡 |
-| Q26 | String interning — is vs == | 🟡 |
-| Q27 | Tuple mutability paradox | 🟡 |
-| Q28 | Multiple return + unpack | 🟢 |
-| Q29 | Augmented assignment and shared reference | 🟠 |
-| Q30 | Capstone — reference model trace | 🟠 |
+| [Q1](#q1) | print() — sep= and end= | 🟢 |
+| [Q2](#q2) | input() and type conversion | 🟢 |
+| [Q3](#q3) | Indentation and syntax | 🟢 |
+| [Q4](#q4) | Variables as references (labels, not boxes) | 🟢 |
+| [Q5](#q5) | Shared reference — spot the mutation | 🟢 |
+| [Q6](#q6) | Rebinding vs mutation — predict output | 🟡 |
+| [Q7](#q7) | Shallow copy vs deep copy | 🟡 |
+| [Q8](#q8) | Config mutation bug — find and fix | 🟡 |
+| [Q9](#q9) | Reference counting and del | 🟡 |
+| [Q10](#q10) | Mutable default argument trap | 🟡 |
+| [Q11](#q11) | Pass-by-assignment — mutate vs rebind | 🟡 |
+| [Q12](#q12) | += on mutable vs immutable | 🟡 |
+| [Q13](#q13) | is vs == — object identity trap | 🟡 |
+| [Q14](#q14) | Single-element tuple — trailing comma | 🟢 |
+| [Q15](#q15) | Falsy values — when 0 and "" are valid data | 🟡 |
+| [Q16](#q16) | Exception variable scope | 🟡 |
+| [Q17](#q17) | Chained comparisons | 🟢 |
+| [Q18](#q18) | Multiple assignment and swap | 🟢 |
+| [Q19](#q19) | Extended unpacking (*args) | 🟡 |
+| [Q20](#q20) | Mutable objects inside tuples | 🟡 |
+| [Q21](#q21) | Late binding closures — predict output | 🟠 |
+| [Q22](#q22) | Late binding closure — fix the bug | 🟠 |
+| [Q23](#q23) | UnboundLocalError — why it happens | 🟡 |
+| [Q24](#q24) | Truthiness — classify values | 🟢 |
+| [Q25](#q25) | Deep copy necessity | 🟡 |
+| [Q26](#q26) | String interning — is vs == | 🟡 |
+| [Q27](#q27) | Tuple mutability paradox | 🟡 |
+| [Q28](#q28) | Multiple return + unpack | 🟢 |
+| [Q29](#q29) | Augmented assignment and shared reference | 🟠 |
+| [Q30](#q30) | Capstone — reference model trace | 🟠 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · print-options — print() with sep= and end= 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 What does this print? Explain what `sep=` and `end=` do.
 
@@ -74,7 +79,12 @@ a-b-c!done
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · input-conversion — input() and type conversion 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 What is wrong here, and how do you fix it?
 
@@ -108,7 +118,12 @@ if age > 18:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · indentation — why this crashes 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 What error does Python raise and why?
 
@@ -133,7 +148,12 @@ Python uses indentation as syntax, not style.
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · references — variables as labels 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Run this in your head. What does `a` print?
 
@@ -166,7 +186,12 @@ print(a)
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · shared-reference — spot the mutation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Predict each print output:
 
@@ -206,7 +231,12 @@ Rebinding `x` with `=` doesn't change the original list. Only mutation methods (
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · rebinding-vs-mutation — predict output 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 What is the final value of `items` after this code?
 
@@ -240,7 +270,12 @@ Inside `add_default`, `lst + [99]` creates a brand-new list and `lst = ...` rebi
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · shallow-deep-copy — fix the mutation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 This code is supposed to keep `original` unchanged. It doesn't work. Fix it.
 
@@ -276,7 +311,12 @@ clone = copy.deepcopy(original)
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · config-mutation — find and fix the bug 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 The default config is getting corrupted. Explain why and fix it.
 
@@ -317,7 +357,12 @@ def get_config(overrides=None):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · ref-counting — predict when memory is freed 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 ```python
 a = [1, 2, 3]
@@ -352,7 +397,12 @@ After `del a` and `del b`, `c` still holds a reference to the list — reference
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · mutable-default — classic gotcha 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Why does this produce surprising output? Fix it.
 
@@ -400,7 +450,12 @@ def add_item(item, history=None):
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · pass-by-assignment — mutate vs rebind 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Predict what each function call does to `my_list`:
 
@@ -441,7 +496,12 @@ B: [10, 20]
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · augmented-assignment — mutable vs immutable 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 ```python
 x = [1, 2]
@@ -479,7 +539,12 @@ B: (1, 2)      ← b is unchanged
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · is-vs-equals — identity trap 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Why does this give inconsistent results? What's the rule?
 
@@ -513,7 +578,12 @@ CPython pre-creates ("interns") integer objects from -5 to 256. Any variable ass
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · tuple-comma — single-element tuple 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 What is the type of each variable?
 
@@ -547,7 +617,12 @@ d → tuple ()        — empty tuple (exception: () works without comma)
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · falsy-values — when 0 and "" are valid 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 This function has a logic bug when `count` is 0 or `name` is `""`. Find and fix it.
 
@@ -587,7 +662,12 @@ def display(name, count):
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · exception-scope — variable deleted after except 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Why does this raise `NameError`? Fix it to save the error message.
 
@@ -625,7 +705,12 @@ In Python 3, the `as e` variable is explicitly deleted when the `except` block e
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · chained-comparisons — predict output 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 ```python
 x = 5
@@ -658,7 +743,12 @@ Python chained comparisons evaluate as `(a < b) and (b < c)` — not `((a < b) <
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · swap — multiple assignment 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Swap `a` and `b` without a temp variable. How does Python guarantee this works?
 
@@ -689,7 +779,12 @@ Python evaluates the right side `(b, a)` as a tuple `(20, 10)` fully before assi
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · extended-unpacking — star operator 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Unpack `data` so that `first = 1`, `last = 5`, and `middle = [2, 3, 4]`.
 
@@ -724,7 +819,12 @@ _, important, *_ = [10, 99, 30, 40, 50]
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · tuple-mutability — paradox 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 A tuple is "immutable" — so why does this succeed?
 
@@ -758,7 +858,12 @@ The tuple's "slots" (the references) are immutable — `t[0] = [99]` would chang
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · late-binding — predict output 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 ```python
 funcs = [lambda: i for i in range(5)]
@@ -787,7 +892,12 @@ Each lambda closes over the variable `i` — not a snapshot of its value. By the
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · late-binding-fix — two ways to fix it 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Fix Q21 so the list prints `[0, 1, 2, 3, 4]`. Show two approaches.
 
@@ -824,7 +934,12 @@ Each call to `make_func` creates a new scope with its own `n`. Clean and readabl
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · unbound-local — explain the error 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 ```python
 counter = 10
@@ -868,7 +983,12 @@ counter = increment(counter)
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · truthiness — classify 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Which of these are falsy in Python?
 
@@ -896,7 +1016,12 @@ The pattern: **empty or zero = falsy**. A container with any element is truthy, 
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · deep-copy-need — when is shallow copy enough? 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 You have a list of user dicts. You want a "backup" before modifying one user's nested settings. Which copy do you need?
 
@@ -935,7 +1060,12 @@ backup = copy.deepcopy(users)
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · string-interning — is vs == with strings 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Predict True or False. Explain the rule.
 
@@ -973,7 +1103,12 @@ C: True   (always — == compares values)
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · tuple-hashability — why can't this be a dict key? 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 ```python
 t = ([1, 2], [3, 4])
@@ -1003,7 +1138,12 @@ A tuple is only hashable if ALL its elements are hashable. `[1, 2]` is a list �
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · multiple-return — unpack safely 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Write a function `min_max(numbers)` that returns both the minimum and maximum in one call. Unpack the result into two variables.
 
@@ -1031,7 +1171,12 @@ Python functions can "return multiple values" by returning a tuple. Tuple unpack
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · aug-assign-shared — advanced trace 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 ```python
 a = [1, 2]
@@ -1071,7 +1216,12 @@ D: False
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · capstone — full reference model trace 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Trace this code from top to bottom. Write the final value of every variable.
 

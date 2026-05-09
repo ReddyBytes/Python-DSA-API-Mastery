@@ -32,7 +32,12 @@
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · stack vs heap — where Python stores variables 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 You write three lines of Python:
 
@@ -44,7 +49,6 @@ city = "London"
 
 Describe where `name`, `age`, and `city` live versus where `"Alice"`, `25`, and `"London"` live. Draw the relationship.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -70,7 +74,12 @@ The actual values `"Alice"`, `25`, `"London"` are objects stored in the heap.
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · stack frame lifecycle — what happens on function call/return 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Trace what happens in memory when this code runs:
 
@@ -84,7 +93,6 @@ result = greet("Alice")
 
 What exists on the stack during `greet()`? What is destroyed when it returns? What survives?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -115,7 +123,12 @@ AFTER return:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · heap allocation — multiple labels, one object 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 What does Python do in memory when you write:
 
@@ -126,7 +139,6 @@ b = a
 
 Is `b` a copy of `"Alice"` or a second label pointing to the same object? How would you verify?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -152,7 +164,12 @@ print(a is b)          # True — same object
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · sys.getrefcount() — read and explain the count 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Run this code and explain why the count is higher than you might expect:
 
@@ -164,7 +181,6 @@ print(sys.getrefcount(obj))
 
 Why is the result always at least 2, not 1?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -187,11 +203,15 @@ print(sys.getrefcount(obj))  # 2 (at minimum)
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · reference counting — increment and decrement 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Show the reference count of a list as you: create it, assign a second name, add it to a container, then remove each reference. Explain each step.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -225,11 +245,15 @@ print(sys.getrefcount(x))  # 2 — back to just x + call arg
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · reference counting — when is an object freed? 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write a class with a `__del__` method. Create an instance, add a second reference, then delete them one by one. Observe exactly when the object is destroyed.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -259,11 +283,15 @@ del obj                  # refcount = 0 → [DELETED] obj_A immediately
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · circular references — the problem reference counting can't solve 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Create two objects that reference each other. Delete the external names. Show that `__del__` is NOT called. Then use `gc.collect()` to fix it.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -304,7 +332,12 @@ gc.enable()
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · gc.collect() — manually trigger garbage collection 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Demonstrate `gc.collect()` with per-generation control. Show:
 - `gc.collect(0)` — gen 0 only
@@ -313,7 +346,6 @@ Demonstrate `gc.collect()` with per-generation control. Show:
 
 Also show `gc.get_threshold()` and explain the default `(700, 10, 10)`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -345,11 +377,15 @@ print(gc.get_count())   # resets after collect
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · gc.get_count() and generations — reading GC state 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Read and interpret `gc.get_count()` before and after creating 1000 objects and then deleting them. What do the three numbers mean?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -380,11 +416,15 @@ print("After del + collect:", gc.get_count())  # (0, 0, 0) or near
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · generators vs lists — memory comparison 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Compare the memory used by a list comprehension versus a generator expression for 1,000,000 squared values. Use `sys.getsizeof()`. What is the ratio?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -411,11 +451,15 @@ print(f"Ratio:     {list_size // gen_size:,}x")          # ~70,000x
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · generator pipeline — O(1) memory chain 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write a three-stage generator pipeline: `read_records()` → `filter_active()` → `enrich()`. Each stage is a generator. Show that no intermediate lists are created and memory stays O(1) regardless of record count.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -453,14 +497,18 @@ print(result[0])   # {"id": 0, "value": 0, "status": "active", "doubled": 0}
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · __slots__ — add to a class and explain savings 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Convert a `RegularUser` class (4 attributes: user_id, name, email, age) to use `__slots__`. Verify that:
 1. The slotted version has no `__dict__`
 2. You cannot add arbitrary attributes to it
 3. Use `sys.getsizeof()` to compare sizes
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -501,11 +549,15 @@ except AttributeError as e:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · __slots__ vs __dict__ — measure the difference 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Create 100,000 instances of both `RegularUser` and `SlottedUser` using `tracemalloc`. Print total MB used by each. What is the real-world savings?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -541,11 +593,15 @@ print(f"Slotted: ~{slt_mb:.1f} MB")   # ~16 MB  (~60% savings)
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · weakref.ref() — reference without holding the object alive 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Create an object. Create a `weakref.ref()` to it. Access it through the weak reference while the object is alive. Then delete the original — show the weak reference returns `None`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -580,11 +636,15 @@ print(weak())          # None — object is gone
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · WeakValueDictionary — self-cleaning cache 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Build a simple document cache using `weakref.WeakValueDictionary`. Store two documents. Delete one. Show the cache shrinks automatically without any manual cleanup code.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -622,7 +682,12 @@ print(cache[2].doc_id)  # 2 — still alive
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · local vs global lifetime — variable scope and memory 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Explain the lifetime of local, global, and built-in variables using this table as a guide. Write code that demonstrates a local variable disappearing after a function returns.
 
@@ -634,7 +699,6 @@ Global     | Lives for entire program run
 Built-in   | Lives for entire interpreter session
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -664,11 +728,15 @@ print(f"Outside: result = {result}")   # 6
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · closure cell on heap — why enclosing variables survive 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Write a `make_counter()` function that returns an `increment()` closure. After `make_counter()` returns, its local variable `count` should normally be destroyed — but it isn't. Explain why, using `__closure__` to inspect it.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -705,11 +773,15 @@ print(c())   # 2
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · nonlocal — mutating an enclosing variable 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Write a function that uses `nonlocal` to modify a variable in the enclosing scope. Show what happens WITHOUT `nonlocal` (gets UnboundLocalError) and then fix it with `nonlocal`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -743,7 +815,12 @@ print(acc(3))   # 18
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · tracemalloc snapshot — before/after comparison 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Write code that:
 1. Starts `tracemalloc`
@@ -752,7 +829,6 @@ Write code that:
 4. Takes a second snapshot
 5. Prints the top 3 lines that allocated the most memory
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -792,11 +868,15 @@ gc.collect()
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · sys.getsizeof() — measuring object sizes 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Measure and compare the sizes of: `None`, `True`, `0`, `"a"`, `[]`, `[1]`, `{}`, `set()`. Then explain the key gotcha with `sys.getsizeof()` and nested objects.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -829,11 +909,15 @@ print(sys.getsizeof(nested))         # ~72 bytes — just the list wrapper
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · memory_profiler @profile — line-by-line memory 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Describe how to use `memory_profiler`'s `@profile` decorator. Write a function that allocates and frees a large list, and explain what the output would show.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -872,13 +956,17 @@ allocate_and_free()
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · avoid large globals — prefer local scope 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Demonstrate why a large global variable is a memory problem. Then show the fix: scope the data locally and release it when done.
 
 Also show the performance tip: caching a global function reference in a local variable for tight loops.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -916,11 +1004,15 @@ for i in range(1_000_000):
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · chunked processing — bounded memory over large data 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Write a `chunked(iterable, size)` generator that yields successive fixed-size chunks. Use it to process 1,000,000 items in batches of 10,000. Prove that at most 10,000 items are in memory at any time.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -963,11 +1055,15 @@ def batch_insert(records, batch_size=1000):
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · del + gc.collect() — explicit cleanup between heavy phases 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Write a multi-phase processing function. After each phase, explicitly `del` the work data and call `gc.collect()`. Explain when this pattern matters versus when Python handles it automatically.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1006,7 +1102,12 @@ print(f"Total: {r1 + r2 + r3:,}")
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · capstone — diagnose and fix a memory leak scenario 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 A web server accumulates memory over time. Here is a simplified version:
 
@@ -1024,7 +1125,6 @@ for i in range(1000):
 
 Identify all memory problems. Rewrite `handle_request` and the surrounding code to fix them. Use `tracemalloc` to verify the fix works.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

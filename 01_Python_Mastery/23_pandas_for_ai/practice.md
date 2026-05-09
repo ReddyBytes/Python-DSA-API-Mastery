@@ -45,11 +45,15 @@ Difficulty: 🟢 Basic / 🟡 Intermediate / 🟠 Advanced
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · time series — DatetimeIndex creation 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Given a list of ISO timestamp strings, convert them to a `DatetimeIndex` using `pd.to_datetime()`, then extract the hour and day-of-week for each timestamp as new DataFrame columns.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -78,11 +82,15 @@ print(df)
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · time series — resample to hourly 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 You have a DataFrame with a `datetime64` index and a `latency_ms` column at per-minute granularity. Resample to produce hourly mean, max, and count — all in one call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -112,11 +120,15 @@ print(hourly.head())
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · time series — rolling window mean 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Using the same `latency_ms` column, compute a 24-period rolling mean and a rolling max over 10 periods. Ensure the rolling mean starts computing even when fewer than 24 values are available.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -143,11 +155,15 @@ print(df[["latency_ms", "rolling_24_mean", "rolling_10_max"]].head(30))
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · time series — shift and diff for lag features 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Create three new columns on a time-series DataFrame: a 1-step lag of `latency_ms`, a 2-step lag, and the first difference (rate of change between consecutive rows). Then drop rows with `NaN` introduced by the shift.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -174,11 +190,15 @@ print(df.head())
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · string operations — str accessor basics 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Given a `raw_text` column with inconsistent casing and extra whitespace, produce three new columns: lowercase version, stripped version, and character length. Confirm that `None` values produce `NaN` without raising an error.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -207,11 +227,15 @@ print(df)
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · string operations — str.contains with regex 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Filter a DataFrame's `text` column to keep only rows that contain a URL (matching the pattern `https?://\S+`). Also create a boolean column `has_pii` that flags rows containing an SSN pattern (`\b\d{3}-\d{2}-\d{4}\b`).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -243,11 +267,15 @@ print(f"Rows after PII filter: {len(df_clean)}")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · string operations — str.extract with named groups 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 A `log_line` column contains entries like `"/api/v1/predict 200 45ms"`. Use `str.extract()` with named capture groups to pull `endpoint`, `status_code`, and `latency_ms` into separate columns, then concatenate them onto the original DataFrame.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -277,11 +305,15 @@ print(df)
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · string operations — str.split expand 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Split a `full_name` column (format: `"FirstName LastName"`) into two separate columns `first` and `last`. Then take a `tags` column where each row is a comma-separated string and explode it into one row per tag.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -313,11 +345,15 @@ print(exploded[["full_name", "tag"]])
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · groupby advanced — agg dict 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Group a user scores DataFrame by `user_id` and compute mean score, max score, and total request count in a single `.agg()` call using a dictionary of aggregations.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -350,11 +386,15 @@ print(summary)
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · groupby advanced — transform vs agg 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Using the same user scores DataFrame, add a `group_mean` column that shows each user's average score broadcast back to every row (same shape as input). Then compute a z-score normalized `score_z` within each group.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -388,11 +428,15 @@ print(df)
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · groupby advanced — groupby+apply 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Filter out groups that have fewer than 2 samples using `groupby().filter()`. Then use `groupby().apply()` to compute the IQR (Q75 - Q25) per user group.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -427,11 +471,15 @@ print(iqr_per_user)
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · groupby advanced — named aggregation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Using `pd.NamedAgg`, produce a summary table that includes: mean score, max score, p25 and p75 quantiles, and the count of samples — all named explicitly in the `.agg()` call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -465,11 +513,15 @@ print(summary)
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · pivot/melt — pivot_table 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Given a sales DataFrame with columns `region`, `product`, `sales`, `units`, build a pivot table that shows total `sales` per region (rows) × product (columns), with `0` replacing missing cells and an "All" totals column.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -508,11 +560,15 @@ print(pt)
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · pivot/melt — melt wide to long 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Convert a wide DataFrame with columns `student`, `math`, `science`, `english` into long format with columns `student`, `subject`, `score`. Each original score column should become a row.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -547,11 +603,15 @@ print(df_long)
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · pivot/melt — wide_to_long / stack 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Take a multi-metric wide DataFrame (columns: `user_id`, `score_jan`, `score_feb`, `count_jan`, `count_feb`) and use `pd.wide_to_long()` to reshape it into long format with columns `user_id`, `month`, `score`, `count`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -589,11 +649,15 @@ print(df_long)
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · pivot/melt — stack and unstack 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Create a DataFrame with a MultiIndex from a `pivot_table` call (rows: region, columns: product with sub-columns sales and units). Then use `stack()` to move the product level from columns into the row index, and `unstack()` to reverse it.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -627,11 +691,15 @@ print(unstacked)
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · query and eval — query() with variables 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Filter a DataFrame to rows where `score >= min_score` and `status == target_status`, where both values are Python variables. Write the filter using `df.query()` with `@` variable injection instead of f-strings.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -664,11 +732,15 @@ print(result)
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · query and eval — eval() for computed columns 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Use `df.eval()` to add two new columns in a single call: `score_pct` (score divided by 100) and `composite` (score × 0.7 + age × 0.3). Then add a third column using a Python variable via `@`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -704,11 +776,15 @@ print(df)
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · query and eval — chained query 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Build a filtering pipeline that: (1) uses `eval()` to create `token_density = quality_score / token_count`, (2) then uses `query()` to keep only rows where `token_count >= 50`, `token_count <= 512`, `language == 'en'`, and `token_density >= @min_density`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -746,11 +822,15 @@ print(df_final)
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · query and eval — performance comparison 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Write a benchmark that compares the speed of boolean indexing vs `query()` on a 500,000-row DataFrame with a three-condition filter. Use `%timeit` or `timeit.timeit()` to measure both, and explain when `query()` wins.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -792,11 +872,15 @@ print(f"Boolean: {t_bool:.3f}s | Query: {t_query:.3f}s")
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · sql integration — read_sql with SQLite 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Create an in-memory SQLite database, write a DataFrame to it using `to_sql()`, then read it back using `pd.read_sql()` with a filtered SQL query.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -834,11 +918,15 @@ conn.close()
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · sql integration — to_sql with if_exists 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Demonstrate all three `if_exists` modes of `to_sql()`: `"replace"` (drops and recreates), `"append"` (adds rows), and `"fail"` (raises if table exists). Show the row count at each step.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -881,11 +969,15 @@ conn.close()
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · sql integration — merge vs SQL JOIN 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Show the Pandas equivalent of an SQL LEFT JOIN and INNER JOIN using `pd.merge()`. Load both "tables" as DataFrames, merge on `user_id`, and verify that the left join preserves all rows from the left DataFrame even when no match exists on the right.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -923,11 +1015,15 @@ print(left)
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · sql integration — read_sql_query with params 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Use `pd.read_sql()` with a parameterized query (using `%(name)s` placeholders) to pull rows where `label = 'positive'` and `quality >= 4`. Never use f-strings to inject values into SQL — demonstrate the correct pattern.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -966,11 +1062,15 @@ conn.close()
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · ml data prep — train/test split preserving index 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Split a 1,000-row DataFrame into 70% train / 15% val / 15% test using stratified sampling on the `label` column. After splitting, verify that: (1) the three sets don't overlap, and (2) the class distribution is preserved in each split.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1015,11 +1115,15 @@ for name, split in [("train", df_train), ("val", df_val), ("test", df_test)]:
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · ml data prep — StandardScaler on DataFrame 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Standardize numeric feature columns using training-set statistics only. Fit the mean and std on `df_train`, then apply the same transformation to `df_val` and `df_test`. Verify that the training set has approximately mean=0 and std=1 after scaling.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1054,11 +1158,15 @@ print(df_train[feature_cols].std().round(4))    # should be ~1
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · ml data prep — one-hot encoding get_dummies 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 One-hot encode a `color` column (values: `"red"`, `"blue"`, `"green"`) using `pd.get_dummies()`. Use `drop_first=True` to avoid multicollinearity, and use `dtype=int` so the output is integers rather than booleans.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1094,11 +1202,15 @@ print(df_encoded)
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · ml data prep — impute missing values 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Handle missing values in a DataFrame: fill numeric column `age` with the training-set median, fill categorical column `region` with `"unknown"`, and drop any rows where the `label` column is null. Apply all changes without using `inplace=True`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1136,11 +1248,15 @@ print(f"Train nulls: {df_train.isnull().sum().sum()}")
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · data validation — assert dtypes 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Write a function that accepts a DataFrame and an expected schema dict (`{column: dtype_string}`) and raises a `ValueError` listing all type mismatches and missing columns. Test it with a DataFrame that has a wrong dtype.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1185,11 +1301,15 @@ except ValueError as e:
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · data validation — check for nulls 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Write a null-rate audit that: (1) prints the null count and null rate per column, (2) raises an error if any "critical" column has any nulls at all, and (3) warns (but does not raise) if any column has a null rate above 5%.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1229,11 +1349,15 @@ null_audit(df, critical_cols=["label", "score"], max_null_rate=0.05)
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · data validation — validate value ranges 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
 
 Assert that a `score` column is within [0, 100], a `probability` column is within [0.0, 1.0], and an `age` column is within [0, 120]. For any violation, include the actual min and max in the error message.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1271,11 +1395,15 @@ for col, (low, high) in range_checks.items():
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · data validation — schema validation with pandera 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
 
 Use `pandera` to define a `DataFrameSchema` that enforces: `score` is float in [0.0, 100.0], `label` is integer in {0, 1}, `source` is a non-null string. Validate a DataFrame against it and handle the `SchemaError` gracefully.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1320,11 +1448,15 @@ except pa.errors.SchemaErrors as e:
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 · performance — astype category 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
 
 Convert a `status` column (values: `"active"`, `"inactive"`, `"pending"`) from `object` dtype to `category` dtype. Measure the memory usage before and after. Also demonstrate setting `dtype='category'` at CSV read time.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1361,11 +1493,15 @@ print(f"Reduction: {(1 - after/before):.1%}")
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · performance — query over boolean mask 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
 
 Compare `query()` and boolean indexing on a 300,000-row DataFrame with a two-condition filter involving a `@variable`. Show that `query()` with the `numexpr` engine avoids intermediate array allocations and explain when it is and is not faster.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1410,11 +1546,15 @@ print(f"Boolean: {t1:.3f}s | Query: {t2:.3f}s")
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · performance — chunked read_csv 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
 
 Read a large CSV file in chunks of 100,000 rows. For each chunk, filter to rows where `quality_score >= 3`, compute a derived column `text_len`, and collect only rows where `text_len > 50`. Combine all filtered chunks into a final DataFrame.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1445,11 +1585,15 @@ print(f"Final rows: {len(df_final):,}")
 
 ---
 
+<a id="q36"></a>
+
 ### Q36 · performance — vectorized vs apply benchmark 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q36](./practice_local.py)
+
 
 Benchmark four approaches for cleaning a 500,000-row text column (strip + lowercase): (1) Python loop with `iterrows()`, (2) `apply(lambda x: ...)`, (3) `.str` accessor chain, (4) `numpy.vectorize`. Report the speedups and explain why the `.str` accessor wins for string operations.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q36](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

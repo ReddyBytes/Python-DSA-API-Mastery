@@ -9,42 +9,46 @@
 
 | # | Difficulty | Topic | Skill |
 |---|---|---|---|
-| [Q1](#q1--with-statement-anatomy--trace-the-5-steps) | 🟢 | with statement | Protocol anatomy |
-| [Q2](#q2--open-as-cm--why-files-close-on-exception) | 🟢 | open() as CM | Exception safety |
-| [Q3](#q3--__exit__-params--three-params-and-return-true) | 🟢 | __exit__ params | Return True behavior |
-| [Q4](#q4--class-based-cm--write-managedfile) | 🟡 | class-based CM | __enter__ / __exit__ |
-| [Q5](#q5--suppress-exceptions--write-suppresserrors) | 🟡 | suppress exceptions | Custom suppressor |
-| [Q6](#q6--contextlibsuppress--rewrite-tryexceptpass) | 🟢 | contextlib.suppress | Idiomatic rewrite |
-| [Q7](#q7--contextmanager--timer-using-generator) | 🟡 | @contextmanager | Generator-based CM |
-| [Q8](#q8--contextmanager-resource-leak--spot-and-fix) | 🟡 | @contextmanager | Missing try/finally |
-| [Q9](#q9--transaction-cm--commit-on-success-rollback-on-exception) | 🟡 | transaction CM | Exception handling |
-| [Q10](#q10--temp_dir-cm--create-and-clean-up-temp-directory) | 🟢 | temp_dir CM | Real-world pattern |
-| [Q11](#q11--timing-cm--measure-and-log-elapsed-time) | 🟡 | timing CM | Production pattern |
-| [Q12](#q12--acquire_lock-cm--lock-with-timeout) | 🟡 | acquire_lock CM | Timeout pattern |
-| [Q13](#q13--redirect_stdout--capture-print-output-to-buffer) | 🟡 | redirect_stdout | Output capture |
-| [Q14](#q14--database-connection-cm--auto-commitrollback) | 🟡 | database CM | sqlite3 lifecycle |
-| [Q15](#q15--multiple-cms--nested-vs-one-liner) | 🟢 | multiple CMs | Composition styles |
-| [Q16](#q16--exit-order--trace-lifo-for-a-b-c) | 🟡 | exit order | LIFO tracing |
-| [Q17](#q17--exitstack--merge-n-files-at-runtime) | 🟡 | ExitStack | Dynamic files |
-| [Q18](#q18--exitstack-callbacks--register-cleanup-functions) | 🟡 | ExitStack | callback() |
-| [Q19](#q19--exitstack-conditional--use-transaction-if-flag-set) | 🟠 | ExitStack | Conditional CM |
-| [Q20](#q20--nullcontext--optional-lock-pattern) | 🟡 | nullcontext | Optional CM |
-| [Q21](#q21--async-cm--write-asyncdbconnection) | 🟡 | async CM | __aenter__ / __aexit__ |
-| [Q22](#q22--asynccontextmanager--write-async_timer) | 🟡 | @asynccontextmanager | Async generator CM |
-| [Q23](#q23--gotcha-return-true--fix-accidental-suppression) | 🟡 | gotcha | return True scope |
-| [Q24](#q24--gotcha-missing-tryfinal--show-leak-add-fix) | 🟡 | gotcha | try/finally leak |
-| [Q25](#q25--gotcha-__enter__-raises--protect-setup) | 🟠 | gotcha | __enter__ safety |
-| [Q26](#q26--contextlibclosing--wrap-legacy-object) | 🟡 | contextlib.closing | .close() wrapping |
-| [Q27](#q27--audit_log-cm--wrap-with-startenderror-logging) | 🟡 | audit_log CM | Logging pattern |
-| [Q28](#q28--exitstack-ownership-transfer--return-stack-to-caller) | 🟠 | ExitStack | Ownership transfer |
-| [Q29](#q29--debug-wrong-suppress-scope--fix-overly-broad-suppress) | 🟡 | debug | Suppress scope |
-| [Q30](#q30--capstone--build-connectionpool-with-exitstack) | 🟠 | capstone | ConnectionPool class |
+| [Q1](#q1) | 🟢 | with statement | Protocol anatomy |
+| [Q2](#q2) | 🟢 | open() as CM | Exception safety |
+| [Q3](#q3) | 🟢 | __exit__ params | Return True behavior |
+| [Q4](#q4) | 🟡 | class-based CM | __enter__ / __exit__ |
+| [Q5](#q5) | 🟡 | suppress exceptions | Custom suppressor |
+| [Q6](#q6) | 🟢 | contextlib.suppress | Idiomatic rewrite |
+| [Q7](#q7) | 🟡 | @contextmanager | Generator-based CM |
+| [Q8](#q8) | 🟡 | @contextmanager | Missing try/finally |
+| [Q9](#q9) | 🟡 | transaction CM | Exception handling |
+| [Q10](#q10) | 🟢 | temp_dir CM | Real-world pattern |
+| [Q11](#q11) | 🟡 | timing CM | Production pattern |
+| [Q12](#q12) | 🟡 | acquire_lock CM | Timeout pattern |
+| [Q13](#q13) | 🟡 | redirect_stdout | Output capture |
+| [Q14](#q14) | 🟡 | database CM | sqlite3 lifecycle |
+| [Q15](#q15) | 🟢 | multiple CMs | Composition styles |
+| [Q16](#q16) | 🟡 | exit order | LIFO tracing |
+| [Q17](#q17) | 🟡 | ExitStack | Dynamic files |
+| [Q18](#q18) | 🟡 | ExitStack | callback() |
+| [Q19](#q19) | 🟠 | ExitStack | Conditional CM |
+| [Q20](#q20) | 🟡 | nullcontext | Optional CM |
+| [Q21](#q21) | 🟡 | async CM | __aenter__ / __aexit__ |
+| [Q22](#q22) | 🟡 | @asynccontextmanager | Async generator CM |
+| [Q23](#q23) | 🟡 | gotcha | return True scope |
+| [Q24](#q24) | 🟡 | gotcha | try/finally leak |
+| [Q25](#q25) | 🟠 | gotcha | __enter__ safety |
+| [Q26](#q26) | 🟡 | contextlib.closing | .close() wrapping |
+| [Q27](#q27) | 🟡 | audit_log CM | Logging pattern |
+| [Q28](#q28) | 🟠 | ExitStack | Ownership transfer |
+| [Q29](#q29) | 🟡 | debug | Suppress scope |
+| [Q30](#q30) | 🟠 | capstone | ConnectionPool class |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · with statement anatomy — trace the 5 steps
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Given the following code:
 
@@ -93,9 +97,13 @@ else:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · open() as CM — why files close on exception
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Explain why the file `f` is guaranteed to be closed in the code below, even if `process(f)` raises a `ValueError`. Then show the fragile version (without a context manager) and explain the difference.
 
@@ -136,9 +144,13 @@ finally:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · __exit__ params — three params and return True
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write the signature of `__exit__` and describe each of its three parameters. Then show what happens when you return `True` vs `False`/`None`. Include a concrete example demonstrating the difference.
 
@@ -191,9 +203,13 @@ except KeyError:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · class-based CM — write ManagedFile
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write a class `ManagedFile` that wraps file open/close as a context manager. It should accept `path` and `mode` arguments. The `as` variable should be the file handle. Exceptions must not be suppressed.
 
@@ -234,9 +250,13 @@ with ManagedFile("data.txt") as f:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · suppress exceptions — write SuppressErrors
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a class `SuppressErrors` that accepts one or more exception types and silently swallows them. Other exception types must still propagate. Demonstrate it with a `KeyError` and a `ValueError`.
 
@@ -281,9 +301,13 @@ except ValueError as e:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟢 · contextlib.suppress — rewrite try/except/pass
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Rewrite the following verbose try/except/pass blocks using `contextlib.suppress()`:
 
@@ -328,9 +352,13 @@ with suppress(KeyError, TypeError):
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · @contextmanager — timer using generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write a `timer(label)` context manager using `@contextmanager` that measures elapsed time for the `with` block and prints `"{label} completed in {elapsed:.4f}s"` on exit. Use `time.perf_counter()`.
 
@@ -367,9 +395,13 @@ with timer("sorting"):
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · @contextmanager resource leak — spot and fix
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** The following context manager has a resource leak. Identify the problem and fix it.
 
@@ -418,9 +450,13 @@ def open_connection(host):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · transaction CM — commit on success, rollback on exception
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Write a `transaction(conn)` context manager using `@contextmanager` that:
 - Executes `conn.execute("BEGIN")` on entry
@@ -469,9 +505,13 @@ except RuntimeError:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟢 · temp_dir CM — create and clean up temp directory
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write a `temp_dir()` context manager using `@contextmanager` that creates a temporary directory, yields its `Path`, and removes the entire directory tree on exit (even on exception).
 
@@ -511,9 +551,13 @@ with temp_dir() as d:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · timing CM — measure and log elapsed time
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Extend the `timer` context manager from Q7 to also accept an optional `logger` argument. If `logger` is provided, use `logger.info()` to log the elapsed time. If not, fall back to `print()`. The log message format should be `"{name} completed in {elapsed:.3f}s"`.
 
@@ -560,9 +604,13 @@ with timer("db query", logger=log):
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · acquire_lock CM — lock with timeout
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write an `acquire_lock(lock, timeout=5.0)` context manager using `@contextmanager`. It should:
 - Try to acquire the lock with the given timeout
@@ -613,9 +661,13 @@ except TimeoutError as e:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · redirect_stdout — capture print() output to buffer
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** You have a legacy function `report()` that uses `print()` to emit output. You need to capture its output as a string without modifying `report()`. Use `contextlib.redirect_stdout` to capture the output into an `io.StringIO` buffer and return the string.
 
@@ -656,9 +708,13 @@ lines = output.strip().splitlines()
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · database connection CM — auto-commit/rollback
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Write a `get_connection(db_path)` context manager using `@contextmanager` for `sqlite3`. It should:
 - Open the connection with `row_factory = sqlite3.Row`
@@ -713,9 +769,13 @@ except RuntimeError:
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟢 · multiple CMs — nested vs one-liner
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Write the same file copy operation (read `input.txt`, write `output.txt`) in two styles:
 1. Nested `with` blocks (old style)
@@ -759,9 +819,13 @@ with (
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · exit order — trace LIFO for A, B, C
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Given three context managers `A`, `B`, `C` used in a single `with` statement, write code that demonstrates the LIFO (last-in, first-out) exit order by printing `ENTER` and `EXIT` events. Verify your answer by running the code mentally.
 
@@ -805,9 +869,13 @@ with Tracked("A") as a, Tracked("B") as b, Tracked("C") as c:
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟡 · ExitStack — merge N files at runtime
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Write a function `merge_files(input_paths, output_path)` that opens a dynamic number of input files (the count is not known at write time), reads them all, and writes their contents concatenated into `output_path`. All files must be closed on exit, even if an exception occurs.
 
@@ -844,9 +912,13 @@ merge_files(paths, "combined.txt")
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · ExitStack callbacks — register cleanup functions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Using `ExitStack`, register three cleanup callbacks in order: `print("cleanup A")`, `print("cleanup B")`, `print("cleanup C")`. Demonstrate that they run in LIFO order (C first, A last).
 
@@ -893,9 +965,13 @@ def process(data):
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟠 · ExitStack conditional — use transaction if flag set
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Write a function `do_work(db, use_transaction=True)` that conditionally wraps its database operations in a transaction context manager. If `use_transaction` is `True`, all operations run inside a transaction (commit on success, rollback on failure). If `False`, operations run directly on `db` with no transaction management. Use `ExitStack`.
 
@@ -943,9 +1019,13 @@ do_work(db, use_transaction=False)
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟡 · nullcontext — optional lock pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Write a `process_data(data, use_lock=True)` function that optionally acquires a `threading.Lock` before processing. Use `contextlib.nullcontext` so there is only one `with` statement in the function body regardless of the `use_lock` flag.
 
@@ -987,9 +1067,13 @@ def open_file(path=None, default=""):
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟡 · async CM — write AsyncDBConnection
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Write a class `AsyncDBConnection` with `__aenter__` and `__aexit__`. On entry, it should simulate connecting (`await asyncio.sleep(0)` as a stand-in). On clean exit, it should commit. On exception, it should rollback. Always close the connection. The `as` variable should be the connection object itself.
 
@@ -1040,9 +1124,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · @asynccontextmanager — write async_timer
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Write `async_timer(name)` using `@asynccontextmanager`. It should measure wall-clock elapsed time using `time.perf_counter()` and print `"{name}: {elapsed:.3f}s"` on exit. Demonstrate it with a simulated async operation.
 
@@ -1081,9 +1169,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟡 · gotcha return True — fix accidental suppression
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** The following context manager has a dangerous bug. Identify it and fix it so that only `KeyError` is suppressed and all other exceptions propagate normally.
 
@@ -1141,9 +1233,13 @@ except ValueError:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟡 · gotcha missing try/finally — show the leak, add fix
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Show two versions of a `managed_resource()` context manager: the leaky version (without `try/finally`) and the fixed version. Demonstrate that the leaky version does NOT call `release()` when the body raises, but the fixed version always does.
 
@@ -1209,9 +1305,13 @@ except RuntimeError:
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟠 · gotcha __enter__ raises — protect setup
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** The following `__enter__` acquires two resources in sequence. If `step_two()` raises, `__exit__` is never called, leaking the resource from `step_one()`. Fix `__enter__` to guarantee cleanup of partially acquired resources.
 
@@ -1270,9 +1370,13 @@ class Resource:
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 🟡 · contextlib.closing — wrap legacy object
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 **Problem:** You have a `LegacyDB` class that has a `.close()` method but does not implement `__enter__`/`__exit__`. Use `contextlib.closing` to use it safely in a `with` statement. Show both the manual pattern (without `closing`) and the idiomatic pattern.
 
@@ -1325,9 +1429,13 @@ with closing(urlopen("http://example.com")) as response:
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 🟡 · audit_log CM — wrap operation with start/end/error logging
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Write an `audit_log(operation_name)` context manager using `@contextmanager`. It should:
 - Print `"START: {operation_name}"` on entry
@@ -1378,9 +1486,13 @@ except ValueError:
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 🟠 · ExitStack ownership transfer — return stack to caller
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 
 **Problem:** Write a function `open_connections(dsns)` that opens a list of database connections (simulate with `io.StringIO` objects) and returns them to the caller along with the `ExitStack`. The caller is responsible for closing everything. Demonstrate the caller using the returned stack in a `with` statement.
 
@@ -1431,9 +1543,13 @@ finally:
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 🟡 · debug wrong suppress scope — fix overly broad suppress
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 **Problem:** The following code has a suppression bug: it suppresses `FileNotFoundError` but the scope of the `suppress` block is too broad, potentially hiding a `FileNotFoundError` raised by `process_content(content)` that should not be suppressed. Refactor to suppress only the specific operation that can legitimately raise `FileNotFoundError`.
 
@@ -1492,9 +1608,13 @@ if os.path.exists("config.json"):
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 🟠 · capstone — build ConnectionPool with ExitStack
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 
 **Problem:** Build a `ConnectionPool` class that manages a pool of connections using `ExitStack` internally. It should:
 - Accept a list of DSNs in `__init__`

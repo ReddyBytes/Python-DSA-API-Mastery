@@ -9,25 +9,30 @@
 
 | # | Concept | Title | Level |
 |---|---------|-------|-------|
-| Q1 | First-class | Assign to variable, store in list, call from list | 🟢 |
-| Q2 | First-class | `func` vs `func()` bug: predict and fix | 🟢 |
-| Q3 | First-class | Store 4 math functions in a dict, call by name | 🟢 |
-| Q4 | Higher-order | Write `apply_twice(func, value)` | 🟡 |
-| Q5 | Higher-order | Write `apply_n(func, value, n)` | 🟡 |
-| Q6 | Pure/impure | Classify 5 functions and explain why | 🟡 |
-| Q7 | Pure/impure | Rewrite an impure (mutating) function as pure | 🟡 |
-| Q8 | map() | Apply tax calculation to a list of prices | 🟢 |
-| Q9 | map() | Use map with two lists | 🟡 |
-| Q10 | filter() | Filter a list of users by `active=True` | 🟢 |
-| Q11 | filter() | Filter out `None` and empty strings | 🟡 |
-| Q12 | reduce() | Sum a list, then find max using reduce | 🟡 |
-| Q13 | Composition | Build a text normalization pipeline | 🟠 |
-| Q14 | Composition | Write `pipe(*funcs)` left-to-right applicator | 🟠 |
-| Q15 | Real-world | Data transform pipeline: filter → map → reduce | 🟠 |
+| [Q1](#q1) | First-class | Assign to variable, store in list, call from list | 🟢 |
+| [Q2](#q2) | First-class | `func` vs `func()` bug: predict and fix | 🟢 |
+| [Q3](#q3) | First-class | Store 4 math functions in a dict, call by name | 🟢 |
+| [Q4](#q4) | Higher-order | Write `apply_twice(func, value)` | 🟡 |
+| [Q5](#q5) | Higher-order | Write `apply_n(func, value, n)` | 🟡 |
+| [Q6](#q6) | Pure/impure | Classify 5 functions and explain why | 🟡 |
+| [Q7](#q7) | Pure/impure | Rewrite an impure (mutating) function as pure | 🟡 |
+| [Q8](#q8) | map() | Apply tax calculation to a list of prices | 🟢 |
+| [Q9](#q9) | map() | Use map with two lists | 🟡 |
+| [Q10](#q10) | filter() | Filter a list of users by `active=True` | 🟢 |
+| [Q11](#q11) | filter() | Filter out `None` and empty strings | 🟡 |
+| [Q12](#q12) | reduce() | Sum a list, then find max using reduce | 🟡 |
+| [Q13](#q13) | Composition | Build a text normalization pipeline | 🟠 |
+| [Q14](#q14) | Composition | Write `pipe(*funcs)` left-to-right applicator | 🟠 |
+| [Q15](#q15) | Real-world | Data transform pipeline: filter → map → reduce | 🟠 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · First-class — Assign, Store, Call
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 1. Define a function `shout(text)` that returns `text.upper() + "!"`.
@@ -68,7 +73,12 @@ print(actions[0]("hello"))  # HELLO! — call via index
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · First-class — `func` vs `func()` Bug
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 The code below has a bug. Predict what error you will get and fix it.
@@ -108,7 +118,12 @@ print(result)   # [1, 1, 3, 4, 5]
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · First-class — Function Dispatch Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Store these four functions in a dict: `add`, `subtract`, `multiply`, `divide`. The keys should be `"+"`, `"-"`, `"*"`, `"/"`. Then write a `calculate(op, a, b)` function that looks up the operation and calls it.
@@ -161,7 +176,12 @@ print(calculate("/", 10, 2))   # 5.0
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Higher-order — apply_twice
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 Write a higher-order function `apply_twice(func, value)` that applies `func` to `value` twice. Test it with a `double` function.
@@ -203,7 +223,12 @@ print(apply_twice(double, 5))    # double(double(5)) → double(10) → 20
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Higher-order — apply_n
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 Generalise Q4. Write `apply_n(func, value, n)` that applies `func` to `value` exactly `n` times.
@@ -249,7 +274,12 @@ print(apply_n(double, 3, 0))      # 3   (zero applications → unchanged)
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Pure/impure — Classify These Functions
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 Classify each function below as **pure** or **impure**. For each impure function, state what makes it impure.
@@ -318,7 +348,12 @@ f5 — IMPURE
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Pure/impure — Rewrite as Pure
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 The function below mutates its argument. Rewrite it as a pure function that returns a new list with all negative numbers replaced by 0, leaving the original untouched.
@@ -365,7 +400,12 @@ print(result)  # [0, 2, 0, 4]
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · map() — Tax Calculation
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 `prices = [9.99, 24.99, 4.49, 14.00]`. Use `map()` to apply a 15% tax to every price and return a new list rounded to 2 decimal places.
@@ -407,7 +447,12 @@ with_tax = list(map(apply_tax, prices))
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · map() — Two Lists
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 `quantities = [2, 5, 1, 3]` and `unit_prices = [4.99, 1.50, 9.99, 2.00]`. Use `map()` with two iterables to compute the total cost for each item (quantity × price).
@@ -444,7 +489,12 @@ print(totals)   # [9.98, 7.5, 9.99, 6.0]
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · filter() — Active Users
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 `users` is a list of dicts. Use `filter()` to return only users where `active` is `True`.
@@ -490,7 +540,12 @@ for u in active_users:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · filter() — Remove None and Empty Strings
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 `items = [1, None, "hello", "", 0, False, "world", None, ""]`. Use `filter()` to keep only items that are not `None` and not empty strings. `0` and `False` should be kept.
@@ -525,7 +580,12 @@ print(cleaned)   # [1, 'hello', 0, False, 'world']
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · reduce() — Sum Then Max
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 1. Use `reduce` to sum `[3, 1, 4, 1, 5, 9, 2, 6]`.
@@ -569,7 +629,12 @@ print(maximum)  # 9
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Composition — Text Normalization Pipeline
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 Build a text normalization pipeline using function composition. Given raw text `"  Python is GREAT!!  "`, produce a clean lowercase word list: `['python', 'is', 'great']`.
@@ -625,7 +690,12 @@ print(normalize("  Hello, World!  "))       # ['hello', 'world']
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Composition — Write pipe(*funcs)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 Write `pipe(*funcs)` that returns a function applying each function left-to-right. Then verify it with a chain of: `add_one` → `double` → `square`.
@@ -675,7 +745,12 @@ print(transform(0))    # (0+1=1) → (1*2=2) → (2**2=4)  → 4
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Real-world — Data Transform Pipeline
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 You have a list of orders. Each order is a dict with `status`, `quantity`, and `price`.

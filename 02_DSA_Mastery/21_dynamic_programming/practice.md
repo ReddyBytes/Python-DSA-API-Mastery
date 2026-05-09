@@ -40,6 +40,9 @@
 <a id="q1"></a>
 ### Q1 · memoization · Fibonacci Top-Down
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Implement `fib(n)` using top-down memoization. `fib(0)=0`, `fib(1)=1`. Verify `fib(10) == 55`. What is the time complexity compared to plain recursion?
@@ -90,6 +93,9 @@ assert fib_cached(10) == 55
 <a id="q2"></a>
 ### Q2 · tabulation · Climbing Stairs Bottom-Up
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** You can climb 1 or 2 steps at a time. How many distinct ways can you reach step `n`? Implement using bottom-up tabulation. Verify: `n=5` → `8`.
@@ -132,6 +138,9 @@ assert climb_stairs(5) == 8
 <a id="q3"></a>
 ### Q3 · space-optimization · Climbing Stairs O(1) Space
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Reduce the climbing-stairs solution to O(1) space. You should only use two variables instead of a full `dp` array.
@@ -170,6 +179,9 @@ assert climb_stairs_optimized(10) == 89
 
 <a id="q4"></a>
 ### Q4 · linear-dp · House Robber
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 🟢 Basic
 
@@ -217,6 +229,9 @@ assert rob([1, 2]) == 2
 <a id="q5"></a>
 ### Q5 · linear-dp · Coin Change Minimum Coins
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Given `coins = [1, 2, 5]` and `amount = 11`, return the fewest coins needed to make `amount`. Return `-1` if it is impossible. Expected: `3`.
@@ -257,6 +272,9 @@ assert coin_change([1], 0) == 0
 <a id="q6"></a>
 ### Q6 · identification · Two Requirements for DP
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Name and explain the two formal requirements for a problem to be solvable with DP. Give a one-line example of each from the climbing-stairs problem.
@@ -296,6 +314,9 @@ One requirement concerns repeated sub-computations; the other concerns whether c
 
 <a id="q7"></a>
 ### Q7 · dp-thinking · How to Define State
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 🟢 Basic
 
@@ -355,6 +376,9 @@ assert coin_change_annotated([1, 5, 10], 15) == 2   # 10 + 5
 <a id="q8"></a>
 ### Q8 · linear-dp · Coin Change Number of Ways
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Given `coins = [1, 2, 5]` and `amount = 5`, return the number of distinct combinations that sum to `amount`. Expected: `4`. Note: this is different from minimum coins — order does not matter.
@@ -392,6 +416,9 @@ assert coin_change_ways([1, 2, 5], 5) == 4
 
 <a id="q9"></a>
 ### Q9 · knapsack · 0/1 Knapsack 2D
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 🟢 Basic
 
@@ -433,6 +460,9 @@ assert knapsack_2d([1, 2, 3], [6, 10, 12], 5) == 22
 <a id="q10"></a>
 ### Q10 · knapsack · 0/1 Knapsack Space-Optimized
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Rewrite the 0/1 knapsack using a 1D `dp` array of size `capacity + 1`. Explain why the inner loop must go **right to left**. Same inputs as Q9 — expected `22`.
@@ -471,6 +501,9 @@ assert knapsack_1d([1, 2, 3], [6, 10, 12], 5) == 22
 
 <a id="q11"></a>
 ### Q11 · 2d-dp · Unique Paths in a Grid
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -516,6 +549,9 @@ assert unique_paths_opt(3, 7) == 28
 
 <a id="q12"></a>
 ### Q12 · 2d-dp · Minimum Path Sum
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -563,6 +599,9 @@ assert min_path_sum([[1, 2], [3, 4]]) == 7
 <a id="q13"></a>
 ### Q13 · sequence-dp · Longest Common Subsequence
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Given `text1 = "abcde"` and `text2 = "ace"`, find the length of their longest common subsequence. Expected: `3` (`"ace"`).
@@ -607,6 +646,9 @@ assert lcs("abc", "def") == 0
 
 <a id="q14"></a>
 ### Q14 · sequence-dp · Longest Increasing Subsequence O(n²)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -653,6 +695,9 @@ assert lis([7, 7, 7, 7]) == 1
 <a id="q15"></a>
 ### Q15 · sequence-dp · LIS O(n log n) Patience Sorting
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Implement LIS in O(n log n) using binary search (patience sorting). Same input: `[10, 9, 2, 5, 3, 7, 101, 18]` → `4`. Explain what `tails` represents.
@@ -697,6 +742,9 @@ assert lis_nlogn([10, 9, 2, 5, 3, 7, 101, 18]) == 4
 
 <a id="q16"></a>
 ### Q16 · string-dp · Edit Distance
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -749,6 +797,9 @@ assert edit_distance("kitten", "sitting") == 3
 <a id="q17"></a>
 ### Q17 · knapsack · Partition Equal Subset Sum
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Given `nums = [1, 5, 11, 5]`, determine whether it can be partitioned into two subsets with equal sum. Expected: `True` (subsets `[1, 5, 5]` and `[11]`).
@@ -793,6 +844,9 @@ assert can_partition([1, 2, 3, 5]) == False
 <a id="q18"></a>
 ### Q18 · knapsack · Unbounded Knapsack
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Items can be used multiple times. Given `weights = [2, 3, 4]`, `values = [3, 4, 5]`, `capacity = 8`. Maximize value. Expected: `12` (use weight-2 item 4 times: `4 × 3 = 12`).
@@ -829,6 +883,9 @@ assert unbounded_knapsack([2, 3, 4], [3, 4, 5], 8) == 12
 
 <a id="q19"></a>
 ### Q19 · state-machine-dp · Stock with Cooldown
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -872,6 +929,9 @@ assert max_profit_cooldown([1]) == 0
 <a id="q20"></a>
 ### Q20 · space-optimization · Rolling Array LCS
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Implement LCS using only O(n) space instead of O(m×n). Explain the `prev` variable trick needed when caching the diagonal cell.
@@ -908,6 +968,9 @@ assert lcs_optimized("abcde", "ace") == 3
 
 <a id="q21"></a>
 ### Q21 · common-mistakes · Wrong Loop Order in Knapsack
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -958,6 +1021,9 @@ assert knapsack_fixed(weights, values, 5) == 22
 
 <a id="q22"></a>
 ### Q22 · common-mistakes · Missing No Solution Case
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -1010,6 +1076,9 @@ assert coin_change_correct([1], 0) == 0
 <a id="q23"></a>
 ### Q23 · interval-dp · Matrix Chain Multiplication
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** Given matrix dimensions `dims = [10, 30, 5, 60]` (matrices: `10×30`, `30×5`, `5×60`), find the minimum number of scalar multiplications to compute the full chain product. Expected: `4500`.
@@ -1055,6 +1124,9 @@ assert matrix_chain([10, 30, 5, 60]) == 4500
 <a id="q24"></a>
 ### Q24 · interval-dp · Burst Balloons
 
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** `nums = [3, 1, 5, 8]`. Burst balloons one at a time. Bursting balloon `i` earns `nums[left] * nums[i] * nums[right]` coins. Maximize total coins. Expected: `167`.
@@ -1099,6 +1171,9 @@ assert max_coins([1, 5]) == 10
 
 <a id="q25"></a>
 ### Q25 · string-dp · Palindrome Minimum Cuts
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -1152,6 +1227,9 @@ assert min_cut("ab") == 1
 
 <a id="q26"></a>
 ### Q26 · bitmask-dp · Minimum Cost Task Assignment
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -1209,6 +1287,9 @@ assert assign_min_cost([[9, 2, 7], [6, 4, 3], [5, 8, 1]]) == 9
 <a id="q27"></a>
 ### Q27 · state-machine-dp · Stock with k Transactions
 
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** `prices = [3,2,6,5,0,3]`, `k = 2`. Find the maximum profit with at most `k` buy-sell transactions. Expected: `7`.
@@ -1254,6 +1335,9 @@ assert max_profit_k(1, [7, 6, 4, 3, 1]) == 0
 
 <a id="q28"></a>
 ### Q28 · 2d-dp · Edit Distance Space-Optimized O(n)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -1303,6 +1387,9 @@ assert edit_distance_optimized("intention", "execution") == 5
 <a id="q29"></a>
 ### Q29 · advanced · Word Break
 
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** `s = "leetcode"`, `wordDict = ["leet", "code"]`. Determine if `s` can be segmented into words from the dictionary. Expected: `True`.
@@ -1348,6 +1435,9 @@ assert word_break("catsandog", ["cats", "dog", "sand", "and", "cat"]) == False
 
 <a id="q30"></a>
 ### Q30 · advanced · Design a DP Solution From Scratch
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 🟠 Advanced
 

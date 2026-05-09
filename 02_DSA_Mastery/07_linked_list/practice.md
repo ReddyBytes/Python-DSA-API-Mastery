@@ -44,6 +44,9 @@
 <a id="q1"></a>
 ### Q1
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 **Define a singly linked list node in Python. Create a small list `1 → 2 → 3` manually (no helper function).**
 
 <details>
@@ -80,6 +83,9 @@ head = n1
 
 <a id="q2"></a>
 ### Q2
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Define a doubly linked list node. Build the list `A ↔ B ↔ C` manually with `prev` and `next` wired up correctly.**
 
@@ -124,6 +130,9 @@ c.prev = b
 <a id="q3"></a>
 ### Q3
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 **Write a helper function `build(arr)` that converts a Python list into a linked list and returns the head.**
 
 <details>
@@ -164,6 +173,9 @@ head = build([1, 2, 3, 4, 5])
 <a id="q4"></a>
 ### Q4
 
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 **Write a function `to_list(head)` that traverses a linked list and returns its values as a Python list.**
 
 <details>
@@ -198,6 +210,9 @@ def to_list(head):
 <a id="q5"></a>
 ### Q5
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 **Write `insert_head(head, val)` — insert a new node with `val` at the front of the list. Return the new head.**
 
 <details>
@@ -231,6 +246,9 @@ head = insert_head(head, 1)
 
 <a id="q6"></a>
 ### Q6
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Write `insert_tail(head, val)` — append a node at the end of the list. Return the head.**
 
@@ -271,6 +289,9 @@ head = insert_tail(head, 4)
 <a id="q7"></a>
 ### Q7
 
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 **Write `delete_head(head)` — remove the first node and return the new head. Handle the empty list case.**
 
 <details>
@@ -305,6 +326,9 @@ head = delete_head(head)
 <a id="q8"></a>
 ### Q8
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 **In two sentences each, state one situation where you would choose a linked list over an array, and one where you would choose an array over a linked list.**
 
 <details>
@@ -335,6 +359,9 @@ Think about: insertion frequency, access patterns, memory, cache behavior.
 
 <a id="q9"></a>
 ### Q9
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Write `insert_after(head, target_val, new_val)` — find the first node with `target_val` and insert a new node with `new_val` immediately after it. Return the head.**
 
@@ -375,6 +402,9 @@ head = insert_after(head, 2, 3)
 
 <a id="q10"></a>
 ### Q10
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Write `delete_val(head, val)` — delete the first node with `val`. Return the new head. Use a dummy node.**
 
@@ -421,6 +451,9 @@ head = delete_val(head, 1)
 <a id="q11"></a>
 ### Q11
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 **Reverse a linked list iteratively. Return the new head.**
 
 <details>
@@ -460,6 +493,9 @@ head = reverse_iterative(head)
 <a id="q12"></a>
 ### Q12
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 **Reverse a linked list recursively. Return the new head.**
 
 <details>
@@ -497,6 +533,9 @@ head = reverse_recursive(head)
 <a id="q13"></a>
 ### Q13
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 **Detect whether a linked list has a cycle using Floyd's algorithm. Return `True` or `False`.**
 
 <details>
@@ -530,6 +569,9 @@ def has_cycle(head):
 
 <a id="q14"></a>
 ### Q14
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Find the middle node of a linked list using the fast/slow pointer technique. For an even-length list, return the second middle node.**
 
@@ -565,6 +607,9 @@ def find_middle(head):
 
 <a id="q15"></a>
 ### Q15
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Merge two sorted linked lists into one sorted linked list. Return the new head.**
 
@@ -609,6 +654,9 @@ b = build([2, 4, 6])
 <a id="q16"></a>
 ### Q16
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 **Remove duplicate values from a sorted linked list so each value appears only once.**
 
 <details>
@@ -646,6 +694,9 @@ head = remove_duplicates(head)
 
 <a id="q17"></a>
 ### Q17
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 **Remove the Nth node from the end of the list in one pass. Return the new head.**
 
@@ -687,6 +738,9 @@ head = remove_nth_from_end(head, 2)
 <a id="q18"></a>
 ### Q18
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 **Find the intersection node of two linked lists (the node where they merge and share the same tail). Return the node, or `None` if they do not intersect.**
 
 <details>
@@ -722,6 +776,9 @@ def get_intersection(headA, headB):
 
 <a id="q19"></a>
 ### Q19
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 **Check whether a linked list is a palindrome. Return `True` or `False`. O(n) time, O(1) space.**
 
@@ -776,6 +833,9 @@ def is_palindrome(head):
 <a id="q20"></a>
 ### Q20
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 **Remove all nodes from a linked list whose value equals `val`. Return the new head.**
 
 <details>
@@ -823,6 +883,9 @@ head = remove_all(head, 7)
 
 <a id="q21"></a>
 ### Q21
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 **Deep copy a linked list where each node has `val`, `next`, and `random` (points to any node in the list or `None`). Return the head of the copy.**
 
@@ -878,6 +941,9 @@ def copy_random_list(head):
 <a id="q22"></a>
 ### Q22
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 **Given a linked list with a cycle, find the node where the cycle begins. Return that node.**
 
 <details>
@@ -925,6 +991,9 @@ def find_cycle_start(head):
 
 <a id="q23"></a>
 ### Q23
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 **Reverse a linked list in groups of k. If the final group has fewer than k nodes, leave it as-is.**
 
@@ -975,6 +1044,9 @@ def reverse_k_group(head, k):
 
 <a id="q24"></a>
 ### Q24
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 **Flatten a multilevel doubly linked list. Each node may have a `child` pointer pointing to another doubly linked list. The flattened list should follow depth-first order.**
 
@@ -1027,6 +1099,9 @@ def flatten(head):
 
 <a id="q25"></a>
 ### Q25
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Implement an LRU (Least Recently Used) cache with O(1) `get` and O(1) `put` using a doubly linked list and a hash map.**
 

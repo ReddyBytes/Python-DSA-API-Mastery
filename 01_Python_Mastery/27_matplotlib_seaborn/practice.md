@@ -37,11 +37,15 @@
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · subplots and layouts — create 2×2 grid with `layout='constrained'` 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Create a 2×2 figure with `layout='constrained'`, figsize `(10, 8)`. Plot `sin(x)`, `cos(x)`, `sin(2x)`, and `cos(2x)` in each panel. Give each panel a title and add a super-title.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -74,11 +78,15 @@ plt.show()
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · subplots and layouts — iterate axes with `.flat` and `sharex` 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Create a 2×3 grid with `sharex=True`. Plot six sine waves with phase shifts of `0, 0.5, 1.0, 1.5, 2.0, 2.5` radians. Use `axes.flat` to loop.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -112,11 +120,15 @@ plt.show()
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · subplots and layouts — GridSpec wide top panel + three bottom panels 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Use `fig.add_gridspec(2, 3)` to create a figure where the top panel spans all three columns and three equal panels sit in the bottom row. Plot an exponential decay in the top panel and scatter plots in each bottom panel.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -155,11 +167,15 @@ plt.show()
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · subplots and layouts — subplot_mosaic named layout 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Use `plt.subplot_mosaic` with the layout string `"AAB\nCDB"` to create a figure where A spans the top-left, B spans the full right column, and C and D share the bottom-left. Title each panel with its letter.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -197,11 +213,15 @@ plt.show()
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · subplots and layouts — inset axes with zoom detail 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Plot a full training loss curve (200 points, x from 0 to 100). Add an inset axis at `[0.55, 0.4, 0.4, 0.5]` showing only the first 10 steps. Use `ax.indicate_inset_zoom()` to draw connecting lines.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -242,11 +262,15 @@ plt.show()
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · customization — set global rcParams for font size, figure size, remove spines 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 At the top of a script, use `plt.rcParams` and `plt.rc()` to set: default figure size to `(8, 4)`, base font size to 13, and remove the top and right spines globally. Then create a simple line plot to verify the settings apply.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -279,11 +303,15 @@ plt.show()
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · customization — apply style via context manager 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Plot the same sine wave twice: once with `'ggplot'` style and once with `'dark_background'` style — each in its own `with plt.style.context(...)` block so the styles do not leak between plots.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -318,11 +346,15 @@ with plt.style.context('dark_background'): # ← different style, isolated
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · customization — annotate loss curve with arrow callout and axvline 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Plot a loss curve that decays exponentially. Add: (1) an `ax.annotate()` arrow pointing to the sharp early drop, (2) an `ax.axvline()` at step 20 labeled "LR drop", and (3) a `ax.text()` label in the plateau region.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -364,11 +396,15 @@ plt.show()
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · customization — twin axes for loss and accuracy 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Create a figure with a primary y-axis for training loss and a secondary y-axis (using `ax1.twinx()`) for accuracy. Color the y-labels and tick labels to match their respective lines. Merge both legends into one box.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -414,11 +450,15 @@ plt.show()
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · customization — linear vs log-log comparison 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Create a side-by-side figure with two panels: the left shows a decaying loss on a linear axis, the right shows the same data on a log-log axis using `ax.set_xscale('log')` and `ax.set_yscale('log')`. Title both panels clearly.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -456,11 +496,15 @@ plt.show()
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · color — bar chart with per-bar conditional coloring 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Create a bar chart of model F1 scores. Color bars green (`'#4CAF50'`) when the score is above 0.85 and red (`'#F44336'`) when at or below 0.85. Add value labels above each bar.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -500,11 +544,15 @@ plt.show()
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · color — scatter plot with continuous colormap 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Create a scatter plot of 200 random (x, y) points where a third variable `values` (random 0–1) is encoded by color using the `'viridis'` colormap. Attach a labeled colorbar.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -536,11 +584,15 @@ plt.show()
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · color — diverging heatmap with labeled colorbar 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Create an 8×8 matrix of random values in `[-1, 1]`. Display it with `ax.imshow()` using the `'RdBu_r'` diverging colormap. Set `vmin=-1, vmax=1` so the center maps to white. Attach a colorbar labeled "Correlation".
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -569,11 +621,15 @@ plt.show()
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · color — seaborn correlation heatmap with masked upper triangle 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Load a DataFrame with 4 numeric columns. Compute the correlation matrix, mask the upper triangle with `np.triu`, and display it using `sns.heatmap()` with `cmap='RdBu_r'`, `center=0`, `annot=True`, and `fmt='.2f'`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -610,11 +666,15 @@ plt.show()
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · color — TwoSlopeNorm for asymmetric residuals 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 You have a residuals array that ranges from -0.5 to +2.0 with a meaningful zero center. Apply `mcolors.TwoSlopeNorm(vmin=-0.5, vcenter=0, vmax=2.0)` to a heatmap so that zero always maps to the neutral white of the `'RdBu_r'` colormap even though the negative range is smaller.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -648,11 +708,15 @@ plt.show()
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · seaborn advanced — pairplot with KDE diagonal 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Load the iris dataset from sklearn. Build a DataFrame and add a `species` column. Call `sns.pairplot()` with `hue='species'`, `diag_kind='kde'`, `plot_kws={'alpha': 0.6}`, and `corner=True` to show only the lower triangle.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -688,11 +752,15 @@ plt.show()
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · seaborn advanced — heatmap with annotated values 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Create a 5×5 correlation matrix using random data. Display it with `sns.heatmap()`, setting `annot=True`, `fmt='.2f'`, `cmap='coolwarm'`, `vmin=-1`, `vmax=1`, and `square=True`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -733,11 +801,15 @@ plt.show()
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · seaborn advanced — FacetGrid histogram grid 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Create a DataFrame with columns `accuracy`, `model` (3 models), and `dataset` (2 datasets). Use `sns.FacetGrid` with `col='model'` and `row='dataset'` to plot a histogram of accuracy for each combination. Add axis labels and column/row titles.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -774,11 +846,15 @@ plt.show()
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · seaborn advanced — violinplot via catplot 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Use `sns.catplot()` with `kind='violin'` to compare accuracy distributions across three models. Set `hue='split'` for train/val/test coloring. Use `inner='quartile'` to show quartile lines inside the violin.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -820,11 +896,15 @@ plt.show()
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · seaborn advanced — clustermap 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Compute a 6×6 correlation matrix. Use `sns.clustermap()` to display it with `cmap='coolwarm'`, `center=0`, `row_cluster=True`, `col_cluster=True`, and `method='average'`. Set `figsize=(8, 8)`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -864,11 +944,15 @@ plt.show()
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · ML visualization — confusion matrix heatmap with cell annotations 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Build a 4×4 confusion matrix array manually. Display it with `ax.imshow(cm, cmap='Blues')`. Annotate every cell with the count using `ax.text()`, choosing white text when the cell value is above half the maximum and black text otherwise (auto-contrast).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -914,11 +998,15 @@ plt.show()
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · ML visualization — ROC curve with random-classifier baseline 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Generate synthetic binary classification data with `make_classification`. Fit a Logistic Regression and compute `roc_curve` and `auc`. Plot the ROC curve with the AUC in the legend and a dashed diagonal baseline.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -959,11 +1047,15 @@ plt.show()
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · ML visualization — learning curve with best-epoch marker 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Simulate train and validation loss over 50 epochs. Plot them on the same axes (solid train, dashed val). Add a vertical red dotted line at the epoch with the minimum validation loss. Shade a light confidence band using `ax.fill_between`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1003,11 +1095,15 @@ plt.show()
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · ML visualization — sorted feature importance horizontal bar chart 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Given an array of 8 feature importances and their names, sort them by importance using `np.argsort()`. Plot a horizontal bar chart with `ax.barh()`. Set y-tick labels to the sorted feature names.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1043,11 +1139,15 @@ plt.show()
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · ML visualization — seaborn residplot with zero-line 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Generate synthetic x and y data with a linear relationship plus noise. Fit the data conceptually (use `sns.residplot` which handles it internally). Add a red dashed zero-line with `ax.axhline(0)`. Explain in a comment what a random scatter vs a funnel pattern means.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1086,11 +1186,15 @@ plt.show()
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · saving — savefig at 300 DPI with bbox_inches 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Create a simple line plot with a long y-axis label. Save it as `output.png` with `dpi=300`, `bbox_inches='tight'`, `pad_inches=0.1`, and `facecolor='white'`. Explain in a comment what happens if you omit `bbox_inches='tight'`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1126,11 +1230,15 @@ plt.show()
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · saving — save figure as vector PDF for LaTeX 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Create a publication-style figure (figsize matching a single IEEE column: 3.5 × 2.5 inches). Plot a smooth curve and save it as both `figure.pdf` (vector) and `figure.png` (raster at 300 DPI). Close the figure after saving.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1162,11 +1270,15 @@ plt.close(fig)  # ← release memory; important in scripts generating many figur
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · saving — PNG vs SVG tradeoffs 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Write a short code snippet that saves the same figure in PNG (dpi=150), SVG, and PDF formats. Then add comments explaining when to choose each: PNG for web, SVG for HTML with scaling, PDF for LaTeX, and why JPEG should be avoided for charts.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1206,11 +1318,15 @@ plt.close(fig)
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · saving — fix overlapping labels with tight_layout before save 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Create a 2×2 subplot grid with long axis labels and a suptitle. Demonstrate the problem (overlapping text) by NOT calling `tight_layout`, then fix it by adding `plt.tight_layout()` before `fig.savefig()`. Alternatively show the `layout='constrained'` approach.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1256,11 +1372,15 @@ plt.show()
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · saving — batch save with plt.close() in a loop 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Given a dict of `{group_name: data_array}`, write a loop that creates one figure per group, plots a histogram, saves it to `{group_name}.png` at `dpi=150` with `bbox_inches='tight'`, and then closes the figure immediately with `plt.close(fig)`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

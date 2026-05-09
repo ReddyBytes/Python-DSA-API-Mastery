@@ -8,42 +8,46 @@
 
 | # | Difficulty | Topic |
 |---|---|---|
-| [Q1](#q1--why-type-hints-exist--annotate-a-function) | 🟢 Easy | Why type hints exist — annotate a function |
-| [Q2](#q2--basic-type-hints--primitive-annotations) | 🟢 Easy | Basic type hints — primitive annotations |
-| [Q3](#q3--runtime-enforcement--the-pydantic-difference) | 🟢 Easy | Runtime enforcement — the Pydantic difference |
-| [Q4](#q4--optional-and-union--nullable-fields) | 🟢 Easy | Optional and Union — nullable fields |
-| [Q5](#q5--complex-container-types--listdict) | 🟢 Easy | Complex container types — list/dict |
-| [Q6](#q6--nested-complex-types--listdictstr-str) | 🟡 Medium | Nested complex types — list[dict[str, str]] |
-| [Q7](#q7--function-type-hints--parameters-and-return) | 🟢 Easy | Function type hints — parameters and return |
-| [Q8](#q8--callable-types--function-as-argument) | 🟡 Medium | Callable types — function as argument |
-| [Q9](#q9--args-and-kwargs-with-type-hints) | 🟡 Medium | *args and **kwargs with type hints |
-| [Q10](#q10--typeddict--typed-dictionary-structure) | 🟡 Medium | TypedDict — typed dictionary structure |
-| [Q11](#q11--dataclass--typed-class-without-boilerplate) | 🟡 Medium | dataclass — typed class without boilerplate |
-| [Q12](#q12--typeddict-vs-dataclass-vs-pydantic) | 🟡 Medium | TypedDict vs dataclass vs Pydantic |
-| [Q13](#q13--typevar--generic-functions) | 🟡 Medium | TypeVar — generic functions |
-| [Q14](#q14--protocol--duck-typing-with-type-hints) | 🟡 Medium | Protocol — duck typing with type hints |
-| [Q15](#q15--protocol-vs-abc) | 🟠 Hard | Protocol vs ABC |
-| [Q16](#q16--pydantic-basemodel--define-a-model) | 🟢 Easy | Pydantic BaseModel — define a model |
-| [Q17](#q17--pydantic-instantiation--coercion-and-validation) | 🟡 Medium | Pydantic instantiation — coercion and validation |
-| [Q18](#q18--validationerror--catching-and-inspecting) | 🟡 Medium | ValidationError — catching and inspecting |
-| [Q19](#q19--field-constraints--gt-lt-ge-le-min_length) | 🟡 Medium | Field constraints — gt/lt/ge/le/min_length |
-| [Q20](#q20--field_validator--custom-validation-logic) | 🟡 Medium | @field_validator — custom validation logic |
-| [Q21](#q21--model_validator--cross-field-validation) | 🟠 Hard | @model_validator — cross-field validation |
-| [Q22](#q22--pydantic-for-llm-outputs--sentimentresult) | 🟡 Medium | Pydantic for LLM outputs — SentimentResult |
-| [Q23](#q23--model_json_schema--for-openai-function-calling) | 🟠 Hard | model_json_schema — for OpenAI function calling |
-| [Q24](#q24--pydantic-v1-vs-v2--api-differences) | 🟡 Medium | Pydantic v1 vs v2 — API differences |
-| [Q25](#q25--pydantic-v2-strict-mode) | 🟠 Hard | Pydantic v2 strict mode |
-| [Q26](#q26--model_validate--import-from-dict-and-json) | 🟡 Medium | model_validate — import from dict and JSON |
-| [Q27](#q27--model_dump--selective-export) | 🟡 Medium | model_dump — selective export |
-| [Q28](#q28--nested-pydantic-models--dict-auto-coercion) | 🟠 Hard | Nested Pydantic models — dict auto-coercion |
-| [Q29](#q29--nested-model_dump--recursive-serialization) | 🟠 Hard | Nested model_dump — recursive serialization |
-| [Q30](#q30--capstone--chatmessage-tokenusage-llmresponse) | 🟠 Hard | Capstone — ChatMessage, TokenUsage, LLMResponse |
+| [Q1](#q1) | 🟢 Easy | Why type hints exist — annotate a function |
+| [Q2](#q2) | 🟢 Easy | Basic type hints — primitive annotations |
+| [Q3](#q3) | 🟢 Easy | Runtime enforcement — the Pydantic difference |
+| [Q4](#q4) | 🟢 Easy | Optional and Union — nullable fields |
+| [Q5](#q5) | 🟢 Easy | Complex container types — list/dict |
+| [Q6](#q6) | 🟡 Medium | Nested complex types — list[dict[str, str]] |
+| [Q7](#q7) | 🟢 Easy | Function type hints — parameters and return |
+| [Q8](#q8) | 🟡 Medium | Callable types — function as argument |
+| [Q9](#q9) | 🟡 Medium | *args and **kwargs with type hints |
+| [Q10](#q10) | 🟡 Medium | TypedDict — typed dictionary structure |
+| [Q11](#q11) | 🟡 Medium | dataclass — typed class without boilerplate |
+| [Q12](#q12) | 🟡 Medium | TypedDict vs dataclass vs Pydantic |
+| [Q13](#q13) | 🟡 Medium | TypeVar — generic functions |
+| [Q14](#q14) | 🟡 Medium | Protocol — duck typing with type hints |
+| [Q15](#q15) | 🟠 Hard | Protocol vs ABC |
+| [Q16](#q16) | 🟢 Easy | Pydantic BaseModel — define a model |
+| [Q17](#q17) | 🟡 Medium | Pydantic instantiation — coercion and validation |
+| [Q18](#q18) | 🟡 Medium | ValidationError — catching and inspecting |
+| [Q19](#q19) | 🟡 Medium | Field constraints — gt/lt/ge/le/min_length |
+| [Q20](#q20) | 🟡 Medium | @field_validator — custom validation logic |
+| [Q21](#q21) | 🟠 Hard | @model_validator — cross-field validation |
+| [Q22](#q22) | 🟡 Medium | Pydantic for LLM outputs — SentimentResult |
+| [Q23](#q23) | 🟠 Hard | model_json_schema — for OpenAI function calling |
+| [Q24](#q24) | 🟡 Medium | Pydantic v1 vs v2 — API differences |
+| [Q25](#q25) | 🟠 Hard | Pydantic v2 strict mode |
+| [Q26](#q26) | 🟡 Medium | model_validate — import from dict and JSON |
+| [Q27](#q27) | 🟡 Medium | model_dump — selective export |
+| [Q28](#q28) | 🟠 Hard | Nested Pydantic models — dict auto-coercion |
+| [Q29](#q29) | 🟠 Hard | Nested model_dump — recursive serialization |
+| [Q30](#q30) | 🟠 Hard | Capstone — ChatMessage, TokenUsage, LLMResponse |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · Why type hints exist — annotate a function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Write a function `send_message(recipient, content, priority)` without type hints, then rewrite it with type hints where `recipient` is a `str`, `content` is a `str`, `priority` is an `int` with a default of `1`, and the function returns `bool`. Show why the annotated version is better.
 
@@ -71,9 +75,13 @@ def send_message(recipient: str, content: str, priority: int = 1) -> bool:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · Basic type hints — primitive annotations
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Annotate each of these four functions with the correct return type: `greet(name: str)` returns a greeting string, `add(a: int, b: int)` returns their sum, `set_flag(value: bool)` returns nothing, `crash(message: str)` always raises and never returns.
 
@@ -107,9 +115,13 @@ def crash(message: str) -> NoReturn:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · Runtime enforcement — the Pydantic difference
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Show that Python does NOT enforce type hints at runtime by calling `greet(999)` where `greet` expects a `str`. Then show that Pydantic DOES enforce types by creating a `User` model with `name: str` and `age: int` and trying to pass `age="not-a-number"`.
 
@@ -147,9 +159,13 @@ except ValidationError as e:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟢 · Optional and Union — nullable fields
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write two equivalent function signatures for `find_user(user_id: int)` that returns a `str` or `None` — one using the old `Optional[str]` syntax and one using the modern `str | None` syntax. Then write `parse(value)` that accepts either `str` or `int` using both `Union` and `|` syntax.
 
@@ -187,9 +203,13 @@ def parse(value: str | int) -> str:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟢 · Complex container types — list/dict
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write `process_names(names)` that takes a list of strings and returns a dict mapping each name to its length. Write `get_coords()` that returns a tuple of two floats. Use the modern (no-import) syntax.
 
@@ -215,9 +235,13 @@ def get_coords() -> tuple[float, float]:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · Nested complex types — list[dict[str, str]]
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write `get_messages()` that returns a `list` of dicts with `str` keys and `str` values. Write `group_by_role(messages)` that takes that same list and returns a `dict` mapping `str` role keys to `list[str]` content values.
 
@@ -246,9 +270,13 @@ def group_by_role(messages: list[dict[str, str]]) -> dict[str, list[str]]:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟢 · Function type hints — parameters and return
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write `send_email(to, subject, body, cc, html)` with full type hints: `to` and `subject` and `body` are `str`, `cc` is an optional list of strings defaulting to `None`, `html` is a `bool` defaulting to `False`, return type is `bool`.
 
@@ -277,9 +305,13 @@ def send_email(
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · Callable types — function as argument
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write `filter_list(items, predicate)` where `items` is a `list[str]` and `predicate` is a callable that takes a `str` and returns `bool`. The function returns `list[str]`. Then write `run_later(callback)` where `callback` takes no arguments and returns `str`.
 
@@ -308,9 +340,13 @@ def run_later(callback: Callable[[], str]) -> None:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · *args and **kwargs with type hints
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Write `log_messages(*messages)` that accepts any number of strings and prints each one. Write `create_record(**fields)` that accepts any keyword arguments of any type and returns a `dict[str, Any]`.
 
@@ -339,9 +375,13 @@ def create_record(**fields: Any) -> dict[str, Any]:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · TypedDict — typed dictionary structure
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Define a `Message` TypedDict with `role: str` and `content: str`. Then define a `PartialMessage` TypedDict where all keys are optional (`total=False`). Create an instance of each and access a field.
 
@@ -377,9 +417,13 @@ partial: PartialMessage = {"role": "assistant"}   # content not required
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · dataclass — typed class without boilerplate
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Define a `Config` dataclass with `model: str`, `temperature: float = 0.7`, `max_tokens: int = 1000`, and `stop_sequences: list[str]` using `field(default_factory=list)`. Create an instance with just `model="gpt-4o"` and print it.
 
@@ -412,9 +456,13 @@ print(cfg)
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · TypedDict vs dataclass vs Pydantic
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Create the same structure — `role: str`, `content: str` — three ways: as a `TypedDict`, a `@dataclass`, and a Pydantic `BaseModel`. Then demonstrate the key difference: show that the dataclass stores a bad value silently, while Pydantic raises.
 
@@ -462,9 +510,13 @@ print(m.role)    # "123" — coerced to str
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · TypeVar — generic functions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Write a generic function `first(items)` that returns the first element of a list. The return type should be the same type as the list elements — so `first([1, 2, 3])` returns `int`, and `first(["a", "b"])` returns `str`. Use `TypeVar`.
 
@@ -494,9 +546,13 @@ s = first(["a", "b"])    # type checker knows s is str
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · Protocol — duck typing with type hints
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Define a `Drawable` Protocol with a `draw() -> None` method. Write two classes `Circle` and `Square` that each implement `draw()` but do NOT inherit from `Drawable`. Write a `render(shape: Drawable)` function that calls `draw()`. Show that both classes satisfy the protocol.
 
@@ -535,9 +591,13 @@ render(Square())   # works — Square satisfies Drawable structurally
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟠 · Protocol vs ABC
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Show the same `Drawable` interface implemented as an ABC and as a Protocol. Explain the key difference. Then add `@runtime_checkable` to the Protocol and demonstrate `isinstance()` checking.
 
@@ -582,9 +642,13 @@ print(isinstance(42, DrawableProto))              # False — int has no draw()
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟢 · Pydantic BaseModel — define a model
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Define a `ChatMessage` Pydantic model with `role: str`, `content: str`, and `tokens: int = 0`. Create an instance with `role="user"` and `content="Hello"`. Access each field and print the model.
 
@@ -617,9 +681,13 @@ print(msg)           # role='user' content='Hello' tokens=0
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟡 · Pydantic instantiation — coercion and validation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Using the `ChatMessage` model from Q16, show that Pydantic coerces `"42"` to `42` for the `tokens` field. Then show that passing `tokens="not-a-number"` raises a `ValidationError`.
 
@@ -658,9 +726,13 @@ except ValidationError as e:
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · ValidationError — catching and inspecting
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Create a `UserProfile` model with `username: str` and `age: int`. Pass `age="not-a-number"` to trigger a `ValidationError`. Catch it and print the number of errors and each error's `loc`, `msg`, and `input` fields.
 
@@ -695,9 +767,13 @@ except ValidationError as e:
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟡 · Field constraints — gt/lt/ge/le/min_length
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Define a `UserProfile` model using `Field()` constraints: `username` must be 3–50 chars, `age` must be > 0 and < 150, `score` must be between 0.0 and 1.0 inclusive, `email` must match a basic email regex pattern. Show a valid instance and show that a constraint violation raises `ValidationError`.
 
@@ -736,9 +812,13 @@ except ValidationError as e:
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟡 · @field_validator — custom validation logic
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Add a `@field_validator("role")` to a `ChatMessage` model that raises `ValueError` if role is not `"system"`, `"user"`, or `"assistant"`. Add a second `@field_validator("content")` that strips whitespace and raises if the stripped string is empty.
 
@@ -782,9 +862,13 @@ print(msg.content)   # "Hello" — stripped by validator
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟠 · @model_validator — cross-field validation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Define an `LLMConfig` model with `temperature: float = 1.0` and `top_p: float = 1.0`. Add a `@model_validator(mode="after")` that raises if both `temperature` and `top_p` are set to non-default values simultaneously (OpenAI recommends using one or the other, not both).
 
@@ -829,9 +913,13 @@ except Exception as e:
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · Pydantic for LLM outputs — SentimentResult
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Define a `SentimentResult` Pydantic model for structured LLM output with: `sentiment` as a `Literal["positive", "negative", "neutral"]`, `confidence` as a `float` constrained to 0.0–1.0 with a description, `reasoning` as a `str` with a description. Show how you'd use it as `response_format` in an OpenAI call (code comment is fine).
 
@@ -870,9 +958,13 @@ class SentimentResult(BaseModel):
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟠 · model_json_schema — for OpenAI function calling
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Define a `WeatherQuery` model with `location: str` (with description), `unit: Literal["celsius", "fahrenheit"]` defaulting to `"celsius"`, and `days: int` constrained 1–7 with a description. Print the JSON Schema. Then show how you'd build the OpenAI tool definition dict using the schema.
 
@@ -917,9 +1009,13 @@ print(query.days)   # 3 — validated int
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟡 · Pydantic v1 vs v2 — API differences
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Write the v1 version of a model with `@validator` and then the v2 equivalent with `@field_validator`. Show the equivalent methods: `dict()`/`model_dump()`, `json()`/`model_dump_json()`, `parse_obj()`/`model_validate()`, `schema()`/`model_json_schema()`.
 
@@ -964,9 +1060,13 @@ Model.model_json_schema()               # JSON Schema dict
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟠 · Pydantic v2 strict mode
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Create a `StrictUser` model using `model_config = ConfigDict(strict=True)` with `name: str` and `age: int`. Show that passing `age="30"` (a string digit) raises a `ValidationError` in strict mode, even though it would normally coerce fine.
 
@@ -1005,9 +1105,13 @@ print(user)
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 🟡 · model_validate — import from dict and JSON
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 **Problem:** Using a `ChatMessage` model (role, content, tokens), use `model_validate()` to create an instance from a plain dict. Use `model_validate_json()` to create an instance from a JSON string. Show that the result is a typed `ChatMessage` object in both cases.
 
@@ -1046,9 +1150,13 @@ print(type(msg2))     # <class 'ChatMessage'>
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 🟡 · model_dump — selective export
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Create a `ChatMessage` with `role="user"`, `content="Hello"`, `tokens=42`. Use `model_dump()` to export all fields, then with `exclude={"tokens"}`, then with `include={"role", "content"}`, then with `exclude_none=True` on a model that has a `None` field.
 
@@ -1090,9 +1198,13 @@ print(msg.model_dump(exclude_none=True))
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 🟠 · Nested Pydantic models — dict auto-coercion
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 
 **Problem:** Define `TokenUsage` with `prompt_tokens: int`, `completion_tokens: int`, `total_tokens: int`. Define `LLMResponse` with `content: str`, `model: str`, and `usage: TokenUsage`. Create an `LLMResponse` passing `usage` as a plain dict (not a `TokenUsage` instance). Verify the `usage` field is a `TokenUsage` object.
 
@@ -1135,9 +1247,13 @@ print(response.usage.prompt_tokens)       # 10
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 🟠 · Nested model_dump — recursive serialization
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 **Problem:** Using the `LLMResponse` and `TokenUsage` models from Q28, call `model_dump()` on a response instance. Show that the result is a plain dict with the nested `TokenUsage` also serialized as a dict (not as a `TokenUsage` object). Then round-trip it: call `LLMResponse.model_validate()` on the dict to recreate the model.
 
@@ -1187,9 +1303,13 @@ print(reloaded.usage.total_tokens)   # 15
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 🟠 · Capstone — ChatMessage, TokenUsage, LLMResponse
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 
 **Problem:** Build a realistic AI engineering model set from scratch:
 

@@ -12,42 +12,46 @@
 
 | Q# | Chapter | Concept | Difficulty |
 |---|---|---|---|
-| [Q1](#q1--ch1--what-is-a-file--text-vs-binary) | Ch1 | Text vs binary file | 🟢 |
-| [Q2](#q2--ch2--file-modes--all-six-modes) | Ch2 | All six file modes | 🟢 |
-| [Q3](#q3--ch3--context-manager--why-with-open) | Ch3 | Why `with open(...)` | 🟢 |
-| [Q4](#q4--ch4--reading-strategies--read-vs-readline-vs-readlines) | Ch4 | read vs readline vs readlines | 🟢 |
-| [Q5](#q5--ch4--reading-strategies--memory-efficient-line-iteration) | Ch4 | Memory-efficient line iteration | 🟢 |
-| [Q6](#q6--ch5--writing--write-vs-writelines) | Ch5 | write() vs writelines() | 🟡 |
-| [Q7](#q7--ch5--writing--printfilef) | Ch5 | print(file=f) | 🟡 |
-| [Q8](#q8--ch6--seektell--seektell-round-trip) | Ch6 | seek/tell round-trip | 🟡 |
-| [Q9](#q9--ch7--encoding--explicit-utf-8) | Ch7 | Explicit UTF-8 encoding | 🟡 |
-| [Q10](#q10--ch7--encoding--unicodedecodeerror-handling) | Ch7 | UnicodeDecodeError handling | 🟡 |
-| [Q11](#q11--ch8--csv-files--csv-dictreader) | Ch8 | csv.DictReader | 🟡 |
-| [Q12](#q12--ch8--csv-files--csv-dictwriter) | Ch8 | csv.DictWriter | 🟡 |
-| [Q13](#q13--ch9--json-files--load-modify-write) | Ch9 | JSON load/modify/write | 🟡 |
-| [Q14](#q14--ch9--json-files--custom-json-serializer) | Ch9 | Custom JSON serializer | 🟡 |
-| [Q15](#q15--ch10--pathlib-survey--rewrite-ospath-code) | Ch10 | Rewrite os.path with pathlib | 🟡 |
-| [Q16](#q16--ch10--pathlib-survey--recursive-glob) | Ch10 | Recursive glob | 🟡 |
-| [Q17](#q17--ch11--large-files--count-error-lines) | Ch11 | Count ERROR lines in 10GB file | 🟡 |
-| [Q18](#q18--ch11--large-files--chunk-reading) | Ch11 | Binary chunk reading | 🟡 |
-| [Q19](#q19--ch12--atomic-writes--atomic-write-pattern) | Ch12 | Atomic write pattern | 🟡 |
-| [Q20](#q20--ch13--temporary-files--namedtemporaryfile-vs-mkdtemp) | Ch13 | NamedTemporaryFile vs mkdtemp | 🟡 |
-| [Q21](#q21--ch14--security--path-traversal-attack-and-defense) | Ch14 | Path traversal attack + defense | 🟡 |
-| [Q22](#q22--ch15--file-locking--flock-exclusive-lock) | Ch15 | flock exclusive lock | 🟡 |
-| [Q23](#q23--ch16--shutil--copy-move-delete) | Ch16 | shutil copy/move/delete | 🟡 |
-| [Q24](#q24--ch16--shutil--make_archive) | Ch16 | shutil.make_archive | 🟡 |
-| [Q25](#q25--mixed--iostringio--in-memory-file-for-testing) | Mixed | io.StringIO for testing | 🟠 |
-| [Q26](#q26--mixed--iobytesio--in-memory-image-processing) | Mixed | io.BytesIO image processing | 🟠 |
-| [Q27](#q27--mixed--generator-pipeline--csv-filter-transform) | Mixed | Generator pipeline | 🟠 |
-| [Q28](#q28--mixed--config-file--atomic-readwrite-with-error-handling) | Mixed | Config file read/write | 🟠 |
-| [Q29](#q29--mixed--log-rotation--size-based-rotation) | Mixed | Size-based log rotation | 🟠 |
-| [Q30](#q30--capstone--filestore-class) | Capstone | FileStore class | 🟠 |
+| [Q1](#q1) | Ch1 | Text vs binary file | 🟢 |
+| [Q2](#q2) | Ch2 | All six file modes | 🟢 |
+| [Q3](#q3) | Ch3 | Why `with open(...)` | 🟢 |
+| [Q4](#q4) | Ch4 | read vs readline vs readlines | 🟢 |
+| [Q5](#q5) | Ch4 | Memory-efficient line iteration | 🟢 |
+| [Q6](#q6) | Ch5 | write() vs writelines() | 🟡 |
+| [Q7](#q7) | Ch5 | print(file=f) | 🟡 |
+| [Q8](#q8) | Ch6 | seek/tell round-trip | 🟡 |
+| [Q9](#q9) | Ch7 | Explicit UTF-8 encoding | 🟡 |
+| [Q10](#q10) | Ch7 | UnicodeDecodeError handling | 🟡 |
+| [Q11](#q11) | Ch8 | csv.DictReader | 🟡 |
+| [Q12](#q12) | Ch8 | csv.DictWriter | 🟡 |
+| [Q13](#q13) | Ch9 | JSON load/modify/write | 🟡 |
+| [Q14](#q14) | Ch9 | Custom JSON serializer | 🟡 |
+| [Q15](#q15) | Ch10 | Rewrite os.path with pathlib | 🟡 |
+| [Q16](#q16) | Ch10 | Recursive glob | 🟡 |
+| [Q17](#q17) | Ch11 | Count ERROR lines in 10GB file | 🟡 |
+| [Q18](#q18) | Ch11 | Binary chunk reading | 🟡 |
+| [Q19](#q19) | Ch12 | Atomic write pattern | 🟡 |
+| [Q20](#q20) | Ch13 | NamedTemporaryFile vs mkdtemp | 🟡 |
+| [Q21](#q21) | Ch14 | Path traversal attack + defense | 🟡 |
+| [Q22](#q22) | Ch15 | flock exclusive lock | 🟡 |
+| [Q23](#q23) | Ch16 | shutil copy/move/delete | 🟡 |
+| [Q24](#q24) | Ch16 | shutil.make_archive | 🟡 |
+| [Q25](#q25) | Mixed | io.StringIO for testing | 🟠 |
+| [Q26](#q26) | Mixed | io.BytesIO image processing | 🟠 |
+| [Q27](#q27) | Mixed | Generator pipeline | 🟠 |
+| [Q28](#q28) | Mixed | Config file read/write | 🟠 |
+| [Q29](#q29) | Mixed | Size-based log rotation | 🟠 |
+| [Q30](#q30) | Capstone | FileStore class | 🟠 |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · Ch1 · What is a file — Text vs binary
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Explain the difference between a text file and a binary file. When would you use each?
 
@@ -83,9 +87,13 @@ with open("image.png", "rb") as f:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · Ch2 · File modes — All six modes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write examples of opening a file in each mode: `r`, `w`, `a`, `x`, `r+`, `rb`. What does each do if the file already exists?
 
@@ -136,9 +144,13 @@ with open("image.png", "rb") as f:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · Ch3 · Context manager — Why `with open(...)`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Why should you always use `with open(...)` instead of `f = open(...)` + `f.close()`? What happens if an exception occurs mid-write?
 
@@ -182,9 +194,13 @@ finally:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟢 · Ch4 · Reading strategies — read() vs readline() vs readlines()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** When would you use `read()`, `readline()`, and `readlines()`? What is the memory implication of `read()` on a 10GB file?
 
@@ -228,9 +244,13 @@ with open("small.txt") as f:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟢 · Ch4 · Reading strategies — Memory-efficient line iteration
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write the most memory-efficient way to process each line in a file.
 
@@ -270,9 +290,13 @@ with open("huge.log") as f:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · Ch5 · Writing — write() vs writelines()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write a function that takes a list of strings and writes them to a file with newlines. Show `write()` and `writelines()` versions.
 
@@ -317,9 +341,13 @@ write_with_join("out.txt", lines)
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · Ch5 · Writing — print(file=f)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Use `print()` to write formatted output to a file.
 
@@ -361,9 +389,13 @@ with open("csv_out.txt", "w") as f:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · Ch6 · seek/tell — seek/tell round-trip
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Open a file, read first 10 bytes, use `tell()` to get current position, seek back to start, then read again.
 
@@ -418,9 +450,13 @@ with open("sample.txt", "rb") as f:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · Ch7 · Encoding — Explicit UTF-8
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Open a UTF-8 file with explicit encoding. What happens if you open a UTF-8 file without specifying encoding on Windows?
 
@@ -467,9 +503,13 @@ with open("file.txt", "r", encoding="utf-8-sig") as f:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · Ch7 · Encoding — UnicodeDecodeError handling
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** You get a `UnicodeDecodeError` reading a file. Show 3 ways to handle it: `strict`, `ignore`, `replace`.
 
@@ -528,9 +568,13 @@ print(detected)   # {'encoding': 'UTF-8', 'confidence': 0.99, 'language': ''}
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · Ch8 · CSV files — csv.DictReader
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Use `csv.DictReader` to read a CSV with headers and print each row as a dict.
 
@@ -590,9 +634,13 @@ print(rows[0])   # {'name': 'Alice', 'age': '30', 'city': 'New York'}
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · Ch8 · CSV files — csv.DictWriter
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Use `csv.DictWriter` to write a list of dicts to CSV with headers.
 
@@ -658,9 +706,13 @@ with open("output3.csv", "w", newline="", encoding="utf-8") as f:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · Ch9 · JSON files — Load, modify, write
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Load a JSON file, modify a key, write it back. Use `indent=2` for pretty output.
 
@@ -717,9 +769,13 @@ with open("config.json", "r", encoding="utf-8") as f:
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · Ch9 · JSON files — Custom JSON serializer
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Write a JSON encoder that handles `datetime` objects (serialize to ISO format string).
 
@@ -793,9 +849,13 @@ print(type(loaded["created_at"]))   # <class 'datetime.datetime'>
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟡 · Ch10 · pathlib survey — Rewrite os.path code
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Rewrite this `os.path` code using pathlib: `os.path.join(os.path.dirname(f), "out", os.path.basename(f))`
 
@@ -851,9 +911,13 @@ print(renamed)        # /data/input/summary.csv
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · Ch10 · pathlib survey — Recursive glob
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Use pathlib to find all `.json` files recursively under a directory.
 
@@ -909,9 +973,13 @@ for p in files_only:
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟡 · Ch11 · Large files — Count ERROR lines in 10GB file
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Process a 10GB log file line by line without loading it into memory. Calculate how many lines contain "ERROR".
 
@@ -979,9 +1047,13 @@ def count_errors_with_progress(log_path: str) -> int:
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · Ch11 · Large files — Binary chunk reading
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Read a binary file in 4096-byte chunks using a while loop.
 
@@ -1037,9 +1109,13 @@ print(sha256_of_file("/etc/hosts"))
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟡 · Ch12 · Atomic writes — Atomic write pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Explain why writing directly to a file is dangerous if the process crashes mid-write. Implement an atomic write using a temp file + rename.
 
@@ -1096,9 +1172,13 @@ write_atomic("/etc/myapp/config.json", config)
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟡 · Ch13 · Temporary files — NamedTemporaryFile vs mkdtemp
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Use `tempfile.NamedTemporaryFile` and `tempfile.mkdtemp`. When is each appropriate?
 
@@ -1164,9 +1244,13 @@ finally:
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟡 · Ch14 · Security — Path traversal attack and defense
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Show a path traversal attack using `../../../etc/passwd`. Write a `safe_path(base, user_input)` function that blocks it.
 
@@ -1237,9 +1321,13 @@ p = safe_path("/var/www/uploads", "evil")
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · Ch15 · File locking — flock exclusive lock
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Use `fcntl.flock` (or `portalocker`) to prevent two processes from writing to the same file simultaneously.
 
@@ -1310,9 +1398,13 @@ with portalocker.Lock("data.json", timeout=5) as f:
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟡 · Ch16 · shutil — Copy, move, delete
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Copy a file, copy a directory tree, move a file, delete a directory tree.
 
@@ -1372,9 +1464,13 @@ print(f"Free: {free / (1024**3):.1f} GB")
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟡 · Ch16 · shutil — make_archive
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Create a `.zip` archive of a directory using `shutil.make_archive`.
 
@@ -1436,9 +1532,13 @@ with zipfile.ZipFile("/tmp/custom.zip", "w", compression=zipfile.ZIP_DEFLATED) a
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟠 · Mixed · io.StringIO — In-memory file for testing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Use `io.StringIO` as an in-memory file. Show a use case: testing a function that writes to a file without touching disk.
 
@@ -1510,9 +1610,13 @@ print(buf.getvalue())        # same — getvalue() works from any position
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 🟠 · Mixed · io.BytesIO — In-memory image processing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 **Problem:** Use `io.BytesIO` to process an image in memory without saving to disk.
 
@@ -1595,9 +1699,13 @@ print(f"{w}x{h}")   # 1920x1080
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 🟠 · Mixed · Generator pipeline — CSV filter and transform
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Write a generator pipeline that: reads a large CSV line by line → filters rows where `amount > 1000` → transforms to dicts → yields results.
 
@@ -1678,9 +1786,13 @@ with io.StringIO(csv_data) as f:
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 🟠 · Mixed · Config file — Atomic read/write with error handling
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 
 **Problem:** Write `read_config(path)` and `write_config(path, data)` that handle JSON config files with atomic writes and proper error handling.
 
@@ -1778,9 +1890,13 @@ print("Config roundtrip OK")
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 🟠 · Mixed · Log rotation — Size-based rotation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 **Problem:** Write a simple log writer that rotates the file when it exceeds 1MB (rename current → `.1`, start fresh).
 
@@ -1858,9 +1974,13 @@ logger.error("Something went wrong: %s", "disk full")
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 🟠 · Capstone — FileStore class
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 
 **Problem:** Build a `FileStore` class: `store(key, data)` writes JSON atomically; `load(key)` reads with error handling; `list()` returns all keys; `delete(key)` removes safely. Uses pathlib throughout.
 

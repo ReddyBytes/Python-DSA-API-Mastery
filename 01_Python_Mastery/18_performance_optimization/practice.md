@@ -8,44 +8,48 @@
 
 | # | Concept | Difficulty |
 |---|---------|-----------|
-| Q1 | cProfile basics: run and read output | 🟢 Basic |
-| Q2 | Read pstats output | 🟢 Basic |
-| Q3 | Sort pstats output | 🟢 Basic |
-| Q4 | cProfile programmatic (Profile object) | 🟡 Intermediate |
-| Q5 | timeit repeat and min() | 🟡 Intermediate |
-| Q6 | timeit setup parameter | 🟡 Intermediate |
-| Q7 | timeit: compare two implementations | 🟡 Intermediate |
-| Q8 | timeit: why min not mean | 🟡 Intermediate |
-| Q9 | tracemalloc: memory snapshot | 🟡 Intermediate |
-| Q10 | line_profiler: @profile decorator | 🟡 Intermediate |
-| Q11 | memory_profiler: peak memory | 🟡 Intermediate |
-| Q12 | tracemalloc: compare snapshots | 🟡 Intermediate |
-| Q13 | Profile context manager | 🟠 Advanced |
-| Q14 | Timing decorator | 🟡 Intermediate |
-| Q15 | Dict vs list lookup: O(1) | 🟢 Basic |
-| Q16 | Generator expressions: memory savings | 🟢 Basic |
-| Q17 | Generator vs list: when to choose | 🟡 Intermediate |
-| Q18 | Generator pipeline: O(1) memory | 🟡 Intermediate |
-| Q19 | String building: join vs += | 🟡 Intermediate |
-| Q20 | Local variable fast path | 🟡 Intermediate |
-| Q21 | lru_cache: apply and inspect | 🟡 Intermediate |
-| Q22 | `__slots__`: memory saving | 🟡 Intermediate |
-| Q23 | `__slots__`: when to avoid | 🟡 Intermediate |
-| Q24 | lru_cache: when to avoid | 🟡 Intermediate |
-| Q25 | String building: io.StringIO | 🟡 Intermediate |
-| Q26 | run_in_executor for blocking calls | 🟠 Advanced |
-| Q27 | NumPy vectorization over loops | 🟡 Intermediate |
-| Q28 | NumPy: when not worth it | 🟡 Intermediate |
-| Q29 | Capstone: profile + fix O(n²) | 🟠 Advanced |
-| Q30 | Capstone: full optimization workflow | 🟠 Advanced |
+| [Q1](#q1) | cProfile basics: run and read output | 🟢 Basic |
+| [Q2](#q2) | Read pstats output | 🟢 Basic |
+| [Q3](#q3) | Sort pstats output | 🟢 Basic |
+| [Q4](#q4) | cProfile programmatic (Profile object) | 🟡 Intermediate |
+| [Q5](#q5) | timeit repeat and min() | 🟡 Intermediate |
+| [Q6](#q6) | timeit setup parameter | 🟡 Intermediate |
+| [Q7](#q7) | timeit: compare two implementations | 🟡 Intermediate |
+| [Q8](#q8) | timeit: why min not mean | 🟡 Intermediate |
+| [Q9](#q9) | tracemalloc: memory snapshot | 🟡 Intermediate |
+| [Q10](#q10) | line_profiler: @profile decorator | 🟡 Intermediate |
+| [Q11](#q11) | memory_profiler: peak memory | 🟡 Intermediate |
+| [Q12](#q12) | tracemalloc: compare snapshots | 🟡 Intermediate |
+| [Q13](#q13) | Profile context manager | 🟠 Advanced |
+| [Q14](#q14) | Timing decorator | 🟡 Intermediate |
+| [Q15](#q15) | Dict vs list lookup: O(1) | 🟢 Basic |
+| [Q16](#q16) | Generator expressions: memory savings | 🟢 Basic |
+| [Q17](#q17) | Generator vs list: when to choose | 🟡 Intermediate |
+| [Q18](#q18) | Generator pipeline: O(1) memory | 🟡 Intermediate |
+| [Q19](#q19) | String building: join vs += | 🟡 Intermediate |
+| [Q20](#q20) | Local variable fast path | 🟡 Intermediate |
+| [Q21](#q21) | lru_cache: apply and inspect | 🟡 Intermediate |
+| [Q22](#q22) | `__slots__`: memory saving | 🟡 Intermediate |
+| [Q23](#q23) | `__slots__`: when to avoid | 🟡 Intermediate |
+| [Q24](#q24) | lru_cache: when to avoid | 🟡 Intermediate |
+| [Q25](#q25) | String building: io.StringIO | 🟡 Intermediate |
+| [Q26](#q26) | run_in_executor for blocking calls | 🟠 Advanced |
+| [Q27](#q27) | NumPy vectorization over loops | 🟡 Intermediate |
+| [Q28](#q28) | NumPy: when not worth it | 🟡 Intermediate |
+| [Q29](#q29) | Capstone: profile + fix O(n²) | 🟠 Advanced |
+| [Q30](#q30) | Capstone: full optimization workflow | 🟠 Advanced |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · cProfile Basics 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write a function `slow_sum(n)` that does `sum(i*i for i in range(n))`. Profile it with `cProfile.run()` using `n=200_000`. What does the output tell you?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -69,11 +73,15 @@ cProfile.run("slow_sum(200_000)", sort="cumulative")
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Read pstats Output 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 In a cProfile report, one row shows: `ncalls=5000, tottime=2.1, cumtime=8.4`. What does each number mean? Which column indicates this function is calling expensive helpers?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -98,11 +106,15 @@ In a cProfile report, one row shows: `ncalls=5000, tottime=2.1, cumtime=8.4`. Wh
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Sort pstats Output 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Explain when you would sort by `tottime` versus `cumtime` when reading a pstats report. Give one example use case for each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -142,11 +154,15 @@ s.sort_stats("cumtime").print_stats(5)   # call tree roots
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · cProfile Programmatic (Profile Object) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Profile only a specific code section (not a full function call) using `cProfile.Profile()` with `.enable()` and `.disable()`. Capture output to a string.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -177,11 +193,15 @@ print(buf.getvalue())
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · timeit repeat and min() 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Use `timeit.repeat()` with `repeat=5, number=10_000` to benchmark `sorted(range(100))`. Take the minimum and convert to microseconds per call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -209,11 +229,15 @@ print(f"Per call:   {best / 10_000 * 1e6:.2f} µs")
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · timeit setup Parameter 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Benchmark `[x**2 for x in data]` where `data = list(range(1000))`. The `data` creation must go in `setup`, not `stmt`. Show the correct usage.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -239,11 +263,15 @@ print(f"Per call: {t / 10_000 * 1e6:.2f} µs")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · timeit: Compare Two Implementations 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Compare `42 in list(range(10_000))` vs `42 in set(range(10_000))`. Use `timeit.repeat` with the data created in `setup`, not inside `stmt`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -271,11 +299,15 @@ print(f"set is {t_list/t_set:.0f}x faster")
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · timeit: Why min Not mean 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 You run `timeit.repeat` and get `[0.15, 0.16, 0.44, 0.15, 0.16]`. Calculate both min and mean. Explain why the 0.44 result should be excluded from your benchmark.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -301,11 +333,15 @@ print(f"mean: {sum(results)/len(results):.3f}s")  # 0.212 — skewed by outlier
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · tracemalloc: Memory Snapshot 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Use `tracemalloc` to measure how much memory `[float(i) for i in range(100_000)]` allocates. Print the peak memory in MB.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -334,11 +370,15 @@ print(f"Peak:    {peak / 1024 / 1024:.2f} MB")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · line_profiler: @profile Decorator 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Describe how to use `line_profiler` on a function `process(data)`. What command runs it, and what does the `% Time` column show?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -374,11 +414,15 @@ Output columns:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · memory_profiler: Peak Memory 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Decorate a function with `@profile` from `memory_profiler`. The function creates a 500k-element list. Show the decorator import and how to run it.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -410,11 +454,15 @@ Output shows `Mem usage` (total RSS) and `Increment` (change from previous line)
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · tracemalloc: Compare Snapshots 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Use `tracemalloc` to compare two snapshots — before and after calling a function 10 times — to identify which line allocates the most memory. Print the top 3 growers.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -449,11 +497,15 @@ for stat in top[:3]:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Profile Context Manager 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Write a reusable `profile_block(label)` context manager using `@contextmanager` that profiles any `with` block and prints the top 5 by `tottime`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -489,11 +541,15 @@ with profile_block("list building"):
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Timing Decorator 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Write a decorator `@timed` that prints elapsed milliseconds every time the decorated function is called. Use `time.perf_counter`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -528,11 +584,15 @@ process(500_000)
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Dict vs List Lookup: O(1) 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 You have 10,000 product records. You repeatedly look up products by their SKU. Show the slow (list scan) vs fast (dict lookup) approach and explain the complexity difference.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -565,11 +625,15 @@ print(find_fast("SKU-9999"))
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Generator Expressions: Memory Savings 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Show the memory size difference between `[x*x for x in range(1_000_000)]` and `(x*x for x in range(1_000_000))` using `sys.getsizeof`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -594,11 +658,15 @@ print(f"Generator size: {sys.getsizeof(gen)} bytes")
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Generator vs List: When to Choose 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 List three situations where you should use a generator instead of a list, and one situation where a list is better.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -634,7 +702,12 @@ data.sort()               # must be a list
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Generator Pipeline: O(1) Memory 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Rewrite this eager pipeline to use generator expressions throughout, keeping O(1) peak memory:
 
@@ -645,7 +718,6 @@ squares = [x * x for x in evens]
 total = sum(squares)
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -677,11 +749,15 @@ total = sum(x * x for x in range(500_000) if x % 2 == 0)
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · String Building: join vs += 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Why does `result += chunk` inside a loop have O(n²) behavior? Rewrite a CSV row builder to use `join()` instead.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -713,11 +789,15 @@ assert build_csv_slow(row) == build_csv_fast(row)
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Local Variable Fast Path 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Explain why `LOAD_FAST` is faster than `LOAD_GLOBAL`, and write a function that demonstrates the optimization by pulling `math.sqrt` into a local variable before a hot loop.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -751,11 +831,15 @@ print("=== fast ==="); dis.dis(fast_version)
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · lru_cache: Apply and Inspect 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Apply `@lru_cache(maxsize=256)` to a function `fib(n)`. After calling `fib(30)`, print the cache info. Then clear the cache and verify it is empty.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -788,11 +872,15 @@ print(f"After clear: currsize={info_after.currsize}")  # 0
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · `__slots__`: Memory Saving 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Create a `Sensor` class with three float attributes. Make two versions — with and without `__slots__`. Create 100,000 instances of each and compare memory using `sys.getsizeof` on a single instance.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -828,11 +916,15 @@ print(f"No __dict__ on slots: {not hasattr(s, '__dict__')}")
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · `__slots__`: When to Avoid 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Name three situations where adding `__slots__` would cause problems or offer no benefit.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -867,11 +959,15 @@ class RigidChild(Rigid):
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · lru_cache: When to Avoid 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Name three cases where `@lru_cache` would cause bugs or be inappropriate.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -910,11 +1006,15 @@ def compute(n: int): return n * n
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · String Building: io.StringIO 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Show how `io.StringIO` can be used as an alternative to `+=` for building large strings. Compare it to `join()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -958,11 +1058,15 @@ assert build_concat(N) == build_join(N) == build_stringio(N)
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · run_in_executor for Blocking Calls 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 In an `async` function, you have a blocking `time.sleep(1)` call that would freeze the event loop. Show how to wrap it with `run_in_executor` to prevent blocking.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -994,11 +1098,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · NumPy Vectorization 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Rewrite a Python loop that computes `sqrt(x^2 + y^2)` for 1 million (x, y) pairs using NumPy. Compare speed with `timeit`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1036,11 +1144,15 @@ print(f"Python: {t_py/3*1000:.1f} ms  NumPy: {t_np/3*1000:.1f} ms  "
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · NumPy: When Not Worth It 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 For what input sizes and use cases is NumPy NOT faster than plain Python? Give a concrete example.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1079,7 +1191,12 @@ print(f"NumPy  (n=5): {t_np/100_000*1e6:.2f} µs")
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · Capstone: Profile and Fix O(n²) 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Profile the function below, identify the algorithmic problem from the pstats output, and fix it:
 
@@ -1096,7 +1213,6 @@ nums = list(range(5000))
 result = count_pairs(nums, 7500)
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1144,7 +1260,12 @@ print(f"Speedup: {(t_slow/5) / (t_fast/100):.0f}x")
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · Capstone: Full Optimization Workflow 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 You are given a slow data processing function. Apply the complete workflow: profile → identify top two hotspots → fix both → verify speedup:
 
@@ -1167,7 +1288,6 @@ records = [
 ]
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

@@ -8,27 +8,31 @@
 
 | # | Difficulty | Concept |
 |---|---|---|
-| Q1 | 🟢 Easy | Basic coroutine: define and run with asyncio.run() |
-| Q2 | 🟢 Easy | asyncio.sleep vs time.sleep |
-| Q3 | 🟡 Medium | gather: fetch 3 URLs concurrently vs sequential |
-| Q4 | 🟡 Medium | create_task: start tasks without waiting immediately |
-| Q5 | 🟡 Medium | async with: async context manager |
-| Q6 | 🟡 Medium | async for: iterate an async generator |
-| Q7 | 🟡 Medium | asyncio.Queue: async producer-consumer |
-| Q8 | 🟡 Medium | asyncio.Event: signal between coroutines |
-| Q9 | 🟡 Medium | TaskGroup (Python 3.11+): structured concurrency |
-| Q10 | 🟡 Medium | run_in_executor: blocking function in async code |
-| Q11 | 🟠 Hard | asyncio.wait_for() with cancellation |
-| Q12 | 🟠 Hard | Semaphore: limit concurrent requests to N |
-| Q13 | 🟡 Medium | gather error handling: return_exceptions=True |
-| Q14 | 🟠 Hard | Async generator: lazy data stream |
-| Q15 | 🟠 Hard | Capstone: async web scraper with rate limiting |
+| [Q1](#q1) | 🟢 Easy | Basic coroutine: define and run with asyncio.run() |
+| [Q2](#q2) | 🟢 Easy | asyncio.sleep vs time.sleep |
+| [Q3](#q3) | 🟡 Medium | gather: fetch 3 URLs concurrently vs sequential |
+| [Q4](#q4) | 🟡 Medium | create_task: start tasks without waiting immediately |
+| [Q5](#q5) | 🟡 Medium | async with: async context manager |
+| [Q6](#q6) | 🟡 Medium | async for: iterate an async generator |
+| [Q7](#q7) | 🟡 Medium | asyncio.Queue: async producer-consumer |
+| [Q8](#q8) | 🟡 Medium | asyncio.Event: signal between coroutines |
+| [Q9](#q9) | 🟡 Medium | TaskGroup (Python 3.11+): structured concurrency |
+| [Q10](#q10) | 🟡 Medium | run_in_executor: blocking function in async code |
+| [Q11](#q11) | 🟠 Hard | asyncio.wait_for() with cancellation |
+| [Q12](#q12) | 🟠 Hard | Semaphore: limit concurrent requests to N |
+| [Q13](#q13) | 🟡 Medium | gather error handling: return_exceptions=True |
+| [Q14](#q14) | 🟠 Hard | Async generator: lazy data stream |
+| [Q15](#q15) | 🟠 Hard | Capstone: async web scraper with rate limiting |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · Coroutine Basics — define and run with asyncio.run()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Write an `async def greet(name)` coroutine that prints "Hello, {name}!", awaits `asyncio.sleep(0.1)`, then prints "Goodbye, {name}!". Run it using `asyncio.run()`. Then show what happens if you call `greet("Alice")` without `await` or `asyncio.run()`.
 
@@ -65,9 +69,13 @@ coro.close()   # suppress the warning
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · Blocking — asyncio.sleep vs time.sleep
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write three concurrent tasks: A (1s), B (0.5s), C (0.7s). Run them with `asyncio.gather()` using `asyncio.sleep()`. Total time should be ~1s. Then replace with `time.sleep()` inside one task and show it blocks the others (total time increases).
 
@@ -116,9 +124,13 @@ print(f"Blocking A:  {time.perf_counter()-start:.2f}s")  # ~1.7s+
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · Concurrency — gather: concurrent vs sequential
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Simulate fetching 3 URLs with delays of 1.0s, 0.8s, 0.6s. First run them sequentially (await each one). Then run them concurrently with `asyncio.gather()`. Print the elapsed time for both and the speedup factor.
 
@@ -167,9 +179,13 @@ print(f"Speedup:     {seq_time/con_time:.1f}x")
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · Tasks — create_task: start background work
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Use `asyncio.create_task()` to start two long-running tasks (sleep 0.5s each). While they run in the background, do some synchronous computation. Then await both tasks. Show the total time is ~0.5s, not 1s.
 
@@ -211,9 +227,13 @@ print(f"Total: {time.perf_counter()-start:.2f}s")  # ~0.5s not 1.0s
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · async with — async context manager for DB connection
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Create an `AsyncDB` class with `__aenter__` (awaits a 0.05s "connection" delay, prints "connected") and `__aexit__` (awaits 0.01s "disconnect" delay, prints "disconnected"). Use it with `async with` to simulate a query.
 
@@ -262,9 +282,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · async for — iterate an async generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write an `async def paginated(total_pages)` generator that yields one page of data (a list of 3 items) per iteration, awaiting `asyncio.sleep(0.02)` between pages. Use `async for` to consume it and print each page.
 
@@ -298,9 +322,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · Async Queue — async producer-consumer
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write an async producer that puts integers 1–6 onto an `asyncio.Queue(maxsize=3)`, one every 0.05s. Write two async consumer workers that each await items, print them squared, and call `queue.task_done()`. Run all three concurrently with `asyncio.gather()`.
 
@@ -348,9 +376,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · Signaling — asyncio.Event between coroutines
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Use `asyncio.Event` to coordinate a server coroutine and two client coroutines. The server sleeps 0.2s (startup), then sets the event. Each client awaits the event before making requests. Show clients don't start until the server signals ready.
 
@@ -394,9 +426,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · TaskGroup — structured concurrency (Python 3.11+)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Use `asyncio.TaskGroup` to run three tasks concurrently. Show that if one task raises an exception, the group cancels the remaining tasks. Catch the `ExceptionGroup` and print which task failed.
 
@@ -438,9 +474,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · Blocking Bridge — run_in_executor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write a synchronous (blocking) `read_file(path)` function that sleeps 0.3s (simulating slow I/O). Call it from an async context using `loop.run_in_executor(None, ...)` so the event loop is not blocked. Show another coroutine runs concurrently while the executor task is waiting.
 
@@ -489,9 +529,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · Timeout — asyncio.wait_for() with cancellation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Write `slow_op()` that sleeps 2 seconds. Wrap it with `asyncio.wait_for()` with a 0.5s timeout. Catch `asyncio.TimeoutError`. Verify the underlying task was cancelled. Then show how to clean up inside the coroutine using `try/finally`.
 
@@ -533,9 +577,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Rate Limiting — Semaphore to cap concurrent requests
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Simulate fetching 10 URLs where each request takes 0.1s. Without a semaphore, all 10 fire simultaneously. Use `asyncio.Semaphore(3)` to limit to 3 concurrent requests. Show that with the semaphore, total time is roughly `ceil(10/3) * 0.1 ≈ 0.4s` instead of 0.1s.
 
@@ -575,9 +623,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · Error Handling — gather with return_exceptions=True
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Create 5 tasks where task 2 and task 4 raise exceptions. Use `asyncio.gather(*tasks, return_exceptions=True)` to collect results. Show that exceptions are returned as values (not raised). Filter and count successes vs failures.
 
@@ -622,9 +674,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟠 · Async Generator — lazy data stream
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Write an async generator `event_stream(n)` that yields `n` events, each after a random 0.02–0.08s delay. Each event is a dict `{"id": i, "value": i**2}`. Consume it with `async for`, stopping early after the first event where `value > 20`.
 
@@ -661,9 +717,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟠 · Capstone — Async web scraper with rate limiting
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Build an async scraper that fetches 15 URLs concurrently with:
 - Max 4 concurrent requests (semaphore)

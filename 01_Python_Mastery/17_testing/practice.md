@@ -55,6 +55,8 @@
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
+
+
 **Problem:** Write `add(a, b)`. Write `test_add` using plain `assert` to verify three cases: (2,3)→5, (-1,1)→0, (0,0)→0.
 
 <details>
@@ -84,6 +86,8 @@ def test_add():
 ### Q2 🟢 · pytest · assert with Multiple Types
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write `test_various_assertions` that uses plain `assert` to check: a list contains an item, a variable is None, a float is approximately 0.3, and a string starts with a prefix.
 
@@ -120,6 +124,8 @@ def test_various_assertions():
 ### Q3 🟡 · pytest · Fixtures as Setup
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a `@pytest.fixture` called `empty_cart` that returns a `ShoppingCart()`. Write two tests using it: one checks `is_empty()` is True, another adds an item and checks `total()`.
 
@@ -162,6 +168,8 @@ def test_add_item_updates_total(empty_cart):
 ### Q4 🟡 · pytest · parametrize Basics
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write `is_prime(n)`. Use `@pytest.mark.parametrize` to test it with at least 6 cases (primes and non-primes).
 
@@ -207,6 +215,8 @@ def test_is_prime(n, expected):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
+
+
 **Problem:** Write `divide(a, b)` that raises `ZeroDivisionError` with message "cannot divide by zero". Write two tests: one checks the exception type, one checks the message with `match`.
 
 <details>
@@ -246,6 +256,8 @@ def test_divide_by_zero_message():
 ### Q6 🟡 · pytest · Fixture Scope
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Explain and demonstrate the four main fixture scopes: `function`, `class`, `module`, `session`. Write one example fixture for each scope with a comment explaining when to use it.
 
@@ -289,6 +301,8 @@ def app_server():
 ### Q7 🟡 · pytest · conftest.py
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write the content of a `conftest.py` that provides: a `db` fixture (in-memory SQLite), a `sample_user` fixture that depends on `db` and inserts a user. Show how both are used in a test file without any imports.
 
@@ -335,6 +349,8 @@ def test_user_in_db(sample_user, db):
 ### Q8 🟡 · pytest · Custom Markers and skip
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write tests marked with `@pytest.mark.slow`, `@pytest.mark.skip`, and `@pytest.mark.xfail`. Show the `pytest.ini` registration for custom markers. Show the commands to run only slow tests and to exclude them.
 
@@ -386,6 +402,8 @@ def test_float_precision():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
+
+
 **Problem:** Write `async def fetch_data(repo, key)` that calls `await repo.get(key)`. Write an async test using `pytest-asyncio` and `AsyncMock` that verifies the function returns the mocked value and calls `repo.get` with the correct key.
 
 <details>
@@ -426,6 +444,8 @@ async def test_fetch_data():
 ### Q10 🟡 · unittest · TestCase and setUp
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write a `TestCase` for a `BankAccount` class with `deposit`, `withdraw`, and `balance`. Use `setUp` to create a fresh account before each test.
 
@@ -483,6 +503,8 @@ class TestBankAccount(unittest.TestCase):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
+
+
 **Problem:** Write `parse_int(s)` that raises `ValueError` with "invalid literal" for non-numeric strings. Write two unittest tests: one checks the exception type, one checks the message.
 
 <details>
@@ -522,6 +544,8 @@ class TestParseInt(unittest.TestCase):
 ### Q12 🟡 · unittest · setUpClass for Expensive Resources
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a `TestCase` with `setUpClass` that initializes a `FakeDatabase` dict once. Write three tests that all read from it. Show that the database is created only once across all tests.
 
@@ -568,6 +592,8 @@ class TestSharedSetup(unittest.TestCase):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
+
+
 **Problem:** Write a `TestCase` that tests `is_palindrome` with 5 cases using `subTest`. Demonstrate that all 5 run even if one fails.
 
 <details>
@@ -609,6 +635,8 @@ class TestPalindrome(unittest.TestCase):
 ### Q14 🟡 · unittest · Migration to pytest
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Given a `unittest.TestCase` with `setUp`, `assertEqual`, and `assertRaises`, rewrite it as pytest functions using a fixture and plain `assert` / `pytest.raises`.
 
@@ -654,6 +682,8 @@ def test_div_zero(calc):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
+
+
 **Problem:** Create a `Mock` for a `DatabaseClient` with a `find_user(user_id)` method. Set `return_value` to return a user dict. Call it and assert the result and that it was called with the right argument.
 
 <details>
@@ -686,6 +716,8 @@ m.find_user.assert_called_once_with(1)
 ### Q16 🟡 · mock · @patch Decorator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Write a function `get_current_user()` that calls `os.environ.get("USER_ID")`. Write a test using `@patch` that makes it return "42" and verifies the function returns the correct value.
 
@@ -723,6 +755,8 @@ def test_get_current_user():
 ### Q17 🟡 · mock · return_value on Chained Calls
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Mock `requests.get(url)` where the result is `response.json()`. Show how to chain `return_value` to mock both the `get` call and the `.json()` call on the response.
 
@@ -764,6 +798,8 @@ def test_fetch_user(mock_get):
 ### Q18 🟡 · mock · side_effect
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Write a test where a mock's `side_effect` is: (1) a list `[10, 20, 30]` returning successive values, (2) an exception, (3) a lambda function that doubles its input.
 
@@ -809,6 +845,8 @@ def test_side_effect_callable():
 ### Q19 🟡 · mock · assert_called_once_with
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Write a mock test that verifies a `send_email(to, subject, body)` call was made exactly once with specific keyword arguments. Also show `assert_called_with`, `assert_any_call`, and `call_args_list`.
 
@@ -859,6 +897,8 @@ def test_email_assertions():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
+
+
 **Problem:** Use `patch.object` to patch the `increment` method on a `Counter` instance. Verify the mock is called, then verify the real method works after the context exits.
 
 <details>
@@ -898,6 +938,8 @@ def test_patch_object():
 ### Q21 🟡 · mock · spec for Type Safety
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Create a `Mock(spec=EmailSender)` where `EmailSender` has a `send(to, subject, body)` method. Show that valid methods work, typos raise `AttributeError`, and explain why spec is important.
 
@@ -939,6 +981,8 @@ def test_spec_mock():
 ### Q22 🟠 · mock · patch.dict for Config
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Write `get_config()` that reads from `os.environ`. Use `patch.dict(os.environ, {...})` in a test to override specific keys. Verify the original environment is restored after the test.
 
@@ -983,6 +1027,8 @@ def test_config_with_env_override():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
+
+
 **Problem:** Write `async def process_items(repo, items)` that calls `await repo.save(item)` for each item. Write an async test using `AsyncMock` that verifies `save` was awaited once per item.
 
 <details>
@@ -1024,6 +1070,8 @@ async def test_process_items():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
+
+
 **Problem:** Write a function `open_and_read(path)` that uses `open(path)` as a context manager and reads the file. Mock `open` using `mock_open` and verify the function returns the expected content.
 
 <details>
@@ -1062,6 +1110,8 @@ def test_open_and_read():
 ### Q25 🟡 · doubles · Mock vs Stub vs Fake
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Implement and use all three test doubles for a `WeatherService` dependency: a Stub (returns fixed data), a Fake (simple real implementation), and a Mock (unittest.mock). Show when you'd choose each.
 
@@ -1113,6 +1163,8 @@ mock_weather.get_temp.assert_called_once_with("London")
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
+
+
 **Problem:** List three situations where you should NOT mock, and write a test for each that demonstrates using the real object instead.
 
 <details>
@@ -1162,6 +1214,8 @@ def test_order_total():
 ### Q27 🟡 · doubles · Spy Pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Implement a `SpyNotifier` that wraps a real `Notifier`, calls it for real, and records the calls. Use it in a test that verifies both the real side effect and the call record.
 
@@ -1224,6 +1278,8 @@ def test_mock_spy():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
+
+
 **Problem:** Write a test for `checkout(cart, payment_service)` that clearly demonstrates the Arrange-Act-Assert pattern with labeled comments. The test should cover the happy path with a mocked payment service.
 
 <details>
@@ -1272,6 +1328,8 @@ def test_checkout_charges_correct_amount():
 ### Q29 🟡 · patterns · TDD Red-Green-Refactor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 **Problem:** Apply TDD to build a `PasswordValidator` that rejects passwords shorter than 8 characters and passwords without an uppercase letter. Write: (1) the failing test (RED), (2) minimal code (GREEN), (3) refactored code (still GREEN).
 
@@ -1330,6 +1388,8 @@ def validate_password(pwd):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
+
+
 **Problem:** Write a comprehensive test suite for `calculate_discount(price, quantity)` that applies: 10% off for qty >= 10, 20% off for qty >= 50. Test the happy paths, boundaries (qty 9, 10, 49, 50), and invalid inputs.
 
 <details>
@@ -1381,6 +1441,8 @@ def test_invalid_quantity():
 
 > 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
 
+
+
 **Problem:** Show a test that FAILS due to shared mutable state between tests, then fix it using fixtures.
 
 <details>
@@ -1429,6 +1491,8 @@ def test_add_another(cart):
 ### Q32 🟠 · patterns · Property-Based Testing with Hypothesis
 
 > 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
+
 
 **Problem:** Use `hypothesis` to test invariants of `sorted()`: the output length equals input length, the output is ordered, and the output contains the same elements. Show what a regular unit test misses that Hypothesis finds.
 
@@ -1481,6 +1545,8 @@ def test_sort_same_elements(lst):
 ### Q33 🟠 · capstone · Coverage Analysis
 
 > 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
+
 
 **Problem:** Write a `PaymentProcessor` with three code paths: success, declined, and error. Write a test suite that achieves 100% line coverage. Use `pytest --cov` to verify. Explain what coverage does NOT guarantee.
 
@@ -1536,6 +1602,8 @@ def test_invalid_amount():
 ### Q34 🟠 · capstone · Test Organization
 
 > 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
+
 
 **Problem:** Design the test file structure for a small FastAPI service with `UserService`, `OrderService`, and an HTTP client. Show: directory layout, `conftest.py` content, naming conventions for test files and functions.
 
@@ -1606,6 +1674,8 @@ def test_create_user_missing_name_raises_validation_error(): ...
 ### Q35 🟠 · capstone — End-to-End Test Suite
 
 > 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
+
 
 **Problem:** Write a complete test suite for an `OrderService` that: creates orders, fetches orders by id, and deletes orders. Use: a pytest fixture with `yield` for the service + in-memory DB, `parametrize` for multiple order types, `Mock(spec=...)` for the payment gateway, and `pytest.raises` for error cases.
 

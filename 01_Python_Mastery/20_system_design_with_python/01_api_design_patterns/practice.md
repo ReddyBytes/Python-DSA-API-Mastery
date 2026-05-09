@@ -4,11 +4,35 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | REST Resource Naming — Name REST endpoints | 🟢 |
+| [Q2](#q2) | HTTP Methods & Status Codes — Map CRUD to HTTP | 🟢 |
+| [Q3](#q3) | Offset Pagination — Implement offset pagination | 🟡 |
+| [Q4](#q4) | Cursor Pagination — Implement cursor-based pagination | 🟡 |
+| [Q5](#q5) | API Versioning — Add URL versioning to existing endpoints | 🟡 |
+| [Q6](#q6) | Error Response Design — Design error response envelope | 🟡 |
+| [Q7](#q7) | Idempotency — Add idempotency key to POST endpoint | 🟡 |
+| [Q8](#q8) | Rate Limit Headers — Write rate limit headers | 🟡 |
+| [Q9](#q9) | API Deprecation — Design deprecation strategy with Sunset header | 🟠 |
+| [Q10](#q10) | Content Negotiation — Implement content negotiation (JSON vs XML) | 🟠 |
+| [Q11](#q11) | Versioned Migration Plan — Design versioned API migration plan | 🟠 |
+| [Q12](#q12) | Capstone — Design complete REST API for e-commerce orders | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · REST Resource Naming — Name REST endpoints 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Design the REST endpoints for a blog API with `posts` and `comments`. List all endpoints for CRUD operations on posts, plus endpoints for comments nested under posts.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use plural nouns. Comments are a sub-resource of posts: /posts/{id}/comments</details>
 
@@ -34,7 +58,12 @@ DELETE /posts/{id}/comments/{cid} # delete a comment
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · HTTP Methods & Status Codes — Map CRUD to HTTP 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 For each operation below, give the HTTP method AND the success status code:
 1. Create a new user
@@ -45,7 +74,6 @@ For each operation below, give the HTTP method AND the success status code:
 6. Action results in "not found"
 7. Action results in "duplicate email" (conflict)
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Create = 201, read = 200, delete = 204 (no body), conflict = 409</details>
 
@@ -78,11 +106,15 @@ POST /users (duplicate email)  →  409 Conflict
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Offset Pagination — Implement offset pagination 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write a function `paginate_users(offset, limit)` that returns a paginated response dict with `data`, `pagination.offset`, `pagination.limit`, and `pagination.total`. Assume a `USERS` list is available.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>slice = USERS[offset:offset+limit]; total = len(USERS)</details>
 
@@ -110,11 +142,15 @@ print(paginate_users(offset=20, limit=5))
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Cursor Pagination — Implement cursor-based pagination 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write `paginate_with_cursor(cursor, limit)` that returns `data` and `next_cursor` (base64-encoded last item id). Accept `cursor=None` to start from the beginning. Use the same `USERS` list.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>base64.b64encode(json.dumps({"id": last_id}).encode()).decode()</details>
 
@@ -148,13 +184,17 @@ def paginate_with_cursor(cursor: str = None, limit: int = 10) -> dict:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · API Versioning — Add URL versioning to existing endpoints 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Given a FastAPI app with `GET /users/{id}`, add URL versioning so:
 - `/v1/users/{id}` returns `{"id": id, "name": "Alice"}`
 - `/v2/users/{id}` returns `{"user": {"id": id, "name": "Alice"}}`
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use APIRouter(prefix="/v1") and APIRouter(prefix="/v2"), then include both in the app</details>
 
@@ -183,11 +223,15 @@ app.include_router(v2)
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Error Response Design — Design error response envelope 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write a `problem_detail()` helper that returns a JSON response following RFC 7807 (Problem Details). Fields: `type`, `title`, `status`, `detail`. Use it to return a 422 validation error for "email is required".
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>RFC 7807 fields: type (URL), title (human string), status (int), detail (specific message)</details>
 
@@ -220,11 +264,15 @@ response = problem_detail(
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Idempotency — Add idempotency key to POST endpoint 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a FastAPI route `POST /payments` that accepts an `Idempotency-Key` header. If the same key is used twice, return the cached response instead of processing again. Use a simple dict as the store.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Store {key: response_dict} in a module-level dict; check before processing</details>
 
@@ -261,11 +309,15 @@ def create_payment(
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Rate Limit Headers — Write rate limit headers 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write a FastAPI middleware (or route dependency) that adds `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `Retry-After` headers to responses. Limit = 5 requests per minute per client IP.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use request.client.host as the client key; return 429 + Retry-After when limit exceeded</details>
 
@@ -310,11 +362,15 @@ async def rate_limit_middleware(request: Request, call_next):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · API Deprecation — Design deprecation strategy with Sunset header 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Add `Deprecation`, `Sunset`, and `Link` headers to a `/v1/users/{id}` endpoint. The v1 sunset date is 2026-01-01. The successor is `/v2/users/{id}`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Deprecation: true, Sunset: RFC 7231 date string, Link: rel="successor-version"</details>
 
@@ -337,11 +393,15 @@ def get_user_v1(user_id: int, response: Response):
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Content Negotiation — Implement content negotiation (JSON vs XML) 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a FastAPI route that checks the `Accept` header and returns either JSON or plain-text XML. If the client sends `Accept: application/xml`, return XML. Otherwise return JSON.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Check request.headers.get("accept", ""). Return Response(content=xml_str, media_type="application/xml") for XML.</details>
 
@@ -369,11 +429,15 @@ def get_user(user_id: int, request: Request):
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Versioned Migration Plan — Design versioned API migration plan 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Design a 4-step migration plan to move clients from `/v1/users` to `/v2/users` without downtime. Consider: announcement, parallel support, monitoring, and sunset.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Plan: launch v2 → deprecation headers on v1 → track v1 usage → sunset date → remove v1</details>
 
@@ -408,7 +472,12 @@ Step 4 — Sunset:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Capstone — Design complete REST API for e-commerce orders 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Design the complete REST API for an e-commerce order system. Include:
 - All endpoints (list, create, get, update status, cancel)
@@ -418,7 +487,6 @@ Design the complete REST API for an e-commerce order system. Include:
 - Rate limit headers
 - Error envelope format
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: what resources exist? What actions on each? What can go wrong? How do you prevent double orders?</details>
 

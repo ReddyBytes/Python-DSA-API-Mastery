@@ -17,7 +17,50 @@ Covers all three subfolder topic areas plus the core theory content.
 
 ## Coding Standards
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | PEP 8 — Fix Naming and Spacing Violations | 🟢 |
+| [Q2](#q2) | Type Hints — Annotate a Function | 🟢 |
+| [Q3](#q3) | Docstrings — Write a Complete Docstring | 🟡 |
+| [Q4](#q4) | Formatters — Black and isort Config | 🟡 |
+| [Q5](#q5) | Ruff — Configure a Project Linter | 🟡 |
+| [Q6](#q6) | Pre-commit — Set Up and Install Hooks | 🟡 |
+| [Q7](#q7) | mypy — Fix Type Errors | 🟡 |
+| [Q8](#q8) | Naming — Convert a Class to Python Conventions | 🟡 |
+| [Q9](#q9) | Layout — Src vs Flat Layout | 🟢 |
+| [Q10](#q10) | pyproject.toml — Write a Complete Config | 🟡 |
+| [Q11](#q11) | `__init__.py` — Public API Design | 🟡 |
+| [Q12](#q12) | Entry Points — Add a CLI | 🟡 |
+| [Q13](#q13) | Build — Build and Check a Distribution | 🟡 |
+| [Q14](#q14) | Editable Install — When and Why | 🟡 |
+| [Q15](#q15) | venv — Create, Install, Freeze | 🟢 |
+| [Q16](#q16) | pip-tools — The Two-File Pattern | 🟡 |
+| [Q17](#q17) | .env — Best Practices | 🟡 |
+| [Q18](#q18) | pyenv — Version Pinning | 🟡 |
+| [Q19](#q19) | Poetry — Daily Workflow | 🟡 |
+| [Q20](#q20) | Dependency Conflicts — Diagnose and Resolve | 🟡 |
+| [Q21](#q21) | Logging — Structured JSON Logging | 🟡 |
+| [Q22](#q22) | Config — Pydantic Settings Pattern | 🟡 |
+| [Q23](#q23) | Error Handling — Graceful Degradation | 🟡 |
+| [Q24](#q24) | Retry — Exponential Backoff with tenacity | 🟡 |
+| [Q25](#q25) | Secrets — Hierarchy and Best Practices | 🟡 |
+| [Q26](#q26) | Docker — Layer Caching Optimization | 🟡 |
+| [Q27](#q27) | Docker — .dockerignore | 🟡 |
+| [Q28](#q28) | CI/CD — GitHub Actions Workflow | 🟡 |
+| [Q29](#q29) | Capstone — Production App Checklist | 🟠 |
+| [Q30](#q30) | Capstone — Debug a Production Issue | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · PEP 8 — Fix Naming and Spacing Violations 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Fix all PEP 8 violations in this snippet.
 
@@ -30,7 +73,6 @@ def getUserData(UserId,forceRefresh=False):
     return userData
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Each import on its own line; snake_case for function and params; spaces around operators; `is None` not `== None`.</details>
 <details><summary>✅ Answer</summary>
@@ -51,7 +93,12 @@ def get_user_data(user_id: int, force_refresh: bool = False) -> dict:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Type Hints — Annotate a Function 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Add complete type hints to this function.
 
@@ -61,7 +108,6 @@ def search_users(query, limit, active_only, fields):
     ...
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>fields is a list of strings; return is list of dicts.</details>
 <details><summary>✅ Answer</summary>
@@ -80,11 +126,15 @@ def search_users(
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Docstrings — Write a Complete Docstring 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write a Google-style docstring for `calculate_discount(price, discount_pct, max_discount)` that returns the discounted price, raises ValueError if discount_pct is not between 0 and 100.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Include: one-line summary, Args, Returns, Raises sections.</details>
 <details><summary>✅ Answer</summary>
@@ -115,11 +165,15 @@ def calculate_discount(
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Formatters — Black and isort Config 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write the complete pyproject.toml configuration for black and isort targeting Python 3.11, line length 88. Explain what `profile = "black"` does for isort.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Without profile = "black", isort might format imports in a way black immediately reformats.</details>
 <details><summary>✅ Answer</summary>
@@ -141,11 +195,15 @@ line_length = 88
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Ruff — Configure a Project Linter 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write the `[tool.ruff]` config that enables pycodestyle (E), pyflakes (F), isort (I), and bugbear (B) rules. Ignore line-length rule since black handles it.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>E501 is the line-too-long rule.</details>
 <details><summary>✅ Answer</summary>
@@ -165,11 +223,15 @@ ignore = ["E501"]
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Pre-commit — Set Up and Install Hooks 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write the `.pre-commit-config.yaml` with black, ruff (auto-fix), mypy, and the `detect-private-key` hook. Show the setup commands.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>detect-private-key is in the pre-commit/pre-commit-hooks repo.</details>
 <details><summary>✅ Answer</summary>
@@ -208,7 +270,12 @@ pre-commit run --all-files  # run once on all existing files
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · mypy — Fix Type Errors 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 What does mypy strict mode flag in this code? Show the fixed version.
 
@@ -222,7 +289,6 @@ result = get_item(["a", "b", "c"], 1)
 print(result.upper())
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>The return type is str | None — calling .upper() on it is unsafe.</details>
 <details><summary>✅ Answer</summary>
@@ -242,7 +308,12 @@ if result is not None:            # ← mypy requires this guard
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Naming — Convert a Class to Python Conventions 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Rewrite this class with correct Python naming throughout.
 
@@ -256,7 +327,6 @@ class dataProcessor:
         return rawData
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Class → PascalCase; methods/params/variables → snake_case; constants stay UPPER_CASE.</details>
 <details><summary>✅ Answer</summary>
@@ -281,11 +351,15 @@ class DataProcessor:
 
 ## Project Structure and Packaging
 
+<a id="q9"></a>
+
 ### Q9 · Layout — Src vs Flat Layout 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Explain the difference between src layout and flat layout. When does flat layout cause hidden bugs?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think about what gets added to sys.path when running pytest from the project root.</details>
 <details><summary>✅ Answer</summary>
@@ -301,11 +375,15 @@ Explain the difference between src layout and flat layout. When does flat layout
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · pyproject.toml — Write a Complete Config 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a complete `pyproject.toml` for a package `my_service` that: uses setuptools, targets Python 3.11+, has runtime deps (fastapi, pydantic-settings), dev deps (pytest, black, ruff), and configures black + ruff + pytest in the same file.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Tool configs go under [tool.X] sections. All in one file.</details>
 <details><summary>✅ Answer</summary>
@@ -345,11 +423,15 @@ addopts = "-v --tb=short"
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · `__init__.py` — Public API Design 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write the `__init__.py` for a package `notifications` that exposes `EmailSender`, `SMSSender`, and `NotificationError`. Explain what `__all__` does.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>__all__ controls what `from package import *` exposes.</details>
 <details><summary>✅ Answer</summary>
@@ -375,11 +457,15 @@ __all__ = ["EmailSender", "SMSSender", "NotificationError"]
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Entry Points — Add a CLI 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Add an entry point `notify` that runs `notifications.cli:main`. Write a minimal `cli.py` with argument parsing.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Entry points live under [project.scripts] in pyproject.toml.</details>
 <details><summary>✅ Answer</summary>
@@ -411,11 +497,15 @@ def main() -> None:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Build — Build and Check a Distribution 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 List the commands to build both sdist and wheel, check the distributions, and explain what `twine check` verifies.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use the `build` package; twine check validates metadata before upload.</details>
 <details><summary>✅ Answer</summary>
@@ -440,11 +530,15 @@ twine check dist/*
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Editable Install — When and Why 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Explain the difference between `pip install .` and `pip install -e .`. When would you use each?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>-e means editable — changes to source are immediately visible without reinstalling.</details>
 <details><summary>✅ Answer</summary>
@@ -468,11 +562,15 @@ Explain the difference between `pip install .` and `pip install -e .`. When woul
 
 ## Virtual Environments and Requirements
 
+<a id="q15"></a>
+
 ### Q15 · venv — Create, Install, Freeze 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Show the complete workflow: create venv, activate, install two packages, freeze to requirements.txt.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>python -m venv, source activate, pip install, pip freeze.</details>
 <details><summary>✅ Answer</summary>
@@ -497,11 +595,15 @@ cat requirements.txt
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · pip-tools — The Two-File Pattern 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Explain the `requirements.in` / `requirements.txt` two-file pattern. Write a `requirements.in`, show the compile command, and explain what `pip-sync` does differently from `pip install -r`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pip-sync removes packages not in the lockfile; pip install only adds.</details>
 <details><summary>✅ Answer</summary>
@@ -527,11 +629,15 @@ pip-sync requirements.txt      # install exactly those pins
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · .env — Best Practices 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 List 5 best practices for `.env` file handling. Show the `.gitignore` entries needed and the `.env.example` pattern.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: what to commit, what not to commit, how to communicate required vars to teammates.</details>
 <details><summary>✅ Answer</summary>
@@ -563,11 +669,15 @@ LOG_LEVEL=INFO
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · pyenv — Version Pinning 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 A project needs Python 3.10.14. Show all commands to install it with pyenv, pin it to the project, and verify the version in CI.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>.python-version file is committed; CI reads it via pyenv or setup-python action.</details>
 <details><summary>✅ Answer</summary>
@@ -597,11 +707,15 @@ In GitHub Actions CI:
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · Poetry — Daily Workflow 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Show the Poetry commands for: adding a new dep, adding a dev-only dep, updating one dep, running tests, and checking if the lock file is up to date.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>poetry add, poetry add --group dev, poetry update, poetry run, poetry lock --check.</details>
 <details><summary>✅ Answer</summary>
@@ -633,11 +747,15 @@ poetry install --without dev
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Dependency Conflicts — Diagnose and Resolve 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 You run `pip install -r requirements.txt` and get a conflict error. Describe your debugging process. What command shows you the full dependency tree?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pip-tree (pipdeptree) shows the full dependency graph.</details>
 <details><summary>✅ Answer</summary>
@@ -671,11 +789,15 @@ poetry why requests
 
 ## Production Patterns
 
+<a id="q21"></a>
+
 ### Q21 · Logging — Structured JSON Logging 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Write a `JSONFormatter` class and a `get_logger` function that returns a logger with JSON output. Show an example log line.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Extend logging.Formatter and override format(); output to stdout for container environments.</details>
 <details><summary>✅ Answer</summary>
@@ -721,11 +843,15 @@ Example output:
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Config — Pydantic Settings Pattern 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Write a `Settings` class using pydantic-settings that validates DATABASE_URL (required), SECRET_KEY (required, min 32 chars), DEBUG (bool, default False), LOG_LEVEL (default "INFO"). Add a cached `get_settings()` function.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use Field(...) for required fields; lru_cache on get_settings() avoids re-parsing env on every call.</details>
 <details><summary>✅ Answer</summary>
@@ -763,11 +889,15 @@ print(settings.debug)          # bool, not the string "true"
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Error Handling — Graceful Degradation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Write a function `get_product_page` that fetches a product (critical) and recommendations (optional). If recommendations fail, return empty list and log a warning.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Wrap the non-critical call in try/except; always return a valid response.</details>
 <details><summary>✅ Answer</summary>
@@ -801,11 +931,15 @@ def get_product_page(product_id: int) -> dict:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Retry — Exponential Backoff with tenacity 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Write a function decorated with tenacity that retries up to 3 times on `ConnectionError` or `TimeoutError`, with exponential backoff (1s, 2s, 4s).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use stop_after_attempt, wait_exponential, retry_if_exception_type.</details>
 <details><summary>✅ Answer</summary>
@@ -834,11 +968,15 @@ def call_payment_api(payload: dict) -> dict:
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Secrets — Hierarchy and Best Practices 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Describe the secrets hierarchy from most to least secure. For each level, name the main risk.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Five levels: Vault/AWS SM, K8s Secrets, env vars, .env file, hardcoded.</details>
 <details><summary>✅ Answer</summary>
@@ -871,11 +1009,15 @@ Hardcoded in source code
 
 ## Docker and CI/CD
 
+<a id="q26"></a>
+
 ### Q26 · Docker — Layer Caching Optimization 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Explain why the order of COPY and RUN commands in a Dockerfile matters for caching. Show the correct order for a Python app.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Each instruction is a layer. When a layer changes, all subsequent layers are invalidated.</details>
 <details><summary>✅ Answer</summary>
@@ -906,11 +1048,15 @@ RUN pip install ...     # re-runs pip on EVERY code change
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · Docker — .dockerignore 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Write a `.dockerignore` file for a Python project and explain why each entry matters.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: what should never be in a Docker image? (secrets, dev tools, git history)</details>
 <details><summary>✅ Answer</summary>
@@ -935,11 +1081,15 @@ Dockerfile*          # no need to include Dockerfiles in images
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · CI/CD — GitHub Actions Workflow 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Write a minimal GitHub Actions workflow that: installs Python 3.11, installs dev deps, runs ruff, mypy, and pytest on every push.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use actions/setup-python and pip install ".[dev]".</details>
 <details><summary>✅ Answer</summary>
@@ -985,11 +1135,15 @@ jobs:
 
 ## Capstone
 
+<a id="q29"></a>
+
 ### Q29 · Capstone — Production App Checklist 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 You are shipping a new Python web service to production. List the 10 things you must verify before deploying. For each, name the tool or pattern.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Cover: structure, deps, config, tests, logging, secrets, Docker, CI, health checks, error handling.</details>
 <details><summary>✅ Answer</summary>
@@ -1010,11 +1164,15 @@ You are shipping a new Python web service to production. List the 10 things you 
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · Capstone — Debug a Production Issue 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Your service has been running fine for 3 months. After a dependency update, it fails in production but passes locally. Walk through your diagnostic process using the production best practices from this module.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think about: dependency versions, environment differences, log comparison, src layout, config.</details>
 <details><summary>✅ Answer</summary>

@@ -41,6 +41,8 @@
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
+
+
 **Problem:** Implement a simple hash function `simple_hash(key: str, table_size: int) -> int` that sums the ASCII values of each character and takes the result modulo `table_size`. Test it on `"apple"`, `"banana"`, and `"abc"` with `table_size=10`.
 
 <details>
@@ -72,6 +74,8 @@ print(simple_hash("abc", 10))     # 294 % 10 = 4
 ### Q2 🟢 · Why dict lookup is O(1) average
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Explain why `d["apple"]` is O(1) while scanning a list for `"apple"` is O(n). Then demonstrate the performance gap by timing a lookup in a `dict` vs a `list` at n=1,000,000.
 
@@ -112,6 +116,8 @@ print(f"list lookup:  {(time.perf_counter() - t0) * 1e6:.2f} μs")
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
+
+
 **Problem:** Implement a class `BadHashClass` where every instance returns the same hash value (`42`), then insert 5 instances into a dict. Explain why this degrades performance and what the worst-case lookup time becomes.
 
 <details>
@@ -151,6 +157,8 @@ print(len(d))  # 5 — they are distinct objects, so all 5 are stored
 ### Q4 🟢 · Hashability rules — what can be a key
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** For each of the following, say whether it can be used as a dict key and why: `"hello"`, `42`, `3.14`, `(1, 2)`, `[1, 2]`, `{1, 2}`, `frozenset([1, 2])`, `{"a": 1}`. Then demonstrate the two common fixes when you have a list you want to use as a key.
 
@@ -197,6 +205,8 @@ d[key] = "frozenset key"
 ### Q5 🟢 · Frequency counting with a dict
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Implement `char_frequency(s: str) -> dict` three ways: (1) using plain dict with `.get(k, 0)`, (2) using `defaultdict(int)`, (3) using `Counter`. Test all three on `"mississippi"` and confirm identical output.
 
@@ -245,6 +255,8 @@ print(freq_counter(s))     # same
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
+
+
 **Problem:** Write a function `filter_seen(items: list, banned: list) -> list` that returns only items not in `banned`. Implement it two ways: (A) using `if item not in banned` (list scan), (B) converting `banned` to a set first. Explain the complexity difference for n items and m banned words.
 
 <details>
@@ -282,6 +294,8 @@ print(len(filter_seen_set(items, banned)))   # 5000
 ### Q7 🟢 · Seen-set pattern — duplicate detection
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Implement `has_duplicate(nums: list[int]) -> bool` using a seen-set pattern. Then implement `first_duplicate(nums: list[int]) -> int | None` that returns the first element that appears more than once (in order of second occurrence). Return `None` if no duplicates exist.
 
@@ -329,6 +343,8 @@ print(first_duplicate([1, 2, 3]))        # None
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
+
+
 **Problem:** Implement `two_sum(nums: list[int], target: int) -> list[int]` that returns `[i, j]` where `nums[i] + nums[j] == target` and `i != j`. Return `[]` if no solution exists. Must be O(n) — no nested loops. Edge case: `[3, 3]` with target `6` must return `[0, 1]`.
 
 <details>
@@ -367,6 +383,8 @@ print(two_sum([3, 2, 4], 6))        # [1, 2]
 ### Q9 🟡 · Chaining vs open addressing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Implement a minimal hash table using **separate chaining**. The class `ChainedHashTable` should support `put(key, value)` and `get(key)` with a table size of 7. Then explain when chaining is preferred over open addressing and vice versa.
 
@@ -423,6 +441,8 @@ print(ht.get("cherry"))  # None
 ### Q10 🟡 · Load factor and resizing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Implement a `ResizingHashTable` that tracks its load factor and automatically doubles in size (and rehashes all entries) when load factor exceeds `0.7`. Support `put(key, value)` and `get(key)`. Print the table size before and after a resize.
 
@@ -489,6 +509,8 @@ for i in range(6):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
+
+
 **Problem:** Demonstrate three key behaviors of Python's dict implementation: (1) integer keys hash to themselves, (2) string keys use randomized SipHash (different per process), (3) dict preserves insertion order since Python 3.7. Also show that `{1: "a", 2: "b"} == {2: "b", 1: "a"}` is `True` — equality ignores order.
 
 <details>
@@ -538,6 +560,8 @@ for i in range(20):
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
+
+
 **Problem:** Given two sets `a = {1, 2, 3, 4, 5}` and `b = {3, 4, 5, 6, 7}`, compute: (1) union, (2) intersection, (3) difference a-b, (4) symmetric difference. For each, state the time complexity. Then write `common_elements(list1, list2) -> list` using set intersection, and explain why it beats a nested loop.
 
 <details>
@@ -576,6 +600,8 @@ print(common_elements([1,2,3,4], [3,4,5,6]))  # [3, 4]
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
+
+
 **Problem:** You have a list of undirected friendship pairs: `[("alice", "bob"), ("bob", "alice"), ("carol", "dave")]`. Using `frozenset` as a dict key, deduplicate this list so that `("alice", "bob")` and `("bob", "alice")` are treated as the same pair. Return the unique pairs as a list of sorted tuples.
 
 <details>
@@ -610,6 +636,8 @@ print(unique_pairs(pairs))
 ### Q14 🟡 · Anagram grouping
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Implement `group_anagrams(words: list[str]) -> list[list[str]]` that groups words which are anagrams of each other. Input: `["eat","tea","tan","ate","nat","bat"]`. Expected: groups `["eat","tea","ate"]`, `["tan","nat"]`, `["bat"]` (order within group and order of groups can vary).
 
@@ -652,6 +680,8 @@ for group in result:
 ### Q15 🟡 · Character mapping — isomorphic strings
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Implement `is_isomorphic(s: str, t: str) -> bool`. Two strings are isomorphic if characters in `s` can be replaced consistently to get `t`. Example: `"egg"` → `"add"` is `True` (e→a, g→d). `"foo"` → `"bar"` is `False` (o maps to both a and r).
 
@@ -697,6 +727,8 @@ print(is_isomorphic("ab", "aa"))     # False
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
+
+
 **Problem:** Implement `subarray_sum(nums: list[int], k: int) -> int` that returns the count of contiguous subarrays whose sum equals `k`. Example: `nums=[1,1,1], k=2` → `2`. Must be O(n).
 
 <details>
@@ -741,6 +773,8 @@ print(subarray_sum([-1, -1, 1], 0))     # 1
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
+
+
 **Problem:** Implement `longest_consecutive(nums: list[int]) -> int` that returns the length of the longest consecutive sequence. Example: `[100,4,200,1,3,2]` → `4` (sequence 1,2,3,4). Must be O(n) — no sorting.
 
 <details>
@@ -782,6 +816,8 @@ print(longest_consecutive([]))  # 0
 ### Q18 🟡 · Top-K frequent elements
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Implement `top_k_frequent(nums: list[int], k: int) -> list[int]` that returns the k most frequent elements. Example: `nums=[1,1,1,2,2,3], k=2` → `[1, 2]`. Two approaches: (A) `Counter.most_common(k)` one-liner, (B) bucket sort approach for O(n) time.
 
@@ -833,6 +869,8 @@ print(top_k_frequent_bucket(nums, 2))   # [1, 2]
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
+
+
 **Problem:** Implement `array_intersection(a, b)` returning unique elements present in both arrays, and `array_union(a, b)` returning unique elements present in either. Then implement `intersection_with_duplicates(a, b)` that counts intersections with multiplicity — if `3` appears twice in `a` and three times in `b`, return two `3`s. Use `Counter` for the last one.
 
 <details>
@@ -877,6 +915,8 @@ print(intersection_with_duplicates(a, b))  # [2, 3, 3]  (2 once, 3 twice — min
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
+
+
 **Problem:** Implement `word_frequency(text: str) -> dict` that returns a frequency map of words (case-insensitive, punctuation stripped). Then use it to find the top 3 most common words in: `"To be or not to be, that is the question. To be is to exist."`. Ignore words in `stop_words = {"to", "be", "or", "not", "is", "that", "the"}`.
 
 <details>
@@ -917,6 +957,8 @@ print(top_words(text, stop_words, 3))  # ['question', 'exist'] (and others)
 ### Q21 🔴 · Design hashmap from scratch
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Design a `HashMap` class supporting `put(key, value)`, `get(key) -> value | -1`, and `remove(key)`. Use separate chaining for collision resolution. Do not use Python's built-in dict or any hashing library. Use a fixed array of 1000 buckets.
 
@@ -979,6 +1021,8 @@ print(hm.get("banana"))  # -1
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
+
+
 **Problem:** Design a `HashSet` class supporting `add(key)`, `remove(key)`, and `contains(key) -> bool`. Use a fixed array of 1000 buckets with separate chaining. Do not use Python's built-in set.
 
 <details>
@@ -1034,6 +1078,8 @@ print(hs.contains(2))   # False
 ### Q23 🔴 · LRU cache — hashmap + doubly linked list
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Design an `LRUCache` with `get(key) -> int` and `put(key, value)`. Both operations must be O(1). When the cache is full, evict the least recently used item. Test with capacity=2: put(1,1), put(2,2), get(1)→1, put(3,3) (evicts key 2), get(2)→-1, get(3)→3.
 
@@ -1113,6 +1159,8 @@ print(cache.get(3))    # 3
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
+
+
 **Problem:** Explain why `server = hash(key) % N` fails when a server is added or removed from a cluster. Then implement a minimal `ConsistentHashRing` with `add_server(name)`, `remove_server(name)`, and `get_server(key)` that minimizes key remapping when the cluster changes.
 
 <details>
@@ -1176,6 +1224,8 @@ print(ring.get_server("user:1001"))    # may or may not change
 ### Q25 🔴 · Hash table vulnerability — adversarial inputs
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Explain the hash-flooding DoS attack: how an attacker can craft inputs that all hash to the same bucket, degrading O(1) to O(n) lookups. Then explain how Python 3.3+ defends against it. Demonstrate that Python's `hash()` for strings is different across processes, and show how to create a stable hash for use cases like database sharding.
 

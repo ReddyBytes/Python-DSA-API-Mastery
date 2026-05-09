@@ -37,11 +37,15 @@
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · Descriptive Stats — Mean, Median, Mode 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 You have a list of salaries: `[45000, 52000, 48000, 55000, 51000, 250000, 49000, 53000, 47000, 50000]`. Compute mean, median, and mode. Which one best represents the "typical" salary and why?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -71,11 +75,15 @@ print(f"Mode:   ${mode:,.0f}")     # $45,000
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Descriptive Stats — Std vs Variance, Bessel Correction 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Given `data = [4, 8, 6, 5, 3, 2, 8, 9, 2, 5]`, compute both sample variance and sample standard deviation. Explain what `ddof=1` means and why you use it.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -103,11 +111,15 @@ print(f"Check: std² = {std**2:.2f} == variance: {var:.2f}")
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Descriptive Stats — IQR and Outlier Detection 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Given exam scores `[55, 60, 62, 65, 68, 70, 71, 72, 73, 75, 76, 78, 80, 95, 150]`, compute the IQR and use the 1.5×IQR rule to identify outliers.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -142,11 +154,15 @@ print(f"Outliers: {outliers}")     # [150]
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Descriptive Stats — Skewness 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Compute skewness for two datasets: symmetric data `[5, 6, 7, 8, 9]` and right-skewed data `[1, 2, 3, 4, 100]`. Explain what positive skewness means.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -174,11 +190,15 @@ print(f"Right-skewed skewness: {rskew:.2f}")     # ~2.24
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Descriptive Stats — pandas describe() 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Create a pandas Series from `[23, 25, 22, 28, 35, 21, 24, 26, 27, 29]`. Call `.describe()` and identify what each output line tells you.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -210,11 +230,15 @@ print(summary)
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Distributions — Uniform Random Sampling 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Generate 5 random floats uniformly distributed between 10 and 50. Then generate 5 random integers uniformly between 1 and 6 (like dice rolls). Use numpy.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -248,11 +272,15 @@ samples = dist.rvs(size=5)
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Distributions — Binomial PMF 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 You flip a fair coin 10 times. Use `scipy.stats.binom` to compute: P(exactly 7 heads), P(at most 7 heads), and P(at least 8 heads).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -281,11 +309,15 @@ print(f"P(at least 8 heads): {p_at_least_8:.4f}")  # 0.0547
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Distributions — Poisson PMF 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 A server receives on average 3 API calls per second. Model this as a Poisson distribution. Find: P(exactly 0 calls), P(exactly 3 calls), P(more than 5 calls).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -314,11 +346,15 @@ print(f"P(> 5 calls):    {p_over_5:.4f}")  # 0.0839
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Distributions — Normal PDF and CDF 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Test scores are normally distributed with mean=75, std=12. Find: P(score > 90), P(score < 60), and the score at the 95th percentile.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -347,11 +383,15 @@ print(f"95th percentile:  {percentile_95:.1f}")  # 94.7
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Distributions — scipy.stats Distribution Object 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Build a t-distribution with 20 degrees of freedom using scipy.stats. Compute its PDF at x=0, CDF at x=2.0, and generate 10 random samples.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -383,11 +423,15 @@ print(f"10 samples:  {samples.round(2)}")
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Normal Distribution — 68-95-99.7 Rule 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Heights are normally distributed: mean=170cm, std=10cm. Verify the 68-95-99.7 rule using scipy — compute what fraction of the population falls within 1, 2, and 3 standard deviations of the mean.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -416,11 +460,15 @@ print(f"Within 3 std: {within_3std:.3f}  (expect ~0.997)")
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Normal Distribution — Z-Score 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 A student scored 88 on an exam where the class mean is 75 and std is 12. Compute the z-score and interpret it. Then compute what raw score corresponds to a z-score of -1.5.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -456,11 +504,15 @@ print(f"Student is at the {percentile:.1f}th percentile")  # 86.1th
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Normal Distribution — Central Limit Theorem 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Demonstrate the CLT: generate a highly skewed exponential population (scale=2, size=100000). Then take 1000 samples of size 50 each and compute each sample mean. Show that the distribution of sample means is approximately normal even though the population is skewed.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -496,14 +548,18 @@ print(f"Mean of sample means: {np.mean(sample_means):.2f}")  # same — unbiased
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Hypothesis Testing — State Null and Alternative Hypotheses 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 For each scenario, write H₀ and H₁:
 1. Testing whether a new drug lowers blood pressure compared to placebo
 2. Checking if a coin is fair
 3. Testing whether a new checkout page has a higher conversion rate than the old one
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -537,7 +593,12 @@ print("Hypotheses stated (see comments above)")
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Hypothesis Testing — P-Value Interpretation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 A t-test returns p-value = 0.032. Answer these:
 1. Do you reject H₀ at α = 0.05?
@@ -545,7 +606,6 @@ A t-test returns p-value = 0.032. Answer these:
 3. Does p = 0.032 mean there's a 3.2% chance H₀ is true?
 4. What does the p-value actually mean?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -582,11 +642,15 @@ print("p-value = P(data this extreme | H₀ is true) — not P(H₀ is true)")
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Hypothesis Testing — Independent Samples T-Test 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Two versions of a recommendation engine were tested. Group A (old) and Group B (new) each had 100 users. Engagement scores were collected. Run a t-test to determine if the new engine is significantly better. Use `np.random.seed(42)`, Group A ~ N(10, 2), Group B ~ N(11, 2), each n=100.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -623,7 +687,12 @@ else:
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Hypothesis Testing — Chi-Square Test 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 You run an experiment: does browser type (Chrome, Firefox, Safari) affect whether users convert (yes/no)? Build a contingency table and run a chi-square test of independence.
 
@@ -634,7 +703,6 @@ Firefox          60       240
 Safari           30       170
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -672,11 +740,15 @@ else:
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Hypothesis Testing — One-Tailed vs Two-Tailed 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 You run a t-test comparing Group A (mean=10) and Group B (mean=10.5). The two-tailed p-value is 0.12. What is the one-tailed p-value if you hypothesized Group B > Group A? Should you switch to one-tailed after seeing the result?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -713,11 +785,15 @@ print("Doing so is p-hacking — it halves p-value without scientific justificat
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · Hypothesis Testing — Significance Threshold 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 A study reports p = 0.049 at α = 0.05. Another study reports p = 0.051. Explain: (1) are both conclusions valid? (2) what's wrong with the "bright line" at 0.05? (3) what should you report alongside p-value?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -760,11 +836,15 @@ print(f"95% CI on difference: {ci}")      # range of plausible effects
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Type I and Type II Errors — Definitions 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 In your own words and with a fraud detection example, explain: (1) Type I error, (2) Type II error, (3) which is worse, and (4) how you control each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -807,11 +887,15 @@ print("Type II = False Negative (missed detection), controlled by beta/power")
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Type I and Type II Errors — Medical Test Trade-Off 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 A cancer screening test has sensitivity = 90% (catches 90% of real cases) and specificity = 85% (correctly clears 85% of non-cases). For 1000 people where 10% have cancer: compute TP, FP, FN, TN. Identify which cells are Type I and Type II errors.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -847,11 +931,15 @@ print(f"Precision: {TP/(TP+FP):.2%}")   # 40% — surprisingly low
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Type I and Type II Errors — Power Calculation 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 You're designing an A/B test. Baseline conversion = 5%, minimum detectable effect = 1% (absolute). Set α = 0.05, target power = 0.80. Calculate the required sample size per group using statsmodels.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -888,11 +976,15 @@ print(f"Total required:          {int(np.ceil(n_required)) * 2}")
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Bayes' Theorem — Formula and Application 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Write out Bayes' theorem formula and implement it in Python. Apply it to: a spam filter where P(spam) = 0.3, P(word "free" | spam) = 0.8, P(word "free" | not spam) = 0.1. Given an email contains "free", compute P(spam | "free").
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -929,11 +1021,15 @@ print(f"P(spam | contains 'free'):   {p_spam_given_free:.3f}")  # 0.774
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Bayes' Theorem — Prior, Posterior, Likelihood 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Label each term in this expression: `P(disease|positive) = P(positive|disease) × P(disease) / P(positive)`. Then explain: what happens to the posterior if the prior (prevalence) drops from 10% to 1%?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -970,11 +1066,15 @@ for prevalence in [0.10, 0.05, 0.01, 0.001]:
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Bayes' Theorem — Medical Test Full Example 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 A disease affects 1% of the population. A test has 99% sensitivity and 99% specificity. (1) What is P(disease | positive test)? (2) What if you test positive twice, independently? Update the posterior from test 1 as the new prior for test 2.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1014,11 +1114,15 @@ print(f"After 2nd positive test: P(disease) = {posterior_2:.3f}")   # ~0.99
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · Correlation — Pearson Correlation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Given study hours `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]` and exam scores `[50, 55, 58, 63, 67, 72, 75, 80, 85, 90]`, compute Pearson correlation. Interpret the result. Also compute the p-value and explain what it means here.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1053,7 +1157,12 @@ print(f"R²: {r_squared:.4f}")      # 0.996 — 99.6% of score variance explaine
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · Correlation — Spearman Correlation 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 A company ranks 8 employees by peer rating (1-8) and manager rating (1-8). Compute Spearman correlation. Explain when you'd choose Spearman over Pearson.
 
@@ -1062,7 +1171,6 @@ Peer:    [1, 2, 3, 4, 5, 6, 7, 8]
 Manager: [2, 1, 4, 3, 6, 5, 8, 7]
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1097,11 +1205,15 @@ print(f"P-value:      {p_value:.4f}") # significant
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Correlation — Covariance Matrix 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Create a DataFrame with 3 columns: height (cm), weight (kg), and age (years) using random data. Compute the covariance matrix and correlation matrix. Explain the difference between the two.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1140,11 +1252,15 @@ print(corr_matrix.round(3))
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · Capstone — A/B Test End-to-End 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Run a complete A/B test analysis. Scenario: old checkout page got 320 conversions from 10000 visits (3.2%). New page got 390 conversions from 10000 visits (3.9%). Steps: (1) state hypotheses, (2) compute lift, (3) run proportions z-test, (4) check significance, (5) compute Cohen's h effect size, (6) interpret results.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1196,11 +1312,15 @@ if p_value < 0.05:
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · Capstone — Interpret Regression Output 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Run a simple linear regression predicting exam score from study hours. Interpret: (1) the coefficient, (2) the intercept, (3) the R², (4) the p-value for the coefficient. Use `np.random.seed(42)`, hours ~ U(1,10), score = 50 + 4*hours + N(0,5).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

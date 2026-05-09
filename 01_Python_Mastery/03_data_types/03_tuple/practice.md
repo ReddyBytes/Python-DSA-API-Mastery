@@ -9,14 +9,19 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1–Q3 | Creating · trailing comma · immutability | 🟢 |
-| Q4–Q6 | Unpacking · swap · packing | 🟡 |
-| Q7–Q9 | Tuple as dict key · in sets · memory | 🟡 |
-| Q10–Q12 | Real-world patterns | 🟡 |
+| [Q1](#q1)–Q3 | Creating · trailing comma · immutability | 🟢 |
+| [Q4](#q4)–Q6 | Unpacking · swap · packing | 🟡 |
+| [Q7](#q7)–Q9 | Tuple as dict key · in sets · memory | 🟡 |
+| [Q10](#q10)–Q12 | Real-world patterns | 🟡 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · tuple — Creating and the Trailing Comma
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Create a tuple with 3 items: `"red"`, `"green"`, `"blue"`. Then try to create a single-item tuple containing just `42` — show the common mistake (without the comma) and the correct fix.
@@ -58,7 +63,12 @@ print(type(single))   # <class 'tuple'>
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · tuple — Immutability
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 `coords = (10, 20, 30)`. Try to change the first element to `99`. What error do you get? Then show the correct way to "update" a tuple when you genuinely need different values.
@@ -96,7 +106,12 @@ print(coords)   # (99, 20, 30)
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · tuple — Tuple vs List
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Create `colors_list = ["red", "green", "blue"]` and `colors_tuple = ("red", "green", "blue")`. Demonstrate that you can change an item in the list but not in the tuple.
@@ -139,7 +154,12 @@ print(colors_tuple)   # ('red', 'green', 'blue')  — unchanged
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · tuple — Unpacking
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 `point = (10, 20, 30)`. Unpack it into three variables `x`, `y`, `z` and print each one on its own line.
@@ -175,7 +195,12 @@ print(z)   # 30
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · tuple — Swap Variables
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 `a = 100`, `b = 200`. Swap their values using tuple unpacking in a single line. Print both variables after the swap.
@@ -212,7 +237,12 @@ print(b)   # 100
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · tuple — Extended Unpacking
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `data = (1, 2, 3, 4, 5)`. Unpack it so that `first` gets the first item, `last` gets the last item, and `middle` gets everything in between — all in one line using `*`.
@@ -248,7 +278,12 @@ print(last)     # 5
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · tuple — Tuple as Dict Key
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 `locations = {(0, 0): "origin", (1, 0): "right", (0, 1): "up"}`. Look up and print the label for the coordinate `(1, 0)`.
@@ -281,7 +316,12 @@ print(locations[(1, 0)])   # right
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · tuple — Tuple in a Set
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 Try to add `[1, 2]` (a list) to a set. Then try adding `(1, 2)` (a tuple). Which works? Why? Show both attempts and the error from the failing one.
@@ -319,7 +359,12 @@ print(s)        # {(1, 2)}
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · tuple — Named Data
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 Store a person's information as a tuple: name `"Alice"`, age `30`, city `"London"`. Unpack the tuple and print a formatted sentence: `"Alice is 30 years old and lives in London"`.
@@ -354,7 +399,12 @@ print(f"{name} is {age} years old and lives in {city}")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · tuple — GPS Coordinates Loop
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 You have GPS coordinates for 3 cities stored as a list of tuples. Loop through the list and print each city's name with its coordinates.
@@ -401,7 +451,12 @@ for name, lat, lon in cities:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · tuple — enumerate with a Tuple
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 `months = ("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")`. Use `enumerate()` to print each month with its number: `"1: Jan"`, `"2: Feb"`, etc. Start counting from 1.
@@ -441,7 +496,12 @@ for num, name in enumerate(months, start=1):
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · tuple — Unpack into a Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 `pairs = [("Alice", 92), ("Bob", 78), ("Charlie", 85)]`. Convert this list of `(name, score)` tuples into a dictionary using a loop and tuple unpacking.

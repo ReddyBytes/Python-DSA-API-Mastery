@@ -9,37 +9,41 @@
 
 | # | Difficulty | Topic | Skill |
 |---|---|---|---|
-| Q1 | 🟢 Easy | Ch1 — Iteration Protocol | Implement `__iter__` and `__next__` on a Countdown class |
-| Q2 | 🟡 Medium | Ch1 — StopIteration | When to raise StopIteration + example |
-| Q3 | 🟡 Medium | Ch2 — Iterator Class | Write a NumberRange iterator (start, stop, step) |
-| Q4 | 🟡 Medium | Ch2 — Iterable vs Iterator | Show lists are reusable, generators are exhausted |
-| Q5 | 🟢 Easy | Ch3 — Generator Functions | Generator that yields squares of 1..n |
-| Q6 | 🟡 Medium | Ch3 — Lazy Evaluation | Explain memory difference: list vs generator for 1M items |
-| Q7 | 🟡 Medium | Ch4 — Frame Suspension | Trace exactly what Python does when it hits `yield` |
-| Q8 | 🟡 Medium | Lazy Memory | Benchmark: sys.getsizeof() list vs generator |
-| Q9 | 🟢 Easy | Ch5 — Generator Expressions | Rewrite list comprehension as gen expression |
-| Q10 | 🟡 Medium | Ch6 — yield from | Flatten a nested list recursively with `yield from` |
-| Q11 | 🟡 Medium | Ch6 — Delegation | Chain two generators with `yield from` instead of a loop |
-| Q12 | 🟡 Medium | Ch7 — send() | Write a running_average() coroutine using send() |
-| Q13 | 🟠 Hard | Ch7 — Priming | Explain why coroutines need next() before send() |
-| Q14 | 🟡 Medium | Ch8 — Pipelines | Build a 3-stage pipeline: read_lines → parse_csv → filter_rows |
-| Q15 | 🟠 Hard | Ch8 — Streaming ETL | Process a large file line-by-line, never fully in memory |
-| Q16 | 🟢 Easy | Ch9 — itertools.chain | Combine two lists lazily with chain() |
-| Q17 | 🟡 Medium | Ch9 — itertools.islice | Take first 10 items from an infinite generator |
-| Q18 | 🟡 Medium | Ch9 — itertools.groupby | Group a sorted list of dicts by a key field |
-| Q19 | 🟡 Medium | Ch10 — Infinite Sequences | Infinite fibonacci() + islice to take first 10 |
-| Q20 | 🟡 Medium | Ch11 — return in generator | Show how `return value` becomes StopIteration.value |
-| Q21 | 🟠 Hard | Ch12 — Async Generators | Async generator for paginated API results |
-| Q22 | 🟡 Medium | Ch13 — Exhaustion | Demonstrate generator exhaustion iterating twice |
-| Q23 | 🟡 Medium | Ch14 — collections.abc | Classify objects with isinstance(x, Iterator/Iterable) |
-| Q24 | 🟠 Hard | Capstone — Production Pattern | paginated_api(url) generator with auto-fetch |
-| Q25 | 🟠 Hard | Capstone — Full ETL | Streaming ETL pipeline: CSV → parse → filter → transform → write |
+| [Q1](#q1) | 🟢 Easy | Ch1 — Iteration Protocol | Implement `__iter__` and `__next__` on a Countdown class |
+| [Q2](#q2) | 🟡 Medium | Ch1 — StopIteration | When to raise StopIteration + example |
+| [Q3](#q3) | 🟡 Medium | Ch2 — Iterator Class | Write a NumberRange iterator (start, stop, step) |
+| [Q4](#q4) | 🟡 Medium | Ch2 — Iterable vs Iterator | Show lists are reusable, generators are exhausted |
+| [Q5](#q5) | 🟢 Easy | Ch3 — Generator Functions | Generator that yields squares of 1..n |
+| [Q6](#q6) | 🟡 Medium | Ch3 — Lazy Evaluation | Explain memory difference: list vs generator for 1M items |
+| [Q7](#q7) | 🟡 Medium | Ch4 — Frame Suspension | Trace exactly what Python does when it hits `yield` |
+| [Q8](#q8) | 🟡 Medium | Lazy Memory | Benchmark: sys.getsizeof() list vs generator |
+| [Q9](#q9) | 🟢 Easy | Ch5 — Generator Expressions | Rewrite list comprehension as gen expression |
+| [Q10](#q10) | 🟡 Medium | Ch6 — yield from | Flatten a nested list recursively with `yield from` |
+| [Q11](#q11) | 🟡 Medium | Ch6 — Delegation | Chain two generators with `yield from` instead of a loop |
+| [Q12](#q12) | 🟡 Medium | Ch7 — send() | Write a running_average() coroutine using send() |
+| [Q13](#q13) | 🟠 Hard | Ch7 — Priming | Explain why coroutines need next() before send() |
+| [Q14](#q14) | 🟡 Medium | Ch8 — Pipelines | Build a 3-stage pipeline: read_lines → parse_csv → filter_rows |
+| [Q15](#q15) | 🟠 Hard | Ch8 — Streaming ETL | Process a large file line-by-line, never fully in memory |
+| [Q16](#q16) | 🟢 Easy | Ch9 — itertools.chain | Combine two lists lazily with chain() |
+| [Q17](#q17) | 🟡 Medium | Ch9 — itertools.islice | Take first 10 items from an infinite generator |
+| [Q18](#q18) | 🟡 Medium | Ch9 — itertools.groupby | Group a sorted list of dicts by a key field |
+| [Q19](#q19) | 🟡 Medium | Ch10 — Infinite Sequences | Infinite fibonacci() + islice to take first 10 |
+| [Q20](#q20) | 🟡 Medium | Ch11 — return in generator | Show how `return value` becomes StopIteration.value |
+| [Q21](#q21) | 🟠 Hard | Ch12 — Async Generators | Async generator for paginated API results |
+| [Q22](#q22) | 🟡 Medium | Ch13 — Exhaustion | Demonstrate generator exhaustion iterating twice |
+| [Q23](#q23) | 🟡 Medium | Ch14 — collections.abc | Classify objects with isinstance(x, Iterator/Iterable) |
+| [Q24](#q24) | 🟠 Hard | Capstone — Production Pattern | paginated_api(url) generator with auto-fetch |
+| [Q25](#q25) | 🟠 Hard | Capstone — Full ETL | Streaming ETL pipeline: CSV → parse → filter → transform → write |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · iteration protocol — Countdown Class
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Implement a `Countdown` class that counts down from `n` to 0 (inclusive). It must implement `__iter__` and `__next__` so it works in a `for` loop and with `next()` directly.
 
@@ -86,9 +90,13 @@ print(next(c))  # raises StopIteration
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · StopIteration — When and How to Raise It
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Explain in your own words: when should `__next__` raise `StopIteration`? Then write a `FiniteRange` class that counts from `start` to `stop` (exclusive) and raises `StopIteration` correctly when exhausted.
 
@@ -139,9 +147,13 @@ except StopIteration:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · iterator class — NumberRange with step
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a `NumberRange` iterator class that accepts `start`, `stop`, and `step` arguments and yields values just like `range(start, stop, step)`. It should work in a `for` loop.
 
@@ -192,9 +204,13 @@ print(list(range(0, 10, 2)))          # [0, 2, 4, 6, 8]
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · iterable vs iterator — Reusable vs Exhausted
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Demonstrate the difference between an iterable and an iterator. Specifically: show that a list can be iterated twice, but a generator is exhausted after one pass. Then show why this matters in practice.
 
@@ -247,9 +263,13 @@ print(process_data(data_list))  # (9, 1) — correct
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟢 · yield — Squares Generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a generator function `squares(n)` that yields the square of each integer from 1 through n (inclusive). Use it with `for`, `list()`, and `sum()`.
 
@@ -293,9 +313,13 @@ print(next(gen))          # 9
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · lazy evaluation — Memory Numbers
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Explain lazy evaluation using memory numbers. Then write code that proves a list comprehension uses ~8MB while a generator expression for 1 million items uses ~200 bytes.
 
@@ -351,9 +375,13 @@ def memory_unsafe_filter(filepath, keyword):
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · frame suspension — Tracing yield
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write a generator function `tracer()` with print statements at each step. Run it step by step with explicit `next()` calls and explain exactly what Python saves/restores at each `yield`.
 
@@ -417,9 +445,13 @@ except StopIteration:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · memory benchmark — sys.getsizeof() comparison
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write a benchmark function that compares memory usage of list comprehension vs generator expression for increasing sizes (100, 1_000, 10_000, 1_000_000 items). Print a comparison table.
 
@@ -474,9 +506,13 @@ memory_benchmark()
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟢 · gen expression — Rewrite a List Comprehension
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Rewrite the following list comprehension as a generator expression. Then explain when you should prefer each form:
 
@@ -533,9 +569,13 @@ print(sys.getsizeof((x for x in range(1_000_000) if x % 2 == 0)))  # ~112B
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · yield from — Flatten a Nested List
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write a `flatten(nested)` generator that recursively flattens a deeply nested list using `yield from`. It should handle arbitrary nesting depth.
 
@@ -591,9 +631,13 @@ print(list(flatten_manual([1, [2, [3]]])))  # [1, 2, 3]
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · delegation — Chain Two Generators with yield from
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Write a `chain_generators(gen1, gen2)` function that yields all items from `gen1` then all items from `gen2`, using `yield from` instead of a manual loop. Compare the two approaches side by side.
 
@@ -652,9 +696,13 @@ print(list(chain(evens(6), odds(6))))   # [0, 2, 4, 1, 3, 5]
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · send() — running_average() Coroutine
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a `running_average()` coroutine that accepts numbers via `send()` and yields the current running average after each value. The coroutine should run indefinitely until closed.
 
@@ -737,9 +785,13 @@ print(avg2.send(15))   # 10.0
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟠 · priming — Why Coroutines Need next() First
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Explain exactly why a coroutine must be primed with `next()` before the first `send(value)` call. Demonstrate what happens if you skip priming. Then write a `@coroutine` decorator that auto-primes.
 
@@ -827,9 +879,13 @@ print(acc.send(5))        # 35
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · pipeline — 3-Stage CSV Pipeline
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Build a 3-stage generator pipeline:
 1. `read_lines(filepath)` — yields raw lines from a file
@@ -913,9 +969,13 @@ demo_pipeline()
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟠 · streaming ETL — Large File, O(1) Memory
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Write a streaming ETL pipeline that processes a large log file line by line. Each line is JSON. The pipeline should: read → parse JSON → filter for ERROR level → extract fields → write to output file. The entire pipeline must maintain O(1) memory.
 
@@ -1027,9 +1087,13 @@ os.unlink(output_path)
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟢 · itertools.chain — Combine Two Lists Lazily
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Use `itertools.chain` to combine two lists without creating a third list. Then show `chain.from_iterable` for combining a list of lists.
 
@@ -1079,9 +1143,13 @@ print(total)   # 90 — never materialized as a full list
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟡 · itertools.islice — First 10 from Infinite Generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Write an infinite `naturals()` generator that yields 1, 2, 3, 4, ... forever. Then use `itertools.islice` to safely take the first 10 values, the values from index 5 to 15, and every 3rd value in the first 30.
 
@@ -1135,9 +1203,13 @@ print(f"Naturals under 100: {len(under_100)} items, last={under_100[-1]}")
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · itertools.groupby — Group Dicts by Key
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Given a list of employee dicts, use `itertools.groupby` to group them by department. Print each department and the employees in it. Demonstrate the critical requirement that the input must be sorted first.
 
@@ -1198,9 +1270,13 @@ print("\nGrouped dict:", grouped)
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟡 · infinite generator — Fibonacci with islice
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Write an infinite `fibonacci()` generator that yields the Fibonacci sequence starting from 0. Use `islice` to print the first 10 values. Then show how to find the first Fibonacci number over 1000.
 
@@ -1255,9 +1331,13 @@ print(f"Sum of first 100 Fibonacci numbers: {total}")
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟡 · return value — StopIteration.value
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Demonstrate that `return value` inside a generator raises `StopIteration` with `StopIteration.value` set to the returned value. Show how to capture it manually and how `yield from` captures it automatically.
 
@@ -1324,9 +1404,13 @@ print(list(delegating()))
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟠 · async generator — Paginated API Results
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Write an async generator `fetch_pages(base_url, max_pages)` that simulates fetching paginated API results one page at a time. Each "fetch" should use `await asyncio.sleep(0)` to simulate I/O. Consume it with `async for`.
 
@@ -1403,9 +1487,13 @@ asyncio.run(process_all_pages())
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · exhaustion — Generator Exhaustion Demo
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Write a demonstration that clearly shows generator exhaustion: create a generator, iterate it fully, then iterate it again and show the result is empty. Then show three fixes.
 
@@ -1472,9 +1560,13 @@ print(list(copy2))   # [0, 1, 4, 9, 16]
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟡 · collections.abc — Classify Iterables and Iterators
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Use `collections.abc.Iterator` and `collections.abc.Iterable` to classify various Python objects. Write a `classify(obj)` function that reports whether an object is an Iterable, an Iterator, both, or neither.
 
@@ -1545,9 +1637,13 @@ classify(None,                   "NoneType")
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟠 · production pattern — paginated_api() Generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Implement a `paginated_api(url, params)` generator that auto-fetches next pages using a cursor. Each response contains `{"items": [...], "next_cursor": "..."}`. The generator should yield individual items (not pages), automatically fetching the next page when needed.
 
@@ -1636,9 +1732,13 @@ with patch("requests.get", side_effect=page_responses):
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟠 · Capstone — Full Streaming ETL Pipeline
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Build a complete streaming ETL pipeline with O(1) memory. The pipeline must:
 1. Read a CSV file line by line

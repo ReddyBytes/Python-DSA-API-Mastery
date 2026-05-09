@@ -39,11 +39,15 @@
 
 ## Ch1 — async/await Recap
 
+<a id="q1"></a>
+
 ### Q1 · async/await basics — define and run a coroutine 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write an async function called `greet` that takes a name, waits 1 second, then returns `"Hello, {name}!"`. Run it with `asyncio.run()` and print the result.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -69,7 +73,12 @@ print(result)                     # Hello, Alice!
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · async/await basics — calling without await 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 What does this code print, and why is it a bug? How do you fix it?
 
@@ -83,7 +92,6 @@ result = get_answer()
 print(result)
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -120,11 +128,15 @@ async def main():
 
 ## Ch2 — Why AI Apps Need Async
 
+<a id="q3"></a>
+
 ### Q3 · Why AI needs async — sync vs async LLM timing 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 You have 5 LLM prompts. Each call takes 0.5 seconds. Show the timing difference between calling them sequentially vs concurrently using `asyncio.sleep(0.5)` as a stand-in for the LLM call. Print elapsed time for both approaches.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -166,7 +178,12 @@ print(f"Concurrent: {time.perf_counter() - t:.2f}s")  # ~0.5s
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Why AI needs async — blocking vs non-blocking 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 This function has a bug that will freeze every other user in a FastAPI server. Identify it and fix it.
 
@@ -178,7 +195,6 @@ async def slow_handler():
     return "done"
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -216,11 +232,15 @@ async def slow_handler_blocking_lib():
 
 ## Ch3 — Streaming LLM Responses
 
+<a id="q5"></a>
+
 ### Q5 · Streaming LLM — async generator with yield 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write an async generator `word_stream(sentence)` that splits a sentence into words and yields each word with a 0.1s delay between them (simulating token-by-token LLM output).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -253,11 +273,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Streaming LLM — async for loop consumption 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 You have an async generator `token_stream()`. Show the difference between consuming it with `for` vs `async for`, and explain why one is wrong.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -292,11 +316,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Streaming LLM — collect stream into string 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a function `stream_and_collect(sentence)` that: (1) streams tokens from `word_stream()` printing each one as it arrives, AND (2) returns the full assembled string at the end. Show both side effects happening together.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -336,11 +364,15 @@ asyncio.run(main())
 
 ## Ch4 — Making Parallel LLM Calls
 
+<a id="q8"></a>
+
 ### Q8 · Parallel LLM calls — asyncio.gather for 3 prompts 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Use `asyncio.gather` to call a mock LLM with 3 different prompts at the same time. The mock LLM is `async def mock_llm(prompt): await asyncio.sleep(0.5); return f"reply:{prompt}"`. Print all 3 results.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -374,11 +406,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Parallel LLM calls — create_task + await 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Start a long mock LLM call using `asyncio.create_task`. While it runs in the background, print "Doing setup work...". Then collect and print the result.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -414,11 +450,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Parallel LLM calls — results order guarantee 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Make 3 mock LLM calls where each takes a different time (0.3s, 0.1s, 0.5s respectively). Use `asyncio.gather`. Show that results come back in input order, not completion order.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -458,11 +498,15 @@ asyncio.run(main())
 
 ## Ch5 — Parallel Embeddings
 
+<a id="q11"></a>
+
 ### Q11 · Parallel embeddings — gather + Semaphore pattern 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 You have 20 documents to embed. A mock embed call takes 0.1s. Use `asyncio.gather` with a `Semaphore(5)` to run all 20 but cap at 5 concurrent. Return all results.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -498,11 +542,15 @@ print(f"Embedded {len(results)} docs")   # 20
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Parallel embeddings — limit N concurrent with Semaphore 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Explain what happens if you create the Semaphore inside the embed function instead of outside. Write code that demonstrates both the broken and correct approach.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -550,11 +598,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Parallel embeddings — chunked batching with progress 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Write `embed_in_batches(texts, batch_size=5, max_concurrent=3)` that processes texts in batches of 5, with at most 3 concurrent per batch. Print progress after each batch. Use `return_exceptions=True` to handle partial failures.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -608,11 +660,15 @@ print(f"Total embedded: {sum(1 for r in results if r)}")
 
 ## Ch6 — Semaphores for Rate Limiting
 
+<a id="q14"></a>
+
 ### Q14 · Semaphore rate limiting — asyncio.Semaphore(N) basics 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Show how `asyncio.Semaphore` works like a bouncer at a club: only N tasks inside at once. Write a demo where 10 tasks try to enter but only 3 are allowed simultaneously. Print when each task enters and exits.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -645,11 +701,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Semaphore rate limiting — bounded concurrency wrapper 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Write a reusable function `run_with_limit(coros, limit)` that takes any list of coroutines and runs them with at most `limit` concurrent. It should work for any type of coroutine, not just LLM calls.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -690,11 +750,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Semaphore rate limiting — Semaphore vs sleep-based throttle 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Compare two approaches to rate limiting: (A) `asyncio.Semaphore(N)` and (B) adding `await asyncio.sleep(0.1)` between calls. Explain why Semaphore is better for burst workloads.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -745,11 +809,15 @@ print(f"Sleep:     {time.perf_counter()-t:.2f}s")   # ~1.0s (10 × 0.1s forced w
 
 ## Ch7 — Async Context Managers
 
+<a id="q17"></a>
+
 ### Q17 · Async context managers — async with for HTTP session 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Show how to use `httpx.AsyncClient` as an async context manager to make two GET requests. Explain why you should reuse one client for multiple requests instead of creating a new one each time.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -784,11 +852,15 @@ asyncio.run(fetch_two())
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Async context managers — custom AsyncContextManager class 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Write a class `ManagedSession` that acts as an async context manager. On enter: print "Session started" and create a mock client. On exit: print "Session ended". Use `__aenter__` and `__aexit__`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -833,11 +905,15 @@ asyncio.run(main())
 
 ## Ch8 — Async Queues
 
+<a id="q19"></a>
+
 ### Q19 · Async queues — basic producer/consumer with asyncio.Queue 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Write a producer that puts 5 items into an `asyncio.Queue`, and a consumer that takes and prints them. Run both concurrently with `asyncio.gather`. Use `None` as a sentinel to signal done.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -881,11 +957,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Async queues — multiple consumers for higher throughput 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Extend the producer/consumer pattern to use 3 consumers processing from the same queue. The producer should send one sentinel (`None`) per consumer so they all know when to stop.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -936,11 +1016,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Async queues — backpressure with maxsize 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 What is backpressure in a queue and why does it matter? Show how `asyncio.Queue(maxsize=3)` creates backpressure: a fast producer that tries to put 10 items quickly but is slowed down when the queue fills up.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -988,11 +1072,15 @@ asyncio.run(main())
 
 ## Ch9 — Error Handling in Async
 
+<a id="q22"></a>
+
 ### Q22 · Error handling — try/except in a coroutine 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Write `safe_call(prompt)` that calls a mock LLM. If a `ValueError` is raised (mock it with a 30% chance), catch it and return `None`. Otherwise return the result. Show it working in a batch.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1032,11 +1120,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Error handling — gather(return_exceptions=True) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Run 5 mock LLM calls with `asyncio.gather`. Two of them will raise exceptions. Show the difference between the default behavior (exception propagates) vs `return_exceptions=True` (exceptions are values). Separate successes from failures.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1093,11 +1185,15 @@ asyncio.run(main())
 
 ## Ch10 — Running Async from Sync Code
 
+<a id="q24"></a>
+
 ### Q24 · Async from sync — asyncio.run() entry point 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Show three scenarios for `asyncio.run()`: (1) correct use at script entry point, (2) wrong use inside another coroutine (explain the error), (3) correct fix for case 2.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1138,11 +1234,15 @@ if __name__ == "__main__":
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Async from sync — asyncio.to_thread() for blocking calls 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 You have a legacy sync function `load_large_file(path)` that takes 2 seconds. Show how to call it from async code without blocking the event loop using `asyncio.to_thread()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1188,11 +1288,15 @@ asyncio.run(main())
 
 ## Ch11 — Async in FastAPI
 
+<a id="q26"></a>
+
 ### Q26 · FastAPI AI endpoint — async def route 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Write a minimal FastAPI app with an async `POST /chat` endpoint that accepts a `prompt` string and returns a `{"reply": "..."}` dict. Use a mock async LLM. Explain why `async def` matters here vs a sync `def`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1231,11 +1335,15 @@ async def chat_endpoint(prompt: str) -> dict:
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · FastAPI AI endpoint — streaming response with SSE 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Write a FastAPI `POST /stream` endpoint that returns tokens as Server-Sent Events. Use an async generator to yield tokens and wrap it in `StreamingResponse`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1279,11 +1387,15 @@ async def stream_endpoint(prompt: str):
 
 ## Ch12 — Production Patterns
 
+<a id="q28"></a>
+
 ### Q28 · Production patterns — retry with exponential backoff 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Write `call_with_backoff(prompt, semaphore, max_retries=5)` that: (1) acquires the semaphore, (2) tries the LLM call, (3) on `RateLimitError` waits `2^attempt + random jitter` seconds and retries, (4) re-raises after max retries.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1332,11 +1444,15 @@ asyncio.run(main())
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · Production patterns — asyncio.TaskGroup structured concurrency 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Python 3.11+ introduced `asyncio.TaskGroup` as a safer alternative to `asyncio.gather`. Use it to run 3 mock LLM calls. Show how it differs from `gather` in error handling — specifically that it cancels all sibling tasks when one fails.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -1388,11 +1504,15 @@ asyncio.run(with_failing_task())
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · Production patterns — capstone parallel batch processor 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Build a complete `batch_embed_corpus(documents, max_concurrent=10)` function that combines everything from this module: async, Semaphore, gather with return_exceptions, exponential backoff on failure. Process a list of 20 mock documents and print a summary of successes and failures.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

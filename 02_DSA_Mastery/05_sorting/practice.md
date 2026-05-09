@@ -43,6 +43,9 @@
 <a id="q1"></a>
 ### Q1 Implement Bubble Sort
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 **Problem:** Implement bubble sort on a list of integers. Include the early-exit optimization so the algorithm stops as soon as a pass completes with no swaps.
 
 **Example:**
@@ -87,6 +90,9 @@ assert bubble_sort([1])             == [1]
 <a id="q2"></a>
 ### Q2 Implement Selection Sort
 
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 **Problem:** Implement selection sort. On each iteration, find the minimum element in the unsorted portion and swap it into the next sorted position.
 
 **Example:**
@@ -127,6 +133,9 @@ assert selection_sort([1])                  == [1]
 
 <a id="q3"></a>
 ### Q3 Implement Insertion Sort
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:** Implement insertion sort. Build a sorted left portion one element at a time by shifting larger elements right to make room for the current element.
 
@@ -169,6 +178,9 @@ assert insertion_sort([4, 3, 2, 1])    == [1, 2, 3, 4]   # O(n²) — max shifts
 <a id="q4"></a>
 ### Q4 `.sort()` vs `sorted()`
 
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 **Problem:** You have a list `nums = [3, 1, 4, 1, 5]`. Write two versions: one that sorts the list in-place and one that returns a new sorted list without modifying the original. Then explain the key API difference.
 
 <details>
@@ -205,6 +217,9 @@ print(bad)            # None  ← BUG
 
 <a id="q5"></a>
 ### Q5 Sort by Custom Key
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:** Given a list of `(name, score)` tuples, sort by score descending. When scores tie, sort by name ascending.
 
@@ -244,6 +259,9 @@ assert result[3] == ("Dave", 85)
 <a id="q6"></a>
 ### Q6 Sort Strings Case-Insensitively
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 **Problem:** Sort a list of strings alphabetically, ignoring case differences. `"Banana"` and `"banana"` should sort as if they are the same letter.
 
 **Example:**
@@ -279,6 +297,9 @@ assert result == result2   # same result for ASCII
 
 <a id="q7"></a>
 ### Q7 Counting Sort
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:** Implement counting sort for a list of non-negative integers where all values are in the range `[0, max_val]`.
 
@@ -322,6 +343,9 @@ assert counting_sort([], 5)                     == []
 <a id="q8"></a>
 ### Q8 Stability Definition
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 **Problem:** Given the list `students = [("Alice", 90), ("Bob", 85), ("Carol", 90), ("Dave", 85)]`, demonstrate with code what **sort stability** means. Show that Python's sort preserves Alice before Carol (both score 90) and Bob before Dave (both score 85).
 
 <details>
@@ -358,6 +382,9 @@ assert result[3][0] == "Dave"
 
 <a id="q9"></a>
 ### Q9 Implement Merge Sort
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:** Implement merge sort using divide-and-conquer. The function should return a new sorted list. Include the `merge` helper that merges two sorted lists in O(n).
 
@@ -410,6 +437,9 @@ assert merge_sort([2, 1])             == [1, 2]
 
 <a id="q10"></a>
 ### Q10 Implement Quicksort with Random Pivot
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:** Implement quicksort using the Lomuto partition scheme. Use a random pivot to avoid O(n²) worst case on sorted input.
 
@@ -466,6 +496,9 @@ assert quicksort([])                   == []
 <a id="q11"></a>
 ### Q11 Implement Heapsort Using heapq
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 **Problem:** Implement heapsort using Python's `heapq` module. Sort a list in ascending order by treating it as a min-heap.
 
 **Example:**
@@ -515,6 +548,9 @@ assert kth_largest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4) == 4
 <a id="q12"></a>
 ### Q12 Sort a Nearly-Sorted Array Efficiently
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 **Problem:** An array is "k-sorted" — each element is at most `k` positions away from its sorted position. Sort it efficiently. For example, with `k=3`, element at index 10 belongs somewhere in indices 7–13.
 
 **Example:**
@@ -559,6 +595,9 @@ assert sort_k_sorted([1, 2, 3], 0)                 == [1, 2, 3]
 <a id="q13"></a>
 ### Q13 Sort Array Elements by Frequency
 
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 **Problem:** Given a list of integers, sort them by frequency — most frequent first. Break ties by placing the smaller number first.
 
 **Example:**
@@ -601,6 +640,9 @@ assert sort_by_frequency([1])                       == [1]
 <a id="q14"></a>
 ### Q14 K-th Largest Element
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 **Problem:** Find the k-th largest element in an unsorted array. Do not sort the entire array — use a min-heap of size k for an O(n log k) solution.
 
 **Example:**
@@ -641,6 +683,9 @@ assert kth_largest([1], 1)                          == 1
 
 <a id="q15"></a>
 ### Q15 Custom Comparator — Largest Number
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:** Given a list of non-negative integers, arrange them to form the largest possible number. Return the result as a string.
 
@@ -688,6 +733,9 @@ assert largest_number([1])              == "1"
 <a id="q16"></a>
 ### Q16 Stability in Multi-Key Sort
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 **Problem:** You have a list of employee records `(name, department, salary)`. Sort first by department alphabetically, then within each department by salary descending. Demonstrate how to achieve this using Python's stable sort with two separate passes instead of a compound key.
 
 <details>
@@ -733,6 +781,9 @@ assert employees[3][0] == "Dave"
 
 <a id="q17"></a>
 ### Q17 Radix Sort
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 **Problem:** Implement LSD (least-significant digit) radix sort for a list of non-negative integers. Process digits from least significant to most significant.
 
@@ -783,6 +834,9 @@ assert radix_sort([5, 3, 8, 1])                        == [1, 3, 5, 8]
 <a id="q18"></a>
 ### Q18 Merge Two Sorted Arrays
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 **Problem:** Given two sorted arrays `a` and `b`, merge them into one sorted array in O(m + n) time without calling sort.
 
 **Example:**
@@ -827,6 +881,9 @@ assert merge_sorted([1, 1], [1, 1])             == [1, 1, 1, 1]
 <a id="q19"></a>
 ### Q19 Sort a Dictionary by Value
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 **Problem:** Given a word-frequency dictionary, return the items sorted by frequency descending. When frequencies tie, sort by word alphabetically.
 
 **Example:**
@@ -864,6 +921,9 @@ assert sorted_keys[0] == "banana"
 
 <a id="q20"></a>
 ### Q20 Timsort O(n) Best Case
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 **Problem:** Explain why Python's `list.sort()` runs in O(n) on an already-sorted list. Then write a benchmark that confirms this by timing a sorted vs random input of 1,000,000 elements.
 
@@ -913,6 +973,9 @@ benchmark_timsort()
 <a id="q21"></a>
 ### Q21 Sort Colors — Dutch National Flag
 
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 **Problem:** Given an array with only three distinct values (0, 1, 2), sort it in-place in a single pass using O(1) extra space. This is the Dutch National Flag problem.
 
 **Example:**
@@ -956,6 +1019,9 @@ arr = [1, 2, 0];            sort_colors(arr);  assert arr == [0, 1, 2]
 
 <a id="q22"></a>
 ### Q22 Meeting Rooms — Sort by Start Time
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 **Problem:** Given a list of meeting intervals `[start, end]`, determine the minimum number of conference rooms required to hold all meetings simultaneously.
 
@@ -1003,6 +1069,9 @@ assert min_meeting_rooms([])                          == 0
 <a id="q23"></a>
 ### Q23 Merge Intervals
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 **Problem:** Given a list of intervals, merge all overlapping intervals and return the resulting list.
 
 **Example:**
@@ -1046,6 +1115,9 @@ assert merge_intervals([[1,4]])                     == [[1,4]]
 
 <a id="q24"></a>
 ### Q24 External Merge Sort with a Min-Heap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 **Problem:** Implement the merge phase of external merge sort: given k sorted lists (representing sorted file chunks), merge them into one sorted sequence using a min-heap. This is the real-world pattern used by GNU sort, Hadoop shuffle, and Spark.
 
@@ -1102,6 +1174,9 @@ assert list(heapq.merge(*[[1,4,7],[2,5,8],[3,6,9]])) == list(range(1, 10))
 
 <a id="q25"></a>
 ### Q25 Choose the Right Sort — 5 Scenarios
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Problem:** For each of the five scenarios below, state which sorting algorithm to use, give the time complexity, and explain the key reason.
 

@@ -9,15 +9,20 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1–Q3 | Creating · accessing · `.get()` | 🟢 |
-| Q4–Q6 | Add · update · delete · iterate | 🟢 |
-| Q7–Q9 | Nested · comprehension · counting | 🟡 |
-| Q10–Q12 | Real-world patterns | 🟡 |
-| Q13–Q15 | Interview patterns | 🟠 |
+| [Q1](#q1)–Q3 | Creating · accessing · `.get()` | 🟢 |
+| [Q4](#q4)–Q6 | Add · update · delete · iterate | 🟢 |
+| [Q7](#q7)–Q9 | Nested · comprehension · counting | 🟡 |
+| [Q10](#q10)–Q12 | Real-world patterns | 🟡 |
+| [Q13](#q13)–Q15 | Interview patterns | 🟠 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · dict — Create a Book Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Create a dictionary for a book with keys: `title`, `author`, `year`, `pages`. Use values: `"Python Crash Course"`, `"Eric Matthes"`, `2019`, `544`. Print the author and the year.
@@ -56,7 +61,12 @@ print(book["year"])     # 2019
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · dict — Safe Access
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 `config = {"host": "localhost", "port": 5432}`. Get `"timeout"` safely with a default of `30`. Also get `"port"` safely. Print both results.
@@ -91,7 +101,12 @@ print(config.get("port", 0))       # 5432 ← key exists, returns value
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · dict — The KeyError Trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Show what happens when you access a missing key with `dict["missing_key"]`. Then show how `.get()` handles the same situation gracefully.
@@ -130,7 +145,12 @@ print(person.get("phone", "Not set"))   # Not set
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · dict — Add, Update, Delete
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 `user = {"name": "Alice", "age": 25, "city": "Delhi"}`. Do three things:
@@ -174,7 +194,12 @@ print(user)
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · dict — Iterate
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 `scores = {"Alice": 92, "Bob": 78, "Charlie": 85, "Diana": 96}`.
@@ -219,7 +244,12 @@ for name, score in scores.items():
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · dict — Check Key Existence
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `inventory = {"apple": 50, "banana": 30}`. Check if `"mango"` exists before accessing it. Show both the `in` approach and the `.get()` approach.
@@ -262,7 +292,12 @@ print(f"mango count: {count}")   # mango count: 0
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · dict — Nested Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 `student = {"name": "Alice", "grades": {"math": 90, "science": 85}}`.
@@ -301,7 +336,12 @@ print(student["grades"])
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · dict — Dict Comprehension
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 `names = ["Alice", "Bob", "Charlie"]`, `scores = [92, 78, 85]`. Create `{"Alice": 92, "Bob": 78, "Charlie": 85}` using `zip` and a dict comprehension.
@@ -338,7 +378,12 @@ print(result)
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · dict — Word Counter
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 `text = "the cat sat on the mat the cat"`. Count how many times each word appears. Use the `.get()` counting pattern (not `Counter`).
@@ -375,7 +420,12 @@ print(freq)
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · dict — Phone Book
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 Store 5 contacts in a dict `{name: number}`. Look up `"Alice"`. Then look up `"Eve"`, who does not exist, and handle it gracefully — print `"Contact not found"` instead of crashing.
@@ -427,7 +477,12 @@ print(number)   # Contact not found
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · dict — Group By
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 `students = [("Alice","A"),("Bob","B"),("Charlie","A"),("Diana","B"),("Eve","A")]`
@@ -466,7 +521,12 @@ print(groups)
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · dict — Invert a Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 `original = {"a": 1, "b": 2, "c": 3}`. Create a new dict with keys and values swapped: `{1: "a", 2: "b", 3: "c"}`. Use a dict comprehension.
@@ -501,7 +561,12 @@ print(inverted)
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · dict — Most Frequent Element
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 `nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]`. Find and print the most frequent element using a dict counter. Do not use `Counter`.
@@ -542,7 +607,12 @@ print(freq)
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · dict — Merge Two Dicts
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 `d1 = {"a": 1, "b": 2}`, `d2 = {"b": 3, "c": 4}`. Merge them using three different approaches. What happens to the duplicate key `"b"` in each case?
@@ -591,7 +661,12 @@ print(merged3)   # {'a': 1, 'b': 3, 'c': 4}
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · dict — List of Dicts to Single Dict
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 `data = [{"name": "Alice", "score": 92}, {"name": "Bob", "score": 78}, {"name": "Charlie", "score": 85}]`

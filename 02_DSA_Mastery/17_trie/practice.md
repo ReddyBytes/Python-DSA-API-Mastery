@@ -41,6 +41,8 @@
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
+
+
 **Problem:** Define a `TrieNode` class using a Python `dict` for children. Explain what the `is_end` flag does and why it is required. Then manually build the trie for words `["cat", "car"]` by creating nodes and linking them — no insert method, just direct node construction.
 
 <details>
@@ -82,6 +84,8 @@ assert root.children['c'].children['a'].is_end is False                # "ca" is
 ### Q2 🟢 · Trie node structure — array approach
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Define a `TrieNode` class using a fixed-size array of 26 slots (lowercase English only). Implement a helper `_idx(ch)` that converts a character to its array index. Show what index `'a'`, `'m'`, and `'z'` map to. Explain when to prefer array over dict.
 
@@ -126,6 +130,8 @@ print(root.children[0])                 # None — 'a' child doesn't exist
 ### Q3 🟢 · Insert a word
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Implement `insert(word: str)` on a `Trie` class. Walk character by character, creating nodes when they don't exist, and mark `is_end = True` after the last character. Insert `["apple", "app", "apt"]` and verify the trie is correct.
 
@@ -181,6 +187,8 @@ assert pt_node.is_end is True      # "apt" ends here
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
+
+
 **Problem:** Implement `search(word: str) -> bool` that returns `True` only if the exact word was inserted. After inserting `["cat", "car"]`, verify that `search("cat")` is `True`, `search("ca")` is `False`, and `search("cab")` is `False`.
 
 <details>
@@ -222,6 +230,8 @@ assert trie.search("cats") is False  # path breaks at 's'
 ### Q5 🟢 · startsWith — prefix check
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Implement `starts_with(prefix: str) -> bool` that returns `True` if any inserted word starts with the given prefix. After inserting `["cat", "car", "dog"]`, verify `starts_with("ca")` is `True`, `starts_with("do")` is `True`, and `starts_with("dx")` is `False`. Explain how this differs from `search()`.
 
@@ -270,6 +280,8 @@ assert trie.starts_with("ca") is True     # but "ca" is a valid prefix
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
+
+
 **Problem:** Insert `["app", "apple"]` into a trie. For each string in `["a", "ap", "app", "appl", "apple", "applet"]`, print whether `search()` and `starts_with()` return `True` or `False`. Explain every case.
 
 <details>
@@ -312,6 +324,8 @@ for word in checks:
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
+
+
 **Problem:** Show what happens when you `insert("")` into a trie, then call `search("")` and `starts_with("")`. Does the implementation handle it correctly without any special-case code? Explain why.
 
 <details>
@@ -348,6 +362,8 @@ assert trie2.starts_with("") is True    # starts_with always returns True for ""
 ### Q8 🟢 · Why trie wins over hashmap on prefix queries
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Given a list of 10 words starting with "ca" and 90 other words, count how many words start with "ca" using (a) a Python `set` and (b) a trie. For the set approach, iterate through all words and check each. For the trie, navigate to the "ca" node and count. Compare the complexity of each approach and explain when the trie advantage grows.
 
@@ -406,6 +422,8 @@ assert count_prefix_trie(trie, "ca") == 10
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
+
+
 **Problem:** Implement `count_words_with_prefix(prefix: str) -> int` on a Trie. After inserting `["apple", "app", "apt", "banana", "band"]`, verify that `count("app") == 2` (matches "app" and "apple"), `count("ban") == 2` (matches "banana" and "band"), and `count("xyz") == 0`.
 
 <details>
@@ -454,6 +472,8 @@ assert trie.count_words_with_prefix("") == 5      # all words
 ### Q10 🟡 · Delete a word with branch pruning
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Implement `delete(word: str)` with proper branch pruning. After inserting `["cat", "car", "ca"]`, deleting "cat" should not affect "car" or "ca". After deleting all three, only the root node should remain. Explain why simply clearing `is_end` is not enough.
 
@@ -512,6 +532,8 @@ assert len(trie.root.children) == 0  # trie is empty
 ### Q11 🟡 · Autocomplete system
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Implement an `AutocompleteTrie` with `insert(word)` and `autocomplete(prefix) -> list[str]`. After inserting `["cat", "car", "card", "care", "dog"]`, `autocomplete("ca")` should return all four "ca" words. Verify that `autocomplete("do")` returns `["dog"]` and `autocomplete("xyz")` returns `[]`.
 
@@ -576,6 +598,8 @@ assert ac.autocomplete("car") == ["car", "card", "care"]   # "car" itself includ
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
+
+
 **Problem:** Given a list of words, find their longest common prefix using a trie. For `["flower", "flow", "flight"]` the answer is `"fl"`. For `["dog", "racecar", "car"]` the answer is `""`. Implement `longest_common_prefix(words: list[str]) -> str`.
 
 <details>
@@ -628,6 +652,8 @@ assert longest_common_prefix(["a"]) == "a"
 ### Q13 🟡 · Replace words with root
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Given a dictionary of root words and a sentence, replace each word in the sentence with its shortest matching root from the dictionary. If no root matches, keep the original word. `replaceWords(["cat", "bat", "rat"], "the cattle was rattled by the battery")` should return `"the cat was rat by the bat"`.
 
@@ -685,6 +711,8 @@ assert replace_words(["ca", "cat"], "cattle") == "ca"
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
+
+
 **Problem:** Build the same trie for 5 words using (a) dict-based nodes and (b) array-based nodes. Count the number of node slots used by each. Explain the memory tradeoff and state when each approach is preferred.
 
 <details>
@@ -738,6 +766,8 @@ print("Array approach: 26 slots per node → wastes space but gives O(1) guarant
 ### Q15 🟡 · Trie vs hashmap — prefix search benchmark
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Build a trie and a set from the same 1000 words. For prefix `"pre"`, measure and compare how long each takes to find all matching words. Describe three scenarios where trie clearly wins over hashmap, and one scenario where hashmap is the better choice.
 
@@ -796,6 +826,8 @@ print(f"Trie: {trie_time*1e6:.1f}μs, {len(trie_matches)} matches")
 ### Q16 🟡 · Implement full Trie class from scratch
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** From memory, implement a complete `Trie` class with `insert`, `search`, `starts_with`, `count_words_with_prefix`, and `autocomplete`. This is the LeetCode 208 "Implement Trie" problem extended. Test with `["apple", "app", "apt", "banana"]`.
 
@@ -883,6 +915,8 @@ assert sorted(trie.autocomplete("ap")) == ["app", "apple", "apt"]
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
+
+
 **Problem:** Implement `search_wildcard(pattern: str) -> bool` where `.` matches any single character. After inserting `["bad", "dad", "mad"]`, `search_wildcard(".ad")` should return `True`, `search_wildcard("b..")` should return `True`, and `search_wildcard("b.d")` should return `True`. This is LeetCode 211.
 
 <details>
@@ -930,6 +964,8 @@ assert trie.search_wildcard("...") is True    # matches all 3-letter words
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
+
+
 **Problem:** Implement `count_words(trie) -> int` that counts total distinct words in the trie. Inserting the same word twice should only count it once. Verify with `["apple", "app", "apple", "banana"]` — should return 3.
 
 <details>
@@ -968,6 +1004,8 @@ assert trie.count_words() == 3   # apple, app, banana (apple inserted twice = 1)
 ### Q19 🟡 · Lexicographic order — collect all words
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Implement `all_words_sorted(trie) -> list[str]` that returns all words in lexicographic order without sorting the results. Explain why a trie DFS that iterates sorted children produces words in alphabetical order naturally.
 
@@ -1014,6 +1052,8 @@ assert words == ["app", "apple", "apt", "banana", "cat"]
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
+
+
 **Problem:** You receive words one at a time (a stream). After each insertion, answer "how many words currently have the prefix 'py'?". Simulate with the stream `["python", "pytorch", "pypi", "java", "javascript", "pylint"]` and print the prefix count after each insertion.
 
 <details>
@@ -1053,6 +1093,8 @@ for word in stream:
 ### Q21 🔴 · Word search in grid — trie + DFS
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Given an m×n grid and a list of words, find all words that can be formed by visiting adjacent (4-directional) cells without reusing cells. This is LeetCode 212 "Word Search II". Implement the solution using a trie to prune the DFS. Test with the classic 4×4 grid example.
 
@@ -1124,6 +1166,8 @@ assert set(result) == {"eat", "oath"}
 ### Q22 🔴 · Top-K autocomplete with frequency ranking
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Design a `RankedAutocompleteTrie` where each word is inserted with a frequency score. `get_top_k(prefix, k)` returns the k most frequent words matching the prefix. Test with search query data: insert `[("python", 95000), ("pytorch", 88000), ("pypi", 22000), ("pylint", 15000)]` and verify `get_top_k("py", 2)` returns `["python", "pytorch"]`.
 
@@ -1199,6 +1243,8 @@ assert trie.get_top_k("pyt", 2) == ["python", "pytorch"]
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
+
+
 **Problem:** Analyze when a trie uses MORE memory than a hashmap, not less. Given a list of 5 words with NO common prefixes (e.g., `["abc", "def", "ghi", "jkl", "mno"]`), count: (a) total characters in all words, (b) total trie nodes created (excluding root). Compare to a hashmap storing the same words. When does trie waste memory?
 
 <details>
@@ -1258,6 +1304,8 @@ print("overcome the per-node dict overhead (~200+ bytes) vs per-character cost."
 ### Q24 🔴 · Design a search suggestion system
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** LeetCode 1268. Given a list of products and a search word, for each prefix of the search word (after each character is typed), return the 3 lexicographically smallest products that start with that prefix. `products = ["mobile", "mouse", "moneypot", "monitor", "mousepad"]`, `searchWord = "mouse"` should produce suggestions after each character is typed.
 
@@ -1326,6 +1374,8 @@ assert output[2] == ["mouse", "mousepad"]
 ### Q25 🔴 · Common mistake gauntlet
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Each snippet below contains a trie bug. For each one, identify the bug, explain what goes wrong, and write the fix. There are 5 bugs covering the most common trie mistakes.
 

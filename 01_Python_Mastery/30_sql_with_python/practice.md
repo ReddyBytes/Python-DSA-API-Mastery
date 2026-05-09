@@ -44,11 +44,15 @@
 
 ## Ch1 — sqlite3 Module
 
+<a id="q1"></a>
+
 ### Q1 · sqlite3 — create connection and cursor 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Open a connection to `mydb.db`, create a cursor, run `SELECT sqlite_version()`, print the result, and close the connection manually.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>sqlite3.connect() returns a connection; call .cursor() on it to get a cursor object</details>
 <details><summary>✅ Answer</summary>
@@ -71,11 +75,15 @@ conn.close()                           # ← always close manually when not usin
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · sqlite3 — CREATE TABLE with IF NOT EXISTS 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Create a `users` table with columns `id` (INTEGER PRIMARY KEY AUTOINCREMENT), `name` (TEXT NOT NULL), and `email` (TEXT UNIQUE). Use `IF NOT EXISTS` so re-running the script is safe.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use conn.execute() with a multi-line CREATE TABLE statement, then conn.commit()</details>
 <details><summary>✅ Answer</summary>
@@ -100,11 +108,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · sqlite3 — context manager connection 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Connect to an in-memory SQLite database (`:memory:`), create a `scores` table, insert one row, and read it back — all inside a `with` block. Explain what the `with` statement handles automatically.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>sqlite3.connect(":memory:") creates a temporary DB that disappears when the connection closes</details>
 <details><summary>✅ Answer</summary>
@@ -129,11 +141,15 @@ with sqlite3.connect(":memory:") as conn:   # ← auto-closes when block exits
 
 ## Ch2 — CRUD Operations
 
+<a id="q4"></a>
+
 ### Q4 · CRUD — INSERT a single row (parameterized) 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Insert one product (`name="MacBook Pro"`, `price=2499.99`, `category="laptops"`) into a `products` table. Use `?` placeholders, not an f-string.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Pass a tuple as the second argument to conn.execute() — never build the SQL string with f-string interpolation</details>
 <details><summary>✅ Answer</summary>
@@ -163,11 +179,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · CRUD — SELECT all rows with fetchall 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Query all products from the `products` table ordered by price descending. Print each row using dict-style column access (`row["name"]`).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Set conn.row_factory = sqlite3.Row before querying to enable column-name access</details>
 <details><summary>✅ Answer</summary>
@@ -191,11 +211,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · CRUD — UPDATE with WHERE clause 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Update the price of `"MacBook Pro"` to `1999.99`. After the update, print how many rows were changed using `conn.total_changes`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>conn.total_changes returns the cumulative count of rows modified since the connection was opened</details>
 <details><summary>✅ Answer</summary>
@@ -217,11 +241,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · CRUD — DELETE with WHERE clause 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Delete all products where `price < 100.0`. Print the number of rows deleted by checking `cursor.rowcount`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use conn.execute() and capture the returned cursor object — cursor.rowcount tells you how many rows were affected</details>
 <details><summary>✅ Answer</summary>
@@ -245,11 +273,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ## Ch3 — SQL Query Patterns
 
+<a id="q8"></a>
+
 ### Q8 · Query Patterns — ORDER BY + LIMIT (top-N) 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write a query that returns the top 3 most expensive products by price. Also write a second query that implements pagination: skip the first 10 products, return the next 10.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use ORDER BY price DESC LIMIT 3 for top-N; add OFFSET 10 for pagination</details>
 <details><summary>✅ Answer</summary>
@@ -283,11 +315,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Query Patterns — GROUP BY + HAVING 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Count the number of products per category and their average price. Only show categories that have more than 1 product. Order results by average price descending.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>HAVING filters aggregated groups (post-GROUP BY); WHERE filters individual rows (pre-GROUP BY) — you cannot use WHERE with COUNT(*)</details>
 <details><summary>✅ Answer</summary>
@@ -316,11 +352,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Query Patterns — subquery (above average) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a query that returns all products whose price is above the average price of all products. Use a subquery — do not pre-compute the average in Python.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>A subquery in the WHERE clause runs first: WHERE price > (SELECT AVG(price) FROM products)</details>
 <details><summary>✅ Answer</summary>
@@ -350,11 +390,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ## Ch4 — Parameterized Queries
 
+<a id="q11"></a>
+
 ### Q11 · Parameterized — ? placeholders explained 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Show the three safe placeholder styles across libraries: `?` for sqlite3, `:name` for SQLAlchemy Core, and `%(name)s` for psycopg2. Write a sqlite3 example using both positional `?` and named `:name` style.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>sqlite3 supports both ? positional and :name named placeholders</details>
 <details><summary>✅ Answer</summary>
@@ -386,11 +430,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Parameterized — executemany bulk insert 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Insert 5 products in a single `executemany()` call. Each product is a tuple of `(name, price, category)`. Confirm the insert count using `cursor.rowcount`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>executemany(sql, list_of_tuples) loops internally and is faster than calling execute() in a Python for-loop</details>
 <details><summary>✅ Answer</summary>
@@ -420,11 +468,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Parameterized — SQL injection prevention 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Demonstrate the injection attack vector: show the dangerous f-string pattern (as a comment only — do not execute), then show the safe parameterized version handling the same malicious input string.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>The injection string '; DROP TABLE products; -- breaks out of the string context in the SQL</details>
 <details><summary>✅ Answer</summary>
@@ -454,11 +506,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ## Ch5 — JOINs
 
+<a id="q14"></a>
+
 ### Q14 · JOINs — INNER JOIN two tables 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Given `customers` and `orders` tables, write an INNER JOIN query that returns only customers who have placed at least one order, showing `customer name` and `product_id`. Explain what happens to customers with no orders.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>INNER JOIN = intersection — only rows where the ON condition matches in BOTH tables appear in the result</details>
 <details><summary>✅ Answer</summary>
@@ -492,11 +548,15 @@ with sqlite3.connect(":memory:") as conn:
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · JOINs — LEFT JOIN (include NULLs) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Rewrite the Q14 query as a LEFT JOIN so every customer appears in the result, even those with no orders. Show `None` for `product_id` when a customer has no orders.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>LEFT JOIN keeps all rows from the left (first) table; unmatched right-side columns become NULL</details>
 <details><summary>✅ Answer</summary>
@@ -528,11 +588,15 @@ with sqlite3.connect(":memory:") as conn:
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · JOINs — self-join pattern 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 You have an `employees` table with columns `id`, `name`, and `manager_id` (which references `employees.id`). Write a self-join query that returns each employee's name alongside their manager's name. Employees with no manager should still appear (NULL manager name).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Alias the same table twice: FROM employees e LEFT JOIN employees m ON e.manager_id = m.id</details>
 <details><summary>✅ Answer</summary>
@@ -574,11 +638,15 @@ with sqlite3.connect(":memory:") as conn:
 
 ## Ch6 — SQLAlchemy
 
+<a id="q17"></a>
+
 ### Q17 · SQLAlchemy — engine + text() raw query 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Create a SQLAlchemy engine for a SQLite database. Use `engine.connect()` and `text()` to run a raw SQL query with a named parameter (`:min_price`). Print each result row.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Wrap SQL strings in text() — never pass bare strings to SQLAlchemy 2.0 execute()</details>
 <details><summary>✅ Answer</summary>
@@ -602,11 +670,15 @@ with engine.connect() as conn:
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · SQLAlchemy — ORM model definition 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Define a `Product` ORM model with columns: `id` (Integer PK), `name` (String, not null), `price` (Float, not null), `category` (String, default `"uncategorized"`). Create the table using `Base.metadata.create_all()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Inherit from DeclarativeBase (SQLAlchemy 2.0 style) — set __tablename__ to the exact DB table name</details>
 <details><summary>✅ Answer</summary>
@@ -640,11 +712,15 @@ print("Tables created.")
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · SQLAlchemy — session CRUD (add/query/delete) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Using the `Product` model from Q18: (1) insert two products via `session.add_all()`, (2) query all products ordered by price, (3) update one product's price by modifying the attribute and committing, (4) delete the cheapest product.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>After modifying an attribute, just call session.commit() — SQLAlchemy's change tracking detects the mutation and generates the UPDATE automatically</details>
 <details><summary>✅ Answer</summary>
@@ -685,11 +761,15 @@ with Session(engine) as session:
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · SQLAlchemy — relationship between models 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Define `Category` and `Product` ORM models with a one-to-many relationship. `Category` has many `Products`. Use `relationship()` with `back_populates` for bidirectional access. Insert a category with two products in one session, then query the category and print its products.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>ForeignKey on Product points to categories.id; relationship() on both sides with back_populates linking them</details>
 <details><summary>✅ Answer</summary>
@@ -741,11 +821,15 @@ with Session(engine) as session:
 
 ## Ch7 — Pandas + SQL
 
+<a id="q21"></a>
+
 ### Q21 · Pandas + SQL — read_sql_query to DataFrame 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Read the `products` table into a pandas DataFrame using `pd.read_sql_query()`. Use a SQLAlchemy engine (not a raw sqlite3 connection). Filter for products with `price > 500` directly in the SQL string.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pd.read_sql_query(sql_string, engine) returns a DataFrame with column names matching the SELECT aliases</details>
 <details><summary>✅ Answer</summary>
@@ -770,11 +854,15 @@ print(df.dtypes)
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Pandas + SQL — to_sql write DataFrame to DB 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Build a DataFrame with 5 rows in-memory, then write it to a table called `sales` using `df.to_sql()`. Use `if_exists="replace"` and `index=False`. Verify by reading the table back with `pd.read_sql_query()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>index=False prevents the DataFrame's row numbers from becoming an extra column in the DB table</details>
 <details><summary>✅ Answer</summary>
@@ -809,11 +897,15 @@ print(df_back)
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Pandas + SQL — chunked read with chunksize 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Use `pd.read_sql_query()` with `chunksize=2` to read a table in chunks. Iterate over the chunks and print the shape of each chunk. Explain why chunking matters for large tables.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>When chunksize is set, read_sql_query returns an iterator of DataFrames instead of one big DataFrame</details>
 <details><summary>✅ Answer</summary>
@@ -846,11 +938,15 @@ for i, chunk in enumerate(chunks):
 
 ## Ch8 — DuckDB
 
+<a id="q24"></a>
+
 ### Q24 · DuckDB — in-process SQL on a DataFrame 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Create a pandas DataFrame with 5 products (name, category, price). Use DuckDB to run a GROUP BY query on it (count and average price per category) without writing anything to disk. Return the result as a pandas DataFrame using `.df()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>DuckDB references the Python variable name directly in SQL: FROM df — no file path, no to_sql() needed</details>
 <details><summary>✅ Answer</summary>
@@ -886,11 +982,15 @@ con.close()
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · DuckDB — read_csv_auto direct file query 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Use DuckDB's `read_csv_auto()` to query a CSV file with SQL directly — no `pd.read_csv()` needed. Filter rows where `price > 1000` and return the top 5 by price descending.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>read_csv_auto('file.csv') auto-detects column types and treats the file like a SQL table</details>
 <details><summary>✅ Answer</summary>
@@ -920,11 +1020,15 @@ con.close()
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · DuckDB — DuckDB vs sqlite3 performance tradeoff 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Explain with a short code comparison when DuckDB outperforms sqlite3 and when sqlite3 is the better choice. Show the DuckDB columnar advantage for a GROUP BY aggregation vs sqlite3's row-store.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details><summary>💡 Hint</summary>DuckDB = OLAP (column-store, analytics); sqlite3 = OLTP (row-store, transactions, concurrent writes)</details>
 <details><summary>✅ Answer</summary>
@@ -963,11 +1067,15 @@ result = con.execute("""
 
 ## Ch9 — Transactions and ACID
 
+<a id="q27"></a>
+
 ### Q27 · Transactions — explicit BEGIN/COMMIT pattern 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Write a function `transfer_funds(conn, from_id, to_id, amount)` that debits one account and credits another inside an explicit `BEGIN ... COMMIT` transaction. Both updates must succeed or neither should persist.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details><summary>💡 Hint</summary>conn.execute("BEGIN") starts the transaction; conn.execute("COMMIT") ends it — if any execute() raises, call ROLLBACK</details>
 <details><summary>✅ Answer</summary>
@@ -1004,11 +1112,15 @@ transfer_funds(conn, from_id=1, to_id=2, amount=200.0)
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Transactions — rollback on error 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Demonstrate a transaction that fails mid-way (e.g., inserting a duplicate UNIQUE value). Show that ROLLBACK restores the previous state and no partial data is committed.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use a UNIQUE constraint on a column, then try inserting a duplicate inside a transaction to trigger a rollback</details>
 <details><summary>✅ Answer</summary>
@@ -1041,11 +1153,15 @@ conn.close()
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · Transactions — savepoint nested rollback 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Use `SAVEPOINT` to create a partial rollback within a transaction: insert three rows, set a savepoint after the second, insert a third that "fails" (you simulate this), roll back to the savepoint, then commit the first two rows only.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details><summary>💡 Hint</summary>SAVEPOINT name; ... ROLLBACK TO SAVEPOINT name; RELEASE SAVEPOINT name; — savepoints are nested checkpoints inside a transaction</details>
 <details><summary>✅ Answer</summary>
@@ -1081,11 +1197,15 @@ conn.close()
 
 ## Ch10 — Indexes and Performance
 
+<a id="q30"></a>
+
 ### Q30 · Indexes — CREATE INDEX single column 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 Create an index on the `category` column of the `products` table. Name it `idx_products_category`. Then create a composite index on `(category, price)` named `idx_cat_price`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details><summary>💡 Hint</summary>CREATE INDEX IF NOT EXISTS idx_name ON table(column) — composite index column order matters for the left-prefix rule</details>
 <details><summary>✅ Answer</summary>
@@ -1114,11 +1234,15 @@ with sqlite3.connect("mydb.db") as conn:
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · Indexes — EXPLAIN QUERY PLAN before/after 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
 
 Run `EXPLAIN QUERY PLAN` on a query filtering by `category` before and after creating an index. Print both plans and explain what the output difference means.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Without an index, the plan shows "SCAN products"; with an index, it shows "SEARCH products USING INDEX"</details>
 <details><summary>✅ Answer</summary>
@@ -1159,11 +1283,15 @@ with sqlite3.connect(":memory:") as conn:
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · Indexes — covering index (composite) 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
 
 Explain what a covering index is. Create a composite index on `(category, price, name)` for a query that selects only `name` and `price` filtered by `category`. Show via `EXPLAIN QUERY PLAN` that the query is satisfied entirely by the index without touching the table.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
 
 <details><summary>💡 Hint</summary>A covering index contains all columns needed by the query — the DB reads only the index, never the table rows</details>
 <details><summary>✅ Answer</summary>
@@ -1203,11 +1331,15 @@ with sqlite3.connect(":memory:") as conn:
 
 ## Ch11 — Connection Pooling
 
+<a id="q33"></a>
+
 ### Q33 · Connection Pooling — pool_size + max_overflow 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
 
 Create a SQLAlchemy engine for a PostgreSQL database with `pool_size=5`, `max_overflow=10`, and `pool_timeout=30`. Explain what each parameter controls.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
 
 <details><summary>💡 Hint</summary>pool_size = idle connections kept open; max_overflow = extra connections allowed under burst traffic; pool_timeout = wait time before raising an error</details>
 <details><summary>✅ Answer</summary>
@@ -1234,11 +1366,15 @@ with engine.connect() as conn:
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · Connection Pooling — NullPool (no pooling) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
 
 Create a SQLAlchemy engine using `NullPool` — a pool that opens and closes a fresh connection on every request. Explain when you would intentionally disable connection pooling.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
 
 <details><summary>💡 Hint</summary>NullPool is used in multiprocessing/serverless contexts where persistent connections cause issues after fork()</details>
 <details><summary>✅ Answer</summary>
@@ -1269,11 +1405,15 @@ with engine.connect() as conn:
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · Connection Pooling — QueuePool with timeout 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
 
 Demonstrate what happens when a SQLAlchemy pool is exhausted: set `pool_size=1`, `max_overflow=0`, and `pool_timeout=2`, then try to open two concurrent connections and show the `TimeoutError`. Explain how to tune these settings for a production web app.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
 
 <details><summary>💡 Hint</summary>QueuePool is the default pool class — hold one connection open in a context manager, then try to acquire a second to see the timeout</details>
 <details><summary>✅ Answer</summary>

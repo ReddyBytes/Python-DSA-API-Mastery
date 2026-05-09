@@ -9,15 +9,20 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1–Q3 | Creating · accessing · modifying | 🟢 |
-| Q4–Q6 | Slicing · sort · search | 🟢 |
-| Q7–Q10 | Copy trap · comprehension · nested | 🟡 |
-| Q11–Q13 | Real-world patterns | 🟡 |
-| Q14–Q15 | Interview patterns | 🟠 |
+| [Q1](#q1)–Q3 | Creating · accessing · modifying | 🟢 |
+| [Q4](#q4)–Q6 | Slicing · sort · search | 🟢 |
+| [Q7](#q7)–Q10 | Copy trap · comprehension · nested | 🟡 |
+| [Q11](#q11)–Q13 | Real-world patterns | 🟡 |
+| [Q14](#q14)–Q15 | Interview patterns | 🟠 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · list — Create and Append
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Start with an empty list. Append `"Python"`, `"is"`, and `"fun"` to it. Print the list and its length.
@@ -54,7 +59,12 @@ print(len(words))  # 3
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · list — Indexing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 `fruits = ["apple", "banana", "cherry"]`. Print the first item using a positive index and the last item using a negative index.
@@ -88,7 +98,12 @@ print(fruits[-1])   # cherry
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · list — Modify
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 `fruits = ["apple", "banana", "cherry"]`. Change `"banana"` to `"mango"` using index assignment. Print the updated list.
@@ -122,7 +137,12 @@ print(fruits)   # ['apple', 'mango', 'cherry']
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · list — Slicing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 `scores = [88, 92, 75, 96, 83, 70, 91]`. Using slicing, print: the first 3 scores, the last 2 scores, and the list reversed.
@@ -157,7 +177,12 @@ print(scores[::-1])  # [91, 70, 83, 96, 75, 92, 88]
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · list — Sort
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 `scores = [88, 92, 75, 96, 83, 70, 91]`. Sort the scores ascending and descending. Show both `.sort()` (in-place) and `sorted()` (returns new list). What is the key difference?
@@ -204,7 +229,12 @@ print(desc)       # [96, 92, 91, 88, 83, 75, 70]
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · list — Search
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `fruits = ["apple", "banana", "apple", "cherry", "apple"]`. Count how many times `"apple"` appears. Find the index of `"cherry"`.
@@ -238,7 +268,12 @@ print(fruits.index("cherry"))   # 3
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · list — Remove Items
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 Show the three ways to remove items from a list: `.remove()`, `.pop()`, and `del`. Use `items = ["a", "b", "c", "d", "e"]`. What is the key difference between each?
@@ -280,7 +315,12 @@ print(items)              # ['d', 'e']
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · list — Copy Trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 `a = [1, 2, 3]`. Do `b = a`, then `b.append(4)`. Print both `a` and `b`. What happens? Fix it so `a` does not change.
@@ -326,7 +366,12 @@ print(b)   # [1, 2, 3, 4]
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · list — List Comprehension
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 `numbers = range(1, 11)`. Using a single list comprehension, create a list of the squares of all even numbers.
@@ -360,7 +405,12 @@ print(squares_of_evens)   # [4, 16, 36, 64, 100]
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · list — Nested List
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 `matrix = [[1,2,3],[4,5,6],[7,8,9]]`. Print the center value (`5`). Print the entire second row.
@@ -394,7 +444,12 @@ print(matrix[1])      # [4, 5, 6]  — entire second row
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · list — Shopping Cart
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 Build a shopping cart: start empty, add 5 items of your choice, remove 1, check if a specific item is in the cart, and print the total count.
@@ -438,7 +493,12 @@ print(cart)              # ['Apples', 'Bread', 'Eggs', 'Butter']
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · list — Top and Bottom
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 `scores = [78, 92, 85, 96, 70, 88, 91, 76, 99, 83]`. Get the top 3 scores and the bottom 3 scores. Do not modify the original list.
@@ -474,7 +534,12 @@ print(scores)        # unchanged
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · list — Deduplicate (Order Preserved)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 Deduplicate `[1, 2, 2, 3, 3, 3, 4]` while preserving the original order. You cannot use `set()` directly (it does not guarantee order).
@@ -511,7 +576,12 @@ print(seen)   # [1, 2, 3, 4]
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · list — Flatten (Interview)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 Flatten `[[1, 2], [3, 4], [5, 6]]` into `[1, 2, 3, 4, 5, 6]` using a single list comprehension.
@@ -545,7 +615,12 @@ print(flat)   # [1, 2, 3, 4, 5, 6]
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · list — Common Elements (Interview)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 `a = [1, 2, 3, 4, 5]`, `b = [3, 4, 5, 6, 7]`. Find the elements that appear in both lists — without using `set`.

@@ -30,6 +30,9 @@
 <a id="q1"></a>
 ### Q1 · LRU Cache — OrderedDict Implementation
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 🟢 Easy
 
 **Problem:** Implement an LRU Cache using Python's `OrderedDict`. Support `get(key)` and `put(key, value)`. Both operations must run in O(1). When the cache is full, evict the least recently used entry.
@@ -95,6 +98,9 @@ print("LRU OrderedDict: passed")
 
 <a id="q2"></a>
 ### Q2 · LRU Cache — What Gets Evicted
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 🟢 Easy
 
@@ -168,6 +174,9 @@ print("Key 2 was evicted. Correct.")
 
 <a id="q3"></a>
 ### Q3 · LRU Cache — Move to MRU on Get AND Put
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 🟢 Easy
 
@@ -252,6 +261,9 @@ print("Bug fixed. get() and put() both call move_to_end.")
 
 <a id="q4"></a>
 ### Q4 · LRU Cache — Doubly Linked List Implementation
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 🟢 Easy
 
@@ -338,6 +350,9 @@ print("LRU DLL: passed")
 
 <a id="q5"></a>
 ### Q5 · LFU Cache — Frequency Bucket Structure
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 🟢 Easy
 
@@ -436,6 +451,9 @@ print("LFU structure: passed")
 <a id="q6"></a>
 ### Q6 · Token Bucket — Allow Burst Traffic
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 🟢 Easy
 
 **Problem:** Implement a `TokenBucket` rate limiter with `capacity` (max tokens) and `rate` (tokens/second). Each call to `allow()` returns `True` if a request is permitted (and consumes one token), `False` otherwise. The bucket refills over time at the given rate.
@@ -496,6 +514,9 @@ print("Token bucket: burst of 5 allowed, 6th denied.")
 
 <a id="q7"></a>
 ### Q7 · LFU Cache — Correct Eviction with min_freq
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 🟡 Medium
 
@@ -606,6 +627,9 @@ print("LFU with min_freq fix: passed")
 <a id="q8"></a>
 ### Q8 · LFU Cache — LRU vs LFU on Same Access Pattern
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Given this access pattern on a cache with capacity 2, show what each policy evicts when key `"C"` is inserted.
@@ -684,6 +708,9 @@ print("Conclusion: LFU is better when access frequency matters more than recency
 <a id="q9"></a>
 ### Q9 · Sliding Window Rate Limiter
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Implement a sliding window log rate limiter. It allows at most `limit` requests per `window_seconds`. Unlike a fixed window, it uses exact timestamps — a request at `t=0.9s` and one at `t=1.1s` are 0.2s apart, both within any window of size >= 0.2s.
@@ -747,6 +774,9 @@ print("Sliding window: 3 allowed, 4th denied correctly.")
 
 <a id="q10"></a>
 ### Q10 · Leaky Bucket vs Token Bucket Trade-offs
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 🟡 Medium
 
@@ -835,6 +865,9 @@ print("Token: burst of 5 allowed, 6th denied.")
 <a id="q11"></a>
 ### Q11 · Caching Strategy — Cache-Aside, Write-Through, Write-Back
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Describe the three main caching write strategies. For each one, write a pseudocode implementation of a `write(key, value)` operation that shows the difference. Then name one production use case where each strategy is preferred.
@@ -920,6 +953,9 @@ print("Write-Back   | Cache only, async DB | Eventual    | Fastest     | Data lo
 <a id="q12"></a>
 ### Q12 · Cache Eviction Policies — LRU, LFU, FIFO, Random
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Four cache eviction policies are listed below. For each access pattern, identify which policy gives the best hit rate and briefly explain why.
@@ -994,6 +1030,9 @@ for pattern, recommendation in policy_guide.items():
 
 <a id="q13"></a>
 ### Q13 · Consistent Hashing — Ring with Virtual Nodes
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 🟡 Medium
 
@@ -1072,6 +1111,9 @@ print("Consistent hashing: ~25% keys moved as expected.")
 <a id="q14"></a>
 ### Q14 · Consistent Hashing — Why Virtual Nodes
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** A consistent hash ring with 3 physical servers (one position each) produces this load distribution on 10,000 keys:
@@ -1146,6 +1188,9 @@ for vnodes in [1, 10, 50, 150]:
 <a id="q15"></a>
 ### Q15 · Bloom Filter — Insert and Query
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Implement a Bloom filter with `expected_items` and a target `false_positive_rate`. Use the optimal `m` (bit array size) and `k` (number of hash functions) formulas:
@@ -1219,6 +1264,9 @@ print(f"Bloom filter: m={bf.m} bits, k={bf.k} hash functions.")
 
 <a id="q16"></a>
 ### Q16 · Top-K — Min-Heap of Size K
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1301,6 +1349,9 @@ print(f"Top-2 frequent: {top_k_frequent(words, 2)}")  # ['is', 'the'] or ['is', 
 <a id="q17"></a>
 ### Q17 · Bloom Filter — Optimal k and False Positive Rate
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 🟠 Hard
 
 **Problem:** Demonstrate empirically how the number of hash functions `k` affects the false positive rate. For a fixed bit array of size `m=100,000` and `n=10,000` inserted items, measure the false positive rate for `k = 1, 3, 7, 10, 20`.
@@ -1379,6 +1430,9 @@ for k in k_values:
 <a id="q18"></a>
 ### Q18 · Consistent Hashing — Keys Moved on Server Add/Remove
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 🟠 Hard
 
 **Problem:** Prove empirically that consistent hashing moves only ~K/N keys when a server is added or removed, while naive modulo hashing moves ~(N-1)/N keys.
@@ -1450,6 +1504,9 @@ assert 10 < ch_pct < 40, "Consistent hashing should move ~25%"
 
 <a id="q19"></a>
 ### Q19 · LFU Cache — min_freq Reset Bug
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1593,6 +1650,9 @@ print("LFU min_freq bug traced and fixed.")
 
 <a id="q20"></a>
 ### Q20 · System Composition — Rate Limiter + LRU + Consistent Hashing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 🟠 Hard
 

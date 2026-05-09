@@ -25,7 +25,6 @@
 
 ## Q1 🟢 · Create and activate — venv creation commands
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 Write the exact commands to create a venv called `env`, activate it on macOS/Linux, and verify it's active.
 
@@ -62,7 +61,6 @@ Note: convention is `.venv` (hidden) not `env`, but `env` is perfectly valid. Th
 
 ## Q2 🟢 · Requirements freeze — capturing and reproducing environments
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 What does `pip freeze > requirements.txt` do? When would you run it? Write the command to recreate the env on another machine.
 
@@ -97,7 +95,6 @@ This installs the exact same versions, making the environment reproducible. With
 
 ## Q3 🟢 · Which python — confirming you're in the venv
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 After activating a venv, which command confirms you're using the venv's Python (not the system one)?
 
@@ -134,7 +131,6 @@ If you see `/usr/bin/python3` or `/opt/homebrew/bin/python3` — the venv is not
 
 ## Q4 🟡 · requirements.txt — installing and upgrading selectively
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 You have a `requirements.txt` with `requests==2.28.0` and `flask`. Write the command to install from it, then upgrade only `flask`.
 
@@ -169,7 +165,6 @@ Important: `pip install --upgrade flask` upgrades flask and its dependencies, bu
 
 ## Q5 🟡 · pip install -e — editable installs
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 What does `pip install -e .` do? When would you use it in your own project?
 
@@ -208,7 +203,6 @@ python -c "import mypackage"   # picks up live source changes
 
 ## Q6 🟡 · venv structure — what's inside and how Python finds packages
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 Describe what's in `venv/lib/python3.11/site-packages/` and how Python finds packages there via `sys.path`.
 
@@ -254,7 +248,6 @@ Python walks `sys.path` left to right and returns the first match. The venv's si
 
 ## Q7 🟡 · .gitignore — what to exclude and why
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 What should you add to `.gitignore` for a venv? Why should you never commit the venv directory?
 
@@ -300,7 +293,6 @@ venv.bak/
 
 ## Q8 🟡 · pyproject.toml basics — minimal project spec
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 Write a minimal `pyproject.toml` for a project named "myapp" with Python ≥3.11 and two dependencies: `requests` and `pydantic`.
 
@@ -353,7 +345,6 @@ Install dev deps with: `pip install -e ".[dev]"`
 
 ## Q9 🟡 · Diagnose ModuleNotFoundError — 3 causes and fixes
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 A script raises `ModuleNotFoundError: No module named 'requests'` even though you pip-installed it. List 3 reasons this happens and how to diagnose each.
 
@@ -423,7 +414,6 @@ pip show requests   # compare Location: path to sys.path entries above
 
 ## Q10 🟠 · poetry workflow — dependency management commands
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 Write the sequence of `poetry` commands to: init a new project, add `fastapi` as a dependency, add `pytest` as a dev dependency, and run tests.
 
@@ -475,7 +465,6 @@ poetry env info         # show venv location and Python version
 
 ## Q11 🟠 · pyenv — version management vs isolation
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 Explain what pyenv does vs what venv does. Write the commands to install Python 3.12 via pyenv and set it as the local version for a project.
 
@@ -542,7 +531,6 @@ source .venv/bin/activate
 
 ## Q12 🟠 · Capstone — new developer onboarding README
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 You're onboarding a new developer to your project. Write the complete README "Setup" section: clone, create venv, install deps, set env vars, run tests.
 

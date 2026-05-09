@@ -8,26 +8,30 @@
 
 | # | Concept | Difficulty |
 |---|---------|-----------|
-| Q1 | Run cProfile on a function | 🟢 Basic |
-| Q2 | Read pstats output: tottime vs cumtime | 🟢 Basic |
-| Q3 | Sort pstats by cumtime, show top 5 | 🟡 Intermediate |
-| Q4 | timeit: benchmark list comprehension vs for loop | 🟡 Intermediate |
-| Q5 | timeit: use setup param to import before timing | 🟡 Intermediate |
-| Q6 | timeit: why use min() not mean() | 🟡 Intermediate |
-| Q7 | @profile with line_profiler | 🟡 Intermediate |
-| Q8 | memory_profiler: trace peak memory of a function | 🟡 Intermediate |
-| Q9 | Write a context manager that profiles any block | 🟠 Advanced |
-| Q10 | Interpret a snakeviz flamegraph | 🟠 Advanced |
-| Q11 | Use tracemalloc to find a memory leak | 🟡 Intermediate |
-| Q12 | Write a decorator that logs timing + memory | 🟠 Advanced |
+| [Q1](#q1) | Run cProfile on a function | 🟢 Basic |
+| [Q2](#q2) | Read pstats output: tottime vs cumtime | 🟢 Basic |
+| [Q3](#q3) | Sort pstats by cumtime, show top 5 | 🟡 Intermediate |
+| [Q4](#q4) | timeit: benchmark list comprehension vs for loop | 🟡 Intermediate |
+| [Q5](#q5) | timeit: use setup param to import before timing | 🟡 Intermediate |
+| [Q6](#q6) | timeit: why use min() not mean() | 🟡 Intermediate |
+| [Q7](#q7) | @profile with line_profiler | 🟡 Intermediate |
+| [Q8](#q8) | memory_profiler: trace peak memory of a function | 🟡 Intermediate |
+| [Q9](#q9) | Write a context manager that profiles any block | 🟠 Advanced |
+| [Q10](#q10) | Interpret a snakeviz flamegraph | 🟠 Advanced |
+| [Q11](#q11) | Use tracemalloc to find a memory leak | 🟡 Intermediate |
+| [Q12](#q12) | Write a decorator that logs timing + memory | 🟠 Advanced |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · Run cProfile on a Function 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write a function `compute(n)` that does `sum(i*i for i in range(n))`. Use `cProfile.run()` to profile a call with `n=100_000`. Print the output sorted by cumulative time.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -51,11 +55,15 @@ cProfile.run("compute(100_000)", sort="cumulative")
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Read pstats Output: tottime vs cumtime 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Given a profile of a function that calls helper functions, explain: which column tells you where the CPU is actually burned (excluding callees), and which tells you the cost of the whole call tree?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -81,11 +89,15 @@ Think about "inside only" vs "inside plus everything called from inside".
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Sort pstats by cumtime, Show Top 5 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Profile a function using `cProfile.Profile()` (not `cProfile.run()`). Capture the output to a string using `io.StringIO`. Sort by `cumtime` and show only the top 5 functions.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -119,11 +131,15 @@ print(buf.getvalue())
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · timeit: Benchmark List Comprehension vs for Loop 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Use `timeit.repeat()` to compare building a list of squares two ways: list comprehension vs manual for loop appending. Use `repeat=5, number=10_000`. Report the best time for each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -153,11 +169,15 @@ print(f"For loop:  {loop/10_000*1e6:.2f} µs/call")
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · timeit: Use setup Param to Import Before Timing 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Benchmark `json.dumps({"key": "value"})` using `timeit.timeit()`. The `import json` must go in the `setup` parameter, not in the `stmt`. Explain why.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -183,11 +203,15 @@ print(f"{t / 100_000 * 1e6:.2f} µs per call")
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · timeit: Why Use min() Not mean() 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 You run `timeit.repeat("sum(range(1000))", repeat=7, number=10_000)` and get results: `[0.21, 0.22, 0.31, 0.20, 0.22, 0.45, 0.21]`. Which value do you report, and why is the 0.45 not representative?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -220,11 +244,15 @@ print(f"Best: {best:.3f}s = {best/10_000*1e6:.2f} µs/call")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · @profile with line_profiler 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a function `process(data)` that filters even numbers and squares them. Add the `@profile` decorator for `line_profiler`. Show the command to run it with `kernprof` and explain what the output columns mean.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -263,11 +291,15 @@ Output columns:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · memory_profiler: Trace Peak Memory of a Function 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write a function that builds a large list of floats, then sorts it. Decorate it with `@profile` from `memory_profiler`. Show how to run it and what the output tells you.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -303,11 +335,15 @@ Output columns:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Context Manager That Profiles Any Block 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write a context manager `profile_block(label)` using `@contextmanager` that profiles any code block inside a `with` statement. It should print the top 5 functions sorted by `tottime` when the block exits.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -345,11 +381,15 @@ with profile_block("my operation"):
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Interpret a snakeviz Flamegraph 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 A snakeviz icicle chart shows: the top-level call `main()` takes 8.2s total. Inside it, `load_data()` occupies 70% of the width. Inside `load_data()`, `json.loads()` takes 60% of its width. Where is the real bottleneck and what would you investigate?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -382,11 +422,15 @@ Width = cumulative time. Follow the widest box down the call tree to find the le
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Use tracemalloc to Find a Memory Leak 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 You suspect a function `accumulate(data)` is leaking memory. Use `tracemalloc` to take a snapshot before and after 10 calls, then print the top 3 lines by memory growth.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>
@@ -424,11 +468,15 @@ for stat in top_diff[:3]:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Decorator That Logs Timing and Memory 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Write a decorator `@timed_and_traced` that wraps any function and prints: elapsed wall time in ms, and peak memory increment during the call in KiB. Use `time.perf_counter` for timing and `tracemalloc` for memory.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>💡 Hint</summary>

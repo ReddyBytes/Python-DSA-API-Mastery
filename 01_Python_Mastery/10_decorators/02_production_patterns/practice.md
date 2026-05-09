@@ -4,9 +4,33 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | @timed — Log execution time with perf_counter | 🟢 |
+| [Q2](#q2) | @logged — Log name, args, and return value | 🟢 |
+| [Q3](#q3) | @retry — Fixed delay between attempts | 🟡 |
+| [Q4](#q4) | @retry backoff — Exponential delay with jitter | 🟡 |
+| [Q5](#q5) | @circuit_breaker — States and basic implementation | 🟡 |
+| [Q6](#q6) | @validate_types — Enforce type annotations | 🟡 |
+| [Q7](#q7) | @require_auth — Role-based access control | 🟡 |
+| [Q8](#q8) | @deprecated — Emit DeprecationWarning with migration hint | 🟡 |
+| [Q9](#q9) | @ttl_cache — Cache with automatic expiry | 🟡 |
+| [Q10](#q10) | @rate_limit — Sliding window enforcer | 🟡 |
+| [Q11](#q11) | @timeout — Raise TimeoutError after N seconds | 🟠 |
+| [Q12](#q12) | Capstone — @resilient combining retry + circuit breaker + timeout | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 🟢 · @timed — Log execution time with perf_counter
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 Write a `@timed` decorator that prints `"func_name took X.XXXs"` using `time.perf_counter()` for high-resolution timing. The message should still appear if the function raises an exception (log the time, then re-raise).
 
@@ -48,9 +72,13 @@ slow_add(2, 3)   # slow_add took 0.100s
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · @logged — Log name, args, and return value
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 Write a `@logged` decorator that prints:
 1. `"Calling func_name with args=(...) kwargs={...}"` before the call
@@ -89,9 +117,13 @@ add(3, 4)
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · @retry — Fixed delay between attempts
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 Write `@retry(max_attempts=3, delay=1.0)` that retries the function up to `max_attempts` times with a fixed `delay` (seconds) between attempts. If all attempts fail, raise the last exception.
 
@@ -140,9 +172,13 @@ print(flaky())   # "ok" after 3 attempts
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · @retry backoff — Exponential delay with jitter
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 Enhance `@retry` to use exponential backoff: the wait doubles after each failure. Add a `jitter` parameter (e.g. `0.1`) that adds a random offset between 0 and `jitter` seconds to each wait. Signature: `@retry(max_attempts=5, delay=0.5, backoff=2.0, jitter=0.1)`.
 
@@ -182,9 +218,13 @@ Wait sequence for `delay=0.5, backoff=2.0`: ~0.5s → ~1.0s → ~2.0s → ~4.0s.
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · @circuit_breaker — States and basic implementation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 Explain the three circuit breaker states in your own words, then implement a `CircuitBreaker` class that:
 - Tracks `failure_count` and opens the circuit after `failure_threshold` failures
@@ -250,9 +290,13 @@ class CircuitBreaker:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · @validate_types — Enforce type annotations
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 Write `@validate_types` that reads a function's `__annotations__`, binds the call arguments using `inspect.signature`, and raises `TypeError` with a clear message if any annotated argument receives the wrong type. Skip the `return` annotation. Skip unannotated parameters.
 
@@ -298,9 +342,13 @@ create_order("1", 9.99)   # TypeError: 'user_id' expected int, got str
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · @require_auth — Role-based access control
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 Write `@require_auth(roles=["admin"])` that checks a `current_user` object (passed as a context variable or as the first argument — your choice). Raise `PermissionError` if the user is `None` (unauthenticated) or if their role is not in the allowed roles list.
 
@@ -348,9 +396,13 @@ delete_user(42)                        # PermissionError: authentication require
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · @deprecated — Emit DeprecationWarning with migration hint
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 Write `@deprecated(reason="...", replacement="...")` that emits a `DeprecationWarning` on every call. The warning message should include the function name, the reason, and the replacement name. Use `stacklevel=2` so the warning points to the caller's line, not inside the decorator.
 
@@ -396,9 +448,13 @@ with warnings.catch_warnings(record=True) as w:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · @ttl_cache — Cache with automatic expiry
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 Write `@ttl_cache(seconds=60)` that caches function results and returns the cached value on subsequent calls — but only if the entry is younger than `seconds`. After expiry, the function is called again and the cache is refreshed. Build a hashable key from `args` and `kwargs`.
 
@@ -451,9 +507,13 @@ expensive(5)   # call_count = 2 (expired)
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · @rate_limit — Sliding window enforcer
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 Write `@rate_limit(max_calls=10, period=1.0)` using a sliding window: keep a list of timestamps of recent calls, discard those older than `period`, and raise `RuntimeError` if the remaining count is at or above `max_calls`. Make it thread-safe with a `threading.Lock`.
 
@@ -502,9 +562,13 @@ ping()   # RuntimeError: rate limit 3/1.0s exceeded
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · @timeout — Raise TimeoutError after N seconds
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 Write `@timeout(seconds=5)` with two implementations:
 1. POSIX version using `signal.SIGALRM` (Linux/Mac only)
@@ -569,9 +633,13 @@ except TimeoutError as e:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Capstone — @resilient combining retry + circuit breaker + timeout
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 Build `@resilient(retries=3, circuit_break_after=5, timeout=10)` that combines all three patterns:
 - Wraps the function with `@timeout` first (innermost)

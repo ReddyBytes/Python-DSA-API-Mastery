@@ -2,22 +2,44 @@
 
 | Q | Difficulty | Topic |
 |---|-----------|-------|
-| [Q1](#q1--basic-dataclass) | 🟢 | Basic `@dataclass` with defaults |
-| [Q2](#q2--frozen) | 🟢 | `frozen=True` — make immutable |
-| [Q3](#q3--default-factory) | 🟡 | `field()` with `default_factory` |
-| [Q4](#q4--post_init) | 🟡 | `__post_init__` — derive fields |
-| [Q5](#q5--ordering) | 🟡 | `order=True` — sortable instances |
-| [Q6](#q6--classvar-and-initvar) | 🟡 | `ClassVar` and `InitVar` |
-| [Q7](#q7--inheritance) | 🟡 | Subclass a dataclass |
-| [Q8](#q8--slots) | 🟠 | `slots=True` — memory savings |
-| [Q9](#q9--asdict-and-astuple) | 🟠 | `asdict()` and `astuple()` |
-| [Q10](#q10--capstone) | 🟠 | Capstone: config system with validation |
+| [Q1](#q1) | 🟢 | Basic `@dataclass` with defaults |
+| [Q2](#q2) | 🟢 | `frozen=True` — make immutable |
+| [Q3](#q3) | 🟡 | `field()` with `default_factory` |
+| [Q4](#q4) | 🟡 | `__post_init__` — derive fields |
+| [Q5](#q5) | 🟡 | `order=True` — sortable instances |
+| [Q6](#q6) | 🟡 | `ClassVar` and `InitVar` |
+| [Q7](#q7) | 🟡 | Subclass a dataclass |
+| [Q8](#q8) | 🟠 | `slots=True` — memory savings |
+| [Q9](#q9) | 🟠 | `asdict()` and `astuple()` |
+| [Q10](#q10) | 🟠 | Capstone: config system with validation |
 
 ---
+
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | basics — basic `@dataclass` with 3 fields and default values | 🟢 |
+| [Q2](#q2) | immutability — `frozen=True` — make immutable, try to modify | 🟢 |
+| [Q3](#q3) | defaults — `field()` with `default_factory` for mutable defaults | 🟡 |
+| [Q4](#q4) | computed fields — `__post_init__` to derive a field from others | 🟡 |
+| [Q5](#q5) | sorting — `order=True` to sort a list of dataclass instances | 🟡 |
+| [Q6](#q6) | special fields — `ClassVar` and `InitVar` | 🟡 |
+| [Q7](#q7) | inheritance — subclass a dataclass | 🟡 |
+| [Q8](#q8) | memory — `slots=True` memory savings (Python 3.10+) | 🟠 |
+| [Q9](#q9) | conversion — `asdict()` and `astuple()` convert to plain Python types | 🟠 |
+| [Q10](#q10) | capstone — dataclass-based config system with validation | 🟠 |
+
+---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · basics — basic `@dataclass` with 3 fields and default values
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Create a `Product` dataclass with `name: str`, `price: float`, and `in_stock: bool = True`. Demonstrate auto-generated `__init__`, `__repr__`, and `__eq__`.
 
@@ -54,9 +76,13 @@ print(p3.in_stock)  # False
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · immutability — `frozen=True` — make immutable, try to modify
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Create a `Coordinate` dataclass with `lat: float` and `lon: float`, frozen. Demonstrate that it's hashable (can be in a set), and that attempting to modify it raises `FrozenInstanceError`.
 
@@ -96,9 +122,13 @@ except Exception as e:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · defaults — `field()` with `default_factory` for mutable defaults
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Create a `Task` dataclass with `title: str`, `tags: list[str]` defaulting to an empty list, and `metadata: dict` defaulting to an empty dict. Show that each instance gets its own list/dict (not shared).
 
@@ -137,9 +167,13 @@ print(t1.tags is t2.tags)   # False
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · computed fields — `__post_init__` to derive a field from others
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Create a `Rectangle` dataclass with `width` and `height`. Use `__post_init__` to compute `area` and `perimeter` as derived fields (use `field(init=False)`). Validate that width and height are positive.
 
@@ -183,9 +217,13 @@ except ValueError as e:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · sorting — `order=True` to sort a list of dataclass instances
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Create a `Task` dataclass with `priority: int`, `created_at: float`, and `title: str`. Use `order=True`. Mark `title` with `field(compare=False)` so sorting ignores it. Sort a list of tasks.
 
@@ -226,9 +264,13 @@ for t in sorted(tasks):
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · special fields — `ClassVar` and `InitVar`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Create an `Employee` dataclass with `name: str`, `salary: float`, a `ClassVar[str]` called `company` (shared class-level attribute), and an `InitVar[float]` called `tax_rate`. Compute `net_salary` in `__post_init__` using `tax_rate`.
 
@@ -272,9 +314,13 @@ print(hasattr(e1, 'tax_rate'))  # False
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · inheritance — subclass a dataclass
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Create a base `Animal` dataclass with `name: str` and `weight: float`. Create a `Dog` subclass that adds `breed: str`. Verify that the auto-generated `__init__` includes all fields from both classes.
 
@@ -315,9 +361,13 @@ print(inspect.signature(Dog.__init__))   # (self, name: str, weight: float, bree
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟠 · memory — `slots=True` memory savings (Python 3.10+)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Create two versions of a `Particle` dataclass — with and without `slots=True`. Compare memory usage for 100,000 instances using `sys.getsizeof`.
 
@@ -369,9 +419,13 @@ except TypeError:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟠 · conversion — `asdict()` and `astuple()` convert to plain Python types
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Create nested dataclasses `Address` (street, city, country) and `Person` (name, age, address). Use `asdict()` to convert to a JSON-serializable dict and `astuple()` for tuple form. Also demonstrate `replace()`.
 
@@ -422,9 +476,13 @@ print(person.age)    # 30 — original unchanged
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · capstone — dataclass-based config system with validation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Build a `ServerConfig` frozen dataclass with `host: str`, `port: int`, `debug: bool = False`, and `allowed_origins: tuple[str, ...] = ()`. Validate in `__post_init__` that port is 1-65535 and host is non-empty. Add a `with_port(new_port)` method using `replace()`. Make it JSON-serializable via `asdict()`.
 

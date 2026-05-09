@@ -8,49 +8,53 @@
 
 | # | Difficulty | Chapter | Concept |
 |---|---|---|---|
-| Q1 | 🟢 | Threading | Thread creation and join |
-| Q2 | 🟢 | Threading | GIL: I/O-bound vs CPU-bound |
-| Q3 | 🟡 | Threading | ThreadPoolExecutor basics |
-| Q4 | 🟡 | Threading | Lock: protect shared counter |
-| Q5 | 🟡 | Threading | Queue: producer-consumer |
-| Q6 | 🟡 | Threading | threading.Event: stop signal |
-| Q7 | 🟢 | Multiprocessing | mp.Process basics |
-| Q8 | 🟢 | Multiprocessing | ProcessPoolExecutor: CPU work |
-| Q9 | 🟡 | Multiprocessing | __name__ guard requirement |
-| Q10 | 🟡 | Multiprocessing | Pool.map and Pool.starmap |
-| Q11 | 🟡 | Multiprocessing | mp.Queue: cross-process IPC |
-| Q12 | 🟡 | Multiprocessing | mp.Value shared counter |
-| Q13 | 🟢 | Asyncio | Basic coroutine + asyncio.run() |
-| Q14 | 🟢 | Asyncio | asyncio.sleep vs time.sleep |
-| Q15 | 🟡 | Asyncio | asyncio.gather: concurrent fetches |
-| Q16 | 🟡 | Asyncio | asyncio.create_task |
-| Q17 | 🟡 | Asyncio | asyncio.wait_for: timeout |
-| Q18 | 🟡 | Asyncio | async with context manager |
-| Q19 | 🟡 | Asyncio | Async generator + async for |
-| Q20 | 🟡 | concurrent.futures | as_completed: arrival order |
-| Q21 | 🟡 | concurrent.futures | Future API: result, exception, done |
-| Q22 | 🟡 | concurrent.futures | Thread vs Process executor swap |
-| Q23 | 🟡 | concurrent.futures | map with timeout |
-| Q24 | 🟡 | concurrent.futures | Exception propagation from future |
-| Q25 | 🟡 | Decision | Choosing the right concurrency model |
-| Q26 | 🟡 | Decision | run_in_executor: bridge sync to async |
-| Q27 | 🟠 | Advanced | asyncio.Semaphore: rate limiting |
-| Q28 | 🟠 | Advanced | Deadlock: diagnose and prevent |
-| Q29 | 🟡 | Advanced | Daemon thread vs non-daemon |
-| Q30 | 🟡 | Advanced | TaskGroup (Python 3.11+) |
-| Q31 | 🟠 | Capstone | Thread-safe counter with Lock |
-| Q32 | 🟠 | Capstone | Parallel prime finder |
-| Q33 | 🟠 | Capstone | Async batch URL fetcher |
-| Q34 | 🟠 | Capstone | Mixed: CPU workers + async I/O |
-| Q35 | 🟠 | Capstone | Concurrency decision tree |
+| [Q1](#q1) | 🟢 | Threading | Thread creation and join |
+| [Q2](#q2) | 🟢 | Threading | GIL: I/O-bound vs CPU-bound |
+| [Q3](#q3) | 🟡 | Threading | ThreadPoolExecutor basics |
+| [Q4](#q4) | 🟡 | Threading | Lock: protect shared counter |
+| [Q5](#q5) | 🟡 | Threading | Queue: producer-consumer |
+| [Q6](#q6) | 🟡 | Threading | threading.Event: stop signal |
+| [Q7](#q7) | 🟢 | Multiprocessing | mp.Process basics |
+| [Q8](#q8) | 🟢 | Multiprocessing | ProcessPoolExecutor: CPU work |
+| [Q9](#q9) | 🟡 | Multiprocessing | __name__ guard requirement |
+| [Q10](#q10) | 🟡 | Multiprocessing | Pool.map and Pool.starmap |
+| [Q11](#q11) | 🟡 | Multiprocessing | mp.Queue: cross-process IPC |
+| [Q12](#q12) | 🟡 | Multiprocessing | mp.Value shared counter |
+| [Q13](#q13) | 🟢 | Asyncio | Basic coroutine + asyncio.run() |
+| [Q14](#q14) | 🟢 | Asyncio | asyncio.sleep vs time.sleep |
+| [Q15](#q15) | 🟡 | Asyncio | asyncio.gather: concurrent fetches |
+| [Q16](#q16) | 🟡 | Asyncio | asyncio.create_task |
+| [Q17](#q17) | 🟡 | Asyncio | asyncio.wait_for: timeout |
+| [Q18](#q18) | 🟡 | Asyncio | async with context manager |
+| [Q19](#q19) | 🟡 | Asyncio | Async generator + async for |
+| [Q20](#q20) | 🟡 | concurrent.futures | as_completed: arrival order |
+| [Q21](#q21) | 🟡 | concurrent.futures | Future API: result, exception, done |
+| [Q22](#q22) | 🟡 | concurrent.futures | Thread vs Process executor swap |
+| [Q23](#q23) | 🟡 | concurrent.futures | map with timeout |
+| [Q24](#q24) | 🟡 | concurrent.futures | Exception propagation from future |
+| [Q25](#q25) | 🟡 | Decision | Choosing the right concurrency model |
+| [Q26](#q26) | 🟡 | Decision | run_in_executor: bridge sync to async |
+| [Q27](#q27) | 🟠 | Advanced | asyncio.Semaphore: rate limiting |
+| [Q28](#q28) | 🟠 | Advanced | Deadlock: diagnose and prevent |
+| [Q29](#q29) | 🟡 | Advanced | Daemon thread vs non-daemon |
+| [Q30](#q30) | 🟡 | Advanced | TaskGroup (Python 3.11+) |
+| [Q31](#q31) | 🟠 | Capstone | Thread-safe counter with Lock |
+| [Q32](#q32) | 🟠 | Capstone | Parallel prime finder |
+| [Q33](#q33) | 🟠 | Capstone | Async batch URL fetcher |
+| [Q34](#q34) | 🟠 | Capstone | Mixed: CPU workers + async I/O |
+| [Q35](#q35) | 🟠 | Capstone | Concurrency decision tree |
 
 ---
 
 ## ## Threading Basics (Q1–Q6)
 
+<a id="q1"></a>
+
 ### Q1 🟢 · Threading — Thread creation, start, and join
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Write a `task(name, delay)` function that prints start/done messages. Create 3 threads with delays 0.3s, 0.2s, 0.1s. Start all three before joining any. Show total time is ~0.3s not 0.6s.
 
@@ -85,9 +89,13 @@ print(f"Total: {time.perf_counter()-start:.2f}s")  # ~0.3s
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · GIL — I/O-bound threads speed up, CPU-bound don't
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Demonstrate the GIL effect. Run `io_work()` (10x `time.sleep(0.01)`) sequentially and in 2 threads. Then run `cpu_work()` (sum-of-squares loop) sequentially and in 2 threads. Show threads help I/O work but not CPU work.
 
@@ -129,9 +137,13 @@ print(f"CPU  sequential={seq_cpu:.2f}s threaded={thr_cpu:.2f}s")  # no speedup
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · ThreadPoolExecutor — submit, map, context manager
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Use `ThreadPoolExecutor(max_workers=3)` to run `process(n)` (returns `n**2` after sleeping `n*0.01s`) over `[1,2,3,4,5]`. Collect results with `map()`. Then repeat with `submit()` and print results with `future.result()`.
 
@@ -168,9 +180,13 @@ print("submit:", results)  # [1, 4, 9, 16, 25]
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · Lock — protect shared counter from race conditions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** 10 threads each increment a shared counter 1000 times. Show it gives wrong results without a lock. Fix with `threading.Lock`.
 
@@ -213,9 +229,13 @@ print(run_threads("safe"))    # always 10000
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · Queue — thread-safe producer-consumer
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Producer puts items 1–5 on `queue.Queue`. Consumer reads until sentinel `None`. Run them in threads. Use `task_done()` and `queue.join()` to confirm all items processed.
 
@@ -258,9 +278,13 @@ print("All items processed")
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · Event — cooperative thread stop signal
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** A worker loops printing "tick" every 0.1s until a `threading.Event` is set. Main thread sets the event after 0.35s. Worker stops cleanly.
 
@@ -297,9 +321,13 @@ t.join()
 
 ## ## Multiprocessing Basics (Q7–Q12)
 
+<a id="q7"></a>
+
 ### Q7 🟢 · Process — mp.Process basics
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Spawn two processes running `worker(n)` (computes sum-of-squares up to n, prints PID). Start both, join both, print exit codes.
 
@@ -330,9 +358,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟢 · ProcessPoolExecutor — parallel CPU work
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Use `ProcessPoolExecutor` to compute `sum(range(n))` for `n in [1M, 2M, 3M, 4M]` in parallel. Print results and elapsed time. Compare to sequential.
 
@@ -365,9 +397,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · Guard — if __name__ == '__main__' requirement
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Write a script that uses `multiprocessing.Pool`. Show the correct placement of the guard. Explain in comments what the `spawn` start method does and why the guard prevents infinite recursion.
 
@@ -392,9 +428,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · Pool — map and starmap
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Use `Pool.map` to square numbers 1–10. Use `Pool.starmap` to compute `pow(base, exp)` for pairs `[(2,3),(3,4),(4,5)]`. Explain why `starmap` is needed for multi-arg functions.
 
@@ -418,9 +458,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · IPC — mp.Queue cross-process
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Child process computes `[n**2 for n in range(5)]` and puts results on `mp.Queue`. Parent collects and prints them.
 
@@ -451,9 +495,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · Shared Memory — mp.Value safe increment
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** 4 processes each increment `mp.Value('i', 0)` by 500 using `mp.Lock`. Verify result is 2000.
 
@@ -482,9 +530,13 @@ if __name__ == '__main__':
 
 ## ## Asyncio Basics (Q13–Q19)
 
+<a id="q13"></a>
+
 ### Q13 🟢 · Coroutine — define and run with asyncio.run()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Write `async def hello(name)` that prints "Hello {name}", awaits 0.1s, prints "Bye {name}", returns "done". Run with `asyncio.run()`.
 
@@ -508,9 +560,13 @@ print(result)
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟢 · Sleep — asyncio.sleep vs time.sleep
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Run 3 tasks of 0.5s each with `asyncio.gather` using `asyncio.sleep`. Total should be ~0.5s. Then replace with `time.sleep` in one task and show it blocks others.
 
@@ -532,9 +588,13 @@ print(f"asyncio.sleep: {time.perf_counter()-start:.2f}s")  # ~0.5s
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟡 · gather — concurrent API fetches
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Three simulated APIs with delays 1.0s, 0.8s, 0.6s. Run sequentially (3 separate awaits) then with `gather`. Print elapsed for both.
 
@@ -566,9 +626,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · create_task — background scheduling
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Create two tasks with `create_task`. Do sync work in between. Then await both. Show total time is ~max(delays).
 
@@ -598,9 +662,13 @@ print(f"{time.perf_counter()-start:.2f}s")  # ~0.4s
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟡 · wait_for — timeout coroutine
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Use `asyncio.wait_for(slow_op(), timeout=0.3)` where `slow_op` takes 1 second. Catch `TimeoutError` and print a message.
 
@@ -627,9 +695,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · async with — async context manager
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Create an `AsyncResource` class with `__aenter__` (prints "opened", awaits 0.01s) and `__aexit__` (prints "closed", awaits 0.01s). Use it with `async with`.
 
@@ -660,9 +732,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟡 · async for — async generator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Write `async def countdown(n)` that yields n, n-1, ..., 1, awaiting 0.05s between each. Consume with `async for` and print each value.
 
@@ -690,9 +766,13 @@ asyncio.run(main())
 
 ## ## concurrent.futures (Q20–Q24)
 
+<a id="q20"></a>
+
 ### Q20 🟡 · as_completed — process in arrival order
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Submit 5 tasks with random delays to `ThreadPoolExecutor`. Use `as_completed` to print each result as it arrives. Show arrival order differs from submission order.
 
@@ -717,9 +797,13 @@ with ThreadPoolExecutor(max_workers=5) as ex:
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟡 · Future API — result, exception, done
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Submit a task that raises `ValueError`. Show `f.exception()` returns the exception without re-raising. Show `f.done()` is True. Show `f.result()` re-raises.
 
@@ -746,9 +830,13 @@ except ValueError as e:
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · Executor Swap — Thread vs Process
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Write code that uses `ThreadPoolExecutor` for I/O work and `ProcessPoolExecutor` for CPU work. Show how swapping executor classes requires changing only one line.
 
@@ -776,9 +864,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟡 · map with timeout
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Use `executor.map(fn, items, timeout=0.5)` where one task takes 1 second. Catch the `TimeoutError` raised when iterating results.
 
@@ -806,9 +898,13 @@ with ThreadPoolExecutor(max_workers=3) as ex:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟡 · Exception propagation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Submit 3 tasks where the middle one raises. Use `as_completed` and `try/except future.result()` to handle the error and continue processing the others.
 
@@ -839,9 +935,13 @@ with ThreadPoolExecutor() as ex:
 
 ## ## Mixed and Advanced (Q25–Q30)
 
+<a id="q25"></a>
+
 ### Q25 🟡 · Decision — choosing the right concurrency model
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** For each scenario, choose the best tool and explain why:
 1. Fetch 100 URLs simultaneously
@@ -872,9 +972,13 @@ with ThreadPoolExecutor() as ex:
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 🟡 · Bridge — run_in_executor in async code
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 **Problem:** Write a synchronous `read_csv(path)` that sleeps 0.2s. Call it from an async function without blocking the event loop. Show another coroutine runs concurrently.
 
@@ -906,9 +1010,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 🟠 · Semaphore — rate-limit async requests
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Fetch 12 URLs with `asyncio.Semaphore(4)` limiting to 4 concurrent. Each "fetch" takes 0.1s. Show total time is ~`ceil(12/4) * 0.1 = 0.3s`.
 
@@ -936,9 +1044,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 🟠 · Deadlock — diagnose and prevent
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 
 **Problem:** Create a deadlock: Thread A holds lock_1, waits for lock_2. Thread B holds lock_2, waits for lock_1. Explain the diagnosis. Show the fix: always acquire locks in the same order.
 
@@ -980,9 +1092,13 @@ print("No deadlock with consistent ordering")
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 🟡 · Daemon — daemon vs non-daemon thread behavior
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 **Problem:** Start a non-daemon thread that sleeps 5 seconds. Show the program waits for it. Then make it daemon — show the program exits immediately without the thread finishing.
 
@@ -1011,9 +1127,13 @@ print("main done — daemon thread killed on exit")
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 🟡 · TaskGroup — structured cancellation (3.11+)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 
 **Problem:** Use `asyncio.TaskGroup` to run 3 tasks. One raises at 0.1s. Show the group cancels the others and raises `ExceptionGroup`.
 
@@ -1049,9 +1169,13 @@ asyncio.run(main())
 
 ## ## Capstone (Q31–Q35)
 
+<a id="q31"></a>
+
 ### Q31 🟠 · Capstone — Thread-safe counter with full test
 
 > 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
+
 
 **Problem:** Build `ThreadSafeCounter` with `increment()`, `decrement()`, `value` property. Run 5 threads each doing 1000 increments and 500 decrements. Verify final value = 5 * (1000 - 500) = 2500.
 
@@ -1087,9 +1211,13 @@ print(c.value)  # 2500
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 🟠 · Capstone — Parallel prime finder
 
 > 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
+
 
 **Problem:** Find all primes below 500,000 using `ProcessPoolExecutor`. Split range into `cpu_count` chunks, find primes in each chunk, merge. Compare to sequential time.
 
@@ -1128,9 +1256,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 🟠 · Capstone — Async batch URL fetcher
 
 > 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
+
 
 **Problem:** Fetch 20 simulated URLs with `asyncio.gather`, semaphore(5), retry on failure (10% failure rate), collect results with `return_exceptions=True`.
 
@@ -1163,9 +1295,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 🟠 · Capstone — Mixed CPU workers and async I/O
 
 > 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
+
 
 **Problem:** From an async context, run 4 CPU-bound tasks (`sum(range(1M))`) using `loop.run_in_executor(ProcessPoolExecutor())`. Simultaneously run 3 async I/O tasks (sleep 0.2s). Show both complete concurrently.
 
@@ -1204,9 +1340,13 @@ asyncio.run(main())
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 🟠 · Capstone — Concurrency decision tree
 
 > 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
+
 
 **Problem:** Write a `choose_executor(task_type, n_tasks, uses_async_lib)` function that returns a recommendation string. Cover: CPU-bound, I/O-bound with sync library, I/O-bound with async library, mixed.
 

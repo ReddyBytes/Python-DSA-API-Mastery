@@ -5,7 +5,32 @@ Each question links to a stub in `practice_local.py` for hands-on solving.
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | `__call__` — Add call_count to decorated function | 🟢 |
+| [Q2](#q2) | `__init__` — RateLimit class decorator | 🟢 |
+| [Q3](#q3) | stateful — Track total AND failed calls separately | 🟡 |
+| [Q4](#q4) | singleton — One instance only | 🟡 |
+| [Q5](#q5) | registry — Plugin registry with register() method | 🟡 |
+| [Q6](#q6) | `@dataclass` basics — Point with auto-methods | 🟡 |
+| [Q7](#q7) | frozen — Config as dict key | 🟡 |
+| [Q8](#q8) | order — Sortable Version | 🟡 |
+| [Q9](#q9) | `field()` — Avoid mutable default trap | 🟡 |
+| [Q10](#q10) | `__post_init__` — Validate after init | 🟡 |
+| [Q11](#q11) | combined — @validated on top of @dataclass | 🟠 |
+| [Q12](#q12) | Capstone — @retry_config with state tracking | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 🟢 · `__call__` — Add call_count to decorated function
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write a class decorator `CountCalls` that wraps any function and exposes a `.call_count` attribute on the wrapper, incremented each time the function is called.
 
@@ -19,7 +44,6 @@ greet("Bob")
 print(greet.call_count)   # 2
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -49,7 +73,12 @@ class CountCalls:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · `__init__` — RateLimit class decorator
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Write a `RateLimit(max_calls, period=1.0)` class decorator. When a decorated function is called more than `max_calls` times within `period` seconds, raise `RuntimeError("Rate limit exceeded")`.
 
@@ -63,7 +92,6 @@ ping()   # ok
 ping()   # RuntimeError: Rate limit exceeded
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -100,7 +128,12 @@ class RateLimit:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · stateful — Track total AND failed calls separately
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Extend the `CallCounter` pattern. Build a `CallTracker` class decorator that stores `total_calls`, `failed_calls`, and a `success_rate` property (float 0.0–1.0). If the wrapped function raises any exception, increment `failed_calls` and re-raise.
 
@@ -120,7 +153,6 @@ print(divide.failed_calls)  # 1
 print(divide.success_rate)  # 0.5
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -161,7 +193,12 @@ class CallTracker:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · singleton — One instance only
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write a `@singleton` function decorator for classes. The first instantiation creates the object; every subsequent call returns the same instance, ignoring new arguments.
 
@@ -177,7 +214,6 @@ print(db1 is db2)    # True
 print(db2.url)       # postgres://localhost/app
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -208,7 +244,12 @@ def singleton(cls):
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · registry — Plugin registry with register() method
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Build a `PluginRegistry` class with a `@PluginRegistry.register("name")` class decorator. The decorator stores the class in an internal dict and returns the class unchanged. Add `get(name)` and `all_names()` class methods.
 
@@ -226,7 +267,6 @@ exp = PluginRegistry.get("pdf")
 print(exp.export("report"))         # PDF: report
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -264,7 +304,12 @@ class PluginRegistry:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · `@dataclass` basics — Point with auto-methods
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Create a `Point(x: float, y: float)` dataclass. Show that `__init__`, `__repr__`, and `__eq__` are auto-generated. Add a `distance_to(other)` method manually.
 
@@ -276,7 +321,6 @@ print(p1 == Point(3.0, 4.0)) # True
 print(p1.distance_to(p2))    # 5.0
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -305,7 +349,12 @@ class Point:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · frozen — Config as dict key
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Create a `Config(host: str, port: int, debug: bool = False)` dataclass with `frozen=True`. Demonstrate that it is immutable and can be used as a dictionary key.
 
@@ -319,7 +368,6 @@ print(lookup[Config("prod", 443)])   # production
 cfg.host = "other"   # FrozenInstanceError
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -345,7 +393,12 @@ class Config:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · order — Sortable Version
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Create a `Version(major: int, minor: int, patch: int = 0)` dataclass with `order=True` and `frozen=True`. Show it can be sorted and compared with `>`.
 
@@ -355,7 +408,6 @@ print(sorted(versions))   # [Version(2,0,5), Version(2,1,3), Version(3,0,0)]
 print(Version(2, 1) > Version(2, 0))   # True
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -381,7 +433,12 @@ class Version:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · `field()` — Avoid mutable default trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Create a `Playlist(name: str, tracks: list)` dataclass where `tracks` defaults to an empty list. Show that each instance gets its own list (not shared). Use `field(default_factory=list)`.
 
@@ -393,7 +450,6 @@ print(p1.tracks)   # ["Song A"]
 print(p2.tracks)   # []  — not affected
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -418,7 +474,12 @@ class Playlist:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · `__post_init__` — Validate after init
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Create a `Coordinate(x: float, y: float)` dataclass that rejects negative values. Use `__post_init__` to raise `ValueError` if either coordinate is negative.
 
@@ -427,7 +488,6 @@ Coordinate(3.0, 4.0)    # ok
 Coordinate(-1.0, 2.0)   # ValueError: x must be non-negative, got -1.0
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -457,7 +517,12 @@ class Coordinate:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · combined — @validated on top of @dataclass
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write a `@validated` class decorator that hooks into `__post_init__` to call a `validate()` method (if present) after `@dataclass` generates `__init__`. Apply both to a `Product(name: str, price: float)` that validates price is positive.
 
@@ -476,7 +541,6 @@ Product("Widget", 9.99)     # ok
 Product("Free", 0.0)        # ValueError: Price must be positive, got 0.0
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details>
 <summary>Hint</summary>
@@ -518,7 +582,12 @@ class Product:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Capstone — @retry_config with state tracking
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Build a `@retry_config(attempts=3, delay=0.0)` class decorator. It should:
 1. Retry the wrapped function up to `attempts` times on any exception
@@ -543,7 +612,6 @@ print(flaky_api.total_calls)    # >= 1
 print(flaky_api.total_retries)  # >= 0
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details>
 <summary>Hint</summary>

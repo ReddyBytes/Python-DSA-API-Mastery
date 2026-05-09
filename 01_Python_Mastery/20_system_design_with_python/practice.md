@@ -8,11 +8,48 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | REST Endpoints — Name REST endpoints for a blog | 🟢 |
+| [Q2](#q2) | HTTP Status Codes — Match operations to status codes | 🟢 |
+| [Q3](#q3) | Offset Pagination — Implement offset pagination | 🟡 |
+| [Q4](#q4) | Cursor Pagination — Implement cursor-based pagination | 🟡 |
+| [Q5](#q5) | API Versioning — Add URL versioning to an endpoint | 🟡 |
+| [Q6](#q6) | Error Envelope — RFC 7807 error response | 🟡 |
+| [Q7](#q7) | Idempotency Key — Prevent duplicate orders | 🟡 |
+| [Q8](#q8) | Rate Limit Headers — Add X-RateLimit-* headers | 🟡 |
+| [Q9](#q9) | Dict TTL Cache — Implement a TTL cache class | 🟢 |
+| [Q10](#q10) | @lru_cache — Memoize Fibonacci | 🟢 |
+| [Q11](#q11) | LRU Cache — OrderedDict LRU | 🟡 |
+| [Q12](#q12) | Cache-Aside — Write cache-aside with mock Redis | 🟡 |
+| [Q13](#q13) | Cache Decorator — @cached(ttl, key_fn) | 🟡 |
+| [Q14](#q14) | Write-Through Cache — Implement write-through update | 🟡 |
+| [Q15](#q15) | Cache Invalidation — Event-driven + TTL combined | 🟡 |
+| [Q16](#q16) | Token Bucket — Implement token bucket | 🟡 |
+| [Q17](#q17) | Sliding Window — Implement sliding window limiter | 🟡 |
+| [Q18](#q18) | Circuit Breaker — 3-state circuit breaker | 🟡 |
+| [Q19](#q19) | Rate Limiter Decorator — @rate_limit decorator | 🟡 |
+| [Q20](#q20) | Retry Backoff — Exponential backoff with jitter | 🟡 |
+| [Q21](#q21) | Connection Pool — queue.Queue-based pool | 🟡 |
+| [Q22](#q22) | SQLAlchemy Pool Config — Configure connection pool | 🟡 |
+| [Q23](#q23) | Celery Task — Background task with Celery | 🟡 |
+| [Q24](#q24) | URL Shortener Design — Design a scalable URL shortener | 🟠 |
+| [Q25](#q25) | End-to-End System — Design a rate-limited cached Python service | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · REST Endpoints — Name REST endpoints for a blog 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Design all CRUD endpoints for a `posts` resource plus nested `comments`. Give HTTP method + URL + success status code for each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Plural nouns. Nested: /posts/{id}/comments. Deep dive: 01_api_design_patterns/theory.md</details>
 
@@ -33,12 +70,16 @@ POST   /posts/{id}/comments 201
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · HTTP Status Codes — Match operations to status codes 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Match each scenario to the correct HTTP status code:
 a) Resource not found | b) Created successfully | c) Input fails validation | d) Duplicate email | e) Not authenticated | f) Authenticated but no permission | g) Rate limit hit
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>404, 201, 422, 409, 401, 403, 429</details>
 
@@ -58,11 +99,15 @@ g) 429 Too Many Requests
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Offset Pagination — Implement offset pagination 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write `paginate(data, offset, limit)` that returns `{data, pagination: {offset, limit, total}}`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>data[offset:offset+limit]; total = len(data)</details>
 
@@ -80,11 +125,15 @@ def paginate(data: list, offset: int = 0, limit: int = 10) -> dict:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Cursor Pagination — Implement cursor-based pagination 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write `paginate_cursor(data, cursor, limit)` where `cursor` is a base64-encoded `{"id": N}`. Return `{data, next_cursor, has_more}`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Decode cursor to find start position. Encode last item id as next_cursor.</details>
 
@@ -113,11 +162,15 @@ def paginate_cursor(data: list, cursor: str = None, limit: int = 10) -> dict:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · API Versioning — Add URL versioning to an endpoint 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Add `/v1/items/{id}` and `/v2/items/{id}` to a FastAPI app. v1 returns flat format; v2 wraps in `{"item": {...}}`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>APIRouter(prefix="/v1"), APIRouter(prefix="/v2"), app.include_router()</details>
 
@@ -143,11 +196,15 @@ app.include_router(v2)
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Error Envelope — RFC 7807 error response 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write `problem_response(status, title, detail)` returning a `JSONResponse` following RFC 7807.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Fields: type, title, status (int), detail</details>
 
@@ -172,11 +229,15 @@ def problem_response(status: int, title: str, detail: str) -> JSONResponse:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Idempotency Key — Prevent duplicate orders 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a `POST /orders` route that uses an `Idempotency-Key` header to prevent double submission. Use a dict as the store.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Check _store[key] before processing. Store result after processing.</details>
 
@@ -204,11 +265,15 @@ def create_order(amount: float, idempotency_key: str = Header(None)):
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Rate Limit Headers — Add X-RateLimit-* headers 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write a FastAPI middleware that adds `X-RateLimit-Limit`, `X-RateLimit-Remaining` headers to every response, and returns 429 with `Retry-After` when limit is exceeded. Use 10 req/min per IP.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Middleware: track timestamps per IP in a defaultdict. Slide the window on each request.</details>
 
@@ -248,11 +313,15 @@ async def rate_limit(request: Request, call_next):
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Dict TTL Cache — Implement a TTL cache class 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write `TTLCache` with `get(key)` and `set(key, value, ttl)`. Expired entries return None.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Store (value, expiry_time). Check time.time() < expiry.</details>
 
@@ -280,11 +349,15 @@ class TTLCache:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · @lru_cache — Memoize Fibonacci 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write `fib(n)` with `@lru_cache`. Print cache info after calling `fib(10)` twice. Then clear and confirm.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>@lru_cache(maxsize=None) for unlimited; .cache_info(), .cache_clear()</details>
 
@@ -308,11 +381,15 @@ print(fib.cache_info())   # currsize=0
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · LRU Cache — OrderedDict LRU 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write `LRUCache(capacity)` with O(1) `get` and `put`. Verify eviction order.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>move_to_end(key) on access; popitem(last=False) to evict LRU</details>
 
@@ -341,11 +418,15 @@ class LRUCache:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Cache-Aside — Write cache-aside with mock Redis 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Write `get_item(item_id)` using cache-aside. Use a dict as mock Redis. Show cache hit on second call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Check cache first. On miss, fetch DB, store in cache with expiry.</details>
 
@@ -371,11 +452,15 @@ def get_item(item_id):
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Cache Decorator — @cached(ttl, key_fn) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Write a reusable `@cached(ttl, key_fn=None)` decorator. Test on a simulated DB call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Closure dict for storage. key_fn(*args) or str(args) as default key.</details>
 
@@ -405,11 +490,15 @@ def cached(ttl: float, key_fn=None):
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Write-Through Cache — Implement write-through update 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Write `update_user(user_id, data)` that writes to both a dict DB and a dict cache simultaneously. Then `get_user(user_id)` serves from cache first.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Write to _db first, then _cache. Read from _cache; on miss, _db → _cache → return.</details>
 
@@ -437,11 +526,15 @@ def get_user(user_id: int):
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Cache Invalidation — Event-driven + TTL combined 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Write `UserStore` with `write(user_id, data)`, `invalidate(user_id)`, and `read(user_id)`. On invalidate, remove from cache. On read, check TTL first.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>invalidate = del _cache[key]. read = TTL check → fall back to DB.</details>
 
@@ -480,11 +573,15 @@ class UserStore:
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Token Bucket — Implement token bucket 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Write `TokenBucket(capacity, refill_rate)` with `consume() -> bool`. Burst of 5 passes; 6th fails; 2 tokens refill after 1 second.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>tokens = min(capacity, tokens + elapsed * rate); if tokens >= 1: tokens -= 1; return True</details>
 
@@ -512,11 +609,15 @@ class TokenBucket:
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Sliding Window — Implement sliding window limiter 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Write `SlidingWindow(max_requests, window_secs)` with `is_allowed() -> bool`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Deque of timestamps. Remove entries older than window on each call.</details>
 
@@ -544,11 +645,15 @@ class SlidingWindow:
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Circuit Breaker — 3-state circuit breaker 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Write `CircuitBreaker(failure_threshold, recovery_timeout)` with `call(func)`. Verify CLOSED → OPEN → HALF_OPEN → CLOSED transitions.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>OPEN: check recovery_timeout elapsed → HALF_OPEN. Success in HALF_OPEN → CLOSED.</details>
 
@@ -588,11 +693,15 @@ class CircuitBreaker:
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · Rate Limiter Decorator — @rate_limit decorator 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Write `@rate_limit(max_calls, period)` that raises `RuntimeError` if limit exceeded. Use sliding window internally.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use a closure deque. Raise RuntimeError with retry_after seconds in message.</details>
 
@@ -624,11 +733,15 @@ def api_call(n): return f"result_{n}"
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Retry Backoff — Exponential backoff with jitter 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Write `@retry(max_attempts, base_delay, exceptions)`. Delay doubles each attempt. Add 10% jitter.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>delay = base_delay * 2**attempt; jitter = random.uniform(0, delay * 0.1)</details>
 
@@ -661,11 +774,15 @@ def retry(max_attempts=3, base_delay=1.0, exceptions=(Exception,)):
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Connection Pool — queue.Queue-based pool 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 Write `ConnectionPool(max_size)` with `acquire()` and `release(conn)`. Use `queue.Queue` internally.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>queue.Queue(maxsize=N); get() to acquire; put() to release</details>
 
@@ -691,11 +808,15 @@ class ConnectionPool:
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · SQLAlchemy Pool Config — Configure connection pool 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Write the SQLAlchemy `create_engine()` call for a PostgreSQL database with pool_size=10, max_overflow=20, pool_timeout=30, pool_recycle=1800. Explain each parameter.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>All four params go into create_engine(). pool_recycle prevents stale connections.</details>
 
@@ -717,11 +838,15 @@ engine = create_engine(
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Celery Task — Background task with Celery 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Write a Celery task `send_email(to, subject)` and show how to call it asynchronously from a FastAPI endpoint. Broker = Redis.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>from celery import Celery; @app.task; task.delay() for async call</details>
 
@@ -754,7 +879,12 @@ def register(email: str):
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · URL Shortener Design — Design a scalable URL shortener 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Design the complete system for a URL shortener (like bit.ly). Include:
 - API endpoints
@@ -762,7 +892,6 @@ Design the complete system for a URL shortener (like bit.ly). Include:
 - Caching strategy
 - Scaling approach for 1M req/day
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: encode short code → store mapping → cache hot URLs → load balance → shard if needed</details>
 
@@ -802,7 +931,12 @@ Scaling for 1M req/day (~12 req/sec):
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · End-to-End System — Design a rate-limited cached Python service 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Design and implement a Python service class `WeatherService` that:
 1. Fetches weather data from a (mock) external API
@@ -811,7 +945,6 @@ Design and implement a Python service class `WeatherService` that:
 4. Retries on failure with exponential backoff (3 attempts)
 5. Opens circuit after 3 consecutive failures
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Compose TTLCache + TokenBucket + CircuitBreaker + retry logic in fetch_weather(city)</details>
 

@@ -8,27 +8,31 @@
 
 | # | Difficulty | Concept |
 |---|---|---|
-| Q1 | 🟢 Easy | Create two threads, start + join |
-| Q2 | 🟢 Easy | ThreadPoolExecutor with 4 workers |
-| Q3 | 🟡 Medium | Race condition: bug + fix with Lock |
-| Q4 | 🟡 Medium | Producer-consumer with Queue |
-| Q5 | 🟡 Medium | threading.Event: signal worker to stop |
-| Q6 | 🟡 Medium | RLock vs Lock: recursive method |
-| Q7 | 🟡 Medium | Daemon thread: auto-stop on main exit |
-| Q8 | 🟡 Medium | as_completed: process results in arrival order |
-| Q9 | 🟡 Medium | GIL: why threading doesn't help CPU work |
-| Q10 | 🟡 Medium | ThreadPoolExecutor context manager shutdown |
-| Q11 | 🟠 Hard | join() with timeout — detect hung thread |
-| Q12 | 🟠 Hard | Bound max_workers for I/O-bound pool |
-| Q13 | 🟡 Medium | threading.local() per-thread storage |
-| Q14 | 🟠 Hard | Concurrent URL fetch, results in input order |
-| Q15 | 🟠 Hard | Capstone: thread-safe cache with RLock |
+| [Q1](#q1) | 🟢 Easy | Create two threads, start + join |
+| [Q2](#q2) | 🟢 Easy | ThreadPoolExecutor with 4 workers |
+| [Q3](#q3) | 🟡 Medium | Race condition: bug + fix with Lock |
+| [Q4](#q4) | 🟡 Medium | Producer-consumer with Queue |
+| [Q5](#q5) | 🟡 Medium | threading.Event: signal worker to stop |
+| [Q6](#q6) | 🟡 Medium | RLock vs Lock: recursive method |
+| [Q7](#q7) | 🟡 Medium | Daemon thread: auto-stop on main exit |
+| [Q8](#q8) | 🟡 Medium | as_completed: process results in arrival order |
+| [Q9](#q9) | 🟡 Medium | GIL: why threading doesn't help CPU work |
+| [Q10](#q10) | 🟡 Medium | ThreadPoolExecutor context manager shutdown |
+| [Q11](#q11) | 🟠 Hard | join() with timeout — detect hung thread |
+| [Q12](#q12) | 🟠 Hard | Bound max_workers for I/O-bound pool |
+| [Q13](#q13) | 🟡 Medium | threading.local() per-thread storage |
+| [Q14](#q14) | 🟠 Hard | Concurrent URL fetch, results in input order |
+| [Q15](#q15) | 🟠 Hard | Capstone: thread-safe cache with RLock |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · Thread Basics — Create two threads, start + join
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Write a `download(url, delay)` function that prints start/done messages and sleeps for `delay` seconds. Create two threads targeting it with different URLs and delays. Start both, join both. Print total elapsed time and show it is less than the sum of delays.
 
@@ -64,9 +68,13 @@ print(f"Total: {time.perf_counter()-start:.2f}s")  # ~0.3s not 0.5s
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · ThreadPoolExecutor — 4 workers, 6 tasks
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Use `ThreadPoolExecutor(max_workers=4)` to run `process(n)` (which sleeps `n * 0.05` seconds and returns `n ** 2`) over the list `[1, 2, 3, 4, 5, 6]`. Print results in input order.
 
@@ -97,9 +105,13 @@ print(results)  # [1, 4, 9, 16, 25, 36]
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · Thread Safety — Race condition: bug then fix with Lock
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Create an `UnsafeCounter` with `increment(n)` that loops `n` times doing `self.value += 1`. Run 10 threads each calling `increment(1000)`. Show the result is often less than 10,000 (race condition). Then create `SafeCounter` that fixes it with `threading.Lock`.
 
@@ -143,9 +155,13 @@ print(run(SafeCounter()))     # always 10000
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · Thread Communication — Producer-consumer with Queue
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Write a producer that puts integers 1–5 onto a `queue.Queue`, followed by a sentinel `None`. Write a consumer that reads until `None`, printing each item squared. Run them in separate threads.
 
@@ -186,9 +202,13 @@ t_prod.join(); t_cons.join()
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · Signaling — threading.Event to stop a worker
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a worker thread that loops, printing "working..." every 0.1s, and checks a `threading.Event` stop signal. In the main thread, start the worker, wait 0.35s, then set the stop event. Show the worker stops cleanly.
 
@@ -223,9 +243,13 @@ t.join()
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · Locking — RLock for recursive methods
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Create a `TreeNode` class with `_lock = threading.RLock()` and a `process(depth)` method that acquires the lock and calls itself recursively (depth times). Show it works with RLock. Then swap to `threading.Lock` and show it deadlocks (or explain why without running it).
 
@@ -263,9 +287,13 @@ node.process(3)   # works fine
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · Daemon Threads — auto-stop on main exit
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Create a background monitor thread that prints "heartbeat" every 0.2s. Make it daemon so the program exits without waiting for it. Show the difference: run once with `daemon=True` (program exits quickly) and explain what `daemon=False` would do.
 
@@ -298,9 +326,13 @@ print("Main done — program exits, daemon thread killed")
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · Futures — as_completed: process in arrival order
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Submit 5 tasks to a `ThreadPoolExecutor` where each task sleeps for a random delay (0.05–0.3s) and returns its task ID. Use `as_completed` to print results as each finishes. Show they arrive out of submission order.
 
@@ -333,9 +365,13 @@ with ThreadPoolExecutor(max_workers=5) as executor:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · GIL — why threading doesn't speed up CPU work
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Write a CPU-bound function `cpu_sum(n)` that sums squares from 0 to n. Time running it twice sequentially vs running it in two threads concurrently. Show threads give no speedup (or are slower). Explain in a comment why.
 
@@ -379,9 +415,13 @@ print(f"Threaded:   {thr:.3f}s  (same or slower)")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · Resource Management — context manager ensures shutdown
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Use `ThreadPoolExecutor` as a context manager. Inside it, submit 3 tasks. Show that exiting the `with` block waits for all tasks to complete before continuing. Then show what happens if you forget the `with` and call `executor.shutdown(wait=True)` manually.
 
@@ -421,9 +461,13 @@ results = [f.result() for f in futures]
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · Timeouts — join() with timeout to detect hung thread
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Start a thread that sleeps for 5 seconds (simulating a hung operation). Join it with a 0.5-second timeout. Detect that it is still alive after the timeout. Log a warning and continue without waiting.
 
@@ -458,9 +502,13 @@ else:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Pool Sizing — bound max_workers for I/O-bound work
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a function that simulates an HTTP GET (sleeps 0.1s). Time running 20 requests sequentially, with `max_workers=4`, and with `max_workers=20`. Show the speedup at each level and explain the diminishing returns.
 
@@ -499,9 +547,13 @@ for n_workers in [1, 4, 10, 20]:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · Thread-Local — per-thread storage with threading.local()
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Use `threading.local()` to give each thread its own `worker_id` and `connection` (simulated). Run 3 threads and show that reading `_local.worker_id` in one thread never sees another thread's value.
 
@@ -535,9 +587,13 @@ for t in threads: t.join()
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟠 · Patterns — Concurrent URL fetch, results in input order
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Fetch 6 URLs concurrently using `ThreadPoolExecutor`. Each "fetch" sleeps a random delay and returns `{"url": url, "status": 200}`. Return results in the **same order as input**, not completion order.
 
@@ -577,9 +633,13 @@ with ThreadPoolExecutor(max_workers=6) as executor:
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟠 · Capstone — Thread-safe cache with RLock
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Build a `ThreadSafeCache` class with:
 - `get(key)` — returns cached value or `None`

@@ -9,22 +9,27 @@
 
 | # | Tool | Concept | Level |
 |---|------|---------|-------|
-| Q1 | `itertools.chain` | Flatten multiple iterables | 🟢 |
-| Q2 | `itertools.islice` | Slice an infinite iterator | 🟢 |
-| Q3 | `itertools.takewhile / dropwhile` | Split at a boundary condition | 🟢 |
-| Q4 | `itertools.groupby` | Group sorted data by key | 🟡 |
-| Q5 | `itertools.product` | Cartesian product of iterables | 🟡 |
-| Q6 | `functools.lru_cache` | Memoize an expensive function | 🟡 |
-| Q7 | `functools.partial` | Specialise a general function | 🟡 |
-| Q8 | `functools.reduce` | Aggregate with a binary function | 🟡 |
-| Q9 | `chain + islice + reduce` | Lazy data pipeline | 🟠 |
-| Q10 | `combinations / permutations` | Combinatorics | 🟡 |
-| Q11 | `islice` (real-world) | Lazy pagination generator | 🟠 |
-| Q12 | `lru_cache` (real-world) | Memoized price calculator | 🟠 |
+| [Q1](#q1) | `itertools.chain` | Flatten multiple iterables | 🟢 |
+| [Q2](#q2) | `itertools.islice` | Slice an infinite iterator | 🟢 |
+| [Q3](#q3) | `itertools.takewhile / dropwhile` | Split at a boundary condition | 🟢 |
+| [Q4](#q4) | `itertools.groupby` | Group sorted data by key | 🟡 |
+| [Q5](#q5) | `itertools.product` | Cartesian product of iterables | 🟡 |
+| [Q6](#q6) | `functools.lru_cache` | Memoize an expensive function | 🟡 |
+| [Q7](#q7) | `functools.partial` | Specialise a general function | 🟡 |
+| [Q8](#q8) | `functools.reduce` | Aggregate with a binary function | 🟡 |
+| [Q9](#q9) | `chain + islice + reduce` | Lazy data pipeline | 🟠 |
+| [Q10](#q10) | `combinations / permutations` | Combinatorics | 🟡 |
+| [Q11](#q11) | `islice` (real-world) | Lazy pagination generator | 🟠 |
+| [Q12](#q12) | `lru_cache` (real-world) | Memoized price calculator | 🟠 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · itertools.chain — Flatten 3 lists
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Flatten 3 separate lists into one iterable without creating a combined list. Use `chain` and print each item.
@@ -64,7 +69,12 @@ for item in chain(list1, list2, list3):
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · itertools.islice — First 5 items from an infinite counter
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 `count()` produces 0, 1, 2, 3, … infinitely. Use `islice` to get only the first 5 items and print them.
@@ -99,7 +109,12 @@ print(first_five)  # [0, 1, 2, 3, 4]
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · itertools.takewhile / dropwhile — Split at a boundary
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Use `takewhile` to get all scores >= 70, and `dropwhile` to get all scores below 70.
@@ -141,7 +156,12 @@ print(failing)  # [65, 58, 45, 30]
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · itertools.groupby — Group employees by department
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 Sort the employee list by department, then use `groupby` to group them. Print each department and its members.
@@ -193,7 +213,12 @@ for dept, members in groupby(sorted(employees, key=key_fn), key=key_fn):
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · itertools.product — All size/color combinations
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 Generate every `(size, color)` pair using `product`. Print each pair, then print the total count.
@@ -235,7 +260,12 @@ print(f"Total: {len(pairs)}")  # Total: 12
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · functools.lru_cache — Memoize an expensive function
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `nth_triangular(n)` computes 1+2+...+n recursively. Add `@lru_cache`, call it 5 times with the same argument, and use `cache_info()` to show cache hits.
@@ -288,7 +318,12 @@ print(nth_triangular.cache_info())
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · functools.partial — Specialised number formatters
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 `format_number(value, prefix="", suffix="", decimal_places=2)` is the base function. Use `partial` to create `format_usd` ($10.00), `format_eur` (€10.00), and `format_pct` (10.00%). Test each with the value `10`.
@@ -333,7 +368,12 @@ print(format_pct(10))   # 10.00%
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · functools.reduce — Three aggregate calculations
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 Use `reduce` to: (1) find the product of all numbers, (2) find the max without using `max()`, (3) merge a list of dicts into one.
@@ -379,7 +419,12 @@ print(f"Merged: {merged}")  # {'a': 1, 'b': 2, 'c': 3}
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · chain + islice + reduce — Lazy log pipeline
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 Use `chain` to combine two log lists, `islice` to take only the first 10 entries, and `reduce` to count how many are at ERROR level.
@@ -423,7 +468,12 @@ print(f"ERROR count in first 10 lines: {error_count}")  # 4
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · combinations / permutations — Card hands
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 Given `cards = ["A", "K", "Q", "J"]`, find: (1) all 2-card hands (combinations), (2) all ways to arrange 2 cards (permutations). Print counts and the first 3 of each.
@@ -466,7 +516,12 @@ print(f"First 3: {arrangements[:3]}")
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Real-world — Lazy pagination
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 Write `paginate(iterable, page_size)` using `islice` that yields one page at a time as a list, stopping when the iterable is exhausted. Test with a 25-item list and `page_size=10`.
@@ -516,7 +571,12 @@ for page_num, page in enumerate(paginate(data, 10), start=1):
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Real-world — Memoized price calculator
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 Write `calculate_total(items_tuple, discount_rate)` where `items_tuple` is a tuple of `(name, price)` pairs. Apply the discount and return the total. Use `@functools.lru_cache`. Why must it take a tuple instead of a list?

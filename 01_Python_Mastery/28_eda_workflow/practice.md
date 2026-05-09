@@ -4,36 +4,36 @@
 
 | # | Chapter | Topic | Difficulty |
 |---|---------|-------|------------|
-| Q1 | Ch1 EDA Checklist | Order of operations | 🟢 |
-| Q2 | Ch1 EDA Checklist | What EDA catches | 🟢 |
-| Q3 | Ch2 Loading & Shape | read_csv + shape | 🟢 |
-| Q4 | Ch2 Loading & Shape | df.info() vs df.describe() | 🟢 |
-| Q5 | Ch2 Loading & Shape | dtypes inspection | 🟢 |
-| Q6 | Ch2 Loading & Shape | head vs tail vs sample | 🟢 |
-| Q7 | Ch3 Missing Values | isnull summary table | 🟡 |
-| Q8 | Ch3 Missing Values | Missing value heatmap | 🟡 |
-| Q9 | Ch3 Missing Values | fillna strategies by threshold | 🟡 |
-| Q10 | Ch3 Missing Values | Drop vs impute decision | 🟡 |
-| Q11 | Ch4 Distributions | Histogram grid | 🟢 |
-| Q12 | Ch4 Distributions | Boxplot for outlier shape | 🟢 |
-| Q13 | Ch4 Distributions | Skewness check | 🟡 |
-| Q14 | Ch4 Distributions | Log transform for skewed | 🟡 |
-| Q15 | Ch5 Categorical Features | value_counts | 🟢 |
-| Q16 | Ch5 Categorical Features | Bar chart for low-cardinality | 🟢 |
-| Q17 | Ch5 Categorical Features | Cardinality classification | 🟡 |
-| Q18 | Ch5 Categorical Features | Rare category handling | 🟡 |
-| Q19 | Ch6 Target Variable | Class balance check | 🟡 |
-| Q20 | Ch6 Target Variable | Target distribution plot | 🟢 |
-| Q21 | Ch6 Target Variable | Imbalance strategies | 🟠 |
-| Q22 | Ch7 Correlations & Outliers | Correlation heatmap | 🟡 |
-| Q23 | Ch7 Correlations & Outliers | IQR outlier detection | 🟡 |
-| Q24 | Ch7 Correlations & Outliers | Z-score outliers | 🟡 |
-| Q25 | Ch7 Correlations & Outliers | Scatter matrix | 🟡 |
-| Q26 | Ch7 Correlations & Outliers | VIF for multicollinearity | 🟠 |
-| Q27 | Ch8 Automated EDA | ydata-profiling | 🟢 |
-| Q28 | Ch8 Automated EDA | sweetviz comparison | 🟡 |
-| Q29 | Ch8 Automated EDA | dtale interactive | 🟡 |
-| Q30 | Ch8 Automated EDA | When to use each tool | 🟠 |
+| [Q1](#q1) | Ch1 EDA Checklist | Order of operations | 🟢 |
+| [Q2](#q2) | Ch1 EDA Checklist | What EDA catches | 🟢 |
+| [Q3](#q3) | Ch2 Loading & Shape | read_csv + shape | 🟢 |
+| [Q4](#q4) | Ch2 Loading & Shape | df.info() vs df.describe() | 🟢 |
+| [Q5](#q5) | Ch2 Loading & Shape | dtypes inspection | 🟢 |
+| [Q6](#q6) | Ch2 Loading & Shape | head vs tail vs sample | 🟢 |
+| [Q7](#q7) | Ch3 Missing Values | isnull summary table | 🟡 |
+| [Q8](#q8) | Ch3 Missing Values | Missing value heatmap | 🟡 |
+| [Q9](#q9) | Ch3 Missing Values | fillna strategies by threshold | 🟡 |
+| [Q10](#q10) | Ch3 Missing Values | Drop vs impute decision | 🟡 |
+| [Q11](#q11) | Ch4 Distributions | Histogram grid | 🟢 |
+| [Q12](#q12) | Ch4 Distributions | Boxplot for outlier shape | 🟢 |
+| [Q13](#q13) | Ch4 Distributions | Skewness check | 🟡 |
+| [Q14](#q14) | Ch4 Distributions | Log transform for skewed | 🟡 |
+| [Q15](#q15) | Ch5 Categorical Features | value_counts | 🟢 |
+| [Q16](#q16) | Ch5 Categorical Features | Bar chart for low-cardinality | 🟢 |
+| [Q17](#q17) | Ch5 Categorical Features | Cardinality classification | 🟡 |
+| [Q18](#q18) | Ch5 Categorical Features | Rare category handling | 🟡 |
+| [Q19](#q19) | Ch6 Target Variable | Class balance check | 🟡 |
+| [Q20](#q20) | Ch6 Target Variable | Target distribution plot | 🟢 |
+| [Q21](#q21) | Ch6 Target Variable | Imbalance strategies | 🟠 |
+| [Q22](#q22) | Ch7 Correlations & Outliers | Correlation heatmap | 🟡 |
+| [Q23](#q23) | Ch7 Correlations & Outliers | IQR outlier detection | 🟡 |
+| [Q24](#q24) | Ch7 Correlations & Outliers | Z-score outliers | 🟡 |
+| [Q25](#q25) | Ch7 Correlations & Outliers | Scatter matrix | 🟡 |
+| [Q26](#q26) | Ch7 Correlations & Outliers | VIF for multicollinearity | 🟠 |
+| [Q27](#q27) | Ch8 Automated EDA | ydata-profiling | 🟢 |
+| [Q28](#q28) | Ch8 Automated EDA | sweetviz comparison | 🟡 |
+| [Q29](#q29) | Ch8 Automated EDA | dtale interactive | 🟡 |
+| [Q30](#q30) | Ch8 Automated EDA | When to use each tool | 🟠 |
 
 ---
 
@@ -41,11 +41,15 @@
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · Ch1 EDA Checklist — Order of operations 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 You receive a CSV with 50 columns and 100,000 rows. List the correct order of the 10 EDA phases a senior engineer would follow before touching any model code.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Start with shape, then types, then quality, then distributions, then relationships.</details>
 
@@ -70,11 +74,15 @@ You receive a CSV with 50 columns and 100,000 rows. List the correct order of th
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Ch1 EDA Checklist — What EDA catches 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 A junior engineer skips EDA and trains a model immediately. Name five specific problems the model will silently suffer from that EDA would have caught.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: quality bugs, type bugs, leakage, imbalance, scale bugs.</details>
 
@@ -102,11 +110,15 @@ A junior engineer skips EDA and trains a model immediately. Name five specific p
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Ch2 Loading & Shape — read_csv + shape 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Load a CSV file called `sales.csv` and print: total rows, total columns, and whether any column has a non-default index.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>df.shape returns a tuple. df.index tells you about the index type.</details>
 
@@ -130,11 +142,15 @@ print(f"Default integer index: {is_default}")  # False = custom index
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Ch2 Loading & Shape — df.info() vs df.describe() 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Explain what `df.info()` and `df.describe()` each show, and when you would use one over the other.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>One shows column metadata. The other shows statistical summaries.</details>
 
@@ -161,11 +177,15 @@ df.describe(include="all")
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Ch2 Loading & Shape — dtypes inspection 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 A DataFrame has a column `transaction_date` stored as `object` dtype. Write code to detect this and convert it to proper datetime.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use df.dtypes to find object columns, then pd.to_datetime() to cast.</details>
 
@@ -194,11 +214,15 @@ print(null_after)                              # new NaTs = rows that couldn't p
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Ch2 Loading & Shape — head vs tail vs sample 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Why is `df.sample(10)` often more useful than `df.head(10)` for spotting data issues?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think about how data is often ordered in a CSV — by time, by ID, by category.</details>
 
@@ -231,11 +255,15 @@ print(df.sample(5, random_state=0))
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Ch3 Missing Values — isnull summary table 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Build a missing value summary DataFrame showing each column's missing count and percentage, sorted by percentage descending, filtered to only columns with any missing values.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Combine isnull().sum() and a percentage calculation into a DataFrame, then query and sort.</details>
 
@@ -265,11 +293,15 @@ print(summary)
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Ch3 Missing Values — Missing value heatmap 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Use the `missingno` library to visualize whether missing values in two columns occur together (correlated missingness).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>msno.heatmap shows correlation between missingness patterns across columns.</details>
 
@@ -295,11 +327,15 @@ msno.dendrogram(df)
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Ch3 Missing Values — fillna strategies by threshold 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write a function that receives a DataFrame and applies the correct imputation strategy based on each column's missing percentage: drop rows for <5%, median-impute for 5–30%, and drop the column for >30%.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Compute pct per column, then branch on the threshold with separate pandas operations.</details>
 
@@ -329,11 +365,15 @@ def smart_impute(df: pd.DataFrame) -> pd.DataFrame:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Ch3 Missing Values — Drop vs impute decision 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 When should you create a separate `col_was_missing` binary indicator column instead of just imputing or dropping?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think about MNAR — Missing Not at Random.</details>
 
@@ -367,11 +407,15 @@ print(df.groupby("income_was_missing")["target"].mean())
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Ch4 Distributions — Histogram grid 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Plot a grid of histograms for all numeric columns in a DataFrame using a single `plt.subplots` call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use axes.flatten() to iterate axes alongside columns in a zip.</details>
 
@@ -402,11 +446,15 @@ plt.show()
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Ch4 Distributions — Boxplot for outlier shape 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Create a side-by-side plot showing a histogram and a boxplot for the same column. What does each tell you that the other doesn't?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Histogram shows shape and modes; boxplot shows quartiles and outlier points explicitly.</details>
 
@@ -437,11 +485,15 @@ plt.tight_layout()
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Ch4 Distributions — Skewness check 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Write code that prints the skewness of every numeric column and flags any column with absolute skewness greater than 1.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use scipy.stats.skew or pandas Series.skew().</details>
 
@@ -470,11 +522,15 @@ for col in numeric_cols:
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Ch4 Distributions — Log transform for skewed 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 A `price` column has skewness of 3.2. Apply a log transform and verify that skewness dropped below 1.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use np.log1p (not np.log) to handle zeros safely.</details>
 
@@ -510,11 +566,15 @@ print(f"After:  skew = {after_skew:.2f}")      # should be < 1
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Ch5 Categorical Features — value_counts 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Print the top 10 values and their percentage share for a categorical column `city`. Show both absolute count and normalized frequency.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>value_counts() has a normalize parameter for percentages.</details>
 
@@ -545,11 +605,15 @@ print(f"Null count: {df[col].isnull().sum()}")  # nulls not shown in value_count
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Ch5 Categorical Features — Bar chart for low-cardinality 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Plot a horizontal bar chart of value counts for any categorical column with fewer than 15 unique values.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Filter columns by nunique() <= 15, then use .plot(kind="barh").</details>
 
@@ -579,11 +643,15 @@ for col in cat_cols:
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Ch5 Categorical Features — Cardinality classification 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Write a function that classifies every categorical column by cardinality and prints the recommended encoding strategy.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Low < 10, Medium 10–100, High > 100 — each has a different encoding strategy.</details>
 
@@ -615,11 +683,15 @@ classify_cardinality(df)
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Ch5 Categorical Features — Rare category handling 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 A `product_type` column has 50 categories, but 40 of them appear fewer than 20 times each. Write code to group rare categories into an `"Other"` bucket.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use value_counts to find rare categories, then Series.where() or map() to replace them.</details>
 
@@ -654,11 +726,15 @@ print(df[col].value_counts())
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · Ch6 Target Variable — Class balance check 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 For a binary classification target `churn`, print class counts and flag if the imbalance ratio exceeds 5:1.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>value_counts(normalize=True) gives proportions; compute the ratio between majority and minority.</details>
 
@@ -694,11 +770,15 @@ else:
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Ch6 Target Variable — Target distribution plot 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 Plot the raw distribution and log-transformed distribution of a regression target `price` side by side.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Two subplots — one for raw, one for np.log1p transformed.</details>
 
@@ -732,11 +812,15 @@ plt.show()
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Ch6 Target Variable — Imbalance strategies 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 List three strategies for handling a severe class imbalance (10:1 ratio) and explain the trade-off of each.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: resampling (SMOTE), algorithmic (class_weight), metric (F1 vs accuracy).</details>
 
@@ -774,11 +858,15 @@ y_pred_tuned = (y_proba >= 0.3).astype(int)  # ← lower threshold
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Ch7 Correlations & Outliers — Correlation heatmap 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Plot a correlation heatmap for all numeric columns. Then print the top 5 features most correlated with the target, sorted by absolute correlation.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use sns.heatmap with annot=True. Sort corr[target].drop(target).abs().</details>
 
@@ -822,11 +910,15 @@ print(top5)
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Ch7 Correlations & Outliers — IQR outlier detection 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Write a reusable function that returns a boolean mask of IQR outliers for any numeric Series, with a configurable fence factor (default 1.5).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Compute Q1, Q3, IQR, then lower/upper bounds. Return (series < lower) | (series > upper).</details>
 
@@ -860,11 +952,15 @@ for col in df.select_dtypes(include="number").columns:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Ch7 Correlations & Outliers — Z-score outliers 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Detect outliers in an `income` column using Z-scores. Explain when Z-score is better than IQR and when IQR is better.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Z = (x - mean) / std. Flag |Z| > 3. Compare against IQR robustness.</details>
 
@@ -901,11 +997,15 @@ print(f"Z-score outliers: {outlier_mask.sum()}")
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Ch7 Correlations & Outliers — Scatter matrix 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 Create a scatter matrix (pairplot) for the four most correlated numeric features with the target. Color points by a binary categorical column.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use sns.pairplot with hue parameter. Select columns first to keep it readable.</details>
 
@@ -945,11 +1045,15 @@ plt.show()
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · Ch7 Correlations & Outliers — VIF for multicollinearity 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 Compute the Variance Inflation Factor (VIF) for all numeric features in a DataFrame and flag any column with VIF > 10.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use statsmodels variance_inflation_factor. It requires a design matrix with a constant column.</details>
 
@@ -995,11 +1099,15 @@ print(vif[vif["VIF"] > 10])
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · Ch8 Automated EDA — ydata-profiling 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Generate a full HTML EDA report for a DataFrame using ydata-profiling in one code block.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details><summary>💡 Hint</summary>ProfileReport(df, explorative=True).to_file("report.html")</details>
 
@@ -1034,11 +1142,15 @@ report.to_file("eda_report.html")   # ← open in browser
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Ch8 Automated EDA — sweetviz comparison 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Use sweetviz to generate a comparison report between a training set and a test set to detect distribution shift.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details><summary>💡 Hint</summary>sv.compare([df_train, "Train"], [df_test, "Test"]).show_html()</details>
 
@@ -1071,11 +1183,15 @@ compare_report.show_html("train_vs_test.html")
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · Ch8 Automated EDA — dtale interactive 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 Launch dtale for an interactive browser-based EDA session on a DataFrame.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
 
 <details><summary>💡 Hint</summary>import dtale; dtale.show(df).open_browser()</details>
 
@@ -1106,11 +1222,15 @@ d.open_browser()   # ← opens localhost:40000 in default browser
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · Ch8 Automated EDA — When to use each tool 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 You have three automated EDA tools: ydata-profiling, sweetviz, and dtale. Describe the ideal use case for each and the situation where you would not rely on automated EDA alone.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: report sharing, comparison tasks, interactive exploration, domain knowledge gaps.</details>
 

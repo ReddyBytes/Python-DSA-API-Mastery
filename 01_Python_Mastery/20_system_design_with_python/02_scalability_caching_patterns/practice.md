@@ -4,11 +4,35 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | Simple TTL Cache — Implement simple dict-based cache with TTL | 🟢 |
+| [Q2](#q2) | @lru_cache — Apply @lru_cache to expensive function | 🟢 |
+| [Q3](#q3) | LRU Cache Implementation — Implement LRU cache using OrderedDict | 🟡 |
+| [Q4](#q4) | Token Bucket — Implement token bucket rate limiter | 🟡 |
+| [Q5](#q5) | Sliding Window Rate Limiter — Implement sliding window rate limiter | 🟡 |
+| [Q6](#q6) | Circuit Breaker — Write circuit breaker class (3 states) | 🟡 |
+| [Q7](#q7) | Connection Pooling — Implement connection pool using queue.Queue | 🟡 |
+| [Q8](#q8) | Cache-Aside Pattern — Cache-aside pattern with Redis mock | 🟡 |
+| [Q9](#q9) | Cache Decorator — Write cache decorator with TTL + key function | 🟠 |
+| [Q10](#q10) | Retry with Exponential Backoff — Implement retry with exponential backoff | 🟠 |
+| [Q11](#q11) | Stateless Session — Design stateless session using JWT | 🟠 |
+| [Q12](#q12) | Capstone — Build rate-limited cached API client | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · Simple TTL Cache — Implement simple dict-based cache with TTL 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Write a `SimpleCache` class with `get(key)` and `set(key, value, ttl)` methods. `get` should return `None` if the key has expired or doesn't exist.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Store (value, expiry_timestamp). In get, check time.time() < expiry.</details>
 
@@ -42,11 +66,15 @@ print(cache.get("user:1"))   # {'name': 'Alice'}
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · @lru_cache — Apply @lru_cache to expensive function 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Write a function `fib(n)` that computes Fibonacci numbers using `@lru_cache`. Print cache info after calling `fib(30)` twice. Then clear the cache and print info again.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>from functools import lru_cache; @lru_cache(maxsize=None) for unlimited cache</details>
 
@@ -73,11 +101,15 @@ print(fib.cache_info())   # CacheInfo(hits=0, misses=0, currsize=0)
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · LRU Cache Implementation — Implement LRU cache using OrderedDict 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Implement a `LRUCache` class with `get(key)` and `put(key, value)` methods. When capacity is exceeded, evict the least recently used item. Both methods must be O(1).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>OrderedDict.move_to_end(key) marks as MRU; popitem(last=False) evicts LRU</details>
 
@@ -115,11 +147,15 @@ print(lru.get("b")) # None — evicted
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Token Bucket — Implement token bucket rate limiter 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Implement a `TokenBucket` class with `consume() -> bool`. Capacity = 5, refill_rate = 2 tokens/second. Show that 5 requests pass, the 6th fails, and after 1 second 2 more pass.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>On each consume(), calculate elapsed time and add tokens. Never exceed capacity.</details>
 
@@ -159,11 +195,15 @@ for i in range(2):
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Sliding Window Rate Limiter — Implement sliding window rate limiter 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Implement a `SlidingWindowLimiter(max_requests, window_secs)` with `is_allowed() -> bool`. Show 3 requests pass in a 1-second window, then the 4th fails, then after 1 second more pass.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use collections.deque. Remove timestamps older than window on each call.</details>
 
@@ -197,11 +237,15 @@ for i in range(5):
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Circuit Breaker — Write circuit breaker class (3 states) 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Implement `CircuitBreaker(failure_threshold, recovery_timeout)` with a `call(func, *args)` method. Test it: make it trip after 3 failures, verify fast-fail, wait for recovery timeout, verify HALF_OPEN allows one test call.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>States: CLOSED (normal) → OPEN (fast fail) → HALF_OPEN (test one). Success in HALF_OPEN → CLOSED.</details>
 
@@ -247,11 +291,15 @@ class CircuitBreaker:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Connection Pooling — Implement connection pool using queue.Queue 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Implement a `ConnectionPool(max_size)` class using `queue.Queue`. Provide `acquire()` and `release(conn)` methods. Simulate 5 workers acquiring and releasing connections.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>queue.Queue(maxsize=N) — put() to release, get(timeout=...) to acquire</details>
 
@@ -295,11 +343,15 @@ for t in threads: t.join()
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Cache-Aside Pattern — Cache-aside pattern with Redis mock 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Write a `get_product(product_id)` function using cache-aside pattern. Use a `MockRedis` dict as the cache store. Cache hit should avoid calling `fetch_from_db()`. TTL = 60 seconds (store expiry timestamp alongside value).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Cache stores (value, expiry). On miss, fetch DB, store in cache with expiry = now + 60.</details>
 
@@ -336,11 +388,15 @@ get_product(2)   # DB call
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Cache Decorator — Write cache decorator with TTL + key function 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write a `@cached(ttl, key_fn=None)` decorator that caches function return values with a TTL. The optional `key_fn` maps args to a cache key string. Default key = str(args).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use a closure dict for storage. key_fn(*args, **kwargs) → string. Store (result, expiry).</details>
 
@@ -381,11 +437,15 @@ get_user(2)   # DB fetch
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Retry with Exponential Backoff — Implement retry with exponential backoff 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Write a `@retry(max_attempts, base_delay, exceptions)` decorator. Delay doubles on each attempt (1s, 2s, 4s). Add random jitter of up to 10% to avoid thundering herd.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>delay = base_delay * (2 ** attempt); jitter = random.uniform(0, delay * 0.1)</details>
 
@@ -424,11 +484,15 @@ def call_flaky_service():
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Stateless Session — Design stateless session using JWT 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write `create_token(user_id)` and `decode_token(token)` functions using PyJWT. The token should include `user_id` and `exp` (expiry 1 hour). Decode should raise on expired/invalid tokens.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>import jwt; jwt.encode(payload, SECRET, algorithm="HS256"); jwt.decode(..., algorithms=["HS256"])</details>
 
@@ -459,7 +523,12 @@ print(decode_token(token))   # {'user_id': 42, 'exp': ...}
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Capstone — Build rate-limited cached API client 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Build a `APIClient` class that:
 1. Caches GET responses with 30-second TTL
@@ -467,7 +536,6 @@ Build a `APIClient` class that:
 3. Retries on failure (3 attempts, exponential backoff)
 4. Returns cached response on rate limit hit (stale-while-revalidate)
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Compose: SimpleCache + TokenBucket + retry logic in a single fetch() method</details>
 

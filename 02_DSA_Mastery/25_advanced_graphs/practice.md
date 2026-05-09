@@ -35,6 +35,9 @@
 <a id="q1"></a>
 ### Q1 · Dijkstra — Single-Source Shortest Path
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 🟢 Easy
 
 **Problem:** Given a weighted directed graph and a source node, return the shortest distance from the source to every other node. All edge weights are non-negative.
@@ -93,6 +96,9 @@ print(dijkstra(g, 4, 0))   # [0, 3, 1, 4]
 
 <a id="q2"></a>
 ### Q2 · Dijkstra — Path Reconstruction
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 🟢 Easy
 
@@ -156,6 +162,9 @@ print(dist, path)   # 4, [0, 2, 1, 3]
 <a id="q3"></a>
 ### Q3 · Dijkstra — Unreachable Nodes
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 🟢 Easy
 
 **Problem:** In a disconnected graph, some nodes may be unreachable from the source. Given the Dijkstra distance array, how do you identify them? What value do they hold and why?
@@ -207,6 +216,9 @@ print(dist[2] == float('inf'))    # True — node 2 unreachable
 
 <a id="q4"></a>
 ### Q4 · Bellman-Ford — Shortest Path with Negative Edges
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 🟢 Easy
 
@@ -272,6 +284,9 @@ print(dist, neg)   # [0, 5, -1], False
 <a id="q5"></a>
 ### Q5 · Bellman-Ford — Negative Cycle Detection
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 🟢 Easy
 
 **Problem:** Detect whether a graph contains a negative-weight cycle reachable from the source.
@@ -328,6 +343,9 @@ print(has_cycle2, dist2)   # False, [0, 1, 3, 0]
 
 <a id="q6"></a>
 ### Q6 · Floyd-Warshall — All-Pairs Shortest Path
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 🟢 Easy
 
@@ -389,6 +407,9 @@ print(dist[1][0])   # inf (no path back in this directed graph)
 
 <a id="q7"></a>
 ### Q7 · Topological Sort — Kahn's Algorithm Basics
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 🟡 Medium
 
@@ -457,6 +478,9 @@ for u in g:
 <a id="q8"></a>
 ### Q8 · Topological Sort — Cycle Detection via Kahn's
 
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Use Kahn's algorithm to detect whether a directed graph contains a cycle. Return `True` if a cycle exists.
@@ -519,6 +543,9 @@ print(has_cycle_directed(4, [(0,1),(1,2),(2,3),(3,1)]))  # True (1→2→3→1)
 
 <a id="q9"></a>
 ### Q9 · Topological Sort — DFS Post-Order
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 🟡 Medium
 
@@ -592,6 +619,9 @@ print(topological_sort_dfs(3, [(0,1),(1,2),(2,0)]))  # [] (cycle)
 <a id="q10"></a>
 ### Q10 · Topological Sort — Course Schedule
 
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** You are given `numCourses` and a list of `prerequisites` where `prerequisites[i] = [a, b]` means you must take course `b` before course `a`. Return a valid course order, or `[]` if impossible.
@@ -651,6 +681,9 @@ print(find_order(1, []))                           # [0]
 
 <a id="q11"></a>
 ### Q11 · SCC — Kosaraju's Algorithm
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 🟡 Medium
 
@@ -735,6 +768,9 @@ print(sorted([sorted(s) for s in sccs]))  # [[0,1,2], [3,4,5]]
 <a id="q12"></a>
 ### Q12 · SCC — Count Strongly Connected Components
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Given a directed graph, count how many strongly connected components it has. A single node with no self-loop counts as one SCC.
@@ -811,6 +847,9 @@ print(count_sccs(6, [(0,1),(1,2),(2,0),(3,4),(4,5),(5,3)]))  # 2
 
 <a id="q13"></a>
 ### Q13 · SCC — Condensation Graph
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 🟡 Medium
 
@@ -897,6 +936,9 @@ print(n_scc, cond)   # 2, {(0, 1)} — SCC0 connects to SCC1
 <a id="q14"></a>
 ### Q14 · Kruskal's MST — Minimum Spanning Tree Weight
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Given an undirected weighted graph, find the minimum spanning tree using Kruskal's algorithm. Return the total weight and the list of MST edges.
@@ -971,6 +1013,9 @@ print(w, mst)   # 6, [(1,0,1),(2,1,3),(3,1,2)]
 <a id="q15"></a>
 ### Q15 · Prim's MST — Minimum Spanning Tree Weight
 
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** Given a dense undirected weighted graph as an adjacency list, find the MST weight using Prim's algorithm (node-centric approach).
@@ -1036,6 +1081,9 @@ print(w, edges)   # 16, edges forming the MST
 <a id="q16"></a>
 ### Q16 · MST — Kruskal vs Prim Decision
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 🟡 Medium
 
 **Problem:** For each scenario below, state which MST algorithm is better and why:
@@ -1089,6 +1137,9 @@ Kruskal's is O(E log E) — the sort dominates. Prim's (with heap) is O(E log V)
 
 <a id="q17"></a>
 ### Q17 · Network Flow — Max Flow via Edmonds-Karp
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1185,6 +1236,9 @@ print(edmonds_karp(6, 0, 5, cap))   # 23
 
 <a id="q18"></a>
 ### Q18 · Network Flow — Bipartite Matching via Max Flow
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1295,6 +1349,9 @@ print(bipartite_matching(3, 3, willing))   # 3 — all students assigned
 <a id="q19"></a>
 ### Q19 · Floyd-Warshall — Negative Cycle Detection via Diagonal
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 🟠 Hard
 
 **Problem:** After running Floyd-Warshall, how do you detect if the graph contains a negative cycle? What does `dist[i][i] < 0` mean?
@@ -1354,6 +1411,9 @@ print(has_neg2)   # False (cycle 0→1→2→0 has weight 1+2+3=6 > 0)
 
 <a id="q20"></a>
 ### Q20 · Floyd-Warshall — Transitive Closure
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1416,6 +1476,9 @@ print(all(r2[i][j] for i in range(3) for j in range(3)))  # True — all reachab
 
 <a id="q21"></a>
 ### Q21 · Algorithm Selection — Choose the Right Algorithm
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1481,6 +1544,9 @@ The key discriminators: (a) negative edges → rules out Dijkstra, (b) single vs
 
 <a id="q22"></a>
 ### Q22 · Dijkstra — Stale Entry Bug and Fix
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1557,6 +1623,9 @@ print(dijkstra_correct(g, 4, 0))   # [0, 7, 3, 9]
 <a id="q23"></a>
 ### Q23 · Bellman-Ford — Mark All Nodes on Negative Cycles
 
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 🟠 Hard
 
 **Problem:** Extend Bellman-Ford to not just detect negative cycles, but mark ALL nodes reachable through a negative cycle with distance `-inf`. This is useful in problems like "find all arbitrage opportunities" in currency exchange.
@@ -1619,6 +1688,9 @@ print(dist2)
 
 <a id="q24"></a>
 ### Q24 · Bipartite Checking via BFS 2-Coloring
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 🟠 Hard
 
@@ -1691,6 +1763,9 @@ print(is_bipartite(5, [(0,1),(1,2),(2,3),(3,4),(4,0)]))  # False
 
 <a id="q25"></a>
 ### Q25 · Directed Cycle Detection — DFS WHITE/GRAY/BLACK
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 🟠 Hard
 

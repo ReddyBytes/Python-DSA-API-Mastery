@@ -6,7 +6,30 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | PEP 8 — Fix PEP 8 Violations | 🟢 |
+| [Q2](#q2) | Type Hints — Annotate a Function Signature | 🟢 |
+| [Q3](#q3) | Docstrings — Write a Google-Style Docstring | 🟡 |
+| [Q4](#q4) | Formatters — Configure black + isort in pyproject.toml | 🟡 |
+| [Q5](#q5) | Linters — Identify and Fix Flake8/Ruff Violations | 🟡 |
+| [Q6](#q6) | Pre-commit — Write a Pre-commit Config | 🟡 |
+| [Q7](#q7) | Naming — Fix camelCase Violations | 🟡 |
+| [Q8](#q8) | mypy — Enable Strict Mode and Fix Errors | 🟡 |
+| [Q9](#q9) | Ruff — Set Up Custom Rule Selection | 🟠 |
+| [Q10](#q10) | Capstone — Apply Full Standards to a Module | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · PEP 8 — Fix PEP 8 Violations 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 The snippet below has at least 5 PEP 8 violations. Find and fix them all.
 
@@ -19,7 +42,6 @@ def ProcessPayment(Amount,currency):
     return x
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Check import style, function name, parameter names, spacing, and None comparison.</details>
 <details><summary>✅ Answer</summary>
@@ -40,7 +62,12 @@ def process_payment(amount: float, currency: str) -> float | bool:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Type Hints — Annotate a Function Signature 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Add type hints to all parameters and the return value.
 
@@ -50,7 +77,6 @@ def get_users(page, page_size, active_only):
     ...
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>page and page_size are integers, active_only is bool, return is list of dicts.</details>
 <details><summary>✅ Answer</summary>
@@ -68,7 +94,12 @@ def get_users(
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Docstrings — Write a Google-Style Docstring 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write a complete Google-style docstring for this function.
 
@@ -80,7 +111,6 @@ def transfer_funds(from_account: str, to_account: str, amount: float) -> dict:
     ...
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Google-style: one-line summary, blank line, Args section, Returns section, Raises section.</details>
 <details><summary>✅ Answer</summary>
@@ -108,11 +138,15 @@ def transfer_funds(from_account: str, to_account: str, amount: float) -> dict:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Formatters — Configure black + isort in pyproject.toml 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Write the `[tool.black]` and `[tool.isort]` sections for a Python 3.11 project with 88-character line length.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>isort profile = "black" makes the two tools agree on import formatting.</details>
 <details><summary>✅ Answer</summary>
@@ -131,7 +165,12 @@ line_length = 88
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Linters — Identify and Fix Flake8/Ruff Violations 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 What violations does this code have? List them and show the fix.
 
@@ -147,7 +186,6 @@ def fetch(url,timeout=30):
     return data
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Look for: unused imports, missing spaces after commas, unused variables.</details>
 <details><summary>✅ Answer</summary>
@@ -168,11 +206,15 @@ def fetch(url: str, timeout: int = 30) -> dict:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Pre-commit — Write a Pre-commit Config 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Write a `.pre-commit-config.yaml` that runs black, ruff (with auto-fix), and checks for accidentally committed private keys.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use pre-commit-hooks repo for detect-private-key; ruff-pre-commit for ruff.</details>
 <details><summary>✅ Answer</summary>
@@ -202,7 +244,12 @@ repos:
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Naming — Fix camelCase Violations 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Rename all identifiers to follow Python conventions.
 
@@ -219,7 +266,6 @@ class userService:
         ...
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Classes → PascalCase; methods/variables → snake_case; constructor params → snake_case.</details>
 <details><summary>✅ Answer</summary>
@@ -241,7 +287,12 @@ class UserService:
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · mypy — Enable Strict Mode and Fix Errors 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Given this function, write the mypy config and show what errors mypy strict mode would flag.
 
@@ -253,7 +304,6 @@ def process(items, multiplier):
     return result
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Strict mode flags: missing annotations, implicit Any types.</details>
 <details><summary>✅ Answer</summary>
@@ -279,11 +329,15 @@ def process(items: list[float], multiplier: float) -> list[float]:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Ruff — Set Up Custom Rule Selection 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write a ruff configuration that enables: pycodestyle errors (E), pyflakes (F), import sorting (I), pyupgrade (UP), and flake8-bugbear (B). Ignore E501 (line too long, since black handles it).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Ruff uses `select` for enabled rules and `ignore` for disabled ones.</details>
 <details><summary>✅ Answer</summary>
@@ -311,7 +365,12 @@ ignore = [
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Capstone — Apply Full Standards to a Module 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 The module below has multiple violations across PEP 8, type hints, docstrings, and lint. Apply all standards: fix naming, add type hints, write docstrings, fix lint violations.
 
@@ -335,7 +394,6 @@ class payment_processor:
         return {"total_requests":self.requestCount}
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Fix: class name (PascalCase), method names (snake_case), spacing, unused imports, type hints, docstrings.</details>
 <details><summary>✅ Answer</summary>

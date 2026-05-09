@@ -1,6 +1,5 @@
 # 💻 Practice — 01_pdb_debugging
 
-> 🛠️ **Solve locally:** [practice_local.py](./practice_local.py)
 
 ---
 
@@ -8,24 +7,28 @@
 
 | # | Difficulty | Topic | Title |
 |---|---|---|---|
-| Q1 | 🟢 | entry points | Insert breakpoint() to pause before a crash |
-| Q2 | 🟢 | core commands | Use p/pp/l/n/s/c in sequence to trace a bug |
-| Q3 | 🟢 | navigation | Use w/u/d to inspect call stack frames |
-| Q4 | 🟡 | breakpoints | Set a conditional breakpoint: only stop when x > 100 |
-| Q5 | 🟡 | post-mortem | Run pdb.pm() on a script that raises an unhandled exception |
-| Q6 | 🟡 | inspect locals | Use locals() and pp to pretty-print all frame variables |
-| Q7 | 🟡 | expression eval | Use ! to change a variable's value mid-session |
-| Q8 | 🟡 | .pdbrc | Write a .pdbrc that aliases ll and pp |
-| Q9 | 🟡 | debug from CLI | Launch pdb from the command line with python -m pdb |
-| Q10 | 🟠 | timed breakpoint | Use a breakpoint condition to only trigger after 5 iterations |
-| Q11 | 🟠 | ipdb | Replace pdb with ipdb for tab completion and syntax highlighting |
-| Q12 | 🟠 | Capstone | Debug a recursive function hitting max depth with pdb |
+| [Q1](#q1) | 🟢 | entry points | Insert breakpoint() to pause before a crash |
+| [Q2](#q2) | 🟢 | core commands | Use p/pp/l/n/s/c in sequence to trace a bug |
+| [Q3](#q3) | 🟢 | navigation | Use w/u/d to inspect call stack frames |
+| [Q4](#q4) | 🟡 | breakpoints | Set a conditional breakpoint: only stop when x > 100 |
+| [Q5](#q5) | 🟡 | post-mortem | Run pdb.pm() on a script that raises an unhandled exception |
+| [Q6](#q6) | 🟡 | inspect locals | Use locals() and pp to pretty-print all frame variables |
+| [Q7](#q7) | 🟡 | expression eval | Use ! to change a variable's value mid-session |
+| [Q8](#q8) | 🟡 | .pdbrc | Write a .pdbrc that aliases ll and pp |
+| [Q9](#q9) | 🟡 | debug from CLI | Launch pdb from the command line with python -m pdb |
+| [Q10](#q10) | 🟠 | timed breakpoint | Use a breakpoint condition to only trigger after 5 iterations |
+| [Q11](#q11) | 🟠 | ipdb | Replace pdb with ipdb for tab completion and syntax highlighting |
+| [Q12](#q12) | 🟠 | Capstone | Debug a recursive function hitting max depth with pdb |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 🟢 · entry points — Insert breakpoint() to pause before a crash
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py#q1--entry-points--insert-breakpoint-to-pause-before-a-crash)
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 You have a function that raises a `KeyError`. Insert a `breakpoint()` call on the line immediately before the crash so you can inspect the local variables before the exception occurs.
 
@@ -71,9 +74,13 @@ At the `(Pdb)` prompt:
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · core commands — Use p/pp/l/n/s/c in sequence to trace a bug
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py#q2--core-commands--use-pppplnsc-in-sequence-to-trace-a-bug)
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 Place a `breakpoint()` inside `apply_multiplier` below. Then step through it using these commands in sequence: `l` (list source), `p multiplier` (inspect variable), `n` (next line), `pp vars()` (print all locals), `c` (continue).
 
@@ -124,9 +131,13 @@ Session:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · navigation — Use w/u/d to inspect call stack frames
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py#q3--navigation--use-wud-to-inspect-call-stack-frames)
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 Given this call chain, place a `breakpoint()` inside `inner()`. Once paused, use `w` to view the full stack, `u` to go up to `middle()`'s frame, inspect `step` there, then `u` again to reach `outer()`'s frame and inspect `initial`.
 
@@ -177,9 +188,13 @@ def inner(value):
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · breakpoints — Set a conditional breakpoint: only stop when x > 100
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py#q4--breakpoints--set-a-conditional-breakpoint-only-stop-when-x--100)
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 You have a loop that runs 200 iterations. You only want pdb to pause when `x` exceeds 100. Set a conditional breakpoint from the pdb prompt using `b`, not an inline `if/breakpoint()` guard.
 
@@ -230,9 +245,13 @@ def process_values():
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · post-mortem — Run pdb.pm() on a script that raises an unhandled exception
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py#q5--post-mortem--run-pdbpm-on-a-script-that-raises-an-unhandled-exception)
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 Wrap the call below in a `try/except` block and call `pdb.post_mortem()` in the `except` clause. Observe that pdb opens at the exact frame where the exception was raised.
 
@@ -281,9 +300,13 @@ At the pdb prompt:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · inspect locals — Use locals() and pp to pretty-print all frame variables
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py#q6--inspect-locals--use-locals-and-pp-to-pretty-print-all-frame-variables)
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 Inside a pdb session, use `pp locals()` to dump all local variables at once. Then use `pp vars()` and compare output. Also try `args` to see only the function's arguments.
 
@@ -329,9 +352,13 @@ label = 'high_value'
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · expression eval — Use ! to change a variable's value mid-session
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py#q7--expression-eval--use--to-change-a-variables-value-mid-session)
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 Inside a pdb session, modify a variable to test whether your fix would work — without actually editing source code. Use `!` prefix for variable names that clash with pdb commands.
 
@@ -373,9 +400,13 @@ At `(Pdb)`, assign `tier = "gold"` and then `n` to step to the next line. Check 
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · .pdbrc — Write a .pdbrc that aliases ll to longlist and pp to pretty-print locals
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py#q8--pdbrc--write-a-pdbrc-that-aliases-ll-and-pp)
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 Write the contents of a `.pdbrc` file that defines two aliases: `ll` as a shortcut to show the full file listing, and `pl` as a shortcut to pretty-print all local variables.
 
@@ -416,9 +447,13 @@ Usage at the `(Pdb)` prompt:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · debug from CLI — Launch pdb from the command line with python -m pdb script.py
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py#q9--debug-from-cli--launch-pdb-from-the-command-line-with-python--m-pdb-scriptpy)
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 Describe the exact shell command to launch a script named `worker.py` under pdb. Then list: what command runs it to the first breakpoint, what happens if the script crashes, and how to restart the script without leaving pdb.
 
@@ -454,9 +489,13 @@ Once at the pdb prompt:
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · timed breakpoint — Use a breakpoint condition to only trigger after 5 loop iterations
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py#q10--timed-breakpoint--use-a-breakpoint-condition-to-only-trigger-after-5-loop-iterations)
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 Write a loop that runs 20 iterations. Use a counter-based condition so `breakpoint()` only fires after the 5th iteration. Do not use `if i == 5: breakpoint()` inline — implement it using a mutable counter or a conditional breakpoint set from pdb.
 
@@ -503,9 +542,13 @@ python -m pdb script.py
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · ipdb — Replace pdb with ipdb for tab completion and syntax highlighting
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py#q11--ipdb--replace-pdb-with-ipdb-for-tab-completion-and-syntax-highlighting)
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 Show two ways to use `ipdb` instead of `pdb`: direct import, and the `PYTHONBREAKPOINT` environment variable. Then show how to disable all breakpoints in a CI environment without changing source code.
 
@@ -554,9 +597,13 @@ env:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Capstone — Describe a step-by-step pdb session to debug a recursive function hitting max depth
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py#q12--capstone--describe-a-step-by-step-pdb-session-to-debug-a-recursive-function-hitting-max-depth)
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 You have a recursive function that raises `RecursionError: maximum recursion depth exceeded`. Describe the exact pdb commands you would run — in order — to identify: which call is looping, what data is causing it, and at what depth it fails.
 

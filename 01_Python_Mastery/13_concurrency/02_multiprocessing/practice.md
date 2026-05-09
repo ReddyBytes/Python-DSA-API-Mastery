@@ -8,27 +8,31 @@
 
 | # | Difficulty | Concept |
 |---|---|---|
-| Q1 | 🟢 Easy | mp.Process basics: spawn, start, join |
-| Q2 | 🟢 Easy | ProcessPoolExecutor: parallelize CPU function |
-| Q3 | 🟡 Medium | __name__ guard: why required |
-| Q4 | 🟡 Medium | mp.Queue: pass results from child to parent |
-| Q5 | 🟡 Medium | Pool.map vs Pool.starmap: difference |
-| Q6 | 🟡 Medium | Pool.imap: process results lazily |
-| Q7 | 🟡 Medium | Shared memory: mp.Value and mp.Array |
-| Q8 | 🟡 Medium | mp.Manager: shared dict across processes |
-| Q9 | 🟡 Medium | Pickling: which objects cannot be pickled |
-| Q10 | 🟡 Medium | ProcessPoolExecutor vs ThreadPoolExecutor: choose |
-| Q11 | 🟠 Hard | Fan-out: parallelize across all CPU cores |
-| Q12 | 🟠 Hard | Error handling: capture exceptions from child |
-| Q13 | 🟡 Medium | mp.Pipe: bidirectional communication |
-| Q14 | 🟡 Medium | chunksize: optimize Pool.map for large inputs |
-| Q15 | 🟠 Hard | Capstone: parallel word count across N files |
+| [Q1](#q1) | 🟢 Easy | mp.Process basics: spawn, start, join |
+| [Q2](#q2) | 🟢 Easy | ProcessPoolExecutor: parallelize CPU function |
+| [Q3](#q3) | 🟡 Medium | __name__ guard: why required |
+| [Q4](#q4) | 🟡 Medium | mp.Queue: pass results from child to parent |
+| [Q5](#q5) | 🟡 Medium | Pool.map vs Pool.starmap: difference |
+| [Q6](#q6) | 🟡 Medium | Pool.imap: process results lazily |
+| [Q7](#q7) | 🟡 Medium | Shared memory: mp.Value and mp.Array |
+| [Q8](#q8) | 🟡 Medium | mp.Manager: shared dict across processes |
+| [Q9](#q9) | 🟡 Medium | Pickling: which objects cannot be pickled |
+| [Q10](#q10) | 🟡 Medium | ProcessPoolExecutor vs ThreadPoolExecutor: choose |
+| [Q11](#q11) | 🟠 Hard | Fan-out: parallelize across all CPU cores |
+| [Q12](#q12) | 🟠 Hard | Error handling: capture exceptions from child |
+| [Q13](#q13) | 🟡 Medium | mp.Pipe: bidirectional communication |
+| [Q14](#q14) | 🟡 Medium | chunksize: optimize Pool.map for large inputs |
+| [Q15](#q15) | 🟠 Hard | Capstone: parallel word count across N files |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · Process Basics — mp.Process, start, join
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Write a `worker(name, n)` function that prints its PID and computes `sum(range(n))`. Spawn two `mp.Process` objects targeting it with different arguments. Start both and join both. Print the PIDs to show they are different from the parent.
 
@@ -62,9 +66,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · ProcessPoolExecutor — parallelize a CPU-bound function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Write `is_prime(n)` that checks primality by trial division. Use `ProcessPoolExecutor` to test all integers from 2 to 50 in parallel. Print the primes found.
 
@@ -101,9 +109,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · Guards — the if __name__ == '__main__' requirement
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a script that creates a `Pool(2)` and calls `pool.map(square, [1,2,3])`. Show it works correctly with the guard. Explain in comments what happens on Windows/macOS without the guard.
 
@@ -141,9 +153,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · IPC — mp.Queue: pass results from child to parent
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Spawn a child process that computes the squares of `[1, 2, 3, 4, 5]` and puts each result onto an `mp.Queue`. In the parent, collect all results and print them.
 
@@ -184,9 +200,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · Pool Methods — Pool.map vs Pool.starmap
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a `power(base, exp)` function. Use `Pool.starmap` to compute `[(2,3), (3,4), (4,5)]` in parallel. Explain in comments why `Pool.map` cannot be used directly here.
 
@@ -223,9 +243,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · Lazy Processing — Pool.imap
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Use `Pool.imap` to compute squares of integers 0–9 lazily. Print each result as it comes without waiting for all to complete. Use `chunksize=3`. Show that `imap` returns an iterator, not a list.
 
@@ -260,9 +284,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · Shared Memory — mp.Value and mp.Array
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Create an `mp.Value('i', 0)` counter. Spawn 4 processes each incrementing it 250 times (total: 1000). Use `mp.Lock` to avoid race conditions. Verify the final value is 1000. Also create an `mp.Array('d', 5)` and show two processes can read from it.
 
@@ -306,9 +334,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · Manager — shared dict across processes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Use `mp.Manager()` to create a shared dict. Spawn 3 processes each writing a different key to the dict. After all finish, print the full dict in the parent.
 
@@ -345,9 +377,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · Pickling — which objects cannot be pickled
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Try passing a lambda to `Pool.map`. Show the `PicklingError`. Then fix it using a named top-level function. Also show that a local (nested) function cannot be pickled. Explain in comments why.
 
@@ -396,9 +432,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · Decision — ProcessPoolExecutor vs ThreadPoolExecutor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Write two benchmark functions — `cpu_task(n)` (sum of squares) and `io_task(delay)` (time.sleep). Run each with both `ThreadPoolExecutor` and `ProcessPoolExecutor` (4 workers, 4 tasks). Print timings and explain which executor is better for each case.
 
@@ -445,9 +485,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · Fan-out — parallelize across all CPU cores
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Given a list of 1000 numbers, write `process_item(x)` that does some CPU work (compute x^3 + sqrt(x) + log(x+1)). Split the list into `cpu_count()` chunks and process each chunk in a separate process using `ProcessPoolExecutor`. Collect and merge results.
 
@@ -489,9 +533,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Error Handling — capture exceptions from child processes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write `risky(x)` that raises `ValueError("bad!")` when `x == 3`. Use `ProcessPoolExecutor.submit` on values 1–5. Catch the exception from the future and continue processing the others. Print which values succeeded and which failed.
 
@@ -528,9 +576,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · IPC — mp.Pipe bidirectional communication
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Use `mp.Pipe(duplex=True)` to set up bidirectional communication between a parent and a child process. Parent sends a list of numbers; child squares each and sends the results back.
 
@@ -571,9 +623,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟡 · Performance — chunksize optimization
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Apply `square(x)` (returns `x**2`) to a list of 10,000 integers using `Pool.map` with `chunksize=1`, `chunksize=100`, and `chunksize=1000`. Time each and explain the tradeoff.
 
@@ -614,9 +670,13 @@ if __name__ == '__main__':
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟠 · Capstone — Parallel word count across N files
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Create 4 in-memory text strings (simulate files). Write `count_words(text)` that returns a `Counter` of word frequencies. Use `ProcessPoolExecutor` to count words in all texts in parallel. Merge the partial counters in the parent to get a global word count.
 

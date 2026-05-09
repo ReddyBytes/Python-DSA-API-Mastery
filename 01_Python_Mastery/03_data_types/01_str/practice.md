@@ -9,15 +9,20 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1–Q3 | Creating strings · f-strings | 🟢 |
-| Q4–Q6 | Indexing · Slicing | 🟢 |
-| Q7–Q10 | String methods | 🟡 |
-| Q11–Q12 | Immutability · replace | 🟡 |
-| Q13–Q15 | Real-world patterns | 🟡 |
+| [Q1](#q1)–Q3 | Creating strings · f-strings | 🟢 |
+| [Q4](#q4)–Q6 | Indexing · Slicing | 🟢 |
+| [Q7](#q7)–Q10 | String methods | 🟡 |
+| [Q11](#q11)–Q12 | Immutability · replace | 🟡 |
+| [Q13](#q13)–Q15 | Real-world patterns | 🟡 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · str — Creating Strings
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 Create a string three different ways: using single quotes, double quotes, and triple quotes. Print all three.
@@ -56,7 +61,12 @@ print(triple)
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · str — f-strings
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 `name = "Alice"`, `age = 25`. Print `"Alice is 25 years old"` using an f-string. Then also print `"Next year Alice will be 26"` — compute the age inside the f-string.
@@ -92,7 +102,12 @@ print(f"Next year {name} will be {age + 1}")
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · str — Raw Strings
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Print `\n` literally (as two characters: backslash and n) without it being treated as a newline. Show two ways to do it.
@@ -127,7 +142,12 @@ print("\\n")        # \n
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · str — Indexing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 `text = "Python"`. Print the first character, the last character, and the second-to-last character. Use both positive and negative indexing.
@@ -163,7 +183,12 @@ print(text[-2])   # o   ← second-to-last
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · str — Slicing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 `text = "Hello, World!"`. Print `"World"` using slicing. Then print just `"Hello"` using slicing.
@@ -197,7 +222,12 @@ print(text[0:5])    # Hello  → start at 0, stop before 5
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · str — Slicing with Step
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 `text = "abcdefgh"`. Print every other character (a, c, e, g). Then print the string reversed.
@@ -231,7 +261,12 @@ print(text[::-1])   # hgfedcba  → reversed
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · str — String Methods
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 `email = "  Alice.SHARMA@Gmail.Com  "`. Strip the whitespace from both ends and convert everything to lowercase in a single chained expression. Print the result.
@@ -265,7 +300,12 @@ print(email.strip().lower())
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · str — split and join
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 `sentence = "apple,banana,cherry"`. Split it by the comma into a list. Then join the list back together using ` - ` as the separator.
@@ -300,7 +340,12 @@ print(" - ".join(parts))      # apple - banana - cherry
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · str — find and replace
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 `msg = "I love cats. Cats are great!"`. Replace `"cats"` with `"dogs"` and `"Cats"` with `"Dogs"`. Print the result.
@@ -335,7 +380,12 @@ print(msg)
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · str — String Checking
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 `phone = "9876543210"`. Check that it is a valid phone number: all digits and exactly 10 characters long. Print `"Valid"` or `"Invalid"`.
@@ -371,7 +421,12 @@ else:
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · str — Immutability
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 `word = "hello"`. Try to change the first character to `"H"` using `word[0] = "H"`. What error do you get? Then fix it the correct way and print `"Hello"`.
@@ -409,7 +464,12 @@ print(word)   # Hello
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · str — Count and Find
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 `text = "banana"`. Count how many times the letter `"a"` appears. Find the index of the first occurrence of `"n"`.
@@ -443,7 +503,12 @@ print(text.find("n"))    # 2
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · str — Real-world CSV Parsing
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 `line = "Alice,28,Mumbai,Engineer"`. Split this CSV line into exactly 4 variables: `name`, `age`, `city`, `role`. Print each one on its own line.
@@ -480,7 +545,12 @@ print(role)   # Engineer
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · str — Real-world Email Validation
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 Write a function that checks whether a string is a valid email address. It must contain `"@"` AND end with either `".com"` or `".in"`. Test it on `"user@example.com"`, `"bad-email"`, and `"user@site.in"`.
@@ -522,7 +592,12 @@ print(is_valid_email("user@site.in"))       # True
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · str — Real-world Word Manipulation
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 `text = "the quick brown fox"`. Do two things:

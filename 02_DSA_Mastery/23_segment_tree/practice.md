@@ -30,6 +30,9 @@
 <a id="q1"></a>
 ### Q1 · structure — Segment Tree Size Allocation
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Given an array of size `n`, what is the safe allocation size for the segment tree array? Why is `2*n` not always enough? Give the formula and explain the worst case.
@@ -74,6 +77,9 @@ tree = [0] * (4 * n)   # safe: 20 slots
 
 <a id="q2"></a>
 ### Q2 · structure — Tree Node Relationships
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 🟢 Basic
 
@@ -132,6 +138,9 @@ print(parent(1))    # 0 — parent of root is 0 (out of tree, ignore)
 <a id="q3"></a>
 ### Q3 · build — Build From Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** Implement `build(arr, tree, node, start, end)` that constructs a segment tree storing range sums. After building `arr = [1, 3, 5, 7, 9, 11]`, what is `tree[1]` (the root)?
@@ -181,6 +190,9 @@ assert tree[1] == sum(arr)             # 36
 
 <a id="q4"></a>
 ### Q4 · query — Range Sum Query
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 🟢 Basic
 
@@ -242,6 +254,9 @@ assert query(tree, 1, 0, n-1, 2, 2) == 5   # single element
 <a id="q5"></a>
 ### Q5 · update — Point Update
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 🟢 Basic
 
 **Problem:** After building a segment tree for `arr = [1, 3, 5, 7, 9, 11]`, implement `update(i, val)` that sets `arr[i] = val` and keeps the tree consistent. After `update(2, 10)`, what should `query(1, 4)` return?
@@ -297,6 +312,9 @@ tree = [0] * (4 * n)
 
 <a id="q6"></a>
 ### Q6 · query — Three Overlap Cases
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 🟢 Basic
 
@@ -361,6 +379,9 @@ Case 1: the node's segment and the query range don't touch at all. Case 2: the n
 
 <a id="q7"></a>
 ### Q7 · query — Range Minimum Query
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -437,6 +458,9 @@ print(st.query(4, 6))  # 3  (min of [9, 3, 8])
 
 <a id="q8"></a>
 ### Q8 · query — Range Maximum Query
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -515,6 +539,9 @@ print(st.query(0, 2))  # 7
 <a id="q9"></a>
 ### Q9 · query — Range GCD Query
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** Implement a segment tree that answers range GCD queries. For `arr = [12, 8, 6, 4]`, what is `gcd(0, 3)` and `gcd(0, 1)`? Why does GCD work as a merge function but average does not?
@@ -579,6 +606,9 @@ print(query_gcd(tree, 1, 0, n-1, 0, 1))  # gcd(12,8) = 4
 
 <a id="q10"></a>
 ### Q10 · tradeoffs — Segment Tree vs Prefix Sum vs BIT
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -646,6 +676,9 @@ for i, v in enumerate(arr):
 
 <a id="q11"></a>
 ### Q11 · bit — Fenwick Tree Point Update and Prefix Sum
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -717,6 +750,9 @@ print(ft.range_sum(0, 4))   # 24  (was 15, added 9)
 <a id="q12"></a>
 ### Q12 · bit — Fenwick Range Update With Difference Array
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** A Fenwick tree natively only does point updates. How can you support "add delta to all elements in range [l, r]" using a Fenwick tree? Implement it and verify: starting from `[0, 0, 0, 0, 0]`, after `range_add(1, 3, 5)` what is each element?
@@ -787,6 +823,9 @@ for i in range(5):
 
 <a id="q13"></a>
 ### Q13 · mistakes — Wrong Tree Size Crash
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 🟡 Intermediate
 
@@ -867,6 +906,9 @@ print("Sum:", tree_fixed[1])  # 60
 <a id="q14"></a>
 ### Q14 · mistakes — Indexing Convention Consistency
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 🟡 Intermediate
 
 **Problem:** The following build function uses 1-indexed child formulas, but the query function uses 0-indexed child formulas. Find the bug and explain what wrong answer it produces for `query(1, 0, 3, 0, 1)` on `arr = [1, 2, 3, 4]`.
@@ -944,6 +986,9 @@ print(query_fixed(tree, 1, 0, n-1, 0, 1))  # 3 correct
 
 <a id="q15"></a>
 ### Q15 · lazy — Lazy Propagation Range Add and Range Sum
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -1045,6 +1090,9 @@ print(st.range_sum(1, 3))   # 39  (12+13+14)
 <a id="q16"></a>
 ### Q16 · lazy — Push-Down Mechanics
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** Explain the `_push_down` function in detail. Why must it be called before recursing into children in BOTH the `range_add` and `range_sum` functions? What happens if you forget it in `range_sum`?
@@ -1118,6 +1166,9 @@ def _push_down_explained(tree, lazy, node, start, end):
 
 <a id="q17"></a>
 ### Q17 · lazy — Lazy Propagation Missing Push-Down Bug
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 🟠 Advanced
 
@@ -1224,6 +1275,9 @@ def range_sum_fixed(self, l, r, node=1, start=0, end=None):
 <a id="q18"></a>
 ### Q18 · merge — Interval Merge Queries
 
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** Design a segment tree that tracks the maximum length of consecutive 1s in an array of 0s and 1s. Each node must store more than just one value. For `arr = [1, 1, 0, 1, 1, 1, 0, 1]`, what is the length of the longest run of 1s?
@@ -1304,6 +1358,9 @@ print("Longest run of 1s:", result.max_run)  # 3  (indices 3, 4, 5)
 <a id="q19"></a>
 ### Q19 · merge — Non-Associative Merge Function Trap
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 🟠 Advanced
 
 **Problem:** A developer uses `average` as the merge function to answer "average of range [l, r]". For `arr = [1, 2, 3]`, what wrong answer does the root produce, and why? What is the correct fix?
@@ -1381,6 +1438,9 @@ print(f"Average of [1,2]: {sub_sum/sub_count}")         # 1.5 correct
 
 <a id="q20"></a>
 ### Q20 · advanced — Coordinate Compression Count in Range
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 🟠 Advanced
 

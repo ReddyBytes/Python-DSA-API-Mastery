@@ -41,6 +41,8 @@
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
+
+
 **Problem:** Write `is_min_heap(arr: list[int]) -> bool` that returns `True` if the array satisfies the min-heap property. Test it on `[1, 3, 5, 7, 9, 8]` (valid) and `[1, 3, 5, 2, 9, 8]` (invalid — `arr[3]=2` violates `parent=3`).
 
 <details>
@@ -76,6 +78,8 @@ print(is_min_heap([1, 3, 5, 2, 9, 8]))   # False — arr[1]=3 > arr[3]=2
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
+
+
 **Problem:** Write `is_max_heap(arr: list[int]) -> bool` that returns `True` if the array satisfies the max-heap property. Test on `[9, 7, 8, 3, 5, 6]` (valid) and `[9, 7, 8, 10, 5, 6]` (invalid).
 
 <details>
@@ -110,6 +114,8 @@ print(is_max_heap([9, 7, 8, 10, 5, 6]))   # False — arr[1]=7 < arr[3]=10
 ### Q3 🟢 · heapq push and pop
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Using `heapq`, push the values `[5, 1, 8, 3, 9, 2]` one at a time into an empty heap, then pop all elements and confirm they come out in ascending order.
 
@@ -149,6 +155,8 @@ assert result == sorted([5, 1, 8, 3, 9, 2])
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
+
+
 **Problem:** Given `data = [7, 3, 1, 9, 4, 6, 2]`, use `heapq.heapify` to convert it to a heap in-place. Then assert that `data[0]` equals the minimum (1) and that the original list reference has been modified.
 
 <details>
@@ -184,6 +192,8 @@ print(data)                  # e.g. [1, 3, 2, 9, 4, 6, 7]
 ### Q5 🟢 · nlargest and nsmallest
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Given `nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]`, use `heapq.nlargest` and `heapq.nsmallest` to find the 3 largest and 3 smallest values. Then explain when you should use `sorted()` instead.
 
@@ -223,6 +233,8 @@ print("Smallest 3:", bottom3)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
+
+
 **Problem:** Python's `heapq` is always a min-heap. Simulate a max-heap by negating values. Push `[4, 7, 2, 9, 1]` into a max-heap and pop them in descending order.
 
 <details>
@@ -260,6 +272,8 @@ assert result == sorted([4, 7, 2, 9, 1], reverse=True)
 ### Q7 🟢 · Peek without popping — heap[0]
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Build a min-heap from `[5, 3, 8, 1, 6]`. Show how to read the minimum element without removing it. Then show what changes if you use `heappop` instead of `heap[0]`.
 
@@ -301,6 +315,8 @@ assert min_val == popped   # both give 1, but pop changed the heap
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
+
+
 **Problem:** Implement `heap_sort(arr: list[int]) -> list[int]` using only `heapq` operations. Do not use Python's built-in `sorted()`. Test on `[5, 3, 8, 1, 9, 2, 7, 4, 6]`.
 
 <details>
@@ -336,6 +352,8 @@ assert result == list(range(1, 10))
 ### Q9 🟡 · Kth largest element
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Given `nums = [3, 2, 1, 5, 6, 4]` and `k = 2`, find the 2nd largest element. Implement using a min-heap of size k. Expected output: `5`.
 
@@ -375,6 +393,8 @@ print(find_kth_largest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4))   # 4
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
+
+
 **Problem:** Given `nums = [7, 10, 4, 3, 20, 15]` and `k = 3`, find the 3rd smallest element. Expected: `7`. Use a max-heap of size k (via negation).
 
 <details>
@@ -412,6 +432,8 @@ print(find_kth_smallest([1, 2, 3], 1))                # 1
 ### Q11 🟡 · Top-K largest elements
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Given `nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]` and `k = 4`, return the 4 largest values (any order). Expected: `{5, 5, 6, 9}`. Implement with a min-heap of size k and compare to `heapq.nlargest`.
 
@@ -452,6 +474,8 @@ print(heapq.nlargest(4, nums))         # [9, 6, 5, 5]  ← same result
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
+
+
 **Problem:** Given `nums = [1, 1, 1, 2, 2, 3]` and `k = 2`, return the 2 most frequent elements. Expected: `[1, 2]`. Use `Counter` for frequencies and a min-heap of size k on `(frequency, value)` pairs.
 
 <details>
@@ -491,6 +515,8 @@ print(top_k_frequent([1], 1))                    # [1]
 ### Q13 🟡 · Merge K sorted lists
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Given `lists = [[1, 4, 7], [2, 5, 8], [3, 6, 9]]`, merge all lists into one sorted list using a min-heap. Expected: `[1, 2, 3, 4, 5, 6, 7, 8, 9]`.
 
@@ -537,6 +563,8 @@ print(merge_k_sorted_lists([[1, 4, 7], [2, 5, 8], [3, 6, 9]]))
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
+
+
 **Problem:** Given `points = [[1, 3], [-2, 2], [5, 8], [0, 1]]` and `k = 2`, return the 2 closest points to the origin `(0,0)` by Euclidean distance. Expected: `[[-2, 2], [0, 1]]` (order not required).
 
 <details>
@@ -575,6 +603,8 @@ print(result)   # [[-2, 2], [0, 1]]
 ### Q15 🟡 · Task scheduler with cooldown
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Given `tasks = ["A","A","A","B","B","B"]` and cooldown `n = 2`, find the minimum CPU intervals to finish all tasks. The same task can't run again within `n` intervals. Expected: `8`.
 
@@ -630,6 +660,8 @@ print(least_interval(["A","A","A","B","B","B"], 0))   # 6
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
+
+
 **Problem:** Write a function `benchmark_heap_vs_sort(n, k)` that compares the time to find the top-k largest elements using (a) `sorted()` and (b) `heapq.nlargest()`. Run it for `n=1_000_000, k=10`. Print both times and explain when you'd choose each approach.
 
 <details>
@@ -675,6 +707,8 @@ benchmark_heap_vs_sort(1_000_000, 10)
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
+
+
 **Problem:** Given `nums = [1, 3, -1, -3, 5, 3, 6, 7]` and `k = 3`, return the maximum of each sliding window. Expected: `[3, 3, 5, 5, 6, 7]`. Use a max-heap with lazy deletion.
 
 <details>
@@ -716,6 +750,8 @@ print(max_sliding_window([1, 3, -1, -3, 5, 3, 6, 7], 3))
 ### Q18 🟡 · Heap as priority queue
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Design a `PriorityQueue` class with `push(priority, item)`, `pop()` (returns item with lowest priority number first), and `peek()`. Use a counter to break ties so no `TypeError` occurs when priorities are equal.
 
@@ -772,6 +808,8 @@ print(pq.pop())   # "low"
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
+
+
 **Problem:** Show that `heapq.heappush(h, (1, {"name": "a"}))` followed by `heapq.heappush(h, (1, {"name": "b"}))` raises `TypeError`. Then fix it with a counter tiebreaker.
 
 <details>
@@ -815,6 +853,8 @@ print(item)   # {"name": "a"}  — same priority, FIFO order
 ### Q20 🟡 · heapify in loop — O(n²) mistake
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Show why calling `heapq.heapify()` inside a for loop is an O(n²) mistake. Write the broken version and the correct fix using `heapq.heappush()` for streaming data.
 
@@ -877,6 +917,8 @@ assert h1[0] == h2[0] == 0
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
+
+
 **Problem:** Design a `MedianFinder` class that supports `add_num(num)` in O(log n) and `find_median()` in O(1). Use two heaps: a max-heap for the lower half and a min-heap for the upper half.
 
 Test sequence: add `[5, 10, 1, 4, 8]` one at a time and print the running median after each insertion.
@@ -934,6 +976,8 @@ for num in [5, 10, 1, 4, 8]:
 ### Q22 🔴 · Sliding median with lazy deletion
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Given `nums = [1, 3, -1, -3, 5, 3, 6, 7]` and `k = 3`, compute the median of each sliding window. Expected: `[1.0, -1.0, -1.0, 3.0, 5.0, 6.0]`.
 
@@ -1032,6 +1076,8 @@ print(sliding_median([1, 3, -1, -3, 5, 3, 6, 7], 3))
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
+
+
 **Problem:** Given a string `s`, rearrange its characters so no two adjacent characters are the same. Return any valid arrangement, or `""` if impossible. Example: `"aab"` → `"aba"`, `"aaab"` → `""`.
 
 <details>
@@ -1082,6 +1128,8 @@ print(reorganize_string("vvvlo"))  # "vlvov" or similar
 ### Q24 🔴 · Median stream with remove support
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Design a `DynamicMedianFinder` supporting `add_num(num)`, `remove_num(num)`, and `find_median()`. Demonstrate it with: add `[1, 2, 3, 4, 5]`, then remove `3`, then find the median (should be `2.5`).
 
@@ -1163,6 +1211,8 @@ print(f"After removing 3:      {dmf.find_median()}")   # 2.5
 ### Q25 🔴 · Design a streaming top-K tracker
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Design a `TopKTracker(k)` class that processes a stream of `(item, score)` pairs and always answers "what are the current top-k items by score?" in O(log k) per update and O(k) per query. Items can be updated (their scores can increase).
 

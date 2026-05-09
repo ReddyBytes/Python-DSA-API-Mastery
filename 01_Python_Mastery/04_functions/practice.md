@@ -9,45 +9,50 @@
 
 | # | Concept | Level |
 |---|---------|-------|
-| Q1 | Ch1 — Refactor duplicated code | 🟢 |
-| Q2 | Ch2 — Function anatomy | 🟢 |
-| Q3 | Ch3 — Call stack trace | 🟢 |
-| Q4 | Ch4 — Positional + keyword args | 🟢 |
-| Q5 | Ch4 — Mutable default arg trap | 🟡 |
-| Q6 | Ch4 — *args | 🟢 |
-| Q7 | Ch4 — **kwargs | 🟢 |
-| Q8 | Ch4 — All 7 parameter types | 🟡 |
-| Q9 | Ch5 — Return with early returns | 🟡 |
-| Q10 | Ch5 — Return vs Print | 🟢 |
-| Q11 | Ch6 — LEGB prediction | 🟡 |
-| Q12 | Ch6 — global and nonlocal | 🟡 |
-| Q13 | Ch7 — First-class functions | 🟡 |
-| Q14 | Ch7 — Higher-order function | 🟡 |
-| Q15 | Ch7 — compose() | 🟠 |
-| Q16 | Ch8 — Lambda sort | 🟡 |
-| Q17 | Ch8 — Lambda with map/filter | 🟡 |
-| Q18 | Ch9 — Basic closure | 🟡 |
-| Q19 | Ch10 — Basic decorator | 🟡 |
-| Q20 | Ch11 — Recursion: factorial | 🟡 |
-| Q21 | Ch11 — Fix broken recursion | 🟢 |
-| Q22 | Ch12 — Generator: lazy squares | 🟡 |
-| Q23 | Ch12 — Generator pipeline | 🟠 |
-| Q24 | Ch13 — Type annotations | 🟡 |
-| Q25 | Ch14 — Google-style docstring | 🟡 |
-| Q26 | Ch15 — Pure vs impure | 🟡 |
-| Q27 | Ch16 — lru_cache | 🟠 |
-| Q28 | Ch16 — functools.partial | 🟡 |
-| Q29 | Ch17 — Introspection | 🟡 |
-| Q30 | Ch18 — Capstone: make_validator | 🟠 |
-| Q31 | Mixed — retry decorator | 🟠 |
-| Q32 | Mixed — Decorator with arguments | 🟠 |
-| Q33 | Mixed — Generator chained pipeline | 🟠 |
-| Q34 | Mixed — Debug TypeError | 🟡 |
-| Q35 | Mixed — Rate limiter using closures | 🟠 |
+| [Q1](#q1) | Ch1 — Refactor duplicated code | 🟢 |
+| [Q2](#q2) | Ch2 — Function anatomy | 🟢 |
+| [Q3](#q3) | Ch3 — Call stack trace | 🟢 |
+| [Q4](#q4) | Ch4 — Positional + keyword args | 🟢 |
+| [Q5](#q5) | Ch4 — Mutable default arg trap | 🟡 |
+| [Q6](#q6) | Ch4 — *args | 🟢 |
+| [Q7](#q7) | Ch4 — **kwargs | 🟢 |
+| [Q8](#q8) | Ch4 — All 7 parameter types | 🟡 |
+| [Q9](#q9) | Ch5 — Return with early returns | 🟡 |
+| [Q10](#q10) | Ch5 — Return vs Print | 🟢 |
+| [Q11](#q11) | Ch6 — LEGB prediction | 🟡 |
+| [Q12](#q12) | Ch6 — global and nonlocal | 🟡 |
+| [Q13](#q13) | Ch7 — First-class functions | 🟡 |
+| [Q14](#q14) | Ch7 — Higher-order function | 🟡 |
+| [Q15](#q15) | Ch7 — compose() | 🟠 |
+| [Q16](#q16) | Ch8 — Lambda sort | 🟡 |
+| [Q17](#q17) | Ch8 — Lambda with map/filter | 🟡 |
+| [Q18](#q18) | Ch9 — Basic closure | 🟡 |
+| [Q19](#q19) | Ch10 — Basic decorator | 🟡 |
+| [Q20](#q20) | Ch11 — Recursion: factorial | 🟡 |
+| [Q21](#q21) | Ch11 — Fix broken recursion | 🟢 |
+| [Q22](#q22) | Ch12 — Generator: lazy squares | 🟡 |
+| [Q23](#q23) | Ch12 — Generator pipeline | 🟠 |
+| [Q24](#q24) | Ch13 — Type annotations | 🟡 |
+| [Q25](#q25) | Ch14 — Google-style docstring | 🟡 |
+| [Q26](#q26) | Ch15 — Pure vs impure | 🟡 |
+| [Q27](#q27) | Ch16 — lru_cache | 🟠 |
+| [Q28](#q28) | Ch16 — functools.partial | 🟡 |
+| [Q29](#q29) | Ch17 — Introspection | 🟡 |
+| [Q30](#q30) | Ch18 — Capstone: make_validator | 🟠 |
+| [Q31](#q31) | Mixed — retry decorator | 🟠 |
+| [Q32](#q32) | Mixed — Decorator with arguments | 🟠 |
+| [Q33](#q33) | Mixed — Generator chained pipeline | 🟠 |
+| [Q34](#q34) | Mixed — Debug TypeError | 🟡 |
+| [Q35](#q35) | Mixed — Rate limiter using closures | 🟠 |
 
 ---
 
+<a id="q1"></a>
+
 ### Q1 · Ch1 — Refactor duplicated code
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 **Problem:**
 You have this repeated code in 3 places. Refactor it into a reusable function.
@@ -88,7 +93,12 @@ process_item("cherry", 3.0)
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Ch2 — Function anatomy
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Problem:**
 Write a function `calculate_discount(price, discount_percent, min_price=0)` with: a Google-style docstring, an early return guard (price must be > 0), and a return value. Include all 5 parts: keyword `def`, name, parameters, body, return.
@@ -137,7 +147,12 @@ print(calculate_discount(-5, 20))         # 0     (guard fires)
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Ch3 — Call stack trace
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 **Problem:**
 Predict the output of this code WITHOUT running it. Then run it and check.
@@ -183,7 +198,12 @@ print(multiply(2, 3))
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Ch4 — Positional + keyword args
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Problem:**
 `send_notification(user_id, message, channel="email", priority=3)`. Call it 3 ways: (1) positional only, (2) override just priority=1, (3) override channel and priority by name.
@@ -229,7 +249,12 @@ print(send_notification("u001", "Hello", channel="push", priority=5))
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Ch4 — Mutable default arg trap
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 **Problem:**
 This function has a dangerous bug. Identify it, explain why it breaks, and fix it.
@@ -281,7 +306,12 @@ print(add_to_history("logout"))  # ['logout']  ← fresh list each time
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Ch4 — *args
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 **Problem:**
 Write `log(*args)` that prints each argument on its own line with a line number prefix. Then call it with 1, 3, and 5 arguments.
@@ -329,7 +359,12 @@ log("a", "b", "c", "d", "e")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Ch4 — **kwargs
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **Problem:**
 Write `create_user(name, email, **kwargs)` that builds and returns a dict with `name`, `email`, plus any extra keyword arguments. Call it with: just name+email, then with `role="admin"` and `active=True` added.
@@ -369,7 +404,12 @@ print(create_user("Bob", "bob@example.com", role="admin", active=True))
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Ch4 — All 7 parameter types
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Problem:**
 Write one function that uses all 7 parameter types in the correct order: positional-only, normal, default, *args, keyword-only, keyword-only with default, **kwargs.
@@ -417,7 +457,12 @@ full_example(
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Ch5 — Return with early returns
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 **Problem:**
 Write `validate_password(password)` that returns `(True, "OK")` if valid, or `(False, reason)` if not. Rules: must be at least 8 chars, must contain a digit, must not contain spaces. Use early returns for each failure case.
@@ -460,7 +505,12 @@ print(validate_password("secureP4ss"))      # (True, 'OK')
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Ch5 — Return vs Print
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Problem:**
 This function is broken when used in a calculation. Explain why and fix it.
@@ -507,7 +557,12 @@ print(result + 10)     # 20
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Ch6 — LEGB prediction
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 **Problem:**
 Predict what each `print` statement outputs. Then verify by running.
@@ -560,7 +615,12 @@ print(x)  # 3 → "global"
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Ch6 — global and nonlocal
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 **Problem:**
 Fix both broken functions. The first has an `UnboundLocalError`; the second can't modify the enclosing variable.
@@ -620,7 +680,12 @@ print(counter(3))   # 8
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Ch7 — First-class functions
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Problem:**
 Create a dict `operations` that maps string names to functions: `"add"`, `"subtract"`, `"multiply"`, `"square"`. Then write a `calculate(op_name, a, b=None)` function that looks up the operation by name and calls it.
@@ -674,7 +739,12 @@ print(calculate("square", 5))       # 25
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Ch7 — Higher-order function
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 **Problem:**
 Write `apply_twice(func, value)` that applies `func` to `value` twice. Test it with `lambda x: x * 2` and `lambda x: x + 3`.
@@ -713,7 +783,12 @@ print(apply_twice(double, 1))  # 4   — 1→2→4
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Ch7 — compose()
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Problem:**
 Write `compose(*functions)` that returns a new function applying each function right-to-left. Test: `transform = compose(str.upper, str.strip, lambda s: s + "!")` applied to `"  hello  "` should give `"HELLO!"`.
@@ -765,7 +840,12 @@ print(transform("hello"))   # "HELLO!"
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Ch8 — Lambda sort
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 **Problem:**
 Sort this list of employees by department (ascending), then by salary (descending) within department.
@@ -817,7 +897,12 @@ for emp in sorted_employees:
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Ch8 — Lambda with map/filter
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 **Problem:**
 `prices = [10.5, 25.0, 3.99, 150.0, 7.49]`. Use `filter` to keep only prices under $20, then use `map` to apply a 10% discount to each. Convert the final result to a list and print it.
@@ -854,7 +939,12 @@ print(result)  # [9.45, 3.59, 6.74]
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Ch9 — Basic closure
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 **Problem:**
 Write `make_multiplier(factor)` that returns a function. The returned function takes a number and multiplies it by `factor`. Create `double = make_multiplier(2)` and `triple = make_multiplier(3)`. Test with several values.
@@ -897,7 +987,12 @@ print(double(triple(4)))  # double(12) = 24
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · Ch10 — Basic decorator
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 **Problem:**
 Write a `@timer` decorator that measures how long a function takes to run and prints `"{func_name} took {time:.4f}s"`. Apply it to a function that does `time.sleep(0.1)`.
@@ -953,7 +1048,12 @@ print(output)  # done
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Ch11 — Recursion: factorial
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 **Problem:**
 Write `factorial(n)` recursively. It should raise `ValueError` for negative input, return 1 for n=0, and work correctly for n=1 through n=10. Print the results for n=0 through n=7.
@@ -1001,7 +1101,12 @@ for i in range(8):
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Ch11 — Fix broken recursion
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 **Problem:**
 This recursive function has a bug. Identify what's wrong and fix it.
@@ -1055,7 +1160,12 @@ count_down(5)
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Ch12 — Generator: lazy squares
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 **Problem:**
 Write a generator function `squares(n)` that yields the square of each number from 1 to n, one at a time. Then iterate over `squares(5)` and sum the results WITHOUT storing all values in a list first.
@@ -1105,7 +1215,12 @@ print(next(gen))  # 1  (computed immediately without building 1M-item list)
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Ch12 — Generator pipeline
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 **Problem:**
 Build a generator pipeline: (1) `read_numbers` yields numbers from a list, (2) `only_even` filters to only even numbers, (3) `doubled` doubles each. Chain them for `[1,2,3,4,5,6,7,8]` and print each result.
@@ -1158,7 +1273,12 @@ for result in pipeline:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Ch13 — Type annotations
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 **Problem:**
 Add proper type annotations to this function. Use `Optional` for parameters that can be None, `List` for list params, and the `->` return type.
@@ -1218,7 +1338,12 @@ def find_user_modern(
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Ch14 — Google-style docstring
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Problem:**
 Add a complete Google-style docstring to this function: description, Args section (with types), Returns section, Raises section, and an Example.
@@ -1276,7 +1401,12 @@ def divide(numerator, denominator):
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · Ch15 — Pure vs impure
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 **Problem:**
 Classify each function as pure or impure. For each impure one, explain what makes it impure, then rewrite it as a pure function.
@@ -1350,7 +1480,12 @@ print(result)    # [1, 2, 3, 'done']
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · Ch16 — lru_cache
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 **Problem:**
 Implement fibonacci WITHOUT cache, then add `@functools.lru_cache`. Print the 35th fibonacci number both ways and time the difference using `time.time()`. Then print `fib.cache_info()`.
@@ -1412,7 +1547,12 @@ print(fib.cache_info())
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Ch16 — functools.partial
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 **Problem:**
 `send_message(user_id, channel, message, priority=3)` is the base function. Use `functools.partial` to create: `send_email` (channel="email"), `send_sms` (channel="sms"). Test each with a user_id and message.
@@ -1462,7 +1602,12 @@ print(send_email("u003", message="URGENT", priority=1))
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · Ch17 — Introspection
+
+> 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
 
 **Problem:**
 Write a function `inspect_function(func)` that prints: the function's `__name__`, its `__doc__` (first line only), its `__defaults__`, and its `__annotations__`. Test it on a function you write with defaults and type hints.
@@ -1512,7 +1657,12 @@ inspect_function(greet)
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · Ch18 — Capstone
+
+> 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
 
 **Problem:**
 Build a `make_validator(min_len, max_len, required_chars)` function factory. It returns a validator function that checks if a string meets all criteria and returns `(True, None)` or `(False, "reason")`. Use a closure to capture the limits. Test with password validation.
@@ -1579,7 +1729,12 @@ for pw in tests:
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · Mixed — retry decorator
+
+> 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
 
 **Problem:**
 Write a `@retry(max_attempts=3, delay=0.0)` decorator that calls the function up to `max_attempts` times if it raises an exception. Print `"Attempt {n} failed: {error}"` each time. Raise the last exception if all attempts fail.
@@ -1649,7 +1804,12 @@ except ConnectionError as e:
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · Mixed — Decorator with arguments (3-layer)
+
+> 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
 
 **Problem:**
 Write a `@validate_types(**expected_types)` decorator that checks each keyword argument matches its expected type and raises `TypeError` if not. Usage: `@validate_types(name=str, age=int)`.
@@ -1709,7 +1869,12 @@ except TypeError as e:
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 · Mixed — Generator chained pipeline
+
+> 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
 
 **Problem:**
 Build a data pipeline using generators only. Input: list of raw log strings `"2024-01-15 ERROR Database timeout"`. Pipeline: (1) parse to dict, (2) filter to ERROR level only, (3) extract just the message. Print the results.
@@ -1770,7 +1935,12 @@ for message in pipeline:
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · Mixed — Debug TypeError
+
+> 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
 
 **Problem:**
 This function call raises a `TypeError`. Identify the exact cause and fix it.
@@ -1828,7 +1998,12 @@ print(result3)  # {'host': 'localhost', 'port': 5432, 'timeout': 30, 'debug': Tr
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · Mixed — Rate limiter using closures
+
+> 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
 
 **Problem:**
 Write `make_rate_limiter(max_calls, period_seconds)` that returns a function. The returned function should: allow up to `max_calls` calls within `period_seconds`, raise `RuntimeError("Rate limit exceeded")` if exceeded, and reset after the period expires. Use `time.time()` for timing.

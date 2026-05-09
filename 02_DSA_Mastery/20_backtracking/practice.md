@@ -44,6 +44,9 @@
 <a id="q1"></a>
 ### Q1
 
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 **When you read a problem statement, what signals tell you to reach for backtracking?**
 
 <details>
@@ -70,6 +73,9 @@ Reach for backtracking when the problem:
 
 <a id="q2"></a>
 ### Q2
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 **Write the universal backtracking template in Python. Label each section.**
 
@@ -119,6 +125,9 @@ def solve(input_data):
 <a id="q3"></a>
 ### Q3
 
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 **Trace the decision tree for generating all subsets of `[1, 2, 3]`. How many leaves are there?**
 
 <details>
@@ -154,6 +163,9 @@ Each element has two choices: include or exclude. Draw a binary tree of depth 3.
 
 <a id="q4"></a>
 ### Q4
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 **Why do you need `result.append(current[:])` instead of `result.append(current)`?**
 
@@ -196,6 +208,9 @@ print(result)            # [[1]] — not [[]] as you might expect!
 <a id="q5"></a>
 ### Q5
 
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 **What are the two rules for a correct base case in a backtracking function?**
 
 <details>
@@ -233,6 +248,9 @@ if start >= len(nums) and len(current) < required:
 <a id="q6"></a>
 ### Q6
 
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 **What is the difference between backtracking and brute force?**
 
 <details>
@@ -264,6 +282,9 @@ Brute force generates everything then filters. Backtracking filters during gener
 
 <a id="q7"></a>
 ### Q7
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 **State the time complexity of (a) generating all subsets and (b) generating all permutations. Explain why.**
 
@@ -304,6 +325,9 @@ n=20:  subsets  = 1,048,576    permutations = 2.4 * 10^18
 
 <a id="q8"></a>
 ### Q8
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 **Explain pruning. Give two concrete examples of pruning conditions.**
 
@@ -353,6 +377,9 @@ if col in cols or (row - col) in diag1 or (row + col) in diag2:
 <a id="q9"></a>
 ### Q9
 
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 **Implement `subsets(nums)` returning all 2^n subsets of a list of distinct integers.**
 
 <details>
@@ -391,6 +418,9 @@ def subsets(nums: list[int]) -> list[list[int]]:
 
 <a id="q10"></a>
 ### Q10
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 **Implement `permutations(nums)` returning all n! permutations of distinct integers.**
 
@@ -438,6 +468,9 @@ def permutations(nums: list[int]) -> list[list[int]]:
 <a id="q11"></a>
 ### Q11
 
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 **Implement `combinations(n, k)` returning all C(n,k) combinations of numbers 1..n.**
 
 <details>
@@ -482,6 +515,9 @@ def combinations(n: int, k: int) -> list[list[int]]:
 <a id="q12"></a>
 ### Q12
 
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 **Implement `combination_sum(candidates, target)` where each candidate can be used any number of times.**
 
 <details>
@@ -525,6 +561,9 @@ def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
 
 <a id="q13"></a>
 ### Q13
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 **Implement `combination_sum_2(candidates, target)` where each candidate can be used at most once, and the input may contain duplicates.**
 
@@ -573,6 +612,9 @@ def combination_sum_2(candidates: list[int], target: int) -> list[list[int]]:
 <a id="q14"></a>
 ### Q14
 
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 **Implement `palindrome_partitioning(s)` returning all ways to partition `s` such that every substring is a palindrome.**
 
 <details>
@@ -618,6 +660,9 @@ def palindrome_partitioning(s: str) -> list[list[str]]:
 
 <a id="q15"></a>
 ### Q15
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 **Implement `word_search(board, word)` returning True if the word exists in the 2D grid (4-directional, no cell reuse).**
 
@@ -668,6 +713,9 @@ def word_search(board: list[list[str]], word: str) -> bool:
 <a id="q16"></a>
 ### Q16
 
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 **Implement `generate_parentheses(n)` returning all valid combinations of n pairs of parentheses.**
 
 <details>
@@ -714,6 +762,9 @@ def generate_parentheses(n: int) -> list[str]:
 <a id="q17"></a>
 ### Q17
 
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 **Implement `subsets_with_dup(nums)` when `nums` may contain duplicates. Return unique subsets only.**
 
 <details>
@@ -756,6 +807,9 @@ def subsets_with_dup(nums: list[int]) -> list[list[int]]:
 
 <a id="q18"></a>
 ### Q18
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 **Implement `permutations_unique(nums)` when `nums` may contain duplicates. Return unique permutations.**
 
@@ -808,6 +862,9 @@ def permutations_unique(nums: list[int]) -> list[list[int]]:
 <a id="q19"></a>
 ### Q19
 
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 **When should you use backtracking vs DP? Give a decision framework.**
 
 <details>
@@ -856,6 +913,9 @@ Decision flowchart:
 <a id="q20"></a>
 ### Q20
 
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 **Before writing any code, how do you estimate whether a backtracking solution is feasible for a given n?**
 
 <details>
@@ -898,6 +958,9 @@ Sudoku          9^81          HUGE      —           pruning saves it
 
 <a id="q21"></a>
 ### Q21
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 **Implement `solve_n_queens(n)` returning all valid placements of n queens on an n×n board. Use O(1) conflict detection.**
 
@@ -968,6 +1031,9 @@ Checking all three is O(1) vs O(n) for scanning the board.
 <a id="q22"></a>
 ### Q22
 
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 **Implement `solve_sudoku(board)` that fills a 9x9 board in-place. Return True if solved.**
 
 <details>
@@ -1022,6 +1088,9 @@ def solve_sudoku(board: list[list[str]]) -> bool:
 
 <a id="q23"></a>
 ### Q23
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 **List and explain 5 distinct pruning techniques used in backtracking. Show code for each.**
 
@@ -1081,6 +1150,9 @@ board[r][c] = temp                      # unmark (unchoose)
 <a id="q24"></a>
 ### Q24
 
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 **Implement `letter_combinations(digits)` returning all possible letter combinations for a phone number string.**
 
 <details>
@@ -1129,6 +1201,9 @@ def letter_combinations(digits: str) -> list[str]:
 
 <a id="q25"></a>
 ### Q25
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 **Implement `restore_ip_addresses(s)` returning all valid IP addresses that can be formed from string `s`.**
 

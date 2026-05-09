@@ -6,11 +6,33 @@
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | Layout — Draw a Standard src/ Project Layout | 🟢 |
+| [Q2](#q2) | pyproject.toml — Write a Minimal Package Config | 🟢 |
+| [Q3](#q3) | `__init__.py` — Write the Public API | 🟡 |
+| [Q4](#q4) | Entry Points — Add a CLI Console Script | 🟡 |
+| [Q5](#q5) | Makefile — Write a Makefile with Standard Targets | 🟡 |
+| [Q6](#q6) | Editable Install — Explain pip install -e . | 🟡 |
+| [Q7](#q7) | Metadata — Add README and License to pyproject.toml | 🟡 |
+| [Q8](#q8) | Publishing — Build and Publish to TestPyPI | 🟠 |
+| [Q9](#q9) | Optional Dependencies — Multi-environment Deps | 🟠 |
+| [Q10](#q10) | Capstone — Scaffold a Complete Project | 🟠 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · Layout — Draw a Standard src/ Project Layout 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Draw the complete directory tree for a Python library called `payment_sdk` using src layout. Include: source package, tests (unit + integration), pyproject.toml, .env.example, Dockerfile, and README.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>src/ contains the package; tests/ sits at root level alongside pyproject.toml.</details>
 <details><summary>✅ Answer</summary>
@@ -40,11 +62,15 @@ payment_sdk/
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · pyproject.toml — Write a Minimal Package Config 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Write a complete `pyproject.toml` for a package named `payment_sdk` version `0.2.0` that requires Python 3.11+, depends on `httpx>=0.27` and `pydantic>=2.0`, and uses setuptools as the build backend.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>You need [build-system], [project], and the requires-python field.</details>
 <details><summary>✅ Answer</summary>
@@ -76,11 +102,15 @@ dev = [
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · `__init__.py` — Write the Public API 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Write the `__init__.py` for `payment_sdk` that: exposes `__version__ = "0.2.0"`, re-exports `PaymentClient` from `.client`, re-exports `PaymentError` from `.exceptions`, and declares `__all__`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use relative imports; __all__ is a list of strings.</details>
 <details><summary>✅ Answer</summary>
@@ -100,11 +130,15 @@ __all__ = ["PaymentClient", "PaymentError", "__version__"]
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Entry Points — Add a CLI Console Script 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Add a `payment-cli` command to `pyproject.toml` that runs the `main()` function from `payment_sdk.cli`. Show the function signature.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Entry points live under [project.scripts].</details>
 <details><summary>✅ Answer</summary>
@@ -133,11 +167,15 @@ def main() -> None:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Makefile — Write a Makefile with Standard Targets 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write a Makefile with targets: `install`, `test`, `lint`, `format`, `build`, `clean`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use .PHONY to mark targets that don't produce files.</details>
 <details><summary>✅ Answer</summary>
@@ -171,11 +209,15 @@ clean:
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · Editable Install — Explain pip install -e . 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Explain what `pip install -e .` does, why it is used during development, and what problem it solves compared to running scripts directly from source.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think about sys.path and the difference between testing installed code vs. raw source.</details>
 <details><summary>✅ Answer</summary>
@@ -197,11 +239,15 @@ With editable install (src layout): `import my_package` always resolves to the i
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Metadata — Add README and License to pyproject.toml 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Extend the `[project]` section to include: a README (Markdown), MIT license, author name and email, and PyPI classifiers for Python 3.11 and the MIT license.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>readme field accepts a filename; license field has a text key; classifiers is a list of strings.</details>
 <details><summary>✅ Answer</summary>
@@ -229,11 +275,15 @@ classifiers = [
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Publishing — Build and Publish to TestPyPI 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 List all the commands to: install build tools, build the package, verify the wheel, and upload to TestPyPI. What should you verify after upload?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Tools needed: build, twine. Always test on TestPyPI before real PyPI.</details>
 <details><summary>✅ Answer</summary>
@@ -263,11 +313,15 @@ python -c "import payment_sdk; print(payment_sdk.__version__)"
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Optional Dependencies — Multi-environment Deps 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Write a `pyproject.toml` with optional dependency groups: `dev` (pytest, black, ruff, mypy), `docs` (mkdocs, mkdocs-material), and `all` that installs both. Show how to install each group.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Groups can reference other groups using the package name with extras syntax.</details>
 <details><summary>✅ Answer</summary>
@@ -301,11 +355,15 @@ pip install -e ".[dev,docs]"  # alternative: comma-separated
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Capstone — Scaffold a Complete Project 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Describe all the commands and files needed to scaffold a new Python library `data_validator` from scratch: project structure, pyproject.toml, __init__.py with version, a CLI entry point, Makefile, and pre-commit config.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Think: mkdir, pyproject.toml, __init__.py, cli.py, .pre-commit-config.yaml, Makefile, pre-commit install.</details>
 <details><summary>✅ Answer</summary>

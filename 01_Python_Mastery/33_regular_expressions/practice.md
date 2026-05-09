@@ -37,11 +37,15 @@
 
 ## Chapter 1 — Core Functions
 
+<a id="q1"></a>
+
 ### Q1 · Core Functions — re.search vs re.match 🟢 {#q1}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 The string `"Error 404: Page not found"` is a server log fragment. Use both `re.match()` and `re.search()` to find the number `404`. Explain why one returns `None` and the other succeeds.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
 
 <details><summary>💡 Hint</summary>re.match() only looks at the beginning of the string — 404 is not at position 0.</details>
 
@@ -68,11 +72,15 @@ print(s.start())   # 6
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Core Functions — re.findall 🟢 {#q2}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 Extract every dollar amount from the string `"Costs: $9.99, $149.00, and $1,299.99 today"`. Return a list of strings including the dollar sign.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use \$ to match a literal dollar sign, then match digits with optional comma separators and decimal part.</details>
 
@@ -93,11 +101,15 @@ print(amounts)   # ['$9.99', '$149.00', '$1,299.99']
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · Core Functions — re.sub replacement 🟢 {#q3}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Redact all email addresses in a support ticket log: `"User john@example.com contacted support@helpdesk.org for invoice help"`. Replace each email with `[EMAIL]`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Build an email pattern: local-part @ domain . TLD. Use re.sub() with the replacement string "[EMAIL]".</details>
 
@@ -120,11 +132,15 @@ print(redacted)
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · Core Functions — re.split 🟢 {#q4}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Split the messy log entry `"one,  two;three\t\tfour five"` into clean tokens. The separator can be any combination of commas, semicolons, or whitespace.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use a character class [,;\s] with + to match one or more of any separator character.</details>
 
@@ -145,11 +161,15 @@ print(parts)   # ['one', 'two', 'three', 'four', 'five']
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Core Functions — re.fullmatch validation 🟢 {#q5}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Write a function `is_valid_zip(s)` that returns `True` only if the entire string is a valid US ZIP code — either 5 digits (`12345`) or ZIP+4 format (`12345-6789`). It must reject partial matches like `"123456"`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
 
 <details><summary>💡 Hint</summary>re.fullmatch() requires the pattern to match the complete string — no leftover characters allowed.</details>
 
@@ -176,11 +196,15 @@ print(is_valid_zip("abcde"))       # False — not digits
 
 ## Chapter 2 — Pattern Building Blocks
 
+<a id="q6"></a>
+
 ### Q6 · Pattern Building — Character classes 🟢 {#q6}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 Extract all hexadecimal color codes from a CSS string: `"color: #ff5733; background: #abc; border: #FFFFFF; opacity: 0.5;"`. A valid hex color is `#` followed by exactly 3 or 6 hex digits (0–9, a–f, A–F).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use [0-9a-fA-F] for a hex digit. The pattern needs to match {3} or {6} digits after #.</details>
 
@@ -202,11 +226,15 @@ print(colors)   # ['#ff5733', '#abc', '#FFFFFF']
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Pattern Building — Quantifiers 🟢 {#q7}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Given the text `"<a>link</a> and <img src='x'/> and <div class='main'>content</div>"`, extract every HTML tag (including closing and self-closing tags). Use a non-greedy quantifier so `<div class='main'>` doesn't swallow everything.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Inside angle brackets, use .*? (lazy) to stop at the first closing >. Without ?, greedy .* will match from the first < all the way to the last >.</details>
 
@@ -228,11 +256,15 @@ print(tags)
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Pattern Building — Anchors ^ and $ 🟡 {#q8}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 A config file has lines like `"  debug = True"` (may have leading spaces) and `"# This is a comment"`. Extract the first word of every non-comment line using `re.MULTILINE`. A non-comment line does not start with `#`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
 
 <details><summary>💡 Hint</summary>With re.MULTILINE, ^ matches at the start of each line. Use a negative lookahead (?!#) to skip comment lines.</details>
 
@@ -260,11 +292,15 @@ print(words)   # ['host', 'port', 'db_name']
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Pattern Building — Escape sequences 🟢 {#q9}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Extract all IP addresses from `"Server: 192.168.1.100, DNS: 8.8.8.8, Loopback: 127.0.0.1"`. The dot in an IP is a literal dot, not the regex "any character" wildcard.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Escape the dot as \. to match a literal period. Without the escape, . matches any character including letters.</details>
 
@@ -286,11 +322,15 @@ print(ips)   # ['192.168.1.100', '8.8.8.8', '127.0.0.1']
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Pattern Building — Alternation with pipe 🟡 {#q10}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Find all log level tokens in `"[INFO] server started [ERROR] auth failed [WARN] high memory [DEBUG] loop tick"`. Only match the exact strings INFO, ERROR, WARN, or DEBUG inside square brackets.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use alternation: INFO|ERROR|WARN|DEBUG inside the bracket characters. Wrap alternatives in a non-capturing group if you combine with other patterns.</details>
 
@@ -317,11 +357,15 @@ print(names)   # ['INFO', 'ERROR', 'WARN', 'DEBUG']
 
 ## Chapter 3 — Common Patterns
 
+<a id="q11"></a>
+
 ### Q11 · Common Patterns — Email validation 🟡 {#q11}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 Write a function `is_valid_email(s)` that validates a complete email address string. Test it against: `"user@example.com"` (valid), `"user.name+tag@sub.domain.co.uk"` (valid), `"@nodomain.com"` (invalid), `"noatsign.com"` (invalid).
 
-> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
 
 <details><summary>💡 Hint</summary>The email pattern has three parts: local part [a-zA-Z0-9._%+-]+, then @, then domain with at least one dot and a 2+ char TLD.</details>
 
@@ -347,11 +391,15 @@ print(is_valid_email("noatsign.com"))                  # False
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · Common Patterns — Phone number 🟡 {#q12}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Extract all US phone numbers from `"Call us: (800) 555-1212 or 800-555-0199 or +1 800 555 0100"`. All three formats are valid. Return just the matched strings.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
 
 <details><summary>💡 Hint</summary>The optional country code is (?:\+1\s?)?. The area code may or may not be in parentheses: \(?\d{3}\)?. Separators between groups can be space, dash, or dot.</details>
 
@@ -374,11 +422,15 @@ print(phones)
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · Common Patterns — URL extraction 🟡 {#q13}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
 
 Extract all URLs from the string `"Visit https://example.com or http://sub.domain.org/path?q=1 for more. Also see ftp://ignore.me"`. Only extract `http://` and `https://` URLs, not ftp.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Start with https?:// to match both http and https. Then match everything that is not whitespace for the rest of the URL.</details>
 
@@ -401,11 +453,15 @@ print(urls)
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · Common Patterns — ISO date 🟢 {#q14}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
 
 Find all ISO-format dates (`YYYY-MM-DD`) in a document: `"Events on 2024-01-15 and 2024-03-22. Next year: 2025-07-04."`. Also show how to reformat each date as `DD/MM/YYYY` using `re.sub()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use \d{4}-\d{2}-\d{2} to find dates. For reformatting, wrap each segment in a capturing group and use backreferences \3/\2/\1 in the replacement.</details>
 
@@ -436,7 +492,12 @@ print(reformatted)
 
 ## Chapter 4 — Named Groups and Complex Extraction
 
+<a id="q15"></a>
+
 ### Q15 · Named Groups — (?P<name>...) extraction 🟡 {#q15}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
 
 Parse this log line using named groups and extract the date, log level, service name, and message into a dict:
 
@@ -444,7 +505,6 @@ Parse this log line using named groups and extract the date, log level, service 
 "2024-01-15 14:23:45 ERROR [user_service] Failed to authenticate user@example.com: timeout"
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use (?P<name>...) for each field. Call m.groupdict() at the end to get all named groups as a dict at once.</details>
 
@@ -479,11 +539,15 @@ if m:
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Named Groups — group() vs groups() vs groupdict() 🟡 {#q16}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
 
 Given the match object from parsing `"2024-01-15"` with the pattern `r"(\d{4})-(\d{2})-(\d{2})"`, demonstrate the difference between `group()`, `group(1)`, `groups()`, and `groupdict()`. Then repeat with named groups.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
 
 <details><summary>💡 Hint</summary>group() with no args returns the full match. group(1) returns the first capturing group. groups() returns a tuple of all groups. groupdict() only works with named groups.</details>
 
@@ -515,11 +579,15 @@ print(m2.groupdict())     # {'year': '2024', 'month': '01', 'day': '15'}
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · Named Groups — re.sub with backreference 🟡 {#q17}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
 
 Convert camelCase identifiers to snake_case using `re.sub()`. For example: `"getUserName"` → `"get_user_name"`, `"processPaymentData"` → `"process_payment_data"`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Find places where a lowercase letter is immediately followed by an uppercase letter. Insert an underscore between them using backreferences \1 and \2 in the replacement.</details>
 
@@ -544,11 +612,15 @@ print(camel_to_snake("HTTPSConnection"))   # h_t_t_p_s_connection
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · Named Groups — Nested groups 🟠 {#q18}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
 
 Parse a time string `"14:23:45"` with a pattern that captures the full time AND each individual component. Show how both the outer and inner groups appear in `groups()`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
 
 <details><summary>💡 Hint</summary>When you nest a group inside another, both groups are captured. group(1) is the outer group, group(2) is the first inner group, and so on. Groups are numbered by their opening parenthesis left-to-right.</details>
 
@@ -578,11 +650,15 @@ print(m.groups())    # ('14:23:45', '14', '23', '45')
 
 ## Chapter 5 — Lookahead and Lookbehind
 
+<a id="q19"></a>
+
 ### Q19 · Lookahead/Lookbehind — Positive lookahead (?=...) 🟡 {#q19}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
 
 Extract just the numeric values (without the unit) from a CSS string: `"font-size: 16px; margin: 8px; opacity: 0.5; padding: 24px;"`. Return only the numbers that are immediately followed by `px`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
 
 <details><summary>💡 Hint</summary>A positive lookahead (?=px) asserts that "px" follows but does not include it in the match. So \d+(?=px) matches the digits without consuming the "px".</details>
 
@@ -603,11 +679,15 @@ print(px_values)   # ['16', '8', '24']
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Lookahead/Lookbehind — Negative lookahead (?!...) 🟡 {#q20}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
 
 In the string `"python3 django flask python2 python"`, find all occurrences of the word `python` that are NOT followed by `2`. Return the matches including any trailing digit that belongs to the match.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use (?!2) after matching "python" to assert it is NOT followed by "2". Then optionally match a trailing digit with \d? to capture python3 as a unit.</details>
 
@@ -628,11 +708,15 @@ print(modern)   # ['python3', 'python']
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Lookahead/Lookbehind — Positive lookbehind (?<=...) 🟡 {#q21}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
 
 From the string `"$9.99 €5.00 £12.50 $149.99"`, extract only the dollar amounts as numbers — without the dollar sign — while ignoring euro and pound amounts.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Use (?<=\$) as a lookbehind to assert the number is preceded by a dollar sign, without including the $ in the match result.</details>
 
@@ -653,11 +737,15 @@ print(dollar_amounts)   # ['9.99', '149.99']
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Lookahead/Lookbehind — Combined lookahead + lookbehind 🟠 {#q22}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
 
 Extract word characters that are surrounded by angle brackets — i.e., the tag name from simple HTML tags like `<div>`, `<span>`, `</p>`. Use lookbehind for `<` (or `</`) and lookahead for `>`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Lookbehind must have a fixed width in Python's re module. Use (?<=<) for opening tags. For closing tags starting with </, a separate pattern or alternation is needed.</details>
 
@@ -687,11 +775,15 @@ print(names_via_lookaround)   # ['div', 'span', 'p', 'br', 'article']
 
 ## Chapter 6 — Flags
 
+<a id="q23"></a>
+
 ### Q23 · Flags — re.IGNORECASE 🟢 {#q23}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
 
 Count how many times the word `"python"` (in any capitalization: Python, PYTHON, python) appears in: `"Python is great. I love python. PYTHON rocks. PyThOn is powerful."`.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
 
 <details><summary>💡 Hint</summary>Pass re.IGNORECASE (or re.I) as the third argument to re.findall() to make the pattern case-insensitive.</details>
 
@@ -713,7 +805,12 @@ print(len(matches))   # 4
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Flags — re.MULTILINE with ^ $ 🟡 {#q24}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
 
 Extract the first word from every line in a multi-line string — but only lines that start with a letter (skip blank lines and lines starting with `#`).
 
@@ -721,7 +818,6 @@ Extract the first word from every line in a multi-line string — but only lines
 text = "# comment\nfoo bar baz\n\nhello world\n# skip me\ndata science"
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
 
 <details><summary>💡 Hint</summary>With re.MULTILINE, ^ matches the start of each line. Add [a-zA-Z] or a negative lookahead to skip comment lines and blank lines.</details>
 
@@ -742,7 +838,12 @@ print(first_words)   # ['foo', 'hello', 'data']
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Flags — re.DOTALL for newlines 🟡 {#q25}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
 
 A multi-line HTML block is stored as a string. Extract the content between `<body>` and `</body>` tags, including any newlines. Without the right flag, `.` will not cross line boundaries.
 
@@ -750,7 +851,6 @@ A multi-line HTML block is stored as a string. Extract the content between `<bod
 html = "<html>\n<head><title>Test</title></head>\n<body>\nHello\nWorld\n</body>\n</html>"
 ```
 
-> 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
 
 <details><summary>💡 Hint</summary>By default, . does not match newline characters. Use re.DOTALL (re.S) to make . match everything including \n.</details>
 
@@ -779,11 +879,15 @@ print(with_flag.group(1))
 
 ## Chapter 7 — Pre-compiling for Performance
 
+<a id="q26"></a>
+
 ### Q26 · Performance — re.compile() pattern reuse 🟡 {#q26}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
 
 You have a list of 1000 log lines and need to extract email addresses from each one. Show the compiled-pattern approach and explain why it is more efficient than calling `re.findall()` with a string pattern in a loop.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
 
 <details><summary>💡 Hint</summary>re.compile() returns a Pattern object. Call .findall(), .search(), .sub() directly on that object instead of passing the pattern string each time.</details>
 
@@ -817,11 +921,15 @@ print(all_emails)
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · Performance — Catastrophic backtracking 🟠 {#q27}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
 
 Explain what catastrophic backtracking is, then demonstrate the problem pattern `(a+)+b` and show a safe alternative. Why does this matter in production?
 
-> 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
 
 <details><summary>💡 Hint</summary>The problem: nested quantifiers on the same character class create exponential combinations for the backtracking engine to try. Count how many ways "aaaaac" can be split among the inner a+ groups.</details>
 
@@ -858,11 +966,15 @@ print(f"Dangerous pattern on 'aaac': result={result}, time={elapsed:.4f}s")
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Performance — Raw strings r"..." 🟢 {#q28}
+
+> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
 
 Explain why regex patterns should always be written as raw strings. Show what goes wrong without `r""` using the pattern `\b\w+\b` and the newline pattern `\n`. Then compile a verbose email pattern using `re.VERBOSE` and raw strings together.
 
-> 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
 
 <details><summary>💡 Hint</summary>In a normal Python string, \b is a backspace character (ASCII 8), not a word boundary. In a raw string r"\b", backslash is literal so the regex engine sees \b correctly.</details>
 

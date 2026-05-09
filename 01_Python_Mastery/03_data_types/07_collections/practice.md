@@ -5,7 +5,32 @@ Each question is self-contained — attempt it before opening the answer.
 
 ---
 
+
+## 📋 Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | counter-frequencies — Count Word Frequencies with Counter | 🟢 |
+| [Q2](#q2) | counter-subtract — Subtract Two Counters | 🟡 |
+| [Q3](#q3) | defaultdict-group — Group Words by First Letter | 🟢 |
+| [Q4](#q4) | defaultdict-nested — Nested defaultdict for a 2D Grid | 🟡 |
+| [Q5](#q5) | namedtuple-basic — Define a Point and Use `_asdict` | 🟢 |
+| [Q6](#q6) | namedtuple-replace — Use `_replace` to Create a Modified Copy | 🟡 |
+| [Q7](#q7) | deque-sliding-window — Implement a Sliding Window of Last N Items | 🟡 |
+| [Q8](#q8) | deque-rotate — Rotate a Queue Efficiently | 🟡 |
+| [Q9](#q9) | ordereddict-lru — Implement LRU Eviction with OrderedDict | 🟠 |
+| [Q10](#q10) | chainmap-config — Implement Config Layering with ChainMap | 🟡 |
+| [Q11](#q11) | pick-the-type — Pick the Right collections Type for Each Scenario | 🟡 |
+| [Q12](#q12) | rewrite-grouping — Rewrite a Grouping Function Using defaultdict | 🟡 |
+
+---
+
+<a id="q1"></a>
+
 ### Q1 · counter-frequencies — Count Word Frequencies with Counter 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
 
 Given a list of words, use `Counter` to produce a frequency map and print the three most common
 words with their counts.
@@ -51,7 +76,12 @@ using a partial sort — faster than sorting the entire counter when n is small.
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · counter-subtract — Subtract Two Counters 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
 
 You have item counts before and after a sale. Use `Counter` arithmetic to find what was sold
 (net decrease per item). Drop any items that ended up with zero or negative counts.
@@ -95,7 +125,12 @@ were added, not just removed.
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · defaultdict-group — Group Words by First Letter 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
 
 Given a list of words, group them into a dict where each key is a letter and each value is a list
 of words starting with that letter. Use `defaultdict` — no `if key not in d` guards.
@@ -137,7 +172,12 @@ function (`list`) is called automatically on first key access.
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · defaultdict-nested — Nested defaultdict for a 2D Grid 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
 
 Create a nested `defaultdict` that lets you assign values to a 2D grid using `grid[row][col] = val`
 without initialising any row first. Then read a value at a coordinate that was never written.
@@ -179,7 +219,12 @@ with zero boilerplate.
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · namedtuple-basic — Define a Point and Use `_asdict` 🟢
+
+> 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
 
 Define a `Point` namedtuple with fields `x` and `y`. Create an instance, access fields by name,
 and convert it to a regular dict.
@@ -218,7 +263,12 @@ print(p)
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · namedtuple-replace — Use `_replace` to Create a Modified Copy 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
 
 You have an `Employee` namedtuple. An employee gets a promotion: same name and department, but a
 new salary. Use `_replace` to produce the updated record without touching the original.
@@ -264,7 +314,12 @@ fields into a new instance, substituting only the named fields you provide.
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · deque-sliding-window — Implement a Sliding Window of Last N Items 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
 
 Write a function `last_n(stream, n)` that consumes an iterable and returns the last `n` items seen.
 Use `deque` with `maxlen`. Then demonstrate it on a sequence of 10 numbers keeping the last 3.
@@ -309,7 +364,12 @@ for i in range(6):
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · deque-rotate — Rotate a Queue Efficiently 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
 
 Given the task queue below, rotate it so that the last two tasks move to the front (highest
 priority). Do it with a single `deque` operation, not by slicing or rebuilding the list.
@@ -357,7 +417,12 @@ whole sequence. It is more explicit and readable than `tasks = tasks[-2:] + task
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · ordereddict-lru — Implement LRU Eviction with OrderedDict 🟠
+
+> 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
 
 Build a minimal `LRUCache` class with `get(key)` and `put(key, value)` methods using `OrderedDict`.
 Capacity is fixed. On a `get`, mark the key as recently used. On a `put` that exceeds capacity,
@@ -407,7 +472,12 @@ the optimal complexity for an LRU cache.
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · chainmap-config — Implement Config Layering with ChainMap 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
 
 Build a config resolver that merges three layers: defaults (lowest priority), environment overrides
 (medium), and runtime overrides (highest). Use `ChainMap` so that writing a new value only affects
@@ -457,7 +527,12 @@ a value), and reverting a layer is O(1) — just rebuild the ChainMap without th
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · pick-the-type — Pick the Right collections Type for Each Scenario 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
 
 For each scenario below, name the best `collections` type and give a one-line reason.
 
@@ -493,7 +568,12 @@ pattern eliminates boilerplate and often improves readability more than performa
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · rewrite-grouping — Rewrite a Grouping Function Using defaultdict 🟡
+
+> 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
 
 Rewrite `group_by_dept` to use `defaultdict` instead of `setdefault`. Keep the same return type.
 

@@ -8,24 +8,28 @@
 
 | Q# | Topic | Difficulty |
 |---|---|---|
-| [Q1](#q1--argv--parse-command-line-arguments) | argv — Parse command-line arguments | 🟢 Basic |
-| [Q2](#q2--syspath--print-all-entries-and-identify-cwd) | sys.path — Print all entries and identify CWD | 🟢 Basic |
-| [Q3](#q3--sysexit--validate-input-with-exit-code) | sys.exit() — Validate input with exit code | 🟢 Basic |
-| [Q4](#q4--sysmodules--inspect-the-import-cache) | sys.modules — Inspect the import cache | 🟡 Intermediate |
-| [Q5](#q5--sysstdin--word-count-from-pipe) | sys.stdin — Word count from pipe | 🟡 Intermediate |
-| [Q6](#q6--sysstdoutstderr--split-log-output) | sys.stdout/stderr — Split log output | 🟡 Intermediate |
-| [Q7](#q7--sysversion_info--version-guard) | sys.version_info — Version guard | 🟡 Intermediate |
-| [Q8](#q8--sysplatform--detect-os) | sys.platform — Detect OS | 🟡 Intermediate |
-| [Q9](#q9--sysmodules-manipulation--lazy-import) | sys.modules manipulation — Lazy import | 🟡 Intermediate |
-| [Q10](#q10--sysgetsizeof--compare-memory-sizes) | sys.getsizeof — Compare memory sizes | 🟡 Intermediate |
-| [Q11](#q11--syspath-manipulation--safe-add-to-path) | sys.path manipulation — Safe add to path | 🟠 Advanced |
-| [Q12](#q12--capstone--cli-entry-point) | Capstone — CLI entry point | 🟠 Advanced |
+| [Q1](#q1) | argv — Parse command-line arguments | 🟢 Basic |
+| [Q2](#q2) | sys.path — Print all entries and identify CWD | 🟢 Basic |
+| [Q3](#q3) | sys.exit() — Validate input with exit code | 🟢 Basic |
+| [Q4](#q4) | sys.modules — Inspect the import cache | 🟡 Intermediate |
+| [Q5](#q5) | sys.stdin — Word count from pipe | 🟡 Intermediate |
+| [Q6](#q6) | sys.stdout/stderr — Split log output | 🟡 Intermediate |
+| [Q7](#q7) | sys.version_info — Version guard | 🟡 Intermediate |
+| [Q8](#q8) | sys.platform — Detect OS | 🟡 Intermediate |
+| [Q9](#q9) | sys.modules manipulation — Lazy import | 🟡 Intermediate |
+| [Q10](#q10) | sys.getsizeof — Compare memory sizes | 🟡 Intermediate |
+| [Q11](#q11) | sys.path manipulation — Safe add to path | 🟠 Advanced |
+| [Q12](#q12) | Capstone — CLI entry point | 🟠 Advanced |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · argv — Parse command-line arguments
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Write a script that uses `sys.argv` to accept a filename as the first argument and an optional `--verbose` flag anywhere in the remaining args. Print the filename and whether verbose mode is on. Print a usage message to stderr and exit with code 2 if no filename is given.
 
@@ -59,9 +63,13 @@ print(f"Verbose: {verbose}")
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · sys.path — Print all entries and identify CWD
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Print all entries in `sys.path`, numbering each one. Then identify and print which entry represents the current working directory (the empty string `''` or the actual CWD path).
 
@@ -95,9 +103,13 @@ print(f"\nCWD represented by: {cwd_entries or 'not found'}")
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟢 · sys.exit() — Validate input with exit code
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Write a function `validate_input(value)` that raises a clean error exit if `value` is negative. It should print an error message to stderr and call `sys.exit(1)`. Then write a `main()` that calls it with a value from the user.
 
@@ -140,9 +152,13 @@ if __name__ == "__main__":
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · sys.modules — Inspect the import cache
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Import `json` and `math`. Then: (1) print how many modules are currently in `sys.modules`, (2) check and print whether `'csv'` is cached, (3) import `csv` and check again, (4) print the module object for `json` retrieved directly from `sys.modules`.
 
@@ -179,9 +195,13 @@ print(f"Same object as import json: {json_from_cache is json}")
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · sys.stdin — Word count from pipe
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Write a script that reads all lines from `sys.stdin` until EOF and prints three counts: total lines, total words, and total characters (including newlines). Match the output format of the Unix `wc` command: `lines words chars`.
 
@@ -220,9 +240,13 @@ print(f"{lines:>8} {words:>8} {chars:>8}")
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · sys.stdout/stderr — Split log output
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Write a `log(message, level="INFO")` function that sends `INFO` and `DEBUG` messages to `sys.stdout` and `WARNING`/`ERROR` messages to `sys.stderr`. Format each line as `[LEVEL] message`. Test it with one message of each level.
 
@@ -262,9 +286,13 @@ log("Connection failed", level="ERROR")
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · sys.version_info — Version guard
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Write a function `require_python(major, minor)` that raises a `RuntimeError` with a descriptive message if the currently running Python is older than the required version. Test it by calling `require_python(3, 10)`.
 
@@ -300,9 +328,13 @@ require_python(3, 10)
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · sys.platform — Detect OS
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Write a function `get_os()` that returns the string `'mac'`, `'linux'`, or `'windows'` based on `sys.platform`. Then write `get_config_dir()` that returns the conventional config directory path for the detected OS. Return `'unknown'` for unrecognized platforms.
 
@@ -348,9 +380,13 @@ print(f"Config dir: {get_config_dir('myapp')}")
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · sys.modules manipulation — Lazy import
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Write a function `lazy_import(name)` that checks `sys.modules` before importing. If the module is already cached, return it from the cache. If not, import it, and return the module. Print whether it was served from cache or freshly imported.
 
@@ -390,9 +426,13 @@ print(json_mod is json_mod2)      # → True — same object
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · sys.getsizeof — Compare memory sizes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Compare the memory footprint of: an empty list, a list with 1000 integers, and a list with 1000 strings. Use `sys.getsizeof` and print the results. Then explain why the sizes may be misleading.
 
@@ -435,9 +475,13 @@ print(f"Size of str '42':     {sys.getsizeof('42')} bytes")
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · sys.path manipulation — Safe add to path
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Write a function `add_to_path(directory, position="end")` that adds a directory to `sys.path` only if it is not already present. Support `position="start"` (insert at index 0) and `position="end"` (append). Return `True` if added, `False` if already present. Include input validation.
 
@@ -489,9 +533,13 @@ print(sys.path[:3])
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Capstone — CLI entry point
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a complete CLI entry point for a file-processing script that: (1) uses `sys.argv` to accept one or more filenames, (2) validates that each file exists and prints an error to `sys.stderr` for any that don't, (3) processes each valid file (just print its line count), (4) exits with code 0 if all files were processed, code 1 if any file was missing, and code 2 if no arguments were given at all.
 

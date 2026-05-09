@@ -8,62 +8,66 @@
 
 | # | Concept | Difficulty |
 |---|---------|------------|
-| [Q1](#q1--classes--init--self--class-blueprint) | Classes, `__init__`, `self` — class blueprint | 🟢 |
-| [Q2](#q2--class-vs-instance-attributes--shared-vs-per-object) | Class vs instance attributes — shared vs per-object | 🟢 |
-| [Q3](#q3--classmethod--staticmethod--factory-constructors) | `@classmethod` / `@staticmethod` — factory constructors | 🟡 |
-| [Q4](#q4--property--controlled-attribute-access) | `@property` — controlled attribute access | 🟡 |
-| [Q5](#q5--inheritance--extending-a-base-class) | Inheritance — extending a base class | 🟡 |
-| [Q6](#q6--super--calling-parent-methods) | `super()` — calling parent methods | 🟡 |
-| [Q7](#q7--polymorphism--shape-hierarchy) | Polymorphism — shape hierarchy | 🟡 |
-| [Q8](#q8--encapsulation--private-attributes-and-validation) | Encapsulation — private attributes and validation | 🟡 |
-| [Q9](#q9--abstract-base-class--enforcing-interfaces) | Abstract base class — enforcing interfaces | 🟡 |
-| [Q10](#q10--dunder-methods--repr-str-eq) | Dunder methods — `__repr__`, `__str__`, `__eq__` | 🟡 |
-| [Q11](#q11--arithmetic-dunder-methods--operator-overloading) | Arithmetic dunder methods — operator overloading | 🟠 |
-| [Q12](#q12--total_ordering--comparison-from-two-methods) | `@total_ordering` — comparison from two methods | 🟡 |
-| [Q13](#q13--mro--method-resolution-order) | MRO — method resolution order | 🟠 |
-| [Q14](#q14--super-in-multiple-inheritance--cooperative-calls) | `super()` in multiple inheritance — cooperative calls | 🟠 |
-| [Q15](#q15--mixins--composable-behavior) | Mixins — composable behavior | 🟠 |
-| [Q16](#q16--composition-vs-inheritance--when-to-use-which) | Composition vs inheritance — when to use which | 🟡 |
-| [Q17](#q17--dataclass--reduce-boilerplate) | `@dataclass` — reduce boilerplate | 🟡 |
-| [Q18](#q18--slots--memory-optimization) | `__slots__` — memory optimization | 🟡 |
-| [Q19](#q19--descriptor--reusable-attribute-logic) | Descriptor — reusable attribute logic | 🟠 |
-| [Q20](#q20--metaclass--class-creation-hook) | Metaclass — class creation hook | 🟠 |
-| [Q21](#q21--singleton-pattern--one-instance) | Singleton pattern — one instance | 🟠 |
-| [Q22](#q22--factory-pattern--decouple-creation-from-use) | Factory pattern — decouple creation from use | 🟠 |
-| [Q23](#q23--observer-pattern--event-bus) | Observer pattern — event bus | 🟠 |
-| [Q24](#q24--strategy-pattern--swappable-algorithms) | Strategy pattern — swappable algorithms | 🟠 |
-| [Q25](#q25--enum-module--named-constants) | Enum module — named constants | 🟢 |
-| [Q26](#q26--method-chaining--fluent-api) | Method chaining — fluent API | 🟡 |
-| [Q27](#q27--isinstance--issubclass--type-checks) | `isinstance` / `issubclass` — type checks | 🟢 |
-| [Q28](#q28--class-decorator--adding-behavior-to-a-class) | Class decorator — adding behavior to a class | 🟠 |
-| [Q29](#q29--state-machine-pattern--valid-transitions) | State machine pattern — valid transitions | 🟠 |
-| [Q30](#q30--plugin-registry-pattern--self-registering-classes) | Plugin/registry pattern — self-registering classes | 🟠 |
-| [Q31](#q31--solid--single-responsibility-principle) | SOLID — Single Responsibility Principle | 🟡 |
-| [Q32](#q32--solid--open-closed-principle) | SOLID — Open/Closed Principle | 🟡 |
-| [Q33](#q33--solid--liskov-substitution-principle) | SOLID — Liskov Substitution Principle | 🟡 |
-| [Q34](#q34--solid--dependency-inversion-principle) | SOLID — Dependency Inversion Principle | 🟠 |
-| [Q35](#q35--why-oop--when-not-to-use-a-class) | Why OOP — when NOT to use a class | 🟢 |
-| [Q36](#q36--trace-mro-predict-output) | Trace MRO — predict output | 🟠 |
-| [Q37](#q37--property-vs-attribute--design-choice) | `@property` vs attribute — design choice | 🟡 |
-| [Q38](#q38--dataclass-with-field-defaults-and-post_init) | Dataclass with `field()` defaults and `__post_init__` | 🟡 |
-| [Q39](#q39--abc-plugin-system--open-for-extension) | ABC plugin system — open for extension | 🟠 |
-| [Q40](#q40--fix-the-class-bug--common-oop-mistakes) | Fix the class bug — common OOP mistakes | 🟡 |
-| [Q41](#q41--descriptor-protocol--get-set-delete) | Descriptor protocol — `__get__`, `__set__`, `__delete__` | 🟠 |
-| [Q42](#q42--mixin-combination--json--validation) | Mixin combination — JSON + validation | 🟠 |
-| [Q43](#q43--abstract-method-enforcement--subclass-contract) | Abstract method enforcement — subclass contract | 🟡 |
-| [Q44](#q44--enum-with-methods-and-values) | Enum with methods and values | 🟡 |
-| [Q45](#q45--capstone--design-a-notification-system) | Capstone — design a notification system | 🟠 |
-| [Q46](#q46--capstone--e-commerce-order-state-machine) | Capstone — e-commerce order state machine | 🟠 |
-| [Q47](#q47--capstone--data-store-abc-with-multiple-backends) | Capstone — data store ABC with multiple backends | 🟠 |
-| [Q48](#q48--debug--fix-the-mro-diamond-problem) | Debug — fix the MRO diamond problem | 🟠 |
-| [Q49](#q49--real-world--build-a-rate-limiter-class) | Real-world — build a rate limiter class | 🟠 |
-| [Q50](#q50--mixed--full-oop-system-in-30-lines) | Mixed — full OOP system in 30 lines | 🟠 |
+| [Q1](#q1) | Classes, `__init__`, `self` — class blueprint | 🟢 |
+| [Q2](#q2) | Class vs instance attributes — shared vs per-object | 🟢 |
+| [Q3](#q3) | `@classmethod` / `@staticmethod` — factory constructors | 🟡 |
+| [Q4](#q4) | `@property` — controlled attribute access | 🟡 |
+| [Q5](#q5) | Inheritance — extending a base class | 🟡 |
+| [Q6](#q6) | `super()` — calling parent methods | 🟡 |
+| [Q7](#q7) | Polymorphism — shape hierarchy | 🟡 |
+| [Q8](#q8) | Encapsulation — private attributes and validation | 🟡 |
+| [Q9](#q9) | Abstract base class — enforcing interfaces | 🟡 |
+| [Q10](#q10) | Dunder methods — `__repr__`, `__str__`, `__eq__` | 🟡 |
+| [Q11](#q11) | Arithmetic dunder methods — operator overloading | 🟠 |
+| [Q12](#q12) | `@total_ordering` — comparison from two methods | 🟡 |
+| [Q13](#q13) | MRO — method resolution order | 🟠 |
+| [Q14](#q14) | `super()` in multiple inheritance — cooperative calls | 🟠 |
+| [Q15](#q15) | Mixins — composable behavior | 🟠 |
+| [Q16](#q16) | Composition vs inheritance — when to use which | 🟡 |
+| [Q17](#q17) | `@dataclass` — reduce boilerplate | 🟡 |
+| [Q18](#q18) | `__slots__` — memory optimization | 🟡 |
+| [Q19](#q19) | Descriptor — reusable attribute logic | 🟠 |
+| [Q20](#q20) | Metaclass — class creation hook | 🟠 |
+| [Q21](#q21) | Singleton pattern — one instance | 🟠 |
+| [Q22](#q22) | Factory pattern — decouple creation from use | 🟠 |
+| [Q23](#q23) | Observer pattern — event bus | 🟠 |
+| [Q24](#q24) | Strategy pattern — swappable algorithms | 🟠 |
+| [Q25](#q25) | Enum module — named constants | 🟢 |
+| [Q26](#q26) | Method chaining — fluent API | 🟡 |
+| [Q27](#q27) | `isinstance` / `issubclass` — type checks | 🟢 |
+| [Q28](#q28) | Class decorator — adding behavior to a class | 🟠 |
+| [Q29](#q29) | State machine pattern — valid transitions | 🟠 |
+| [Q30](#q30) | Plugin/registry pattern — self-registering classes | 🟠 |
+| [Q31](#q31) | SOLID — Single Responsibility Principle | 🟡 |
+| [Q32](#q32) | SOLID — Open/Closed Principle | 🟡 |
+| [Q33](#q33) | SOLID — Liskov Substitution Principle | 🟡 |
+| [Q34](#q34) | SOLID — Dependency Inversion Principle | 🟠 |
+| [Q35](#q35) | Why OOP — when NOT to use a class | 🟢 |
+| [Q36](#q36) | Trace MRO — predict output | 🟠 |
+| [Q37](#q37) | `@property` vs attribute — design choice | 🟡 |
+| [Q38](#q38) | Dataclass with `field()` defaults and `__post_init__` | 🟡 |
+| [Q39](#q39) | ABC plugin system — open for extension | 🟠 |
+| [Q40](#q40) | Fix the class bug — common OOP mistakes | 🟡 |
+| [Q41](#q41) | Descriptor protocol — `__get__`, `__set__`, `__delete__` | 🟠 |
+| [Q42](#q42) | Mixin combination — JSON + validation | 🟠 |
+| [Q43](#q43) | Abstract method enforcement — subclass contract | 🟡 |
+| [Q44](#q44) | Enum with methods and values | 🟡 |
+| [Q45](#q45) | Capstone — design a notification system | 🟠 |
+| [Q46](#q46) | Capstone — e-commerce order state machine | 🟠 |
+| [Q47](#q47) | Capstone — data store ABC with multiple backends | 🟠 |
+| [Q48](#q48) | Debug — fix the MRO diamond problem | 🟠 |
+| [Q49](#q49) | Real-world — build a rate limiter class | 🟠 |
+| [Q50](#q50) | Mixed — full OOP system in 30 lines | 🟠 |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 · Classes / `__init__` / `self` — Class blueprint
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 🟢 Basic
 
 Write a `BankAccount` class:
@@ -114,9 +118,13 @@ print(bob)     # Bob's account: $0.00
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 · Class vs Instance Attributes — Shared vs per-object
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 🟢 Basic
 
 Given this code, predict the output and explain why:
@@ -161,9 +169,13 @@ To modify the class attribute, write `Counter.count = 99` — not `c1.count = 99
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 · `@classmethod` / `@staticmethod` — Factory constructors
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 🟡 Intermediate
 
 Add two factory class methods to `Temperature`:
@@ -214,9 +226,13 @@ print(Temperature.is_valid_celsius(-300))  # False
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 · `@property` — Controlled attribute access
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 🟡 Intermediate
 
 Add a validated `price` property to `Product`:
@@ -275,9 +291,13 @@ except AttributeError as e:
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 · Inheritance — Extending a base class
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 🟡 Intermediate
 
 Build a `SavingsAccount` that extends a given `Account` base class:
@@ -343,9 +363,13 @@ print(savings.add_interest())   # 60.0 (4% of 1500)
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 · `super()` — Calling parent methods
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 🟡 Intermediate
 
 What does each `print` output? Explain why.
@@ -393,9 +417,13 @@ Dog
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 · Polymorphism — Shape hierarchy
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 🟡 Intermediate
 
 Create a `Shape` base class and `Circle`, `Rectangle`, `Triangle` subclasses. Each must implement `area()` and `perimeter()`.
@@ -449,9 +477,13 @@ describe_all([Circle(5), Rectangle(4, 6), Triangle(3, 4, 5)])
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 · Encapsulation — Private attributes and validation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 🟡 Intermediate
 
 A `Person` class has `name` and `age`. Encapsulate `age`:
@@ -506,9 +538,13 @@ except AttributeError as e:
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 · Abstract Base Class — Enforcing interfaces
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 🟡 Intermediate
 
 Create an abstract `DataStore` class with abstract methods `get(key)`, `set(key, value)`, `delete(key)`.
@@ -583,9 +619,13 @@ print(store.get_or_default("y", "missing"))  # missing
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 · Dunder Methods — `__repr__`, `__str__`, `__eq__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 🟡 Intermediate
 
 Add `__repr__`, `__str__`, and `__eq__` to this `Point` class:
@@ -636,9 +676,13 @@ print(p1 == p2)     # True
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 · Arithmetic Dunder Methods — Operator overloading
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 🟠 Advanced
 
 Implement a `Vector` class where `+`, `-`, `*` (scalar), and `abs()` work naturally:
@@ -694,9 +738,13 @@ print(abs(v1))    # 5.0
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 · `@total_ordering` — Comparison from two methods
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 🟡 Intermediate
 
 Use `@total_ordering` to give a `Temperature` class full comparison support (`<`, `<=`, `>`, `>=`, `==`) by only defining `__eq__` and `__lt__`.
@@ -744,9 +792,13 @@ print(Temperature(100) > Temperature(37))   # True — from @total_ordering
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 · MRO — Method resolution order
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 🟠 Advanced
 
 What is the MRO of `D`? Predict the output:
@@ -787,9 +839,13 @@ D → B → C → A
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 · `super()` in Multiple Inheritance — Cooperative calls
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 🟠 Advanced
 
 Build a mixin chain where `super()` chains correctly through multiple classes. Three mixins (LogMixin, TimerMixin, CacheMixin) each override `process()`. Compose them so all three run when `process()` is called on a combined class.
@@ -836,9 +892,13 @@ p.process("hello")   # LogMixin logs, CacheMixin hits (no Base call)
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 · Mixins — Composable behavior
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 🟠 Advanced
 
 Create two mixins:
@@ -902,9 +962,13 @@ print(user2.name)
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 · Composition vs Inheritance — When to use which
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 🟡 Intermediate
 
 Refactor this inheritance design to use composition instead:
@@ -955,9 +1019,13 @@ confirmation.confirm("ORD-001", "alice@example.com")
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 · `@dataclass` — Reduce boilerplate
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 🟡 Intermediate
 
 Rewrite this class as a `@dataclass`. Include:
@@ -1013,9 +1081,13 @@ except ValueError as e:
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 · `__slots__` — Memory optimization
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 🟡 Intermediate
 
 Add `__slots__` to this class. Explain what changes and what breaks:
@@ -1065,9 +1137,13 @@ except AttributeError as e:
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 · Descriptor — Reusable attribute logic
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 🟠 Advanced
 
 Write a `Validator` descriptor that enforces a minimum value for any attribute:
@@ -1131,9 +1207,13 @@ except ValueError as e:
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 · Metaclass — Class creation hook
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 🟠 Advanced
 
 Write a metaclass `SingletonMeta` that ensures only one instance of any class using it can be created:
@@ -1180,9 +1260,13 @@ print(a.value)         # "first"
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 · Singleton Pattern — One instance
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 🟠 Advanced
 
 Implement a Singleton using `__new__` (not a metaclass):
@@ -1233,9 +1317,13 @@ print(pool2.url)        # postgres://localhost/app
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 · Factory Pattern — Decouple creation from use
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 🟠 Advanced
 
 Build a `NotificationFactory` that creates the right notification type from a string:
@@ -1302,9 +1390,13 @@ for ch in ["email", "sms", "slack"]:
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 · Observer Pattern — Event bus
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 🟠 Advanced
 
 Build a simple `EventBus` where components can:
@@ -1359,9 +1451,13 @@ bus.publish("user_registered", user_id=42, email="alice@example.com")
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 · Strategy Pattern — Swappable algorithms
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 🟠 Advanced
 
 Create a `Sorter` class that accepts a sorting strategy function and uses it in a `sort(data)` method. Support at least: bubble sort, Python's built-in sort, and a reverse sort — all swappable at runtime.
@@ -1415,9 +1511,13 @@ print(sorter.sort(data))   # [9, 6, 5, 4, 3, 2, 1, 1]
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 · Enum Module — Named constants
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 🟢 Basic
 
 Replace these magic string constants with a proper `OrderStatus` enum:
@@ -1473,9 +1573,13 @@ print(status == OrderStatus.PENDING)   # True
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 · Method Chaining — Fluent API
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 🟡 Intermediate
 
 Add method chaining to a `QueryBuilder` class so this works:
@@ -1543,9 +1647,13 @@ print(q)
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 · `isinstance` / `issubclass` — Type checks
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 🟢 Basic
 
 For this class hierarchy, predict ALL outputs:
@@ -1592,9 +1700,13 @@ True   # exact type match
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 · Class Decorator — Adding behavior to a class
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 🟠 Advanced
 
 Write a `@register` class decorator that adds every decorated class to a central registry dict, keyed by the class name.
@@ -1644,9 +1756,13 @@ print(registry["Dog"]())   # <__main__.Dog object>
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 · State Machine Pattern — Valid transitions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 🟠 Advanced
 
 Build an `Order` class whose status can only transition through valid states:
@@ -1718,9 +1834,13 @@ print(order.status)   # delivered
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 · Plugin/Registry Pattern — Self-registering classes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 🟠 Advanced
 
 Build a `TransformerRegistry` where transformer classes self-register using a decorator:
@@ -1781,9 +1901,13 @@ print(list(TransformerRegistry._transformers.keys()))   # ['uppercase', 'reverse
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 · SOLID — Single Responsibility Principle
 
 > 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
+
 🟡 Intermediate
 
 This class violates SRP. Identify the problem and refactor:
@@ -1841,9 +1965,13 @@ class UserReporter:
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 · SOLID — Open/Closed Principle
 
 > 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
+
 🟡 Intermediate
 
 This discount calculator violates OCP. Refactor it:
@@ -1908,9 +2036,13 @@ print(calculate_discount(100, "employee")) # 30.0
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 · SOLID — Liskov Substitution Principle
 
 > 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
+
 🟡 Intermediate
 
 Does this subclass violate LSP? Fix it:
@@ -1990,9 +2122,13 @@ s = Square(5)
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 · SOLID — Dependency Inversion Principle
 
 > 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
+
 🟠 Advanced
 
 This code violates DIP. Refactor:
@@ -2063,9 +2199,13 @@ processor_test = OrderProcessor(test_db, SMTPEmailService())
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 · Why OOP — When NOT to use a class
 
 > 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
+
 🟢 Basic
 
 Which of these should be a class vs a module-level function? Explain:
@@ -2117,9 +2257,13 @@ def to_kelvin(c): return c + 273.15
 
 ---
 
+<a id="q36"></a>
+
 ### Q36 · Trace MRO — Predict output
 
 > 🛠️ **Solve locally:** [practice_local.py → Q36](./practice_local.py)
+
+
 🟠 Advanced
 
 Trace the MRO and predict the exact output:
@@ -2167,9 +2311,13 @@ B+C+A
 
 ---
 
+<a id="q37"></a>
+
 ### Q37 · `@property` vs Attribute — Design choice
 
 > 🛠️ **Solve locally:** [practice_local.py → Q37](./practice_local.py)
+
+
 🟡 Intermediate
 
 When should you use `@property` vs a plain attribute? Refactor this code appropriately:
@@ -2227,9 +2375,13 @@ print(c.area)       # 314.15... — automatically updated
 
 ---
 
+<a id="q38"></a>
+
 ### Q38 · Dataclass with `field()` Defaults and `__post_init__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q38](./practice_local.py)
+
+
 🟡 Intermediate
 
 Create an `Employee` dataclass with:
@@ -2278,9 +2430,13 @@ except ValueError as e:
 
 ---
 
+<a id="q39"></a>
+
 ### Q39 · ABC Plugin System — Open for extension
 
 > 🛠️ **Solve locally:** [practice_local.py → Q39](./practice_local.py)
+
+
 🟠 Advanced
 
 Build a report generator that supports multiple formats (CSV, JSON, HTML) using an ABC. New formats should be addable without changing the core generator.
@@ -2337,9 +2493,13 @@ for fmt in [CSVFormatter(), JSONFormatter(), HTMLFormatter()]:
 
 ---
 
+<a id="q40"></a>
+
 ### Q40 · Fix the Class Bug — Common OOP mistakes
 
 > 🛠️ **Solve locally:** [practice_local.py → Q40](./practice_local.py)
+
+
 🟡 Intermediate
 
 Each snippet has a subtle bug. Identify and fix all three:
@@ -2409,9 +2569,13 @@ class Node:
 
 ---
 
+<a id="q41"></a>
+
 ### Q41 · Descriptor Protocol — `__get__`, `__set__`, `__delete__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q41](./practice_local.py)
+
+
 🟠 Advanced
 
 Implement a `TypedAttribute` descriptor that enforces a specific type on assignment:
@@ -2476,9 +2640,13 @@ except TypeError as e:
 
 ---
 
+<a id="q42"></a>
+
 ### Q42 · Mixin Combination — JSON + Validation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q42](./practice_local.py)
+
+
 🟠 Advanced
 
 Use `JSONMixin` and `ValidationMixin` (from Q15) to create a `Product` model. Add a `@classmethod from_dict(cls, data)` method and show a round-trip: `Product → JSON string → new Product`.
@@ -2535,9 +2703,13 @@ except ValueError as e:
 
 ---
 
+<a id="q43"></a>
+
 ### Q43 · Abstract Method Enforcement — Subclass contract
 
 > 🛠️ **Solve locally:** [practice_local.py → Q43](./practice_local.py)
+
+
 🟡 Intermediate
 
 Create an `Animal` ABC with abstract methods `speak()` and `move()`. Create 3 concrete animals. Show that trying to instantiate an incomplete subclass fails at instantiation — not at the method call.
@@ -2592,9 +2764,13 @@ except TypeError as e:
 
 ---
 
+<a id="q44"></a>
+
 ### Q44 · Enum with Methods and Values
 
 > 🛠️ **Solve locally:** [practice_local.py → Q44](./practice_local.py)
+
+
 🟡 Intermediate
 
 Create a `Color` enum with RGB values. Add a `to_hex()` method and a `brighten()` method. Show iteration over all enum members.
@@ -2648,9 +2824,13 @@ for color in Color:
 
 ---
 
+<a id="q45"></a>
+
 ### Q45 · Capstone — Design a notification system
 
 > 🛠️ **Solve locally:** [practice_local.py → Q45](./practice_local.py)
+
+
 🟠 Advanced
 
 Design and implement a complete notification system with:
@@ -2736,9 +2916,13 @@ for r in results:
 
 ---
 
+<a id="q46"></a>
+
 ### Q46 · Capstone — E-commerce order state machine
 
 > 🛠️ **Solve locally:** [practice_local.py → Q46](./practice_local.py)
+
+
 🟠 Advanced
 
 Build an `Order` class that:
@@ -2823,9 +3007,13 @@ print(order.audit_trail())
 
 ---
 
+<a id="q47"></a>
+
 ### Q47 · Capstone — Data store ABC with multiple backends
 
 > 🛠️ **Solve locally:** [practice_local.py → Q47](./practice_local.py)
+
+
 🟠 Advanced
 
 Extend the `DataStore` ABC from Q9 with two more methods:
@@ -2877,9 +3065,13 @@ print(store.get_many(["user:1", "user:2", "user:99"]))
 
 ---
 
+<a id="q48"></a>
+
 ### Q48 · Debug — Fix the MRO diamond problem
 
 > 🛠️ **Solve locally:** [practice_local.py → Q48](./practice_local.py)
+
+
 🟠 Advanced
 
 This code fails with a `TypeError`. Explain why and fix it:
@@ -2950,9 +3142,13 @@ print([c.__name__ for c in Diamond.__mro__])
 
 ---
 
+<a id="q49"></a>
+
 ### Q49 · Real-world — Build a rate limiter class
 
 > 🛠️ **Solve locally:** [practice_local.py → Q49](./practice_local.py)
+
+
 🟠 Advanced
 
 Implement a `RateLimiter` class:
@@ -3016,9 +3212,13 @@ print(limiter.allow("bob"))     # True — separate counter
 
 ---
 
+<a id="q50"></a>
+
 ### Q50 · Mixed — Full OOP system in 30 lines
 
 > 🛠️ **Solve locally:** [practice_local.py → Q50](./practice_local.py)
+
+
 🟠 Advanced
 
 Design and implement a minimal task management system in ≤30 lines using:

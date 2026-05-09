@@ -48,7 +48,7 @@ def parse_practice_md(filepath):
     blocks = re.split(r"(?=\n### Q\d+)", content)
 
     for block in blocks:
-        heading = re.match(r"\n?### (Q\d+\s·\s.+)", block)
+        heading = re.match(r"\n?### (Q\d+.*)", block)
         if not heading:
             continue
 
@@ -60,9 +60,28 @@ def parse_practice_md(filepath):
         )
         problem_text = problem_match.group(1).strip() if problem_match else ""
 
+        # If no **Problem:** label, extract the question text (first paragraph after heading)
+        if not problem_text:
+            # Get text between heading and first code block or <details>
+            text_match = re.search(
+                r"###\s+Q\d+.*?\n\n(.*?)(?=```|<details)", block, re.DOTALL
+            )
+            if text_match:
+                problem_text = text_match.group(1).strip()
+
         # Starter code: first ```python block only
         code_match = re.search(r"```python\n(.*?)```", block, re.DOTALL)
         starter_code = code_match.group(1).rstrip() if code_match else ""
+
+        # Detect if code is starter code (has # your code here / # TODO / pass)
+        # vs answer code (complete solution without placeholders)
+        starter_markers = ["# your code here", "# TODO", "# write", "pass", "..."]
+        is_starter = any(marker in starter_code.lower() for marker in starter_markers)
+
+        # If code doesn't look like starter code, don't include it
+        # (it's likely the answer/example — user should write from scratch)
+        if not is_starter and starter_code:
+            starter_code = "# your code here\n"
 
         problems.append(
             {"title": full_title, "problem": problem_text, "code": starter_code}

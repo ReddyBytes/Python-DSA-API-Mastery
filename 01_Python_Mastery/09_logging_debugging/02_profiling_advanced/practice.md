@@ -1,6 +1,5 @@
 # 💻 Practice — 02_profiling_advanced
 
-> 🛠️ **Solve locally:** [practice_local.py](./practice_local.py)
 
 ---
 
@@ -8,24 +7,28 @@
 
 | Q | Difficulty | Topic | Title |
 |---|-----------|-------|-------|
-| [Q1](#q1--cprofile--profile-a-function-with-cprofilerun-and-read-the-output) | 🟢 Easy | cProfile | Profile a function with cProfile.run() and read the output |
-| [Q2](#q2--pstats--sort-cprofile-output-by-cumulative-time-show-top-10) | 🟡 Medium | pstats | Sort cProfile output by cumulative time, show top 10 |
-| [Q3](#q3--tracemalloc--find-the-3-lines-allocating-the-most-memory-in-a-script) | 🟡 Medium | tracemalloc | Find the 3 lines allocating the most memory in a script |
-| [Q4](#q4--line_profiler--add-profile-decorator-and-run-kernprof-to-find-a-slow-line) | 🟡 Medium | line_profiler | Add @profile decorator and run kernprof to find a slow line |
-| [Q5](#q5--inspect--use-inspectsignature-to-introspect-a-functions-parameters) | 🟡 Medium | inspect | Use inspect.signature() to introspect a function's parameters |
-| [Q6](#q6--inspect-stack--use-inspectstack-inside-a-function-to-print-the-call-chain) | 🟡 Medium | inspect stack | Use inspect.stack() inside a function to print the call chain |
-| [Q7](#q7--loguru-basics--replace-loggingbasicconfig-with-logurus-one-liner-setup) | 🟡 Medium | loguru basics | Replace logging.basicConfig with loguru's one-liner setup |
-| [Q8](#q8--loguru-bind--use-loggerbind-to-add-context-to-every-log-line) | 🟡 Medium | loguru bind | Use logger.bind(request_id=...) to add context to every log line |
-| [Q9](#q9--async-debug--enable-asyncio-debug-mode-and-catch-a-coroutine-that-never-awaits) | 🟡 Medium | async debug | Enable asyncio debug mode and catch a coroutine that never awaits |
-| [Q10](#q10--objgraph--use-objgraphshow_most_common_types-to-find-a-memory-leak) | 🟠 Hard | objgraph | Use objgraph.show_most_common_types() to find a memory leak |
-| [Q11](#q11--debugpy--configure-debugpy-to-listen-on-port-5678-for-vs-code-attach) | 🟠 Hard | debugpy | Configure debugpy to listen on port 5678 for VS Code attach |
-| [Q12](#q12--capstone--profile-optimize-and-verify) | 🟠 Hard | Capstone | Profile a slow function, identify the hotspot, optimize, verify |
+| [Q1](#q1) | 🟢 Easy | cProfile | Profile a function with cProfile.run() and read the output |
+| [Q2](#q2) | 🟡 Medium | pstats | Sort cProfile output by cumulative time, show top 10 |
+| [Q3](#q3) | 🟡 Medium | tracemalloc | Find the 3 lines allocating the most memory in a script |
+| [Q4](#q4) | 🟡 Medium | line_profiler | Add @profile decorator and run kernprof to find a slow line |
+| [Q5](#q5) | 🟡 Medium | inspect | Use inspect.signature() to introspect a function's parameters |
+| [Q6](#q6) | 🟡 Medium | inspect stack | Use inspect.stack() inside a function to print the call chain |
+| [Q7](#q7) | 🟡 Medium | loguru basics | Replace logging.basicConfig with loguru's one-liner setup |
+| [Q8](#q8) | 🟡 Medium | loguru bind | Use logger.bind(request_id=...) to add context to every log line |
+| [Q9](#q9) | 🟡 Medium | async debug | Enable asyncio debug mode and catch a coroutine that never awaits |
+| [Q10](#q10) | 🟠 Hard | objgraph | Use objgraph.show_most_common_types() to find a memory leak |
+| [Q11](#q11) | 🟠 Hard | debugpy | Configure debugpy to listen on port 5678 for VS Code attach |
+| [Q12](#q12) | 🟠 Hard | Capstone | Profile a slow function, identify the hotspot, optimize, verify |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · cProfile — Profile a function with cProfile.run() and read the output
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 You have a slow function `slow_sum(n)` that sums squares from 0 to n. Use `cProfile.run()` to profile it and print the stats table to stdout.
 
@@ -60,9 +63,13 @@ cProfile.run('slow_sum(500_000)')
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟡 · pstats — Sort cProfile output by cumulative time, show top 10
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 Save a cProfile run to `'output.prof'`, then use `pstats.Stats` to load it, strip directory prefixes from filenames, sort by `'cumtime'`, and print the top 10 rows.
 
@@ -97,9 +104,13 @@ stats.print_stats(10)                           # ← show only top 10 entries
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · tracemalloc — Find the 3 lines allocating the most memory in a script
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 Use `tracemalloc` to identify the top 3 source lines that allocate the most memory during execution of a function that builds several large lists.
 
@@ -140,9 +151,13 @@ for stat in top_stats[:3]:
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · line_profiler — Add @profile decorator and run kernprof to find a slow line
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 Write a function `compute(n)` that has two steps: one fast (list comprehension) and one slow (a nested loop). Add the `@profile` decorator and show the `kernprof` command to run it. Identify which line dominates.
 
@@ -182,9 +197,13 @@ Output will show line B consuming 90%+ of `% Time`.
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · inspect — Use inspect.signature() to introspect a function's parameters
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 Given a function `create_user(name: str, age: int = 18, admin: bool = False)`, use `inspect.signature()` to loop over its parameters and print each parameter's name, default value, and type annotation.
 
@@ -222,9 +241,13 @@ for name, param in sig.parameters.items():
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · inspect stack — Use inspect.stack() inside a function to print the call chain
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 Write a helper `who_called_me()` that uses `inspect.stack()` to print the full call chain — function name, filename, and line number — for every frame from the caller up to the top level.
 
@@ -269,9 +292,13 @@ outer()
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · loguru basics — Replace logging.basicConfig with loguru's one-liner setup
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 Rewrite this stdlib snippet using loguru — eliminate all setup boilerplate and demonstrate that loguru's default output includes timestamp, level, and location with zero configuration.
 
@@ -317,9 +344,13 @@ logger.error("Connection to DB lost")
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · loguru bind — Use logger.bind(request_id=...) to add context to every log line
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 Write a `handle_request(request_id, user_id)` function that creates a bound logger with `request_id` and `user_id` attached, then logs three events. Show that every line in the output carries both context values without repeating them manually.
 
@@ -362,9 +393,13 @@ handle_request("REQ-001", 42)
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · async debug — Enable asyncio debug mode and catch a coroutine that never awaits
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 Write an async function `handle_signup(user_id)` that calls another coroutine but forgets the `await`. Enable asyncio debug mode and show that Python raises a `RuntimeWarning` for the unawaited coroutine.
 
@@ -409,9 +444,13 @@ asyncio.run(main(), debug=True)   # ← debug=True activates unawaited coroutine
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟠 · objgraph — Use objgraph.show_most_common_types() to find a memory leak
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 Simulate a memory leak by appending to a module-level list inside a loop. Use `objgraph.show_most_common_types()` before and after the loop to observe which type grows, then use `objgraph.show_growth()` to confirm the delta.
 
@@ -454,9 +493,13 @@ objgraph.show_growth(limit=5)
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟠 · debugpy — Configure debugpy to listen on port 5678 for VS Code attach
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 Write the debugpy setup block that: (1) reads an environment variable `ENABLE_DEBUGPY` to gate the debug listener, (2) listens on `0.0.0.0:5678`, and (3) waits for the debugger to attach before continuing. Also write the matching `.vscode/launch.json` attach configuration.
 
@@ -525,9 +568,13 @@ ENABLE_DEBUGPY=1 python app.py
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟠 · Capstone — Profile a slow function, identify the hotspot, apply an optimization, and verify the improvement with a second profile run
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 You have a function `find_duplicates(items)` that finds duplicate values in a list using a naive O(n²) nested-loop approach. Complete all four steps:
 

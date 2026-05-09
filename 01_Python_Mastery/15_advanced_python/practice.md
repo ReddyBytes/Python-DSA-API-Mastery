@@ -2,47 +2,51 @@
 
 | Q | Difficulty | Topic |
 |---|-----------|-------|
-| [Q1](#q1--repr-and-str) | 🟢 | `__repr__` and `__str__` |
-| [Q2](#q2--len-and-bool) | 🟢 | `__len__` and `__bool__` |
-| [Q3](#q3--eq-and-hash) | 🟡 | `__eq__` and `__hash__` |
-| [Q4](#q4--total-ordering) | 🟡 | `__lt__` and `@total_ordering` |
-| [Q5](#q5--contains-and-iter) | 🟡 | `__contains__` and `__iter__` |
-| [Q6](#q6--add-and-radd) | 🟡 | `__add__` and `__radd__` |
-| [Q7](#q7--mul-and-rmul) | 🟡 | `__mul__` and `__rmul__` |
-| [Q8](#q8--call) | 🟡 | `__call__` with state |
-| [Q9](#q9--enter-and-exit) | 🟡 | `__enter__` and `__exit__` |
-| [Q10](#q10--getitem-and-setitem) | 🟡 | `__getitem__` and `__setitem__` |
-| [Q11](#q11--descriptor-basics) | 🟡 | Basic descriptor with `__get__` and `__set__` |
-| [Q12](#q12--set_name) | 🟡 | `__set_name__` auto-registration |
-| [Q13](#q13--data-vs-non-data) | 🟡 | Data vs non-data descriptor priority |
-| [Q14](#q14--property-internals) | 🟠 | `@property` as a descriptor |
-| [Q15](#q15--dynamic-class-creation) | 🟡 | `type()` three-argument form |
-| [Q16](#q16--metaclass-basics) | 🟡 | Custom metaclass with `__new__` |
-| [Q17](#q17--singleton-metaclass) | 🟠 | Singleton via metaclass `__call__` |
-| [Q18](#q18--init_subclass) | 🟡 | `__init_subclass__` for registration |
-| [Q19](#q19--abcmeta) | 🟠 | ABCMeta and `@abstractmethod` |
-| [Q20](#q20--basic-dataclass) | 🟢 | `@dataclass` basics |
-| [Q21](#q21--frozen-dataclass) | 🟢 | `frozen=True` — immutable dataclass |
-| [Q22](#q22--default-factory) | 🟡 | `field(default_factory=...)` |
-| [Q23](#q23--post-init) | 🟡 | `__post_init__` for derived fields |
-| [Q24](#q24--order) | 🟡 | `order=True` for sortable dataclasses |
-| [Q25](#q25--slots-memory) | 🟡 | `__slots__` memory comparison |
-| [Q26](#q26--slots-restriction) | 🟡 | `__slots__` attribute restriction |
-| [Q27](#q27--slots-inheritance) | 🟠 | `__slots__` in subclasses |
-| [Q28](#q28--dir-and-callable) | 🟡 | `dir()` + `callable()` introspection |
-| [Q29](#q29--dynamic-attributes) | 🟡 | `getattr` / `setattr` / `hasattr` / `delattr` |
-| [Q30](#q30--inspect-signature) | 🟠 | `inspect.signature` at runtime |
-| [Q31](#q31--enum-basics) | 🟡 | `Enum` — named constants |
-| [Q32](#q32--intenum) | 🟡 | `IntEnum` and `Flag` |
-| [Q33](#q33--abc-interface) | 🟠 | ABC as interface contract |
-| [Q34](#q34--protocol) | 🟠 | `typing.Protocol` structural typing |
-| [Q35](#q35--capstone) | 🟠 | Capstone: ORM-style model using metaclass + descriptors |
+| [Q1](#q1) | 🟢 | `__repr__` and `__str__` |
+| [Q2](#q2) | 🟢 | `__len__` and `__bool__` |
+| [Q3](#q3) | 🟡 | `__eq__` and `__hash__` |
+| [Q4](#q4) | 🟡 | `__lt__` and `@total_ordering` |
+| [Q5](#q5) | 🟡 | `__contains__` and `__iter__` |
+| [Q6](#q6) | 🟡 | `__add__` and `__radd__` |
+| [Q7](#q7) | 🟡 | `__mul__` and `__rmul__` |
+| [Q8](#q8) | 🟡 | `__call__` with state |
+| [Q9](#q9) | 🟡 | `__enter__` and `__exit__` |
+| [Q10](#q10) | 🟡 | `__getitem__` and `__setitem__` |
+| [Q11](#q11) | 🟡 | Basic descriptor with `__get__` and `__set__` |
+| [Q12](#q12) | 🟡 | `__set_name__` auto-registration |
+| [Q13](#q13) | 🟡 | Data vs non-data descriptor priority |
+| [Q14](#q14) | 🟠 | `@property` as a descriptor |
+| [Q15](#q15) | 🟡 | `type()` three-argument form |
+| [Q16](#q16) | 🟡 | Custom metaclass with `__new__` |
+| [Q17](#q17) | 🟠 | Singleton via metaclass `__call__` |
+| [Q18](#q18) | 🟡 | `__init_subclass__` for registration |
+| [Q19](#q19) | 🟠 | ABCMeta and `@abstractmethod` |
+| [Q20](#q20) | 🟢 | `@dataclass` basics |
+| [Q21](#q21) | 🟢 | `frozen=True` — immutable dataclass |
+| [Q22](#q22) | 🟡 | `field(default_factory=...)` |
+| [Q23](#q23) | 🟡 | `__post_init__` for derived fields |
+| [Q24](#q24) | 🟡 | `order=True` for sortable dataclasses |
+| [Q25](#q25) | 🟡 | `__slots__` memory comparison |
+| [Q26](#q26) | 🟡 | `__slots__` attribute restriction |
+| [Q27](#q27) | 🟠 | `__slots__` in subclasses |
+| [Q28](#q28) | 🟡 | `dir()` + `callable()` introspection |
+| [Q29](#q29) | 🟡 | `getattr` / `setattr` / `hasattr` / `delattr` |
+| [Q30](#q30) | 🟠 | `inspect.signature` at runtime |
+| [Q31](#q31) | 🟡 | `Enum` — named constants |
+| [Q32](#q32) | 🟡 | `IntEnum` and `Flag` |
+| [Q33](#q33) | 🟠 | ABC as interface contract |
+| [Q34](#q34) | 🟠 | `typing.Protocol` structural typing |
+| [Q35](#q35) | 🟠 | Capstone: ORM-style model using metaclass + descriptors |
 
 ---
+
+<a id="q1"></a>
 
 ### Q1 🟢 · representation — `__repr__` and `__str__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
+
+
 
 **Problem:** Create a `Book` class with `title`, `author`, and `year`. Implement `__repr__` so that `eval(repr(b))` recreates it, and `__str__` for human-readable display like `"The Hobbit by J.R.R. Tolkien (1937)"`.
 
@@ -78,9 +82,13 @@ print(b)         # The Hobbit by J.R.R. Tolkien (1937)
 
 ---
 
+<a id="q2"></a>
+
 ### Q2 🟢 · sizing — `__len__` and `__bool__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
+
+
 
 **Problem:** Create a `Bag` class wrapping a list of items. Implement `__len__` and `__bool__`. An empty bag should be falsy. A bag with items should be truthy regardless of item values.
 
@@ -122,9 +130,13 @@ if not b2:
 
 ---
 
+<a id="q3"></a>
+
 ### Q3 🟡 · equality — `__eq__` and `__hash__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
+
+
 
 **Problem:** Create a `Point` class with `x` and `y`. Implement `__eq__` (equal when same coordinates) and `__hash__` (so Points can be used in sets and as dict keys). Show both work.
 
@@ -170,9 +182,13 @@ print(labels[Point(1, 2)])  # A
 
 ---
 
+<a id="q4"></a>
+
 ### Q4 🟡 · ordering — `__lt__` and `@total_ordering`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
+
+
 
 **Problem:** Create a `Version` class (`major.minor.patch`). Use `@total_ordering` to provide full comparison support from just `__eq__` and `__lt__`. Show that `sorted()` works.
 
@@ -223,9 +239,13 @@ print(sorted([v1, v2, v3]))        # [0.9.5, 1.0.0, 1.1.0]
 
 ---
 
+<a id="q5"></a>
+
 ### Q5 🟡 · container — `__contains__` and `__iter__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
+
+
 
 **Problem:** Create a `WordSet` class that stores unique lowercase words. Implement `__contains__` (case-insensitive `in` check) and `__iter__` (alphabetically sorted). Show that `for word in ws` and `"Hello" in ws` both work.
 
@@ -265,9 +285,13 @@ print(list(ws))          # ['java', 'python', 'rust']
 
 ---
 
+<a id="q6"></a>
+
 ### Q6 🟡 · arithmetic — `__add__` and `__radd__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
+
+
 
 **Problem:** Create a `Vector2D` class. Implement `__add__` (Vector + Vector and Vector + scalar) and `__radd__` (so `5 + v` also works). Test all three cases.
 
@@ -310,9 +334,13 @@ print(10 + v1)   # Vector2D(11, 12)  — uses __radd__
 
 ---
 
+<a id="q7"></a>
+
 ### Q7 🟡 · arithmetic — `__mul__` and `__rmul__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
+
+
 
 **Problem:** Add `__mul__` (scalar multiplication: `v * 3`) and `__rmul__` (`3 * v`) to `Vector2D`. Add `__abs__` for magnitude. Verify `3 * v == v * 3`.
 
@@ -363,9 +391,13 @@ print(abs(v))           # 5.0
 
 ---
 
+<a id="q8"></a>
+
 ### Q8 🟡 · callable — `__call__` with state
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
+
+
 
 **Problem:** Create a `Counter` callable class that increments a tally each time it's called. It should track total calls, sum of all passed values, and support `.reset()`. Test it as a decorator.
 
@@ -421,9 +453,13 @@ print(process.calls)   # 2
 
 ---
 
+<a id="q9"></a>
+
 ### Q9 🟡 · context manager — `__enter__` and `__exit__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
+
+
 
 **Problem:** Build a `Timer` context manager class. `__enter__` records the start time. `__exit__` records the end time and stores the elapsed duration as `.elapsed`. It should also suppress `ZeroDivisionError` and print a warning instead.
 
@@ -465,9 +501,13 @@ print(f"Still running, elapsed: {t2.elapsed:.4f}s")
 
 ---
 
+<a id="q10"></a>
+
 ### Q10 🟡 · subscript — `__getitem__` and `__setitem__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
+
+
 
 **Problem:** Create a `Matrix` class that supports `m[row, col]` reads and `m[row, col] = value` writes. Initialize all cells to `0`. Raise `IndexError` for out-of-bounds access.
 
@@ -515,9 +555,13 @@ print(m[1, 1])   # 5
 
 ---
 
+<a id="q11"></a>
+
 ### Q11 🟡 · descriptors — basic descriptor with `__get__` and `__set__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
+
+
 
 **Problem:** Write a `Positive` descriptor that raises `ValueError` if the value is set to zero or negative. Use it on a `Circle` class with a `radius` field.
 
@@ -569,9 +613,13 @@ except ValueError as e:
 
 ---
 
+<a id="q12"></a>
+
 ### Q12 🟡 · descriptors — `__set_name__` auto-registration
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
+
+
 
 **Problem:** Write a `Typed` descriptor that enforces a specific type. Use `__set_name__` so the descriptor knows its attribute name without being told explicitly. Apply it to a `Person` class with `name: str` and `age: int`.
 
@@ -627,9 +675,13 @@ except TypeError as e:
 
 ---
 
+<a id="q13"></a>
+
 ### Q13 🟡 · descriptors — data vs non-data descriptor priority
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
+
+
 
 **Problem:** Demonstrate the difference between a data descriptor (has `__set__`) and a non-data descriptor (only `__get__`). Write directly to `obj.__dict__` and show which type wins.
 
@@ -674,9 +726,13 @@ print(d.nondata)   # 'in dict' — instance __dict__ wins
 
 ---
 
+<a id="q14"></a>
+
 ### Q14 🟠 · descriptors — `@property` as a descriptor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
+
+
 
 **Problem:** Implement `MyProperty` — a descriptor equivalent to Python's built-in `property`. Support getter, setter, and deleter via `.setter()` and `.deleter()` chaining. Test it on a `Circle.radius` attribute.
 
@@ -745,9 +801,13 @@ print(c.radius)   # 10
 
 ---
 
+<a id="q15"></a>
+
 ### Q15 🟡 · metaclasses — `type()` three-argument form
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
+
+
 
 **Problem:** Use `type(name, bases, namespace)` to create a `Rectangle` class dynamically — no `class` statement. Give it `width`, `height`, an `area()` method, and `__repr__`.
 
@@ -792,9 +852,13 @@ print(type(Rectangle))   # <class 'type'>
 
 ---
 
+<a id="q16"></a>
+
 ### Q16 🟡 · metaclasses — custom metaclass with `__new__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
+
+
 
 **Problem:** Write a `RegistryMeta` metaclass that auto-registers every concrete subclass by name in `RegistryMeta._registry`. The root class should NOT be registered. Show that subclasses appear automatically.
 
@@ -839,9 +903,13 @@ print(result)   # starting
 
 ---
 
+<a id="q17"></a>
+
 ### Q17 🟠 · metaclasses — singleton via metaclass `__call__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
+
+
 
 **Problem:** Write a `SingletonMeta` metaclass. Calling `MyClass()` a second time returns the same instance, not a new one. Verify with `is`.
 
@@ -878,9 +946,13 @@ print(c1.debug)     # True — first __init__ wins
 
 ---
 
+<a id="q18"></a>
+
 ### Q18 🟡 · metaclasses — `__init_subclass__` for registration
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
+
+
 
 **Problem:** Implement a plugin registry using `__init_subclass__` instead of a metaclass. Each subclass declares a `plugin_name` keyword argument. Build a `dispatch(name, data)` classmethod.
 
@@ -926,9 +998,13 @@ print(Processor.dispatch("csv",  [1, 2, 3]))  # 1,2,3
 
 ---
 
+<a id="q19"></a>
+
 ### Q19 🟠 · ABCs — ABCMeta and `@abstractmethod`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
+
+
 
 **Problem:** Create an abstract `Shape` base class with abstract methods `area()` and `perimeter()` and a concrete `describe()` method. Create `Circle` and `Rectangle` subclasses. Show that `Shape()` raises `TypeError`.
 
@@ -992,9 +1068,13 @@ print(Rectangle(4, 6).describe()) # Rectangle: area=24.00, perimeter=20.00
 
 ---
 
+<a id="q20"></a>
+
 ### Q20 🟢 · dataclasses — `@dataclass` basics
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
+
+
 
 **Problem:** Create a `Product` dataclass with `name: str`, `price: float`, and `in_stock: bool = True`. Show the auto-generated `__init__`, `__repr__`, and `__eq__`.
 
@@ -1029,9 +1109,13 @@ print(p1 == p3)     # False
 
 ---
 
+<a id="q21"></a>
+
 ### Q21 🟢 · dataclasses — `frozen=True`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
+
+
 
 **Problem:** Create a frozen `Coordinate` dataclass with `lat: float` and `lon: float`. Show it's hashable (can be used in a set), and that attempting to modify it raises `FrozenInstanceError`.
 
@@ -1071,9 +1155,13 @@ except Exception as e:
 
 ---
 
+<a id="q22"></a>
+
 ### Q22 🟡 · dataclasses — `field(default_factory=...)`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
+
+
 
 **Problem:** Create a `Task` dataclass with `title: str`, `tags: list[str]` defaulting to an empty list, and `metadata: dict` defaulting to an empty dict. Show that each instance gets its own list (not shared).
 
@@ -1110,9 +1198,13 @@ print(t1.tags is t2.tags)  # False
 
 ---
 
+<a id="q23"></a>
+
 ### Q23 🟡 · dataclasses — `__post_init__`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
+
+
 
 **Problem:** Create a `Rectangle` dataclass with `width` and `height`. Use `__post_init__` to compute `area` as a derived field (`field(init=False)`) and validate that both dimensions are positive.
 
@@ -1153,9 +1245,13 @@ except ValueError as e:
 
 ---
 
+<a id="q24"></a>
+
 ### Q24 🟡 · dataclasses — `order=True`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
+
+
 
 **Problem:** Create a `Task` dataclass with `priority: int`, `created_at: float`, and `title: str`. Use `order=True`. Mark `title` with `field(compare=False)` so sorting ignores it. Sort a list of tasks.
 
@@ -1196,9 +1292,13 @@ for t in sorted(tasks):
 
 ---
 
+<a id="q25"></a>
+
 ### Q25 🟡 · slots — `__slots__` memory comparison
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
+
+
 
 **Problem:** Create two versions of an `Event` class (with and without `__slots__`), each with `name: str`, `ts: float`, `value: float`. Compare memory using `sys.getsizeof`. Report percentage savings.
 
@@ -1243,9 +1343,13 @@ print(f"Savings: {size_dict - size_slots} bytes ({(size_dict - size_slots)/size_
 
 ---
 
+<a id="q26"></a>
+
 ### Q26 🟡 · slots — `__slots__` attribute restriction
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
+
+
 
 **Problem:** Create a slotted `Config` class with slots `host`, `port`, `debug`. Show that reading and writing declared slots works normally, but trying to add an undeclared attribute raises `AttributeError`.
 
@@ -1287,9 +1391,13 @@ print(type(Config.host))   # <class 'member_descriptor'>
 
 ---
 
+<a id="q27"></a>
+
 ### Q27 🟠 · slots — `__slots__` in subclasses
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
+
+
 
 **Problem:** Show how `__slots__` inheritance works. Create a slotted `Animal` base class and a slotted `Dog` subclass. Demonstrate that the subclass must also declare `__slots__` (even empty) to avoid a `__dict__` being added back.
 
@@ -1340,9 +1448,13 @@ print(f"With slots: {size1}, Without: {size2}")
 
 ---
 
+<a id="q28"></a>
+
 ### Q28 🟡 · introspection — `dir()` + `callable()`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
+
+
 
 **Problem:** Write a `list_methods(obj)` function that returns all public, callable attributes (no dunder methods). Test it on a list, a dict, and a custom class.
 
@@ -1384,9 +1496,13 @@ print(list_methods(Service()))   # ['start', 'stop']
 
 ---
 
+<a id="q29"></a>
+
 ### Q29 🟡 · introspection — dynamic attribute access
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
+
+
 
 **Problem:** Write a `Config` class that takes `**kwargs` in `__init__` and stores each key as an attribute using `setattr`. Add `get(name, default)`, `has(name)`, `remove(name)`, and `to_dict()` methods.
 
@@ -1434,9 +1550,13 @@ print(cfg.to_dict())            # {'host': 'localhost', 'port': 8080}
 
 ---
 
+<a id="q30"></a>
+
 ### Q30 🟠 · introspection — `inspect.signature` at runtime
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
+
+
 
 **Problem:** Write a `validate_call(func)` decorator that uses `inspect.signature` to check that all arguments match their type annotations at call time. Raise `TypeError` with a clear message if a type doesn't match.
 
@@ -1493,9 +1613,13 @@ except TypeError as e:
 
 ---
 
+<a id="q31"></a>
+
 ### Q31 🟡 · enums — `Enum` named constants
 
 > 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
+
+
 
 **Problem:** Create an `OrderStatus` enum with `PENDING`, `PROCESSING`, `SHIPPED`, `DELIVERED`, and `CANCELLED`. Show lookup by name and by value, membership testing, and iteration.
 
@@ -1536,9 +1660,13 @@ print(OrderStatus.SHIPPED in list(OrderStatus))   # True
 
 ---
 
+<a id="q32"></a>
+
 ### Q32 🟡 · enums — `IntEnum` and `Flag`
 
 > 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
+
+
 
 **Problem:** Create a `Priority` IntEnum and a `Permission` Flag enum. Show that `Priority.HIGH > Priority.LOW` works, and that `Permission.READ | Permission.WRITE` can be tested with `in`.
 
@@ -1579,9 +1707,13 @@ print(user_perm)                         # Permission.READ|WRITE
 
 ---
 
+<a id="q33"></a>
+
 ### Q33 🟠 · ABCs — ABC as interface contract
 
 > 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
+
+
 
 **Problem:** Create an abstract `Repository` base class with abstract methods `save(entity)`, `find_by_id(id)`, and `delete(id)`. Add a concrete `find_all()` that calls `find_by_id` in a loop. Show partial implementation raises `TypeError`.
 
@@ -1638,9 +1770,13 @@ repo = MemoryRepo()   # works
 
 ---
 
+<a id="q34"></a>
+
 ### Q34 🟠 · typing — `typing.Protocol` structural typing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
+
+
 
 **Problem:** Define a `Drawable` Protocol with a `draw() -> None` method. Write a `render_all(shapes)` function typed with `list[Drawable]`. Show that unrelated classes with a `draw()` method satisfy the protocol at runtime.
 
@@ -1691,9 +1827,13 @@ print(isinstance(Invisible(), Drawable))  # False
 
 ---
 
+<a id="q35"></a>
+
 ### Q35 🟠 · capstone — ORM-style model using metaclass + descriptors
 
 > 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)
+
+
 
 **Problem:** Build a mini ORM model system where:
 1. `Field` is a descriptor that enforces a type.
