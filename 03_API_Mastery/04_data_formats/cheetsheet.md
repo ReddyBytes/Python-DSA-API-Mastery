@@ -267,7 +267,7 @@ Same data model as JSON. Drop-in for internal services.
 
 **[Back to README](../README.md)**
 
-**Theory:** [serialization_guide.md](./serialization_guide.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** [← REST Best Practices](../03_rest_best_practices/cheetsheet.md) &nbsp;|&nbsp; **Next:** [Authentication →](../05_authentication/cheetsheet.md)
 

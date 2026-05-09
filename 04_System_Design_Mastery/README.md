@@ -65,7 +65,7 @@ A complete system design mastery system — from understanding how computers and
 
 | Step | Module | What You'll Learn |
 |------|--------|-------------------|
-| 1 | [Computer Fundamentals](./00_computer_fundamentals/story.md) | CPU, RAM, disk, processes, threads, I/O, syscalls |
+| 1 | [Computer Fundamentals](./00_computer_fundamentals/theory.md) | CPU, RAM, disk, processes, threads, I/O, syscalls |
 | 2 | [Networking Basics](./01_networking_basics/theory.md) | TCP vs UDP, HTTP/1–3, DNS, TLS/HTTPS, WebSockets |
 | 3 | [System Fundamentals](./02_system_fundamentals/theory.md) | Latency, throughput, availability, CAP theorem, SLOs |
 | 4 | [Databases](./05_databases/theory.md) | SQL vs NoSQL, ACID transactions, indexes, query optimization |
@@ -138,11 +138,11 @@ A complete system design mastery system — from understanding how computers and
 
 | # | Topic | Files |
 |---|-------|-------|
-| 00 | [Computer Fundamentals](./00_computer_fundamentals/story.md) | story.md |
+| 00 | [Computer Fundamentals](./00_computer_fundamentals/theory.md) | story.md |
 | 01 | [Networking Basics](./01_networking_basics/theory.md) | theory.md |
 | 02 | [System Fundamentals](./02_system_fundamentals/theory.md) | theory.md |
 | 03 | [API Design](./03_api_design/theory.md) | theory.md |
-| 04 | [Backend Architecture](./04_backend_architecture/intro.md) | intro.md |
+| 04 | [Backend Architecture](./04_backend_architecture/theory.md) | intro.md |
 
 </details>
 
@@ -264,7 +264,7 @@ A complete system design mastery system — from understanding how computers and
 
 </div>
 
-**New to system design?** → [Computer Fundamentals](./00_computer_fundamentals/story.md) → [Networking Basics](./01_networking_basics/theory.md)
+**New to system design?** → [Computer Fundamentals](./00_computer_fundamentals/theory.md) → [Networking Basics](./01_networking_basics/theory.md)
 
 **Design interview coming up?** → [Interview Framework](./23_interview_framework/theory.md) → [Case Studies](./22_case_studies/theory.md)
 

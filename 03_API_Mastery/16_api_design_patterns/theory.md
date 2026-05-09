@@ -960,6 +960,6 @@ Versioning
 
 **Prev:** [API Gateway Patterns](../15_api_gateway/theory.md) | **Next:** [WebSockets and Real-Time APIs](../17_websockets/theory.md)
 
-**Related Topics:** [API Gateway Patterns](../15_api_gateway/theory.md) | [Real-World Architectures](../18_real_world_apis/architectures.md) | [API Versioning](../08_versioning_standards/versioning_strategy.md) | [REST Best Practices](../03_rest_best_practices/patterns.md)
+**Related Topics:** [API Gateway Patterns](../15_api_gateway/theory.md) | [Real-World Architectures](../18_real_world_apis/theory.md) | [API Versioning](../08_versioning_standards/theory.md) | [REST Best Practices](../03_rest_best_practices/theory.md)
 
 **Up:** [03_API_Mastery](../README.md)

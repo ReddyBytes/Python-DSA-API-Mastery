@@ -85,7 +85,7 @@ A complete API mastery system — from understanding what an API is, through bui
 | 2 | [FastAPI & Databases](./07_fastapi/database_guide.md) | SQLAlchemy, PostgreSQL, CRUD operations, Alembic migrations |
 | 3 | [Error Handling](./06_error_handling_standards/theory.md) | Consistent error format, validation errors, HTTP exceptions |
 | 4 | [API Versioning](./08_versioning_standards/theory.md) | Breaking changes, URL vs header versioning, deprecation |
-| 5 | [Testing & Docs](./10_testing_documentation/testing_apis.md) | TestClient, pytest fixtures, contract testing, OpenAPI |
+| 5 | [Testing & Docs](./10_testing_documentation/theory.md) | TestClient, pytest fixtures, contract testing, OpenAPI |
 | 6 | [API Performance](./09_api_performance_scaling/theory.md) | N+1 queries, caching, connection pooling, async endpoints |
 
 **Prerequisite:** Beginner path complete.
@@ -138,7 +138,7 @@ A complete API mastery system — from understanding what an API is, through bui
 
 | Module | Topic | Files |
 |--------|-------|-------|
-| 01 | [What is an API?](./01_what_is_an_api/theory.md) | story.md |
+| 01 | [What is an API?](./01_what_is_an_api/theory.md) | theory.md |
 | 02 | [REST Fundamentals](./02_rest_fundamentals/theory.md) | theory.md |
 | 03 | [REST Best Practices](./03_rest_best_practices/theory.md) | theory.md |
 | 04 | [Data Formats & Serialization](./04_data_formats/theory.md) | theory.md |
@@ -169,7 +169,7 @@ All FastAPI topics are in `07_fastapi/` for focused navigation:
 |--------|-------|-------|
 | 08 | [API Versioning](./08_versioning_standards/theory.md) | theory.md |
 | 09 | [API Performance & Scaling](./09_api_performance_scaling/theory.md) | theory.md |
-| 10 | [Testing & Documentation](./10_testing_documentation/testing_apis.md) | testing_apis.md · [docs_that_work.md](./10_testing_documentation/docs_that_work.md) |
+| 10 | [Testing & Documentation](./10_testing_documentation/theory.md) | testing_apis.md · [theory.md](./10_testing_documentation/theory.md) |
 | 11 | [Security in Production](./11_api_security_production/theory.md) | theory.md |
 | 12 | [Production Deployment](./12_production_deployment/theory.md) | theory.md |
 

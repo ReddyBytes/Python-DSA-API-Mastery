@@ -224,7 +224,7 @@ Link: <https://api.example.com/v2/users>; rel="successor-version"
 
 **[Back to README](../README.md)**
 
-**Theory:** [patterns.md](./patterns.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** [← REST Fundamentals](../02_rest_fundamentals/cheetsheet.md) &nbsp;|&nbsp; **Next:** [Data Formats →](../04_data_formats/cheetsheet.md)
 

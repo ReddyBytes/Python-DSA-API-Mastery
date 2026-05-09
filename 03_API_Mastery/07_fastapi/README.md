@@ -22,6 +22,6 @@ why_fastapi.md  →  first_api.md  →  core_guide.md  →  database_guide.md  �
 
 | | |
 |---|---|
-| ← Previous | [06 — Error Handling](../06_error_handling_standards/error_guide.md) |
-| ➡️ Next | [08 — Versioning](../08_versioning_standards/versioning_strategy.md) |
+| ← Previous | [06 — Error Handling](../06_error_handling_standards/theory.md) |
+| ➡️ Next | [08 — Versioning](../08_versioning_standards/theory.md) |
 | 🏠 Home | [README.md](../README.md) |

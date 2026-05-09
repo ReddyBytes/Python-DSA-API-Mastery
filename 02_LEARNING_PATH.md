@@ -98,10 +98,10 @@ theory.md → visual_explanation.md → cheetsheet.md → common_mistakes.md →
 
 | # | Topic | File |
 |---|-------|------|
-| 1 | What is an API? | `03_API_Mastery/01_what_is_an_api/story.md` |
-| 2 | HTTP Deep Dive | `03_API_Mastery/02_rest_fundamentals/rest_explained.md` |
-| 3 | REST Design | `03_API_Mastery/03_rest_best_practices/patterns.md` |
-| 4 | Data Formats | `03_API_Mastery/04_data_formats/serialization_guide.md` |
+| 1 | What is an API? | `03_API_Mastery/01_what_is_an_api/theory.md` |
+| 2 | HTTP Deep Dive | `03_API_Mastery/02_rest_fundamentals/theory.md` |
+| 3 | REST Design | `03_API_Mastery/03_rest_best_practices/theory.md` |
+| 4 | Data Formats | `03_API_Mastery/04_data_formats/theory.md` |
 
 **Time**: 1 week
 **Milestone**: Build a REST API with 3 endpoints using FastAPI.
@@ -150,8 +150,8 @@ theory.md → visual_explanation.md → cheetsheet.md → common_mistakes.md →
 
 | # | Topic | File |
 |---|-------|------|
-| 5 | Authentication | `03_API_Mastery/05_authentication/securing_apis.md` |
-| 6 | Error Handling | `03_API_Mastery/06_error_handling_standards/error_guide.md` |
+| 5 | Authentication | `03_API_Mastery/05_authentication/theory.md` |
+| 6 | Error Handling | `03_API_Mastery/06_error_handling_standards/theory.md` |
 | 7 | FastAPI Deep Dive | `03_API_Mastery/07_fastapi/why_fastapi.md` |
 |   | FastAPI Basics | `03_API_Mastery/07_fastapi/first_api.md` |
 |   | FastAPI Core | `03_API_Mastery/07_fastapi/core_guide.md` |
@@ -187,7 +187,7 @@ theory.md → visual_explanation.md → cheetsheet.md → common_mistakes.md →
 
 | Stage | Topic | File |
 |-------|-------|------|
-| 1 | Computer Fundamentals | `04_System_Design_Mastery/00_computer_fundamentals/story.md` |
+| 1 | Computer Fundamentals | `04_System_Design_Mastery/00_computer_fundamentals/theory.md` |
 | 1 | Networking Basics | `04_System_Design_Mastery/01_networking_basics/theory.md` |
 | 1 | System Fundamentals | `04_System_Design_Mastery/02_system_fundamentals/theory.md` |
 | 3 | Databases | `04_System_Design_Mastery/05_databases/theory.md` |
@@ -209,11 +209,11 @@ theory.md → visual_explanation.md → cheetsheet.md → common_mistakes.md →
 | 17 | Testing | `01_Python_Mastery/17_testing/theory.md` |
 | 18 | Performance | `01_Python_Mastery/18_performance_optimization/theory.md` |
 | 19 | Production Best Practices | `01_Python_Mastery/19_production_best_practices/theory.md` |
-|   | API Versioning | `03_API_Mastery/08_versioning_standards/versioning_strategy.md` |
-|   | API Performance | `03_API_Mastery/09_api_performance_scaling/performance_guide.md` |
-|   | Testing APIs | `03_API_Mastery/10_testing_documentation/testing_apis.md` |
-|   | Security | `03_API_Mastery/11_api_security_production/security_hardening.md` |
-|   | Deployment | `03_API_Mastery/12_production_deployment/deployment_guide.md` |
+|   | API Versioning | `03_API_Mastery/08_versioning_standards/theory.md` |
+|   | API Performance | `03_API_Mastery/09_api_performance_scaling/theory.md` |
+|   | Testing APIs | `03_API_Mastery/10_testing_documentation/theory.md` |
+|   | Security | `03_API_Mastery/11_api_security_production/theory.md` |
+|   | Deployment | `03_API_Mastery/12_production_deployment/theory.md` |
 
 **Time**: 2–3 weeks
 **Milestone**: Add unit tests, CI/CD, Docker deployment, and rate limiting to your API project.

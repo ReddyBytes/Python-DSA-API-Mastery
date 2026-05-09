@@ -8,7 +8,7 @@
 
 | Module | Topics Covered |
 |--------|---------------|
-| [00 — Computer Fundamentals](./00_computer_fundamentals/story.md) | CPU, memory hierarchy (L1/L2/L3 cache, RAM, SSD), process vs thread, context switching, I/O blocking vs async — the hardware layer every system runs on |
+| [00 — Computer Fundamentals](./00_computer_fundamentals/theory.md) | CPU, memory hierarchy (L1/L2/L3 cache, RAM, SSD), process vs thread, context switching, I/O blocking vs async — the hardware layer every system runs on |
 | [01 — Networking Basics](./01_networking_basics/theory.md) | OSI and TCP/IP models, TCP vs UDP, DNS, HTTP/1.1–3, TLS, WebSockets, SSE, gRPC, L4 vs L7 networking — how bytes move between machines |
 | [02 — System Fundamentals](./02_system_fundamentals/theory.md) | Scalability, availability, reliability, latency vs throughput, CAP theorem, PACELC, consistency models, fault tolerance patterns, back-of-envelope estimation |
 | [04 — Backend Architecture](./04_backend_architecture/intro.md) | Stateless design, connection pooling, synchronous vs asynchronous processing, request lifecycle, monolith scaling limits — how a single server handles traffic |

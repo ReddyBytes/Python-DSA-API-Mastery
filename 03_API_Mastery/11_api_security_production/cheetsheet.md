@@ -269,4 +269,4 @@ app.add_middleware(
 
 **Prev:** [← Testing & Documentation](../10_testing_documentation/) &nbsp;|&nbsp; **Next:** [Production Deployment →](../12_production_deployment/cheetsheet.md)
 
-**Related Topics:** [Authentication](../05_authentication/securing_apis.md) · [Production Deployment](../12_production_deployment/) · [Real-World APIs](../18_real_world_apis/)
+**Related Topics:** [Authentication](../05_authentication/theory.md) · [Production Deployment](../12_production_deployment/) · [Real-World APIs](../18_real_world_apis/)

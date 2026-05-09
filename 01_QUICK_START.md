@@ -19,7 +19,7 @@ Step 2 → 01_Python_Mastery/02_control_flow/theory.md
 Step 3 → 01_Python_Mastery/04_functions/theory.md
 Step 4 → 02_DSA_Mastery/01_complexity_analysis/theory.md
 Step 5 → 02_DSA_Mastery/02_arrays/theory.md
-Step 6 → 03_API_Mastery/01_what_is_an_api/story.md
+Step 6 → 03_API_Mastery/01_what_is_an_api/theory.md
 ```
 
 Take your time. Do not rush.
@@ -29,8 +29,8 @@ Take your time. Do not rush.
 ### "I know Python basics, I want to build APIs"
 
 ```
-Step 1 → 03_API_Mastery/01_what_is_an_api/story.md
-Step 2 → 03_API_Mastery/02_rest_fundamentals/rest_explained.md
+Step 1 → 03_API_Mastery/01_what_is_an_api/theory.md
+Step 2 → 03_API_Mastery/02_rest_fundamentals/theory.md
 Step 3 → 03_API_Mastery/07_fastapi/why_fastapi.md
 Step 4 → 03_API_Mastery/07_fastapi/first_api.md
 Step 5 → 03_API_Mastery/07_fastapi/core_guide.md

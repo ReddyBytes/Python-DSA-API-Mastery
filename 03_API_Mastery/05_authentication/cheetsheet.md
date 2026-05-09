@@ -310,7 +310,7 @@ def verify_api_key(provided_key: str, stored_hash: str) -> bool:
 
 **[Back to README](../README.md)**
 
-**Theory:** [securing_apis.md](./securing_apis.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** [← Data Formats](../04_data_formats/cheetsheet.md) &nbsp;|&nbsp; **Next:** [Error Handling →](../06_error_handling_standards/cheetsheet.md)
 

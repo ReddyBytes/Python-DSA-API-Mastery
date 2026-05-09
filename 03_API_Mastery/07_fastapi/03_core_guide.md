@@ -1038,4 +1038,4 @@ Vamsi now has the full toolkit: validation that documents itself, dependencies t
 
 **Prev:** [Why FastAPI](02_why_fastapi.md) | **Next:** [FastAPI and Databases](04_database_guide.md)
 
-**Related Topics:** [Why FastAPI](02_why_fastapi.md) · [FastAPI and Databases](04_database_guide.md) · [FastAPI Advanced](advanced_guide.md) · [Authentication and Authorization](../05_authentication/securing_apis.md)
+**Related Topics:** [Why FastAPI](02_why_fastapi.md) · [FastAPI and Databases](04_database_guide.md) · [FastAPI Advanced](05_advanced_guide.md) · [Authentication and Authorization](../05_authentication/theory.md)

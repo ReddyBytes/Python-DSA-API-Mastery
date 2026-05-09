@@ -256,7 +256,7 @@ unit_price      NUMERIC(10,2) NOT NULL
 
 | If stuck on | Go read |
 |-------------|---------|
-| JWT / password hashing | `03_API_Mastery/05_authentication/securing_apis.md` |
+| JWT / password hashing | `03_API_Mastery/05_authentication/theory.md` |
 | SQLAlchemy models | `03_API_Mastery/07_fastapi/database_guide.md` |
 | FastAPI `Depends()` | `03_API_Mastery/07_fastapi/core_guide.md` |
 | pytest + TestClient | `01_Python_Mastery/17_testing/theory.md` |

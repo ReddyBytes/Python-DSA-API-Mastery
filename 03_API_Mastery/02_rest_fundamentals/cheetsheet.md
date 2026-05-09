@@ -208,7 +208,7 @@ Request headers (conditional):
 
 **[Back to README](../README.md)**
 
-**Theory:** [rest_explained.md](./rest_explained.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** [← What is an API](../01_what_is_an_api/cheetsheet.md) &nbsp;|&nbsp; **Next:** [REST Best Practices →](../03_rest_best_practices/cheetsheet.md)
 

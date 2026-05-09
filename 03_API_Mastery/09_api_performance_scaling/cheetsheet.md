@@ -352,7 +352,7 @@ SCALING
 
 **[Back to README](../README.md)**
 
-**Theory:** [performance_guide.md](./performance_guide.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** [← Versioning](../08_versioning_standards/cheetsheet.md) &nbsp;|&nbsp; **Next:** [Testing & Docs →](../10_testing_documentation/cheetsheet.md)
 

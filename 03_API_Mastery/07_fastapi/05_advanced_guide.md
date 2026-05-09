@@ -1189,4 +1189,4 @@ Async vs Sync
 |------|------|
 | [FastAPI & Databases](04_database_guide.md) | None (last FastAPI file) |
 
-**Related Topics:** [FastAPI Core Guide](01_core_guide.md) | [WebSockets & Real-Time APIs](../17_websockets/realtime_apis.md) | [Production Deployment](../12_production_deployment/deployment_guide.md) | [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md)
+**Related Topics:** [FastAPI Core Guide](03_core_guide.md) | [WebSockets & Real-Time APIs](../17_websockets/theory.md) | [Production Deployment](../12_production_deployment/theory.md) | [OpenTelemetry](../19_opentelemetry/theory.md)

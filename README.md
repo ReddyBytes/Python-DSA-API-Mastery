@@ -87,7 +87,7 @@ This repo is one track in a complete AI/ML/DevOps engineering curriculum.
 | 5 | [OOP](./01_Python_Mastery/05_oops/theory_part1.md) | Classes, inheritance, dunder methods, ABC |
 | 6 | [Complexity Analysis](./02_DSA_Mastery/01_complexity_analysis/theory.md) | Big O — how to reason about speed and memory |
 | 7 | [Arrays & Strings](./02_DSA_Mastery/02_arrays/theory.md) | Core operations, two-pointer, sliding window |
-| 8 | [What is an API?](./03_API_Mastery/01_what_is_an_api/story.md) | HTTP, request-response, status codes, your first API call |
+| 8 | [What is an API?](./03_API_Mastery/01_what_is_an_api/theory.md) | HTTP, request-response, status codes, your first API call |
 
 **Prerequisite:** Basic command line and one programming language.
 
@@ -104,7 +104,7 @@ This repo is one track in a complete AI/ML/DevOps engineering curriculum.
 | 2 | [Generators & Iterators](./01_Python_Mastery/11_generators_iterators/theory.md) | yield, generator pipelines, memory-efficient processing |
 | 3 | [Context Managers](./01_Python_Mastery/12_context_managers/theory.md) | with, __enter__/__exit__, contextlib |
 | 4 | [FastAPI Mastery](./03_API_Mastery/07_fastapi/core_guide.md) | Pydantic, dependency injection, routers, database integration |
-| 5 | [Authentication](./03_API_Mastery/05_authentication/securing_apis.md) | OAuth2, JWT, API keys, rate limiting |
+| 5 | [Authentication](./03_API_Mastery/05_authentication/theory.md) | OAuth2, JWT, API keys, rate limiting |
 | 6 | [Trees & Graphs](./02_DSA_Mastery/14_trees/theory.md) | BFS, DFS, tree traversals, graph algorithms |
 | 7 | [Databases](./04_System_Design_Mastery/05_databases/theory.md) | SQL vs NoSQL, indexing, transactions, replication |
 | 8 | [Caching](./04_System_Design_Mastery/06_caching/theory.md) | Redis, cache patterns, TTL, eviction strategies |
@@ -126,7 +126,7 @@ This repo is one track in a complete AI/ML/DevOps engineering curriculum.
 | 4 | [Testing](./01_Python_Mastery/17_testing/theory.md) | pytest, mocking, fixtures, TDD, integration testing |
 | 5 | [Dynamic Programming](./02_DSA_Mastery/21_dynamic_programming/theory.md) | Memoization, tabulation, classic DP patterns |
 | 6 | [Distributed Systems](./04_System_Design_Mastery/10_distributed_systems/theory.md) | Raft, consensus, partitioning, quorum, split-brain |
-| 7 | [API Performance](./03_API_Mastery/09_api_performance_scaling/performance_guide.md) | N+1, connection pools, horizontal scaling, metrics |
+| 7 | [API Performance](./03_API_Mastery/09_api_performance_scaling/theory.md) | N+1, connection pools, horizontal scaling, metrics |
 | 8 | [Microservices](./04_System_Design_Mastery/12_microservices/theory.md) | Service decomposition, service mesh, communication patterns |
 
 **Prerequisite:** Intermediate path complete.
@@ -274,24 +274,24 @@ This repo is one track in a complete AI/ML/DevOps engineering curriculum.
 
 | # | Topic | Core Concept |
 |---|-------|-------------|
-| 01 | [What is an API?](./03_API_Mastery/01_what_is_an_api/story.md) | HTTP, request-response, status codes, headers |
-| 02 | [REST Fundamentals](./03_API_Mastery/02_rest_fundamentals/rest_explained.md) | Resources, HTTP verbs, statelessness, idempotency |
-| 03 | [REST Best Practices](./03_API_Mastery/03_rest_best_practices/patterns.md) | URL design, versioning, pagination, error formats |
-| 04 | [Data Formats](./03_API_Mastery/04_data_formats/serialization_guide.md) | JSON types, Pydantic validation, XML, binary formats |
-| 05 | [Authentication](./03_API_Mastery/05_authentication/securing_apis.md) | OAuth2, JWT, API keys, sessions, rate limiting, CORS |
-| 06 | [Error Handling](./03_API_Mastery/06_error_handling_standards/error_guide.md) | Error formats, pagination, filtering, sorting |
+| 01 | [What is an API?](./03_API_Mastery/01_what_is_an_api/theory.md) | HTTP, request-response, status codes, headers |
+| 02 | [REST Fundamentals](./03_API_Mastery/02_rest_fundamentals/theory.md) | Resources, HTTP verbs, statelessness, idempotency |
+| 03 | [REST Best Practices](./03_API_Mastery/03_rest_best_practices/theory.md) | URL design, versioning, pagination, error formats |
+| 04 | [Data Formats](./03_API_Mastery/04_data_formats/theory.md) | JSON types, Pydantic validation, XML, binary formats |
+| 05 | [Authentication](./03_API_Mastery/05_authentication/theory.md) | OAuth2, JWT, API keys, sessions, rate limiting, CORS |
+| 06 | [Error Handling](./03_API_Mastery/06_error_handling_standards/theory.md) | Error formats, pagination, filtering, sorting |
 | **07** | **[FastAPI Mastery](./03_API_Mastery/07_fastapi/README.md)** | **ASGI, Pydantic, Depends, middleware, routers, databases** |
-| 08 | [API Versioning](./03_API_Mastery/08_versioning_standards/versioning_strategy.md) | Breaking vs non-breaking changes, URL vs header versioning |
-| 09 | [API Performance](./03_API_Mastery/09_api_performance_scaling/performance_guide.md) | Caching, N+1, connection pools, horizontal scaling |
-| 10 | [Testing & Docs](./03_API_Mastery/10_testing_documentation/testing_apis.md) | TestClient, contract testing, OpenAPI docs |
-| 11 | [Security in Production](./03_API_Mastery/11_api_security_production/security_hardening.md) | HTTPS, input validation, token security, audit logs |
-| 12 | [Production Deployment](./03_API_Mastery/12_production_deployment/deployment_guide.md) | Docker, Gunicorn/Uvicorn, Kubernetes, CI/CD |
-| 13 | [GraphQL](./03_API_Mastery/13_graphql/graphql_story.md) | Schema, queries, mutations, subscriptions, N+1, DataLoader |
-| 14 | [gRPC](./03_API_Mastery/14_grpc/grpc_guide.md) | Protocol Buffers, 4 streaming modes, Python client/server |
-| 15 | [API Gateway](./03_API_Mastery/15_api_gateway/gateway_patterns.md) | Routing, auth offload, rate limiting, BFF pattern |
-| 16 | [API Design Patterns](./03_API_Mastery/16_api_design_patterns/design_guide.md) | Idempotency keys, bulk ops, long-running operations |
-| 17 | [WebSockets](./03_API_Mastery/17_websockets/realtime_apis.md) | Full-duplex, handshake, use cases, scaling |
-| 18 | [Real-World APIs](./03_API_Mastery/18_real_world_apis/architectures.md) | Payment, social media, ride-sharing, SaaS API design |
+| 08 | [API Versioning](./03_API_Mastery/08_versioning_standards/theory.md) | Breaking vs non-breaking changes, URL vs header versioning |
+| 09 | [API Performance](./03_API_Mastery/09_api_performance_scaling/theory.md) | Caching, N+1, connection pools, horizontal scaling |
+| 10 | [Testing & Docs](./03_API_Mastery/10_testing_documentation/theory.md) | TestClient, contract testing, OpenAPI docs |
+| 11 | [Security in Production](./03_API_Mastery/11_api_security_production/theory.md) | HTTPS, input validation, token security, audit logs |
+| 12 | [Production Deployment](./03_API_Mastery/12_production_deployment/theory.md) | Docker, Gunicorn/Uvicorn, Kubernetes, CI/CD |
+| 13 | [GraphQL](./03_API_Mastery/13_graphql/theory.md) | Schema, queries, mutations, subscriptions, N+1, DataLoader |
+| 14 | [gRPC](./03_API_Mastery/14_grpc/theory.md) | Protocol Buffers, 4 streaming modes, Python client/server |
+| 15 | [API Gateway](./03_API_Mastery/15_api_gateway/theory.md) | Routing, auth offload, rate limiting, BFF pattern |
+| 16 | [API Design Patterns](./03_API_Mastery/16_api_design_patterns/theory.md) | Idempotency keys, bulk ops, long-running operations |
+| 17 | [WebSockets](./03_API_Mastery/17_websockets/theory.md) | Full-duplex, handshake, use cases, scaling |
+| 18 | [Real-World APIs](./03_API_Mastery/18_real_world_apis/theory.md) | Payment, social media, ride-sharing, SaaS API design |
 | 99 | [Interview Master](./03_API_Mastery/99_interview_master/api_questions.md) | Junior → Senior Q&A, API design problems |
 
 </details>
@@ -301,11 +301,11 @@ This repo is one track in a complete AI/ML/DevOps engineering curriculum.
 
 | Stage | # | Topic | Core Concept |
 |-------|---|-------|-------------|
-| 🖥️ Foundations | 00 | [Computer Fundamentals](./04_System_Design_Mastery/00_computer_fundamentals/story.md) | CPU, RAM, disk, processes, threads, I/O |
+| 🖥️ Foundations | 00 | [Computer Fundamentals](./04_System_Design_Mastery/00_computer_fundamentals/theory.md) | CPU, RAM, disk, processes, threads, I/O |
 | | 01 | [Networking Basics](./04_System_Design_Mastery/01_networking_basics/theory.md) | TCP/IP, HTTP/1–3, TLS, DNS, WebSockets, gRPC |
 | | 02 | [System Fundamentals](./04_System_Design_Mastery/02_system_fundamentals/theory.md) | CAP, latency, throughput, availability, SLOs |
 | 🔌 Services | 03 | [API Design](./04_System_Design_Mastery/03_api_design/theory.md) | REST, GraphQL, gRPC, versioning, idempotency |
-| | 04 | [Backend Architecture](./04_System_Design_Mastery/04_backend_architecture/intro.md) | Client-server, monolith, stateless services |
+| | 04 | [Backend Architecture](./04_System_Design_Mastery/04_backend_architecture/theory.md) | Client-server, monolith, stateless services |
 | 🗄️ Data | 05 | [Databases](./04_System_Design_Mastery/05_databases/theory.md) | SQL vs NoSQL, ACID, indexing, replication, sharding |
 | | 06 | [Caching](./04_System_Design_Mastery/06_caching/theory.md) | Redis, cache patterns, eviction, CDN |
 | | 07 | [Storage & CDN](./04_System_Design_Mastery/07_storage_cdn/theory.md) | Object storage, block storage, CDN strategy |
@@ -359,7 +359,7 @@ This repo is one track in a complete AI/ML/DevOps engineering curriculum.
 
 **Know Python, starting DSA?** → [Complexity Analysis](./02_DSA_Mastery/01_complexity_analysis/theory.md)
 
-**Want to build APIs?** → [What is an API?](./03_API_Mastery/01_what_is_an_api/story.md) → [FastAPI Mastery](./03_API_Mastery/07_fastapi/README.md)
+**Want to build APIs?** → [What is an API?](./03_API_Mastery/01_what_is_an_api/theory.md) → [FastAPI Mastery](./03_API_Mastery/07_fastapi/README.md)
 
 **Preparing for interviews?** → [Quick Start Guide](./01_QUICK_START.md) → [Learning Path](./02_LEARNING_PATH.md)
 

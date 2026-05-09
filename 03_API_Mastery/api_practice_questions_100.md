@@ -83,7 +83,7 @@
 
 </details>
 
-> 📖 **Theory:** [HTTP Methods](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [HTTP Methods](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -119,7 +119,7 @@ PATCH /articles/99
 
 </details>
 
-> 📖 **Theory:** [PUT vs PATCH](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [PUT vs PATCH](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -158,7 +158,7 @@ The server stores the key + response. If the same key arrives again (retry), it 
 
 </details>
 
-> 📖 **Theory:** [Idempotency](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [Idempotency](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -190,7 +190,7 @@ POST /reports/generate → 202 Accepted, Body: {"job_id": "abc", "status_url": "
 
 </details>
 
-> 📖 **Theory:** [Success Status Codes](./06_error_handling_standards/error_guide.md)
+> 📖 **Theory:** [Success Status Codes](./06_error_handling_standards/theory.md)
 
 ---
 
@@ -222,7 +222,7 @@ POST /reports/generate → 202 Accepted, Body: {"job_id": "abc", "status_url": "
 
 </details>
 
-> 📖 **Theory:** [Error Status Codes](./06_error_handling_standards/error_guide.md)
+> 📖 **Theory:** [Error Status Codes](./06_error_handling_standards/theory.md)
 
 ---
 
@@ -259,7 +259,7 @@ GitHub uses 404 for private repos instead of 403 to prevent repo name enumeratio
 
 </details>
 
-> 📖 **Theory:** [404 vs 403](./06_error_handling_standards/error_guide.md)
+> 📖 **Theory:** [404 vs 403](./06_error_handling_standards/theory.md)
 
 ---
 
@@ -292,7 +292,7 @@ Implications:
 
 </details>
 
-> 📖 **Theory:** [REST Statelessness](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [REST Statelessness](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -331,7 +331,7 @@ GET    /users/42/posts → posts belonging to user 42
 
 </details>
 
-> 📖 **Theory:** [Resource Naming](./03_rest_best_practices/patterns.md)
+> 📖 **Theory:** [Resource Naming](./03_rest_best_practices/theory.md)
 
 ---
 
@@ -373,7 +373,7 @@ HATEOAS (Hypermedia As The Engine Of Application State) is a REST constraint whe
 
 </details>
 
-> 📖 **Theory:** [HATEOAS](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [HATEOAS](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -414,7 +414,7 @@ If the server can't produce the format in `Accept`, it returns **406 Not Accepta
 
 </details>
 
-> 📖 **Theory:** [Content-Type Header](./04_data_formats/serialization_guide.md)
+> 📖 **Theory:** [Content-Type Header](./04_data_formats/theory.md)
 
 ---
 
@@ -453,7 +453,7 @@ app.add_middleware(CORSMiddleware, allow_origins=["https://myapp.com"],
 
 </details>
 
-> 📖 **Theory:** [CORS](./11_api_security_production/security_hardening.md)
+> 📖 **Theory:** [CORS](./11_api_security_production/theory.md)
 
 ---
 
@@ -487,7 +487,7 @@ Cache-Control: no-cache, must-revalidate     ← cache but always check freshnes
 
 </details>
 
-> 📖 **Theory:** [Cache-Control](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Cache-Control](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -531,7 +531,7 @@ POST /users/42?action=activate   ← avoid mixing
 
 </details>
 
-> 📖 **Theory:** [Path vs Query Params](./03_rest_best_practices/patterns.md)
+> 📖 **Theory:** [Path vs Query Params](./03_rest_best_practices/theory.md)
 
 ---
 
@@ -571,7 +571,7 @@ POST /users/42?action=activate   ← avoid mixing
 
 </details>
 
-> 📖 **Theory:** [API Versioning](./08_versioning_standards/versioning_strategy.md)
+> 📖 **Theory:** [API Versioning](./08_versioning_standards/theory.md)
 
 ---
 
@@ -614,7 +614,7 @@ Disadvantages: can't jump to page 5 directly. Forward-only (usually). Cursor mus
 
 </details>
 
-> 📖 **Theory:** [Pagination](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Pagination](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -645,7 +645,7 @@ Disadvantages: can't jump to page 5 directly. Forward-only (usually). Cursor mus
 
 </details>
 
-> 📖 **Theory:** [Request Lifecycle](./01_what_is_an_api/story.md)
+> 📖 **Theory:** [Request Lifecycle](./01_what_is_an_api/theory.md)
 
 ---
 
@@ -683,7 +683,7 @@ HTTP/2:   Req1 + Req2 interleaved → Resp1 + Resp2 interleaved (one connection)
 
 </details>
 
-> 📖 **Theory:** [HTTP/2 vs HTTP/1](./01_what_is_an_api/story.md)
+> 📖 **Theory:** [HTTP/2 vs HTTP/1](./01_what_is_an_api/theory.md)
 
 ---
 
@@ -718,7 +718,7 @@ HTTP/1.1 enables keep-alive by default. HTTP/2 always uses a persistent connecti
 
 </details>
 
-> 📖 **Theory:** [Keep-Alive](./01_what_is_an_api/story.md)
+> 📖 **Theory:** [Keep-Alive](./01_what_is_an_api/theory.md)
 
 ---
 
@@ -777,7 +777,7 @@ For cursor-based:
 
 </details>
 
-> 📖 **Theory:** [Pagination Response](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Pagination Response](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -827,7 +827,7 @@ RFC 7807 (Problem Details for HTTP APIs) defines a standard:
 
 </details>
 
-> 📖 **Theory:** [Error Response Format](./06_error_handling_standards/error_guide.md)
+> 📖 **Theory:** [Error Response Format](./06_error_handling_standards/theory.md)
 
 ---
 
@@ -876,7 +876,7 @@ If ETag doesn't match (someone else modified it): `412 Precondition Failed`.
 
 </details>
 
-> 📖 **Theory:** [ETags](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [ETags](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -915,7 +915,7 @@ If ETag doesn't match (someone else modified it): `412 Precondition Failed`.
 
 </details>
 
-> 📖 **Theory:** [REST vs RPC](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [REST vs RPC](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -951,7 +951,7 @@ If ETag doesn't match (someone else modified it): `412 Precondition Failed`.
 
 </details>
 
-> 📖 **Theory:** [Safe HTTP Methods](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [Safe HTTP Methods](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -1000,7 +1000,7 @@ def retry_with_backoff(func, max_retries=5):
 
 </details>
 
-> 📖 **Theory:** [Rate Limiting Headers](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Rate Limiting Headers](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -1040,7 +1040,7 @@ def retry_with_backoff(func, max_retries=5):
 
 </details>
 
-> 📖 **Theory:** [Response Envelope](./03_rest_best_practices/patterns.md)
+> 📖 **Theory:** [Response Envelope](./03_rest_best_practices/theory.md)
 
 ---
 
@@ -1234,7 +1234,7 @@ def create_user(body: CreateUserRequest):   # ← FastAPI detects BaseModel → 
 
 </details>
 
-> 📖 **Theory:** [Auth Schemes](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [Auth Schemes](./05_authentication/theory.md)
 
 ---
 
@@ -1263,7 +1263,7 @@ The payload is **encoded, not encrypted** — anyone with the token can decode i
 
 </details>
 
-> 📖 **Theory:** [JWT Structure](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [JWT Structure](./05_authentication/theory.md)
 
 ---
 
@@ -1286,7 +1286,7 @@ A single long-lived token is a security liability — if stolen, the attacker ha
 
 </details>
 
-> 📖 **Theory:** [Access & Refresh Tokens](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [Access & Refresh Tokens](./05_authentication/theory.md)
 
 ---
 
@@ -1318,7 +1318,7 @@ Use **client credentials** for machine-to-machine flows where there is no human 
 
 </details>
 
-> 📖 **Theory:** [OAuth2 Flow](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [OAuth2 Flow](./05_authentication/theory.md)
 
 ---
 
@@ -1341,7 +1341,7 @@ Use **client credentials** for machine-to-machine flows where there is no human 
 
 </details>
 
-> 📖 **Theory:** [API Key vs JWT](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [API Key vs JWT](./05_authentication/theory.md)
 
 ---
 
@@ -1618,7 +1618,7 @@ app.add_middleware(
 
 </details>
 
-> 📖 **Theory:** [CORS in FastAPI](./11_api_security_production/security_hardening.md)
+> 📖 **Theory:** [CORS in FastAPI](./11_api_security_production/theory.md)
 
 ---
 
@@ -1853,7 +1853,7 @@ app.dependency_overrides.clear()
 
 </details>
 
-> 📖 **Theory:** [Testing FastAPI](./10_testing_documentation/testing_apis.md)
+> 📖 **Theory:** [Testing FastAPI](./10_testing_documentation/theory.md)
 
 ---
 
@@ -1959,7 +1959,7 @@ A **request ID** is critical because: distributed systems process requests acros
 
 </details>
 
-> 📖 **Theory:** [API Logging](./12_production_deployment/deployment_guide.md)
+> 📖 **Theory:** [API Logging](./12_production_deployment/theory.md)
 
 ---
 
@@ -2045,7 +2045,7 @@ app = FastAPI(lifespan=lifespan)
 
 </details>
 
-> 📖 **Theory:** [Caching Strategies](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Caching Strategies](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -2110,7 +2110,7 @@ Flow: check cache → on miss, read DB → write result to cache → return data
 
 </details>
 
-> 📖 **Theory:** [Redis Cache-Aside](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Redis Cache-Aside](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -2148,7 +2148,7 @@ The difficulty is fundamental: a cache is a **copy** of data, and maintaining co
 
 </details>
 
-> 📖 **Theory:** [Cache Invalidation](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Cache Invalidation](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -2188,7 +2188,7 @@ The difficulty is fundamental: a cache is a **copy** of data, and maintaining co
 
 </details>
 
-> 📖 **Theory:** [Rate Limiting](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Rate Limiting](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -2228,7 +2228,7 @@ You would NOT add one to calls that are already async/fire-and-forget, or where 
 
 </details>
 
-> 📖 **Theory:** [Circuit Breaker](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Circuit Breaker](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -2277,7 +2277,7 @@ def retry_with_backoff(fn, max_attempts=5, base=1, cap=60):
 
 </details>
 
-> 📖 **Theory:** [Retry & Backoff](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Retry & Backoff](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -2321,7 +2321,7 @@ Mitigation: make the gateway stateless, scale it horizontally, push auth to JWT 
 
 </details>
 
-> 📖 **Theory:** [API Gateway](./15_api_gateway/gateway_patterns.md)
+> 📖 **Theory:** [API Gateway](./15_api_gateway/gateway_theory.md)
 
 ---
 
@@ -2366,7 +2366,7 @@ Mitigation: make the gateway stateless, scale it horizontally, push auth to JWT 
 
 </details>
 
-> 📖 **Theory:** [Webhooks vs Polling](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Webhooks vs Polling](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -2411,7 +2411,7 @@ Mitigation: make the gateway stateless, scale it horizontally, push auth to JWT 
 
 </details>
 
-> 📖 **Theory:** [Webhook Security](./11_api_security_production/security_hardening.md)
+> 📖 **Theory:** [Webhook Security](./11_api_security_production/theory.md)
 
 ---
 
@@ -2469,7 +2469,7 @@ EmailService consumes PaymentCompleted → sends confirmation
 
 </details>
 
-> 📖 **Theory:** [Event-Driven APIs](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Event-Driven APIs](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -2523,7 +2523,7 @@ REST: server controls the response shape. GraphQL: the client controls exactly w
 
 </details>
 
-> 📖 **Theory:** [GraphQL vs REST](./13_graphql/graphql_story.md)
+> 📖 **Theory:** [GraphQL vs REST](./13_graphql/graphql_theory.md)
 
 ---
 
@@ -2580,7 +2580,7 @@ Result: 10 individual resolver calls → 1 batched DB query.
 
 </details>
 
-> 📖 **Theory:** [GraphQL N+1](./13_graphql/graphql_story.md)
+> 📖 **Theory:** [GraphQL N+1](./13_graphql/graphql_theory.md)
 
 ---
 
@@ -2628,7 +2628,7 @@ Result: 10 individual resolver calls → 1 batched DB query.
 
 </details>
 
-> 📖 **Theory:** [gRPC vs REST](./14_grpc/grpc_guide.md)
+> 📖 **Theory:** [gRPC vs REST](./14_grpc/theory.md)
 
 ---
 
@@ -2682,7 +2682,7 @@ message User {
 
 </details>
 
-> 📖 **Theory:** [Protocol Buffers](./14_grpc/grpc_guide.md)
+> 📖 **Theory:** [Protocol Buffers](./14_grpc/theory.md)
 
 ---
 
@@ -2748,7 +2748,7 @@ Cons:
 
 </details>
 
-> 📖 **Theory:** [Versioning Strategies](./08_versioning_standards/versioning_strategy.md)
+> 📖 **Theory:** [Versioning Strategies](./08_versioning_standards/theory.md)
 
 ---
 
@@ -2796,7 +2796,7 @@ FastAPI introspects `CreateUserRequest` (a Pydantic model) for request schema an
 
 </details>
 
-> 📖 **Theory:** [OpenAPI Spec](./10_testing_documentation/docs_that_work.md)
+> 📖 **Theory:** [OpenAPI Spec](./10_testing_documentation/theory.md)
 
 ---
 
@@ -2844,7 +2844,7 @@ Contract testing catches this in Team A's own CI pipeline, before they deploy, b
 
 </details>
 
-> 📖 **Theory:** [Contract Testing](./10_testing_documentation/testing_apis.md)
+> 📖 **Theory:** [Contract Testing](./10_testing_documentation/theory.md)
 
 ---
 
@@ -2896,7 +2896,7 @@ This means: **watch latency percentiles to find the safe operating point** — d
 
 </details>
 
-> 📖 **Theory:** [Load Testing](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Load Testing](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -2938,7 +2938,7 @@ Example: a trace for `POST /checkout` that shows the full call tree: API gateway
 
 </details>
 
-> 📖 **Theory:** [API Observability](./19_opentelemetry/opentelemetry_guide.md)
+> 📖 **Theory:** [API Observability](./19_opentelemetry/theory.md)
 
 ---
 
@@ -2982,7 +2982,7 @@ A **parent span** is the span that caused the current span. When Service A calls
 
 </details>
 
-> 📖 **Theory:** [Distributed Tracing](./19_opentelemetry/opentelemetry_guide.md)
+> 📖 **Theory:** [Distributed Tracing](./19_opentelemetry/theory.md)
 
 ---
 
@@ -3082,7 +3082,7 @@ async def create_payment(
 
 </details>
 
-> 📖 **Theory:** [Idempotency Implementation](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Idempotency Implementation](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -3200,7 +3200,7 @@ Accept an optional `webhook_url` in the POST body. If provided, fire the webhook
 
 </details>
 
-> 📖 **Theory:** [Async Job API](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Async Job API](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -3263,7 +3263,7 @@ Cons: base64 inflates file size by ~33%; the JSON parser must hold the entire en
 
 </details>
 
-> 📖 **Theory:** [File Upload](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [File Upload](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -3319,7 +3319,7 @@ Mitigation: Disable debug/verbose error responses in production (return generic 
 
 </details>
 
-> 📖 **Theory:** [OWASP API Security](./11_api_security_production/security_hardening.md)
+> 📖 **Theory:** [OWASP API Security](./11_api_security_production/theory.md)
 
 ---
 
@@ -3419,7 +3419,7 @@ The **Backend for Frontend (BFF) pattern** is the architectural version of this:
 
 </details>
 
-> 📖 **Theory:** [Mobile API Optimization](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Mobile API Optimization](./09_api_performance_scaling/theory.md)
 
 ## 🏋️ Tier 4 — Interview / Scenario
 
@@ -3447,7 +3447,7 @@ Think of a restaurant. You (the client) sit at a table and interact only through
 
 </details>
 
-> 📖 **Theory:** [REST Principles](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [REST Principles](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -3471,7 +3471,7 @@ Pressing the elevator button is idempotent. Press it once — the elevator is ca
 
 </details>
 
-> 📖 **Theory:** [Idempotency](./02_rest_fundamentals/rest_explained.md)
+> 📖 **Theory:** [Idempotency](./02_rest_fundamentals/theory.md)
 
 ---
 
@@ -3495,7 +3495,7 @@ With cookies and server-side sessions, the server is the librarian who holds you
 
 </details>
 
-> 📖 **Theory:** [JWT vs Sessions](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [JWT vs Sessions](./05_authentication/theory.md)
 
 ---
 
@@ -3520,7 +3520,7 @@ Imagine you run a coffee shop with one barista. Most customers order one coffee.
 
 </details>
 
-> 📖 **Theory:** [Rate Limiting](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Rate Limiting](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -3545,7 +3545,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Backward Compatibility](./08_versioning_standards/versioning_strategy.md)
+> 📖 **Theory:** [Backward Compatibility](./08_versioning_standards/theory.md)
 
 ---
 
@@ -3570,7 +3570,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [REST vs GraphQL](./13_graphql/graphql_story.md)
+> 📖 **Theory:** [REST vs GraphQL](./13_graphql/graphql_theory.md)
 
 ---
 
@@ -3595,7 +3595,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [JWT vs Sessions](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [JWT vs Sessions](./05_authentication/theory.md)
 
 ---
 
@@ -3619,7 +3619,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Sync vs Async API](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Sync vs Async API](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -3643,7 +3643,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Gateway vs Service Mesh](./15_api_gateway/gateway_patterns.md)
+> 📖 **Theory:** [Gateway vs Service Mesh](./15_api_gateway/gateway_theory.md)
 
 ---
 
@@ -3667,7 +3667,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Webhook vs Polling](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Webhook vs Polling](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -3693,7 +3693,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [API Performance](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [API Performance](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -3718,7 +3718,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Auth Security](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [Auth Security](./05_authentication/theory.md)
 
 ---
 
@@ -3743,7 +3743,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Cache Freshness](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Cache Freshness](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -3768,7 +3768,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Tiered Rate Limiting](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Tiered Rate Limiting](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -3793,7 +3793,7 @@ A backward-compatible change is like rearranging your living room — guests who
 
 </details>
 
-> 📖 **Theory:** [Breaking Changes](./08_versioning_standards/versioning_strategy.md)
+> 📖 **Theory:** [Breaking Changes](./08_versioning_standards/theory.md)
 
 ---
 
@@ -3821,7 +3821,7 @@ The first request succeeds. The second request fails with `401 Unauthorized`.
 
 </details>
 
-> 📖 **Theory:** [JWT Expiry](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [JWT Expiry](./05_authentication/theory.md)
 
 ---
 
@@ -3856,7 +3856,7 @@ except UniqueConstraintError:
 
 </details>
 
-> 📖 **Theory:** [Idempotency Race Condition](./16_api_design_patterns/design_guide.md)
+> 📖 **Theory:** [Idempotency Race Condition](./16_api_design_patterns/theory.md)
 
 ---
 
@@ -3934,7 +3934,7 @@ async def auth_middleware(request: Request, call_next):
 
 </details>
 
-> 📖 **Theory:** [Auth Middleware](./11_api_security_production/security_hardening.md)
+> 📖 **Theory:** [Auth Middleware](./11_api_security_production/theory.md)
 
 ---
 
@@ -3971,7 +3971,7 @@ app.add_middleware(
 
 </details>
 
-> 📖 **Theory:** [CORS Preflight](./11_api_security_production/security_hardening.md)
+> 📖 **Theory:** [CORS Preflight](./11_api_security_production/theory.md)
 
 ---
 
@@ -4045,7 +4045,7 @@ GraphQL is the correct choice for this specific scenario. The constraints map di
 
 </details>
 
-> 📖 **Theory:** [REST vs GraphQL Design](./13_graphql/graphql_story.md)
+> 📖 **Theory:** [REST vs GraphQL Design](./13_graphql/graphql_theory.md)
 
 ---
 
@@ -4070,7 +4070,7 @@ Server-side sessions with a centralized store (Redis) — or a hybrid JWT approa
 
 </details>
 
-> 📖 **Theory:** [JWT vs Sessions Mobile](./05_authentication/securing_apis.md)
+> 📖 **Theory:** [JWT vs Sessions Mobile](./05_authentication/theory.md)
 
 ---
 
@@ -4119,7 +4119,7 @@ def is_allowed(api_key: str, limit: int = 1000, window_ms: int = 60_000) -> bool
 
 </details>
 
-> 📖 **Theory:** [Rate Limiter Design](./09_api_performance_scaling/performance_guide.md)
+> 📖 **Theory:** [Rate Limiter Design](./09_api_performance_scaling/theory.md)
 
 ---
 
@@ -4188,4 +4188,4 @@ Track `v1` vs `v2` traffic per API key. Proactively contact companies still on `
 
 </details>
 
-> 📖 **Theory:** [Versioning System Design](./08_versioning_standards/versioning_strategy.md)
+> 📖 **Theory:** [Versioning System Design](./08_versioning_standards/theory.md)

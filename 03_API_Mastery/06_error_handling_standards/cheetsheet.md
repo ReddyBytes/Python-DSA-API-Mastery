@@ -304,7 +304,7 @@ match error["code"]:
 
 **[Back to README](../README.md)**
 
-**Theory:** [error_guide.md](./error_guide.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** [← Authentication](../05_authentication/cheetsheet.md) &nbsp;|&nbsp; **Next:** [FastAPI →](../07_fastapi/cheetsheet.md)
 

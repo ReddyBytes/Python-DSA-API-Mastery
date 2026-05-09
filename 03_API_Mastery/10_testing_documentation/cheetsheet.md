@@ -381,7 +381,7 @@ Error handling
 
 **[Back to README](../README.md)**
 
-**Theory:** [testing_apis.md](./testing_apis.md) · [docs_that_work.md](./docs_that_work.md)
+**Theory:** [theory.md](./theory.md) · [theory.md](./theory.md)
 
 **Prev:** [← Performance & Scaling](../09_api_performance_scaling/cheetsheet.md) &nbsp;|&nbsp; **Next:** [API Security Production →](../11_api_security_production/)
 

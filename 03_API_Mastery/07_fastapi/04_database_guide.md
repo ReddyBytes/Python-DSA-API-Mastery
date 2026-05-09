@@ -890,6 +890,6 @@ The clean separation between layers is the entire point. `crud.py` doesn't know 
 
 **Next:** [FastAPI Advanced Guide](05_advanced_guide.md)
 
-**Related Topics:** [FastAPI Core Guide](03_core_guide.md) | [Testing APIs](../10_testing_documentation/testing_apis.md) | [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md)
+**Related Topics:** [FastAPI Core Guide](03_core_guide.md) | [Testing APIs](../10_testing_documentation/theory.md) | [API Performance & Scaling](../09_api_performance_scaling/theory.md)
 
 [Back to Top](#top)

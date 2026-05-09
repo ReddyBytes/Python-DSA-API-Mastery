@@ -694,4 +694,4 @@ Vamsi closed his notebook. He now understood not just how to use FastAPI, but wh
 
 **Next:** [03 Core Guide](03_core_guide.md)
 
-**Related Topics:** [REST Fundamentals](../02_rest_fundamentals/rest_explained.md) · [FastAPI Core Guide](03_core_guide.md) · [Authentication](../05_authentication/auth_explained.md)
+**Related Topics:** [REST Fundamentals](../02_rest_fundamentals/theory.md) · [FastAPI Core Guide](03_core_guide.md) · [Authentication](../05_authentication/theory.md)

@@ -229,7 +229,7 @@ app.include_router(users_v2.router, prefix="/v2")
 
 **[Back to README](../README.md)**
 
-**Theory:** [versioning_strategy.md](./versioning_strategy.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** [← FastAPI](../07_fastapi/cheetsheet.md) &nbsp;|&nbsp; **Next:** [Performance & Scaling →](../09_api_performance_scaling/cheetsheet.md)
 
