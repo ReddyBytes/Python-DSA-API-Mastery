@@ -1,50 +1,80 @@
-# 🔩 Low Level Design (LLD)
+<a id="top"></a>
 
-> LLD is about designing the internals of a component — class structure, responsibilities,
-> relationships, and how objects collaborate to fulfill a requirement.
-> Where HLD answers "what services exist?", LLD answers "how is each service built internally?"
+# Low Level Design (LLD)
 
----
+> "You know," Swathi said, drawing a class diagram on the whiteboard in her Hyderabad office, "HLD is like
+> deciding how many rooms a house should have. LLD is deciding where to put the wiring, the plumbing, the
+> light switches inside each room. The blueprint that the electrician actually follows."
+>
+> She tapped the marker against the board. "When your architect says 'we need a notification service,' that's
+> HLD. When I ask 'what classes does that service contain, how do they talk to each other, which design
+> patterns make it extensible' — that's LLD. It's the craft of turning architecture into code that a team
+> can maintain for years."
 
-## 📋 Contents
+<a id="toc"></a>
 
-```
-1.  What is LLD and when does it matter?
-2.  OOP pillars applied to design
-3.  SOLID principles — the design compass
-4.  Design patterns — reusable solutions
-5.  Class diagrams & relationships
-6.  Modeling real-world entities
-7.  State machines
-8.  Designing a parking lot (step by step)
-9.  Designing a chess game (step by step)
-10. Designing an elevator system
-11. Designing a library management system
-12. Designing a notification service
-13. LLD interview approach
-```
+## Table of Contents
 
----
+- [1. What is LLD and When Does It Matter?](#1-what-is-lld)
+  - [LLD vs HLD](#lld-vs-hld)
+  - [When LLD Matters](#when-lld-matters)
+  - [LLD vs Coding](#lld-vs-coding)
+- [2. OOP Pillars Applied to Design](#2-oop-pillars)
+  - [Encapsulation](#encapsulation)
+  - [Abstraction](#abstraction)
+  - [Inheritance](#inheritance)
+  - [Polymorphism](#polymorphism)
+- [3. SOLID Principles — The Design Compass](#3-solid-principles)
+  - [S — Single Responsibility Principle](#srp)
+  - [O — Open/Closed Principle](#ocp)
+  - [L — Liskov Substitution Principle](#lsp)
+  - [I — Interface Segregation Principle](#isp)
+  - [D — Dependency Inversion Principle](#dip)
+- [4. Design Patterns in LLD](#4-design-patterns)
+  - [Creational Patterns](#creational-patterns)
+  - [Structural Patterns](#structural-patterns)
+  - [Behavioral Patterns](#behavioral-patterns)
+- [5. Class Diagrams and Relationships](#5-class-diagrams)
+  - [Relationship Types](#relationship-types)
+  - [Notation](#notation)
+  - [Example — Parking Lot Diagram](#parking-lot-diagram)
+- [6. Modeling Real-World Entities](#6-modeling-entities)
+  - [Step-by-Step Approach](#step-by-step-approach)
+  - [Example — Food Delivery System](#food-delivery-example)
+- [7. State Machines](#7-state-machines)
+  - [Order State Diagram](#order-state-diagram)
+  - [Implementation Pattern](#state-implementation)
+- [8. Designing a Parking Lot (Step by Step)](#8-parking-lot)
+  - [Requirements Gathering](#parking-requirements)
+  - [Full Implementation](#parking-implementation)
+- [9. Designing a Chess Game (Step by Step)](#9-chess-game)
+  - [Core Classes](#chess-core-classes)
+  - [Board and Game Logic](#chess-board-logic)
+- [10. Designing an Elevator System](#10-elevator-system)
+  - [Elevator and Controller](#elevator-controller)
+  - [SCAN Algorithm Dispatch](#scan-dispatch)
+- [11. Designing a Library Management System](#11-library-system)
+  - [Book and Member Classes](#library-classes)
+  - [Library Service Logic](#library-service)
+- [12. Designing a Notification Service](#12-notification-service)
+  - [Channel Abstraction](#notification-channels)
+  - [Service Orchestration](#notification-orchestration)
+- [13. LLD Interview Approach](#13-interview-approach)
+  - [Five-Step Process](#interview-process)
+  - [Signals Interviewers Look For](#interview-signals)
+- [14. Summary](#14-summary)
 
-## 📌 Learning Priority
+[Back to Top](#top)
 
-**Must Learn** — Core concept, daily use, interview essential:
-SOLID principles · design patterns (Factory/Strategy/Observer/State/Decorator)
+<a id="1-what-is-lld"></a>
 
-**Should Learn** — Important for real projects, comes up regularly:
-class diagram notation · OOP pillars application · state machines
+# 1. What is LLD and When Does It Matter?
 
-**Good to Know** — Useful in specific situations, not always tested:
-worked examples (parking lot/elevator/chess) · Singleton/Builder patterns
+Swathi pulled up a chair next to a junior developer. "Think of it this way — your product manager says 'build a notification system.' Your architect says 'it'll be a microservice that consumes from Kafka.' But who decides the internal class structure? Who decides which pattern makes adding a new notification channel a two-line change instead of a 500-line refactor? That's the LLD engineer."
 
-**Reference** — Know it exists, look up syntax when needed:
-design pattern selection tree · SOLID violation identification · concurrency in LLD
+<a id="lld-vs-hld"></a>
 
----
-
-## 1. What is LLD?
-
-Low Level Design bridges the gap between architecture and code.
+## LLD vs HLD
 
 ```
 HLD (High Level Design):
@@ -58,23 +88,47 @@ LLD (Low Level Design):
   "What's the interface? What design patterns apply?"
 ```
 
-**When LLD matters:**
+<a id="when-lld-matters"></a>
+
+## When LLD Matters
+
 - System design interviews (FAANG, Stripe, etc.)
 - Code reviews for new features
 - Team design discussions before implementation
 - Greenfield services: designing before writing
 
-**LLD vs Coding:**
+<a id="lld-vs-coding"></a>
+
+## LLD vs Coding
+
 ```
 Coding:  "Implement the feature"
 LLD:     "Design the classes that make the feature work"
 ```
 
----
+[Back to Top](#top)
 
-## 2. OOP Pillars Applied to Design
+<a id="2-oop-pillars"></a>
 
-### Encapsulation
+# 2. OOP Pillars Applied to Design
+
+Swathi stood at the whiteboard. "Before we talk about patterns or SOLID, let's ground ourselves. Every LLD decision comes back to four pillars. I've seen engineers memorize patterns without understanding these foundations — their designs collapse under real requirements."
+
+```
+                    +------------------+
+                    |   OOP Pillars    |
+                    +--------+---------+
+                             |
+         +-------------------+-------------------+
+         |         |                   |          |
+  Encapsulation  Abstraction    Inheritance  Polymorphism
+  (hide state)   (hide how)     (IS-A)       (same interface,
+                                              different behavior)
+```
+
+<a id="encapsulation"></a>
+
+## Encapsulation
 
 Hide implementation, expose only what's needed.
 
@@ -99,9 +153,9 @@ class BankAccount:
 
 **Rule:** Make fields private. Expose through methods that enforce invariants.
 
----
+<a id="abstraction"></a>
 
-### Abstraction
+## Abstraction
 
 Expose what, not how.
 
@@ -128,9 +182,9 @@ class PayPalProcessor(PaymentProcessor):
 
 **Rule:** Program to interfaces. Callers don't know which processor they're using.
 
----
+<a id="inheritance"></a>
 
-### Inheritance
+## Inheritance
 
 Use for IS-A relationships. Prefer composition over inheritance.
 
@@ -149,11 +203,11 @@ class SavingsAccount(BankAccount):
         self.deposit(self._balance * self._rate)
 ```
 
-**Pitfall:** Deep inheritance hierarchies are fragile. More than 2–3 levels → use composition.
+**Pitfall:** Deep inheritance hierarchies are fragile. More than 2-3 levels — use composition.
 
----
+<a id="polymorphism"></a>
 
-### Polymorphism
+## Polymorphism
 
 Different implementations, same interface.
 
@@ -164,13 +218,25 @@ def process_payment(processor: PaymentProcessor, amount: float, token: str):
         raise PaymentFailed("charge returned false")
 ```
 
----
+[Back to Top](#top)
 
-## 3. SOLID Principles
+<a id="3-solid-principles"></a>
 
-The five principles that prevent design rot.
+# 3. SOLID Principles — The Design Compass
 
-### S — Single Responsibility Principle
+"SOLID," Swathi said, writing each letter large on the board, "is not academic theory. It's the difference between code you can extend in 30 minutes and code that takes a week to change without breaking something. Let me show you what each one prevents."
+
+```
+  S  ─  Single Responsibility     →  Prevents God classes
+  O  ─  Open/Closed               →  Prevents modification cascades
+  L  ─  Liskov Substitution       →  Prevents broken polymorphism
+  I  ─  Interface Segregation     →  Prevents fat interfaces
+  D  ─  Dependency Inversion      →  Prevents tight coupling
+```
+
+<a id="srp"></a>
+
+## S — Single Responsibility Principle
 
 A class should have ONE reason to change.
 
@@ -206,9 +272,9 @@ class OrderRepository:
     def save(self, order) -> None: ...
 ```
 
----
+<a id="ocp"></a>
 
-### O — Open/Closed Principle
+## O — Open/Closed Principle
 
 Open for extension, closed for modification.
 
@@ -245,9 +311,9 @@ class DiscountCalculator:
         return strategy.apply(order)
 ```
 
----
+<a id="lsp"></a>
 
-### L — Liskov Substitution Principle
+## L — Liskov Substitution Principle
 
 Subclasses must be substitutable for their base class.
 
@@ -283,9 +349,9 @@ class Square(Shape):
     def area(self): return self._side ** 2
 ```
 
----
+<a id="isp"></a>
 
-### I — Interface Segregation Principle
+## I — Interface Segregation Principle
 
 Clients should not depend on interfaces they don't use.
 
@@ -324,9 +390,9 @@ class Robot(Workable):  # only implements what it needs
     def work(self): ...
 ```
 
----
+<a id="dip"></a>
 
-### D — Dependency Inversion Principle
+## D — Dependency Inversion Principle
 
 High-level modules should not depend on low-level modules. Both depend on abstractions.
 
@@ -357,13 +423,29 @@ class OrderService:
         self._repo = repo
 ```
 
----
+[Back to Top](#top)
 
-## 4. Design Patterns in LLD
+<a id="4-design-patterns"></a>
 
-### Creational Patterns
+# 4. Design Patterns in LLD
+
+Swathi opened her laptop to a codebase. "Design patterns are not something you memorize and regurgitate. They're solutions that emerged from decades of production pain. When I see a problem — 'I need to create objects without knowing the concrete type' — my brain immediately says Factory. When I need to swap algorithms at runtime — Strategy. Let me walk you through the ones that show up in every LLD interview."
+
+```
+  Creational              Structural              Behavioral
+  ──────────────          ──────────────          ──────────────
+  Singleton               Adapter                 Observer
+  Factory Method          Decorator               Strategy
+  Builder                 Facade                  Command
+                          Composite               State
+```
+
+<a id="creational-patterns"></a>
+
+## Creational Patterns
 
 **Singleton** — one instance, globally accessible:
+
 ```python
 class DatabaseConnection:
     _instance = None
@@ -381,6 +463,7 @@ class DatabaseConnection:
 ```
 
 **Factory Method** — delegate object creation:
+
 ```python
 class NotificationFactory:
     @staticmethod
@@ -393,6 +476,7 @@ class NotificationFactory:
 ```
 
 **Builder** — construct complex objects step by step:
+
 ```python
 class QueryBuilder:
     def __init__(self):
@@ -429,11 +513,12 @@ query = (QueryBuilder()
     .build())
 ```
 
----
+<a id="structural-patterns"></a>
 
-### Structural Patterns
+## Structural Patterns
 
 **Adapter** — bridge incompatible interfaces:
+
 ```python
 class LegacyPaymentGateway:
     def make_payment(self, card_number, expiry, amount): ...
@@ -448,6 +533,7 @@ class PaymentAdapter(PaymentProcessor):  # implements our interface
 ```
 
 **Decorator** — add behavior without changing the class:
+
 ```python
 class LoggingPaymentProcessor(PaymentProcessor):
     def __init__(self, processor: PaymentProcessor, logger):
@@ -468,6 +554,7 @@ processor = LoggingPaymentProcessor(
 ```
 
 **Facade** — simplify a complex subsystem:
+
 ```python
 class HomeAutomationFacade:
     def __init__(self, lights, ac, alarm, tv):
@@ -489,6 +576,7 @@ class HomeAutomationFacade:
 ```
 
 **Composite** — tree structures where single and group are treated the same:
+
 ```python
 class FileSystemItem(ABC):
     @abstractmethod
@@ -515,11 +603,12 @@ class Directory(FileSystemItem):
             child.display(indent + 2)
 ```
 
----
+<a id="behavioral-patterns"></a>
 
-### Behavioral Patterns
+## Behavioral Patterns
 
 **Observer** — notify dependents of state changes (event system):
+
 ```python
 from typing import Callable
 
@@ -544,6 +633,7 @@ bus.publish("order.created", order)  # triggers all 3 handlers
 ```
 
 **Strategy** — swap algorithms at runtime:
+
 ```python
 class SortStrategy(ABC):
     @abstractmethod
@@ -567,6 +657,7 @@ class DataProcessor:
 ```
 
 **Command** — encapsulate requests as objects (undo/redo):
+
 ```python
 class Command(ABC):
     @abstractmethod
@@ -602,6 +693,7 @@ class TransactionHistory:
 ```
 
 **State** — change behavior based on internal state:
+
 ```python
 class OrderState(ABC):
     @abstractmethod
@@ -638,9 +730,17 @@ class Order:
     def cancel(self):  self._state.cancel(self)
 ```
 
----
+[Back to Top](#top)
 
-## 5. Class Diagrams & Relationships
+<a id="5-class-diagrams"></a>
+
+# 5. Class Diagrams and Relationships
+
+"Class diagrams," Swathi explained, drawing arrows between boxes, "are the language of LLD. In an interview, you'll sketch these on a whiteboard. In production, they're your design doc. The relationship types tell other engineers how tightly coupled two classes are — and that determines how painful a future refactor will be."
+
+<a id="relationship-types"></a>
+
+## Relationship Types
 
 ```
 Relationships (weakest to strongest):
@@ -650,8 +750,13 @@ Relationships (weakest to strongest):
   Composition  ◆——→     A "owns" B (B dies with A)
   Inheritance  ——▷      A IS-A B
   Realization  - - ▷    A implements interface B
+```
 
-Notation:
+<a id="notation"></a>
+
+## Notation
+
+```
   + public
   - private
   # protected
@@ -664,7 +769,10 @@ Notation:
   + method(): ReturnType
 ```
 
-**Example — Parking Lot:**
+<a id="parking-lot-diagram"></a>
+
+## Example — Parking Lot Diagram
+
 ```
 ParkingLot                 ParkingFloor
 ─────────────              ────────────────
@@ -684,11 +792,17 @@ ParkingLot                 ParkingFloor
                     + vacate()              MOTORCYCLE
 ```
 
----
+[Back to Top](#top)
 
-## 6. Modeling Real-World Entities
+<a id="6-modeling-entities"></a>
 
-**Step-by-step approach:**
+# 6. Modeling Real-World Entities
+
+Swathi pulled out a napkin at lunch. "Every LLD problem starts the same way — you have a messy real-world scenario and you need to turn it into clean classes. I teach my juniors a six-step recipe. Let me show you with a food delivery system."
+
+<a id="step-by-step-approach"></a>
+
+## Step-by-Step Approach
 
 ```
 1. Identify entities (nouns) → classes
@@ -699,7 +813,10 @@ ParkingLot                 ParkingFloor
 6. Consider edge cases
 ```
 
-**Example — Food delivery system:**
+<a id="food-delivery-example"></a>
+
+## Example — Food Delivery System
+
 ```
 Nouns:     Customer, Restaurant, Menu, MenuItem, Order, OrderItem,
            DeliveryDriver, Payment, Review
@@ -716,28 +833,37 @@ Relationships:
   Restaurant ◆——→ Menu ◆——→ MenuItems
 ```
 
----
+[Back to Top](#top)
 
-## 7. State Machines
+<a id="7-state-machines"></a>
 
-Many real-world entities have explicit state transitions.
+# 7. State Machines
+
+"State machines," Swathi said, "are how you model anything with a lifecycle — orders, tickets, user accounts, elevators. If you ever write a bunch of if/elif chains checking 'status == something,' you need a state machine instead."
+
+<a id="order-state-diagram"></a>
+
+## Order State Diagram
 
 ```
 Order States:
   PENDING ──confirm──→ CONFIRMED ──assign──→ PREPARING
-                                                  │
-                              CANCELLED ←─cancel──┘
-                                                  │
+                                                  |
+                              CANCELLED <─cancel──+
+                                                  |
                                              pick_up
-                                                  ▼
+                                                  v
                                             OUT_FOR_DELIVERY
-                                                  │
+                                                  |
                                               deliver
-                                                  ▼
+                                                  v
                                             DELIVERED
 ```
 
-**Implementation pattern:**
+<a id="state-implementation"></a>
+
+## Implementation Pattern
+
 ```python
 from enum import Enum, auto
 
@@ -764,11 +890,18 @@ def transition(order, new_status: OrderStatus):
     order.status = new_status
 ```
 
----
+[Back to Top](#top)
 
-## 8. Designing a Parking Lot (Step by Step)
+<a id="8-parking-lot"></a>
 
-### Requirements gathering
+# 8. Designing a Parking Lot (Step by Step)
+
+"The parking lot," Swathi grinned, "is the 'Hello World' of LLD interviews. Everyone gets asked this at least once. But most candidates give a shallow answer — a couple of classes, no patterns. Let me show you the production-grade version."
+
+<a id="parking-requirements"></a>
+
+## Requirements Gathering
+
 ```
 Functional:
   - Multiple floors, each with multiple spots
@@ -782,7 +915,10 @@ Non-functional:
   - Support multiple payment methods
 ```
 
-### Classes identified
+<a id="parking-implementation"></a>
+
+## Full Implementation
+
 ```python
 from enum import Enum
 from datetime import datetime
@@ -873,7 +1009,7 @@ class ParkingLot:
         self.name = name
         self._floors = floors
         self._pricing = pricing
-        self._active_tickets: dict[str, Ticket] = {}  # ticket_id → ticket
+        self._active_tickets: dict[str, Ticket] = {}  # ticket_id -> ticket
         self._ticket_counter = 0
 
     def park_vehicle(self, vehicle: Vehicle) -> Ticket:
@@ -909,9 +1045,17 @@ class ParkingLot:
         return sum(f.available_count() for f in self._floors)
 ```
 
----
+[Back to Top](#top)
 
-## 9. Designing a Chess Game
+<a id="9-chess-game"></a>
+
+# 9. Designing a Chess Game (Step by Step)
+
+"Chess," Swathi said, "tests your ability to model polymorphism elegantly. Every piece type moves differently — but the board doesn't care which type it is. This is polymorphism in its purest form."
+
+<a id="chess-core-classes"></a>
+
+## Core Classes
 
 ```python
 from enum import Enum
@@ -968,7 +1112,13 @@ class Rook(Piece):
                 if board.has_piece(pos):
                     break  # blocked after capture
         return moves
+```
 
+<a id="chess-board-logic"></a>
+
+## Board and Game Logic
+
+```python
 class Board:
     def __init__(self):
         self._grid: dict[tuple[int,int], Piece] = {}
@@ -1012,9 +1162,17 @@ class Game:
         return True
 ```
 
----
+[Back to Top](#top)
 
-## 10. Designing an Elevator System
+<a id="10-elevator-system"></a>
+
+# 10. Designing an Elevator System
+
+"The elevator problem," Swathi noted, "is interesting because it tests your ability to design a scheduling algorithm alongside your class hierarchy. The SCAN algorithm — same one used in disk I/O — is the classic approach."
+
+<a id="elevator-controller"></a>
+
+## Elevator and Controller
 
 ```python
 from enum import Enum
@@ -1034,7 +1192,13 @@ class ElevatorState(Enum):
 class Request:
     floor: int
     direction: Direction | None = None  # None for internal requests
+```
 
+<a id="scan-dispatch"></a>
+
+## SCAN Algorithm Dispatch
+
+```python
 class Elevator:
     def __init__(self, elevator_id: int, total_floors: int):
         self.id = elevator_id
@@ -1099,9 +1263,17 @@ class ElevatorController:
         return min(self._elevators, key=score)
 ```
 
----
+[Back to Top](#top)
 
-## 11. Designing a Library Management System
+<a id="11-library-system"></a>
+
+# 11. Designing a Library Management System
+
+"A library system," Swathi explained, "is a great LLD problem because it has clear entities, a natural lifecycle for borrowed books, and a waitlist — which is a queue problem hiding inside an OOP problem."
+
+<a id="library-classes"></a>
+
+## Book and Member Classes
 
 ```python
 from datetime import datetime, timedelta
@@ -1128,7 +1300,7 @@ class Member:
     def __init__(self, member_id: str, name: str):
         self.id = member_id
         self.name = name
-        self._borrowed: dict[str, datetime] = {}  # isbn → due_date
+        self._borrowed: dict[str, datetime] = {}  # isbn -> due_date
 
     def can_borrow(self) -> bool:
         return len(self._borrowed) < self.MAX_BORROW_LIMIT
@@ -1146,12 +1318,18 @@ class Member:
             raise Exception(f"Member didn't borrow {isbn}")
         overdue_days = max(0, (datetime.now() - due).days)
         return overdue_days * 1.0  # $1/day fine
+```
 
+<a id="library-service"></a>
+
+## Library Service Logic
+
+```python
 class Library:
     def __init__(self):
         self._books: dict[str, Book] = {}
         self._members: dict[str, Member] = {}
-        self._waitlist: dict[str, list[str]] = {}  # isbn → [member_id]
+        self._waitlist: dict[str, list[str]] = {}  # isbn -> [member_id]
 
     def add_book(self, book: Book) -> None:
         self._books[book.isbn] = book
@@ -1197,9 +1375,17 @@ class Library:
         return b
 ```
 
----
+[Back to Top](#top)
 
-## 12. Designing a Notification Service
+<a id="12-notification-service"></a>
+
+# 12. Designing a Notification Service
+
+"This one," Swathi said, "is my favorite interview question to give. It tests Open/Closed, Strategy, and Factory all at once. A great candidate designs it so adding a new channel — say WhatsApp — requires zero changes to existing code."
+
+<a id="notification-channels"></a>
+
+## Channel Abstraction
 
 ```python
 from abc import ABC, abstractmethod
@@ -1244,7 +1430,13 @@ class PushSender(NotificationSender):
     def send(self, to, subject, body) -> bool:
         print(f"[PUSH] To: {to}: {subject}")
         return True
+```
 
+<a id="notification-orchestration"></a>
+
+## Service Orchestration
+
+```python
 class UserContactRepository(ABC):
     @abstractmethod
     def get_email(self, user_id: str) -> str | None: ...
@@ -1283,9 +1475,17 @@ class NotificationService:
         return results
 ```
 
----
+[Back to Top](#top)
 
-## 13. LLD Interview Approach
+<a id="13-interview-approach"></a>
+
+# 13. LLD Interview Approach
+
+"Let me give you the recipe," Swathi said. "Every LLD interview follows the same 40-minute structure. Candidates who wing it get lost in details. Candidates who follow this structure consistently pass."
+
+<a id="interview-process"></a>
+
+## Five-Step Process
 
 ```
 Step 1 — Requirements (5 min)
@@ -1315,36 +1515,75 @@ Step 5 — Edge Cases & Extensions (5 min)
   Testing: what would unit tests look like?
 ```
 
-**Signals interviewers look for:**
+<a id="interview-signals"></a>
+
+## Signals Interviewers Look For
+
 ```
-✓ Clean interface definitions (ABC / abstract methods)
-✓ Dependency injection (not hardcoded dependencies)
-✓ Single responsibility in each class
-✓ Polymorphism for extensibility
-✓ State machine for entities with lifecycle
-✓ Asking clarifying questions before designing
-✗ God classes (one class doing everything)
-✗ Deep inheritance trees (> 3 levels)
-✗ Hardcoded dependencies (new ConcreteClass() inside business logic)
-✗ Anemic models (classes with only getters/setters, no behavior)
+GOOD SIGNALS:
+  Clean interface definitions (ABC / abstract methods)
+  Dependency injection (not hardcoded dependencies)
+  Single responsibility in each class
+  Polymorphism for extensibility
+  State machine for entities with lifecycle
+  Asking clarifying questions before designing
+
+RED FLAGS:
+  God classes (one class doing everything)
+  Deep inheritance trees (> 3 levels)
+  Hardcoded dependencies (new ConcreteClass() inside business logic)
+  Anemic models (classes with only getters/setters, no behavior)
 ```
 
----
+[Back to Top](#top)
 
-## 🔁 Navigation
+<a id="14-summary"></a>
 
-| | |
-|---|---|
-| 🎯 Interview | [interview.md](./interview.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| ← Previous | [16 — High Level Design](../16_high_level_design/theory.md) |
-| ➡️ Next | [18 — Design Patterns](../18_design_patterns/theory.md) |
-| 🏠 Home | [README.md](../README.md) |
+# 14. Summary
 
----
+## Learning Priority
 
-**[🏠 Back to README](../README.md)**
+**Must Learn** — Core concept, daily use, interview essential:
+SOLID principles, design patterns (Factory/Strategy/Observer/State/Decorator)
 
-**Prev:** [← High Level Design — Interview Q&A](../16_high_level_design/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+**Should Learn** — Important for real projects, comes up regularly:
+class diagram notation, OOP pillars application, state machines
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**Good to Know** — Useful in specific situations, not always tested:
+worked examples (parking lot/elevator/chess), Singleton/Builder patterns
+
+**Reference** — Know it exists, look up syntax when needed:
+design pattern selection tree, SOLID violation identification, concurrency in LLD
+
+## Key Takeaways
+
+```
++------------------------------------------------------------------+
+|                    LLD DESIGN CHECKLIST                           |
++------------------------------------------------------------------+
+| 1. Gather requirements (functional + non-functional)             |
+| 2. Identify entities (nouns → classes)                           |
+| 3. Identify behaviors (verbs → methods)                          |
+| 4. Map relationships (composition > aggregation > association)   |
+| 5. Apply SOLID (especially SRP + DIP)                            |
+| 6. Pick design patterns (Strategy, Factory, Observer, State)     |
+| 7. Draw class diagram with proper notation                       |
+| 8. Implement core logic with clean interfaces                    |
+| 9. Consider state machines for lifecycle entities                |
+| 10. Address edge cases, concurrency, extensibility               |
++------------------------------------------------------------------+
+```
+
+[Back to Top](#top)
+
+<a id="navigation"></a>
+
+## Navigation
+
+| Link | Destination |
+|------|-------------|
+| Previous | [16 — High Level Design](../16_high_level_design/theory.md) |
+| Next | [18 — Design Patterns](../18_design_patterns/theory.md) |
+| Interview | [interview.md](./interview.md) |
+| Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
+| Home | [README.md](../README.md) |

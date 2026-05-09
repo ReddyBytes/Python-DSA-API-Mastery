@@ -1,78 +1,116 @@
-# 🌐 Distributed Systems
+<a id="top"></a>
 
-> The science of making multiple computers work as one reliable system.
-> Understanding distributed systems is what separates senior engineers
-> from developers who "just use microservices."
+# Distributed Systems
 
-> 📝 **Practice:** [Q47 · distributed-idempotency](../system_design_practice_questions_100.md#q47--normal--distributed-idempotency) · [Q52 · distributed-locks](../system_design_practice_questions_100.md#q52--critical--distributed-locks)
+> "When I joined a team running five microservices across two data centers," Hari says, leaning back
+> in his chair, "I thought the hardest part would be the algorithms. It wasn't. The hardest part was
+> accepting that every assumption I held about single-process programming was a lie in distributed
+> land. The network lies. Clocks lie. Even 'success' lies — because a timeout doesn't mean failure,
+> it means you don't know."
 
----
+> 📝 **Practice:** [Q47 - distributed-idempotency](../system_design_practice_questions_100.md#q47--normal--distributed-idempotency) | [Q52 - distributed-locks](../system_design_practice_questions_100.md#q52--critical--distributed-locks)
 
-## 📌 Learning Priority
+<a id="learning-priority"></a>
+
+## Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-fallacies of distributed computing · Raft consensus · replication modes (leader-follower/multi-leader/leaderless) · CAP implications
+fallacies of distributed computing, Raft consensus, replication modes (leader-follower/multi-leader/leaderless), CAP implications
 
 **Should Learn** — Important for real projects, comes up regularly:
-vector clocks · quorum reads/writes · consistent hashing · distributed transactions (2PC/Saga/Outbox)
+vector clocks, quorum reads/writes, consistent hashing, distributed transactions (2PC/Saga/Outbox)
 
 **Good to Know** — Useful in specific situations, not always tested:
-gossip protocols · CRDTs · split-brain and fencing · leader election
+gossip protocols, CRDTs, split-brain and fencing, leader election
 
 **Reference** — Know it exists, look up syntax when needed:
-Byzantine fault tolerance · partial synchrony assumptions · causality tracking
+Byzantine fault tolerance, partial synchrony assumptions, causality tracking
 
----
+<a id="contents"></a>
 
-## 📋 Contents
+## Table of Contents
 
-```
-1.  Why distributed systems are hard
-2.  The fallacies of distributed computing
-3.  Time in distributed systems
-4.  Replication — keeping copies in sync
-5.  Consensus — agreeing on one truth
-6.  Partitioning (Sharding)
-7.  Distributed transactions
-8.  Vector clocks and causality
-9.  Leader election
-10. Gossip protocols
-11. Consistent hashing
-12. Quorum reads and writes
-13. Split-brain and fencing
-14. Distributed patterns summary
-```
+- [1. Why Distributed Systems Are Hard](#1-why-distributed-systems-are-hard)
+- [2. The Fallacies of Distributed Computing](#2-the-fallacies-of-distributed-computing)
+- [3. Time in Distributed Systems](#3-time-in-distributed-systems)
+  - [The Clock Problem](#the-clock-problem)
+  - [Logical Clocks (Lamport Clock)](#logical-clocks-lamport-clock)
+  - [Vector Clocks](#vector-clocks)
+- [4. Replication](#4-replication)
+  - [Single-Leader Replication](#single-leader-replication)
+  - [Synchronous vs Asynchronous Replication](#synchronous-vs-asynchronous-replication)
+  - [Replication Lag Problems](#replication-lag-problems)
+  - [Multi-Leader Replication](#multi-leader-replication)
+  - [Leaderless Replication (Dynamo-style)](#leaderless-replication-dynamo-style)
+  - [CRDTs — Conflict-Free Replicated Data Types](#crdts--conflict-free-replicated-data-types)
+- [5. Consensus](#5-consensus)
+  - [Why It Is Hard (FLP Impossibility)](#why-it-is-hard-flp-impossibility)
+  - [Raft Consensus Algorithm](#raft-consensus-algorithm)
+  - [Paxos](#paxos)
+- [6. Partitioning (Sharding)](#6-partitioning-sharding)
+  - [Hash Partitioning](#hash-partitioning)
+  - [Range Partitioning](#range-partitioning)
+  - [Consistent Hashing](#consistent-hashing)
+  - [Sharding Considerations](#sharding-considerations)
+- [7. Distributed Transactions](#7-distributed-transactions)
+  - [Two-Phase Commit (2PC)](#two-phase-commit-2pc)
+  - [Saga Pattern](#saga-pattern)
+  - [Outbox Pattern](#outbox-pattern)
+- [8. Vector Clocks and Causality](#8-vector-clocks-and-causality)
+- [9. Leader Election](#9-leader-election)
+  - [Bully Algorithm](#bully-algorithm)
+  - [ZooKeeper / etcd Based Election](#zookeeper--etcd-based-election)
+- [10. Gossip Protocols](#10-gossip-protocols)
+- [11. Consistent Hashing (Deep Dive)](#11-consistent-hashing-deep-dive)
+- [12. Quorum Reads and Writes](#12-quorum-reads-and-writes)
+- [13. Split-Brain and Fencing](#13-split-brain-and-fencing)
+- [14. Distributed Patterns Summary](#14-distributed-patterns-summary)
+- [Summary](#summary)
 
----
+[Back to Top](#top)
 
-## 1. Why Distributed Systems Are Hard
+<a id="1-why-distributed-systems-are-hard"></a>
+
+# 1. Why Distributed Systems Are Hard
+
+"Imagine you're a chef in one kitchen," Hari explains to a junior engineer. "You can see every pot,
+every burner, every timer. Now imagine ten kitchens across the city, connected only by phone. You
+call Kitchen B — no answer. Did they burn down? Is the phone line cut? Are they just busy? You
+genuinely cannot tell. That uncertainty is the fundamental reality of distributed systems."
 
 ```
 In a single process, you can assume:
-  ✓ Operations are atomic
-  ✓ State is consistent
-  ✓ No partial failures
-  ✓ Time is linear and shared
-  ✓ Memory is shared
+  + Operations are atomic
+  + State is consistent
+  + No partial failures
+  + Time is linear and shared
+  + Memory is shared
 
 In a distributed system, NONE of these hold:
-  ✗ Network calls can fail partway through
-  ✗ Nodes have independent, unsynchronized clocks
-  ✗ A node can be slow but not "down" (partial failure)
-  ✗ You can't observe global state atomically
-  ✗ Messages can be delayed, duplicated, or reordered
+  x Network calls can fail partway through
+  x Nodes have independent, unsynchronized clocks
+  x A node can be slow but not "down" (partial failure)
+  x You can't observe global state atomically
+  x Messages can be delayed, duplicated, or reordered
 ```
 
 The core challenge:
+
 ```
 You want a distributed system to behave like a single reliable computer.
 But the physical reality is multiple unreliable, asynchronous computers.
 The gap between appearance and reality is where bugs live.
 ```
 
----
+[Back to Top](#top)
 
-## 2. The Fallacies of Distributed Computing
+<a id="2-the-fallacies-of-distributed-computing"></a>
+
+# 2. The Fallacies of Distributed Computing
+
+"Every one of these fallacies," Hari says, tapping the whiteboard, "I've seen cause a production
+incident. Number one — the network is reliable — cost us three hours of downtime when a switch
+firmware upgrade silently started dropping 0.1% of packets. Our retry budget wasn't sized for it."
 
 Assumptions that will hurt you (Peter Deutsch, L. Peter Deutsch, 1994):
 
@@ -102,11 +140,34 @@ Assumptions that will hurt you (Peter Deutsch, L. Peter Deutsch, 1994):
    Reality: different OS, hardware, protocols, MTUs
 ```
 
----
+```
+Impact in real systems:
 
-## 3. Time in Distributed Systems
+Fallacy               What breaks                    Prevention
+────────────────────────────────────────────────────────────────────
+Network reliable      Silent data loss, timeouts     Retries + idempotency
+Latency zero          Cascade failures, slow UX      Timeouts + circuit breakers
+Bandwidth infinite    Queue backup, OOM              Backpressure + pagination
+Network secure        Data leaks, injection          mTLS + encryption at rest
+Topology stable       Stale DNS, lost connections    Service discovery + health checks
+One admin             Config drift, blame storms     GitOps + ownership boundaries
+Cost zero             CPU burn on serialization      Proto/Avro + connection pools
+Homogeneous           Protocol mismatches            Contract testing + gateways
+```
 
-### The clock problem
+[Back to Top](#top)
+
+<a id="3-time-in-distributed-systems"></a>
+
+# 3. Time in Distributed Systems
+
+"Time," Hari says with a grin, "is the first thing that betrays you. Your laptop clock and my
+laptop clock disagree by milliseconds. In those milliseconds, entire transactions can happen.
+So which event came first? Wall-clock time cannot answer that question reliably."
+
+<a id="the-clock-problem"></a>
+
+## The Clock Problem
 
 ```
 Each node has its own clock. Clocks drift.
@@ -117,7 +178,9 @@ If node A records event at 10:00:000 and node B at 10:00:001,
 you don't know which happened first!
 ```
 
-### Logical Clocks (Lamport Clock)
+<a id="logical-clocks-lamport-clock"></a>
+
+## Logical Clocks (Lamport Clock)
 
 Each node maintains a counter. Every event increments it. Messages carry the sender's counter.
 
@@ -139,12 +202,14 @@ class LamportClock:
 ```
 
 ```
-Rule:  If A → B (A happened before B), then clock(A) < clock(B)
+Rule:  If A -> B (A happened before B), then clock(A) < clock(B)
        But: clock(A) < clock(B) does NOT mean A happened before B
        (concurrent events can have any clock ordering)
 ```
 
-### Vector Clocks
+<a id="vector-clocks"></a>
+
+## Vector Clocks
 
 Track per-node counters to capture causality precisely.
 
@@ -177,28 +242,44 @@ class VectorClock:
 
 ```
 Usage: DynamoDB, Riak use vector clocks to detect conflicts
-If two updates are concurrent → conflict detected → resolve (LWW or merge)
+If two updates are concurrent -> conflict detected -> resolve (LWW or merge)
+
+Visual comparison:
+
+  Lamport Clock:  A single counter — tells you "maybe before" but not "definitely before"
+  Vector Clock:   Per-node counters — tells you exactly: before, after, or concurrent
+
+  Node X: [3, 0, 0]   Node Y: [0, 2, 0]   -> Concurrent (neither dominates)
+  Node X: [3, 2, 1]   Node Y: [3, 1, 0]   -> X happened after Y (X dominates)
 ```
 
----
+[Back to Top](#top)
 
-## 4. Replication
+<a id="4-replication"></a>
+
+# 4. Replication
+
+"Why keep copies?" Hari asks rhetorically. "Two reasons: if a node dies, you haven't lost data.
+And if a node is overloaded with reads, other copies can share the load. But replication is where
+distributed systems get truly painful — because keeping copies in sync is the hard problem."
 
 Keeping copies of data on multiple nodes for fault tolerance and read scaling.
 
-### Single-Leader Replication
+<a id="single-leader-replication"></a>
+
+## Single-Leader Replication
 
 ```
-                    ┌─────────────┐
- Writes ──────────→ │   Leader    │
-                    └──────┬──────┘
-         Replication log   │
-              ┌────────────┼────────────┐
-              ▼            ▼            ▼
-        ┌──────────┐ ┌──────────┐ ┌──────────┐
-        │ Follower │ │ Follower │ │ Follower │
-        └──────────┘ └──────────┘ └──────────┘
-              └──────── Reads ────────┘
+                    +-------------+
+ Writes ----------> |   Leader    |
+                    +------+------+
+         Replication log   |
+              +------------+------------+
+              v            v            v
+        +----------+ +----------+ +----------+
+        | Follower | | Follower | | Follower |
+        +----------+ +----------+ +----------+
+              +-------- Reads --------+
 
 Properties:
   + Simple: single write path
@@ -208,7 +289,9 @@ Properties:
   - Followers may lag (replication lag = source of stale reads)
 ```
 
-### Synchronous vs Asynchronous Replication
+<a id="synchronous-vs-asynchronous-replication"></a>
+
+## Synchronous vs Asynchronous Replication
 
 ```
 Synchronous (semi-sync):
@@ -225,11 +308,13 @@ Asynchronous:
   Example: MySQL async replication (default)
 ```
 
-### Replication Lag Problems
+<a id="replication-lag-problems"></a>
+
+## Replication Lag Problems
 
 ```
 1. Read-your-own-writes:
-   You write → read from lagging replica → see old data
+   You write -> read from lagging replica -> see old data
    Fix: read your own writes from the leader
 
 2. Monotonic reads:
@@ -241,7 +326,9 @@ Asynchronous:
    Fix: replicas apply writes in the same order as leader
 ```
 
-### Multi-Leader Replication
+<a id="multi-leader-replication"></a>
+
+## Multi-Leader Replication
 
 ```
 Multiple nodes accept writes. Used for:
@@ -251,16 +338,18 @@ Multiple nodes accept writes. Used for:
 Problem: WRITE CONFLICTS
   Node A: user changes title to "A" at 10:00
   Node B: user changes title to "B" at 10:01
-  Both replicate to the other node → conflict!
+  Both replicate to the other node -> conflict!
 
 Conflict resolution:
   Last Write Wins (LWW): timestamp determines winner
-    → data loss if clocks are off
+    -> data loss if clocks are off
   Custom merge: application-level merge (e.g., CRDT)
   Conflict-free: design writes to be commutative (add-only)
 ```
 
-### Leaderless Replication (Dynamo-style)
+<a id="leaderless-replication-dynamo-style"></a>
+
+## Leaderless Replication (Dynamo-style)
 
 ```
 Any node can accept writes. Quorum determines success.
@@ -274,12 +363,18 @@ Example: N=3, W=2, R=2
   High availability:  W=1, R=1 (no overlap — eventual)
   High durability:    W=3, R=1
 
-Read repair: on read, detect stale versions → update the stale node
+Read repair: on read, detect stale versions -> update the stale node
 Anti-entropy: background process syncs nodes
 Used by: Cassandra, DynamoDB, Riak
 ```
 
-### CRDTs — Conflict-Free Replicated Data Types
+<a id="crdts--conflict-free-replicated-data-types"></a>
+
+## CRDTs — Conflict-Free Replicated Data Types
+
+"Think of CRDTs like this," Hari says. "Instead of two people fighting over the same whiteboard
+marker, you give each person their own marker and a mathematical rule for merging whatever they
+write. No coordination needed — the merge always produces the same result regardless of order."
 
 In eventual consistency, different replicas may receive updates in different orders. **CRDTs (Conflict-free Replicated Data Types)** are data structures mathematically designed to merge conflicting updates automatically — no coordinator needed, no conflicts possible.
 
@@ -293,7 +388,7 @@ G-Counter (grow-only counter):
   Value = sum of all slots.
 
   Node A: [3, 0, 0]    Node B: [0, 5, 0]
-  Merge:  [3, 5, 0]  ← take max per slot — no conflict!
+  Merge:  [3, 5, 0]  <- take max per slot — no conflict!
 
 OR-Set (observed-remove set):
   Add: generate unique tag (uuid) for each element.
@@ -314,13 +409,21 @@ LWW-Register (last-write-wins register):
 
 **Trade-off:** CRDTs restrict what operations are possible — only operations that are mathematically mergeable. For arbitrary business logic, you still need coordination or conflict resolution rules.
 
----
+[Back to Top](#top)
 
-## 5. Consensus
+<a id="5-consensus"></a>
+
+# 5. Consensus
+
+"Consensus is the constitutional amendment process of distributed systems," Hari explains. "Getting
+all nodes to agree on a single value sounds trivial until you realize that messages can be lost,
+nodes can crash mid-vote, and you can never be sure if silence means 'no' or 'still thinking.'"
 
 Multiple nodes must agree on a single value, even with failures.
 
-### Why it's hard (FLP Impossibility)
+<a id="why-it-is-hard-flp-impossibility"></a>
+
+## Why It Is Hard (FLP Impossibility)
 
 ```
 Fischer-Lynch-Paterson (1985):
@@ -328,10 +431,12 @@ Fischer-Lynch-Paterson (1985):
   there is no deterministic consensus algorithm that always terminates.
 
 Practice: Real systems use timeouts (make asynchrony bounded)
-→ This is why Paxos and Raft require leader elections with timeouts
+-> This is why Paxos and Raft require leader elections with timeouts
 ```
 
-### Raft Consensus Algorithm
+<a id="raft-consensus-algorithm"></a>
+
+## Raft Consensus Algorithm
 
 ```
 Three roles: Leader, Follower, Candidate
@@ -360,9 +465,22 @@ Properties:
 Used by: etcd, CockroachDB, TiKV, Consul
 ```
 
-> 📝 **Practice:** [Q50 · distributed-consensus](../system_design_practice_questions_100.md#q50--thinking--distributed-consensus)
+```
+Raft state machine visual:
 
-### Paxos
+  +----------+    timeout    +-----------+   wins election   +--------+
+  | Follower | -----------> | Candidate | ----------------> | Leader |
+  +----------+              +-----------+                   +--------+
+       ^                         |                              |
+       |     discovers leader    |    discovers higher term     |
+       +-------------------------+------------------------------+
+```
+
+> 📝 **Practice:** [Q50 - distributed-consensus](../system_design_practice_questions_100.md#q50--thinking--distributed-consensus)
+
+<a id="paxos"></a>
+
+## Paxos
 
 ```
 The original consensus algorithm (Lamport, 1989).
@@ -378,34 +496,46 @@ Multi-Paxos: elect a distinguished proposer (leader) to skip Phase 1
 Used by: Chubby (Google), Zookeeper (ZAB variant)
 ```
 
----
+[Back to Top](#top)
 
-## 6. Partitioning (Sharding)
+<a id="6-partitioning-sharding"></a>
+
+# 6. Partitioning (Sharding)
+
+"Sharding is like dividing a library across multiple buildings," Hari says. "Authors A through M
+in Building 1, N through Z in Building 2. Great for parallel access — terrible when someone asks
+for 'all books published in 2023' and you have to call every building."
 
 Split data across multiple nodes so no single node holds it all.
 
-### Hash Partitioning
+<a id="hash-partitioning"></a>
+
+## Hash Partitioning
 
 ```python
 def get_partition(key: str, num_partitions: int) -> int:
     return hash(key) % num_partitions
 
-# Problem: adding/removing a node → almost all keys remapped
+# Problem: adding/removing a node -> almost all keys remapped
 # Solution: consistent hashing
 ```
 
-### Range Partitioning
+<a id="range-partitioning"></a>
+
+## Range Partitioning
 
 ```
-Users A-F → Shard 1
-Users G-M → Shard 2
-Users N-Z → Shard 3
+Users A-F -> Shard 1
+Users G-M -> Shard 2
+Users N-Z -> Shard 3
 
 + Natural range scans (find all users A-C)
 - Hotspots if data is skewed (everyone's name starts with S)
 ```
 
-### Consistent Hashing
+<a id="consistent-hashing"></a>
+
+## Consistent Hashing
 
 ```
 Imagine a ring 0..2^32. Hash nodes onto ring.
@@ -414,9 +544,9 @@ Hash key onto ring. Walk clockwise to find node.
         Node A (pos 10)
            /
   0 ──────────────────── 2^32
-          ▲       ▲
+          ^       ^
      key=5  key=15
-     → Node A  → Node B
+     -> Node A  -> Node B
 
 Adding node C between A and B:
   Only keys between A and C move to C
@@ -426,7 +556,9 @@ Result: adding/removing a node moves only K/N keys
   (K = total keys, N = number of nodes)
 ```
 
-### Sharding Considerations
+<a id="sharding-considerations"></a>
+
+## Sharding Considerations
 
 ```
 Choosing shard key:
@@ -437,20 +569,29 @@ Choosing shard key:
 
 Cross-shard queries:
   Scatter-gather: query all shards, merge results
-  → Expensive: avoid or handle on application layer
+  -> Expensive: avoid or handle on application layer
 
 Rebalancing:
   Fixed partitions: assign partitions to nodes, move partitions when adding
   Dynamic: split partition when too large
 ```
 
----
+[Back to Top](#top)
 
-## 7. Distributed Transactions
+<a id="7-distributed-transactions"></a>
+
+# 7. Distributed Transactions
+
+"Single-database transactions are a luxury," Hari says. "ACID gave us this beautiful guarantee:
+either everything happens or nothing does. Now stretch that across three services, two databases,
+and a message broker. Suddenly 'atomicity' becomes a distributed problem, and distributed problems
+don't have clean answers — only trade-offs."
 
 Making operations span multiple services/databases atomically.
 
-### Two-Phase Commit (2PC)
+<a id="two-phase-commit-2pc"></a>
+
+## Two-Phase Commit (2PC)
 
 ```
 Phase 1 (Prepare):
@@ -458,8 +599,8 @@ Phase 1 (Prepare):
   Each participant: acquire locks, write to local WAL, respond YES/NO
 
 Phase 2 (Commit or Abort):
-  If all YES → Coordinator sends COMMIT to all
-  If any NO  → Coordinator sends ABORT to all
+  If all YES -> Coordinator sends COMMIT to all
+  If any NO  -> Coordinator sends ABORT to all
 
 Problems:
   - Blocking: if coordinator dies after prepare, participants wait forever
@@ -470,9 +611,27 @@ Use when: must have atomicity, can tolerate blocking, small number of participan
 Used by: databases with distributed transactions (PostgreSQL FDW, MySQL NDB)
 ```
 
-> 📝 **Practice:** [Q45 · two-phase-commit](../system_design_practice_questions_100.md#q45--critical--two-phase-commit)
+```
+2PC timeline visual:
 
-### Saga Pattern
+  Coordinator         Participant A       Participant B
+      |                    |                    |
+      |--- PREPARE ------->|                    |
+      |--- PREPARE -------------------------------->|
+      |                    |                    |
+      |<-- YES ------------|                    |
+      |<-- YES ------------------------------------|
+      |                    |                    |
+      |--- COMMIT -------->|                    |
+      |--- COMMIT --------------------------------->|
+      |                    |                    |
+```
+
+> 📝 **Practice:** [Q45 - two-phase-commit](../system_design_practice_questions_100.md#q45--critical--two-phase-commit)
+
+<a id="saga-pattern"></a>
+
+## Saga Pattern
 
 ```
 Sequence of local transactions + compensating transactions.
@@ -485,8 +644,8 @@ Order Saga:
   4. Send confirmation      (no compensation needed)
 
 If step 3 fails:
-  → Run compensate(step 2): issue refund
-  → Run compensate(step 1): release inventory
+  -> Run compensate(step 2): issue refund
+  -> Run compensate(step 1): release inventory
 
 Choreography: each service publishes events, next step triggered by event
 Orchestration: central saga orchestrator calls each step
@@ -498,7 +657,9 @@ Trade-off:
   - ACD but NOT ACID (no Isolation between steps)
 ```
 
-### Outbox Pattern
+<a id="outbox-pattern"></a>
+
+## Outbox Pattern
 
 ```
 Problem: write to DB + publish event must be atomic
@@ -507,61 +668,120 @@ Solution: write event to "outbox" table in same DB transaction,
           separate process reads outbox and publishes to Kafka.
 
            Application
-               │
-        ┌──────▼───────────────────┐
-        │ BEGIN TRANSACTION         │
-        │   INSERT INTO orders ...  │
-        │   INSERT INTO outbox ...  │ ← both in same TX
-        │ COMMIT                    │
-        └───────────────────────────┘
-                    │
-           ┌────────▼────────┐
-           │  Outbox Poller  │ → Kafka → Consumers
-           │  (reads & acks) │
-           └─────────────────┘
+               |
+        +------v---------------------------+
+        | BEGIN TRANSACTION                 |
+        |   INSERT INTO orders ...         |
+        |   INSERT INTO outbox ...         | <- both in same TX
+        | COMMIT                           |
+        +----------------------------------+
+                    |
+           +-------v---------+
+           |  Outbox Poller  | -> Kafka -> Consumers
+           |  (reads & acks) |
+           +-----------------+
 
 Guarantees: at-least-once delivery (idempotent consumers required)
 ```
 
----
+[Back to Top](#top)
 
-## 8. Leader Election
+<a id="8-vector-clocks-and-causality"></a>
+
+# 8. Vector Clocks and Causality
+
+"We covered vector clocks in the Time section," Hari notes, "but let me emphasize the causality
+angle. In a distributed system, you need to answer one question constantly: did event A cause
+event B, or were they independent? Vector clocks give you that answer without requiring
+synchronized clocks."
+
+```
+Causality tracking with vector clocks — decision tree:
+
+  Compare VC(A) and VC(B):
+    All entries in A <= B, at least one <  ->  A happened before B
+    All entries in B <= A, at least one <  ->  B happened before A
+    Neither dominates                      ->  A and B are concurrent
+
+  Why this matters:
+    - Concurrent writes = conflict (need resolution strategy)
+    - Causal writes = safe to apply in order
+    - Without causality tracking, you cannot distinguish the two
+```
+
+Real-world usage:
+- **DynamoDB** uses vector clocks to detect conflicting writes on the same key
+- **Riak** returns all concurrent versions to the client for application-level resolution
+- **Git** uses a DAG of commits — conceptually similar to tracking causality
+
+[Back to Top](#top)
+
+<a id="9-leader-election"></a>
+
+# 9. Leader Election
+
+"Every distributed system eventually needs a boss," Hari says. "Someone has to decide the order
+of operations, break ties, coordinate. The trick is: how do you elect a boss when the voters
+can't reliably communicate with each other?"
 
 How distributed systems choose a single coordinator.
 
-> 📝 **Practice:** [Q51 · leader-election](../system_design_practice_questions_100.md#q51--normal--leader-election)
+> 📝 **Practice:** [Q51 - leader-election](../system_design_practice_questions_100.md#q51--normal--leader-election)
 
-### Bully Algorithm
+<a id="bully-algorithm"></a>
+
+## Bully Algorithm
 
 ```
 When a node detects the leader is dead:
   1. Send ELECTION message to all nodes with higher ID
-  2. If no response → you are the new leader (send VICTORY)
-  3. If higher node responds → it takes over election
+  2. If no response -> you are the new leader (send VICTORY)
+  3. If higher node responds -> it takes over election
   4. Highest ID that is alive becomes leader
 
 Simple but: highest ID node always wins.
 Not used in practice (many better algorithms).
 ```
 
-### ZooKeeper / etcd Based Election
+<a id="zookeeper--etcd-based-election"></a>
+
+## ZooKeeper / etcd Based Election
 
 ```
 Nodes create ephemeral sequential znodes in a /leader directory:
   /leader/node-000001
-  /leader/node-000002 ← lowest = current leader
+  /leader/node-000002 <- lowest = current leader
   /leader/node-000003
 
-If leader dies → its ephemeral node deleted
+If leader dies -> its ephemeral node deleted
 Each follower watches the node just below its own
-When the next node disappears → that follower attempts leadership
+When the next node disappears -> that follower attempts leadership
 
 This prevents "herd effect": only one node wakes up on each death
 ```
 
----
+```
+ZooKeeper election visual:
 
-## 9. Gossip Protocols
+  /leader/
+    node-000001  <- LEADER (ephemeral, dies with session)
+    node-000002  <- watches node-000001
+    node-000003  <- watches node-000002
+
+  If node-000001 dies:
+    node-000002 notified -> becomes leader
+    node-000003 still watches node-000002 (no herd)
+```
+
+[Back to Top](#top)
+
+<a id="10-gossip-protocols"></a>
+
+# 10. Gossip Protocols
+
+"Gossip protocols work exactly like office gossip," Hari laughs. "You tell two people, they each
+tell two people, and within minutes everyone knows. Mathematically, it's O(log N) rounds to reach
+all nodes. No central authority needed — just randomized peer-to-peer chatter."
 
 ```
 How to disseminate information to all nodes without central coordinator.
@@ -576,7 +796,7 @@ Properties:
   + Eventually consistent spread
 
 Math: with N nodes, after O(log N) rounds, all nodes have the info
-  With 1000 nodes → ~10 rounds to full propagation
+  With 1000 nodes -> ~10 rounds to full propagation
 
 Used by:
   Cassandra: membership, schema changes, topology
@@ -584,9 +804,24 @@ Used by:
   Amazon S3: cluster membership
 ```
 
----
+```
+Gossip propagation (3 rounds, 8 nodes):
 
-## 10. Consistent Hashing (Deep Dive)
+  Round 0:  [X] [ ] [ ] [ ] [ ] [ ] [ ] [ ]   (1 node knows)
+  Round 1:  [X] [X] [X] [ ] [ ] [ ] [ ] [ ]   (3 nodes know)
+  Round 2:  [X] [X] [X] [X] [X] [X] [ ] [ ]   (6 nodes know)
+  Round 3:  [X] [X] [X] [X] [X] [X] [X] [X]   (all 8 know)
+```
+
+[Back to Top](#top)
+
+<a id="11-consistent-hashing-deep-dive"></a>
+
+# 11. Consistent Hashing (Deep Dive)
+
+"We touched on consistent hashing in the partitioning section," Hari says. "Now let me show you
+the real implementation. Virtual nodes are the key insight — without them, you get uneven
+distribution because hash functions don't guarantee uniform spacing on the ring."
 
 ```python
 import hashlib
@@ -623,31 +858,66 @@ class ConsistentHashRing:
         return int(hashlib.md5(value.encode()).hexdigest(), 16)
 ```
 
----
+```
+Why virtual nodes matter:
 
-## 11. Quorum Reads and Writes
+  Without vnodes (3 physical nodes on ring):
+    Node A: owns 60% of ring   <- unbalanced!
+    Node B: owns 25% of ring
+    Node C: owns 15% of ring
+
+  With 150 vnodes per physical node (450 points on ring):
+    Node A: owns ~33% of ring  <- balanced!
+    Node B: owns ~33% of ring
+    Node C: owns ~34% of ring
+```
+
+[Back to Top](#top)
+
+<a id="12-quorum-reads-and-writes"></a>
+
+# 12. Quorum Reads and Writes
+
+"The quorum formula is simple," Hari says, writing on the whiteboard: "W + R > N. That's it.
+If your write reaches W nodes and your read touches R nodes, and W + R exceeds the total N,
+then at least one node in your read set has the latest write. Guaranteed overlap."
 
 ```
 N = total replicas
 W = write quorum (must succeed)
 R = read quorum (must succeed)
 
-W + R > N → guaranteed to see latest write (overlap exists)
+W + R > N -> guaranteed to see latest write (overlap exists)
 
 Common configs (N=3):
-  W=3, R=1 → Strong write, fast read (wait for all)
-  W=1, R=3 → Fast write, strong read
-  W=2, R=2 → Balanced (Cassandra QUORUM)
-  W=1, R=1 → Eventual consistency (Cassandra ONE)
+  W=3, R=1 -> Strong write, fast read (wait for all)
+  W=1, R=3 -> Fast write, strong read
+  W=2, R=2 -> Balanced (Cassandra QUORUM)
+  W=1, R=1 -> Eventual consistency (Cassandra ONE)
 
 Read repair:
-  On quorum read, if versions differ → write latest to stale replica
+  On quorum read, if versions differ -> write latest to stale replica
   Ensures slow repair even without explicit sync job
 ```
 
----
+```
+Quorum overlap visual (N=3, W=2, R=2):
 
-## 12. Split-Brain and Fencing
+  Write goes to:     [Node1] [Node2]  ___
+  Read comes from:    ___    [Node2] [Node3]
+                              ^^^^
+                        Overlap guarantees freshness
+```
+
+[Back to Top](#top)
+
+<a id="13-split-brain-and-fencing"></a>
+
+# 13. Split-Brain and Fencing
+
+"Split-brain is the nightmare scenario," Hari says seriously. "Two nodes both think they're the
+leader. Both accept writes. Data diverges. When the partition heals, you have two conflicting
+histories and no automatic way to merge them. Prevention is everything."
 
 ```
 Split-brain: network partition causes two nodes to both think
@@ -659,7 +929,7 @@ Prevention techniques:
 
 1. Quorum fence:
    Leader requires quorum to accept any write.
-   If it can't reach quorum → steps down.
+   If it can't reach quorum -> steps down.
    Prevents stale leader from accepting writes.
 
 2. STONITH (Shoot The Other Node In The Head):
@@ -673,9 +943,26 @@ Prevention techniques:
    Old leader's writes get rejected even if it doesn't know it's deposed.
 ```
 
----
+```
+Fencing token visual:
 
-## 13. Distributed Patterns Summary
+  Old Leader (token=33)           Storage Layer
+       |                               |
+       |--- WRITE (token=33) --------->|
+       |                               |  Current token = 34
+       |<-- REJECTED (stale token) ----|  (new leader already has 34)
+       |                               |
+
+  New Leader (token=34)
+       |--- WRITE (token=34) --------->|
+       |<-- ACCEPTED ------------------|
+```
+
+[Back to Top](#top)
+
+<a id="14-distributed-patterns-summary"></a>
+
+# 14. Distributed Patterns Summary
 
 ```
 Pattern              Problem Solved                    Key Trade-off
@@ -692,28 +979,73 @@ CRDT                 Conflict-free concurrent updates  Limited data structures
 Sidecar              Add cross-cutting concerns        Extra process overhead
 ```
 
----
+```
+Decision guide — when to use what:
 
----
+  Need strong consistency across nodes?
+    -> Raft/Paxos consensus
 
-## 📝 Practice Questions
+  Need atomic multi-service transaction?
+    -> 2PC (if blocking OK) or Saga (if eventual OK)
 
-> 📝 **Practice:** [Q73 · designing-for-failure](../system_design_practice_questions_100.md#q73--design--designing-for-failure)
+  Need to detect causal ordering?
+    -> Vector clocks
 
-## 🔁 Navigation
+  Need cluster membership propagation?
+    -> Gossip protocol
+
+  Need even data distribution with minimal reshuffling?
+    -> Consistent hashing with virtual nodes
+
+  Need tunable consistency vs latency?
+    -> Quorum reads/writes (adjust W and R)
+
+  Need conflict-free concurrent updates?
+    -> CRDTs (if your data model fits)
+```
+
+[Back to Top](#top)
+
+<a id="practice-questions"></a>
+
+# 15. Practice Questions
+
+> 📝 **Practice:** [Q73 - designing-for-failure](../system_design_practice_questions_100.md#q73--design--designing-for-failure)
+
+[Back to Top](#top)
+
+<a id="summary"></a>
+
+# 🔥 Summary
+
+| Concept | One-Line Takeaway |
+|---------|-------------------|
+| Fallacies | Never assume the network is reliable, fast, or secure |
+| Time/Clocks | Wall-clock ordering is unreliable; use logical or vector clocks |
+| Replication | Trade-off between write latency, read freshness, and durability |
+| Consensus | Raft/Paxos let nodes agree despite failures — at cost of performance |
+| Partitioning | Split data for scale; consistent hashing minimizes reshuffling |
+| 2PC | Atomic but blocking; use for small participant sets |
+| Saga | Eventually consistent alternative to 2PC for multi-service flows |
+| Outbox | Solves DB-write + event-publish atomicity gap |
+| Gossip | O(log N) propagation without central coordination |
+| Quorum | W + R > N = guaranteed freshness; tune for your latency needs |
+| Split-brain | Fencing tokens prevent stale leaders from corrupting data |
+| CRDTs | Math-guaranteed conflict-free merges — limited to mergeable operations |
+
+"Distributed systems," Hari concludes, "are not about finding perfect solutions. They're about
+choosing which imperfection you can live with. CAP theorem isn't a limitation — it's a design
+compass. Once you accept that you cannot have everything, you start making intentional trade-offs
+instead of accidental ones."
+
+[Back to Top](#top)
+
+## Navigation
 
 | | |
 |---|---|
-| 🎯 Interview | [interview.md](./interview.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| ← Previous | [09 — Message Queues](../09_message_queues/theory.md) |
-| ➡️ Next | [11 — Scalability Patterns](../11_scalability_patterns/theory.md) |
-| 🏠 Home | [README.md](../README.md) |
-
----
-
-**[🏠 Back to README](../README.md)**
-
-**Prev:** [← Message Queues — Interview Q&A](../09_message_queues/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
-
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+| Back to README | [README.md](../README.md) |
+| Interview Q&A | [interview.md](./interview.md) |
+| Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
+| Previous | [09 - Message Queues](../09_message_queues/theory.md) |
+| Next | [11 - Scalability Patterns](../11_scalability_patterns/theory.md) |

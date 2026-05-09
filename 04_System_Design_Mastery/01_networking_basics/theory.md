@@ -1,50 +1,67 @@
-# 🌐 Networking Fundamentals
+<a id="top"></a>
 
-> Every system design decision involving services, APIs, or data transfer
-> depends on networking. Understanding the underlying protocols helps you
-> make better decisions about latency, reliability, and security.
+# Networking Fundamentals
 
----
+> "Imagine you're in Hyderabad calling your friend in San Francisco," Srini says, setting down
+> his chai. "That voice travels through cables under the ocean, gets chopped into packets,
+> reassembled on the other side, and all of it happens in 200 milliseconds. Every system
+> design decision involving services, APIs, or data transfer depends on networking. Understanding
+> the underlying protocols helps you make better decisions about latency, reliability, and security."
 
-## 📌 Learning Priority
+## Table of Contents
+
+- [Learning Priority](#learning-priority)
+- [1. The OSI and TCP/IP Models](#1-the-osi-and-tcpip-models)
+- [2. IP Addressing](#2-ip-addressing)
+  - [IPv4 and IPv6](#ipv4-and-ipv6)
+  - [CIDR Notation](#cidr-notation)
+  - [Ports](#ports)
+- [3. TCP — Reliable, Ordered Delivery](#3-tcp--reliable-ordered-delivery)
+  - [Three-Way Handshake](#three-way-handshake)
+  - [TCP Guarantees](#tcp-guarantees)
+  - [TCP Head-of-Line Blocking](#tcp-head-of-line-blocking)
+- [4. UDP — Fast, Unreliable Delivery](#4-udp--fast-unreliable-delivery)
+- [5. DNS — Domain Name System](#5-dns--domain-name-system)
+- [6. HTTP/1.1](#6-http11)
+- [7. HTTP/2](#7-http2)
+- [8. HTTP/3 and QUIC](#8-http3-and-quic)
+- [9. TLS and HTTPS](#9-tls-and-https)
+- [10. WebSockets](#10-websockets)
+- [11. Server-Sent Events (SSE)](#11-server-sent-events-sse)
+- [12. gRPC and Protocol Buffers](#12-grpc-and-protocol-buffers)
+- [13. Load Balancer Networking: L4 vs L7](#13-load-balancer-networking-l4-vs-l7)
+- [14. CDN Networking](#14-cdn-networking)
+- [15. Network Latency and Optimization](#15-network-latency-and-optimization)
+- [Summary](#summary)
+- [Practice Questions](#practice-questions)
+- [Navigation](#navigation)
+
+<a id="learning-priority"></a>
+
+## Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-OSI and TCP/IP models · TCP vs UDP · HTTP methods and status codes · DNS resolution · TLS basics
+OSI and TCP/IP models, TCP vs UDP, HTTP methods and status codes, DNS resolution, TLS basics
 
 **Should Learn** — Important for real projects, comes up regularly:
-HTTP/2 multiplexing · gRPC over HTTP/2 · L4 vs L7 load balancing · CDN architecture
+HTTP/2 multiplexing, gRPC over HTTP/2, L4 vs L7 load balancing, CDN architecture
 
 **Good to Know** — Useful in specific situations, not always tested:
-QUIC/HTTP/3 advantages · SSE vs WebSocket vs long-polling · network latency optimization
+QUIC/HTTP/3 advantages, SSE vs WebSocket vs long-polling, network latency optimization
 
 **Reference** — Know it exists, look up syntax when needed:
-TCP internals (SACK/Nagle/window scaling) · DNSSEC · TCP congestion control algorithms
+TCP internals (SACK/Nagle/window scaling), DNSSEC, TCP congestion control algorithms
 
----
+[Back to Top](#top)
 
-## 📋 Contents
+<a id="1-the-osi-and-tcpip-models"></a>
 
-```
-1.  The OSI and TCP/IP models
-2.  IP addressing and routing
-3.  TCP — reliable, ordered delivery
-4.  UDP — fast, unreliable delivery
-5.  DNS — translating names to addresses
-6.  HTTP/1.1 — the web protocol
-7.  HTTP/2 — multiplexing and headers compression
-8.  HTTP/3 / QUIC — UDP-based reliability
-9.  TLS / HTTPS — encrypted transport
-10. WebSockets — persistent bidirectional
-11. Server-Sent Events (SSE)
-12. gRPC and Protocol Buffers
-13. Load balancer networking (L4 vs L7)
-14. CDN networking
-15. Network latency and optimization
-```
+# 1. The OSI and TCP/IP Models
 
----
-
-## 1. The OSI and TCP/IP Models
+"Think of mailing a letter," Srini explains. "You write it (application), put it in an envelope
+(presentation), address it (session/transport), the post office routes it (network), the truck
+carries it (data link), and the road exists (physical). Each layer does one job and hands off
+to the next. That is exactly how the internet works — in layers."
 
 ```
 OSI Model (7 layers)          TCP/IP Model (4 layers)    Examples
@@ -62,9 +79,19 @@ Practical shortcut:
   Load balancers operate at Layer 4 (TCP) or Layer 7 (HTTP)
 ```
 
----
+[Back to Top](#top)
 
-## 2. IP Addressing
+<a id="2-ip-addressing"></a>
+
+# 2. IP Addressing
+
+"Every device on a network needs an address, like every house needs a house number," Srini says.
+"IPv4 gave us about 4 billion addresses. Sounds like a lot, but we ran out years ago. IPv6 is
+the new system — enough addresses to give one to every atom on Earth, basically."
+
+<a id="ipv4-and-ipv6"></a>
+
+## IPv4 and IPv6
 
 ```
 IPv4: 32-bit address (4 billion unique addresses)
@@ -78,23 +105,45 @@ IPv4: 32-bit address (4 billion unique addresses)
 IPv6: 128-bit address (340 undecillion unique addresses)
   Format: 2001:0db8:85a3::8a2e:0370:7334
   Loopback: ::1
+```
 
+<a id="cidr-notation"></a>
+
+## CIDR Notation
+
+```
 CIDR notation:
   192.168.1.0/24  → 192.168.1.0 to 192.168.1.255 (256 addresses)
   10.0.0.0/8      → 10.0.0.0 to 10.255.255.255 (16M addresses)
   /24 = 8 host bits = 254 usable hosts
+```
 
+<a id="ports"></a>
+
+## Ports
+
+```
 Ports:
   0-1023:    Well-known (HTTP=80, HTTPS=443, SSH=22, DNS=53, MySQL=3306)
   1024-49151: Registered
   49152-65535: Ephemeral (OS assigns for outbound connections)
 ```
 
----
+[Back to Top](#top)
 
-## 3. TCP — Reliable, Ordered Delivery
+<a id="3-tcp--reliable-ordered-delivery"></a>
 
-### Three-way handshake
+# 3. TCP — Reliable, Ordered Delivery
+
+"TCP is like sending a registered letter with tracking," Srini says. "You know it arrived,
+you know it arrived in order, and if it got lost the post office will resend it. That
+reliability costs time — every letter needs a confirmation receipt — but for important data
+like your bank transactions, you absolutely need it."
+
+<a id="three-way-handshake"></a>
+
+## Three-Way Handshake
+
 ```
 Client                         Server
   │─────────── SYN ─────────────→│   "I want to connect"
@@ -111,7 +160,10 @@ Total: 1.5 RTT to establish, then data flows.
 This 3-way handshake is why TCP has higher initial latency than UDP.
 ```
 
-### TCP guarantees
+<a id="tcp-guarantees"></a>
+
+## TCP Guarantees
+
 ```
 1. Ordered delivery:     packets arrive in sequence
 2. Reliable delivery:    lost packets are retransmitted
@@ -122,7 +174,10 @@ This 3-way handshake is why TCP has higher initial latency than UDP.
 The price: latency (retransmits, acks) and head-of-line blocking.
 ```
 
-### TCP Head-of-Line Blocking
+<a id="tcp-head-of-line-blocking"></a>
+
+## TCP Head-of-Line Blocking
+
 ```
 In TCP, if packet 3 is lost:
   Packet 4, 5, 6 must wait in buffer until 3 is retransmitted.
@@ -132,9 +187,16 @@ Impact: HTTP/1.1 multiplexing (pipelining) abandoned due to this.
 Fix: HTTP/2 uses streams, HTTP/3 uses QUIC (UDP-based, no HOL blocking).
 ```
 
----
+[Back to Top](#top)
 
-## 4. UDP — Fast, Unreliable Delivery
+<a id="4-udp--fast-unreliable-delivery"></a>
+
+# 4. UDP — Fast, Unreliable Delivery
+
+"UDP is like shouting across a room," Srini grins. "You yell, and maybe they hear you,
+maybe they don't. No confirmation. No retry. But it is fast. When you are on a video call
+and one frame drops, you don't want the whole call to freeze while waiting for that old
+frame — you just want the next one. That is UDP."
 
 ```
 No handshake. No ordering. No retransmission.
@@ -156,9 +218,17 @@ UDP vs TCP comparison:
   UDP: Best-effort, unordered, faster, connectionless
 ```
 
----
+[Back to Top](#top)
 
-## 5. DNS — Domain Name System
+<a id="5-dns--domain-name-system"></a>
+
+# 5. DNS — Domain Name System
+
+"DNS is the phone book of the internet," Srini says. "You know your friend's name, but you
+need their phone number to call them. Same thing — you type google.com, but your computer
+needs the IP address 142.250.64.68 to actually connect. DNS does that translation, and it
+does it through a hierarchy — root servers, then TLD servers, then the authoritative server
+for that specific domain."
 
 ```
 Hierarchy:
@@ -196,11 +266,18 @@ DNS load balancing:
   Health-check DNS: remove unhealthy IPs from rotation
 ```
 
-> 📝 **Practice:** [Q9 · dns-system-design](../system_design_practice_questions_100.md#q9--thinking--dns-system-design)
+> **Practice:** [Q9 - dns-system-design](../system_design_practice_questions_100.md#q9--thinking--dns-system-design)
 
----
+[Back to Top](#top)
 
-## 6. HTTP/1.1
+<a id="6-http11"></a>
+
+# 6. HTTP/1.1
+
+"HTTP is the language browsers speak to servers," Srini says. "It is dead simple at its core:
+the client says 'give me this resource' and the server responds with the resource plus a status
+code. 200 means all good, 404 means not found, 500 means the server messed up. Every web
+developer must know these status codes cold."
 
 ```
 Stateless request-response protocol over TCP.
@@ -246,9 +323,16 @@ HTTP/1.1 limitations:
   Fix: HTTP/2
 ```
 
----
+[Back to Top](#top)
 
-## 7. HTTP/2
+<a id="7-http2"></a>
+
+# 7. HTTP/2
+
+"HTTP/1.1 is like a single-lane road," Srini explains. "One car at a time. Browsers worked
+around this by opening 6 parallel connections — like building 6 lanes. HTTP/2 said: forget
+multiple lanes, let us build one super-highway where all cars can drive simultaneously,
+interleaved as frames. One connection, many streams. Much more efficient."
 
 ```
 Improvements over HTTP/1.1:
@@ -282,9 +366,17 @@ Still has TCP head-of-line blocking:
   HTTP/3 solves this.
 ```
 
----
+[Back to Top](#top)
 
-## 8. HTTP/3 / QUIC
+<a id="8-http3-and-quic"></a>
+
+# 8. HTTP/3 and QUIC
+
+"Here is the clever part," Srini says, leaning forward. "HTTP/2 solved the application-layer
+problem but TCP underneath still has head-of-line blocking. If one packet drops, everything
+waits. So Google said: what if we build our own reliability layer on top of UDP? That is QUIC.
+Each stream is independent — one drops, others keep going. Plus you get faster connection
+setup because TLS is baked right into the handshake."
 
 ```
 QUIC: Quick UDP Internet Connections
@@ -309,9 +401,17 @@ Status: ~30% of web traffic uses HTTP/3 (2024)
 Support: Chrome, Firefox, Safari, Nginx, Cloudflare, major CDNs
 ```
 
----
+[Back to Top](#top)
 
-## 9. TLS / HTTPS
+<a id="9-tls-and-https"></a>
+
+# 9. TLS and HTTPS
+
+"When you see that lock icon in your browser, that is TLS at work," Srini says. "Without it,
+anyone sitting between you and the server — your ISP, the coffee shop WiFi, a hacker — can
+read everything. TLS encrypts the pipe. The server proves its identity with a certificate
+signed by a trusted authority, you both agree on encryption keys, and then everything is
+private. It is like whispering through an unbreakable tube."
 
 ```
 TLS (Transport Layer Security) encrypts traffic between client and server.
@@ -346,9 +446,17 @@ TLS termination in infrastructure:
   Client → (TLS) → Load Balancer → (TLS) → App Servers (end-to-end)
 ```
 
----
+[Back to Top](#top)
 
-## 10. WebSockets
+<a id="10-websockets"></a>
+
+# 10. WebSockets
+
+"Normal HTTP is like sending letters back and forth," Srini says. "You send a request, wait
+for a response, send another request. But what if you need a phone call — both sides talking
+at once, continuously? That is WebSockets. The connection starts as HTTP, upgrades to a
+persistent two-way pipe, and then both sides can send messages anytime without the overhead
+of new requests."
 
 ```
 Full-duplex, persistent connection between client and server.
@@ -388,9 +496,17 @@ WebSocket vs SSE vs polling:
   WebSocket:  Bidirectional                            → full duplex
 ```
 
----
+[Back to Top](#top)
 
-## 11. Server-Sent Events (SSE)
+<a id="11-server-sent-events-sse"></a>
+
+# 11. Server-Sent Events (SSE)
+
+"Sometimes you don't need a phone call," Srini says. "You just need a radio — the server
+broadcasts, and the client listens. Stock tickers, live scores, notification feeds. The client
+does not need to send data back on the same channel. SSE gives you that one-way push over
+plain HTTP, with automatic reconnection built in. Simpler than WebSockets when you only
+need server-to-client flow."
 
 ```
 One-way: server pushes events to client over HTTP.
@@ -422,9 +538,18 @@ Use when: server needs to push, client just consumes
   Live feeds, notifications, progress updates, stock tickers
 ```
 
----
+[Back to Top](#top)
 
-## 12. gRPC and Protocol Buffers
+<a id="12-grpc-and-protocol-buffers"></a>
+
+# 12. gRPC and Protocol Buffers
+
+"REST is like writing English letters between services," Srini explains. "Human-readable,
+universal, but verbose. gRPC is like using a highly compressed binary code that both sides
+agreed on in advance. The .proto file is your contract — both client and server generate
+code from it. Messages are tiny, parsing is instant, and you get streaming for free because
+it runs on HTTP/2. For internal microservice communication where you control both ends, gRPC
+is often 5-10x more efficient than REST."
 
 ```
 gRPC: Google's RPC framework. Built on HTTP/2.
@@ -432,7 +557,7 @@ Protocol Buffers: binary serialization format.
 
 Advantages:
   + Strongly typed (schema enforced)
-  + Compact binary encoding (~5-10× smaller than JSON)
+  + Compact binary encoding (~5-10x smaller than JSON)
   + Code generation in 10+ languages
   + HTTP/2 multiplexing + streaming
 
@@ -471,9 +596,17 @@ gRPC vs REST:
     Use for: public APIs, external clients, simplicity
 ```
 
----
+[Back to Top](#top)
 
-## 13. Load Balancer Networking: L4 vs L7
+<a id="13-load-balancer-networking-l4-vs-l7"></a>
+
+# 13. Load Balancer Networking: L4 vs L7
+
+"Imagine a traffic police officer at a junction," Srini says. "An L4 load balancer is like
+an officer who can only see license plates — they route cars based on where they came from
+and where they are going, nothing else. An L7 load balancer is like an officer who can open
+the trunk, check what is inside, read the shipping label, and then decide which warehouse to
+send the truck to. More work, but much smarter routing."
 
 ```
 Layer 4 (Transport) Load Balancer:
@@ -512,9 +645,17 @@ When to use which:
   L7: you need URL-based routing, sticky sessions, TLS offload
 ```
 
----
+[Back to Top](#top)
 
-## 14. CDN Networking
+<a id="14-cdn-networking"></a>
+
+# 14. CDN Networking
+
+"Think of it like franchise restaurants," Srini says. "The original recipe is in one kitchen
+in Dallas. But you don't fly to Dallas every time you want a burger. There are locations in
+every city serving the same food. A CDN does this for your content — copies of your static
+files sit in data centers all over the world, so users get served from the nearest one.
+Latency drops from 150ms to 20ms."
 
 ```
 CDN (Content Delivery Network): distributed cache at edge locations.
@@ -554,18 +695,26 @@ Push vs Pull CDN:
         Better for large files, predictable patterns
 ```
 
----
+[Back to Top](#top)
 
-## 15. Network Latency and Optimization
+<a id="15-network-latency-and-optimization"></a>
+
+# 15. Network Latency and Optimization
+
+"In system design interviews, latency numbers are your secret weapon," Srini says. "When
+someone asks why you chose a certain architecture, you pull out these numbers and do the
+math. 'If each service call adds 500 microseconds within the same data center, and we have
+3 hops, that is 1.5ms. But if those services are cross-continent, each hop is 150ms, so
+we are looking at 450ms. That is why we co-locate services.' Numbers win arguments."
 
 ```
 Latency numbers:
   L1 cache hit:            0.5 ns
   L2 cache hit:            7 ns
   RAM access:              100 ns
-  Network (same rack):     5 μs
-  SSD random read:         150 μs
-  Network (same DC):       500 μs   ← 1 service call
+  Network (same rack):     5 us
+  SSD random read:         150 us
+  Network (same DC):       500 us   ← 1 service call
   Network (cross DC, US):  5 ms
   SSD sequential read:     1 ms
   Network (US → EU):       150 ms
@@ -589,33 +738,55 @@ Connection pooling:
 RTT math:
   Client → LB → App Server → DB → App Server → LB → Client
   = 1 RTT (client→LB) + 1 RTT (app→DB) + 1 RTT (LB→client)
-  = 3 RTT total = 3 × 500μs = 1.5ms (same DC)
-  = 3 × 150ms = 450ms (transcontinental!)
+  = 3 RTT total = 3 x 500us = 1.5ms (same DC)
+  = 3 x 150ms = 450ms (transcontinental!)
   → Minimize cross-region hops
 ```
 
----
+[Back to Top](#top)
 
----
+<a id="summary"></a>
 
-## 📝 Practice Questions
+# Summary
 
-> 📝 **Practice:** [Q11 · reverse-proxy-vs-forward-proxy](../system_design_practice_questions_100.md#q11--interview--reverse-proxy-vs-forward-proxy)
+| Topic | Key Takeaway |
+|-------|-------------|
+| OSI/TCP-IP | 7 layers simplified to 4; you care about L3 (IP), L4 (TCP/UDP), L7 (HTTP) |
+| IP Addressing | IPv4 exhausted, IPv6 unlimited; CIDR defines subnet ranges |
+| TCP | Reliable, ordered, 1.5 RTT setup; head-of-line blocking is the tradeoff |
+| UDP | Fast, no guarantees; use for streaming, DNS, gaming, QUIC |
+| DNS | Hierarchical phone book; TTL controls caching; lower before migrations |
+| HTTP/1.1 | Stateless request-response; know methods and status codes cold |
+| HTTP/2 | Multiplexing on one connection; HPACK compression; still TCP HOL blocking |
+| HTTP/3/QUIC | UDP-based; independent streams; 0-RTT resume; future of the web |
+| TLS | Encrypts the pipe; certificates prove identity; terminate at LB or end-to-end |
+| WebSockets | Persistent bidirectional; scales with Redis pub/sub |
+| SSE | One-way server push; simpler than WebSocket for read-only streams |
+| gRPC | Binary, typed, streaming; 5-10x smaller than JSON; internal services |
+| L4 vs L7 LB | L4 = fast/dumb (IP/port); L7 = smart/slower (HTTP content) |
+| CDN | Edge cache; latency 20ms vs 150ms; push vs pull |
+| Latency | Same DC = 500us; cross-continent = 150ms; minimize hops |
 
-## 🔁 Navigation
+[Back to Top](#top)
+
+<a id="practice-questions"></a>
+
+# Practice Questions
+
+> **Practice:** [Q11 - reverse-proxy-vs-forward-proxy](../system_design_practice_questions_100.md#q11--interview--reverse-proxy-vs-forward-proxy)
+
+> **Practice:** [Q9 - dns-system-design](../system_design_practice_questions_100.md#q9--thinking--dns-system-design)
+
+[Back to Top](#top)
+
+<a id="navigation"></a>
+
+# Navigation
 
 | | |
 |---|---|
-| 🎯 Interview | [interview.md](./interview.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| ← Previous | [00 — Computer Fundamentals](../00_computer_fundamentals/story.md) |
-| ➡️ Next | [02 — System Fundamentals](../02_system_fundamentals/theory.md) |
-| 🏠 Home | [README.md](../README.md) |
-
----
-
-**[🏠 Back to README](../README.md)**
-
-**Prev:** [← Computer Fundamentals — Story](../00_computer_fundamentals/story.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
-
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+| Previous | [00 - Computer Fundamentals](../00_computer_fundamentals/theory.md) |
+| Next | [02 - System Fundamentals](../02_system_fundamentals/theory.md) |
+| Interview | [interview.md](./interview.md) |
+| Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
+| Home | [README.md](../README.md) |

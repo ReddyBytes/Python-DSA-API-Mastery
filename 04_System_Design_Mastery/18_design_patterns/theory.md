@@ -1,44 +1,60 @@
-# 🧩 Design Patterns for System Design
+<a id="top"></a>
+
+# Design Patterns for System Design
 
 > Gang of Four patterns and how they appear in real distributed systems.
 > Understanding patterns helps you design components that are maintainable,
 > extensible, and communicate intent clearly.
 
-> 📝 **Practice:** [Q46 · outbox-pattern](../system_design_practice_questions_100.md#q46--thinking--outbox-pattern)
+> **Practice:** [Q46 - outbox-pattern](../system_design_practice_questions_100.md#q46--thinking--outbox-pattern)
 
----
+<a id="toc"></a>
 
-## 📋 Contents
+## Table of Contents
 
-```
-1.  Why patterns matter in system design
-2.  Creational patterns
-3.  Structural patterns
-4.  Behavioral patterns
-5.  Patterns in distributed systems
-6.  Pattern combinations in real systems
-7.  Anti-patterns
-```
+- [1. Why Patterns Matter](#1-why-patterns-matter)
+  - [Learning Priority](#learning-priority)
+- [2. Creational Patterns](#2-creational-patterns)
+  - [Singleton](#singleton)
+  - [Factory Method](#factory-method)
+  - [Builder](#builder)
+- [3. Structural Patterns](#3-structural-patterns)
+  - [Adapter](#adapter)
+  - [Decorator](#decorator)
+  - [Facade](#facade)
+  - [Proxy](#proxy)
+  - [Composite](#composite)
+- [4. Behavioral Patterns](#4-behavioral-patterns)
+  - [Observer (Event Bus)](#observer-event-bus)
+  - [Strategy](#strategy)
+  - [Command](#command)
+  - [State](#state)
+  - [Chain of Responsibility](#chain-of-responsibility)
+  - [Template Method](#template-method)
+- [5. Patterns in Distributed Systems](#5-patterns-in-distributed-systems)
+- [6. Pattern Combinations in Real Systems](#6-pattern-combinations-in-real-systems)
+  - [E-Commerce Order System](#e-commerce-order-system)
+  - [Notification System](#notification-system)
+- [7. Anti-Patterns](#7-anti-patterns)
+- [Summary](#summary)
 
----
+<a id="story"></a>
 
-## 📌 Learning Priority
+## Pavan's Story
 
-**Must Learn** — Core concept, daily use, interview essential:
-creational (Singleton/Factory/Builder) · structural (Adapter/Decorator/Facade/Proxy) · behavioral (Observer/Strategy/Command/State)
+Pavan builds platforms for a logistics company in Hyderabad. Every quarter, a new team joins and writes the same code from scratch — a payment handler that looks like the notification handler that looks like the shipping handler. The patterns are the same, but nobody names them.
 
-**Should Learn** — Important for real projects, comes up regularly:
-anti-patterns (God Object/Anemic Model/Golden Hammer) · patterns in distributed systems (Circuit Breaker/Retry as patterns)
+One day Pavan draws a diagram on the whiteboard: "This thing you keep writing? It has a name. It is called the Strategy pattern. And this thing where you wrap one service inside another to add logging? That is the Decorator pattern."
 
-**Good to Know** — Useful in specific situations, not always tested:
-pattern combinations in real systems · Chain of Responsibility · Template Method
+Once the team has shared vocabulary, code reviews become faster. Architecture discussions become precise. "Use a Factory here" replaces twenty minutes of explaining what you mean. Patterns are not about complexity — they are about naming the solutions that already exist in your code so everyone speaks the same language.
 
-**Reference** — Know it exists, look up syntax when needed:
-performance implications of patterns · functional programming alternatives
+Pavan's rule: "If three developers independently write the same structure, it is a pattern. Name it, document it, and never reinvent it again."
 
----
+<a id="1-why-patterns-matter"></a>
 
-## 1. Why Patterns Matter
+# 1. Why Patterns Matter
+
+[Back to Top](#top)
 
 ```
 Design patterns are named solutions to recurring problems.
@@ -53,11 +69,34 @@ Caution:
   Apply when the problem genuinely matches the pattern.
 ```
 
----
+<a id="learning-priority"></a>
 
-## 2. Creational Patterns
+## Learning Priority
 
-### Singleton
+**Must Learn** — Core concept, daily use, interview essential:
+creational (Singleton/Factory/Builder) - structural (Adapter/Decorator/Facade/Proxy) - behavioral (Observer/Strategy/Command/State)
+
+**Should Learn** — Important for real projects, comes up regularly:
+anti-patterns (God Object/Anemic Model/Golden Hammer) - patterns in distributed systems (Circuit Breaker/Retry as patterns)
+
+**Good to Know** — Useful in specific situations, not always tested:
+pattern combinations in real systems - Chain of Responsibility - Template Method
+
+**Reference** — Know it exists, look up syntax when needed:
+performance implications of patterns - functional programming alternatives
+
+<a id="2-creational-patterns"></a>
+
+# 2. Creational Patterns
+
+[Back to Top](#top)
+
+Pavan explains: "Creational patterns answer one question — who creates the object and how? When object creation gets complex or you need flexibility in what gets instantiated, these patterns give you control without scattering `new` calls everywhere."
+
+<a id="singleton"></a>
+
+## Singleton
+
 One instance, globally accessible.
 
 ```python
@@ -93,9 +132,10 @@ Cache client:               one Redis client per process
 **Caution:** Singletons are global state. They make testing harder.
 Use dependency injection when possible.
 
----
+<a id="factory-method"></a>
 
-### Factory Method
+## Factory Method
+
 Define interface for object creation; let subclasses decide which class.
 
 ```python
@@ -107,17 +147,17 @@ class Notification(ABC):
 
 class EmailNotification(Notification):
     def send(self, to, message):
-        print(f"Email → {to}: {message}")
+        print(f"Email -> {to}: {message}")
         return True
 
 class SMSNotification(Notification):
     def send(self, to, message):
-        print(f"SMS → {to}: {message[:160]}")
+        print(f"SMS -> {to}: {message[:160]}")
         return True
 
 class PushNotification(Notification):
     def send(self, to, message):
-        print(f"Push → {to}: {message}")
+        print(f"Push -> {to}: {message}")
         return True
 
 class NotificationFactory:
@@ -148,9 +188,10 @@ Queue client factory:       RabbitMQ, SQS, Kafka
 Logger factory:             FileLogger, CloudwatchLogger, JsonLogger
 ```
 
----
+<a id="builder"></a>
 
-### Builder
+## Builder
+
 Construct complex objects step by step.
 
 ```python
@@ -213,11 +254,18 @@ request = (HTTPRequestBuilder()
 
 **Real-world:** Query builders (SQLAlchemy), test data builders, SDK configuration.
 
----
+<a id="3-structural-patterns"></a>
 
-## 3. Structural Patterns
+# 3. Structural Patterns
 
-### Adapter
+[Back to Top](#top)
+
+Pavan says: "Structural patterns answer — how do I compose objects into larger structures without making them tightly coupled? Think of them as the wiring diagram between components."
+
+<a id="adapter"></a>
+
+## Adapter
+
 Convert interface of a class into another interface clients expect.
 
 ```python
@@ -244,9 +292,10 @@ class LegacyUserAdapter(UserRepository):
 
 **Real-world:** Wrapping third-party libraries, legacy system integration.
 
----
+<a id="decorator"></a>
 
-### Decorator
+## Decorator
+
 Add behavior to objects dynamically without changing their class.
 
 ```python
@@ -283,9 +332,10 @@ repo = LoggingRepository(
 
 **Real-world:** Caching, logging, retry, rate-limiting, tracing layers.
 
----
+<a id="facade"></a>
 
-### Facade
+## Facade
+
 Provide a simple interface to a complex subsystem.
 
 ```python
@@ -311,9 +361,10 @@ class OrderFacade:
 
 **Real-world:** API gateway, service orchestrator in microservices.
 
----
+<a id="proxy"></a>
 
-### Proxy
+## Proxy
+
 Provide a surrogate to control access to another object.
 
 ```python
@@ -340,9 +391,10 @@ Caching proxy:    cache results of expensive operations
 Logging proxy:    record calls without changing original
 ```
 
----
+<a id="composite"></a>
 
-### Composite
+## Composite
+
 Tree structures where leaves and composites treated uniformly.
 
 ```python
@@ -374,11 +426,17 @@ class Combo(MenuItem):
 
 **Real-world:** File system trees, UI component hierarchies, menu systems, permission groups.
 
----
+<a id="4-behavioral-patterns"></a>
 
-## 4. Behavioral Patterns
+# 4. Behavioral Patterns
 
-### Observer (Event Bus)
+[Back to Top](#top)
+
+Pavan explains: "Behavioral patterns define how objects communicate and distribute responsibility. Creational builds them, structural connects them, behavioral makes them talk to each other."
+
+<a id="observer-event-bus"></a>
+
+## Observer (Event Bus)
 
 One-to-many dependency. When one object changes, dependents notified automatically.
 
@@ -408,14 +466,14 @@ bus.on("order.placed", notify_warehouse)
 bus.emit("order.placed", order)  # all 3 handlers called
 ```
 
-> 📝 **Practice:** [Q42 · event-sourcing](../system_design_practice_questions_100.md#q42--thinking--event-sourcing)
-
+> **Practice:** [Q42 - event-sourcing](../system_design_practice_questions_100.md#q42--thinking--event-sourcing)
 
 **Real-world:** Domain events, UI event systems, webhook dispatchers, Kafka consumers.
 
----
+<a id="strategy"></a>
 
-### Strategy
+## Strategy
+
 Define family of algorithms, make them interchangeable.
 
 ```python
@@ -450,9 +508,9 @@ class PricingEngine:
 
 **Real-world:** Pricing, sorting, auth methods, routing algorithms, serialization.
 
----
+<a id="command"></a>
 
-### Command
+## Command
 
 Encapsulate a request as an object — supports undo, logging, queueing.
 
@@ -492,11 +550,12 @@ class TransactionHistory:
 
 **Real-world:** Transaction systems, undo/redo, job queues, database migrations, macro recording.
 
-> 📝 **Practice:** [Q43 · cqrs-pattern](../system_design_practice_questions_100.md#q43--normal--cqrs-pattern)
+> **Practice:** [Q43 - cqrs-pattern](../system_design_practice_questions_100.md#q43--normal--cqrs-pattern)
 
----
+<a id="state"></a>
 
-### State
+## State
+
 Object changes behavior based on internal state.
 
 ```python
@@ -531,9 +590,10 @@ class Order:
 
 **Real-world:** Order/payment lifecycle, connection state, vending machine, traffic light.
 
----
+<a id="chain-of-responsibility"></a>
 
-### Chain of Responsibility
+## Chain of Responsibility
+
 Pass request along handlers until one deals with it.
 
 ```python
@@ -579,9 +639,10 @@ result = auth.process({"token": "valid", "path": "/api/data"})
 
 **Real-world:** HTTP middleware pipeline, request validation, event processing.
 
----
+<a id="template-method"></a>
 
-### Template Method
+## Template Method
+
 Define skeleton of algorithm; subclasses fill in the steps.
 
 ```python
@@ -617,73 +678,104 @@ class JSONExporter(DataExporter):
 
 **Real-world:** Test frameworks (setUp/tearDown), data pipelines, report generation.
 
----
+<a id="5-patterns-in-distributed-systems"></a>
 
-## 5. Patterns in Distributed Systems
+# 5. Patterns in Distributed Systems
+
+[Back to Top](#top)
+
+Pavan maps the GoF patterns to the distributed world: "Every infrastructure component you use daily is a pattern in disguise. Once you see it, you cannot unsee it."
 
 ```
-HTTP/gRPC client stub:    → Proxy pattern
+HTTP/gRPC client stub:    -> Proxy pattern
                             Looks like a local object, calls remote service
 
-Service discovery:        → Abstract Factory
+Service discovery:        -> Abstract Factory
                             Create correct client per environment (dev/staging/prod)
 
-Circuit Breaker:          → State pattern
-                            CLOSED → OPEN → HALF-OPEN based on failure rate
+Circuit Breaker:          -> State pattern
+                            CLOSED -> OPEN -> HALF-OPEN based on failure rate
 
-Retry + Backoff:          → Decorator
+Retry + Backoff:          -> Decorator
                             Wrap any callable with transparent retry behavior
 
-Event Processing:         → Observer / Chain of Responsibility
-                            Kafka consumer → validate → enrich → persist → notify
+Event Processing:         -> Observer / Chain of Responsibility
+                            Kafka consumer -> validate -> enrich -> persist -> notify
 
-API Gateway:              → Facade
+API Gateway:              -> Facade
                             Single entry point routing to multiple services
 
-Outbox Pattern:           → Command
+Outbox Pattern:           -> Command
                             Write to DB and outbox in one TX; worker executes later
 
-CQRS:                     → Strategy
+CQRS:                     -> Strategy
                             Different read strategy vs write strategy per path
 ```
 
-> 📝 **Practice:** [Q44 · saga-pattern](../system_design_practice_questions_100.md#q44--thinking--saga-pattern)
+> **Practice:** [Q44 - saga-pattern](../system_design_practice_questions_100.md#q44--thinking--saga-pattern)
 
----
-
-## 6. Pattern Combinations in Real Systems
-
-### E-Commerce Order System
 ```
-Factory     → Create payment processor per provider
-Builder     → Build complex Order with optional fields
-Strategy    → Pricing, shipping cost, discount calculation
-Observer    → Order events fan out to inventory, email, analytics
-State       → Order lifecycle: pending → confirmed → shipped → delivered
-Command     → Undo for cart operations; audit log
-Chain       → HTTP middleware: auth → validate → rate-limit → business logic
-Decorator   → Add logging, caching, retry to repositories
-Facade      → OrderService hides inventory + payment + shipping coordination
++------------------+       +------------------+       +------------------+
+|   API Gateway    |       |  Circuit Breaker |       |   Event Bus      |
+|   (Facade)       |------>|   (State)        |------>|   (Observer)     |
++------------------+       +------------------+       +------------------+
+        |                         |                          |
+        v                         v                          v
++------------------+       +------------------+       +------------------+
+|  gRPC Stub       |       |  Retry Wrapper   |       |  Outbox Worker   |
+|  (Proxy)         |       |  (Decorator)     |       |  (Command)       |
++------------------+       +------------------+       +------------------+
 ```
 
-### Notification System
+<a id="6-pattern-combinations-in-real-systems"></a>
+
+# 6. Pattern Combinations in Real Systems
+
+[Back to Top](#top)
+
+Pavan says: "No real system uses one pattern in isolation. Production code is a composition of patterns working together. Learn to spot the combinations."
+
+<a id="e-commerce-order-system"></a>
+
+## E-Commerce Order System
+
 ```
-Factory          → Create sender per channel (email, SMS, push, Slack)
-Strategy         → Choose delivery channel based on priority / user preference
-Observer         → Subscribe handlers to domain events
-Decorator        → Add retry, fallback, deduplication behavior
-Chain            → Filter pipeline (quiet hours → preferences → dedup → send)
-Template Method  → Base sender (prepare → format → send → log)
+Factory     -> Create payment processor per provider
+Builder     -> Build complex Order with optional fields
+Strategy    -> Pricing, shipping cost, discount calculation
+Observer    -> Order events fan out to inventory, email, analytics
+State       -> Order lifecycle: pending -> confirmed -> shipped -> delivered
+Command     -> Undo for cart operations; audit log
+Chain       -> HTTP middleware: auth -> validate -> rate-limit -> business logic
+Decorator   -> Add logging, caching, retry to repositories
+Facade      -> OrderService hides inventory + payment + shipping coordination
 ```
 
----
+<a id="notification-system"></a>
 
-## 7. Anti-Patterns
+## Notification System
+
+```
+Factory          -> Create sender per channel (email, SMS, push, Slack)
+Strategy         -> Choose delivery channel based on priority / user preference
+Observer         -> Subscribe handlers to domain events
+Decorator        -> Add retry, fallback, deduplication behavior
+Chain            -> Filter pipeline (quiet hours -> preferences -> dedup -> send)
+Template Method  -> Base sender (prepare -> format -> send -> log)
+```
+
+<a id="7-anti-patterns"></a>
+
+# 7. Anti-Patterns
+
+[Back to Top](#top)
+
+Pavan warns: "Knowing what NOT to do is just as important. These are the patterns that feel right in the moment but create maintenance nightmares. I have seen every one of these in production."
 
 ```
 God Object:
   One class knows and does everything.
-  Fix: SRP — split into focused, single-responsibility classes.
+  Fix: SRP -- split into focused, single-responsibility classes.
 
 Anemic Domain Model:
   Classes with only getters/setters, no behavior ("data bags").
@@ -716,28 +808,59 @@ Magic Numbers:
   Fix: Named constants or configuration.
 ```
 
----
+<a id="practice-questions"></a>
 
----
+## Practice Questions
 
-## 📝 Practice Questions
+> **Practice:** [Q61 - feature-flags](../system_design_practice_questions_100.md#q61--normal--feature-flags)
 
-> 📝 **Practice:** [Q61 · feature-flags](../system_design_practice_questions_100.md#q61--normal--feature-flags)
+<a id="summary"></a>
 
-## 🔁 Navigation
+# Summary
+
+[Back to Top](#top)
+
+```
++---------------------+------------------------------------------+----------------------------+
+| Category            | Pattern                                  | One-Line Purpose           |
++---------------------+------------------------------------------+----------------------------+
+| Creational          | Singleton                                | One shared instance        |
+|                     | Factory Method                           | Decouple object creation   |
+|                     | Builder                                  | Step-by-step construction  |
++---------------------+------------------------------------------+----------------------------+
+| Structural          | Adapter                                  | Bridge incompatible APIs   |
+|                     | Decorator                                | Layer behavior dynamically |
+|                     | Facade                                   | Simplify complex subsystem |
+|                     | Proxy                                    | Control access/lazy init   |
+|                     | Composite                                | Uniform tree structures    |
++---------------------+------------------------------------------+----------------------------+
+| Behavioral          | Observer                                 | Event notification         |
+|                     | Strategy                                 | Swap algorithms at runtime |
+|                     | Command                                  | Encapsulate actions/undo   |
+|                     | State                                    | Behavior changes per state |
+|                     | Chain of Responsibility                  | Pipeline of handlers       |
+|                     | Template Method                          | Algorithm skeleton         |
++---------------------+------------------------------------------+----------------------------+
+| Distributed         | Proxy (gRPC stub), Facade (API Gateway), State (Circuit Breaker),   |
+|                     | Decorator (Retry), Observer (Events), Command (Outbox)              |
++---------------------+------------------------------------------+----------------------------+
+| Anti-Patterns       | God Object, Anemic Domain, Golden Hammer, Premature Optimization,   |
+|                     | Singleton Abuse, Shotgun Surgery, Primitive Obsession               |
++---------------------+------------------------------------------+----------------------------+
+```
+
+Pavan's final word: "Patterns are not a checklist to apply everywhere. They are a vocabulary. When you see a recurring problem, reach for the named solution. When someone proposes architecture, you can now say exactly which pattern it maps to — and whether it fits."
+
+<a id="navigation"></a>
+
+## Navigation
 
 | | |
 |---|---|
-| 🎯 Interview | [interview.md](./interview.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| ← Previous | [17 — Low Level Design](../17_low_level_design/theory.md) |
-| ➡️ Next | [19 — Clean Architecture](../19_clean_architecture/theory.md) |
-| 🏠 Home | [README.md](../README.md) |
+| Back | [README.md](../README.md) |
+| Previous | [17 - Low Level Design](../17_low_level_design/theory.md) |
+| Next | [19 - Clean Architecture](../19_clean_architecture/theory.md) |
+| Interview | [interview.md](./interview.md) |
+| Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 
----
-
-**[🏠 Back to README](../README.md)**
-
-**Prev:** [← Low Level Design — Interview Q&A](../17_low_level_design/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
-
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+[Back to Top](#top)
