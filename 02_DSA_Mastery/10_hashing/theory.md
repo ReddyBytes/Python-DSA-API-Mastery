@@ -1,32 +1,31 @@
 <a id="top"></a>
-# Hashing — The Power of Instant Lookup
-
-> Hashing is about one thing:
->
-> **Turning search into instant access.**
->
-> Without hashing, many real-world systems would be painfully slow.
-
-Hashing is not just a data structure.
-It is a strategy to reduce lookup time.
+# 📘 10 – Hashing in Python
 
 ## 📖 Table of Contents
 
-1. [Real Life Analogy — Library Without and With Hashing](#1-real-life-analogy)
-2. [What Is Hashing?](#2-what-is-hashing)
-3. [Hash Table Structure](#3-hash-table-structure)
-4. [Collision — The Core Challenge](#4-collision)
-5. [Load Factor](#5-load-factor)
-6. [Hashing in Python (Dictionary and Set)](#6-hashing-in-python)
-7. [Why Strings Are Immutable (Connection to Hashing)](#7-why-strings-are-immutable)
-8. [Common Hashing Patterns in Interviews](#8-common-hashing-patterns)
-9. [Example — Two Sum](#9-example-two-sum)
-10. [Space-Time Trade-Off](#10-space-time-trade-off)
-11. [Worst Case of Hashing](#11-worst-case-of-hashing)
-12. [Hash Function Properties](#12-hash-function-properties)
-13. [Real-World Usage of Hashing](#13-real-world-usage)
-14. [When NOT to Use Hashing](#14-when-not-to-use-hashing)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is Hashing?](#1-what-is-hashing)
+  - [Visual: The Locker Room](#visual-locker-room)
+  - [Visual: A Simple Hash Function](#visual-hash-function)
+- [2. Hash Table Structure](#2-hash-table-structure)
+- [3. Collision — The Core Challenge](#3-collision)
+  - [Separate Chaining](#separate-chaining)
+  - [Visual: Chaining in Detail](#visual-chaining)
+  - [Open Addressing](#open-addressing)
+  - [Visual: Linear Probing](#visual-probing)
+- [4. Load Factor and Resizing](#4-load-factor)
+  - [Visual: Load Factor and Crowding](#visual-load-factor)
+- [5. Hashing in Python — Dict and Set](#5-hashing-python)
+  - [Visual: Python Dict Internals](#visual-dict-internals)
+- [6. Why Immutability Matters for Hashing](#6-immutability)
+- [7. Common Hashing Patterns](#7-patterns)
+  - [Visual: When to Reach for a Hash Map](#visual-when-hashmap)
+  - [Group Anagrams Walkthrough](#group-anagrams)
+  - [Two Sum Step by Step](#two-sum)
+- [8. Hash Function Properties](#8-hash-properties)
+- [🔥 Summary](#summary)
 
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -41,115 +40,46 @@ hash table vulnerabilities · quadratic probing and double hashing
 **Reference** — Know it exists, look up syntax when needed:
 cryptographic hashing · bloom filters · consistent hashing · cuckoo hashing
 
-<a id="1-real-life-analogy"></a>
-# 1. Real Life Analogy — Library Without and With Hashing
+Jaya is a librarian with 1 million books. When a reader asks for a specific title, she has two choices: walk through every shelf one by one (O(n) — minutes for a million books), or use her index card system that tells her the exact shelf number instantly (O(1) — one lookup). That index card system is **hashing** — a way to convert any key into a direct address. Today Jaya will learn how this magical system works, what goes wrong when two books point to the same shelf, and why hashing powers almost every fast lookup in computing.
 
-Imagine a library with 1 million books.
+<a id="1-what-is-hashing"></a>
+# 1. What Is Hashing?
 
-### Without Hashing
+Jaya discovers that hashing is about one thing: **turning search into instant access**. Instead of scanning through data, you compute where the data should be — and go straight there.
 
-You search for a book by scanning shelves one by one.
-
-Time grows as number of books grows.
-
-This is linear search → O(n)
-
-### With Hashing
-
-Each book has a unique code.
-You directly go to that shelf.
-
-Instant access.
-
-That is hashing.
-
-Instead of searching,
-you compute the location.
-
-## Visual: The Locker Room
-
-Imagine you work at a gym. Every morning, 500 members walk in and need to find their locker.
-
-**Bad approach (Linear Search):** "Is this locker yours? No. Is this one? No. Is this one?..."
-That could take 500 checks. Terrible.
-
-**Good approach (Hashing):** Each member's name goes through a formula that spits out a locker number.
-You walk straight to your locker. No searching. Done.
-
-That formula? That's the **hash function**.
-That locker room? That's the **hash table**.
+A **hash function** takes a key and produces an index:
 
 ```
-Your Name  →  [ Hash Function ]  →  Locker Number
-
-"Alice"    →  [ magic math  ]   →  Locker 3
-"Bob"      →  [ magic math  ]   →  Locker 17
-"Charlie"  →  [ magic math  ]   →  Locker 42
-```
-
-The hash function takes any input and returns a number (the index).
-
-Two golden rules:
-1. Same input ALWAYS gives same output (deterministic)
-2. Output is always a valid index (bounded)
-
-```
-"Alice"  →  hash  →  3     ← always 3, every single time
-"Alice"  →  hash  →  3     ← yep, still 3
-"Alice"  →  hash  →  3     ← you get the idea
-```
-
-> [↑ Back to Top](#top)
-
-<a id="2-what-is-hashing"></a>
-# 2. What Is Hashing?
-
-Hashing uses a function called a **hash function**.
-
-The hash function:
-
-Input → Key
-Output → Index
-
-Example:
-
-```
-hash("apple") → 4
+hash("apple")  → 4
 hash("banana") → 7
 ```
 
-Index tells where data should be stored.
+This allows: Insert O(1) average, Search O(1) average, Delete O(1) average.
 
-This allows:
+<a id="visual-locker-room"></a>
+## Visual: The Locker Room
 
-Insertion → O(1) average
-Search → O(1) average
-Deletion → O(1) average
-
-Hashing is about fast lookup.
-
-## Visual: O(1) Lookup — Why It's So Fast
-
-The locker room has 100 lockers (indices 0-99).
-
-You need locker 17.
+Jaya's library has a locker room with 100 lockers. Each book gets assigned a locker number based on its title. To find a book, she does not check lockers 0 through 99 — she computes the locker number from the title and goes straight there.
 
 ```
-Lockers:  [0] [1] [2] ... [17] ... [99]
-                           ↑
-                    go directly here
+Without hashing (linear search):
+  Check locker 0... nope
+  Check locker 1... nope
+  Check locker 2... nope
+  ...
+  Check locker 47... FOUND!
+  Time: O(n) — checked 47 lockers
+
+With hashing (direct access):
+  hash("The Great Gatsby") → 47
+  Go straight to locker 47 → FOUND!
+  Time: O(1) — one calculation, one lookup
 ```
 
-You don't check lockers 0 through 16. You don't check 18 through 99.
-You walk straight to 17.
+<a id="visual-hash-function"></a>
+## Visual: A Simple Hash Function
 
-That's O(1). Constant time. Doesn't matter if you have 100 lockers or 1,000,000 lockers.
-
-## Visual: A Simple Hash Function — Watching "apple" Get Hashed
-
-Here's the simplest possible hash function:
-- Add up all the ASCII values of the characters
-- Take the result mod the table size
+The simplest hash function: add up ASCII values, take modulo table size.
 
 ```
 "apple" → ASCII values:
@@ -168,8 +98,6 @@ Table size = 10
 "apple" → index 0
 ```
 
-Step by step:
-
 ```
 "apple"
   │
@@ -186,37 +114,23 @@ sum = 530
 index 0
 ```
 
-And "banana":
-
-```
-b=98, a=97, n=110, a=97, n=110, a=97
-Sum = 609
-609 % 10 = 9  →  index 9
-```
+And "banana": `b=98 + a=97 + n=110 + a=97 + n=110 + a=97 = 609. 609 % 10 = 9 → index 9`.
 
 > 📝 **Practice:** [Q2 · dict-vs-list-timing](./practice.md#q2--why-dict-lookup-is-o1-average) · [Q3 · O1-average-vs-On-worst](./practice.md#q3--o1-average-vs-on-worst-case)
 
 > [↑ Back to Top](#top)
 
-<a id="3-hash-table-structure"></a>
-# 3. Hash Table Structure
+<a id="2-hash-table-structure"></a>
+# 2. Hash Table Structure
 
-Internally:
+Jaya builds her first hash table — an array where the hash function decides which slot each item goes into. It looks simple, but there is one critical problem lurking.
 
 ```
 Index: 0 1 2 3 4 5 6 7
 Value: - - - - A - - B
 ```
 
-Hash function decides index.
-
-But there is a problem.
-
-Two keys may produce same index.
-
-That is called collision.
-
-## Visual: Hash Table Time Complexity Summary
+The hash function decides the index. But what happens when two keys produce the same index? That is called a **collision** — and solving it is the core challenge of hashing.
 
 ```
 Operation    Average    Worst case
@@ -226,39 +140,24 @@ Lookup       O(1)       O(n)  ← rare, terrible hash function
 Delete       O(1)       O(n)  ← rare
 ```
 
-The worst case rarely happens with good hash functions.
 In practice, treat all hash table operations as O(1).
 
 > 📝 **Practice:** [Q9 · chaining-vs-open-addressing](./practice.md#q9--chaining-vs-open-addressing)
 
 > [↑ Back to Top](#top)
 
-<a id="4-collision"></a>
-# 4. Collision — The Core Challenge
+<a id="3-collision"></a>
+# 3. Collision — The Core Challenge
 
-Example:
+Jaya assigns two books to the same locker — `hash("cat") → 3` and `hash("tac") → 3`. Both want locker 3. She needs a plan for when this happens.
 
-```
-hash("cat") → 3
-hash("tac") → 3
-```
-
-Both want index 3.
-
-We must resolve collision.
-
-Two main strategies:
-
+<a id="visual-collision"></a>
 ## Visual: What a Collision Looks Like
 
 ```
 "abc"  → 97+98+99   = 294 → 294 % 7 = 0
 "bca"  → 98+99+97   = 294 → 294 % 7 = 0
-```
 
-Both "abc" and "bca" want the same index:
-
-```
 Hash Table (size 7):
 
 Index:  [ 0 ] [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ]
@@ -267,21 +166,15 @@ Index:  [ 0 ] [ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ]
     COLLISION!
 ```
 
-Real hash functions are much cleverer (they use bit mixing, prime numbers, etc.),
-but collisions can still happen. So we need a plan.
+Two main strategies:
 
-## 🔹 Separate Chaining
+<a id="separate-chaining"></a>
+## Separate Chaining
 
-Each index stores a linked list.
+Each index stores a linked list. Colliding items share the locker but form a chain.
 
-```
-Index 3 → cat → tac → act
-```
-
+<a id="visual-chaining"></a>
 ## Visual: Chaining in Detail
-
-Instead of one item per locker, each locker holds a **linked list**.
-When two things collide, they share the same locker but form a chain.
 
 ```
 Hash Table with Chaining:
@@ -295,30 +188,19 @@ Index 5:  → ["xyz"] → None
 Index 6:  → None
 ```
 
-When you look up "bca":
-1. Hash "bca" → index 0
-2. Walk the chain at index 0: "abc"? No. "bca"? Yes! Found it.
+Lookup "bca": hash → index 0 → walk chain: "abc"? No. "bca"? Yes!
 
-**Best case:** O(1) — you're the only one in your locker
-**Worst case:** O(n) — everyone collided into the same locker (terrible hash function)
+Best case: O(1). Worst case: O(n) — everyone in the same chain.
 
-Time complexity:
-O(1) average
-O(n) worst case
+<a id="open-addressing"></a>
+## Open Addressing
 
-## 🔹 Open Addressing
+If the slot is occupied, find the next available one.
 
-If index occupied,
-find next available slot.
+Techniques: linear probing, quadratic probing, double hashing.
 
-Techniques:
-- Linear probing
-- Quadratic probing
-- Double hashing
-
-## Visual: Open Addressing (Linear Probing)
-
-If locker 0 is taken, try locker 1. If that's taken, try locker 2. And so on.
+<a id="visual-probing"></a>
+## Visual: Linear Probing
 
 ```
 Inserting "abc" → index 0:
@@ -332,32 +214,20 @@ Inserting "bca" → also wants index 0, but it's TAKEN:
            ↑ placed here!
 ```
 
-Lookup "bca":
-1. Hash → index 0
-2. Check index 0: "abc" ≠ "bca"
-3. Check index 1: "bca" = "bca" — Found!
+Lookup "bca": hash → index 0 → "abc" ≠ "bca" → try index 1 → "bca" = "bca" → Found!
 
 > 📝 **Practice:** [Q80 · hash-collision-resolution](../dsa_practice_questions_100.md#q80--interview--hash-collision-resolution)
 
 > [↑ Back to Top](#top)
 
-<a id="5-load-factor"></a>
-# 5. Load Factor
+<a id="4-load-factor"></a>
+# 4. Load Factor and Resizing
 
-Load factor = (number of elements) / (table size)
+Jaya notices that as more books fill the lockers, collisions become more frequent. The locker room gets crowded. The **load factor** measures this crowding: `elements / table_size`.
 
-If load factor becomes high:
-Collisions increase.
+When load factor crosses a threshold (~0.7), the table resizes — creates a bigger table, rehashes everything. Expensive once, but keeps future operations fast.
 
-When load factor crosses threshold (e.g., 0.7):
-Table resizes.
-
-Resizing:
-- Create bigger table
-- Rehash all elements
-
-This is why hash operations are amortized O(1).
-
+<a id="visual-load-factor"></a>
 ## Visual: Load Factor and Crowding
 
 ```
@@ -366,401 +236,259 @@ Items: 7, Table size: 10  →  Load factor = 0.7  (70% full)
 Items: 9, Table size: 10  →  Load factor = 0.9  (90% full) ← danger zone
 ```
 
-As load factor increases, collisions get more frequent:
-
 ```
 Load 0.3:  □□□■□□□□□□   ← few collisions, fast
 Load 0.7:  ■□■■■□■■□■   ← some collisions, still ok
 Load 0.9:  ■■■■■□■■■■   ← many collisions, slowing down
 ```
 
-Rule of thumb: keep load factor below 0.75 (Python uses 2/3 as the threshold).
-
-When you hit the threshold, the table resizes (doubles in size) and rehashes everything.
-Expensive once, but it keeps future operations fast.
+Python uses 2/3 as the threshold. This is why hash operations are amortized O(1).
 
 > 📝 **Practice:** [Q10 · load-factor-and-resizing](./practice.md#q10--load-factor-and-resizing)
 
 > [↑ Back to Top](#top)
 
-<a id="6-hashing-in-python"></a>
-# 6. Hashing in Python (Dictionary and Set)
+<a id="5-hashing-python"></a>
+# 5. Hashing in Python — Dict and Set
 
-Python provides:
-
-- dict
-- set
-
-Both use hash tables internally.
-
-Example:
+Jaya learns that Python's `dict` and `set` are both hash tables under the hood. Every time she writes `d["key"] = value`, Python hashes the key, finds the slot, and stores the value.
 
 ```python
 d = {}
-d["apple"] = 10
+d["name"] = "Alice"
+d["age"] = 25
+
+print(d["name"])   # O(1) lookup
+print("age" in d)  # O(1) membership check
 ```
 
-Lookup:
-
 ```python
-d["apple"]
+s = set()
+s.add("apple")
+s.add("banana")
+
+print("apple" in s)   # O(1) — hash table lookup
 ```
 
-Average:
-O(1)
+<a id="visual-dict-internals"></a>
+## Visual: Python Dict Internals
 
-## Visual: Python Dict Internals — Open Addressing Done Right
+Python's dict uses **open addressing** with a randomized probe sequence (not simple linear probing). Each slot stores `(hash, key, value)`.
 
-Python's `dict` uses open addressing (not chaining).
+```
+Python dict internal layout (simplified):
+
+Slot 0: (hash=530, "apple", 4.99)
+Slot 1: (empty)
+Slot 2: (empty)
+Slot 3: (hash=294, "cat", 7.50)
+Slot 4: (empty)
+Slot 5: (hash=609, "banana", 2.99)
+Slot 6: (empty)
+Slot 7: (empty)
+
+Lookup "apple":
+  1. hash("apple") → 530
+  2. 530 % 8 = 2... check slot 2: empty? probe next
+  3. Find slot 0: hash matches, key matches → return 4.99
+```
+
+Since Python 3.7, `dict` preserves insertion order. This is a guarantee, not an implementation detail.
+
+Only **hashable** (immutable) objects can be dict keys or set members. Lists, dicts, and sets are NOT hashable — they are mutable.
+
+> [↑ Back to Top](#top)
+
+<a id="6-immutability"></a>
+# 6. Why Immutability Matters for Hashing
+
+Jaya understands why her locker system requires permanent labels — if a book's title could change after being assigned to a locker, the locker number would become wrong, and she would never find the book again.
+
+In Python, dict keys and set members must be immutable because:
+1. The hash is computed at insertion time
+2. If the object changes, its hash changes
+3. The object is now in the wrong slot — it becomes unfindable
 
 ```python
+# Lists are mutable → NOT hashable
 d = {}
-d["name"] = "Alice"   # hash("name") → some index
-d["age"]  = 30        # hash("age")  → different index
-d["city"] = "NYC"     # hash("city") → different index
+d[[1, 2]] = "hello"   # TypeError: unhashable type: 'list'
+
+# Tuples are immutable → hashable
+d[(1, 2)] = "hello"   # works!
 ```
 
-Under the hood:
-
-```
-Python dict internal array:
-
-Slot 0:  empty
-Slot 1:  empty
-Slot 2:  hash=..., key="age",  value=30
-Slot 3:  empty
-Slot 4:  hash=..., key="name", value="Alice"
-Slot 5:  empty
-Slot 6:  hash=..., key="city", value="NYC"
-Slot 7:  empty
-```
-
-**Why Python 3.7+ preserves insertion order:**
-
-Python 3.7 added a separate compact array that tracks insertion order.
-The hash table slots still hold the data, but a second array remembers the order you inserted.
-
-```
-Insertion order array: ["name", "age", "city"]  ← remembers this order
-Hash table:            scrambled by hash values  ← fast lookup
-```
-
-When you iterate, Python follows the insertion order array. Best of both worlds.
-
-**Common mistake — Counter subtraction drops data:** `Counter(a) - Counter(b)` silently drops all zero and negative counts, causing silent data loss. Use `.subtract()` to preserve the full picture, or use an explicit loop over `needed.items()` for checking whether one string can be built from another.
-
-**Common mistake — KeyError on first increment:** Writing `counts[key] += 1` on a plain `dict` raises `KeyError` the first time a key appears. Use `counts.get(key, 0) + 1`, `defaultdict(int)`, or `Counter` instead.
-
-**Common mistake — modifying a dict during iteration:** Deleting keys from a dict while looping over it raises `RuntimeError: dictionary changed size during iteration`. Collect the keys to delete first (`[k for k in d if ...]`), then delete them, or build a new dict with a comprehension.
-
-> 📝 **Practice:** [Q20 · hash-map-vs-hash-set](../dsa_practice_questions_100.md#q20--critical--hash-map-vs-hash-set) · [Q86 · production-wrong-data-structure](../dsa_practice_questions_100.md#q86--design--production-wrong-data-structure)
-> 📝 **Practice:** [Q11 · python-dict-internals](./practice.md#q11--python-dict-internals--open-addressing) · [Q12 · set-operations](./practice.md#q12--python-set-operations--union-intersection-difference)
+This is why strings are immutable — they need to be hashable for use as dict keys. Python caches the hash value of a string after first computation, making repeated lookups even faster.
 
 > [↑ Back to Top](#top)
 
-<a id="7-why-strings-are-immutable"></a>
-# 7. Why Strings Are Immutable (Connection to Hashing)
+<a id="7-patterns"></a>
+# 7. Common Hashing Patterns
 
-Hash tables require keys to be immutable.
+Jaya discovers that hash maps are the Swiss Army knife of interview problems. Any time you need to count, group, or look up values quickly, a hash map is usually the answer.
 
-Why?
-
-If key changes after hashing,
-its index becomes incorrect.
-
-That's why:
-
-- Strings → immutable
-- Tuples → hashable
-- Lists → not hashable
-
-Understanding this shows depth.
-
-**Common mistake — using a list as a dict key:** Lists are mutable, so they cannot be hashed. `d[[1, 2, 3]] = "value"` raises `TypeError: unhashable type: 'list'`. Convert with `tuple([1, 2, 3])` when order matters, or `frozenset([1, 2, 3])` when it does not.
-
-**Common mistake — using `sorted(word)` as a dict key:** `sorted()` returns a list, which is not hashable. Convert it to a string with `"".join(sorted(word))` or to a tuple with `tuple(sorted(word))` before using it as a key.
-
-| Key type | Hashable | Use when |
-|---|---|---|
-| `tuple(lst)` | Yes | Order matters (e.g., anagram grouping) |
-| `frozenset(lst)` | Yes | Order does NOT matter |
-| `"".join(sorted(lst))` | Yes | String-based canonical form |
-
-> 📝 **Practice:** [Q4 · hashability-rules](./practice.md#q4--hashability-rules--what-can-be-a-key) · [Q13 · frozenset-as-dict-key](./practice.md#q13--frozenset-as-dict-key)
-
-> [↑ Back to Top](#top)
-
-<a id="8-common-hashing-patterns"></a>
-# 8. Common Hashing Patterns in Interviews
-
-Most problems using hashing involve:
-
-- Frequency counting
-- Duplicate detection
-- Two-sum problem
-- Anagram checking
-- Subarray sum
-- Grouping elements
-
-Hashing reduces nested loops.
-
+<a id="visual-when-hashmap"></a>
 ## Visual: When to Reach for a Hash Map
 
 ```
-Question you're asking          →   Use a hash map for
-
-"Have I seen X before?"         →   Set or dict (membership check)
-"How many times have I seen X?" →   Counter or dict
-"What was X paired with?"       →   Dict (key→value store)
-"Group things by property Y"    →   defaultdict(list) keyed by Y
-"Find complement in array"      →   Dict (Two Sum pattern)
+Problem asks for...              Use...
+─────────────────────────────────────────────
+Count frequency of elements  →  Counter / dict
+Find duplicates              →  set
+Group by property            →  defaultdict(list)
+Two sum / pair finding       →  dict (complement lookup)
+Check membership             →  set (O(1) vs list O(n))
 ```
 
-## Visual: Group Anagrams Walkthrough
-
-Group words that are anagrams of each other.
-
-**Input:** `["eat", "tea", "tan", "ate", "nat", "bat"]`
-**Output:** `[["eat","tea","ate"], ["tan","nat"], ["bat"]]`
-
-**The insight:** Two words are anagrams if and only if they have the same sorted characters.
+<a id="group-anagrams"></a>
+## Group Anagrams Walkthrough
 
 ```
-"eat" → sorted → "aet"
-"tea" → sorted → "aet"
-"ate" → sorted → "aet"    ← all three map to the same key!
+Input: ["eat", "tea", "tan", "ate", "nat", "bat"]
 
-"tan" → sorted → "ant"
-"nat" → sorted → "ant"    ← these two map to the same key!
+Step 1: Sort each word → use as key
+  "eat" → "aet"
+  "tea" → "aet"
+  "tan" → "ant"
+  "ate" → "aet"
+  "nat" → "ant"
+  "bat" → "abt"
 
-"bat" → sorted → "abt"    ← alone
+Step 2: Group by sorted key
+  "aet" → ["eat", "tea", "ate"]
+  "ant" → ["tan", "nat"]
+  "abt" → ["bat"]
 ```
 
-Step by step:
+```python
+from collections import defaultdict
 
-```
-See "eat" → key "aet" → map: {"aet": ["eat"]}
-See "tea" → key "aet" → map: {"aet": ["eat", "tea"]}
-See "tan" → key "ant" → map: {"aet": ["eat","tea"], "ant": ["tan"]}
-See "ate" → key "aet" → map: {"aet": ["eat","tea","ate"], "ant": ["tan"]}
-See "nat" → key "ant" → map: {"aet": ["eat","tea","ate"], "ant": ["tan","nat"]}
-See "bat" → key "abt" → map: {"aet": [...], "ant": [...], "abt": ["bat"]}
-
-Final: values of the map = [[...], [...], [...]]
+def group_anagrams(strs):
+    groups = defaultdict(list)
+    for s in strs:
+        key = tuple(sorted(s))
+        groups[key].append(s)
+    return list(groups.values())
 ```
 
-## Visual: Counter — Frequency Made Easy
-
-Python's `Counter` is a hash map that counts things automatically.
+## Counter — Frequency Made Easy
 
 ```python
 from collections import Counter
 
-Counter("mississippi")
+text = "mississippi"
+freq = Counter(text)
+print(freq)
 # Counter({'i': 4, 's': 4, 'p': 2, 'm': 1})
+
+print(freq.most_common(2))  # [('i', 4), ('s', 4)]
 ```
 
-Visually, it builds this map:
+<a id="two-sum"></a>
+## Two Sum Step by Step
+
+Jaya's most famous interview problem: find two numbers that add up to a target.
 
 ```
-"mississippi"
-  m → 1
-  i → 4  (positions 1, 4, 7, 10)
-  s → 4  (positions 2, 3, 5, 6)
-  p → 2  (positions 8, 9)
+nums = [2, 7, 11, 15], target = 9
 
-Counter({'i': 4, 's': 4, 'p': 2, 'm': 1})
+Brute force: check every pair → O(n²)
+Hash map: for each number, check if (target - number) exists → O(n)
 ```
 
-Use cases:
-- Word frequency counting
-- Anagram detection: `Counter("eat") == Counter("tea")` → True
-- Finding the most common element: `.most_common(1)`
+```
+Step 1: num=2, complement=9-2=7
+  seen = {}
+  7 not in seen → add {2: 0}
 
-> 📝 **Practice:** [Q5 · frequency-counting](./practice.md#q5--frequency-counting-with-a-dict) · [Q7 · seen-set-pattern](./practice.md#q7--seen-set-pattern--duplicate-detection) · [Q8 · complement-lookup-two-sum](./practice.md#q8--complement-lookup--two-sum) · [Q14 · anagram-grouping](./practice.md#q14--anagram-grouping)
+Step 2: num=7, complement=9-7=2
+  seen = {2: 0}
+  2 IS in seen! → return [0, 1]
+```
+
+```python
+def two_sum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+    return []
+```
 
 > [↑ Back to Top](#top)
 
-<a id="9-example-two-sum"></a>
-# 9. Example — Two Sum
+<a id="8-hash-properties"></a>
+# 8. Hash Function Properties
 
-Without hashing:
+Jaya learns what makes a good hash function — it must distribute keys evenly across the table to minimize collisions.
 
-Double loop → O(n²)
+A good hash function must be:
+- **Deterministic** — same input always produces same output
+- **Uniform** — distributes keys evenly across the table
+- **Fast** — O(1) to compute
+- **Minimizes collisions** — different inputs produce different outputs (ideally)
 
-With hashing:
-
-Store visited numbers in set/dictionary.
-
-For each element:
-Check if (target - current) exists.
-
-Time:
-O(n)
-
-Hashing transforms problem.
-
-## Visual: Two Sum Step by Step
-
-Classic problem. Given an array and a target, find two numbers that add up to the target.
-
-**Input:** `[2, 7, 11, 15]`, target = `9`
-**Output:** indices `[0, 1]` (because 2 + 7 = 9)
-
-**The naive approach (O(n²)):** check every pair.
-
-```
-Pairs to check:
-(2,7), (2,11), (2,15), (7,11), (7,15), (11,15)
-That's 6 checks for 4 items. For 1000 items → 499,500 checks. Yikes.
-```
-
-**The hash map approach (O(n)):**
-
-For each number, ask: "Is there a number I've already seen that completes the pair?"
-
-That question translates to: "Does `target - current_number` exist in my map?"
-
-```
-Step 1: See 2
-  - Need: 9 - 2 = 7. Is 7 in map? { } → No.
-  - Store: {2: index_0}
-
-  Map: {2: 0}
-
-Step 2: See 7
-  - Need: 9 - 7 = 2. Is 2 in map? {2: 0} → YES!
-  - Return: [map[2], current_index] = [0, 1]
-
-  Done! Found [0, 1]
-```
-
-```
-Array:  [  2  ,  7  , 11  , 15  ]
-         ↑
-         current
-
-Map: {}
-Need (9-2)=7 in map? No.
-Store 2→0.
-
-Array:  [  2  ,  7  , 11  , 15  ]
-                 ↑
-                 current
-
-Map: {2: 0}
-Need (9-7)=2 in map? YES → return [0, 1]
-```
-
-**Common mistake — Two Sum self-pairing:** Using `seen = set(nums)` (values only) lets the same element pair with itself when `target == 2 * nums[i]`. Always store `value → index` in a dict, and insert the current element **after** the lookup so the current index can never pair with itself.
-
-> 📝 **Practice:** [Q8 · two-sum](./practice.md#q8--complement-lookup--two-sum)
+A bad hash function (e.g., always returning 0) turns the hash table into a linked list — O(n) for everything.
 
 > [↑ Back to Top](#top)
 
-<a id="10-space-time-trade-off"></a>
-# 10. Space-Time Trade-Off
+<a id="summary"></a>
+## 🔥 Summary
 
-Hashing trades space for speed.
+| Concept | Key Takeaway |
+|---------|-------------|
+| Hashing | Convert key → index for O(1) access |
+| Hash function | Must be deterministic, uniform, fast |
+| Collision | Two keys → same index. Solve with chaining or probing |
+| Chaining | Linked list at each slot |
+| Open addressing | Find next available slot |
+| Load factor | elements/size — resize when > ~0.7 |
+| Python dict/set | Hash tables. Keys must be immutable (hashable) |
+| Immutability | Mutable keys break hash tables — object becomes unfindable |
+| Two Sum | Complement lookup with hash map — O(n) |
 
-You use extra memory
-to reduce time complexity.
+**Space-time trade-off:** Hash tables trade memory for speed. They use extra space (the table array + overhead) to achieve O(1) time. This is the fundamental deal.
 
-Senior-level understanding:
-Always consider memory constraints.
+**Worst case:** If every key hashes to the same index, the table degrades to O(n). This happens with adversarial inputs or terrible hash functions. Python mitigates this with randomized hashing (hash randomization since Python 3.3).
 
-> 📝 **Practice:** [Q6 · set-membership-beats-list](./practice.md#q6--set-membership-beats-list-lookup)
+**Real-world usage:**
+- **Databases** — hash indexes for O(1) lookups
+- **Caching** — Redis, Memcached, LRU cache
+- **Compilers** — symbol tables
+- **Networking** — routing tables, load balancers (consistent hashing)
+- **Security** — password hashing (bcrypt, SHA-256)
+- **Deduplication** — detecting duplicate files
 
-> [↑ Back to Top](#top)
+**When NOT to use hashing:**
+- Order matters (use sorted tree instead)
+- Sorted traversal required (hash tables are unordered)
+- Memory is highly constrained (hash tables have overhead)
 
-<a id="11-worst-case-of-hashing"></a>
-# 11. Worst Case of Hashing
-
-If many collisions occur:
-
-Hash table degrades to linked list.
-
-Worst case:
-O(n)
-
-Good hash function minimizes collision probability.
-
-> 📝 **Practice:** [Q3 · O1-average-vs-On-worst](./practice.md#q3--o1-average-vs-on-worst-case) · [Q25 · hash-table-vulnerability](./practice.md#q25--hash-table-vulnerability--adversarial-inputs)
-
-> [↑ Back to Top](#top)
-
-<a id="12-hash-function-properties"></a>
-# 12. Hash Function Properties
-
-A good hash function should:
-
-- Be fast
-- Distribute keys uniformly
-- Minimize collisions
-- Be deterministic
-
-Poor hash functions cause performance issues.
-
-> 📝 **Practice:** [Q25 · hash-table-vulnerability](./practice.md#q25--hash-table-vulnerability--adversarial-inputs)
-
-> [↑ Back to Top](#top)
-
-<a id="13-real-world-usage"></a>
-# 13. Real-World Usage of Hashing
-
-Hashing powers:
-
-- Database indexing
-- Caching systems
-- Password storage (hashed)
-- Routing tables
-- Compilers (symbol tables)
-- Blockchain (cryptographic hashing)
-
-Hashing is foundational to modern computing.
-
-> 📝 **Practice:** [Q23 · lru-cache](./practice.md#q23--lru-cache--hashmap--doubly-linked-list) · [Q24 · consistent-hashing](./practice.md#q24--consistent-hashing-concept)
-
-> [↑ Back to Top](#top)
-
-<a id="14-when-not-to-use-hashing"></a>
-# 14. When NOT to Use Hashing
-
-Avoid hashing when:
-
-- Order matters
-- Sorted traversal required
-- Memory is highly constrained
-- Deterministic iteration order needed
-
-Use tree-based structures instead.
+> A hash table is a locker room where the locker number is calculated from your key, not searched for. Direct access. No searching. That is why it is O(1).
 
 > 📝 **Practice:** [Q21 · design-hashmap-from-scratch](./practice.md#q21--design-hashmap-from-scratch) · [Q22 · design-hashset-from-scratch](./practice.md#q22--design-hashset-from-scratch)
 
-> [↑ Back to Top](#top)
-
-# Final Understanding
-
-Hashing:
-
-- Enables instant lookup
-- Uses hash function to compute index
-- Handles collisions carefully
-- Trades memory for speed
-- Powers dictionaries and sets
-
-It is one of the most powerful tools in algorithm design.
-
-If you master hashing,
-many medium-level problems become easy.
-
-## The One-Liner Mental Model
-
-> A hash table is a locker room where the locker number is calculated from your key,
-> not searched for. Direct access. No searching. That's why it's O(1).
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Queue — Interview Q&A](../09_queue/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [09_queue → theory.md](../09_queue/theory.md) |
+| ➡ Next Module | [11_two_pointers → theory.md](../11_two_pointers/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Practice](./practice.md) · [Collision Handling](./collision_handling.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[09 Queue →](../09_queue/theory.md) · [11 Two Pointers →](../11_two_pointers/theory.md) · [03 Strings →](../03_strings/theory.md) · [15 BST →](../15_binary_search_trees/theory.md)
+
+**Jump to specific topics in other files:**
+- Anagram detection with hashing → [03_strings § Anagram Detection](../03_strings/theory.md#anagram-detection)
+- Two Sum variations → [11_two_pointers § theory.md](../11_two_pointers/theory.md)
+- Hash map in graph algorithms → [18_graphs § theory.md](../18_graphs/theory.md)
+- LRU Cache (hash map + linked list) → [07_linked_list § Real-World Impact](../07_linked_list/theory.md#8-real-world)
+
+> [↑ Back to Top](#top)

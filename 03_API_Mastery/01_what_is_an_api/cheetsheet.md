@@ -245,7 +245,7 @@ r.raise_for_status()   # raises HTTPError if 4xx or 5xx
 
 **[Back to README](../README.md)**
 
-**Theory:** [story.md](./story.md)
+**Theory:** [theory.md](./theory.md)
 
 **Prev:** — &nbsp;|&nbsp; **Next:** [REST Fundamentals →](../02_rest_fundamentals/cheetsheet.md)
 

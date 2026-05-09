@@ -1,30 +1,60 @@
-# 11 — FastAPI Advanced Features
+<a id="top"></a>
 
-> 📝 **Practice:** [Q42 · fastapi-middleware](../api_practice_questions_100.md#q42--normal--fastapi-middleware)
+# FastAPI Advanced Features
 
-> 📝 **Practice:** [Q40 · fastapi-async-endpoints](../api_practice_questions_100.md#q40--thinking--fastapi-async-endpoints)
+> Vamsi has built routes, validated request bodies with Pydantic, wired up a database,
+> and mastered dependency injection. That was the first 80%. Now he is stepping into
+> the remaining 20% — the advanced features that separate a simple CRUD service from a
+> production system handling real-time connections, large file transfers, background
+> jobs, and thousands of requests per second without falling over.
 
-> "The basics get you to production. The advanced features keep you there."
+> **Practice:** [Q42 - fastapi-middleware](../api_practice_questions_100.md#q42--normal--fastapi-middleware)
+>
+> **Practice:** [Q40 - fastapi-async-endpoints](../api_practice_questions_100.md#q40--thinking--fastapi-async-endpoints)
+>
+> **Practice:** [Q50 - fastapi-lifespan](../api_practice_questions_100.md#q50--thinking--fastapi-lifespan)
 
-> 📝 **Practice:** [Q50 · fastapi-lifespan](../api_practice_questions_100.md#q50--thinking--fastapi-lifespan)
+<a id="toc"></a>
 
----
+## Table of Contents
 
-## Where We Are
+- [1. WebSockets — Real-Time Bidirectional Communication](#1-websockets)
+  - [The Connection Manager Pattern](#connection-manager-pattern)
+  - [Chat With Username Tracking](#chat-with-username-tracking)
+  - [Sending JSON Over WebSockets](#sending-json-over-websockets)
+  - [What WebSockets Are Not Good For](#websockets-limitations)
+- [2. File Uploads — Handling Binary Data](#2-file-uploads)
+  - [Basic Upload](#basic-upload)
+  - [Upload to S3](#upload-to-s3)
+  - [Multiple File Upload](#multiple-file-upload)
+  - [File Upload With Form Data](#file-upload-with-form-data)
+- [3. Streaming Responses — Don't Buffer What You Can Stream](#3-streaming-responses)
+  - [Server-Sent Events (SSE) for Live Updates](#sse-for-live-updates)
+  - [Streaming Large File Downloads](#streaming-large-file-downloads)
+  - [Streaming a Database Export as CSV](#streaming-database-export-csv)
+- [4. Background Tasks With Celery — Offload Heavy Work](#4-background-tasks)
+  - [Setting Up Celery](#setting-up-celery)
+  - [Wiring Celery Into FastAPI Routes](#wiring-celery-into-fastapi)
+  - [Running the Worker](#running-the-worker)
+- [5. Caching With Redis — Stop Hitting the Database for the Same Data](#5-caching-with-redis)
+  - [Cache-Aside Pattern](#cache-aside-pattern)
+  - [Cache Invalidation — The Hard Part](#cache-invalidation)
+  - [Caching a Computed Result — Leaderboard Example](#caching-computed-result)
+- [6. Rate Limiting With Redis](#6-rate-limiting)
+  - [Fixed Window Rate Limiter](#fixed-window-rate-limiter)
+  - [Tighter Limits on Expensive Endpoints](#tighter-limits)
+  - [Propagating Rate Limit Headers to Responses](#propagating-rate-limit-headers)
+- [7. Async vs Sync — Choosing the Right Function Signature](#7-async-vs-sync)
+  - [The Rule](#the-rule)
+  - [Mixing Async and Sync in the Same App](#mixing-async-and-sync)
+  - [Quick Decision Guide](#quick-decision-guide)
+- [Putting It Together — A Real-World Service Structure](#putting-it-together)
+- [Summary](#summary)
+- [Practice Questions](#practice-questions)
 
-You know how to define routes, validate request bodies with Pydantic, connect a database,
-and wire up dependency injection. That covers 80% of what most FastAPI services need.
+<a id="1-websockets"></a>
 
-The remaining 20% is what separates a simple CRUD API from a production system that
-handles real-time connections, large file transfers, background jobs, and thousands of
-requests per second without falling over.
-
-This chapter covers seven features you will reach for once your API starts doing serious
-work.
-
----
-
-## 1. WebSockets — Real-Time Bidirectional Communication
+# 1. WebSockets — Real-Time Bidirectional Communication
 
 HTTP is request-response. The client sends a request, the server sends a response, the
 connection closes. There is no way for the server to push data to a client that isn't
@@ -35,7 +65,32 @@ persistent, bidirectional channel. Either side can send messages at any time. Th
 what powers chat applications, live dashboards, collaborative editing, and anything that
 needs sub-second updates.
 
-### The Connection Manager Pattern
+Vamsi thinks of it like a phone call versus a letter. HTTP is sending a letter and
+waiting for a reply. WebSockets are picking up the phone — once the call connects,
+either person can talk at any time without waiting.
+
+```
+HTTP (Request-Response):
+
+  Client ──── Request ────> Server
+  Client <─── Response ──── Server
+  [connection closes]
+
+WebSocket (Bidirectional):
+
+  Client ──── HTTP Upgrade ──> Server
+  Client <─── 101 Switching ── Server
+         ╔═══════════════════════╗
+  Client ←──── messages ────→ Server
+  Client ←──── messages ────→ Server
+  Client ←──── messages ────→ Server
+         ╚═══════════════════════╝
+  [stays open until either side closes]
+```
+
+<a id="connection-manager-pattern"></a>
+
+## The Connection Manager Pattern
 
 When you have multiple WebSocket clients connected simultaneously, you need something to
 track them and coordinate broadcasts. The `ConnectionManager` is the standard pattern:
@@ -90,7 +145,9 @@ Walk through what happens here:
 5. `WebSocketDisconnect` is raised when the client closes the connection — we clean up and
    notify others
 
-### Chat With Username Tracking
+<a id="chat-with-username-tracking"></a>
+
+## Chat With Username Tracking
 
 Real chat needs to know who's who. Pass data in the URL or headers during the handshake:
 
@@ -133,7 +190,9 @@ async def chat_endpoint(websocket: WebSocket, username: str):
         await chat.broadcast(f"[{left} left]")
 ```
 
-### Sending JSON Over WebSockets
+<a id="sending-json-over-websockets"></a>
+
+## Sending JSON Over WebSockets
 
 Text is fine for chat. For structured data, send JSON:
 
@@ -163,7 +222,9 @@ async def live_data(websocket: WebSocket):
         pass
 ```
 
-### What WebSockets Are Not Good For
+<a id="websockets-limitations"></a>
+
+## What WebSockets Are Not Good For
 
 WebSockets are stateful — each connection is held open and tied to one server process.
 This makes horizontal scaling complicated. If you have four app servers and user A is
@@ -174,14 +235,38 @@ Use WebSockets when you genuinely need server-push. For polling patterns where t
 checks for updates every few seconds, Server-Sent Events (SSE) are simpler and work over
 plain HTTP.
 
----
+> **Common mistake:** Using `async def` for a WebSocket handler that calls blocking
+> synchronous code inside the loop. This blocks the event loop and freezes all other
+> WebSocket connections on that worker. Always use async I/O inside WebSocket handlers.
 
-## 2. File Uploads — Handling Binary Data
+[Back to Top](#top)
+
+<a id="2-file-uploads"></a>
+
+# 2. File Uploads — Handling Binary Data
 
 APIs that deal with user avatars, document uploads, video submissions, or any binary
 content need to handle file uploads correctly. FastAPI uses `UploadFile` for this.
 
-### Basic Upload
+Vamsi pictures it like a post office. You don't shove a 50-pound box through the letter
+slot — you hand it to the clerk who checks the size, validates the label, and puts it
+in the right bin. `UploadFile` is that clerk.
+
+```
+Client                       FastAPI                      Storage
+  |                            |                            |
+  |── multipart/form-data ──>  |                            |
+  |   (file bytes streaming)   |                            |
+  |                            |── validate type ──>        |
+  |                            |── validate size ──>        |
+  |                            |── stream to storage ────>  |
+  |                            |                            |
+  |<── {"url": "..."} ────────|                            |
+```
+
+<a id="basic-upload"></a>
+
+## Basic Upload
 
 ```python
 from fastapi import FastAPI, UploadFile, File, HTTPException
@@ -215,7 +300,9 @@ async def upload_photo(file: UploadFile = File(...)):
     return {"filename": file.filename, "size": len(contents), "url": f"/files/{file.filename}"}
 ```
 
-### Upload to S3
+<a id="upload-to-s3"></a>
+
+## Upload to S3
 
 Saving to local disk doesn't survive server restarts or scale to multiple instances.
 Upload to S3 instead:
@@ -255,7 +342,9 @@ async def upload_photo(file: UploadFile = File(...)):
     return {"url": cdn_url, "key": s3_key}
 ```
 
-### Multiple File Upload
+<a id="multiple-file-upload"></a>
+
+## Multiple File Upload
 
 ```python
 from typing import List
@@ -277,7 +366,9 @@ async def upload_gallery(files: List[UploadFile] = File(...)):
     return {"uploaded": len(results), "files": results}
 ```
 
-### File Upload With Form Data
+<a id="file-upload-with-form-data"></a>
+
+## File Upload With Form Data
 
 Sometimes you need both file and form fields in the same request. Use `Form` alongside
 `File`:
@@ -303,15 +394,39 @@ async def upload_document(
     }
 ```
 
----
+> **Common mistake:** Trying to use a Pydantic model as a JSON body alongside `File(...)`.
+> When you mix `File` and `Form`, the entire request must be `multipart/form-data` — no
+> JSON body allowed. Use `Form(...)` for each field instead.
 
-## 3. Streaming Responses — Don't Buffer What You Can Stream
+[Back to Top](#top)
+
+<a id="3-streaming-responses"></a>
+
+# 3. Streaming Responses — Don't Buffer What You Can Stream
 
 When a response is large — a CSV export, a generated PDF, a log file, live event data —
 loading it entirely into memory before sending is wasteful. Streaming responses send data
 to the client as it's generated or read.
 
-### Server-Sent Events (SSE) for Live Updates
+Vamsi thinks of it like a water pipe versus a bucket. Buffering is filling the whole
+bucket before handing it over. Streaming is connecting a pipe — water flows as it arrives.
+
+```
+Buffered (bad for large data):
+
+  DB ──[all rows]──> Memory ──[full response]──> Client
+       (waits...)              (waits...)
+
+Streamed (good for large data):
+
+  DB ──[batch 1]──> Generator ──[chunk 1]──> Client (starts receiving immediately)
+     ──[batch 2]──>           ──[chunk 2]──> Client
+     ──[batch 3]──>           ──[chunk 3]──> Client
+```
+
+<a id="sse-for-live-updates"></a>
+
+## Server-Sent Events (SSE) for Live Updates
 
 SSE is a lightweight alternative to WebSockets for one-directional server-to-client
 streaming. It works over plain HTTP and reconnects automatically if the connection drops.
@@ -350,7 +465,9 @@ source.onmessage = (event) => {
 };
 ```
 
-### Streaming Large File Downloads
+<a id="streaming-large-file-downloads"></a>
+
+## Streaming Large File Downloads
 
 Never load a 500 MB file into memory to serve a download. Read and stream it in chunks:
 
@@ -383,7 +500,9 @@ async def download_file(filename: str):
     )
 ```
 
-### Streaming a Database Export as CSV
+<a id="streaming-database-export-csv"></a>
+
+## Streaming a Database Export as CSV
 
 Generating a CSV from a database query? Stream rows as they come from the database rather
 than building the entire CSV in memory first:
@@ -427,9 +546,11 @@ async def export_users_csv(db: Session = Depends(get_db)):
     )
 ```
 
----
+[Back to Top](#top)
 
-## 4. Background Tasks With Celery — Offload Heavy Work
+<a id="4-background-tasks"></a>
+
+# 4. Background Tasks With Celery — Offload Heavy Work
 
 FastAPI has built-in `BackgroundTasks` for lightweight post-response work (sending an
 email after registration, writing an audit log). But if the work is genuinely heavy —
@@ -439,9 +560,23 @@ proper task queue.
 Celery is the standard Python choice: a distributed task queue that runs jobs
 asynchronously on separate worker processes, backed by Redis or RabbitMQ as a broker.
 
-> 📝 **Practice:** [Q41 · fastapi-background-tasks](../api_practice_questions_100.md#q41--normal--fastapi-background-tasks)
+Vamsi thinks of it like a restaurant. The waiter (FastAPI) takes your order and hands it
+to the kitchen (Celery worker). The waiter doesn't stand at the stove cooking — they
+immediately return to serve other tables. When the food is ready, a runner delivers it.
 
-### Setting Up Celery
+```
+                         ┌──────────────────────┐
+  Client ──> FastAPI ──> │  Redis Broker (queue) │ ──> Celery Worker ──> Result
+       <── task_id ──    └──────────────────────┘
+                                                        (runs in separate process)
+  Client ──> GET /tasks/{id} ──> Redis Backend ──> status/result
+```
+
+> **Practice:** [Q41 - fastapi-background-tasks](../api_practice_questions_100.md#q41--normal--fastapi-background-tasks)
+
+<a id="setting-up-celery"></a>
+
+## Setting Up Celery
 
 ```python
 # tasks.py
@@ -489,7 +624,9 @@ def send_bulk_email(recipient_ids: list, template_id: str):
     return {"sent": len(recipient_ids)}
 ```
 
-### Wiring Celery Into FastAPI Routes
+<a id="wiring-celery-into-fastapi"></a>
+
+## Wiring Celery Into FastAPI Routes
 
 ```python
 # main.py
@@ -542,7 +679,9 @@ def get_task_status(task_id: str):
     return {"status": task.state, "task_id": task_id}
 ```
 
-### Running the Worker
+<a id="running-the-worker"></a>
+
+## Running the Worker
 
 ```bash
 # In a separate terminal (or container):
@@ -556,9 +695,11 @@ The pattern here is important: the FastAPI route returns in milliseconds with a 
 The client polls `/tasks/{task_id}` to check progress. The actual work happens in a
 separate process that can take as long as it needs. Your HTTP server stays responsive.
 
----
+[Back to Top](#top)
 
-## 5. Caching With Redis — Stop Hitting the Database for the Same Data
+<a id="5-caching-with-redis"></a>
+
+# 5. Caching With Redis — Stop Hitting the Database for the Same Data
 
 The first time you serve `/products/42`, you query the database. The second time — and the
 ten thousandth time — the data is identical. Why hit the database every time?
@@ -566,7 +707,28 @@ ten thousandth time — the data is identical. Why hit the database every time?
 A cache stores recent query results and serves them for subsequent identical requests.
 Redis is fast (sub-millisecond), simple, and the standard choice.
 
-### Cache-Aside Pattern
+Vamsi pictures it like a sticky note on his desk. Instead of walking to the filing cabinet
+(database) every time someone asks for product 42, he writes the answer on a sticky note
+(cache). Next time — instant answer. But sticky notes get stale, so he throws them away
+after 5 minutes (TTL) and fetches fresh data.
+
+```
+Request for /products/42:
+
+  ┌─────────┐     HIT      ┌───────────┐
+  │  Client │ ──────────>   │   Redis   │ ──> Return cached data (sub-ms)
+  └─────────┘               └───────────┘
+       │                         │
+       │         MISS            │
+       │                         v
+       │                    ┌──────────┐
+       └───────────────────>│    DB    │ ──> Fetch, cache it, return
+                            └──────────┘
+```
+
+<a id="cache-aside-pattern"></a>
+
+## Cache-Aside Pattern
 
 The most common caching pattern: try the cache first; on a miss, fetch from the database
 and populate the cache.
@@ -607,7 +769,9 @@ async def get_product(product_id: int, db: Session = Depends(get_db)):
     return product_data
 ```
 
-### Cache Invalidation — The Hard Part
+<a id="cache-invalidation"></a>
+
+## Cache Invalidation — The Hard Part
 
 When a product is updated, the cached version is stale. Delete it:
 
@@ -634,7 +798,13 @@ async def update_product(
     return product
 ```
 
-### Caching a Computed Result — Leaderboard Example
+> **Common mistake:** Updating the cache instead of deleting it. If your update logic has
+> a bug, the cache now holds corrupted data with no way to self-heal. Deleting is safer —
+> the next read will populate fresh data from the source of truth (database).
+
+<a id="caching-computed-result"></a>
+
+## Caching a Computed Result — Leaderboard Example
 
 Some data is expensive to compute but doesn't change frequently. Cache the computation:
 
@@ -665,15 +835,36 @@ async def get_leaderboard(db: Session = Depends(get_db)):
     return result
 ```
 
----
+[Back to Top](#top)
 
-## 6. Rate Limiting With Redis
+<a id="6-rate-limiting"></a>
+
+# 6. Rate Limiting With Redis
 
 Rate limiting protects your API from abuse — whether accidental (a client in an infinite
 loop) or intentional (a DDoS or credential-stuffing attack). Without it, one misbehaving
 client can take down your service for everyone.
 
-### Fixed Window Rate Limiter
+Vamsi thinks of it like a bouncer at a club with a clicker counter. Each person (IP/user)
+gets counted. Once you hit the limit for this time window, the bouncer turns you away
+with a "come back later" (429 Too Many Requests).
+
+```
+Fixed Window Rate Limiting:
+
+  Window 1 (00:00 - 01:00)     Window 2 (01:00 - 02:00)
+  ┌────────────────────────┐   ┌────────────────────────┐
+  │ req req req req req ... │   │ req req req            │
+  │ count: 100 (LIMIT!)    │   │ count: 3 (OK)          │
+  └────────────────────────┘   └────────────────────────┘
+        │                             │
+        v                             v
+   429 Too Many Requests         200 OK
+```
+
+<a id="fixed-window-rate-limiter"></a>
+
+## Fixed Window Rate Limiter
 
 ```python
 from fastapi import Request, HTTPException, Depends
@@ -721,7 +912,9 @@ async def search(q: str):
     return {"query": q, "results": [...]}
 ```
 
-### Tighter Limits on Expensive Endpoints
+<a id="tighter-limits"></a>
+
+## Tighter Limits on Expensive Endpoints
 
 Not all endpoints cost the same. Apply tighter limits to costly ones:
 
@@ -746,7 +939,9 @@ async def list_products():
     return cached_product_list()
 ```
 
-### Propagating Rate Limit Headers to Responses
+<a id="propagating-rate-limit-headers"></a>
+
+## Propagating Rate Limit Headers to Responses
 
 Use a middleware to attach the headers from each request to the final response:
 
@@ -767,14 +962,25 @@ class RateLimitHeaderMiddleware(BaseHTTPMiddleware):
 app.add_middleware(RateLimitHeaderMiddleware)
 ```
 
----
+[Back to Top](#top)
 
-## 7. Async vs Sync — Choosing the Right Function Signature
+<a id="7-async-vs-sync"></a>
+
+# 7. Async vs Sync — Choosing the Right Function Signature
 
 FastAPI supports both `async def` and `def` routes. Choosing the wrong one can silently
 hurt performance.
 
-### The Rule
+Vamsi imagines two restaurant kitchens. The async kitchen has one chef who juggles
+multiple dishes — while the pasta is boiling (I/O wait), the chef preps the salad. The
+sync kitchen has multiple chefs (thread pool), each dedicated to one dish. Both work.
+But if the async chef tries to do something that blocks (like grinding spices for 10
+minutes straight), every other dish stops. That is the danger of blocking inside
+`async def`.
+
+<a id="the-rule"></a>
+
+## The Rule
 
 **Use `async def` when** your handler does I/O that has an async interface: async
 database drivers, `httpx` for async HTTP calls, async file I/O, Redis with `aioredis`.
@@ -811,7 +1017,14 @@ async def get_user_broken(user_id: int, db: Session = Depends(get_db)):
     return user
 ```
 
-### Mixing Async and Sync in the Same App
+> **Common mistake:** Declaring every route as `async def` because "async is faster."
+> It is only faster when the I/O library supports `await`. Calling sync code inside
+> `async def` is actively harmful — it blocks the single event loop thread, freezing
+> all concurrent requests until the blocking call completes.
+
+<a id="mixing-async-and-sync"></a>
+
+## Mixing Async and Sync in the Same App
 
 You will almost certainly have both in the same application. That is fine. FastAPI
 handles each correctly at the router level.
@@ -849,7 +1062,9 @@ async def expensive_sync_route():
     return {"result": result}
 ```
 
-### Quick Decision Guide
+<a id="quick-decision-guide"></a>
+
+## Quick Decision Guide
 
 ```
 Your handler calls...                        Use
@@ -865,88 +1080,113 @@ PIL, numpy, pandas (CPU work)               def
 If you are unsure, use `def`. FastAPI will run it in a thread pool, which is safe.
 Using `async def` with sync blocking calls is worse than using `def`.
 
----
+[Back to Top](#top)
 
-## Putting It Together — A Real-World Service Structure
+<a id="putting-it-together"></a>
+
+# 8. Putting It Together — A Real-World Service Structure
 
 A FastAPI service that uses all seven features looks roughly like this:
 
 ```
 app/
-├── main.py               ← FastAPI app, routes, middleware
-├── tasks.py              ← Celery task definitions
-├── dependencies.py       ← get_db, rate_limit, auth dependencies
+├── main.py               <- FastAPI app, routes, middleware
+├── tasks.py              <- Celery task definitions
+├── dependencies.py       <- get_db, rate_limit, auth dependencies
 ├── routers/
-│   ├── users.py          ← user CRUD routes (sync, SQLAlchemy)
-│   ├── uploads.py        ← file upload routes (async, S3)
-│   ├── streaming.py      ← SSE and download routes
-│   └── websockets.py     ← WebSocket routes
-├── cache.py              ← Redis client, cache helpers
-└── models.py             ← SQLAlchemy models
+│   ├── users.py          <- user CRUD routes (sync, SQLAlchemy)
+│   ├── uploads.py        <- file upload routes (async, S3)
+│   ├── streaming.py      <- SSE and download routes
+│   └── websockets.py     <- WebSocket routes
+├── cache.py              <- Redis client, cache helpers
+└── models.py             <- SQLAlchemy models
 ```
 
 The boundaries are clean: routes that do DB work use sync SQLAlchemy; routes that call
 external services use async httpx; uploads stream directly to S3; heavy work gets queued
 to Celery. Each piece uses the right tool for its job.
 
----
+[Back to Top](#top)
 
-## Summary
+<a id="summary"></a>
+
+# 9. Summary
 
 ```
 WebSockets
-  → Persistent bidirectional connections
-  → ConnectionManager tracks active sockets
-  → Use WebSocketDisconnect to handle clean disconnects
-  → Use SSE for one-directional streaming (simpler, HTTP-native)
+  -> Persistent bidirectional connections
+  -> ConnectionManager tracks active sockets
+  -> Use WebSocketDisconnect to handle clean disconnects
+  -> Use SSE for one-directional streaming (simpler, HTTP-native)
 
 File Uploads
-  → UploadFile + File(...) for multipart uploads
-  → Always validate content_type and size before accepting
-  → Stream directly to S3 — don't load large files into memory
-  → Mix File and Form for metadata + file in one request
+  -> UploadFile + File(...) for multipart uploads
+  -> Always validate content_type and size before accepting
+  -> Stream directly to S3 — don't load large files into memory
+  -> Mix File and Form for metadata + file in one request
 
 Streaming Responses
-  → StreamingResponse with a generator function
-  → SSE format: "data: <payload>\n\n" with media_type="text/event-stream"
-  → Stream large downloads in chunks (65 KB default chunk size)
-  → Stream database exports in batches — never SELECT all rows into memory
+  -> StreamingResponse with a generator function
+  -> SSE format: "data: <payload>\n\n" with media_type="text/event-stream"
+  -> Stream large downloads in chunks (65 KB default chunk size)
+  -> Stream database exports in batches — never SELECT all rows into memory
 
 Background Tasks (Celery)
-  → Route returns immediately with task_id
-  → Worker processes the job in a separate process
-  → Client polls /tasks/{task_id} for status and result
-  → Use for: video processing, bulk email, report generation
+  -> Route returns immediately with task_id
+  -> Worker processes the job in a separate process
+  -> Client polls /tasks/{task_id} for status and result
+  -> Use for: video processing, bulk email, report generation
 
 Caching (Redis)
-  → Cache-aside: try cache → miss → DB → populate cache
-  → Always set a TTL — stale cache is better than no cache
-  → Invalidate cache on write (delete the key)
-  → Cache expensive computed results, not just DB rows
+  -> Cache-aside: try cache -> miss -> DB -> populate cache
+  -> Always set a TTL — stale cache is better than no cache
+  -> Invalidate cache on write (delete the key)
+  -> Cache expensive computed results, not just DB rows
 
 Rate Limiting (Redis)
-  → INCR + EXPIRE per identifier + time window
-  → Per-IP for unauthenticated, per-user for authenticated
-  → Return X-RateLimit-* headers on every response
-  → Tighter limits on expensive endpoints
+  -> INCR + EXPIRE per identifier + time window
+  -> Per-IP for unauthenticated, per-user for authenticated
+  -> Return X-RateLimit-* headers on every response
+  -> Tighter limits on expensive endpoints
 
 Async vs Sync
-  → async def: for async DB drivers, httpx, websockets
-  → def: for SQLAlchemy sync, PIL, pandas, requests
-  → Never call blocking sync code inside async def
-  → FastAPI runs def routes in a thread pool automatically
+  -> async def: for async DB drivers, httpx, websockets
+  -> def: for SQLAlchemy sync, PIL, pandas, requests
+  -> Never call blocking sync code inside async def
+  -> FastAPI runs def routes in a thread pool automatically
 ```
 
----
+<a id="fire-summary"></a>
 
-## 📝 Practice Questions
+## 🔥 Summary
 
-> 📝 **Practice:** [Q93 · predict-dependency-chain](../api_practice_questions_100.md#q93--logical--predict-dependency-chain)
+| Feature | When to Use | Key Pattern |
+|---------|-------------|-------------|
+| WebSockets | Real-time bidirectional (chat, live dashboards) | ConnectionManager + broadcast loop |
+| File Uploads | User-submitted binary data | Validate type/size, stream to S3 |
+| Streaming | Large responses, live events | Generator + StreamingResponse |
+| Celery | Heavy background work (>100ms) | delay() + poll task_id |
+| Redis Cache | Repeated identical reads | Cache-aside with TTL + invalidate on write |
+| Rate Limiting | Protect from abuse | Redis INCR per window per identifier |
+| async def | Async I/O libraries | Only when ALL calls inside use await |
+| def | Sync libraries, CPU work | FastAPI auto-threads it safely |
 
----
+[Back to Top](#top)
 
-**[🏠 Back to README](../README.md)**
+<a id="practice-questions"></a>
 
-**Prev:** [← FastAPI & Databases](../07_fastapi/database_guide.md) &nbsp;|&nbsp; **Next:** [API Versioning →](../08_versioning_standards/versioning_strategy.md)
+# 10. Practice Questions
 
-**Related Topics:** [FastAPI Core Guide](../07_fastapi/core_guide.md) · [WebSockets & Real-Time APIs](../17_websockets/realtime_apis.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md)
+> **Practice:** [Q93 - predict-dependency-chain](../api_practice_questions_100.md#q93--logical--predict-dependency-chain)
+
+[Back to Top](#top)
+
+## Navigation
+
+**[Back to README](../README.md)**
+
+| Prev | Next |
+|------|------|
+| [FastAPI & Databases](04_database_guide.md) | None (last FastAPI file) |
+
+**Related Topics:** [FastAPI Core Guide](01_core_guide.md) | [WebSockets & Real-Time APIs](../17_websockets/realtime_apis.md) | [Production Deployment](../12_production_deployment/deployment_guide.md) | [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md)

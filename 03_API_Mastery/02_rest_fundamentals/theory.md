@@ -1,4 +1,45 @@
-# REST Fundamentals
+<a id="top"></a>
+
+## Table of Contents
+
+- [1. How REST Was Born](#1-how-rest-was-born)
+- [2. Learning Priority](#2-learning-priority)
+- [3. The Six REST Constraints](#3-the-six-rest-constraints)
+  - [Client-Server](#client-server)
+  - [Stateless](#stateless)
+  - [Cacheable](#cacheable)
+  - [Uniform Interface](#uniform-interface)
+  - [Layered System](#layered-system)
+  - [Code on Demand (Optional)](#code-on-demand-optional)
+- [4. Resources — Thinking in Nouns, Not Verbs](#4-resources--thinking-in-nouns-not-verbs)
+- [5. URL Design Patterns](#5-url-design-patterns)
+  - [Collections](#collections)
+  - [Single Items](#single-items)
+  - [Nested Resources](#nested-resources)
+  - [Actions (the Exception to Nouns-Only)](#actions-the-exception-to-nouns-only)
+  - [Filtering](#filtering)
+  - [Sorting](#sorting)
+  - [Pagination](#pagination)
+  - [Sparse Fieldsets](#sparse-fieldsets)
+- [6. HTTP Verbs — Deep Dive](#6-http-verbs--deep-dive)
+  - [GET — The Getter](#get--the-getter)
+  - [POST — The Creator](#post--the-creator)
+  - [PUT — The Full Replacer](#put--the-full-replacer)
+  - [PATCH — The Surgeon](#patch--the-surgeon)
+  - [DELETE — The Terminator](#delete--the-terminator)
+- [7. Idempotency — One of the Most Important Concepts](#7-idempotency--one-of-the-most-important-concepts)
+- [8. Request/Response Structure — Full Examples](#8-requestresponse-structure--full-examples)
+  - [Creating a User — POST](#creating-a-user--post)
+  - [Fetching a User — GET](#fetching-a-user--get)
+  - [Validation Error — 400](#validation-error--400)
+  - [Paginated Collection Response](#paginated-collection-response)
+- [9. HATEOAS — The Constraint Nobody Uses](#9-hateoas--the-constraint-nobody-uses)
+- [10. How RESTful Is "RESTful Enough"?](#10-how-restful-is-restful-enough)
+- [Summary](#summary)
+
+<a id="1-how-rest-was-born"></a>
+
+# 1. How REST Was Born
 
 > 📝 **Practice:** [Q22 · rest-vs-rpc](../api_practice_questions_100.md#q22--normal--rest-vs-rpc)
 
@@ -8,7 +49,7 @@
 
 > 📝 **Practice:** [Q76 · explain-rest-principles](../api_practice_questions_100.md#q76--interview--explain-rest-principles)
 
-## A Guy Wrote a Dissertation and Changed How We Build Software
+"Alright team, gather round," Lakshmi says, pulling up a whiteboard in the meeting room. "Before we redesign our API, let me tell you the story of why REST exists in the first place."
 
 In the year 2000, Roy Fielding — one of the principal authors of the HTTP specification
 itself — submitted his PhD dissertation at UC Irvine.
@@ -33,9 +74,15 @@ those constraints, it's RESTful. If it doesn't, it isn't.
 
 That's it. No REST police. No compliance certificate. Just principles.
 
----
+"Think of it like this," Lakshmi draws a box on the whiteboard. "REST is like the building code for skyscrapers. Nobody enforces it with a badge. But if you follow it, your building stands. If you don't, well... you find out eventually."
 
-## 📌 Learning Priority
+> [↑ Back to Top](#top)
+
+<a id="2-learning-priority"></a>
+
+# 2. Learning Priority
+
+Lakshmi taps the whiteboard. "Not everything here has the same weight. Let me tell you what to focus on first."
 
 **Must Learn** — Core concept, daily use, interview essential:
 6 REST constraints · resource modeling (nouns not verbs) · HTTP verb semantics · idempotency
@@ -49,16 +96,17 @@ Fielding dissertation concepts · cacheability constraint
 **Reference** — Know it exists, look up syntax when needed:
 strict REST vs pragmatic REST · HATEOAS in practice
 
----
+> [↑ Back to Top](#top)
 
-## The 6 REST Constraints
+<a id="3-the-six-rest-constraints"></a>
 
-Fielding defined six constraints. Follow all of them (or most of them) and you've got
-a RESTful API. Let's go through each one like a real human being, not a textbook.
+# 3. The Six REST Constraints
 
----
+Lakshmi uncaps a fresh marker. "Fielding defined six constraints. Follow all of them — or most of them — and you've got a RESTful API. Let's go through each one like real engineers, not textbooks."
 
-### Constraint 1: Client-Server
+<a id="client-server"></a>
+
+## Client-Server
 
 **The principle:** The client and server are separate. They don't need to know anything
 about each other's internal implementation. They only need to agree on the interface —
@@ -85,9 +133,9 @@ iOS App        ─┼──── same API ────> Your Backend (Python/Go
 Android App    ─┘
 ```
 
----
+<a id="stateless"></a>
 
-### Constraint 2: Stateless
+## Stateless
 
 **The principle:** Each request from client to server must contain all the information
 needed to understand the request. The server doesn't store any session state between
@@ -125,9 +173,9 @@ You just add more servers when load increases.
 The token (like a JWT) carries all the identity information. The server verifies the
 token on every request. No server-side session storage needed.
 
----
+<a id="cacheable"></a>
 
-### Constraint 3: Cacheable
+## Cacheable
 
 **The principle:** Responses must define themselves as cacheable or non-cacheable.
 If a response is cacheable, clients and intermediaries can reuse that response for
@@ -152,9 +200,9 @@ ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"  ← fingerprint of the respons
 and that data is cached at the CDN level, your servers only handle 1 request instead of
 10,000. That's a 10,000x performance improvement for free.
 
----
+<a id="uniform-interface"></a>
 
-### Constraint 4: Uniform Interface
+## Uniform Interface
 
 **The principle:** The interface between clients and servers must be uniform. There are
 four sub-constraints here:
@@ -182,9 +230,9 @@ never used a specific one before. If you know REST, you can make reasonable gues
 That predictability is a feature. Developers don't need to read docs to make educated
 guesses about how an endpoint works.
 
----
+<a id="layered-system"></a>
 
-### Constraint 5: Layered System
+## Layered System
 
 **The principle:** A client can't tell whether it's connected directly to the end server
 or to an intermediary. There can be multiple layers: load balancers, CDNs, API gateways,
@@ -215,9 +263,9 @@ hardcode a specific server IP. The IP might be a load balancer. The load balance
 route to any of ten servers. That's fine — that's the layered system constraint working
 exactly as intended.
 
----
+<a id="code-on-demand-optional"></a>
 
-### Constraint 6: Code on Demand (Optional)
+## Code on Demand (Optional)
 
 **The principle:** Servers can optionally extend client functionality by transferring
 executable code. The most common example: a web server sending JavaScript to a browser.
@@ -232,12 +280,13 @@ the "client" runs JavaScript that the server delivered.
 You don't need to worry about this one for the APIs you'll build. Just know it exists
 and is optional.
 
----
+> [↑ Back to Top](#top)
 
-## Resources — Thinking in Nouns, Not Verbs
+<a id="4-resources--thinking-in-nouns-not-verbs"></a>
 
-This is the most practical concept in REST, and the one that trips up developers most
-often when they're new.
+# 4. Resources — Thinking in Nouns, Not Verbs
+
+Lakshmi draws a big dividing line on the whiteboard. "OK, constraints aside — this is the most practical concept in REST, and the one that trips up developers most often when they're new."
 
 **A REST API is a collection of resources.** Resources are things. Nouns. Not actions.
 
@@ -281,13 +330,17 @@ You have to document every single endpoint from scratch. Your API becomes unpred
 When you design around nouns and use HTTP methods as verbs, your API becomes predictable.
 Developers can guess how it works. They can explore it. It's self-consistent.
 
----
+> [↑ Back to Top](#top)
 
-## URL Design Patterns
+<a id="5-url-design-patterns"></a>
 
-Let's get into the real patterns you'll see (and use) constantly.
+# 5. URL Design Patterns
 
-### Collections
+"Now let's get into the real patterns you'll see and use constantly," Lakshmi says, drawing URL examples on the board.
+
+<a id="collections"></a>
+
+## Collections
 
 ```
 GET /users          → all users (usually paginated)
@@ -297,7 +350,9 @@ GET /orders         → all orders
 
 A collection URL is always a plural noun. It returns a list.
 
-### Single Items
+<a id="single-items"></a>
+
+## Single Items
 
 ```
 GET /users/42       → user with ID 42
@@ -308,7 +363,9 @@ GET /orders/x9y7    → order with ID "x9y7"
 The ID goes in the URL path. IDs can be integers, UUIDs, slugs — whatever your system
 uses.
 
-### Nested Resources
+<a id="nested-resources"></a>
+
+## Nested Resources
 
 ```
 GET /users/42/orders           → all orders belonging to user 42
@@ -324,7 +381,9 @@ and the relationships get confusing. If you need `GET /users/42/orders/7/items/3
 yourself if `GET /order-items/3` (with the order ID returned in the item object) might
 be cleaner.
 
-### Actions (the Exception to Nouns-Only)
+<a id="actions-the-exception-to-nouns-only"></a>
+
+## Actions (the Exception to Nouns-Only)
 
 Sometimes you have operations that genuinely don't map to CRUD. That's OK:
 
@@ -339,7 +398,9 @@ These are actions on resources, not resources themselves. The convention is to u
 verb as the last segment. Use these sparingly — if you find yourself adding many actions,
 you might want to reconsider your resource design.
 
-### Filtering
+<a id="filtering"></a>
+
+## Filtering
 
 ```
 GET /users?role=admin
@@ -351,7 +412,9 @@ GET /orders?status=pending&customer_id=42
 Filtering goes in query parameters, not the URL path. The URL path identifies the
 collection; query parameters narrow down what you want from it.
 
-### Sorting
+<a id="sorting"></a>
+
+## Sorting
 
 ```
 GET /users?sort=created_at
@@ -360,7 +423,9 @@ GET /products?sort=price&order=asc
 GET /orders?sort=total&order=desc
 ```
 
-### Pagination
+<a id="pagination"></a>
+
+## Pagination
 
 ```
 GET /users?page=2&limit=20         → offset-based: page 2, 20 per page
@@ -370,7 +435,9 @@ GET /users?offset=40&limit=20      → raw offset: skip 40, take 20
 
 More on pagination strategies in the next module.
 
-### Sparse Fieldsets
+<a id="sparse-fieldsets"></a>
+
+## Sparse Fieldsets
 
 ```
 GET /users?fields=id,name,email    → only return these fields, not everything
@@ -378,14 +445,15 @@ GET /users?fields=id,name,email    → only return these fields, not everything
 
 Useful for mobile clients that don't want to receive data they won't use.
 
----
+> [↑ Back to Top](#top)
 
-## HTTP Verbs — Deep Dive
+<a id="6-http-verbs--deep-dive"></a>
+
+# 6. HTTP Verbs — Deep Dive
 
 > 📝 **Practice:** [Q1 · http-methods-semantics](../api_practice_questions_100.md#q1--normal--http-methods-semantics)
 
-You've seen the verbs. Let's go deeper on two important properties: **idempotency** and
-**safety**.
+Lakshmi pulls up a comparison table. "You've seen the verbs. Now let's go deeper on two important properties: **idempotency** and **safety**."
 
 ```
 Method    Safe?    Idempotent?    Has Body?
@@ -406,7 +474,9 @@ once. More on this in the next section.
 
 > 📝 **Practice:** [Q23 · http-methods-safe](../api_practice_questions_100.md#q23--normal--http-methods-safe)
 
-### GET — The Getter
+<a id="get--the-getter"></a>
+
+## GET — The Getter
 
 ```
 GET /users/42
@@ -424,7 +494,9 @@ GET requests have no body. Parameters go in the URL path (`/users/42`) or query 
 (`/users?role=admin`). GET should never modify anything. If a GET request modifies
 state, something is wrong.
 
-### POST — The Creator
+<a id="post--the-creator"></a>
+
+## POST — The Creator
 
 ```
 POST /users
@@ -452,7 +524,9 @@ POST creates a new resource. The server assigns the ID. The response includes a
 
 > 📝 **Practice:** [Q2 · post-vs-put-vs-patch](../api_practice_questions_100.md#q2--thinking--post-vs-put-vs-patch)
 
-### PUT — The Full Replacer
+<a id="put--the-full-replacer"></a>
+
+## PUT — The Full Replacer
 
 ```
 PUT /users/42
@@ -477,7 +551,9 @@ Response 200:
 PUT replaces the entire resource. If you send a PUT with only `name` and forget to
 include `email`, the email gets wiped. PUT is a full replacement. Send everything.
 
-### PATCH — The Surgeon
+<a id="patch--the-surgeon"></a>
+
+## PATCH — The Surgeon
 
 ```
 PATCH /users/42
@@ -508,7 +584,9 @@ Use PATCH when you want to change specific fields without affecting others.
 In practice, PATCH is far more common. Most "edit" operations in real apps are partial
 updates.
 
-### DELETE — The Terminator
+<a id="delete--the-terminator"></a>
+
+## DELETE — The Terminator
 
 ```
 DELETE /users/42
@@ -520,13 +598,15 @@ Response 204 No Content
 204 with no body is the most common response for DELETE. Some APIs return 200 with the
 deleted object (useful if you want to confirm what was deleted), but 204 is the standard.
 
----
+> [↑ Back to Top](#top)
 
-## Idempotency — One of the Most Important Concepts
+<a id="7-idempotency--one-of-the-most-important-concepts"></a>
+
+# 7. Idempotency — One of the Most Important Concepts
 
 > 📝 **Practice:** [Q3 · idempotency-keys](../api_practice_questions_100.md#q3--critical--idempotency-keys)
 
-Let's talk about this in depth because it matters more than most developers realize.
+"This one," Lakshmi says, underlining the word on the whiteboard three times, "matters more than most developers realize. Pay attention."
 
 **Idempotent** means: calling the operation multiple times produces the same result as
 calling it once.
@@ -589,13 +669,17 @@ processing the charge again. More on this in the best practices module.
 
 > 📝 **Practice:** [Q77 · explain-idempotency-analogy](../api_practice_questions_100.md#q77--interview--explain-idempotency-analogy)
 
----
+> [↑ Back to Top](#top)
 
-## Request/Response Structure — Full Examples
+<a id="8-requestresponse-structure--full-examples"></a>
 
-Let's look at complete real-world examples.
+# 8. Request/Response Structure — Full Examples
 
-### Creating a User — POST
+Lakshmi switches to the projector. "Let me show you complete real-world examples — headers, bodies, status codes, the whole picture."
+
+<a id="creating-a-user--post"></a>
+
+## Creating a User — POST
 
 **Request:**
 ```
@@ -632,7 +716,9 @@ Location: /api/v1/users/128
 }
 ```
 
-### Fetching a User — GET
+<a id="fetching-a-user--get"></a>
+
+## Fetching a User — GET
 
 **Request:**
 ```
@@ -662,7 +748,9 @@ ETag: "d3b07384d113edec49eaa6238ad5ff00"
 }
 ```
 
-### Validation Error — 400
+<a id="validation-error--400"></a>
+
+## Validation Error — 400
 
 **Request:**
 ```
@@ -703,7 +791,9 @@ Content-Type: application/json
 }
 ```
 
-### Paginated Collection Response
+<a id="paginated-collection-response"></a>
+
+## Paginated Collection Response
 
 **Request:**
 ```
@@ -740,12 +830,13 @@ Content-Type: application/json
 }
 ```
 
----
+> [↑ Back to Top](#top)
 
-## HATEOAS — The Constraint Nobody Uses (But You Should Know About)
+<a id="9-hateoas--the-constraint-nobody-uses"></a>
 
-HATEOAS stands for Hypermedia As The Engine Of Application State. Say it once, feel
-fancy, then mostly forget about it in day-to-day work.
+# 9. HATEOAS — The Constraint Nobody Uses
+
+"Now for the weird one," Lakshmi says with a grin. "HATEOAS stands for Hypermedia As The Engine Of Application State. Say it once, feel fancy, then mostly forget about it in day-to-day work."
 
 The idea: API responses should include links to related actions. The client discovers
 what it can do next by reading the response, not from external documentation.
@@ -774,11 +865,15 @@ documentation, not hypermedia links, to understand what they can do.
 You'll see HATEOAS mentioned in REST purity discussions. You'll rarely see it in actual
 APIs. Don't stress about it. Know it exists. Move on.
 
----
+> [↑ Back to Top](#top)
 
-## How RESTful Is "RESTful Enough"?
+<a id="10-how-restful-is-restful-enough"></a>
 
-Here's a real talk moment: most APIs people call "REST" or "RESTful" don't actually
+# 10. How RESTful Is "RESTful Enough"?
+
+Lakshmi puts down the marker. "Here's a real talk moment, team."
+
+Most APIs people call "REST" or "RESTful" don't actually
 implement all six constraints. They implement Client-Server, Stateless, and Uniform
 Interface. They partially implement Cacheable and Layered System. They ignore Code on
 Demand and HATEOAS.
@@ -797,9 +892,11 @@ what matters.
 Don't let perfect be the enemy of good. A pragmatic REST API that developers can
 understand and use is worth a hundred technically-perfect APIs that are confusing.
 
----
+> [↑ Back to Top](#top)
 
-## Summary
+<a id="summary"></a>
+
+## 🔥 Summary
 
 ```
 REST = 6 architectural constraints, not a protocol or standard
@@ -831,10 +928,12 @@ Idempotency:
   → matters for: retries, network failures, reliability
 ```
 
----
+> [↑ Back to Top](#top)
 
-**[🏠 Back to README](../README.md)**
+**[Back to README](../README.md)**
 
-**Prev:** [← What is an API?](../01_what_is_an_api/story.md) &nbsp;|&nbsp; **Next:** [REST Best Practices →](../03_rest_best_practices/patterns.md)
+**Prev:** [What is an API?](../01_what_is_an_api/theory.md) | **Next:** [REST Best Practices](../03_rest_best_practices/theory.md)
 
-**Related Topics:** [REST Best Practices](../03_rest_best_practices/patterns.md) · [What is an API?](../01_what_is_an_api/story.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [API Versioning](../08_versioning_standards/versioning_strategy.md)
+**Related Topics:** [REST Best Practices](../03_rest_best_practices/theory.md) | [What is an API?](../01_what_is_an_api/theory.md) | [Error Handling Standards](../06_error_handling_standards/theory.md) | [API Versioning](../08_versioning_standards/theory.md)
+
+**Up:** [03_API_Mastery](../README.md)

@@ -23,17 +23,33 @@ Let's break it slowly and clearly.
 3. [Core Idea of DP](#3-core-idea-of-dp)
 4. [Two Requirements for DP](#4-two-requirements-for-dp)
 5. [Two Ways to Implement DP](#5-two-ways-to-implement-dp)
+   - [Memoization (Top-Down)](#memoization-top-down)
+   - [Tabulation (Bottom-Up)](#tabulation-bottom-up)
+   - [Visual: Memoization vs Tabulation](#visual-memoization-vs-tabulation)
 6. [How to Identify DP Problems](#6-how-to-identify-dp-problems)
 7. [Classic DP Problems](#7-classic-dp-problems)
+   - [Fibonacci](#fibonacci)
+   - [Climbing Stairs](#climbing-stairs)
+   - [0/1 Knapsack](#01-knapsack)
+   - [Longest Common Subsequence](#longest-common-subsequence-lcs)
+   - [Longest Increasing Subsequence](#longest-increasing-subsequence-lis)
+   - [Coin Change](#coin-change)
 8. [Time and Space Complexity](#8-time-and-space-complexity)
 9. [DP vs Greedy](#9-dp-vs-greedy)
 10. [DP vs Backtracking](#10-dp-vs-backtracking)
 11. [Common DP Patterns](#11-common-dp-patterns)
+    - [1D DP](#1d-dp)
+    - [2D DP](#2d-dp)
+    - [DP on Strings](#dp-on-strings)
+    - [DP on Grid](#dp-on-grid)
+    - [DP on Trees](#dp-on-trees)
+    - [DP on Subsequences](#dp-on-subsequences)
+    - [DP on Strings — Edit Distance](#dp-on-strings--edit-distance)
+    - [Bitmask DP — Tracking Subsets as States](#bitmask-dp--tracking-subsets-as-states)
 12. [DP Dimensions — Choosing the Right State](#12-dp-dimensions)
-13. [Mental Model](#13-mental-model)
-14. [Step-by-Step DP Thinking Strategy](#14-step-by-step-dp-thinking-strategy)
-15. [Real-World Applications](#15-real-world-applications)
-16. [Final Understanding](#16-final-understanding)
+    - [Space Optimization — 2D Table to 1D Rolling Array](#space-optimization--2d-table-to-1d-rolling-array)
+13. [Step-by-Step DP Thinking Strategy](#13-step-by-step-dp-thinking-strategy)
+14. [Mental Model](#14-mental-model)
 
 ## 📌 Learning Priority
 
@@ -52,6 +68,8 @@ digit DP · DP on trees · convex hull trick · profile DP
 <a id="1-real-life-story"></a>
 
 # 1. Real Life Story — Climbing Stairs
+
+Quinn is a budget traveler backpacking across Southeast Asia. At every hostel, every street market, every bus station, Quinn writes down the cheapest price in a little notebook. When a friend asks "what's the cheapest way from Bangkok to Hanoi?" Quinn doesn't retrace every route from scratch — Quinn flips open the notebook and combines known cheapest segments. That notebook is dynamic programming: solve each sub-trip once, write it down, and build optimal full journeys from stored answers.
 
 Imagine you are climbing stairs.
 
@@ -88,6 +106,8 @@ That is DP.
 <a id="2-why-normal-recursion-is-slow"></a>
 
 # 2. Why Normal Recursion Is Slow
+
+Quinn's friend tries to figure out the cheapest route by calling every travel agent along the way, but each agent calls the same sub-agents repeatedly without writing anything down. The phone bills explode exponentially. Quinn just looks at the notebook — one call per city, done.
 
 Let's solve climbing stairs recursively.
 
@@ -172,6 +192,8 @@ WITH memoization — linear work:
 
 # 3. Core Idea of DP
 
+Quinn's entire travel strategy boils down to one rule: if you've already figured out the cheapest price for a segment, write it in the notebook and never re-research it. Every new route decision just looks up previously stored answers and combines them.
+
 If subproblem repeats,
 store result.
 
@@ -191,6 +213,8 @@ DP = Recursion + Memory
 
 # 4. Two Requirements for DP
 
+Quinn's notebook strategy only works under two conditions: first, the same city-pair price keeps getting asked about (overlapping subproblems); second, the cheapest Bangkok-to-Hanoi trip genuinely passes through the cheapest Bangkok-to-Saigon segment (optimal substructure). Without both, the notebook is useless.
+
 DP works when:
 
 1. Overlapping Subproblems
@@ -209,6 +233,10 @@ If these exist → use DP.
 <a id="5-two-ways-to-implement-dp"></a>
 
 # 5. Two Ways to Implement DP
+
+Quinn can fill the notebook two ways. Top-down: start with the big question ("cheapest Bangkok to Hanoi?"), break it into sub-trips, and jot down answers as they come back. Bottom-up: start from the shortest known hops (direct buses) and build up longer routes city by city until the full answer appears. Same notebook, different fill order.
+
+<a id="memoization-top-down"></a>
 
 ## Memoization (Top-Down)
 
@@ -240,6 +268,8 @@ O(n)
 
 > 📝 **Practice:** [Q1 — Fibonacci Top-Down](./practice.md#q1--memoization--fibonacci-top-down)
 
+<a id="tabulation-bottom-up"></a>
+
 ## Tabulation (Bottom-Up)
 
 Build solution from smallest case.
@@ -261,6 +291,8 @@ No recursion stack.
 **Common mistake — wrong base case initialization:** If you set `dp[0] = 0` and rely on `dp[i] = dp[i-1] + dp[i-2]`, then `dp[2] = dp[1] + dp[0] = 1 + 0 = 1` — wrong, the answer is 2. Either set `dp[2] = 2` explicitly, or use `dp[0] = 1` as the "empty path" sentinel. Write the state definition first; it forces the correct base value.
 
 > 📝 **Practice:** [Q2 — Climbing Stairs Bottom-Up](./practice.md#q2--tabulation--climbing-stairs-bottom-up) · [Q3 — O(1) Space](./practice.md#q3--space-optimization--climbing-stairs-o1-space)
+
+<a id="visual-memoization-vs-tabulation"></a>
 
 ## Visual: Memoization vs Tabulation
 
@@ -337,6 +369,8 @@ Tabulation (Bottom-Up) — Iterative + Table:
 
 # 6. How to Identify DP Problems
 
+Quinn has learned to recognize which travel questions benefit from the notebook. Whenever a question includes "how many ways," "cheapest route," "longest trail," or "best combination with a weight limit," Quinn knows the notebook (DP) will help. The pattern recognition becomes instinct.
+
 Look for:
 
 - Count number of ways
@@ -355,13 +389,21 @@ If recursion has repeated calls → DP candidate.
 
 # 7. Classic DP Problems
 
+Quinn's notebook has chapters for the most common route types. Fibonacci routes, staircase climbs, weight-limited packing, string comparisons, and coin-making problems all follow recognizable patterns. Master these chapters and most new problems are just variations.
+
+<a id="fibonacci"></a>
+
 ## Fibonacci
 
 Base DP example.
 
+<a id="climbing-stairs"></a>
+
 ## Climbing Stairs
 
 Same pattern as Fibonacci.
+
+<a id="01-knapsack"></a>
 
 ## 0/1 Knapsack
 
@@ -414,6 +456,8 @@ Important 2D DP.
 
 > 📝 **Practice:** [Q9 — 0/1 Knapsack 2D](./practice.md#q9--knapsack--01-knapsack-2d) · [Q10 — Space-Optimized](./practice.md#q10--knapsack--01-knapsack-space-optimized) · [Q17 — Partition Subset](./practice.md#q17--knapsack--partition-equal-subset-sum)
 
+<a id="longest-common-subsequence-lcs"></a>
+
 ## Longest Common Subsequence (LCS)
 
 Compare two strings.
@@ -458,6 +502,8 @@ Classic 2D DP.
 > 📝 **Practice:** [Q57 · dp-lcs](../dsa_practice_questions_100.md#q57--normal--dp-lcs)
 
 > 📝 **Practice:** [Q13 — LCS](./practice.md#q13--sequence-dp--longest-common-subsequence) · [Q20 — LCS Space-Optimized](./practice.md#q20--space-optimization--rolling-array-lcs)
+
+<a id="longest-increasing-subsequence-lis"></a>
 
 ## Longest Increasing Subsequence (LIS)
 
@@ -519,6 +565,8 @@ Standard DP approach for comparison (O(n^2)):
 
 > 📝 **Practice:** [Q14 — LIS O(n²)](./practice.md#q14--sequence-dp--longest-increasing-subsequence-on2) · [Q15 — LIS O(n log n)](./practice.md#q15--sequence-dp--lis-onlogn-patience-sorting)
 
+<a id="coin-change"></a>
+
 ## Coin Change
 
 Minimum coins to make amount.
@@ -541,6 +589,8 @@ DP required.
 
 # 8. Time and Space Complexity
 
+Quinn notices a trade-off: carrying the notebook (extra space) means never re-researching a route (saving time). The heavier the notebook, the faster the trip planning. DP trades memory for speed — always.
+
 DP often reduces:
 
 Exponential → Polynomial
@@ -561,6 +611,8 @@ DP trades space for speed.
 
 # 9. DP vs Greedy
 
+Quinn's greedy friend always takes the cheapest next bus without planning ahead — sometimes ending up stranded at a dead-end town with no onward connections. Quinn's notebook considers all possible routes and picks the globally cheapest one. Greedy is fast but fragile; DP is thorough and correct.
+
 Greedy:
 Makes local decision.
 
@@ -576,6 +628,8 @@ DP usually works.
 
 # 10. DP vs Backtracking
 
+Quinn's backtracking friend tries every single route combination exhaustively — even re-exploring routes already proven expensive. Quinn does the same exploration but writes down each segment's cost the first time, so the second time that segment appears, it's a free lookup. DP is backtracking with a notebook.
+
 Backtracking:
 Explores all combinations.
 
@@ -589,6 +643,10 @@ DP is optimized backtracking.
 <a id="11-common-dp-patterns"></a>
 
 # 11. Common DP Patterns
+
+Quinn's notebook has different page layouts for different trip types: single-route chains (1D), grid maps (2D), string comparisons, and subset packing problems. Recognizing which layout fits a new problem is half the battle won.
+
+<a id="1d-dp"></a>
 
 ## 1D DP
 
@@ -622,10 +680,14 @@ Each cell depends on the previous two cells:
   AFTER  (space O(1)):  just keep prev=8, curr=13 → next=21
 ```
 
+<a id="2d-dp"></a>
+
 ## 2D DP
 
 Example:
 LCS, knapsack.
+
+<a id="dp-on-strings"></a>
 
 ## DP on Strings
 
@@ -633,6 +695,8 @@ Edit distance
 Palindrome partitioning
 
 > 📝 **Practice:** [Q16 — Edit Distance](./practice.md#q16--string-dp--edit-distance) · [Q25 — Palindrome Min Cuts](./practice.md#q25--string-dp--palindrome-minimum-cuts) · [Q29 — Word Break](./practice.md#q29--advanced--word-break)
+
+<a id="dp-on-grid"></a>
 
 ## DP on Grid
 
@@ -675,269 +739,21 @@ Problem: Count unique paths from top-left to bottom-right.
 
 > 📝 **Practice:** [Q11 — Unique Paths](./practice.md#q11--2d-dp--unique-paths-in-a-grid) · [Q12 — Minimum Path Sum](./practice.md#q12--2d-dp--minimum-path-sum)
 
+<a id="dp-on-trees"></a>
+
 ## DP on Trees
 
 Tree diameter
 House robber III
+
+<a id="dp-on-subsequences"></a>
 
 ## DP on Subsequences
 
 Subset sum
 Partition equal subset
 
-> [↑ Back to Top](#top)
-
-<a id="12-dp-dimensions"></a>
-
-# 12. DP Dimensions — Choosing the Right State
-
-One of the hardest parts of DP is deciding how many dimensions your dp array needs.
-The rule: **one dimension per independently varying parameter**.
-
-> 📝 **Practice:** [Q9 — 2D Knapsack](./practice.md#q9--knapsack--01-knapsack-2d) · [Q10 — 1D Optimized](./practice.md#q10--knapsack--01-knapsack-space-optimized) · [Q11 — Grid DP](./practice.md#q11--2d-dp--unique-paths-in-a-grid)
-
-```
-STATE DIMENSION GUIDE
-
-1D dp[i]       → one varying parameter
-               → "what's the best answer for the first i items?"
-               Examples: Fibonacci, climbing stairs, house robber
-
-2D dp[i][j]    → two varying parameters
-               → "best answer for first i items with capacity j?"
-               Examples: 0/1 knapsack, edit distance, longest common subsequence
-
-3D dp[i][j][k] → three varying parameters
-               → rare, usually means you need to reconsider your state
-               Examples: some grid problems with a variable constraint
-```
-
-**1D Example — Climbing Stairs:**
-
-```python
-# State: dp[i] = number of ways to reach step i
-# Varying parameter: current step i
-dp = [0] * (n + 1)
-dp[0] = 1
-dp[1] = 1
-for i in range(2, n + 1):
-    dp[i] = dp[i-1] + dp[i-2]
-```
-
-**2D Example — 0/1 Knapsack:**
-
-```python
-# State: dp[i][w] = max value using first i items with weight limit w
-# Two varying parameters: item index i, remaining capacity w
-dp = [[0] * (W + 1) for _ in range(n + 1)]
-for i in range(1, n + 1):
-    for w in range(W + 1):
-        if weights[i-1] <= w:
-            dp[i][w] = max(dp[i-1][w], values[i-1] + dp[i-1][w - weights[i-1]])
-        else:
-            dp[i][w] = dp[i-1][w]
-```
-
-**Space Optimization Trick:**
-
-Many 2D DP problems only look at the previous row — collapse to 1D:
-
-```python
-# 0/1 knapsack space-optimized: O(W) instead of O(n × W)
-dp = [0] * (W + 1)
-for i in range(n):
-    for w in range(W, weights[i] - 1, -1):   # ← traverse BACKWARDS to avoid using item twice
-        dp[w] = max(dp[w], values[i] + dp[w - weights[i]])
-```
-
-**Common mistake — wrong loop order in knapsack space optimization:** Iterating the inner loop left-to-right in the 1D knapsack silently converts 0/1 knapsack into unbounded knapsack — each item can be selected multiple times. Memory aid: 0/1 = right to left. Unbounded = left to right.
-
-## Visual: Space Optimization — 2D Table to 1D Rolling Array
-
-For problems where dp[i][j] only depends on row i-1, compress to 1D:
-
-Before: 2D table (O(m×n) space):
-
-```
-  Unique paths, 3×4 grid:
-
-  Row 0: [1, 1, 1, 1]   ← base case
-  Row 1: [1, 2, 3, 4]   ← computed from row 0
-  Row 2: [1, 3, 6, 10]  ← computed from row 1
-
-  We keep all rows in memory, but we only ever
-  look at the PREVIOUS row when computing the current row.
-  Rows 0 and 1 are DEAD after row 2 is computed.
-```
-
-After: 1D rolling array (O(n) space):
-
-```
-  Use a single array, update it IN PLACE left-to-right:
-
-  Start:   dp = [1, 1, 1, 1]  ← row 0
-
-  Pass 1 (computing row 1):
-    dp[0] stays 1  (leftmost column always 1)
-    dp[1] = dp[1] + dp[0] = 1 + 1 = 2
-    dp[2] = dp[2] + dp[1] = 1 + 2 = 3
-    dp[3] = dp[3] + dp[2] = 1 + 3 = 4
-  dp = [1, 2, 3, 4]  ← now represents row 1
-
-  Pass 2 (computing row 2):
-    dp[0] stays 1
-    dp[1] = dp[1] + dp[0] = 2 + 1 = 3
-    dp[2] = dp[2] + dp[1] = 3 + 3 = 6
-    dp[3] = dp[3] + dp[2] = 4 + 6 = 10
-  dp = [1, 3, 6, 10]  ← answer is dp[-1] = 10
-
-  BEFORE optimization:  O(m × n) space
-  AFTER  optimization:  O(n) space    (just one row)
-
-  When can you do this?
-  Only when dp[i][j] depends ONLY on dp[i-1][...] and dp[i][j-1].
-  Does NOT work when you need values from 2+ rows back.
-```
-
-**Common mistake — rolling array overwrites needed values:** When the transition needs the diagonal value `dp[i-1][j-1]`, updating in place overwrites it before you read it. Save `prev = dp[j]` before the update and use `prev` wherever you need the old diagonal. This is required in edit distance space optimization but not in unique paths.
-
-**State Transition Diagram:**
-
-Think of the DP table as a directed graph where each cell depends on others:
-
-```
-dp[i][j] depends on:
-  - dp[i-1][j]     (skip current item)
-  - dp[i-1][j-w]   (take current item)
-
-Fill order: row by row, left to right
-→ always fill cells before they are needed
-```
-
-> [↑ Back to Top](#top)
-
-<a id="13-mental-model"></a>
-
-# 13. Mental Model
-
-Think of DP as:
-
-Building solutions like Lego blocks.
-
-Small blocks combine to form bigger blocks.
-
-Each block stored for reuse.
-
-## Visual: Mental Model Summary
-
-```
-┌────────────────────────────────────────────────────────────────┐
-│  DYNAMIC PROGRAMMING — MENTAL MODELS                           │
-├─────────────────────┬──────────────────────────────────────────┤
-│  Recognition        │  Look for...                             │
-├─────────────────────┼──────────────────────────────────────────┤
-│  "Count ways"       │  Probably DP (add subproblem results)    │
-│  "Max/min value"    │  Probably DP (optimize subproblems)      │
-│  Overlapping        │  Memoize! Don't recompute                │
-│  subproblems        │                                          │
-│  Optimal            │  DP works if optimal solution is         │
-│  substructure       │  composed of optimal sub-solutions       │
-├─────────────────────┼──────────────────────────────────────────┤
-│  Problem Type       │  DP Pattern                              │
-├─────────────────────┼──────────────────────────────────────────┤
-│  Fibonacci/stairs   │  1D, dp[i] = f(dp[i-1], dp[i-2])        │
-│  Grid paths         │  2D, dp[i][j] = dp[i-1][j] + dp[i][j-1] │
-│  Two strings        │  2D grid (LCS, edit distance)            │
-│  Subset/knapsack    │  2D: items × capacity                    │
-│  Subsequence        │  1D or 2D depending on constraints       │
-├─────────────────────┼──────────────────────────────────────────┤
-│  Optimization       │  How to apply                            │
-├─────────────────────┼──────────────────────────────────────────┤
-│  Memo → table       │  Eliminate recursion overhead            │
-│  2D → 1D array      │  Only if row i depends only on row i-1   │
-│  2 variables        │  Only if dp[i] depends on dp[i-1] only   │
-└─────────────────────┴─────────────────────────────────────────┘
-
-  The 3-step DP framework:
-  1. DEFINE: What does dp[i] or dp[i][j] represent?
-  2. TRANSITION: How does dp[i] relate to smaller subproblems?
-  3. BASE CASE: What are the smallest inputs with known answers?
-```
-
-> [↑ Back to Top](#top)
-
-<a id="14-step-by-step-dp-thinking-strategy"></a>
-
-# 14. Step-by-Step DP Thinking Strategy
-
-When solving DP problem:
-
-1. Define state clearly.
-2. Write recurrence relation.
-3. Define base case.
-4. Choose memo or tabulation.
-5. Optimize space if possible.
-6. Analyze complexity.
-
-Never start coding before defining state.
-
-**Common mistake — wrong state definition leads to wrong code:** A vague `dp[i]` definition means the base case initialization becomes guesswork. Write the state definition as one precise English sentence before writing any code. For LIS: "dp[i] = length of the longest increasing subsequence that ends at index i." That sentence forces `dp = [1] * n` (not 0), because every element alone is a length-1 subsequence.
-
-**Common mistake — transition accesses out-of-bounds index:** When a transition uses `dp[i-2]`, `dp[i-2]` is invalid at `i=1` and in Python silently accesses `dp[-1]` (the last element), corrupting the answer. Either handle the first `k-1` iterations as explicit base cases or guard with `if i >= k else 0`.
-
-**Common mistake — circular state dependency:** If your transition reads `dp[i]` while computing `dp[i]`, the recurrence is circular — there is no valid fill order. Redefine the state so it strictly depends on previously computed states (smaller i for 1D, previous row for 2D).
-
-**Pre-submission checklist:**
-
-- Can I write the state definition in one precise English sentence? If not, the state is wrong.
-- Are all base cases initialized correctly? Verify by hand for n=0, n=1, and a 1-cell grid.
-- Does the transition access any index that could be negative or out of bounds?
-- For knapsack: does the inner loop go right-to-left (0/1) or left-to-right (unbounded)?
-- If using a rolling array: do I cache the old `dp[j]` value before overwriting it?
-- Is the "no solution" case handled? Return -1 when `dp[n]` is still at its sentinel value.
-- Are all states computed in the correct topological order?
-
-> 📝 **Practice:** [Q7 — 6-Step Strategy Applied](./practice.md#q7--dp-thinking--how-to-define-state) · [Q30 — Design from Scratch](./practice.md#q30--advanced--design-a-dp-solution-from-scratch)
-
-> [↑ Back to Top](#top)
-
-<a id="15-real-world-applications"></a>
-
-# 15. Real-World Applications
-
-- Stock market prediction
-- Route optimization
-- Resource allocation
-- DNA sequence alignment
-- AI decision systems
-- Game strategy engines
-
-DP widely used in advanced systems.
-
-> [↑ Back to Top](#top)
-
-<a id="16-final-understanding"></a>
-
-# 16. Final Understanding
-
-Dynamic Programming is:
-
-- Optimization of recursion
-- Memory-based speed-up
-- Used for complex optimization problems
-- Often polynomial time
-- Requires careful state modeling
-- One of the most important interview topics
-
-Mastering DP prepares you for:
-
-- Hard interview rounds
-- FAANG-level problems
-- Competitive programming
-- Real-world optimization systems
-
-DP is not about memorizing formulas.
-It is about learning to model problems correctly.
+<a id="dp-on-strings--edit-distance"></a>
 
 ## DP on Strings — Edit Distance
 
@@ -1043,6 +859,8 @@ def edit_distance_optimized(s, t):
 
 **Complexity:** O(m×n) time, O(m×n) space (or O(n) with optimization)
 
+<a id="bitmask-dp--tracking-subsets-as-states"></a>
+
 ## Bitmask DP — Tracking Subsets as States
 
 > Imagine assigning employees to tasks. Each assignment changes which employees are "available." A bitmask tracks exactly which subset is available — and DP finds the optimal assignment across all possible subsets.
@@ -1127,10 +945,272 @@ def assignment(cost):
 
 > [↑ Back to Top](#top)
 
+<a id="12-dp-dimensions"></a>
+
+# 12. DP Dimensions — Choosing the Right State
+
+Quinn's notebook pages come in different sizes. A simple route chain needs a single-column page (1D). A trip with weight constraints needs a two-column page (2D) — one axis for cities, one for remaining luggage weight. The rule: one column per independently varying parameter. Choosing the right page layout is the hardest part.
+
+One of the hardest parts of DP is deciding how many dimensions your dp array needs.
+The rule: **one dimension per independently varying parameter**.
+
+> 📝 **Practice:** [Q9 — 2D Knapsack](./practice.md#q9--knapsack--01-knapsack-2d) · [Q10 — 1D Optimized](./practice.md#q10--knapsack--01-knapsack-space-optimized) · [Q11 — Grid DP](./practice.md#q11--2d-dp--unique-paths-in-a-grid)
+
+```
+STATE DIMENSION GUIDE
+
+1D dp[i]       → one varying parameter
+               → "what's the best answer for the first i items?"
+               Examples: Fibonacci, climbing stairs, house robber
+
+2D dp[i][j]    → two varying parameters
+               → "best answer for first i items with capacity j?"
+               Examples: 0/1 knapsack, edit distance, longest common subsequence
+
+3D dp[i][j][k] → three varying parameters
+               → rare, usually means you need to reconsider your state
+               Examples: some grid problems with a variable constraint
+```
+
+**1D Example — Climbing Stairs:**
+
+```python
+# State: dp[i] = number of ways to reach step i
+# Varying parameter: current step i
+dp = [0] * (n + 1)
+dp[0] = 1
+dp[1] = 1
+for i in range(2, n + 1):
+    dp[i] = dp[i-1] + dp[i-2]
+```
+
+**2D Example — 0/1 Knapsack:**
+
+```python
+# State: dp[i][w] = max value using first i items with weight limit w
+# Two varying parameters: item index i, remaining capacity w
+dp = [[0] * (W + 1) for _ in range(n + 1)]
+for i in range(1, n + 1):
+    for w in range(W + 1):
+        if weights[i-1] <= w:
+            dp[i][w] = max(dp[i-1][w], values[i-1] + dp[i-1][w - weights[i-1]])
+        else:
+            dp[i][w] = dp[i-1][w]
+```
+
+**Space Optimization Trick:**
+
+Many 2D DP problems only look at the previous row — collapse to 1D:
+
+```python
+# 0/1 knapsack space-optimized: O(W) instead of O(n × W)
+dp = [0] * (W + 1)
+for i in range(n):
+    for w in range(W, weights[i] - 1, -1):   # ← traverse BACKWARDS to avoid using item twice
+        dp[w] = max(dp[w], values[i] + dp[w - weights[i]])
+```
+
+**Common mistake — wrong loop order in knapsack space optimization:** Iterating the inner loop left-to-right in the 1D knapsack silently converts 0/1 knapsack into unbounded knapsack — each item can be selected multiple times. Memory aid: 0/1 = right to left. Unbounded = left to right.
+
+<a id="space-optimization--2d-table-to-1d-rolling-array"></a>
+
+## Visual: Space Optimization — 2D Table to 1D Rolling Array
+
+For problems where dp[i][j] only depends on row i-1, compress to 1D:
+
+Before: 2D table (O(m×n) space):
+
+```
+  Unique paths, 3×4 grid:
+
+  Row 0: [1, 1, 1, 1]   ← base case
+  Row 1: [1, 2, 3, 4]   ← computed from row 0
+  Row 2: [1, 3, 6, 10]  ← computed from row 1
+
+  We keep all rows in memory, but we only ever
+  look at the PREVIOUS row when computing the current row.
+  Rows 0 and 1 are DEAD after row 2 is computed.
+```
+
+After: 1D rolling array (O(n) space):
+
+```
+  Use a single array, update it IN PLACE left-to-right:
+
+  Start:   dp = [1, 1, 1, 1]  ← row 0
+
+  Pass 1 (computing row 1):
+    dp[0] stays 1  (leftmost column always 1)
+    dp[1] = dp[1] + dp[0] = 1 + 1 = 2
+    dp[2] = dp[2] + dp[1] = 1 + 2 = 3
+    dp[3] = dp[3] + dp[2] = 1 + 3 = 4
+  dp = [1, 2, 3, 4]  ← now represents row 1
+
+  Pass 2 (computing row 2):
+    dp[0] stays 1
+    dp[1] = dp[1] + dp[0] = 2 + 1 = 3
+    dp[2] = dp[2] + dp[1] = 3 + 3 = 6
+    dp[3] = dp[3] + dp[2] = 4 + 6 = 10
+  dp = [1, 3, 6, 10]  ← answer is dp[-1] = 10
+
+  BEFORE optimization:  O(m × n) space
+  AFTER  optimization:  O(n) space    (just one row)
+
+  When can you do this?
+  Only when dp[i][j] depends ONLY on dp[i-1][...] and dp[i][j-1].
+  Does NOT work when you need values from 2+ rows back.
+```
+
+**Common mistake — rolling array overwrites needed values:** When the transition needs the diagonal value `dp[i-1][j-1]`, updating in place overwrites it before you read it. Save `prev = dp[j]` before the update and use `prev` wherever you need the old diagonal. This is required in edit distance space optimization but not in unique paths.
+
+**State Transition Diagram:**
+
+Think of the DP table as a directed graph where each cell depends on others:
+
+```
+dp[i][j] depends on:
+  - dp[i-1][j]     (skip current item)
+  - dp[i-1][j-w]   (take current item)
+
+Fill order: row by row, left to right
+→ always fill cells before they are needed
+```
+
+> [↑ Back to Top](#top)
+
+<a id="13-step-by-step-dp-thinking-strategy"></a>
+
+# 13. Step-by-Step DP Thinking Strategy
+
+Quinn developed a 6-step ritual for every new route problem: (1) define what the notebook page tracks, (2) write how each cell relates to previous cells, (3) fill in the obvious starting values, (4) decide whether to fill top-down or bottom-up, (5) check if old pages can be discarded to save weight, (6) count how many pages total. This ritual never fails.
+
+When solving DP problem:
+
+1. Define state clearly.
+2. Write recurrence relation.
+3. Define base case.
+4. Choose memo or tabulation.
+5. Optimize space if possible.
+6. Analyze complexity.
+
+Never start coding before defining state.
+
+**Common mistake — wrong state definition leads to wrong code:** A vague `dp[i]` definition means the base case initialization becomes guesswork. Write the state definition as one precise English sentence before writing any code. For LIS: "dp[i] = length of the longest increasing subsequence that ends at index i." That sentence forces `dp = [1] * n` (not 0), because every element alone is a length-1 subsequence.
+
+**Common mistake — transition accesses out-of-bounds index:** When a transition uses `dp[i-2]`, `dp[i-2]` is invalid at `i=1` and in Python silently accesses `dp[-1]` (the last element), corrupting the answer. Either handle the first `k-1` iterations as explicit base cases or guard with `if i >= k else 0`.
+
+**Common mistake — circular state dependency:** If your transition reads `dp[i]` while computing `dp[i]`, the recurrence is circular — there is no valid fill order. Redefine the state so it strictly depends on previously computed states (smaller i for 1D, previous row for 2D).
+
+**Pre-submission checklist:**
+
+- Can I write the state definition in one precise English sentence? If not, the state is wrong.
+- Are all base cases initialized correctly? Verify by hand for n=0, n=1, and a 1-cell grid.
+- Does the transition access any index that could be negative or out of bounds?
+- For knapsack: does the inner loop go right-to-left (0/1) or left-to-right (unbounded)?
+- If using a rolling array: do I cache the old `dp[j]` value before overwriting it?
+- Is the "no solution" case handled? Return -1 when `dp[n]` is still at its sentinel value.
+- Are all states computed in the correct topological order?
+
+> 📝 **Practice:** [Q7 — 6-Step Strategy Applied](./practice.md#q7--dp-thinking--how-to-define-state) · [Q30 — Design from Scratch](./practice.md#q30--advanced--design-a-dp-solution-from-scratch)
+
+> [↑ Back to Top](#top)
+
+<a id="14-mental-model"></a>
+
+# 14. Mental Model
+
+Quinn's final insight after hundreds of trips: think of DP as building a travel guide one city at a time. Small known segments (Lego blocks) combine into longer routes (bigger blocks). Each block, once built, sits in the notebook forever — ready to be snapped onto the next question without rebuilding.
+
+Think of DP as:
+
+Building solutions like Lego blocks.
+
+Small blocks combine to form bigger blocks.
+
+Each block stored for reuse.
+
+## Visual: Mental Model Summary
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│  DYNAMIC PROGRAMMING — MENTAL MODELS                           │
+├─────────────────────┬──────────────────────────────────────────┤
+│  Recognition        │  Look for...                             │
+├─────────────────────┼──────────────────────────────────────────┤
+│  "Count ways"       │  Probably DP (add subproblem results)    │
+│  "Max/min value"    │  Probably DP (optimize subproblems)      │
+│  Overlapping        │  Memoize! Don't recompute                │
+│  subproblems        │                                          │
+│  Optimal            │  DP works if optimal solution is         │
+│  substructure       │  composed of optimal sub-solutions       │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Problem Type       │  DP Pattern                              │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Fibonacci/stairs   │  1D, dp[i] = f(dp[i-1], dp[i-2])        │
+│  Grid paths         │  2D, dp[i][j] = dp[i-1][j] + dp[i][j-1] │
+│  Two strings        │  2D grid (LCS, edit distance)            │
+│  Subset/knapsack    │  2D: items × capacity                    │
+│  Subsequence        │  1D or 2D depending on constraints       │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Optimization       │  How to apply                            │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Memo → table       │  Eliminate recursion overhead            │
+│  2D → 1D array      │  Only if row i depends only on row i-1   │
+│  2 variables        │  Only if dp[i] depends on dp[i-1] only   │
+└─────────────────────┴─────────────────────────────────────────┘
+
+  The 3-step DP framework:
+  1. DEFINE: What does dp[i] or dp[i][j] represent?
+  2. TRANSITION: How does dp[i] relate to smaller subproblems?
+  3. BASE CASE: What are the smallest inputs with known answers?
+```
+
+> [↑ Back to Top](#top)
+
+## 🔥 Summary
+
+Dynamic Programming is:
+
+- Optimization of recursion
+- Memory-based speed-up
+- Used for complex optimization problems
+- Often polynomial time
+- Requires careful state modeling
+- One of the most important interview topics
+
+Mastering DP prepares you for:
+
+- Hard interview rounds
+- FAANG-level problems
+- Competitive programming
+- Real-world optimization systems
+
+DP is not about memorizing formulas.
+It is about learning to model problems correctly.
+
+**Real-World Applications:**
+
+- Stock market prediction
+- Route optimization
+- Resource allocation
+- DNA sequence alignment
+- AI decision systems
+- Game strategy engines
+
+DP widely used in advanced systems.
+
+**Quinn's final takeaway:** Every DP problem is just a travel planning problem in disguise. Define the trip segments (state), figure out how segments connect (transition), know your starting point (base case), and never research the same segment twice (memoization). The notebook always wins.
+
 ## 📂 Navigation
 
-**[🏠 Back to README](../README.md)**
+**[Back to README](../README.md)**
 
-**Prev:** [← Backtracking — Interview Q&A](../20_backtracking/interview.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
+| Previous | Next |
+|----------|------|
+| [← 20 Backtracking](../20_backtracking/theory.md) | [22 Bit Manipulation →](../22_bit_manipulation/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)
+**This folder:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Patterns](./patterns.md) · [Practice](./practice.md) · [Real World Usage](./real_world_usage.md)
+
+**Related modules:** [04 Recursion](../04_recursion/theory.md) · [19 Greedy](../19_greedy/theory.md) · [20 Backtracking](../20_backtracking/theory.md) · [22 Bit Manipulation](../22_bit_manipulation/theory.md)
+
+**Jump to topics:** [Memoization](#memoization-top-down) · [Tabulation](#tabulation-bottom-up) · [Knapsack](#01-knapsack) · [LCS](#longest-common-subsequence-lcs) · [LIS](#longest-increasing-subsequence-lis) · [Coin Change](#coin-change) · [Edit Distance](#dp-on-strings--edit-distance) · [Bitmask DP](#bitmask-dp--tracking-subsets-as-states) · [Space Optimization](#space-optimization--2d-table-to-1d-rolling-array)

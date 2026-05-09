@@ -15,18 +15,28 @@ is one of the most important interview skills.
 
 ## 📖 Table of Contents
 
-1. [Real Life Story — Eating Cake](#1-real-life-story)
-2. [Backpack Story — Choosing Items](#2-backpack-story)
+1. [The Greedy Choice — Why Local Beats Global](#1-the-greedy-choice)
+  - [The Buffet Strategy](#visual-the-buffet-strategy)
+2. [When Greedy Fails — The Knapsack Lesson](#2-when-greedy-fails)
+  - [Greedy Stays Ahead](#visual-why-greedy-sometimes-works)
 3. [What Is a Greedy Algorithm?](#3-what-is-a-greedy-algorithm)
 4. [When Does Greedy Work?](#4-when-does-greedy-work)
+  - [The Greedy Decision Flowchart](#visual-the-greedy-decision-flowchart)
 5. [Classic Greedy Problems](#5-classic-greedy-problems)
+  - [Activity Selection](#activity-selection)
+  - [Merge Intervals](#merge-intervals)
+  - [Minimum Number of Coins](#minimum-number-of-coins)
+  - [Huffman Coding](#huffman-coding)
+  - [Fractional Knapsack](#fractional-knapsack)
+  - [Job Sequencing with Deadlines](#job-sequencing-with-deadlines)
+  - [Jump Game](#visual-jump-game)
+  - [Minimum Platforms — Sweep Line](#visual-minimum-platforms)
 6. [Greedy vs Dynamic Programming](#6-greedy-vs-dynamic-programming)
+  - [Sort Order Cheat Sheet](#visual-sort-order-cheat-sheet)
 7. [How to Recognize Greedy Problems](#7-how-to-recognize-greedy-problems)
 8. [Time Complexity](#8-time-complexity)
-9. [Real-World Applications](#9-real-world-applications)
-10. [Common Mistakes](#10-common-mistakes)
-11. [Mental Model](#11-mental-model)
-12. [Final Understanding](#12-final-understanding)
+9. [Common Mistakes](#9-common-mistakes)
+  - [Wrong vs Correct Greedy Choices](#visual-wrong-vs-correct-greedy-choices)
 
 ## 📌 Learning Priority
 
@@ -42,8 +52,10 @@ greedy vs DP distinction · Huffman coding
 **Reference** — Know it exists, look up syntax when needed:
 job sequencing · graph-based greedy (Kruskal's/Prim's overview)
 
-<a id="1-real-life-story"></a>
-# 1. Real Life Story — Eating Cake
+<a id="1-the-greedy-choice"></a>
+# 1. The Greedy Choice — Why Local Beats Global
+
+Felix is an event planner running a massive catered gala. At the dessert table, he sees cake pieces: small, medium, and large. Felix grabs the largest piece first without calculating how many guests still need dessert — that is a greedy choice. Sometimes this strategy fills everyone's plate perfectly; sometimes it leaves the last guests with nothing.
 
 You have cake pieces:
 
@@ -60,6 +72,7 @@ You just pick the biggest now.
 Sometimes good.
 Sometimes wrong.
 
+<a id="visual-the-buffet-strategy"></a>
 ## Visual: The Buffet Strategy
 
 You're at an all-you-can-eat buffet. You're hungry. You have a strategy:
@@ -82,8 +95,10 @@ If yes: greedy is elegant and fast. If no: you need dynamic programming.
 
 > [↑ Back to Top](#top)
 
-<a id="2-backpack-story"></a>
-# 2. Backpack Story — Choosing Items
+<a id="2-when-greedy-fails"></a>
+# 2. When Greedy Fails — The Knapsack Lesson
+
+Felix is packing supplies for an outdoor wedding. His van has limited space, and he wants to maximize the total value of what he delivers. His greedy instinct says: load the single most expensive item first. But what if two medium-priced centerpieces together are worth more than one expensive ice sculpture? Felix learns the hard way — greedy does not always give the global optimum.
 
 You have limited space.
 
@@ -102,6 +117,7 @@ This shows:
 
 Greedy doesn't always give global optimum.
 
+<a id="visual-why-greedy-sometimes-works"></a>
 ## Visual: Why Greedy Sometimes Works — "Greedy Stays Ahead"
 
 The formal intuition is called the "greedy stays ahead" argument.
@@ -120,6 +136,8 @@ For problems where greedy works, the local best choice never "locks you out" of 
 <a id="3-what-is-a-greedy-algorithm"></a>
 # 3. What Is a Greedy Algorithm?
 
+Felix plans events one decision at a time. Once he books a vendor, he never calls them back to renegotiate. He picks the best available option at each step and moves forward — no backtracking, no second-guessing. That is exactly how a greedy algorithm operates.
+
 A greedy algorithm:
 
 - Makes locally optimal choice
@@ -132,6 +150,8 @@ It never backtracks.
 
 <a id="4-when-does-greedy-work"></a>
 # 4. When Does Greedy Work?
+
+Felix wonders: when can he trust his instinct to just pick the best option now? It works when two conditions hold — the greedy choice property (locally optimal leads to globally optimal) and optimal substructure (solving the remaining subproblem optimally still gives the overall optimum). Not all planning problems have these properties.
 
 Greedy works when:
 
@@ -146,31 +166,37 @@ A local optimal choice leads to global optimal solution.
 
 Not all problems have this.
 
+<a id="visual-the-greedy-decision-flowchart"></a>
 ## Visual: The Greedy Decision Flowchart
 
 ```
 Does the problem ask for maximum/minimum of something?
-    │
-    ▼
+    |
+    v
 Can you sort the input and make a local decision at each step?
-    │
-    ▼
+    |
+    v
 Can you prove that this local choice never "locks you out" of a better solution?
-    │
-    ├── YES → Greedy! Clean, O(n log n) or O(n)
-    │
-    └── MAYBE → Test with examples.
-        If greedy fails on a simple case → Dynamic Programming.
+    |
+    +-- YES -> Greedy! Clean, O(n log n) or O(n)
+    |
+    +-- MAYBE -> Test with examples.
+        If greedy fails on a simple case -> Dynamic Programming.
 ```
 
 > [↑ Back to Top](#top)
 
 <a id="5-classic-greedy-problems"></a>
 # 5. Classic Greedy Problems
-📝 [Practice Q3–Q8 — Basic Problems](./practice.md#basic-q1q8) · [Practice Q9–Q20 — Intermediate Problems](./practice.md#intermediate-q9q20)
 
+Felix faces the ultimate test: a week of back-to-back events. Each event requires its own greedy strategy — scheduling meetings, budgeting coins, compressing guest lists, packing gift bags, assigning staff, and planning routes. These are the classic problems every event planner (and every interview candidate) must master.
+
+> 📝 [Practice Q3-Q8 — Basic Problems](./practice.md#basic-q1q8) · [Practice Q9-Q20 — Intermediate Problems](./practice.md#intermediate-q9q20)
+
+<a id="activity-selection"></a>
 ## Activity Selection
-📝 [Practice Q3 — Max Meetings](./practice.md#q3-activity-selection--maximum-non-overlapping-meetings) · [Practice Q13 — Min Intervals to Remove](./practice.md#q13-minimum-intervals-to-remove-non-overlapping) · [Practice Q21 — Prove Correctness](./practice.md#q21-prove-activity-selection-correctness--exchange-argument)
+
+> 📝 [Practice Q3 — Max Meetings](./practice.md#q3-activity-selection--maximum-non-overlapping-meetings) · [Practice Q13 — Min Intervals to Remove](./practice.md#q13-minimum-intervals-to-remove-non-overlapping) · [Practice Q21 — Prove Correctness](./practice.md#q21-prove-activity-selection-correctness--exchange-argument)
 
 You have activities with start/end times.
 
@@ -190,7 +216,7 @@ Correct greedy logic.
 
 You have a meeting room. Several teams want to book it. You want to fit the MAXIMUM number of meetings.
 
-Here are 6 meetings (start time → end time):
+Here are 6 meetings (start time -> end time):
 
 ```
 Meeting A:  |====|                    starts 1, ends 4
@@ -234,17 +260,17 @@ Sort by end time:
   E: ends 11
 
 Step 1: Pick A (ends at 4). Room busy until 4.
-        ✓ A selected. Last end time = 4.
+        A selected. Last end time = 4.
 
 Step 2: D starts at 2. 2 < 4, OVERLAPS with A. Skip D.
 
 Step 3: F starts at 4. 4 >= 4, no overlap. Pick F!
-        ✓ F selected. Last end time = 6.
+        F selected. Last end time = 6.
 
 Step 4: B starts at 3. 3 < 6, overlaps. Skip B.
 
 Step 5: C starts at 6. 6 >= 6, no overlap. Pick C!
-        ✓ C selected. Last end time = 9.
+        C selected. Last end time = 9.
 
 Step 6: E starts at 8. 8 < 9, overlaps. Skip E.
 
@@ -252,9 +278,9 @@ Result: A, F, C = 3 meetings
 ```
 
 ```
-  Short+early:  |=|            ends at 2    ← greedy picks this
+  Short+early:  |=|            ends at 2    <- greedy picks this
   Long+early:   |==========|   ends at 10
-  Short+late:          |=|     ends at 8    ← then this
+  Short+late:          |=|     ends at 8    <- then this
 ```
 
 Sorting by start time might grab the long meeting and block two short ones.
@@ -279,6 +305,7 @@ def max_activities(intervals):
 
 **Common mistake — wrong greedy property for activity selection:** Sorting by shortest duration or earliest start time produces incorrect results silently. The only correct greedy choice is earliest finish time — any other sort key fails on simple counterexamples like `[(0,100),(1,2),(3,4)]` where start-time greedy picks only 1 activity instead of 3.
 
+<a id="merge-intervals"></a>
 ## Merge Intervals
 
 Different goal: you don't want to pick the max meetings. You want to **merge** all overlapping intervals
@@ -329,8 +356,8 @@ Before merging:                    After merging:
 ```
 
 ```
-Activity Selection:   "Which intervals can I pick so NONE overlap?" → maximize count
-Merge Intervals:      "Combine all overlapping intervals"           → minimize count
+Activity Selection:   "Which intervals can I pick so NONE overlap?" -> maximize count
+Merge Intervals:      "Combine all overlapping intervals"           -> minimize count
 
 Same problem of overlapping ranges. Completely different algorithms. Different greedy choices.
 ```
@@ -350,8 +377,10 @@ def merge_intervals(intervals):
 
 **Common mistake — wrong sort order for interval problems:** Activity selection needs sort by END time; merge intervals needs sort by START time. Using the wrong key runs without errors but silently gives the wrong answer. Check: `[[1,10],[2,3],[4,5],[6,7]]` — sort-by-start picks 1 interval, sort-by-end correctly picks 3.
 
+<a id="minimum-number-of-coins"></a>
 ## Minimum Number of Coins (Certain Systems)
-📝 [Practice Q4 — Coin Change Counterexample](./practice.md#q4-does-greedy-always-work-coin-change-counterexample) · [Practice Q15 — When Greedy Fails, Use DP](./practice.md#q15-coin-change--when-greedy-fails-use-dp) · [Practice Q22 — When Greedy Works](./practice.md#q22-when-does-coin-change-greedy-work-prove-it)
+
+> 📝 [Practice Q4 — Coin Change Counterexample](./practice.md#q4-does-greedy-always-work-coin-change-counterexample) · [Practice Q15 — When Greedy Fails, Use DP](./practice.md#q15-coin-change--when-greedy-fails-use-dp) · [Practice Q22 — When Greedy Works](./practice.md#q22-when-does-coin-change-greedy-work-prove-it)
 
 Coins:
 1, 5, 10, 25
@@ -382,10 +411,10 @@ Greedy is seductive — it always feels right. But it can mislead you.
 **Problem:** Make change for amount = 6, using coins [1, 3, 4].
 
 ```
-Greedy path:     6 → [take 4] → 2 → [take 1] → 1 → [take 1] → 0   (3 coins)
-                                                                     ✗ NOT optimal
-Optimal path:    6 → [take 3] → 3 → [take 3] → 0                   (2 coins)
-                                                                     ✓ OPTIMAL
+Greedy path:     6 -> [take 4] -> 2 -> [take 1] -> 1 -> [take 1] -> 0   (3 coins)
+                                                                     NOT optimal
+Optimal path:    6 -> [take 3] -> 3 -> [take 3] -> 0                   (2 coins)
+                                                                     OPTIMAL
 ```
 
 **Why did greedy fail?**
@@ -402,12 +431,14 @@ The "locally best" choice (biggest coin) blocked the "globally best" path.
 The rule of thumb:
 - Greedy works when picking the locally best option never eliminates a better global option
 - Greedy fails when a local choice closes off paths that lead to a better answer
-- When greedy fails → consider **Dynamic Programming** (which explores ALL options)
+- When greedy fails -> consider **Dynamic Programming** (which explores ALL options)
 
 **Common mistake — applying greedy to arbitrary coin denominations:** Greedy (largest coin first) only works when each denomination divides evenly into the next larger one, like `[1, 5, 10, 25]`. For arbitrary denominations like `[1, 3, 4]`, use DP. The fix: `dp[i] = min(dp[i], dp[i - coin] + 1)` for all coins at each amount.
 
+<a id="huffman-coding"></a>
 ## Huffman Coding
-📝 [Practice Q14 — Build the Huffman Tree](./practice.md#q14-huffman-encoding--build-the-optimal-prefix-tree) · [Practice Q23 — Min Cost to Connect Ropes](./practice.md#q23-minimum-cost-to-connect-all-ropes)
+
+> 📝 [Practice Q14 — Build the Huffman Tree](./practice.md#q14-huffman-encoding--build-the-optimal-prefix-tree) · [Practice Q23 — Min Cost to Connect Ropes](./practice.md#q23-minimum-cost-to-connect-all-ropes)
 
 Build optimal prefix code.
 
@@ -418,8 +449,10 @@ Always optimal.
 
 Used in compression.
 
+<a id="fractional-knapsack"></a>
 ## Fractional Knapsack
-📝 [Practice Q7 — Fractional Knapsack](./practice.md#q7-fractional-knapsack)
+
+> 📝 [Practice Q7 — Fractional Knapsack](./practice.md#q7-fractional-knapsack)
 
 You can take fraction of item.
 
@@ -433,14 +466,17 @@ Greedy fails.
 
 Important difference.
 
+<a id="job-sequencing-with-deadlines"></a>
 ## Job Sequencing with Deadlines
-📝 [Practice Q20 — Task Assignment](./practice.md#q20-task-assignment--minimize-maximum-completion-time) · [Practice Q12 — Task Scheduler](./practice.md#q12-task-scheduler-with-cooldown)
+
+> 📝 [Practice Q20 — Task Assignment](./practice.md#q20-task-assignment--minimize-maximum-completion-time) · [Practice Q12 — Task Scheduler](./practice.md#q12-task-scheduler-with-cooldown)
 
 Sort jobs by profit.
 Schedule greedily.
 
 Works due to problem structure.
 
+<a id="visual-jump-game"></a>
 ## Visual: Jump Game
 
 You're playing a board game. Each tile tells you the maximum number of steps you can jump forward.
@@ -507,6 +543,7 @@ def can_jump(nums):
 
 **Common mistake — Jump Game off-by-one in the loop guard:** The check `if i > max_reach: return False` must come BEFORE updating max_reach. If you update max_reach for unreachable indices, you get false positives. The critical invariant: only update max_reach when you can actually be at index i.
 
+<a id="visual-minimum-platforms"></a>
 ## Visual: Minimum Platforms — Sweep Line
 
 The sweep-line approach for "minimum platforms needed" requires TWO separately sorted arrays: arrivals and departures.
@@ -546,7 +583,10 @@ departure" — we count it as the departing train leaving first.
 
 <a id="6-greedy-vs-dynamic-programming"></a>
 # 6. Greedy vs Dynamic Programming
-📝 [Practice Q25 — Full Decision Framework](./practice.md#q25-greedy-vs-dp--full-decision-framework) · [Practice Q4 — Coin Change Counterexample](./practice.md#q4-does-greedy-always-work-coin-change-counterexample)
+
+Felix faces a dilemma: should he commit to a vendor instantly (greedy) or compare all quotes before deciding (dynamic programming)? Greedy is fast — one pass, decision made. DP is thorough — it explores every combination. The trade-off is speed versus guaranteed optimality.
+
+> 📝 [Practice Q25 — Full Decision Framework](./practice.md#q25-greedy-vs-dp--full-decision-framework) · [Practice Q4 — Coin Change Counterexample](./practice.md#q4-does-greedy-always-work-coin-change-counterexample)
 
 Greedy:
 - Fast
@@ -562,6 +602,7 @@ DP:
 If greedy property not proven,
 use DP.
 
+<a id="visual-sort-order-cheat-sheet"></a>
 ## Visual: Sort Order Cheat Sheet
 
 ```
@@ -577,7 +618,10 @@ Task scheduling (earliest deadline) DEADLINE    Classic EDF scheduling
 
 <a id="7-how-to-recognize-greedy-problems"></a>
 # 7. How to Recognize Greedy Problems
-📝 [Practice Q1 — Greedy Choice Property](./practice.md#q1-what-is-the-greedy-choice-property) · [Practice Q2 — Optimal Substructure](./practice.md#q2-optimal-substructure-in-greedy)
+
+Felix has learned to spot greedy-friendly situations by pattern. If the event requirements can be sorted and handled one-at-a-time without revisiting past decisions, greedy will likely work. The moment he catches himself needing to undo a choice, that is the signal to switch strategies.
+
+> 📝 [Practice Q1 — Greedy Choice Property](./practice.md#q1-what-is-the-greedy-choice-property) · [Practice Q2 — Optimal Substructure](./practice.md#q2-optimal-substructure-in-greedy)
 
 Look for:
 
@@ -595,12 +639,15 @@ Sorting often involved.
 
 <a id="8-time-complexity"></a>
 # 8. Time Complexity
-📝 [Practice Q3 — Activity Selection](./practice.md#q3-activity-selection--maximum-non-overlapping-meetings) · [Practice Q6 — Jump Game O(n)](./practice.md#q6-jump-game-i--can-you-reach-the-end)
+
+Felix notices that his greedy decisions always follow the same two-phase pattern: first he sorts all the vendor bids (O(n log n)), then he walks through them once picking the best at each step (O(n)). That makes greedy algorithms among the fastest optimization strategies available.
+
+> 📝 [Practice Q3 — Activity Selection](./practice.md#q3-activity-selection--maximum-non-overlapping-meetings) · [Practice Q6 — Jump Game O(n)](./practice.md#q6-jump-game-i--can-you-reach-the-end)
 
 Most greedy problems:
 
-Sort → O(n log n)
-Then iterate → O(n)
+Sort -> O(n log n)
+Then iterate -> O(n)
 
 Total:
 O(n log n)
@@ -609,23 +656,12 @@ Efficient.
 
 > [↑ Back to Top](#top)
 
-<a id="9-real-world-applications"></a>
-# 9. Real-World Applications
+<a id="9-common-mistakes"></a>
+# 9. Common Mistakes
 
-- Network bandwidth allocation
-- Scheduling meetings
-- Task prioritization
-- Resource allocation
-- Data compression
-- Cache replacement policies
+Felix learned every one of these the hard way — each mistake cost him a failed event or a panicked last-minute fix. The pattern is always the same: assuming the obvious local choice is safe without testing a counterexample first.
 
-Greedy used widely in systems.
-
-> [↑ Back to Top](#top)
-
-<a id="10-common-mistakes"></a>
-# 10. Common Mistakes
-📝 [Practice Q4 — Greedy Fails for Coins](./practice.md#q4-does-greedy-always-work-coin-change-counterexample) · [Practice Q21 — Prove Correctness](./practice.md#q21-prove-activity-selection-correctness--exchange-argument)
+> 📝 [Practice Q4 — Greedy Fails for Coins](./practice.md#q4-does-greedy-always-work-coin-change-counterexample) · [Practice Q21 — Prove Correctness](./practice.md#q21-prove-activity-selection-correctness--exchange-argument)
 
 - Assuming greedy always works
 - Not proving greedy property
@@ -635,6 +671,7 @@ Greedy used widely in systems.
 
 Greedy requires proof intuition.
 
+<a id="visual-wrong-vs-correct-greedy-choices"></a>
 ## Visual: Summary of Wrong vs Correct Greedy Choices
 
 ```
@@ -655,31 +692,12 @@ Min platforms                  Mixed event sort       Separate sorted arrivals/d
 | Jump Game off-by-one | Updating max_reach for unreachable index | Check `if i > max_reach: return False` FIRST |
 | Activity selection by duration | Shortest duration is not greedy-safe | Sort by FINISH TIME, not duration or start time |
 
-> [↑ Back to Top](#top)
-
-<a id="11-mental-model"></a>
-# 11. Mental Model
-📝 [Practice Q25 — When Greedy Works vs DP](./practice.md#q25-greedy-vs-dp--full-decision-framework)
-
-Greedy is like:
-
-Climbing mountain.
-
-At every step:
-Move in steepest upward direction.
-
-Usually works.
-But sometimes leads to local peak.
-
-Global maximum may be elsewhere.
-
 **Common mistake — not proving greedy works before trusting it:** Always test on a few examples before committing to a greedy approach. If greedy fails on even one counterexample, switch to DP. The "greedy stays ahead" exchange argument is the standard proof technique — if you can't sketch it, you haven't proven correctness.
 
 > [↑ Back to Top](#top)
 
-<a id="12-final-understanding"></a>
-# 12. Final Understanding
-📝 [Practice — All 25 Problems](./practice.md)
+<a id="summary"></a>
+## 🔥 Summary
 
 Greedy is:
 
@@ -690,27 +708,32 @@ Greedy is:
 - Used in scheduling and optimization
 - Not always safe
 
-Mastering greedy improves:
+**Mental Model:** Greedy is like climbing a mountain — at every step, move in the steepest upward direction. Usually works, but sometimes leads to a local peak while the global maximum is elsewhere.
 
-- Interview speed
-- Pattern recognition
-- Optimization thinking
+**Real-World Applications:**
+- Network bandwidth allocation
+- Scheduling meetings
+- Task prioritization
+- Resource allocation
+- Data compression (Huffman coding)
+- Cache replacement policies
 
-Greedy is about confidence in local choices.
+Greedy is used widely in systems wherever speed matters and the greedy choice property holds.
+
+**Felix's Final Lesson:** Mastering greedy improves interview speed, pattern recognition, and optimization thinking. The confidence to trust a local choice — backed by proof — is what separates a correct greedy solution from a lucky guess.
+
+> 📝 [Practice — All 25 Problems](./practice.md)
 
 > [↑ Back to Top](#top)
 
-# Navigation
+**[Back to README](../README.md)**
 
-Previous:
-[18_graphs/interview.md](/02_DSA_Mastery/18_graphs/interview.md)
+| Prev | Next |
+|------|------|
+| [Graphs](../18_graphs/theory.md) | [Backtracking](../20_backtracking/theory.md) |
 
-Next:
-[19_greedy/interview.md](/02_DSA_Mastery/19_greedy/interview.md)
-[20_backtracking/theory.md](/02_DSA_Mastery/20_backtracking/theory.md)
+**This folder:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
 
-**[🏠 Back to README](../README.md)**
+**Related modules:** [Dynamic Programming](../21_dynamic_programming/theory.md) · [Graphs](../18_graphs/theory.md) · [Backtracking](../20_backtracking/theory.md)
 
-**Prev:** [← Graphs — Interview Q&A](../18_graphs/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
-
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**Jump to:** [Activity Selection](#activity-selection) · [Coin Change](#minimum-number-of-coins) · [Jump Game](#visual-jump-game) · [Greedy vs DP](#6-greedy-vs-dynamic-programming) · [Common Mistakes](#9-common-mistakes)

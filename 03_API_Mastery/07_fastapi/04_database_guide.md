@@ -1,12 +1,52 @@
-# 10 — FastAPI & Databases: Connecting to the Real World
+<a id="top"></a>
 
-> Your API can validate data, handle auth, and organize routes. Now it needs to actually remember things. This stage connects FastAPI to PostgreSQL — the combination used by most production Python backends.
+# FastAPI & Databases: Connecting to the Real World
 
----
+> Vamsi's API can validate data, handle auth, and organize routes. Now it needs to actually remember things. This stage connects FastAPI to PostgreSQL — the combination used by most production Python backends.
 
-## The Story
+<a id="toc"></a>
 
-Every tutorial that stores data in a Python dictionary eventually hits the same wall: restart the server and everything disappears. Real applications need a database.
+## Table of Contents
+
+- [1. The Story](#1-the-story)
+- [2. Setup and Installation](#2-setup-and-installation)
+  - [Project Structure](#project-structure)
+  - [Environment File](#environment-file)
+- [3. Database Connection](#3-database-connection)
+  - [Practice](#practice-connection)
+- [4. SQLAlchemy Models](#4-sqlalchemy-models)
+  - [Practice](#practice-models)
+- [5. Pydantic Schemas vs SQLAlchemy Models](#5-pydantic-schemas-vs-sqlalchemy-models)
+- [6. CRUD Operations](#6-crud-operations)
+- [7. Routes and Database](#7-routes-and-database)
+- [8. Alembic Migrations](#8-alembic-migrations)
+  - [Initial Setup](#initial-setup)
+  - [Configure alembic.ini](#configure-alembicini)
+  - [Configure env.py](#configure-envpy)
+  - [Creating and Running Migrations](#creating-and-running-migrations)
+  - [Typical Workflow](#typical-workflow)
+  - [Practice](#practice-migrations)
+- [9. Async Database — SQLAlchemy 2.0](#9-async-database--sqlalchemy-20)
+  - [Additional Dependencies](#additional-dependencies)
+  - [Async Database Setup](#async-database-setup)
+  - [Async CRUD](#async-crud)
+  - [Async Routes](#async-routes)
+  - [Sync vs Async — When to Use Which](#sync-vs-async--when-to-use-which)
+- [10. Complete Working Application](#10-complete-working-application)
+- [11. Summary](#11-summary)
+- [12. Practice Questions](#12-practice-questions)
+
+[Back to Top](#top)
+
+<a id="1-the-story"></a>
+
+# 1. The Story
+
+Vamsi had built a solid FastAPI application — validated inputs, organized routes, clean dependencies. But every time he restarted the server during development, all his test data vanished. He was storing users in a Python dictionary, and dictionaries live only as long as the process runs.
+
+"I need a real database," Vamsi said, staring at his terminal. He had heard of PostgreSQL, SQLAlchemy, and Alembic, but connecting them all together felt like wiring up a house for the first time. Which cable goes where? What breaks if you get the order wrong?
+
+This guide follows Vamsi as he connects his FastAPI application to PostgreSQL for the first time — building a complete users API backed by a real database. Every tutorial that stores data in a Python dictionary eventually hits the same wall: restart the server and everything disappears. Real applications need a database.
 
 The standard stack for FastAPI + databases is:
 
@@ -17,9 +57,11 @@ The standard stack for FastAPI + databases is:
 
 This stage builds a complete users API backed by a real PostgreSQL database.
 
----
+[Back to Top](#top)
 
-## 1. Setup and Installation
+<a id="2-setup-and-installation"></a>
+
+# 2. Setup and Installation
 
 ```bash
 pip install sqlalchemy psycopg2-binary alembic python-dotenv passlib[bcrypt]
@@ -35,7 +77,9 @@ What each package does:
 | `python-dotenv` | Loads `.env` files so you don't hardcode credentials |
 | `passlib[bcrypt]` | Password hashing — never store plain text passwords |
 
-### Project Structure
+<a id="project-structure"></a>
+
+## Project Structure
 
 ```
 myapp/
@@ -49,7 +93,9 @@ myapp/
     └── users.py            ← route handlers
 ```
 
-### Environment File
+<a id="environment-file"></a>
+
+## Environment File
 
 ```bash
 # .env
@@ -59,9 +105,13 @@ SECRET_KEY=your-secret-key-here
 
 Add `.env` to your `.gitignore` immediately. Never commit credentials.
 
----
+> **Common Mistake:** Vamsi once accidentally committed his `.env` file to GitHub. Even after deleting it, the credentials were in the git history. Always add `.env` to `.gitignore` before your first commit, and if you slip up, rotate all exposed credentials immediately.
 
-## 2. Database Connection — `database.py`
+[Back to Top](#top)
+
+<a id="3-database-connection"></a>
+
+# 3. Database Connection — `database.py`
 
 ```python
 
@@ -91,9 +141,6 @@ def get_db():
         db.close()
 ```
 
-> 📝 **Practice:** [Q36 · db-connection-pooling](../api_practice_questions_100.md#q36--thinking--db-connection-pooling)
-
-
 **What each piece does:**
 
 `create_engine(DATABASE_URL)` — Creates the connection pool. SQLAlchemy maintains a pool of connections so your app isn't opening and closing a connection on every request.
@@ -104,9 +151,19 @@ def get_db():
 
 `get_db()` — The FastAPI dependency. It opens a session, yields it to the route handler, and always closes it when the route finishes (even if the route raised an exception). This is the `yield` dependency pattern from the previous stage applied to database sessions.
 
----
+> **Common Mistake:** Vamsi initially forgot the `finally: db.close()` block. Under load, his app ran out of database connections because sessions were never returned to the pool. The `try/finally` pattern ensures cleanup happens even when routes raise exceptions.
 
-## 3. SQLAlchemy Models — `models.py`
+<a id="practice-connection"></a>
+
+## Practice
+
+> **Practice:** [Q36 - db-connection-pooling](../api_practice_questions_100.md#q36--thinking--db-connection-pooling)
+
+[Back to Top](#top)
+
+<a id="4-sqlalchemy-models"></a>
+
+# 4. SQLAlchemy Models — `models.py`
 
 SQLAlchemy models describe your database tables as Python classes. Each class is a table. Each class attribute is a column.
 
@@ -146,9 +203,6 @@ class Order(Base):
     user = relationship("User", back_populates="orders")
 ```
 
-> 📝 **Practice:** [Q37 · orm-vs-raw-sql](../api_practice_questions_100.md#q37--interview--orm-vs-raw-sql)
-
-
 **Column options explained:**
 
 | Option | Meaning |
@@ -166,9 +220,19 @@ class Order(Base):
 
 `back_populates` makes the relationship bidirectional — `order.user` navigates back to the user.
 
----
+> **Common Mistake:** Vamsi initially used `default=func.now()` instead of `server_default=func.now()`. The difference: `default` sets the value in Python when the object is created, while `server_default` tells PostgreSQL to set it. If you use `default`, the timestamp comes from the application server's clock. With `server_default`, it comes from the database server — which is what you want for consistency across multiple app instances.
 
-## 4. Pydantic Schemas vs SQLAlchemy Models — The Critical Distinction
+<a id="practice-models"></a>
+
+## Practice
+
+> **Practice:** [Q37 - orm-vs-raw-sql](../api_practice_questions_100.md#q37--interview--orm-vs-raw-sql)
+
+[Back to Top](#top)
+
+<a id="5-pydantic-schemas-vs-sqlalchemy-models"></a>
+
+# 5. Pydantic Schemas vs SQLAlchemy Models — The Critical Distinction
 
 This is the most important concept to internalize. There are **two completely separate things** that look similar but serve different purposes:
 
@@ -255,9 +319,13 @@ class OrderResponse(BaseModel):
 
 **`EmailStr`** — Built into Pydantic (requires `pip install pydantic[email]`). Validates that the string looks like an email address, more rigorously than a manual `@` check.
 
----
+> **Common Mistake:** Vamsi forgot `from_attributes = True` on his `UserResponse` schema and got a cryptic validation error when FastAPI tried to serialize the SQLAlchemy object. The error said something about expecting a dict but receiving a `User` object. This single config line bridges the gap between SQLAlchemy objects and Pydantic serialization.
 
-## 5. CRUD Operations — `crud.py`
+[Back to Top](#top)
+
+<a id="6-crud-operations"></a>
+
+# 6. CRUD Operations — `crud.py`
 
 The CRUD layer contains all database operations. Routes call these functions; they don't write SQL or query the database directly.
 
@@ -338,9 +406,13 @@ def delete_user(db: Session, user_id: int) -> bool:
 
 `updates.dict(exclude_unset=True)` — On a PATCH request, the client only sends fields they want to change. `exclude_unset=True` returns only the fields that were explicitly provided, not the ones that defaulted to `None`. This prevents accidentally overwriting existing data with `None`.
 
----
+> **Common Mistake:** Vamsi once called `db.commit()` inside a loop that created multiple users. When the third insert failed (duplicate email), the first two were already committed and couldn't be rolled back. The fix: call `db.add()` for all objects first, then `db.commit()` once. If anything fails, the entire batch rolls back cleanly.
 
-## 6. Routes + Database — The Full Stack
+[Back to Top](#top)
+
+<a id="7-routes-and-database"></a>
+
+# 7. Routes and Database — The Full Stack
 
 ```python
 # routers/users.py
@@ -420,15 +492,19 @@ app.include_router(users.router)
 
 `Base.metadata.create_all(bind=engine)` reads all your SQLAlchemy models (any class that inherits from `Base`) and creates their tables if they don't exist. This is convenient for development but in production you manage schema changes through Alembic migrations.
 
----
+[Back to Top](#top)
 
-## 7. Alembic Migrations
+<a id="8-alembic-migrations"></a>
+
+# 8. Alembic Migrations
 
 `Base.metadata.create_all()` is great for getting started, but it has a critical limitation: once a table exists, it won't alter it. If you add a column to your model, `create_all` does nothing — the column doesn't appear in the database.
 
 Alembic solves this. It tracks your schema history and generates SQL migration scripts.
 
-### Initial Setup
+<a id="initial-setup"></a>
+
+## Initial Setup
 
 ```bash
 alembic init alembic
@@ -442,7 +518,9 @@ alembic/
 alembic.ini         ← main config file
 ```
 
-### Configure `alembic.ini`
+<a id="configure-alembicini"></a>
+
+## Configure `alembic.ini`
 
 Find this line and update it:
 ```ini
@@ -455,7 +533,9 @@ Or better, use an environment variable:
 sqlalchemy.url = %(DATABASE_URL)s
 ```
 
-### Configure `alembic/env.py`
+<a id="configure-envpy"></a>
+
+## Configure `alembic/env.py`
 
 Find the `target_metadata = None` line and replace it:
 
@@ -473,7 +553,9 @@ target_metadata = Base.metadata
 
 Alembic needs to import your models to know what the "current" schema looks like. That's why you explicitly import them here.
 
-### Creating and Running Migrations
+<a id="creating-and-running-migrations"></a>
+
+## Creating and Running Migrations
 
 ```bash
 # Generate a migration script by comparing your models to the current database
@@ -494,13 +576,13 @@ alembic downgrade -1
 alembic history
 ```
 
-> 📝 **Practice:** [Q38 · n-plus-one-query](../api_practice_questions_100.md#q38--critical--n-plus-one-query)
-> 📝 **Practice:** [Q96 · debug-n-plus-one-load](../api_practice_questions_100.md#q96--debug--debug-n-plus-one-load)
-
-
 After running `alembic revision --autogenerate`, inspect the generated file in `alembic/versions/`. Alembic is good at detecting new tables and columns but sometimes misses index changes or complex constraints. Always review the generated migration before running it.
 
-### Typical Workflow
+> **Common Mistake:** Vamsi ran `alembic revision --autogenerate` without importing his new `Order` model in `env.py`. Alembic generated an empty migration because it didn't know the model existed. Always import every model in `alembic/env.py` so autogenerate can see the full schema.
+
+<a id="typical-workflow"></a>
+
+## Typical Workflow
 
 ```bash
 # 1. Modify your SQLAlchemy model (add a column, new table, etc.)
@@ -514,13 +596,25 @@ alembic upgrade head
 # 5. Deploy — run alembic upgrade head on the production server too
 ```
 
----
+<a id="practice-migrations"></a>
 
-## 8. Async Database — SQLAlchemy 2.0
+## Practice
+
+> **Practice:** [Q38 - n-plus-one-query](../api_practice_questions_100.md#q38--critical--n-plus-one-query)
+>
+> **Practice:** [Q96 - debug-n-plus-one-load](../api_practice_questions_100.md#q96--debug--debug-n-plus-one-load)
+
+[Back to Top](#top)
+
+<a id="9-async-database--sqlalchemy-20"></a>
+
+# 9. Async Database — SQLAlchemy 2.0
 
 The async version matters when your application is I/O-heavy and you want to handle many concurrent requests efficiently. Async routes don't block the event loop while waiting for the database.
 
-### Additional Dependencies
+<a id="additional-dependencies"></a>
+
+## Additional Dependencies
 
 ```bash
 pip install asyncpg sqlalchemy[asyncio]
@@ -528,7 +622,9 @@ pip install asyncpg sqlalchemy[asyncio]
 
 `asyncpg` is the async PostgreSQL driver. `sqlalchemy[asyncio]` adds async support to SQLAlchemy.
 
-### Async Database Setup
+<a id="async-database-setup"></a>
+
+## Async Database Setup
 
 ```python
 # database_async.py
@@ -558,7 +654,9 @@ async def get_db():
         yield session
 ```
 
-### Async CRUD
+<a id="async-crud"></a>
+
+## Async CRUD
 
 ```python
 # crud_async.py
@@ -604,7 +702,9 @@ The key differences from sync SQLAlchemy:
 - `result.scalar_one_or_none()` extracts a single result
 - `result.scalars().all()` extracts a list
 
-### Async Routes
+<a id="async-routes"></a>
+
+## Async Routes
 
 ```python
 # routers/users_async.py
@@ -634,7 +734,9 @@ async def get_user(user_id: int, db: AsyncSession = Depends(get_db)):
 
 Routes that use async CRUD must themselves be `async def`. FastAPI handles both `def` and `async def` routes — sync routes run in a thread pool so they don't block the event loop.
 
-### Sync vs Async — When to Use Which
+<a id="sync-vs-async--when-to-use-which"></a>
+
+## Sync vs Async — When to Use Which
 
 | Scenario | Recommendation |
 |----------|---------------|
@@ -645,9 +747,13 @@ Routes that use async CRUD must themselves be `async def`. FastAPI handles both 
 
 Don't use async just because it sounds better. Sync SQLAlchemy is simpler, easier to debug, and fast enough for most applications. Async shines specifically when you have thousands of concurrent requests all waiting on I/O simultaneously.
 
----
+> **Common Mistake:** Vamsi mixed sync and async database calls in the same route — calling a sync `db.query()` inside an `async def` route. This blocks the event loop and defeats the purpose of async. If your route is `async def`, all database operations in that route must use `await`. If you need sync operations, use a regular `def` route and let FastAPI handle the thread pool.
 
-## 9. Complete Working Application
+[Back to Top](#top)
+
+<a id="10-complete-working-application"></a>
+
+# 10. Complete Working Application
 
 Putting it all together — a fully functional users API:
 
@@ -703,9 +809,11 @@ uvicorn main:app --reload
 
 Open `http://localhost:8000/docs` — you have a fully documented API backed by a real PostgreSQL database.
 
----
+[Back to Top](#top)
 
-## Summary
+<a id="11-summary"></a>
+
+# 11. Summary
 
 | Layer | File | Purpose |
 |-------|------|---------|
@@ -719,16 +827,69 @@ Open `http://localhost:8000/docs` — you have a fully documented API backed by 
 
 The clean separation between layers is the entire point. `crud.py` doesn't know about HTTP. `models.py` doesn't know about JSON. `schemas.py` doesn't know about the database. Each file has one job, and changes in one layer don't ripple into others.
 
----
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      FastAPI Application                      │
+├─────────────────────────────────────────────────────────────┤
+│  Client Request                                              │
+│       │                                                      │
+│       ▼                                                      │
+│  routers/users.py  (HTTP layer — validates, routes)          │
+│       │                                                      │
+│       ▼                                                      │
+│  schemas.py        (Pydantic — parse input, shape output)    │
+│       │                                                      │
+│       ▼                                                      │
+│  crud.py           (Business logic — queries, mutations)     │
+│       │                                                      │
+│       ▼                                                      │
+│  models.py         (SQLAlchemy — table definitions)          │
+│       │                                                      │
+│       ▼                                                      │
+│  database.py       (Connection pool — engine, sessions)      │
+│       │                                                      │
+│       ▼                                                      │
+│  PostgreSQL        (Persistent storage)                      │
+└─────────────────────────────────────────────────────────────┘
+```
 
-## 📝 Practice Questions
+[Back to Top](#top)
 
-> 📝 **Practice:** [Q39 · db-transactions-rest](../api_practice_questions_100.md#q39--thinking--db-transactions-rest)
+<a id="12-practice-questions"></a>
 
----
+# 12. Practice Questions
 
-**[🏠 Back to README](../README.md)**
+> **Practice:** [Q39 - db-transactions-rest](../api_practice_questions_100.md#q39--thinking--db-transactions-rest)
 
-**Prev:** [← FastAPI Core Guide](../07_fastapi/core_guide.md) &nbsp;|&nbsp; **Next:** [FastAPI Advanced →](../07_fastapi/advanced_guide.md)
+[Back to Top](#top)
 
-**Related Topics:** [FastAPI Core Guide](../07_fastapi/core_guide.md) · [Testing APIs](../10_testing_documentation/testing_apis.md) · [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md)
+<a id="fire-summary"></a>
+
+# 🔥 Summary
+
+| Concept | One-liner |
+|---------|-----------|
+| Database connection | `create_engine` + `sessionmaker` + `get_db` yield dependency |
+| SQLAlchemy models | Python classes that map to PostgreSQL tables |
+| Pydantic schemas | Validate API input, serialize API output — separate from DB models |
+| CRUD layer | All database logic isolated in one file, routes never touch SQL |
+| Alembic | Schema migration tool — generates and applies incremental SQL changes |
+| Async SQLAlchemy | `asyncpg` + `select()` + `await` — use only when high concurrency demands it |
+| `from_attributes = True` | Bridges SQLAlchemy objects to Pydantic serialization |
+| Session lifecycle | Open per request, yield to route, close in finally block |
+| `exclude_unset=True` | PATCH semantics — only update fields the client explicitly sent |
+| `server_default` vs `default` | Database-side vs Python-side default values |
+
+<a id="nav"></a>
+
+## Navigation
+
+**[Back to README](../README.md)**
+
+**Prev:** [FastAPI Core Guide](03_core_guide.md)
+
+**Next:** [FastAPI Advanced Guide](05_advanced_guide.md)
+
+**Related Topics:** [FastAPI Core Guide](03_core_guide.md) | [Testing APIs](../10_testing_documentation/testing_apis.md) | [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md)
+
+[Back to Top](#top)

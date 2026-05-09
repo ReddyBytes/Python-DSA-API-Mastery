@@ -19,20 +19,31 @@ this becomes fun.
 
 ## 📖 Table of Contents
 
-1. [Real Life Story — Light Switch Board](#1-real-life-story)
+1. [The Switch Board — Binary as Physical Switches](#1-the-switch-board)
+  - [Visual: The Switch Board](#visual-the-switch-board)
 2. [Understanding Binary Numbers](#2-understanding-binary-numbers)
+  - [Visual: Binary Number Examples](#visual-binary-number-examples)
 3. [Bitwise Operators](#3-bitwise-operators)
+  - [AND (&)](#and)
+  - [OR (|)](#or)
+  - [XOR (^)](#xor)
+  - [NOT (~)](#not)
+  - [Left Shift (<<)](#left-shift)
+  - [Right Shift (>>)](#right-shift)
 4. [Important Bit Tricks](#4-important-bit-tricks)
+  - [Check If Number Is Even](#check-if-number-is-even)
+  - [Check If Power of Two](#check-if-power-of-two)
+  - [Count Set Bits](#count-set-bits)
+  - [Swap Without Temp Variable](#swap-without-temp-variable)
+  - [Cheat Sheet — Common Bit Tricks](#cheat-sheet-common-bit-tricks)
 5. [XOR Special Properties](#5-xor-special-properties)
+  - [Visual: XOR — The Disappearing Trick](#visual-xor-the-disappearing-trick)
 6. [Subset Generation Using Bits](#6-subset-generation-using-bits)
+  - [Visual: Bitmask for Subsets — A Tiny Map](#visual-bitmask-for-subsets)
 7. [Bitmasking](#7-bitmasking)
 8. [Why Bit Manipulation Is Fast](#8-why-bit-manipulation-is-fast)
-9. [Real-World Applications](#9-real-world-applications)
-10. [Common Mistakes Reference](#10-common-mistakes-reference)
-11. [Mental Model](#11-mental-model)
-12. [Final Understanding](#12-final-understanding)
 
-## 📌 Learning Priority
+## Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
 bitwise operators (AND OR XOR NOT shifts) · check even/odd · power of two check
@@ -46,8 +57,10 @@ swap without temp · clear/set/toggle bit patterns
 **Reference** — Know it exists, look up syntax when needed:
 gray code · Hamming codes · parity checking
 
-<a id="1-real-life-story"></a>
-# 1. Real Life Story — Light Switch Board
+<a id="1-the-switch-board"></a>
+# 1. The Switch Board — Binary as Physical Switches
+
+Byte is a hardware engineer who builds circuit boards for a living. Every morning, he walks into the lab and faces a row of eight toggle switches on his test bench. Each switch can be flipped UP (1) or DOWN (0). That row of switches is the most honest representation of how a computer thinks — no abstractions, no fancy numbers, just electricity flowing or not flowing.
 
 Imagine a switch board with 8 switches.
 
@@ -69,6 +82,7 @@ Each switch represents a bit.
 Bit manipulation means:
 Turning switches ON or OFF intelligently.
 
+<a id="visual-the-switch-board"></a>
 ## Visual: The Switch Board
 
 Your computer doesn't understand numbers the way you do. It only understands one thing:
@@ -83,9 +97,9 @@ Let's take the number **13** and represent it as switches:
 
 ```
 Binary:    1    1    0    1
-           │    │    │    │
+           |    |    |    |
 Switch:   [ON] [ON] [OFF][ON]
-           │    │    │    │
+           |    |    |    |
 Place:     8    4    2    1
 ```
 
@@ -102,6 +116,8 @@ Value:    128   64   32   16    8    4    2    1
 <a id="2-understanding-binary-numbers"></a>
 # 2. Understanding Binary Numbers
 
+Byte picks up a chip and reads the label: "5." But when he probes the pins with his oscilloscope, he sees only three wires carrying current — positions 2, 0 are HIGH, position 1 is LOW. That is the computer's truth: 101. Every decimal number you know is just a pattern of HIGH and LOW signals on a wire, and Byte's job is to read those signals fluently.
+
 Example:
 
 Decimal 5 in binary:
@@ -113,21 +129,22 @@ Decimal 5 in binary:
 Position values:
 
 ```
-(1 × 2²) + (0 × 2¹) + (1 × 2⁰)
+(1 x 2^2) + (0 x 2^1) + (1 x 2^0)
 ```
 
 Binary is base 2.
 
 Each bit represents power of 2.
 
+<a id="visual-binary-number-examples"></a>
 ## Visual: Binary Number Examples
 
 Let's check a few numbers:
 ```
-13 = 8+4+1   = 1101₂   (4 bits)
-10 = 8+2     = 1010₂   (4 bits)
- 7 = 4+2+1   = 0111₂   (4 bits)
- 8 = 8       = 1000₂   (4 bits, only one switch on)
+13 = 8+4+1   = 1101 (base 2)   (4 bits)
+10 = 8+2     = 1010 (base 2)   (4 bits)
+ 7 = 4+2+1   = 0111 (base 2)   (4 bits)
+ 8 = 8       = 1000 (base 2)   (4 bits, only one switch on)
 ```
 
 > 📝 **Practice:** [Q1 — Read a Bit](./practice.md#q1--binary-representation--read-a-bit)
@@ -137,17 +154,20 @@ Let's check a few numbers:
 <a id="3-bitwise-operators"></a>
 # 3. Bitwise Operators
 
+Byte has six tools hanging on his workshop wall. Each one does something different to the switches on his board. AND is like a series circuit — both switches must be on for current to flow. OR is a parallel circuit — either path works. XOR is the "disagreement detector" — it lights up only when two switches differ. NOT is the universal inverter. And the two Shift wrenches slide every switch left or right along the rail.
+
 > 📝 **Practice:** [Q64 · bit-manipulation-basics](../dsa_practice_questions_100.md#q64--normal--bit-manipulation-basics)
 
 ## Visual: Six Operations on 13 and 10
 
 Let's work with two numbers throughout:
 ```
-13 = 1101₂
-10 = 1010₂
+13 = 1101 (base 2)
+10 = 1010 (base 2)
 ```
 
-## 🔹 AND (&)
+<a id="and"></a>
+## AND (&)
 
 1 & 1 = 1
 Else = 0
@@ -173,7 +193,8 @@ Used for masking.
 
 > 📝 **Practice:** [Q2 — Mask Out Lower Bits](./practice.md#q2--bitwise-and--mask-out-lower-bits)
 
-## 🔹 OR (|)
+<a id="or"></a>
+## OR (|)
 
 1 | 0 = 1
 0 | 0 = 0
@@ -198,10 +219,11 @@ Used to set bits.
 
 > 📝 **Practice:** [Q3 — Set a Specific Bit](./practice.md#q3--bitwise-or--set-a-specific-bit)
 
-## 🔹 XOR (^)
+<a id="xor"></a>
+## XOR (^)
 
-Same bits → 0
-Different bits → 1
+Same bits -> 0
+Different bits -> 1
 
 Rule: output is 1 if bits are DIFFERENT. The "odd one out" operation.
 
@@ -225,7 +247,8 @@ Very powerful operator.
 
 > 📝 **Practice:** [Q4 — Flip Bits Selectively](./practice.md#q4--bitwise-xor--flip-bits-selectively)
 
-## 🔹 NOT (~)
+<a id="not"></a>
+## NOT (~)
 
 Flips bits.
 
@@ -247,46 +270,48 @@ Just remember: `~n = -(n+1)` in Python.
 
 **Common mistake — Python's ~ gives -(n+1), not a 32-bit complement:** In C and Java, `~0` gives `0xFFFFFFFF`. In Python, integers have arbitrary precision so `~0 = -1`. When you need 32-bit unsigned NOT, use `(~n) & 0xFFFFFFFF`. For complement of only the meaningful bits, use `(~n) & ((1 << n.bit_length()) - 1)`.
 
-## 🔹 Left Shift (<<)
+<a id="left-shift"></a>
+## Left Shift (<<)
 
 Rule: slide all bits to the left, fill the right with zeros.
 
 5 << 1:
 
-101 → 1010 = 10
+101 -> 1010 = 10
 
 ```
   13 = 1101
   13 << 1:
   Before: 0 0 0 0 1 1 0 1
-  After:  0 0 0 1 1 0 1 0  =  26  (13 × 2)
+  After:  0 0 0 1 1 0 1 0  =  26  (13 x 2)
 
   13 << 2:
   Before: 0 0 0 0 1 1 0 1
-  After:  0 0 1 1 0 1 0 0  =  52  (13 × 4)
+  After:  0 0 1 1 0 1 0 0  =  52  (13 x 4)
 ```
 
 Multiply by 2. Each left shift multiplies by 2. This is FAST — the CPU does it in a single clock cycle.
 
 **Common mistake — left shift overflow in 32-bit contexts:** In Python, `1 << 32` succeeds and produces a 33-bit value without error. If you are simulating 32-bit logic, validate that `0 <= pos < 32` before shifting and apply `& 0xFFFFFFFF` after the operation to mask back to 32 bits.
 
-## 🔹 Right Shift (>>)
+<a id="right-shift"></a>
+## Right Shift (>>)
 
 Rule: slide all bits to the right, drop the rightmost bit.
 
 8 >> 1:
 
-1000 → 0100 = 4
+1000 -> 0100 = 4
 
 ```
   13 = 1101
   13 >> 1:
   Before: 0 0 0 0 1 1 0 1
-  After:  0 0 0 0 0 1 1 0  =  6  (13 ÷ 2, rounded down)
+  After:  0 0 0 0 0 1 1 0  =  6  (13 / 2, rounded down)
 
   13 >> 2:
   Before: 0 0 0 0 1 1 0 1
-  After:  0 0 0 0 0 0 1 1  =  3  (13 ÷ 4, rounded down)
+  After:  0 0 0 0 0 0 1 1  =  3  (13 / 4, rounded down)
 ```
 
 Divide by 2 (integer division). The dropped bits are just gone.
@@ -298,9 +323,12 @@ Divide by 2 (integer division). The dropped bits are just gone.
 <a id="4-important-bit-tricks"></a>
 # 4. Important Bit Tricks
 
-## 🔹 Check If Number Is Even
+Byte keeps a laminated card taped to his workstation — his "bit tricks cheat sheet." These are the moves that save him from writing ten lines of logic when one bitwise expression will do. He calls them "switch patterns" because each trick is really just a clever way to read or flip switches without touching the ones you do not care about.
 
-Last bit 0 → even
+<a id="check-if-number-is-even"></a>
+## Check If Number Is Even
+
+Last bit 0 -> even
 
 ```
 if n & 1 == 0:
@@ -308,7 +336,8 @@ if n & 1 == 0:
 
 > 📝 **Practice:** [Q6 — Parity Check Without Modulo](./practice.md#q6--even-odd--parity-check-without-modulo)
 
-## 🔹 Check If Power of Two
+<a id="check-if-power-of-two"></a>
+## Check If Power of Two
 
 Power of two has only one 1 bit.
 
@@ -345,8 +374,8 @@ When you subtract 1 from a power of 2, all the lower bits flip ON and the single
 ```
 8     = 1 0 0 0
 8 - 1 = 0 1 1 1
-─────────────────
-AND   = 0 0 0 0  ← Always zero for powers of 2!
+-----------------
+AND   = 0 0 0 0  <-- Always zero for powers of 2!
 ```
 
 Now check a NON-power of 2, like 6:
@@ -354,8 +383,8 @@ Now check a NON-power of 2, like 6:
 ```
 6     = 0 1 1 0
 6 - 1 = 0 1 0 1
-─────────────────
-AND   = 0 1 0 0  ← Not zero! So 6 is NOT a power of 2.
+-----------------
+AND   = 0 1 0 0  <-- Not zero! So 6 is NOT a power of 2.
 ```
 
 The logic: for powers of 2, subtracting 1 flips exactly the bits we want to cancel out.
@@ -370,7 +399,8 @@ def is_power_of_2(n):
 
 > 📝 **Practice:** [Q11 — Power of 2 Check](./practice.md#q11--power-of-2--one-bit-trick)
 
-## 🔹 Count Set Bits
+<a id="count-set-bits"></a>
+## Count Set Bits
 
 Use:
 
@@ -435,7 +465,8 @@ def count_set_bits(n):
 
 > 📝 **Practice:** [Q12 — Brian Kernighan Count](./practice.md#q12--count-set-bits--brian-kernighan) · [Q13 — Count Bits DP](./practice.md#q13--count-set-bits-dp--count-bits-0n-dp)
 
-## 🔹 Swap Without Temp Variable
+<a id="swap-without-temp-variable"></a>
+## Swap Without Temp Variable
 
 ```
 a = a ^ b
@@ -447,12 +478,13 @@ XOR trick.
 
 > 📝 **Practice:** [Q15 — XOR Swap](./practice.md#q15--xor-swap--no-temp-variable)
 
-## Visual: Cheat Sheet — Common Bit Tricks
+<a id="cheat-sheet-common-bit-tricks"></a>
+## Cheat Sheet — Common Bit Tricks
 
 ```
 Operation                    Code              Example (n=13=1101)
-──────────────────────────────────────────────────────────────────
-Check if power of 2          n & (n-1) == 0    12 & 11 = 8 ≠ 0  → Not power of 2
+----------------------------------------------------------------------
+Check if power of 2          n & (n-1) == 0    12 & 11 = 8 != 0  -> Not power of 2
 Remove lowest set bit        n & (n-1)         1101 & 1100 = 1100
 Get lowest set bit           n & (-n)          1101 & 0011 = 0001
 Set bit i                    n | (1 << i)      set bit 1: 1101 | 0010 = 1111
@@ -467,6 +499,8 @@ Divide by 2^k                n >> k            13 >> 2 = 3
 
 <a id="5-xor-special-properties"></a>
 # 5. XOR Special Properties
+
+Byte calls XOR the "ghost operator." When you XOR something with itself, it vanishes — like a ghost passing through a wall. XOR with zero leaves you unchanged, like a ghost that does not disturb anything. And if you apply XOR twice, the ghost reappears exactly as it was. This vanishing act is the foundation of some of the most elegant algorithms in computer science.
 
 1. a ^ a = 0
 2. a ^ 0 = a
@@ -485,6 +519,7 @@ Result = 3
 
 Because duplicates cancel.
 
+<a id="visual-xor-the-disappearing-trick"></a>
 ## Visual: XOR — The Disappearing Trick
 
 XOR has three magical properties:
@@ -502,7 +537,7 @@ a = 5  = 101
 b = 9  = 1001
 
 a XOR b:   101 XOR 1001 = 1100 = 12
-(12) XOR a: 1100 XOR 0101 = 1001 = 9 = b   ✓
+(12) XOR a: 1100 XOR 0101 = 1001 = 9 = b   (verified)
 ```
 
 The two `a`s cancelled each other out, leaving only `b`.
@@ -549,6 +584,8 @@ def find_single(nums):
 <a id="6-subset-generation-using-bits"></a>
 # 6. Subset Generation Using Bits
 
+Byte is inventorying his toolbox. He has three tools: a wrench (A), a screwdriver (B), and pliers (C). He wants to list every possible combination he could carry to a job site. Instead of writing out combinations by hand, he numbers them 0 through 7 in binary — each bit position represents "do I bring this tool or not?" That is subset generation: counting in binary and letting each bit answer a yes/no question.
+
 For n elements:
 
 Total subsets = 2^n
@@ -560,15 +597,16 @@ Example:
 Elements: [A, B, C]
 
 Binary:
-000 → []
-001 → [C]
-010 → [B]
-011 → [B, C]
-100 → [A]
+000 -> []
+001 -> [C]
+010 -> [B]
+011 -> [B, C]
+100 -> [A]
 ...
 
 Very clean method.
 
+<a id="visual-bitmask-for-subsets"></a>
 ## Visual: Bitmask for Subsets — A Tiny Map
 
 Imagine you have a set of 3 items: **[A, B, C]**.
@@ -580,7 +618,7 @@ Each subset can be represented as a 3-bit number:
 
 ```
 Mask  Binary  Subset        Meaning
-───────────────────────────────────────
+-------------------------------------------
   0   0 0 0   {}            Nothing selected
   1   0 0 1   {A}           Only A
   2   0 1 0   {B}           Only B
@@ -591,7 +629,7 @@ Mask  Binary  Subset        Meaning
   7   1 1 1   {A, B, C}     Everything
 ```
 
-For n items, there are 2ⁿ subsets. Each subset maps to a unique integer from 0 to 2ⁿ-1.
+For n items, there are 2^n subsets. Each subset maps to a unique integer from 0 to 2^n-1.
 
 **Check if element i is in subset `mask`:**
 ```python
@@ -624,6 +662,8 @@ for mask in range(1 << n):      # 0 to 2^n - 1
 <a id="7-bitmasking"></a>
 # 7. Bitmasking
 
+Byte is designing a circuit board for a vending machine. The machine has 4 item slots, and he needs to track which slots still have inventory. Instead of using four separate boolean variables, he uses a single 4-bit register: 1010 means slots 1 and 3 have items, slots 0 and 2 are empty. One number encodes the entire machine state. That is bitmasking — packing multiple boolean flags into a single integer.
+
 Bitmask represents state.
 
 Example:
@@ -653,6 +693,8 @@ Advanced usage.
 <a id="8-why-bit-manipulation-is-fast"></a>
 # 8. Why Bit Manipulation Is Fast
 
+Byte measures everything in clock cycles. When he writes `n * 2` the CPU has to route signals through the multiplication unit — multiple cycles, multiple gates. But when he writes `n << 1`, the CPU literally just shifts every wire one position to the left and grounds the new wire. One cycle. One gate depth. That is why systems programmers reach for bit operations: they map directly to the simplest possible hardware action.
+
 Bit operations happen at hardware level.
 
 Very low overhead.
@@ -665,8 +707,11 @@ Each left shift multiplies by 2 in a single CPU clock cycle. Each right shift di
 
 > [↑ Back to Top](#top)
 
-<a id="9-real-world-applications"></a>
-# 9. Real-World Applications
+## 🔥 Summary
+
+**Real-World Applications**
+
+Bit manipulation is used heavily in systems:
 
 - Encryption
 - Compression
@@ -676,12 +721,7 @@ Each left shift multiplies by 2 in a single CPU clock cycle. Each right shift di
 - Permission systems (UNIX file permissions)
 - Flags in databases
 
-Bit manipulation used heavily in systems.
-
-> [↑ Back to Top](#top)
-
-<a id="10-common-mistakes-reference"></a>
-# 10. Common Mistakes Reference
+**Common Mistakes Reference**
 
 This section summarises the key mistakes covered inline above.
 
@@ -697,10 +737,7 @@ This section summarises the key mistakes covered inline above.
 
 Bit logic must be precise.
 
-> [↑ Back to Top](#top)
-
-<a id="11-mental-model"></a>
-# 11. Mental Model
+**Mental Model**
 
 Think of bit manipulation as:
 
@@ -715,10 +752,7 @@ Bit manipulation treats numbers as rows of switches: AND requires both on, OR ne
 XOR detects differences, and shifts multiply or divide by powers of 2 — giving you
 direct hardware-speed control over data at the binary level.
 
-> [↑ Back to Top](#top)
-
-<a id="12-final-understanding"></a>
-# 12. Final Understanding
+**Final Understanding**
 
 Bit manipulation is:
 
@@ -740,17 +774,16 @@ Bit manipulation is small but mighty.
 
 > [↑ Back to Top](#top)
 
-# 🔁 Navigation
+## Navigation
 
-Previous:
-[21_dynamic_programming/interview.md](/02_DSA_Mastery/21_dynamic_programming/interview.md)
+**[Back to README](../README.md)**
 
-Next:
-[22_bit_manipulation/interview.md](/02_DSA_Mastery/22_bit_manipulation/interview.md)
-[23_segment_tree/theory.md](/02_DSA_Mastery/23_segment_tree/theory.md)
+| Prev | Next |
+|------|------|
+| [Dynamic Programming](../21_dynamic_programming/theory.md) | [Segment Tree](../23_segment_tree/theory.md) |
 
-**[🏠 Back to README](../README.md)**
+**This folder:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)
 
-**Prev:** [← Dynamic Programming — Interview Q&A](../21_dynamic_programming/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+**Related modules:** [Dynamic Programming](../21_dynamic_programming/theory.md) · [Segment Tree](../23_segment_tree/theory.md) · [Arrays](../02_arrays/theory.md) · [Backtracking](../20_backtracking/theory.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)
+**Jump to topics:** [Binary Basics](#2-understanding-binary-numbers) · [Operators](#3-bitwise-operators) · [Tricks](#4-important-bit-tricks) · [XOR](#5-xor-special-properties) · [Subsets](#6-subset-generation-using-bits) · [Bitmasking](#7-bitmasking)

@@ -22,17 +22,26 @@ It is powerful but can be slow.
 
 1. [Real Life Story — Maze Explorer](#1-real-life-story)
 2. [Decision Tree Visualization](#2-decision-tree)
+  - [Subsets Tree — Full Expansion](#subsets-tree-full-expansion)
+  - [Include / Exclude Tree (Detailed)](#include-exclude-tree-detailed)
 3. [What Is Backtracking?](#3-what-is-backtracking)
+  - [State Restoration — Choose, Explore, Unchoose](#state-restoration)
 4. [The Backtracking Template](#4-the-backtracking-template)
+  - [The Backtracking Recipe](#the-backtracking-recipe)
 5. [Why Backtracking Is Powerful](#5-why-backtracking-is-powerful)
+  - [Pruning — Subsets with Sum Constraint](#pruning-subsets-with-sum-constraint)
+  - [When to Prune](#when-to-prune)
 6. [Classic Backtracking Problems](#6-classic-problems)
+  - [Subsets](#subsets)
+  - [Permutations](#permutations)
+  - [Combination Sum](#combination-sum)
+  - [N-Queens](#n-queens)
+  - [Sudoku Solver](#sudoku-solver)
 7. [Pruning (Very Important)](#7-pruning)
+  - [Complexity Overview](#complexity-overview)
 8. [Time Complexity](#8-time-complexity)
 9. [Backtracking vs DFS](#9-backtracking-vs-dfs)
 10. [Backtracking vs Dynamic Programming](#10-backtracking-vs-dp)
-11. [Real-World Applications](#11-real-world-applications)
-12. [Mental Model](#12-mental-model)
-13. [Final Understanding](#13-final-understanding)
 
 ## 📌 Learning Priority
 
@@ -53,7 +62,7 @@ constraint propagation · intelligent backtracking · CSP heuristics
 
 > 📝 **Practice:** [Q6 · backtracking vs brute force](./practice.md#q6)
 
-Imagine you are inside a maze.
+Wren stands at the entrance of a stone maze. She picks the left corridor, walks until she hits a dead end, then retraces her steps back to the last fork. She marks the dead path with chalk and takes the next untried corridor. She never tears down walls — she simply remembers where she has been, undoes her last step, and tries again. That is backtracking: explore forward, retreat when stuck, try the next option.
 
 You choose a path.
 
@@ -73,6 +82,8 @@ You explore carefully.
 # 2. Decision Tree Visualization
 
 > 📝 **Practice:** [Q3 · trace the subsets tree](./practice.md#q3)
+
+Wren imagines each fork in her maze as a branch on a tree. At every element, she faces two doors: include it or exclude it. Drawing this out on paper, she can see every possible path from root to leaf — the complete map of all choices she will ever need to make.
 
 Suppose we want to generate:
 
@@ -95,7 +106,8 @@ Include or exclude.
 
 Backtracking explores this tree.
 
-## Visual: Subsets Tree — Full Expansion
+<a id="subsets-tree-full-expansion"></a>
+**Subsets Tree — Full Expansion**
 
 Every element has exactly two choices: **include** it or **exclude** it.
 The complete exploration tree has 2^3 = 8 leaves, one per subset.
@@ -117,7 +129,8 @@ Decision variable:    element 1       element 2         element 3
 
 All 8 leaves are valid subsets — no pruning needed for the plain subsets problem.
 
-## Visual: Include / Exclude Tree (Detailed)
+<a id="include-exclude-tree-detailed"></a>
+**Include / Exclude Tree (Detailed)**
 
 ```
                             []
@@ -165,6 +178,8 @@ def subsets(nums):
 
 > 📝 **Practice:** [Q2 · write the universal template](./practice.md#q2)
 
+Wren does not bulldoze through walls. She carries a notebook where she writes each decision she makes. When she hits a dead end, she erases the last entry and tries the next option from that same fork. Her notebook always reflects only the path she is currently on — never leftover marks from abandoned routes.
+
 Backtracking is:
 
 A recursive algorithm
@@ -177,7 +192,8 @@ Core idea:
 - Explore
 - Undo
 
-## Visual: State Restoration — Choose, Explore, Unchoose
+<a id="state-restoration"></a>
+**State Restoration — Choose, Explore, Unchoose**
 
 This is the heartbeat of every backtracking algorithm.
 
@@ -230,6 +246,8 @@ after as seen by the caller.
 
 > 📝 **Practice:** [Q2 · write the universal template](./practice.md#q2) · [Q4 · why copy before appending](./practice.md#q4) · [Q5 · base case rules](./practice.md#q5)
 
+Wren discovered a recipe that works in every maze she encounters. First, check if she has reached the treasure room (base case). If not, look at all doors from the current room, pick one, walk through, explore everything beyond it, then walk back and try the next door. The recipe never changes — only the maze does.
+
 ```python
 def backtrack(path):
     if solution_found:
@@ -251,7 +269,8 @@ Three key parts:
 
 Undo is crucial.
 
-## Visual: The Backtracking Recipe
+<a id="the-backtracking-recipe"></a>
+**The Backtracking Recipe**
 
 ```
 function backtrack(state, choices):
@@ -277,6 +296,8 @@ function backtrack(state, choices):
 
 > 📝 **Practice:** [Q8 · pruning](./practice.md#q8) · [Q23 · 5 pruning techniques](./practice.md#q23)
 
+Wren realized she does not need to walk down every corridor. If she can see from the entrance that a passage is flooded, she marks it off without stepping in. This is pruning — eliminating entire branches of the maze before wasting steps on them. Without this insight, she would spend exponential time exploring every dead end.
+
 It explores all possibilities.
 
 But intelligently:
@@ -288,7 +309,8 @@ This is pruning.
 Without pruning:
 Exponential explosion.
 
-## Visual: Pruning — Subsets with Sum Constraint
+<a id="pruning-subsets-with-sum-constraint"></a>
+**Pruning — Subsets with Sum Constraint**
 
 Suppose we only want subsets that sum to <= 4, from [1, 2, 3].
 
@@ -317,7 +339,8 @@ If current_sum + remaining_min > target  →  prune entire subtree
                                              (no need to go deeper)
 ```
 
-### When to prune
+<a id="when-to-prune"></a>
+**When to Prune**
 
 ```
   PRUNE when you can prove no valid solution exists in the subtree.
@@ -337,7 +360,10 @@ If current_sum + remaining_min > target  →  prune entire subtree
 
 > 📝 **Practice:** [Q9 · subsets](./practice.md#q9) · [Q10 · permutations](./practice.md#q10) · [Q11 · combinations](./practice.md#q11) · [Q12 · combination sum](./practice.md#q12) · [Q14 · palindrome partitioning](./practice.md#q14) · [Q15 · word search](./practice.md#q15)
 
-## Subsets
+Wren keeps a journal of the classic mazes she has conquered. Each maze teaches a different shape of decision tree — some branch by include/exclude, some by arrangement order, some by constraint placement. Knowing these archetypes means she can recognize any new maze as a variant of one she has already solved.
+
+<a id="subsets"></a>
+**Subsets**
 
 Include/exclude each element.
 
@@ -348,7 +374,8 @@ O(2^n)
 
 **Common mistake — duplicate subsets with repeated input:** When input contains duplicates like `[1, 1, 2]`, the same value at the same recursion level generates identical branches. Fix: sort the input first, then skip with `if i > start and nums[i] == nums[i-1]: continue`. Use `i > start` (not `i > 0`) — using `i > 0` incorrectly skips the first occurrence at deeper recursion levels, causing missed valid results like `[1, 1, 2]`.
 
-## Permutations
+<a id="permutations"></a>
+**Permutations**
 
 Arrange elements.
 
@@ -359,7 +386,7 @@ Large quickly.
 
 **Common mistake — using `start` index for permutations:** A `start` pointer enforces "pick from remaining tail", which generates combinations, not permutations. For `[1, 2, 3]` this produces only `[1, 2, 3]` instead of all 6 permutations. Fix: use a `used[]` boolean array and iterate `range(0, n)` on every call, skipping `used[i]` elements.
 
-## Visual: Permutation Tree — All Permutations of [1, 2, 3]
+**Permutation Tree — All Permutations of [1, 2, 3]**
 
 At each level we pick which element goes in the current position. We swap it
 into place, recurse, then swap back (restore).
@@ -400,7 +427,7 @@ def permutations(nums):
     return result
 ```
 
-### Swap trace for permutations([1,2,3])
+**Swap trace for permutations([1,2,3])**
 
 ```
 backtrack(start=0)
@@ -421,13 +448,15 @@ backtrack(start=0)
   swap back → [1,2,3]
 ```
 
-## Combination Sum
+<a id="combination-sum"></a>
+**Combination Sum**
 
 Pick numbers that sum to target.
 
 Prune when sum exceeds target.
 
-## N-Queens
+<a id="n-queens"></a>
+**N-Queens**
 
 Place queens so no attacks.
 
@@ -441,7 +470,7 @@ Classic backtracking problem.
 
 > 📝 **Practice:** [Q62 · backtracking-n-queens](../dsa_practice_questions_100.md#q62--design--backtracking-n-queens)
 
-## Visual: N-Queens Decision Tree — 4-Queens on a 4x4 Board
+**N-Queens Decision Tree — 4-Queens on a 4x4 Board**
 
 We place one queen per column, left to right. Each row choice must not conflict
 with previously placed queens (same row, or diagonal).
@@ -508,7 +537,8 @@ def solve_n_queens(n):
 
 **Common mistake — O(n) board scan for N-Queens conflict check:** Scanning the board for conflicts each placement is O(n) per call. A queen attacks along its column (`col`), its `\` diagonal (`row - col` = constant), and its `/` diagonal (`row + col` = constant). Maintain three sets — `cols`, `diag1`, `diag2` — for O(1) conflict detection. Always add to all three sets on place and remove from all three on backtrack.
 
-## Sudoku Solver
+<a id="sudoku-solver"></a>
+**Sudoku Solver**
 
 Fill board.
 If invalid → backtrack.
@@ -521,6 +551,8 @@ Constraint-heavy.
 # 7. Pruning (Very Important)
 
 > 📝 **Practice:** [Q8 · pruning basics](./practice.md#q8) · [Q23 · 5 pruning techniques](./practice.md#q23)
+
+Wren learned that the fastest way through any maze is to never enter a corridor you already know leads nowhere. Before she even steps in, she checks the air flow, listens for echoes, and reads the chalk marks from earlier explorers. The more constraints she can check at the entrance, the fewer steps she wastes inside dead-end tunnels.
 
 Pruning means:
 
@@ -535,7 +567,8 @@ This reduces time dramatically.
 
 Pruning makes backtracking efficient.
 
-### Complexity overview
+<a id="complexity-overview"></a>
+**Complexity Overview**
 
 ```
 Problem              Worst-case tree size   With good pruning
@@ -558,6 +591,8 @@ used in production constraint solvers despite its theoretical exponential cost.
 
 > 📝 **Practice:** [Q7 · time complexity of subsets and permutations](./practice.md#q7) · [Q20 · estimate feasibility](./practice.md#q20)
 
+Wren once asked: "How long will it take to explore every corridor?" The answer depends on the maze shape. A binary include/exclude maze doubles at each level — O(2^n). A permutation maze where every remaining option is available at each step grows as O(n!). Knowing this upfront tells her when pruning is merely helpful versus absolutely essential.
+
 Backtracking often exponential:
 
 Subsets → O(2^n)
@@ -575,6 +610,8 @@ But pruning reduces actual runtime.
 
 > 📝 **Practice:** [Q6 · backtracking vs brute force](./practice.md#q6) · [Q19 · backtracking vs DP](./practice.md#q19)
 
+Wren uses DFS as her walking strategy — always go deeper before going wider. But backtracking adds discipline on top: she undoes her state at each step and checks constraints before committing. Plain DFS just visits nodes; backtracking builds and tears down candidate solutions as it goes.
+
 Backtracking is DFS with:
 
 - State undoing
@@ -590,6 +627,8 @@ But not all DFS is backtracking.
 
 > 📝 **Practice:** [Q19 · backtracking vs DP decision guide](./practice.md#q19)
 
+Wren noticed that some mazes have corridors that overlap — the same room appears on multiple paths. In those mazes, she memorizes the result for each room so she never re-explores it. That is dynamic programming. But when every path is unique and she needs all of them, pure backtracking is the right tool — there is nothing to cache.
+
 Backtracking:
 Explores all possibilities.
 
@@ -601,42 +640,24 @@ DP may be better.
 
 > [↑ Back to Top](#top)
 
-<a id="11-real-world-applications"></a>
-# 11. Real-World Applications
+<a id="summary"></a>
+## 🔥 Summary
 
-- Puzzle solving
-- Game solving
-- Scheduling
-- Path finding
-- Constraint satisfaction
-- Cryptography
-- AI search problems
+**Real-World Applications of Backtracking:**
 
-Backtracking used in AI systems.
+- Puzzle solving (Sudoku, crosswords)
+- Game solving (chess move generation, maze solving)
+- Scheduling (timetable generation under constraints)
+- Path finding (all paths, not just shortest)
+- Constraint satisfaction (SAT solvers, CSPs)
+- Cryptography (brute force key search with early termination)
+- AI search problems (planning, theorem proving)
 
-> [↑ Back to Top](#top)
+**Mental Model — Wren's Rule:**
 
-<a id="12-mental-model"></a>
-# 12. Mental Model
+Think of backtracking as exploring branches of a tree. If a branch fails, cut it, go back, try next branch. It is systematic exploration — never random, never destructive, always reversible.
 
-Think of backtracking as:
-
-Exploring branches of a tree.
-
-If branch fails:
-Cut it.
-Go back.
-
-Try next branch.
-
-It is systematic exploration.
-
-> [↑ Back to Top](#top)
-
-<a id="13-final-understanding"></a>
-# 13. Final Understanding
-
-Backtracking is:
+**Core Properties:**
 
 - Recursive
 - Exploratory
@@ -645,7 +666,7 @@ Backtracking is:
 - Optimizable using pruning
 - Template-based
 
-Mastering backtracking prepares you for:
+**Mastering backtracking prepares you for:**
 
 - Hard interview problems
 - Puzzle-like questions
@@ -656,17 +677,16 @@ Backtracking is disciplined exploration.
 
 > [↑ Back to Top](#top)
 
-# Navigation
+## 🧭 Navigation
 
-Previous:
-[19_greedy/interview.md](/02_DSA_Mastery/19_greedy/interview.md)
+**[Back to README](../README.md)**
 
-Next:
-[20_backtracking/interview.md](/02_DSA_Mastery/20_backtracking/interview.md)
-[21_dynamic_programming/theory.md](/02_DSA_Mastery/21_dynamic_programming/theory.md)
+| Previous | Next |
+|----------|------|
+| [19 Greedy — Theory](../19_greedy/theory.md) | [21 Dynamic Programming — Theory](../21_dynamic_programming/theory.md) |
 
-**[🏠 Back to README](../README.md)**
+**This folder:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
 
-**Prev:** [← Greedy — Interview Q&A](../19_greedy/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+**Related modules:** [04 Recursion](../04_recursion/theory.md) · [18 Graphs](../18_graphs/theory.md) · [19 Greedy](../19_greedy/theory.md) · [21 Dynamic Programming](../21_dynamic_programming/theory.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**Jump to:** [Decision Trees](#2-decision-tree) · [Template](#4-the-backtracking-template) · [Classic Problems](#6-classic-problems) · [Pruning](#7-pruning)

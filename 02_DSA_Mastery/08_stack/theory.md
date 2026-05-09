@@ -1,38 +1,33 @@
 <a id="top"></a>
-# Stack — Understanding It Through Real Life
-
-> A stack is not an abstract computer concept.
-> You already use it every day — without realizing it.
-
-Stack follows one strict rule:
-
-**Last In, First Out (LIFO)**
-
-Whoever comes last must leave first.
-
-Let's understand this not through code,
-but through life.
+# 📘 08 – Stack in Python
 
 ## 📖 Table of Contents
 
-1. [Plates in Your Kitchen](#1-plates-in-your-kitchen)
-2. [Books on a Study Table](#2-books-on-a-study-table)
-3. [Browser Back Button](#3-browser-back-button)
-4. [Call Stack — Inside Your Computer](#4-call-stack-inside-your-computer)
-5. [Why Stack Is Powerful](#5-why-stack-is-powerful)
-6. [What Makes Stack Special?](#6-what-makes-stack-special)
-7. [Stack Operations Explained with Daily Logic](#7-stack-operations-explained-with-daily-logic)
-8. [Implementing Stack in Python (Reality Check)](#8-implementing-stack-in-python-reality-check)
-9. [Parentheses Validation — Real Life Analogy](#9-parentheses-validation-real-life-analogy)
-10. [Reversing Order — Why Stack Helps](#10-reversing-order-why-stack-helps)
-11. [Monotonic Stack — Daily Scenario](#11-monotonic-stack-daily-scenario)
-12. [Stack vs Queue in Daily Life](#12-stack-vs-queue-in-daily-life)
-13. [Where You Use Stack Without Knowing](#13-where-you-use-stack-without-knowing)
-14. [When Stack Is Dangerous](#14-when-stack-is-dangerous)
-15. [The Monotonic Stack Pattern (Deep Dive)](#15-the-monotonic-stack-pattern-deep-dive)
-16. [DFS With an Explicit Stack](#16-dfs-with-an-explicit-stack)
-17. [Final Understanding](#17-final-understanding)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is a Stack?](#1-what-is-a-stack)
+  - [Plates in the Kitchen](#plates)
+  - [Books on the Table](#books)
+  - [Browser Back Button](#browser)
+  - [Call Stack Inside Your Computer](#call-stack)
+  - [Visual: LIFO Push/Pop](#visual-lifo)
+  - [Visual: Call Stack and Stack Overflow](#visual-call-stack)
+- [2. Why Stacks Are Powerful](#2-why-powerful)
+- [3. Stack Operations and Implementation](#3-operations)
+  - [Push, Pop, Peek](#push-pop-peek)
+  - [Implementing in Python](#implementing)
+- [4. Classic Stack Problems](#4-classic-problems)
+  - [Parentheses Validation](#parentheses)
+  - [Reversing Order](#reversing)
+- [5. Monotonic Stack](#5-monotonic-stack)
+  - [Visual: Next Greater Element](#visual-nge)
+  - [Next Greater Element Pattern](#nge-pattern)
+  - [Stock Span Problem](#stock-span)
+  - [When to Use Monotonic Stack](#when-monotonic)
+- [6. DFS With Explicit Stack](#6-dfs-stack)
+  - [Visual: Mark-on-Push vs Mark-on-Pop](#visual-mark)
+- [🔥 Summary](#summary)
 
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -47,888 +42,416 @@ stack-based DFS · undo/redo pattern
 **Reference** — Know it exists, look up syntax when needed:
 expression evaluation · reverse Polish notation parsing
 
-<a id="1-plates-in-your-kitchen"></a>
-# 1. Plates in Your Kitchen
+Zara works in a busy cafeteria. Every day she stacks clean plates, manages order tickets, and tracks which task to undo when something goes wrong. Without realizing it, she uses stacks constantly. A stack follows one strict rule: **Last In, First Out (LIFO)** — whoever comes last must leave first. Today Zara will discover that this simple rule powers everything from browser history to function calls to some of the trickiest interview problems.
 
-Imagine you wash 5 plates.
+<a id="1-what-is-a-stack"></a>
+# 1. What Is a Stack?
 
-You stack them like this:
+Zara encounters stacks everywhere in her daily life — plates, books, browser tabs, even the way her computer runs programs. Every example follows the same LIFO rule.
+
+<a id="plates"></a>
+## Plates in the Kitchen
+
+Zara washes 5 plates and stacks them:
 
 ```
-Top
-  ↑
-Plate 5
-Plate 4
-Plate 3
-Plate 2
-Plate 1
+Top →  [Plate 5]
+       [Plate 4]
+       [Plate 3]
+       [Plate 2]
+Bottom [Plate 1]
 ```
 
-Now when you need a plate,
-which one do you take?
+When she needs a plate, she takes from the top. She cannot reach Plate 1 without removing Plate 5 first. Last washed = first used. That is LIFO.
 
-The top one.
+<a id="books"></a>
+## Books on the Table
 
-You cannot remove Plate 3 directly.
-You must remove 5 and 4 first.
+Zara studies after work. She stacks textbooks on her desk:
 
-That restriction defines a stack.
+```
+Top →  [Python DSA]
+       [System Design]
+       [SQL Mastery]
+Bottom [Linux Guide]
+```
 
-Operations happening here:
+She picks up the top book first. To reach the Linux Guide, she must remove everything above it. The most recently placed book is the first one she reads.
 
-- Put plate → Push
-- Take plate → Pop
-- See top plate → Peek
+<a id="browser"></a>
+## Browser Back Button
 
-You just implemented a stack in your kitchen.
+Zara browses the web: Home → Products → Item → Cart. Each page is pushed onto a stack. When she clicks Back, the most recent page is popped:
 
+```
+Push: Home → Products → Item → Cart
+
+Stack:  [Cart]      ← current page
+        [Item]
+        [Products]
+        [Home]
+
+Click Back → pop Cart → now on Item
+Click Back → pop Item → now on Products
+```
+
+The browser's back button is a stack.
+
+<a id="call-stack"></a>
+## Call Stack Inside Your Computer
+
+When Python calls a function, it pushes a frame onto the call stack. When the function returns, the frame is popped. Recursion = pushing many frames before any pop.
+
+```python
+def a():
+    b()
+
+def b():
+    c()
+
+def c():
+    print("hello")
+```
+
+<a id="visual-call-stack"></a>
+## Visual: Call Stack and Stack Overflow
+
+```
+PHASE 1: Calls are pushed
+
+  [c()]    ← top (most recent)
+  [b()]
+  [a()]
+  [main]   ← bottom
+
+PHASE 2: Returns are popped
+
+  c() prints "hello", returns → popped
+  b() returns → popped
+  a() returns → popped
+  main continues
+```
+
+**Stack Overflow** — what happens when the stack gets too deep:
+
+```
+def infinite():
+    infinite()    # never stops → stack grows forever
+
+[infinite()]
+[infinite()]
+[infinite()]
+[infinite()]
+... 1000 frames later ...
+→ RecursionError: maximum recursion depth exceeded
+```
+
+Python's default recursion limit is ~1000 frames. Each frame consumes memory. An infinite recursion fills the stack until the system kills it.
+
+<a id="visual-lifo"></a>
 ## Visual: LIFO Push/Pop in Action
 
-Walk into any buffet restaurant and look at the plate station. There is a spring-loaded dispenser with a tall stack of plates. You always take the plate on TOP. When the staff adds clean plates, they go on TOP. The plate that went in last comes out first.
+```
+PUSH operations (add to top):
+
+push(10):  [10]
+push(20):  [20]
+           [10]
+push(30):  [30]
+           [20]
+           [10]
+
+POP operations (remove from top):
+
+pop():     returns 30    stack: [20]
+                                [10]
+pop():     returns 20    stack: [10]
+pop():     returns 10    stack: []  (empty)
+
+LIFO: 30 was pushed last, popped first.
+```
+
+> [↑ Back to Top](#top)
+
+<a id="2-why-powerful"></a>
+# 2. Why Stacks Are Powerful
+
+Zara realizes the stack is not just about plates — it is a pattern for controlling order. Any time you need to process the most recent item first, reverse a sequence, or match opening/closing pairs, a stack is the right tool.
+
+Stacks shine when:
+- **Order matters** — you must process the most recent item first
+- **Nesting matters** — matching brackets, tags, parentheses
+- **Undo/redo** — reverse the last action
+- **Depth-first exploration** — explore one path completely before backtracking
+- **Expression evaluation** — operator precedence
+
+What makes a stack special: it restricts access to ONE end. You cannot reach the bottom without removing everything above it. This constraint is the source of its power — it enforces a strict processing order.
 
 ```
-push(A)    push(B)    push(C)    pop()     pop()
-  [C]                                      [A]
-  [B]        [B]        [C]
-  [A]        [A]        [B]       [B]      ← only
-             ↑          [A]       [A]         this
-           grows                           remains
-           upward
+Stack vs unrestricted access:
+
+Stack:     can only touch TOP → enforces LIFO order
+Array:     can touch ANY index → no order enforcement
 ```
 
-The only operations you get:
-- **push(x)**: add to the top
-- **pop()**: remove from the top
-- **peek()**: look at the top without removing
-- **is_empty()**: is there anything here?
+> [↑ Back to Top](#top)
+
+<a id="3-operations"></a>
+# 3. Stack Operations and Implementation
+
+Zara learns the three fundamental moves she can make with her plate stack. Each one is O(1) — constant time, regardless of how tall the stack is.
+
+<a id="push-pop-peek"></a>
+## Push, Pop, Peek
+
+| Operation | What it does | Time |
+|---|---|---|
+| `push(x)` | Add x to the top | O(1) |
+| `pop()` | Remove and return the top | O(1) |
+| `peek()` / `top()` | Look at the top without removing | O(1) |
+| `is_empty()` | Check if stack is empty | O(1) |
+
+**Common mistake — popping from an empty stack:** Always check `if stack:` before `stack.pop()`. Popping from an empty list raises `IndexError`.
+
+<a id="implementing"></a>
+## Implementing in Python
+
+Python's `list` is a perfect stack — `append()` is push, `pop()` is pop. Both are O(1) amortized.
 
 ```python
 stack = []
-stack.append(1)   # push
-stack.append(2)   # push
-stack.append(3)   # push
-stack.pop()       # returns 3 — top comes off first
-stack.pop()       # returns 2
+
+stack.append(10)    # push
+stack.append(20)
+stack.append(30)
+
+top = stack[-1]     # peek → 30
+val = stack.pop()   # pop → 30
+print(stack)        # [10, 20]
 ```
 
-**Common mistake — pop(0) instead of pop():** Using `stack.pop(0)` removes the first element (FIFO/queue order) and costs O(n) per call because all remaining elements must shift left. Always use `stack.pop()` for LIFO; if you need FIFO, use `collections.deque` with `popleft()`.
+Do NOT use `collections.deque` for a stack — it works but sends the wrong signal to readers. `list` is the idiomatic Python stack. Use `deque` for queues.
 
 > [↑ Back to Top](#top)
 
-<a id="2-books-on-a-study-table"></a>
-# 2. Books on a Study Table
+<a id="4-classic-problems"></a>
+# 4. Classic Stack Problems
 
-You're studying.
+Zara discovers that two of the most common interview problems are built entirely on the stack principle: matching pairs and reversing order.
 
-You place books one on top of another.
+<a id="parentheses"></a>
+## Parentheses Validation
 
-Later, you decide to remove one.
-You remove the most recently placed book.
-
-That's LIFO.
-
-Now imagine someone says:
-
-"Take the 2nd book from bottom."
-
-You can't.
-You must remove the top ones first.
-
-That limitation is the identity of a stack.
-
-> [↑ Back to Top](#top)
-
-<a id="3-browser-back-button"></a>
-# 3. Browser Back Button
-
-You open:
-
-1. Google
-2. YouTube
-3. LinkedIn
-
-Your browsing history behaves like:
+Zara checks if every opening bracket has a matching closer in the right order. She pushes openers onto the stack. When she sees a closer, she pops and checks if it matches.
 
 ```
-Top
-LinkedIn
-YouTube
-Google
+Input: "({[]})"
+
+Step 1: '(' → push       stack: ['(']
+Step 2: '{' → push       stack: ['(', '{']
+Step 3: '[' → push       stack: ['(', '{', '[']
+Step 4: ']' → pop '[' ✓  stack: ['(', '{']
+Step 5: '}' → pop '{' ✓  stack: ['(']
+Step 6: ')' → pop '(' ✓  stack: []
+
+Stack empty at end → VALID ✓
 ```
 
-When you press back:
-
-You go to YouTube.
-Then Google.
-
-The last visited page comes first when going back.
-
-That is stack behavior.
-
-> [↑ Back to Top](#top)
-
-<a id="4-call-stack-inside-your-computer"></a>
-# 4. Call Stack — Inside Your Computer
-
-Now imagine function calls.
-
-You call:
-
-main()
-   calls process()
-       calls calculate()
-
-In memory:
-
 ```
-Top
-calculate()
-process()
-main()
-```
+Input: "({[}])"
 
-When calculate() finishes,
-it returns first.
+Step 1: '(' → push       stack: ['(']
+Step 2: '{' → push       stack: ['(', '{']
+Step 3: '[' → push       stack: ['(', '{', '[']
+Step 4: '}' → pop '[' ✗  MISMATCH! '[' ≠ '}'
 
-Then process() returns.
-Then main() returns.
-
-Exactly like plates.
-
-That structure is called the **call stack**.
-
-Every program you write uses stack internally.
-
-## Visual: Call Stack Frame-by-Frame
-
-When you call a function, your computer creates a "stack frame" — a little box of memory containing the function's local variables, its return address, and the return value. This frame gets pushed onto the call stack. When the function returns, the frame is popped off.
-
-Let's trace `factorial(4)`:
-
-```python
-def factorial(n):
-    if n == 0:
-        return 1
-    return n * factorial(n - 1)
-```
-
-**Building up (pushing frames):**
-
-```
-Call factorial(4):
-┌──────────────────┐
-│ factorial(4)     │  ← current frame
-│ n = 4            │
-│ waiting for f(3) │
-└──────────────────┘
-
-Call factorial(3):
-┌──────────────────┐
-│ factorial(3)     │  ← current frame
-│ n = 3            │
-│ waiting for f(2) │
-├──────────────────┤
-│ factorial(4)     │
-│ n = 4            │
-│ waiting for f(3) │
-└──────────────────┘
-
-Call factorial(2):
-┌──────────────────┐
-│ factorial(2)     │
-│ n = 2            │
-│ waiting for f(1) │
-├──────────────────┤
-│ factorial(3)     │
-├──────────────────┤
-│ factorial(4)     │
-└──────────────────┘
-
-Call factorial(1):
-┌──────────────────┐
-│ factorial(1)     │
-│ n = 1            │
-│ waiting for f(0) │
-├──────────────────┤
-│ factorial(2)     │
-├──────────────────┤
-│ factorial(3)     │
-├──────────────────┤
-│ factorial(4)     │
-└──────────────────┘
-
-Call factorial(0):
-┌──────────────────┐
-│ factorial(0)     │  ← base case! returns 1
-│ n = 0            │
-├──────────────────┤
-│ factorial(1)     │
-├──────────────────┤
-│ ...              │
-└──────────────────┘
-```
-
-**Unwinding (popping frames):**
-
-```
-factorial(0) returns 1 → popped
-┌──────────────────┐
-│ factorial(1)     │  ← now n * 1 = 1 * 1 = 1, returns 1
-└──────────────────┘
-
-factorial(1) returns 1 → popped
-┌──────────────────┐
-│ factorial(2)     │  ← now n * 1 = 2 * 1 = 2, returns 2
-└──────────────────┘
-
-factorial(2) returns 2 → popped
-┌──────────────────┐
-│ factorial(3)     │  ← now 3 * 2 = 6, returns 6
-└──────────────────┘
-
-factorial(3) returns 6 → popped
-┌──────────────────┐
-│ factorial(4)     │  ← now 4 * 6 = 24, returns 24
-└──────────────────┘
-
-factorial(4) returns 24. Done.
-```
-
-## Visual: Stack Overflow
-
-Every computer has a maximum call stack size. If you write infinite recursion (or very deep recursion), you keep pushing frames onto the stack until there is no room left. The program crashes with "RecursionError: maximum recursion depth exceeded."
-
-```
-┌──────────────────┐
-│ factorial(999)   │
-├──────────────────┤
-│ factorial(998)   │
-├──────────────────┤
-│ ...              │  ← stack keeps growing
-├──────────────────┤
-│ factorial(1)     │
-├──────────────────┤  ← LIMIT REACHED
-│ CRASH!           │  ← "RecursionError"
-└──────────────────┘
-```
-
-> 📝 **Practice:** [Q18 · recursion-call-stack](./practice.md#q18----trace-the-recursion-call-stack-for-factorial4) · [Q24 · fix-stack-overflow](./practice.md#q24----diagnose-and-fix-a-stack-overflow)
-
-> [↑ Back to Top](#top)
-
-<a id="5-why-stack-is-powerful"></a>
-# 5. Why Stack Is Powerful
-
-Stacks control execution order.
-
-Think about undo functionality in an editor.
-
-You type:
-- Word A
-- Word B
-- Word C
-
-Undo removes C first.
-
-Then B.
-Then A.
-
-Undo is LIFO.
-
-Without stack,
-undo feature would be complex.
-
-> 📝 **Practice:** [Q15 · undo-redo](./practice.md#q15----undoredo-with-a-command-stack) · [Q14 · browser-history](./practice.md#q14----browser-history-with-backforward)
-
-> [↑ Back to Top](#top)
-
-<a id="6-what-makes-stack-special"></a>
-# 6. What Makes Stack Special?
-
-Stack has a restriction:
-
-You can only interact with one end — the top.
-
-That restriction makes reasoning easier.
-
-If you allowed removal from anywhere,
-it would become something else (like a list).
-
-Stack's limitation is its strength.
-
-> [↑ Back to Top](#top)
-
-<a id="7-stack-operations-explained-with-daily-logic"></a>
-# 7. Stack Operations Explained with Daily Logic
-
-## 🔹 Push
-
-You place a new plate on top.
-
-Time: O(1)
-
-Why?
-Because you don't touch other plates.
-
-## 🔹 Pop
-
-You remove the top plate.
-
-Time: O(1)
-
-Again,
-no shifting,
-no searching.
-
-**Common mistake — popping without checking empty:** Calling `.pop()` on an empty list raises `IndexError`. Always guard with `if stack:` before popping. For peek, use `stack[-1] if stack else None` rather than calling `.pop()` and pushing back.
-
-## 🔹 Peek
-
-You look at the top plate without removing it.
-
-Time: O(1)
-
-> 📝 **Practice:** [Q2 · push-pop-peek](./practice.md#q2----implement-push--pop--peek-with-a-python-list) · [Q3 · deque-stack](./practice.md#q3----implement-a-stack-using-collectionsdeque) · [Q4 · safe-peek](./practice.md#q4----safe-peek----handle-empty-stack)
-
-> [↑ Back to Top](#top)
-
-<a id="8-implementing-stack-in-python-reality-check"></a>
-# 8. Implementing Stack in Python (Reality Check)
-
-Python already gives stack-like behavior:
-
-```python
-stack = []
-stack.append(10)  # push
-stack.pop()       # pop
-```
-
-Why is this efficient?
-
-Because operations happen at end of list.
-
-No shifting required.
-
-> 📝 **Practice:** [Q1 · lifo-demo](./practice.md#q1----what-comes-out-first-from-a-stack) · [Q5 · reverse-with-stack](./practice.md#q5----reverse-a-list-using-a-stack) · [Q8 · stack-vs-queue](./practice.md#q8----stack-vs-queue-spot-the-difference)
-
-> [↑ Back to Top](#top)
-
-<a id="9-parentheses-validation-real-life-analogy"></a>
-# 9. Parentheses Validation — Real Life Analogy
-
-Imagine you are packing boxes.
-
-You open a box:
-
-```
-(
-```
-
-You must close it properly:
-
-```
-)
-```
-
-If you open:
-
-```
-( {
-```
-
-You must close:
-
-```
-} )
-```
-
-The most recently opened must close first.
-
-That is stack logic.
-
-Validation process:
-
-1. Push opening bracket.
-2. On closing bracket:
-   - Check top.
-   - If matches → pop.
-   - If not → invalid.
-
-Stack ensures proper nesting.
-
-## Visual: Bracket Matching Step-by-Step
-
-The stack remembers the order of opening brackets for you. LIFO ensures the most recently opened bracket is checked first — exactly what you need for nesting.
-
-**Trace on `"({[]})"`:**
-
-```
-Character: (    {    [    ]    }    )
-           ↓    ↓    ↓    ↓    ↓    ↓
-
-Step 1: '(' is opening → push
-  Stack: [ ( ]
-
-Step 2: '{' is opening → push
-  Stack: [ (, { ]
-
-Step 3: '[' is opening → push
-  Stack: [ (, {, [ ]
-
-Step 4: ']' is closing → pop top, check match
-  Popped: '[' — matches ']' ✓
-  Stack: [ (, { ]
-
-Step 5: '}' is closing → pop top, check match
-  Popped: '{' — matches '}' ✓
-  Stack: [ ( ]
-
-Step 6: ')' is closing → pop top, check match
-  Popped: '(' — matches ')' ✓
-  Stack: [ ]   (empty)
-
-Stack is empty at the end → BALANCED ✓
-```
-
-**Trace on `"({[})"` — a mismatch:**
-
-```
-Character: (    {    [    }    )
-
-Step 1: '(' → push.  Stack: [ ( ]
-Step 2: '{' → push.  Stack: [ (, { ]
-Step 3: '[' → push.  Stack: [ (, {, [ ]
-Step 4: '}' → pop top
-  Popped: '[' — does NOT match '}' ✗
-  STOP. Return "NOT BALANCED"
+→ INVALID ✗
 ```
 
 ```python
-def is_balanced(s):
+def is_valid(s):
     stack = []
-    match = {')': '(', '}': '{', ']': '['}
+    pairs = {')': '(', '}': '{', ']': '['}
+
     for ch in s:
         if ch in '({[':
             stack.append(ch)
         elif ch in ')}]':
-            if not stack or stack[-1] != match[ch]:
+            if not stack or stack[-1] != pairs[ch]:
                 return False
             stack.pop()
+
     return len(stack) == 0
 ```
 
-**Common mistake — returning True without checking empty stack:** After processing all characters, the stack may still contain unmatched opening brackets. `return True` at the end means `"((("` passes validation. Always use `return len(stack) == 0` so unmatched openers are caught.
+**Common mistake — forgetting to check stack is empty at end:** `"((("` has no mismatches during traversal, but 3 unmatched openers remain. Always verify `len(stack) == 0` after the loop.
 
-> 📝 **Practice:** [Q32 · valid-parentheses](../dsa_practice_questions_100.md#q32--logical--valid-parentheses)
+<a id="reversing"></a>
+## Reversing Order
 
-> [↑ Back to Top](#top)
+Zara needs to reverse a sequence. She pushes everything onto the stack, then pops — items come out in reverse order.
 
-<a id="10-reversing-order-why-stack-helps"></a>
-# 10. Reversing Order — Why Stack Helps
+```
+Input:  [1, 2, 3, 4, 5]
 
-Imagine you want to reverse a sentence:
+Push all:  stack = [1, 2, 3, 4, 5]  (5 on top)
 
-"I love programming"
+Pop all:   5, 4, 3, 2, 1
 
-If you push each word into stack:
+Output: [5, 4, 3, 2, 1]
+```
 
-Push: I  
-Push: love  
-Push: programming  
-
-Then pop:
-
-programming  
-love  
-I  
-
-Stack automatically reverses order.
-
-This is why stack is used in reversing problems.
+This is why stacks naturally reverse things — LIFO inverts the input order.
 
 > [↑ Back to Top](#top)
 
-<a id="11-monotonic-stack-daily-scenario"></a>
-# 11. Monotonic Stack — Daily Scenario
+<a id="5-monotonic-stack"></a>
+# 5. Monotonic Stack
 
-Imagine daily temperatures.
+Zara stands in a crowd at a concert. She looks to her right — who is the next person taller than her? That is the **Next Greater Element** problem, and the monotonic stack solves it in O(n).
 
-You want to know:
-When will next hotter day come?
+A **monotonic stack** maintains elements in sorted order (either increasing or decreasing). When a new element violates the monotone property, it pops elements — and whatever triggers the pop BECOMES the answer for the popped element.
 
-If today is 30°C,
-and tomorrow is 28°C,
-you wait.
-
-But when a hotter day arrives,
-you resolve previous waiting days.
-
-Monotonic stack stores unresolved days.
-
-Once hotter day comes,
-you clear stack elements that are smaller.
-
-Each day enters stack once,
-leaves once.
-
-Time:
-O(n)
-
-This pattern appears complex,
-but it's just structured waiting.
-
-> 📝 **Practice:** [Q12 · daily-temperatures](./practice.md#q12----daily-temperatures) · [Q13 · next-greater-element](./practice.md#q13----next-greater-element) · [Q20 · stock-span](./practice.md#q20----stock-span-problem) · [Q33 · monotonic-stack](../dsa_practice_questions_100.md#q33--thinking--monotonic-stack)
-
-> [↑ Back to Top](#top)
-
-<a id="12-stack-vs-queue-in-daily-life"></a>
-# 12. Stack vs Queue in Daily Life
-
-Stack:
-Plates
-
-Queue:
-Line at a supermarket
-
-In queue,
-first person entering leaves first.
-
-In stack,
-last plate placed leaves first.
-
-Confusing these leads to wrong algorithm choice.
-
-> 📝 **Practice:** [Q8 · stack-vs-queue](./practice.md#q8----stack-vs-queue-spot-the-difference) · [Q82 · stack-vs-queue](../dsa_practice_questions_100.md#q82--interview--stack-vs-queue)
-
-> [↑ Back to Top](#top)
-
-<a id="13-where-you-use-stack-without-knowing"></a>
-# 13. Where You Use Stack Without Knowing
-
-- Undo/Redo
-- Browser navigation
-- Recursion
-- Function calls
-- Backtracking
-- Expression parsing
-- Depth-first search
-
-Stack is everywhere in computing.
-
-> 📝 **Practice:** [Q9 · balanced-parens](./practice.md#q9----balanced-parentheses-single-type) · [Q10 · balanced-brackets](./practice.md#q10----balanced-brackets-multi-type-) · [Q16 · rpn](./practice.md#q16----evaluate-reverse-polish-notation-rpn) · [Q17 · simplify-path](./practice.md#q17----simplify-file-path-ab-c) · [Q31 · stack-lifo-uses](../dsa_practice_questions_100.md#q31--normal--stack-lifo-uses)
-
-> [↑ Back to Top](#top)
-
-<a id="14-when-stack-is-dangerous"></a>
-# 14. When Stack Is Dangerous
-
-If you keep pushing plates without removing,
-stack grows tall.
-
-In programming:
-
-Too many recursive calls →
-Stack overflow.
-
-Memory is limited.
-
-Stack must be managed carefully.
-
-> [↑ Back to Top](#top)
-
-<a id="15-the-monotonic-stack-pattern-deep-dive"></a>
-# 15. The Monotonic Stack Pattern (Deep Dive)
-
-A **monotonic stack** is a stack that maintains elements in either strictly increasing or strictly decreasing order. It's one of the most powerful patterns for "next greater/smaller element" problems.
-
-**The core idea:**
-
-Instead of comparing each element against all others (O(n²)), use a stack to efficiently find the next element that "breaks" the current order — O(n) total.
-
+<a id="visual-nge"></a>
 ## Visual: Next Greater Element — Crowd Analogy
 
-You are standing in a crowd at a concert. You want to know: for each person, who is the next person to their right that is taller than them?
-
-Brute force: for each person, scan everyone to their right until you find someone taller. O(n²).
-
-The smart way: use a monotonic stack. Maintain a stack where elements are always in decreasing order (tallest at the bottom, shortest at the top).
-
-**Problem:** Find the "Next Greater Element" for each position in `[2, 1, 4, 3, 7]`.
-
-Expected output: `[4, 4, 7, 7, -1]` (-1 means no one taller to the right)
+Zara is in a line of people with different heights. Each person looks to their right for the first person taller than them.
 
 ```
-We iterate left to right. Stack holds indices of elements we haven't found
-a "next greater" for yet.
+Heights: [2, 1, 4, 3, 5]
 
-Process index 0, val=2:
-  Stack is empty. Push index 0.
-  Stack: [0]  (values: [2])
+Person 2 looks right → sees 1 (shorter), then 4 (TALLER!) → answer is 4
+Person 1 looks right → sees 4 (TALLER!) → answer is 4
+Person 4 looks right → sees 3 (shorter), then 5 (TALLER!) → answer is 5
+Person 3 looks right → sees 5 (TALLER!) → answer is 5
+Person 5 looks right → nobody taller → answer is -1
 
-Process index 1, val=1:
-  Stack top = index 0, val=2. Is 1 > 2? No.
-  Push index 1.
-  Stack: [0, 1]  (values: [2, 1])
-
-Process index 2, val=4:
-  Stack top = index 1, val=1. Is 4 > 1? YES!
-    result[1] = 4. Pop index 1.
-  Stack top = index 0, val=2. Is 4 > 2? YES!
-    result[0] = 4. Pop index 0.
-  Stack is empty. Push index 2.
-  Stack: [2]  (values: [4])
-
-Process index 3, val=3:
-  Stack top = index 2, val=4. Is 3 > 4? No.
-  Push index 3.
-  Stack: [2, 3]  (values: [4, 3])
-
-Process index 4, val=7:
-  Stack top = index 3, val=3. Is 7 > 3? YES!
-    result[3] = 7. Pop index 3.
-  Stack top = index 2, val=4. Is 7 > 4? YES!
-    result[2] = 7. Pop index 2.
-  Stack is empty. Push index 4.
-  Stack: [4]  (values: [7])
-
-End of array. Remaining in stack: [index 4]
-  result[4] = -1 (nothing to the right)
-
-Final result: [4, 4, 7, 7, -1]
+Result: [4, 4, 5, 5, -1]
 ```
 
-**Why is this O(n)?** Each element is pushed once and popped once. Total work: 2n = O(n).
-
-**The mental model:** imagine people walking in from the right. Each new person "resolves" all shorter people ahead of them (they can see over them). Unresolved people stay in the stack waiting for someone taller.
+The brute force is O(n²) — for each person, scan right. The monotonic stack does it in O(n).
 
 ```
-Array:  [2,  1,  4,  3,  7]
-Result: [4,  4,  7,  7, -1]
+Stack trace (decreasing stack — stores indices):
 
-     7      ←← tallest, resolves everyone remaining
-   4   3    ←← 4 resolves 2 and 1; 7 later resolves 4 and 3
-  2  1
+i=0, val=2: stack empty, push 0         stack: [0]
+i=1, val=1: 1 < 2, push 1              stack: [0, 1]
+i=2, val=4: 4 > 1, pop 1 → ans[1]=4
+             4 > 2, pop 0 → ans[0]=4
+             push 2                     stack: [2]
+i=3, val=3: 3 < 4, push 3              stack: [2, 3]
+i=4, val=5: 5 > 3, pop 3 → ans[3]=5
+             5 > 4, pop 2 → ans[2]=5
+             push 4                     stack: [4]
+
+Remaining in stack: [4] → ans[4]=-1
+
+Result: [4, 4, 5, 5, -1]  ✓
 ```
 
-### Pattern 1: Next Greater Element
-
-**Problem:** For each element in an array, find the next element to its right that is greater.
-
-```
-Input:  [2, 1, 5, 3, 6]
-Output: [5, 5, 6, 6, -1]
-         ↑  ↑  ↑  ↑   ↑
-         2→5  1→5  5→6  3→6  6→none
-```
-
-**Stack state walkthrough:**
-
-```
-i=0: stack=[]      → push 2      → stack=[2]
-i=1: stack=[2]     → 1<2, push   → stack=[2,1]
-i=2: stack=[2,1]   → 5>1, pop 1  → answer[1]=5  → stack=[2]
-                   → 5>2, pop 2  → answer[0]=5  → stack=[]
-                   → push 5      → stack=[5]
-i=3: stack=[5]     → 3<5, push   → stack=[5,3]
-i=4: stack=[5,3]   → 6>3, pop 3  → answer[3]=6  → stack=[5]
-                   → 6>5, pop 5  → answer[2]=6  → stack=[]
-                   → push 6      → stack=[6]
-end: stack=[6]     → 6 has no next greater → answer[4]=-1
-```
+<a id="nge-pattern"></a>
+## Next Greater Element Pattern
 
 ```python
-def next_greater(nums):
-    n = len(nums)
-    answer = [-1] * n
-    stack = []                      # stores indices
+def next_greater_element(arr):
+    n = len(arr)
+    result = [-1] * n
+    stack = []  # stores indices
 
     for i in range(n):
-        while stack and nums[i] > nums[stack[-1]]:
+        while stack and arr[i] > arr[stack[-1]]:
             idx = stack.pop()
-            answer[idx] = nums[i]   # nums[i] is the next greater for idx
+            result[idx] = arr[i]
         stack.append(i)
-
-    return answer
-```
-
-**Time:** O(n) — each element pushed and popped at most once.
-**Space:** O(n) — stack.
-
-**Common mistake — ignoring leftover stack after loop:** In circular variants (next greater in a circular array), doing only one pass means wrap-around elements are never resolved. The fix is two passes: `for i in range(2 * n)` with `idx = i % n`, pushing only during the first pass (`if i < n`).
-
-> 📝 **Practice:** [Q69 · monotonic-stack-nge](../dsa_practice_questions_100.md#q69--logical--monotonic-stack-nge)
-
-### Pattern 2: Stock Span Problem
-
-**Problem:** For each day's stock price, find how many consecutive days before it had a price ≤ today's price (including today itself).
-
-```
-Prices: [100, 80, 60, 70, 60, 75, 85]
-Spans:  [  1,  1,  1,  2,  1,  4,  6]
-
-Day 6: price=75 → look back: 60≤75, 70≤75, 60≤75, then 80>75 → span=4
-```
-
-```python
-def stock_span(prices):
-    stack = []   # stores (price, span)
-    result = []
-
-    for price in prices:
-        span = 1
-        while stack and stack[-1][0] <= price:
-            span += stack.pop()[1]   # accumulate spans of popped elements
-        stack.append((price, span))
-        result.append(span)
 
     return result
 ```
 
-### When to Use Monotonic Stack
+Time: O(n) — each element is pushed and popped at most once.
 
-```
-Problem pattern                          → Use monotonic stack
-─────────────────────────────────────────────────────────────
-"Next greater/smaller element"           → decreasing/increasing stack
-"Previous greater/smaller element"       → process left to right
-"Largest rectangle in histogram"         → maintain increasing stack
-"Trapping rain water"                    → maintain decreasing stack
-"Daily temperatures"                     → next greater (decreasing)
-```
+<a id="stock-span"></a>
+## Stock Span Problem
 
-**The recognition signal:** If the problem asks "for each element, find the nearest element satisfying condition X in O(n)", monotonic stack is likely the answer.
-
-> 📝 **Practice:** [Q21 · histogram](./practice.md#q21----largest-rectangle-in-histogram) · [Q22 · circular-nge](./practice.md#q22----next-greater-element-ii-circular-array) · [Q23 · rain-water](./practice.md#q23----trapping-rain-water) · [Q69 · monotonic-stack-nge](../dsa_practice_questions_100.md#q69--logical--monotonic-stack-nge)
-
-> [↑ Back to Top](#top)
-
-<a id="16-dfs-with-an-explicit-stack"></a>
-# 16. DFS With an Explicit Stack
-
-Recursive DFS uses the call stack implicitly. You can always convert it to an iterative version using your own explicit stack — and sometimes that is necessary (deep trees hit Python's recursion limit).
-
-**Tree:**
-
-```
-        A
-       / \
-      B   C
-     / \
-    D   E
-```
-
-**Recursive DFS (implicit stack):**
-
-```
-visit(A)
-  visit(B)
-    visit(D) ← leaf, return
-    visit(E) ← leaf, return
-  visit(C) ← leaf, return
-
-Output: A, B, D, E, C
-```
-
-**Iterative DFS (explicit stack):**
-
-```
-Start: stack = [A]
-
-Step 1: pop A → visit A
-  push A's children: C first, then B (so B is on top — processed first)
-  stack = [C, B]
-  visited: A
-
-Step 2: pop B → visit B
-  push B's children: E first, then D
-  stack = [C, E, D]
-  visited: A, B
-
-Step 3: pop D → visit D (leaf, no children)
-  stack = [C, E]
-  visited: A, B, D
-
-Step 4: pop E → visit E (leaf, no children)
-  stack = [C]
-  visited: A, B, D, E
-
-Step 5: pop C → visit C (leaf, no children)
-  stack = []
-  visited: A, B, D, E, C
-
-Done. Same order as recursive!
-```
-
-The trick: push children in REVERSE order so the left child is processed first (since the stack reverses the order again on pop).
+For each day, find how many consecutive previous days had a price less than or equal to today's price. Same monotonic stack idea — maintain a decreasing stack of prices.
 
 ```python
-def dfs_iterative(root):
-    if not root:
-        return
-    stack = [root]
-    while stack:
-        node = stack.pop()
-        print(node.val)
-        # push right first so left is processed first
-        if node.right:
-            stack.append(node.right)
-        if node.left:
-            stack.append(node.left)
+def stock_span(prices):
+    n = len(prices)
+    spans = [0] * n
+    stack = []  # stores indices
+
+    for i in range(n):
+        while stack and prices[i] >= prices[stack[-1]]:
+            stack.pop()
+        spans[i] = i + 1 if not stack else i - stack[-1]
+        stack.append(i)
+
+    return spans
 ```
 
-**The key insight:** any recursive algorithm that does "work on the way down" (pre-order style) can be converted to iterative with a stack. The stack is just making explicit what recursion was doing implicitly all along.
+<a id="when-monotonic"></a>
+## When to Use Monotonic Stack
 
-**Common mistake — marking visited on pop instead of push:** When doing iterative DFS on a graph, if you mark a node visited only when you pop it, the same node can be pushed multiple times by different neighbours before it is ever popped. Mark nodes visited immediately when pushing, not when popping, to prevent redundant work and cycles.
+| Problem type | Stack type | Pop condition |
+|---|---|---|
+| Next Greater Element | Decreasing | Current > top |
+| Next Smaller Element | Increasing | Current < top |
+| Previous Greater | Decreasing | Current >= top |
+| Stock Span | Decreasing | Current >= top |
 
-## Visual: Mark-on-Push vs Mark-on-Pop
-
-```
-Graph: A -> B -> D
-            C -> D
-
-WRONG (mark on pop):
-  Stack: [A]
-  Pop A, mark A → push B, push C       stack: [B, C]
-  Pop C, mark C → push D               stack: [B, D]
-  Pop D, mark D                         stack: [B]
-  Pop B, mark B → push D  ← D pushed again! stack: [D]
-  Pop D, already visited → skip
-
-CORRECT (mark on push):
-  Stack: [A], visited: {A}
-  Pop A → push B (mark B), push C (mark C)   stack: [B, C]
-  Pop C → D not visited, push D (mark D)      stack: [B, D]
-  Pop D → no unvisited neighbours             stack: [B]
-  Pop B → D already visited, skip             stack: []
-  Done. D was pushed exactly once.
-```
+Rule: whatever triggers the pop BECOMES the answer for the popped element.
 
 > [↑ Back to Top](#top)
 
-<a id="17-final-understanding"></a>
-# 17. Final Understanding
+<a id="6-dfs-stack"></a>
+# 6. DFS With Explicit Stack
 
-Stack is:
+Zara learns that recursion uses the call stack implicitly. For iterative DFS, she builds her own stack explicitly — same logic, but she controls the memory.
 
-- A strict behavioral structure
-- Based on LIFO
-- Simple in design
-- Extremely powerful in control flow
+```python
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
 
-It is not about storing data.
-It is about controlling order.
+    while stack:
+        node = stack.pop()
+        if node in visited:
+            continue
+        visited.add(node)
+        print(node)
 
-If you understand stack deeply,
-you understand recursion,
-DFS,
-expression evaluation,
-and many advanced algorithms.
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                stack.append(neighbor)
+```
 
-Next time you stack plates,
-remember —
-you are using a data structure.
+<a id="visual-mark"></a>
+## Visual: Mark-on-Push vs Mark-on-Pop
 
-## Quick Reference
+Two strategies for tracking visited nodes. Mark-on-push avoids duplicate pushes. Mark-on-pop is simpler but may push duplicates.
+
+```
+Mark-on-Push:
+  Push A (mark A immediately)            stack: [A]
+  Pop A → push B, C (mark B, C on push) stack: [B, C]
+  Pop C → push D (mark D on push)       stack: [B, D]
+  Pop D → no unvisited neighbours        stack: [B]
+  Pop B → D already visited              stack: []
+
+Mark-on-Pop:
+  Push A                                  stack: [A]
+  Pop A (mark A) → push B, C             stack: [B, C]
+  Pop C (mark C) → push D                stack: [B, D]
+  Pop D (mark D) → no unvisited          stack: [B]
+  Pop B (mark B) → D already visited     stack: []
+```
+
+Mark-on-push is more efficient — prevents duplicate entries on the stack.
+
+> [↑ Back to Top](#top)
+
+<a id="summary"></a>
+## 🔥 Summary
 
 ```
 Stack: LIFO (Last In, First Out)
@@ -945,11 +468,6 @@ Operations: push O(1), pop O(1), peek O(1)
 | Evaluate expression           | Operand stack + operator stack   |
 +-------------------------------+----------------------------------+
 
-Call stack:
-  Each function call = push a frame
-  Each function return = pop a frame
-  Stack overflow = too many frames (infinite recursion)
-
 Monotonic stack rules:
   Next Greater: maintain decreasing stack
   Next Smaller: maintain increasing stack
@@ -957,10 +475,42 @@ Monotonic stack rules:
   Whatever triggers the pop BECOMES the answer for the popped element
 ```
 
-> [↑ Back to Top](#top)
+| Concept | Key Takeaway |
+|---------|-------------|
+| LIFO | Last in, first out — enforces strict processing order |
+| Operations | push/pop/peek all O(1) |
+| Brackets | Push openers, pop and match on closers |
+| Monotonic stack | O(n) solution for next greater/smaller element |
+| DFS | Explicit stack replaces recursion's implicit call stack |
+| Call stack | Function calls = push, returns = pop |
+
+**Stack vs Queue:**
+- Stack: LIFO — plates, undo, DFS, recursion
+- Queue: FIFO — waiting line, BFS, task scheduling
+
+**Where you use stacks without knowing:** browser back button, Ctrl+Z undo, compiler expression parsing, call stack in every program, XML/HTML tag matching.
+
+**When stacks are dangerous:** infinite recursion → stack overflow. Always ensure base case exists. Python limit ~1000 frames.
+
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Linked List — Interview Q&A](../07_linked_list/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [07_linked_list → theory.md](../07_linked_list/theory.md) |
+| ➡ Next Module | [09_queue → theory.md](../09_queue/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[07 Linked List →](../07_linked_list/theory.md) · [09 Queue →](../09_queue/theory.md) · [04 Recursion →](../04_recursion/theory.md) · [18 Graphs →](../18_graphs/theory.md)
+
+**Jump to specific topics in other files:**
+- Recursion and call stack → [04_recursion § The Call Stack](../04_recursion/theory.md#3-the-call-stack)
+- DFS in graphs → [18_graphs § theory.md](../18_graphs/theory.md)
+- Queue (FIFO counterpart) → [09_queue § theory.md](../09_queue/theory.md)
+- Monotonic stack in sliding window → [12_sliding_window § theory.md](../12_sliding_window/theory.md)
+
+> [↑ Back to Top](#top)

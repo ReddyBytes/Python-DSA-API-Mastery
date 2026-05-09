@@ -1,10 +1,15 @@
 <a id="top"></a>
 # Advanced Graph Algorithms — Mastering Complex Network Problems
 
-> Basic graphs teach you traversal.
-> Advanced graphs teach you structure, flow, and optimization.
+> Meet **Pushpa** — a smuggler who navigates complex network routes through mountains.
+> His world is a graph of hidden trails, border checkpoints, and river crossings.
+> Every route has a cost. Every wrong turn means capture. Every decision matters.
 >
-> This is where interviews become serious.
+> Basic graphs taught you how to walk through trails.
+> Advanced graphs teach you how to find the cheapest path, the strongest alliances,
+> the minimum infrastructure to connect all hideouts, and the maximum cargo flow.
+>
+> This is where Pushpa's survival depends on algorithmic mastery.
 
 Advanced graph algorithms are used in:
 
@@ -24,15 +29,45 @@ We now explore the four major pillars:
 
 ## 📖 Table of Contents
 
-1. [Topological Sort — Ordering Dependencies](#1-topological-sort)
-2. [Strongly Connected Components (SCC)](#2-scc)
-3. [Minimum Spanning Tree (MST)](#3-mst)
-4. [Network Flow — Maximum Flow in Graph](#4-network-flow)
-5. [Shortest Path Algorithms](#5-shortest-path)
-6. [When to Use What?](#6-when-to-use)
-7. [Mental Model](#7-mental-model)
-8. [Final Understanding](#8-final-understanding)
-9. [Navigation](#9-navigation)
+- [1. Topological Sort — Ordering Dependencies](#1-topological-sort)
+  - [Real Life Example](#1-real-life)
+  - [Visual: Course Prerequisites](#1-visual-prereqs)
+  - [Core Idea](#1-core-idea)
+  - [Kahn's Algorithm (BFS + Indegree)](#1-kahns)
+  - [Visual: Kahn's Step-by-Step Trace](#1-kahns-trace)
+  - [DFS-Based Topological Sort](#1-dfs-topo)
+  - [Detecting Cycles](#1-cycles)
+- [2. Strongly Connected Components (SCC)](#2-scc)
+  - [Real Life Example](#2-real-life)
+  - [Visual: The Mutual Follow Problem](#2-visual-mutual)
+  - [Kosaraju's Algorithm](#2-kosaraju)
+  - [Visual: Kosaraju's Two-Pass Walkthrough](#2-kosaraju-trace)
+  - [Tarjan's Algorithm](#2-tarjan)
+  - [Where SCC Used](#2-scc-used)
+- [3. Minimum Spanning Tree (MST)](#3-mst)
+  - [Real Life Example](#3-real-life)
+  - [Kruskal's Algorithm](#3-kruskal)
+  - [Visual: Kruskal's Step-by-Step](#3-kruskal-trace)
+  - [Prim's Algorithm](#3-prim)
+  - [Difference](#3-difference)
+- [4. Network Flow — Maximum Flow in Graph](#4-network-flow)
+  - [Real Life Example](#4-real-life)
+  - [Ford-Fulkerson Algorithm](#4-ford-fulkerson)
+  - [Edmonds-Karp](#4-edmonds-karp)
+  - [Dinic's Algorithm](#4-dinic)
+  - [Applications](#4-applications)
+- [5. Shortest Path Algorithms](#5-shortest-path)
+  - [Dijkstra — The GPS That Never Backtracks](#5-dijkstra)
+  - [Visual: Dijkstra Step-by-Step Trace](#5-dijkstra-trace)
+  - [Bellman-Ford — Shortest Path with Negative Weights](#5-bellman-ford)
+  - [Visual: Bellman-Ford Round-by-Round Trace](#5-bellman-trace)
+  - [Python Implementation (Bellman-Ford)](#5-bellman-python)
+  - [Detecting Negative Cycles](#5-neg-cycles)
+  - [Bellman-Ford vs Dijkstra](#5-bellman-vs-dijkstra)
+  - [Floyd-Warshall — All-Pairs Shortest Path](#5-floyd)
+  - [Python Implementation (Floyd-Warshall)](#5-floyd-python)
+  - [Floyd-Warshall vs Bellman-Ford](#5-floyd-vs-bellman)
+- [6. When to Use What?](#6-when-to-use)
 
 ## 📌 Learning Priority
 
@@ -51,6 +86,16 @@ Dinic's max flow · A* search · bidirectional Dijkstra · Eulerian path · bipa
 <a id="1-topological-sort"></a>
 # 1. Topological Sort — Ordering Dependencies
 
+Pushpa has a supply chain. Before he can move cargo across the border, he must:
+first acquire the goods, then load them onto mules, then bribe the checkpoint guard,
+then cross the river, then deliver to the buyer. You cannot bribe the guard before
+you have cargo — that would raise suspicion. You cannot cross the river before the
+guard is bribed — that means capture.
+
+This is a Directed Acyclic Graph (DAG) of dependencies.
+Topological sort gives Pushpa the valid execution order for his smuggling operation.
+
+<a id="1-real-life"></a>
 ## Real Life Example
 
 Imagine building software.
@@ -68,6 +113,7 @@ This forms a Directed Acyclic Graph (DAG).
 
 Topological sort gives valid execution order.
 
+<a id="1-visual-prereqs"></a>
 ## Visual: Course Prerequisites
 
 You are advising a CS student on which courses to take. Some courses have
@@ -95,6 +141,7 @@ Calculus before Machine Learning, etc.
 
 A valid topological order: IC, MA, DS, CA, AL, ML, CAP
 
+<a id="1-core-idea"></a>
 ## Core Idea
 
 Only works on:
@@ -106,9 +153,8 @@ Produces linear ordering such that:
 For every edge u → v,
 u comes before v.
 
-## Two Ways to Implement
-
-### Kahn's Algorithm (BFS + Indegree)
+<a id="1-kahns"></a>
+## Kahn's Algorithm (BFS + Indegree)
 
 1. Calculate indegree of each node.
 2. Add nodes with indegree 0 to queue.
@@ -152,6 +198,7 @@ print(topological_sort_kahn(graph, 3))   # [0, 1, 2]
 Time:
 O(V + E)
 
+<a id="1-kahns-trace"></a>
 ## Visual: Kahn's Step-by-Step Trace
 
 ```
@@ -191,7 +238,8 @@ O(V + E)
 
 > 📝 **Practice:** [Q7 · Kahn's basics](./practice.md#q7--topological-sort--kahns-algorithm-basics) · [Q8 · cycle detection](./practice.md#q8--topological-sort--cycle-detection-via-kahns) · [Q9 · DFS post-order](./practice.md#q9--topological-sort--dfs-post-order) · [Q10 · course schedule](./practice.md#q10--topological-sort--course-schedule)
 
-### DFS-Based Topological Sort
+<a id="1-dfs-topo"></a>
+## DFS-Based Topological Sort
 
 1. DFS traversal.
 2. Push node to stack after exploring neighbors.
@@ -212,7 +260,7 @@ O(V + E)
   │  │  │  │  │  │  │  explore CAP
   │  │  │  │  │  │  │  │  *** PUSH CAP to stack ***
   │  │  │  │  │  │  │  *** PUSH ML to stack ***
-  │  │  │  │  │  *** PUSH AL to stack ***
+  │  │  │  │  │  │  *** PUSH AL to stack ***
   │  │  │  *** PUSH DS to stack ***
   │  *** PUSH IC to stack ***
 
@@ -223,6 +271,7 @@ O(V + E)
 Also:
 O(V + E)
 
+<a id="1-cycles"></a>
 ## Detecting Cycles
 
 If topological sort does not include all nodes,
@@ -251,8 +300,17 @@ cycle exists.
 <a id="2-scc"></a>
 # 2. Strongly Connected Components (SCC)
 
+Pushpa's smuggling network spans multiple mountain regions. Within each region,
+his runners can reach each other through a web of trails — if Runner A can get a
+message to Runner B, then Runner B can always get a message back to Runner A.
+These tight-knit regional cells are Strongly Connected Components. But between
+regions, messages only flow one way — the mountain pass from Region 1 to Region 2
+is one-directional. Pushpa needs to identify these cells to know which groups can
+coordinate internally and which need special one-way courier routes.
+
 > 📝 **Practice:** [Q11 · Kosaraju's algorithm](./practice.md#q11--scc--kosarajus-algorithm) · [Q12 · count SCCs](./practice.md#q12--scc--count-strongly-connected-components) · [Q13 · condensation graph](./practice.md#q13--scc--condensation-graph)
 
+<a id="2-real-life"></a>
 ## Real Life Example
 
 Imagine cities where:
@@ -263,6 +321,7 @@ they form a strong group.
 
 SCC = maximal set of nodes reachable mutually.
 
+<a id="2-visual-mutual"></a>
 ## Visual: The Mutual Follow Problem
 
 In a social network, a Strongly Connected Component is a tight-knit clique where
@@ -287,6 +346,7 @@ get from A to B AND from B to A.
   └──────────────┘     └──────────────┘     └──────────────┘
 ```
 
+<a id="2-kosaraju"></a>
 ## Kosaraju's Algorithm
 
 Steps:
@@ -298,6 +358,7 @@ Steps:
 Time:
 O(V + E)
 
+<a id="2-kosaraju-trace"></a>
 ## Visual: Kosaraju's Two-Pass Walkthrough
 
 **Pass 1 — DFS on original graph, record finish order:**
@@ -349,6 +410,7 @@ O(V + E)
 
 **Common mistake — second DFS on the original graph:** The entire point of Pass 2 is to use the REVERSED graph. If you run both DFS passes on the original graph, DFS from the last-finished node freely crosses SCC boundaries and merges multiple SCCs into one. Always build `radj` (reversed adjacency list) before Pass 2.
 
+<a id="2-tarjan"></a>
 ## Tarjan's Algorithm
 
 Single DFS traversal.
@@ -361,6 +423,7 @@ Uses:
 More advanced.
 Also O(V + E)
 
+<a id="2-scc-used"></a>
 ## Where SCC Used
 
 - Social network clustering
@@ -377,10 +440,20 @@ Also O(V + E)
 <a id="3-mst"></a>
 # 3. Minimum Spanning Tree (MST)
 
+Pushpa needs to connect all his mountain hideouts with supply trails. Each trail
+between two hideouts has a construction cost — clearing brush, bribing locals,
+building rope bridges. He wants ALL hideouts connected so cargo can flow anywhere,
+but he wants to spend the absolute minimum on trail construction. He needs exactly
+N-1 trails for N hideouts. Any fewer and some hideouts are cut off. Any more and
+he is wasting money that could buy more cargo.
+
+This is the Minimum Spanning Tree problem.
+
 > 📝 **Practice:** [Q14 · Kruskal's MST](./practice.md#q14--kruskals-mst--minimum-spanning-tree-weight) · [Q15 · Prim's MST](./practice.md#q15--prims-mst--minimum-spanning-tree-weight) · [Q16 · Kruskal vs Prim](./practice.md#q16--mst--kruskal-vs-prim-decision)
 
 > 📝 **Practice:** [Q53 · minimum-spanning-tree](../dsa_practice_questions_100.md#q53--interview--minimum-spanning-tree)
 
+<a id="3-real-life"></a>
 ## Real Life Example
 
 Connecting cities with minimum cable cost.
@@ -395,6 +468,7 @@ That is MST.
 Key constraint: you need exactly N-1 roads for N cities. Any fewer and some cities
 are disconnected. Any more and you are wasting money.
 
+<a id="3-kruskal"></a>
 ## Kruskal's Algorithm
 
 1. Sort edges by weight.
@@ -404,6 +478,7 @@ are disconnected. Any more and you are wasting money.
 Time:
 O(E log E)
 
+<a id="3-kruskal-trace"></a>
 ## Visual: Kruskal's Step-by-Step (6 Cities)
 
 ```
@@ -445,6 +520,7 @@ O(E log E)
   └─────────────────────────────────────────────────────────────┘
 ```
 
+<a id="3-prim"></a>
 ## Prim's Algorithm
 
 1. Start from node.
@@ -456,6 +532,7 @@ O(E log V)
 
 **Common mistake — mixing Prim's and Kruskal's logic:** Prim's is vertex-based — it grows a tree from a starting node, always picking the cheapest edge that connects an unvisited vertex to the current tree via a min-heap on `(weight, vertex)`. Kruskal's is edge-based — it sorts all edges globally and uses Union-Find to skip cycles. Mixing them (e.g., doing a global edge sort inside Prim's framework) breaks the "only expand from current tree" invariant and produces wrong MSTs on some inputs.
 
+<a id="3-difference"></a>
 ## Difference
 
 Kruskal:
@@ -471,8 +548,15 @@ Choose based on graph density.
 <a id="4-network-flow"></a>
 # 4. Network Flow — Maximum Flow in Graph
 
+Pushpa has multiple smuggling routes from his source warehouse to the final buyer.
+Each route (pipe) has a maximum capacity — only so many mules can travel that trail
+per night. Some trails are narrow (low capacity), some are wide highways (high capacity).
+Pushpa wants to maximize the total cargo delivered per night across ALL routes combined.
+This is the Maximum Flow problem — finding how much "flow" can be pushed from source to sink.
+
 > 📝 **Practice:** [Q17 · max flow Edmonds-Karp](./practice.md#q17--network-flow--max-flow-via-edmonds-karp) · [Q18 · bipartite matching](./practice.md#q18--network-flow--bipartite-matching-via-max-flow)
 
+<a id="4-real-life"></a>
 ## Real Life Example
 
 Water flows through pipes.
@@ -482,6 +566,7 @@ Each pipe has capacity.
 Goal:
 Maximize water flow from source to sink.
 
+<a id="4-ford-fulkerson"></a>
 ## Ford-Fulkerson Algorithm
 
 Find augmenting path.
@@ -490,6 +575,7 @@ Increase flow.
 Time:
 Depends on implementation.
 
+<a id="4-edmonds-karp"></a>
 ## Edmonds-Karp
 
 BFS-based Ford-Fulkerson.
@@ -497,6 +583,7 @@ BFS-based Ford-Fulkerson.
 Time:
 O(VE²)
 
+<a id="4-dinic"></a>
 ## Dinic's Algorithm
 
 Optimized approach.
@@ -506,6 +593,7 @@ O(E√V) (for some cases)
 
 Used in competitive programming.
 
+<a id="4-applications"></a>
 ## Applications
 
 - Maximum bipartite matching
@@ -518,6 +606,14 @@ Used in competitive programming.
 <a id="5-shortest-path"></a>
 # 5. Shortest Path Algorithms
 
+Pushpa stands at his mountain base camp, staring at a map of trails leading to
+the border crossing 200 km away. There are dozens of paths — some short but
+dangerous (negative cost: allies along the way actually GIVE him supplies), some
+long but safe. He needs the cheapest route. Sometimes he needs to know the cheapest
+route between EVERY pair of hideouts so any runner can reach any other runner optimally.
+
+This is the domain of shortest path algorithms.
+
 > 📝 **Practice:** [Q1 · Dijkstra basics](./practice.md#q1--dijkstra--single-source-shortest-path) · [Q2 · path reconstruction](./practice.md#q2--dijkstra--path-reconstruction) · [Q4 · Bellman-Ford](./practice.md#q4--bellman-ford--shortest-path-with-negative-edges) · [Q5 · negative cycles](./practice.md#q5--bellman-ford--negative-cycle-detection) · [Q6 · Floyd-Warshall](./practice.md#q6--floyd-warshall--all-pairs-shortest-path)
 
 > 📝 **Practice:** [Q100 · design-shortest-path-constraints](../dsa_practice_questions_100.md#q100--design--design-shortest-path-constraints)
@@ -526,6 +622,7 @@ Dijkstra (covered in module 18) handles non-negative weights.
 But what if edges have negative weights?
 What if you need ALL pairs of shortest paths?
 
+<a id="5-dijkstra"></a>
 ## Dijkstra — The GPS That Never Backtracks
 
 Think of Dijkstra as a GPS that always explores the cheapest known route next.
@@ -551,6 +648,7 @@ to the cheapest next step — called greedy relaxation.
     └───────────► D     E (same node)
 ```
 
+<a id="5-dijkstra-trace"></a>
 ## Visual: Dijkstra Step-by-Step Trace
 
 ```
@@ -592,11 +690,19 @@ Final shortest paths from A:
 
 **Common mistake — not skipping stale Dijkstra entries:** Python's `heapq` does not support priority updates, so when a shorter path is found, the old `(higher_cost, node)` entry stays in the heap. Always add `if d > dist[u]: continue` immediately after popping. Without this, the algorithm reprocesses nodes with outdated distances, causing O(E²) degradation in worst case instead of O(E log V).
 
+> 📝 **Practice:** [Q51 · dijkstra-algorithm](../dsa_practice_questions_100.md#q51--normal--dijkstra-algorithm)
+
+<a id="5-bellman-ford"></a>
 ## Bellman-Ford — Shortest Path with Negative Weights
 
 > 📝 **Practice:** [Q89 · production-negative-cycles](../dsa_practice_questions_100.md#q89--design--production-negative-cycles)
 
-### The Problem Dijkstra Can't Solve
+Pushpa discovers that some trails actually GAIN him resources — allied villages along
+the way top up his supplies (negative-weight edges). Dijkstra cannot handle this because
+it greedily commits to distances. Bellman-Ford is the patient approach: it relaxes ALL
+edges V-1 times, guaranteeing correctness even with negative weights.
+
+## The Problem Dijkstra Can't Solve
 
 ```
 Graph:
@@ -611,9 +717,7 @@ Graph:
 Dijkstra fails here — it greedily picks the shortest path and never revises.
 With negative edges, a longer path might become shorter after traversal.
 
-> 📝 **Practice:** [Q51 · dijkstra-algorithm](../dsa_practice_questions_100.md#q51--normal--dijkstra-algorithm)
-
-### The Core Idea
+## The Core Idea
 
 Bellman-Ford is the patient mathematician. He doesn't trust any single pass.
 He relaxes ALL edges V-1 times. After V-1 passes, all shortest paths are found.
@@ -625,7 +729,7 @@ Relaxation: if dist[u] + weight(u,v) < dist[v]:
                 dist[v] = dist[u] + weight(u,v)
 ```
 
-### Why N-1 Rounds?
+## Why N-1 Rounds?
 
 ```
 In a graph with N nodes, the longest simple path has at most N-1 edges.
@@ -638,6 +742,7 @@ Round N-1: correctly compute shortest paths using at most N-1 edges
 After N-1 rounds: ALL shortest paths found (assuming no negative cycles).
 ```
 
+<a id="5-bellman-trace"></a>
 ## Visual: Bellman-Ford Round-by-Round Trace
 
 ```
@@ -667,7 +772,8 @@ After N-1 rounds: ALL shortest paths found (assuming no negative cycles).
   Final: A=0, B=4, C=7, D=7, E=0
 ```
 
-### Python Implementation
+<a id="5-bellman-python"></a>
+## Python Implementation (Bellman-Ford)
 
 ```python
 def bellman_ford(graph, source, V):
@@ -698,7 +804,8 @@ edges = [(0,1,6), (0,2,7), (1,2,8), (1,3,-4), (2,3,9), (2,4,-3), (3,0,2), (4,3,7
 result = bellman_ford(edges, source=0, V=5)
 ```
 
-### Detecting Negative Cycles
+<a id="5-neg-cycles"></a>
+## Detecting Negative Cycles
 
 After V-1 passes, run one more pass. If any dist still decreases, a negative cycle exists.
 (A negative cycle means "shortest path" = -∞ — you can loop forever decreasing distance.)
@@ -711,7 +818,8 @@ Negative cycle: A →(1)→ B →(-3)→ C →(1)→ A
 
 **Common mistake — Bellman-Ford stopping at V-1 passes:** Running V-1 iterations finds shortest paths but does NOT detect negative cycles. You must run one additional (Nth) pass. If any distance still improves, a negative cycle exists in the reachable graph. Stopping early returns plausible-looking but meaningless finite distances for nodes caught in a negative cycle.
 
-### Bellman-Ford vs Dijkstra
+<a id="5-bellman-vs-dijkstra"></a>
+## Bellman-Ford vs Dijkstra
 
 ```
 ┌─────────────────┬──────────────────────────┬──────────────────────────┐
@@ -724,16 +832,21 @@ Negative cycle: A →(1)→ B →(-3)→ C →(1)→ A
 └─────────────────┴──────────────────────────┴──────────────────────────┘
 ```
 
+<a id="5-floyd"></a>
 ## Floyd-Warshall — All-Pairs Shortest Path
 
-### The Problem
+Pushpa doesn't just need the cheapest route from base camp to the border.
+He needs to know the cheapest route between EVERY pair of hideouts so any runner
+can reach any other runner optimally. Floyd-Warshall gives him this complete map.
+
+## The Problem
 
 Dijkstra and Bellman-Ford find shortest paths FROM one source.
 Floyd-Warshall finds shortest paths BETWEEN ALL pairs of nodes simultaneously.
 
 **Real-world use:** "What is the shortest route between EVERY city pair in a road network?"
 
-### The Core Idea
+## The Core Idea
 
 Use dynamic programming with a 3D state:
 
@@ -770,7 +883,8 @@ Final: all-pairs shortest distances computed in O(V³)
 
 **Common mistake — Floyd-Warshall wrong loop order:** The `k` loop (intermediate node) MUST be the outermost loop. If `k` is innermost, you ask "does node k help path i→j?" before `dist[i][k]` and `dist[k][j]` are fully optimized through earlier intermediates. This produces wrong shortest paths silently. The correct order is always `for k → for i → for j`.
 
-### Python Implementation
+<a id="5-floyd-python"></a>
+## Python Implementation (Floyd-Warshall)
 
 ```python
 def floyd_warshall(n, edges):
@@ -810,7 +924,8 @@ result = floyd_warshall(3, edges)
 # result[2][1] = 7  (2→0→1)
 ```
 
-### Floyd-Warshall vs Bellman-Ford
+<a id="5-floyd-vs-bellman"></a>
+## Floyd-Warshall vs Bellman-Ford
 
 ```
 Use Floyd-Warshall when: all-pairs shortest path needed, V is small (V ≤ 500)
@@ -822,6 +937,10 @@ Time: Floyd = O(V³),  Bellman = O(VE)
 
 <a id="6-when-to-use"></a>
 # 6. When to Use What?
+
+Pushpa stares at a new problem. The terrain varies — sometimes he needs ordering,
+sometimes connectivity, sometimes cheapest path. Here is how he decides which
+algorithm to deploy:
 
 | Problem Type                                | Algorithm              | Time         |
 |---------------------------------------------|------------------------|--------------|
@@ -838,24 +957,15 @@ Pattern recognition crucial.
 
 > [↑ Back to Top](#top)
 
-<a id="7-mental-model"></a>
-# 7. Mental Model
+## 🔥 Summary
 
-Advanced graph algorithms solve:
+Advanced graph algorithms solve three categories of problems:
 
-Structure problems
-Flow problems
-Optimization problems
+**Structure problems** — ordering (topological sort) and grouping (SCC)
+**Flow problems** — maximizing throughput (network flow)
+**Optimization problems** — minimum cost connectivity (MST) and shortest paths (Dijkstra/Bellman-Ford/Floyd-Warshall)
 
-They are layered over basic BFS/DFS.
-
-Without strong basics,
-advanced graphs become confusing.
-
-> [↑ Back to Top](#top)
-
-<a id="8-final-understanding"></a>
-# 8. Final Understanding
+They are layered over basic BFS/DFS. Without strong basics, advanced graphs become confusing.
 
 Advanced graph mastery means:
 
@@ -874,22 +984,32 @@ These topics appear in:
 
 Advanced graph algorithms represent high-level algorithmic maturity.
 
+```
+  Pushpa's Algorithm Selection Flowchart:
+
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  "What does the problem ask?"                                   │
+  ├─────────────────────────────────────────────────────────────────┤
+  │                                                                 │
+  │  Order tasks?          ──► Topological Sort (Kahn's or DFS)     │
+  │  Find tight groups?    ──► SCC (Kosaraju's or Tarjan's)         │
+  │  Connect everything    ──► MST (Kruskal's or Prim's)            │
+  │    cheaply?                                                     │
+  │  Max throughput?       ──► Network Flow (Edmonds-Karp/Dinic's)  │
+  │  Cheapest single path? ──► Dijkstra (no neg) / Bellman (neg)    │
+  │  All-pairs cheapest?   ──► Floyd-Warshall                       │
+  │                                                                 │
+  └─────────────────────────────────────────────────────────────────┘
+```
+
 > [↑ Back to Top](#top)
 
-<a id="9-navigation"></a>
-# 9. Navigation
-
-Previous:
-[24_disjoint_set_union/interview.md](/02_DSA_Mastery/24_disjoint_set_union/interview.md)
-
-Next:
-[25_advanced_graphs/interview.md](/02_DSA_Mastery/25_advanced_graphs/interview.md)
-[26_system_design_patterns/theory.md](/02_DSA_Mastery/26_system_design_patterns/theory.md)
+## 📂 Navigation
 
 **[Back to README](../README.md)**
 
-**Prev:** [Disjoint Set Union — Interview Q&A](../24_disjoint_set_union/interview.md) | **Next:** [Cheat Sheet](./cheetsheet.md)
+**Prev:** [Disjoint Set Union — Theory](../24_disjoint_set_union/theory.md) | **Next:** None (last module)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Graphs — Theory](../18_graphs/theory.md) · [Disjoint Set Union — Theory](../24_disjoint_set_union/theory.md) · [Greedy — Theory](../19_greedy/theory.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
 
 > [↑ Back to Top](#top)

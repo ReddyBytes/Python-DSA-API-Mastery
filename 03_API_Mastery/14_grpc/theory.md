@@ -1,8 +1,41 @@
+<a id="top"></a>
+
 # gRPC — When JSON Is Too Slow
 
-## The 100,000 Calls Per Second Problem
+> Naveen's Story: Naveen is a Telugu microservices architect building high-performance inter-service communication at a company processing 100,000 calls per second between services. He discovered that JSON serialization was burning 10 seconds of CPU overhead per second — and that silent contract breakage at 2am on Black Friday was the real cost of REST at scale. This is his journey into gRPC.
 
-You're working at a company with a microservices architecture. Dozens of services.
+<a id="toc"></a>
+
+## Table of Contents
+
+- [1. The 100,000 Calls Per Second Problem](#the-100000-calls-per-second-problem)
+- [2. Learning Priority](#learning-priority)
+- [3. What gRPC Is](#what-grpc-is)
+- [4. Protocol Buffers — The Schema](#protocol-buffers-the-schema)
+  - [Generating Code from the Schema](#generating-code-from-the-schema)
+- [5. The 4 Communication Modes](#the-4-communication-modes)
+  - [Unary — One Request, One Response](#unary-one-request-one-response)
+  - [Server Streaming — One Request, Many Responses](#server-streaming-one-request-many-responses)
+  - [Client Streaming — Many Requests, One Response](#client-streaming-many-requests-one-response)
+  - [Bidirectional Streaming — Streams in Both Directions](#bidirectional-streaming-streams-in-both-directions)
+- [6. Python gRPC — A Minimal Client and Server](#python-grpc-a-minimal-client-and-server)
+- [7. gRPC vs REST — An Honest Comparison](#grpc-vs-rest-an-honest-comparison)
+- [8. When gRPC Wins](#when-grpc-wins)
+- [9. When REST Wins](#when-rest-wins)
+- [10. The Mental Model](#the-mental-model)
+- [11. Summary](#summary)
+- [12. gRPC Interceptors — Cross-Cutting Concerns](#grpc-interceptors-cross-cutting-concerns)
+  - [Server-Side Interceptor](#server-side-interceptor)
+  - [Client-Side Interceptor](#client-side-interceptor)
+- [13. Fire Summary](#fire-summary)
+
+[Back to Top](#top)
+
+<a id="the-100000-calls-per-second-problem"></a>
+
+# 1. The 100,000 Calls Per Second Problem
+
+Naveen is working at a company with a microservices architecture. Dozens of services.
 Hundreds of engineers. The checkout service calls the inventory service every time
 someone places an order. The recommendation service calls the user service on every
 page load.
@@ -57,9 +90,13 @@ This is the world REST and JSON create in large service-to-service communication
 Google, operating at orders of magnitude larger than almost any company, had this
 problem in the early 2010s. Their answer was gRPC.
 
----
+"That was the moment I stopped treating REST as the default for everything," Naveen recalls. "When you've seen a silent contract break take down checkout on the busiest day of the year, you start demanding compile-time guarantees between services."
 
-## 📌 Learning Priority
+[Back to Top](#top)
+
+<a id="learning-priority"></a>
+
+# 2. Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
 .proto file · service definition · Python server/client
@@ -73,9 +110,11 @@ gRPC-web
 **Reference** — Know it exists, look up syntax when needed:
 Protocol Buffers advanced features
 
----
+[Back to Top](#top)
 
-## What gRPC Is
+<a id="what-grpc-is"></a>
+
+# 3. What gRPC Is
 
 gRPC is a high-performance, open-source remote procedure call framework originally
 developed by Google, open-sourced in 2015.
@@ -117,9 +156,13 @@ Types are checked at compile time.
 The field-rename-at-2am problem becomes a compiler error.
 ```
 
----
+Naveen explains the mental shift: "With REST, your contract lives in documentation that nobody reads. With gRPC, your contract lives in code that the compiler enforces. That's the difference between a gentleman's agreement and a legal contract."
 
-## Protocol Buffers — The Schema
+[Back to Top](#top)
+
+<a id="protocol-buffers-the-schema"></a>
+
+# 4. Protocol Buffers — The Schema
 
 The `.proto` file is where you define your services and messages. It's the source
 of truth for both sides of the conversation.
@@ -185,9 +228,11 @@ new numbers without breaking existing clients who just ignore unknown field numb
 **Never change a field number. Never reuse a field number.**
 Add new fields. Mark old ones as `reserved`. This is the compatibility contract.
 
-> 📝 **Practice:** [Q64 · protocol-buffers](../api_practice_questions_100.md#q64--normal--protocol-buffers)
+> **Practice:** [Q64 - protocol-buffers](../api_practice_questions_100.md#q64--normal--protocol-buffers)
 
-### Generating Code from the Schema
+<a id="generating-code-from-the-schema"></a>
+
+## Generating Code from the Schema
 
 This is one of gRPC's superpowers. You write the schema once, and the proto compiler
 generates typed client and server code in your language:
@@ -211,14 +256,18 @@ python -m grpc_tools.protoc \
 The generated code is what your engineers import and use. Nobody writes serialization
 code by hand.
 
----
+[Back to Top](#top)
 
-## The 4 Communication Modes
+<a id="the-4-communication-modes"></a>
+
+# 5. The 4 Communication Modes
 
 This is where gRPC genuinely extends beyond what REST can do. REST is request-response,
 full stop. gRPC supports four communication patterns:
 
-### 1. Unary — One Request, One Response
+<a id="unary-one-request-one-response"></a>
+
+## Unary — One Request, One Response
 
 The classic pattern. Identical to REST in structure but faster.
 
@@ -239,7 +288,9 @@ rpc GetUser (GetUserRequest) returns (User);
 
 Use this for: most API calls that map to a single data fetch or operation.
 
-### 2. Server Streaming — One Request, Many Responses
+<a id="server-streaming-one-request-many-responses"></a>
+
+## Server Streaming — One Request, Many Responses
 
 The client sends one request. The server sends back a stream of responses, one at
 a time, over the same connection. The client processes them as they arrive.
@@ -269,7 +320,9 @@ rpc ListUsers (ListUsersRequest) returns (stream User);
 Use this for: large data sets where you want to start processing before all data
 arrives, real-time feeds, log streaming, export operations.
 
-### 3. Client Streaming — Many Requests, One Response
+<a id="client-streaming-many-requests-one-response"></a>
+
+## Client Streaming — Many Requests, One Response
 
 The client sends a stream of messages. When done, the server responds once with
 a summary or aggregated result.
@@ -297,7 +350,9 @@ rpc CreateUsers (stream CreateUserRequest) returns (BulkCreateResult);
 Use this for: bulk uploads, telemetry data ingestion, large file upload in chunks,
 sensor readings where you want one acknowledgement after batching.
 
-### 4. Bidirectional Streaming — Streams in Both Directions
+<a id="bidirectional-streaming-streams-in-both-directions"></a>
+
+## Bidirectional Streaming — Streams in Both Directions
 
 Both sides send streams of messages simultaneously over the same connection.
 The order and timing of sends and receives is up to the application.
@@ -326,9 +381,11 @@ rpc SyncUsers (stream UserSyncEvent) returns (stream UserSyncAck);
 Use this for: real-time collaborative applications, bidirectional message brokers,
 game server communication, live trading systems, interactive media streams.
 
----
+[Back to Top](#top)
 
-## Python gRPC — A Minimal Client and Server
+<a id="python-grpc-a-minimal-client-and-server"></a>
+
+# 6. Python gRPC — A Minimal Client and Server
 
 Let's build a working gRPC service in Python. We'll implement `GetUser` (unary)
 and `ListUsers` (server streaming).
@@ -444,9 +501,11 @@ python server.py
 python client.py
 ```
 
----
+[Back to Top](#top)
 
-## gRPC vs REST — An Honest Comparison
+<a id="grpc-vs-rest-an-honest-comparison"></a>
+
+# 7. gRPC vs REST — An Honest Comparison
 
 ```
                     REST (HTTP/1.1 + JSON)    gRPC (HTTP/2 + Protobuf)
@@ -481,11 +540,15 @@ Memory usage: gRPC ~60% lower
 
 These numbers matter when you're doing millions of calls per day between services.
 
-> 📝 **Practice:** [Q63 · grpc-vs-rest](../api_practice_questions_100.md#q63--interview--grpc-vs-rest)
+> **Practice:** [Q63 - grpc-vs-rest](../api_practice_questions_100.md#q63--interview--grpc-vs-rest)
 
----
+Naveen's take: "I show these benchmarks to every team that says 'REST is fine for internal calls.' REST IS fine — until it isn't. Know where your inflection point is."
 
-## When gRPC Wins
+[Back to Top](#top)
+
+<a id="when-grpc-wins"></a>
+
+# 8. When gRPC Wins
 
 **Internal microservice communication.** This is gRPC's home turf. Service-to-service
 calls inside your infrastructure, where you control both sides of the wire, can almost
@@ -514,9 +577,11 @@ bulk ingestion, bidirectional for real-time sync — gRPC handles all of these n
 at the protocol level. With REST, streaming requires Server-Sent Events or WebSockets
 with bespoke implementations.
 
----
+[Back to Top](#top)
 
-## When REST Wins
+<a id="when-rest-wins"></a>
+
+# 9. When REST Wins
 
 **Public APIs.** If you're building an API that external developers will consume,
 gRPC is a poor choice. They can't use curl to test it. They can't call it from a
@@ -539,9 +604,11 @@ investment: maintaining proto files, setting up code generation in CI, learning 
 error model. For a small team building a straightforward CRUD service, that overhead
 often isn't worth it.
 
----
+[Back to Top](#top)
 
-## The Mental Model
+<a id="the-mental-model"></a>
+
+# 10. The Mental Model
 
 ```
 REST                            gRPC
@@ -563,9 +630,11 @@ high-speed internal backbone — typed, binary, fast.
 The companies running at scale use both. REST for anything facing the outside world.
 gRPC for the service-to-service communication that powers it all underneath.
 
----
+[Back to Top](#top)
 
-## Summary
+<a id="summary"></a>
+
+# 11. Summary
 
 ```
 What it is:    Remote procedure call framework from Google
@@ -583,15 +652,19 @@ in exchange for speed, type safety, and streaming power. That trade is worth it
 in the right context — and knowing that context is what separates engineers who
 cargo-cult technology from those who choose it deliberately.
 
----
+[Back to Top](#top)
 
-## 🔗 gRPC Interceptors — Cross-Cutting Concerns
+<a id="grpc-interceptors-cross-cutting-concerns"></a>
+
+# 12. gRPC Interceptors — Cross-Cutting Concerns
 
 > Just as FastAPI middleware wraps every HTTP request, gRPC interceptors wrap every RPC call — the right place to add authentication, logging, metrics, and retry logic without touching each handler.
 
 **gRPC interceptors** (called **middleware** in HTTP terms) run before and after every RPC call on both server and client sides. They're the standard pattern for authentication, structured logging, request ID injection, and metrics collection.
 
-### Server-side interceptor
+<a id="server-side-interceptor"></a>
+
+## Server-Side Interceptor
 
 ```python
 import grpc
@@ -602,7 +675,7 @@ class LoggingInterceptor(grpc.ServerInterceptor):
     """Log every incoming RPC with timing."""
 
     def intercept_service(self, continuation, handler_call_details):
-        method = handler_call_details.method   # ← "/package.Service/Method"
+        method = handler_call_details.method   # <- "/package.Service/Method"
 
         def intercept_call(request, context):
             start = time.time()
@@ -621,12 +694,12 @@ class LoggingInterceptor(grpc.ServerInterceptor):
 class AuthInterceptor(grpc.ServerInterceptor):
     """Validate bearer token on every RPC."""
 
-    SKIP_AUTH = {"/grpc.health.v1.Health/Check"}   # ← health checks skip auth
+    SKIP_AUTH = {"/grpc.health.v1.Health/Check"}   # <- health checks skip auth
 
     def intercept_service(self, continuation, handler_call_details):
         method = handler_call_details.method
         if method in self.SKIP_AUTH:
-            return continuation(handler_call_details)   # ← pass through
+            return continuation(handler_call_details)   # <- pass through
 
         def check_auth(request, context):
             metadata = dict(context.invocation_metadata())
@@ -642,11 +715,13 @@ class AuthInterceptor(grpc.ServerInterceptor):
 # Register interceptors when creating server:
 server = grpc.server(
     futures.ThreadPoolExecutor(max_workers=10),
-    interceptors=[AuthInterceptor(), LoggingInterceptor()]   # ← order matters
+    interceptors=[AuthInterceptor(), LoggingInterceptor()]   # <- order matters
 )
 ```
 
-### Client-side interceptor
+<a id="client-side-interceptor"></a>
+
+## Client-Side Interceptor
 
 ```python
 class RetryInterceptor(grpc.UnaryUnaryClientInterceptor):
@@ -658,11 +733,11 @@ class RetryInterceptor(grpc.UnaryUnaryClientInterceptor):
         for attempt in range(3):
             response = continuation(client_call_details, request)
             try:
-                return response.result()        # ← raises on error
+                return response.result()        # <- raises on error
             except grpc.RpcError as e:
                 if e.code() not in self.RETRIABLE or attempt == 2:
                     raise
-                time.sleep(2 ** attempt)        # ← backoff: 1s, 2s, 4s
+                time.sleep(2 ** attempt)        # <- backoff: 1s, 2s, 4s
                 logging.warning(f"Retry {attempt+1} for {e.code()}")
 
 # Create channel with interceptors:
@@ -675,12 +750,12 @@ stub = UserServiceStub(channel)
 
 **Interceptor execution order:**
 ```
-Request:   Interceptor1 → Interceptor2 → Handler
-Response:  Handler → Interceptor2 → Interceptor1
+Request:   Interceptor1 -> Interceptor2 -> Handler
+Response:  Handler -> Interceptor2 -> Interceptor1
 
 [AuthInterceptor, LoggingInterceptor]:
-  Request:  Auth checks first → Logging wraps second
-  Response: Logging records time → Auth doesn't act on response
+  Request:  Auth checks first -> Logging wraps second
+  Response: Logging records time -> Auth doesn't act on response
 ```
 
 **Common interceptors in production:**
@@ -690,10 +765,34 @@ Response:  Handler → Interceptor2 → Interceptor1
 - **Request ID** — inject/propagate trace ID via metadata
 - **Retry** — client-side retry for transient failures
 
----
+[Back to Top](#top)
 
-**[🏠 Back to README](../README.md)**
+<a id="fire-summary"></a>
 
-**Prev:** [← GraphQL](../13_graphql/graphql_story.md) &nbsp;|&nbsp; **Next:** [API Gateway Patterns →](../15_api_gateway/gateway_patterns.md)
+# 13. Fire Summary
 
-**Related Topics:** [GraphQL](../13_graphql/graphql_story.md) · [API Gateway Patterns](../15_api_gateway/gateway_patterns.md) · [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md)
+| Concept | One-Liner |
+|---------|-----------|
+| gRPC | High-performance RPC framework using HTTP/2 + Protobuf, open-sourced by Google |
+| Protocol Buffers | Binary serialization format — 3-10x smaller than JSON, strongly typed |
+| .proto file | The contract between services — compiled into client/server code |
+| Field numbers | Binary identifiers in Protobuf — never reuse, never change |
+| Unary RPC | One request, one response — the REST equivalent |
+| Server streaming | One request, stream of responses back |
+| Client streaming | Stream of requests, one response back |
+| Bidirectional | Both sides stream simultaneously over one connection |
+| Code generation | One .proto generates typed stubs in 10+ languages |
+| Interceptors | Middleware for gRPC — auth, logging, retry, metrics |
+| gRPC-Web | Proxy layer enabling browser clients to call gRPC services |
+| When to use gRPC | Internal services, high throughput, polyglot, streaming |
+| When to use REST | Public APIs, browser clients, simplicity, small teams |
+
+[Back to Top](#top)
+
+<a id="navigation"></a>
+
+## Navigation
+
+[Back to README](../README.md) | [Prev: GraphQL](../13_graphql/theory.md) | [Next: API Gateway Patterns](../15_api_gateway/theory.md)
+
+Related Topics: [GraphQL](../13_graphql/theory.md) | [API Gateway Patterns](../15_api_gateway/theory.md) | [API Performance and Scaling](../09_api_performance_scaling/theory.md)

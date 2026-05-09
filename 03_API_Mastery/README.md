@@ -63,10 +63,10 @@ A complete API mastery system — from understanding what an API is, through bui
 
 | Step | Module | What You'll Learn |
 |------|--------|-------------------|
-| 1 | [What is an API?](./01_what_is_an_api/story.md) | HTTP, request-response cycle, status codes, headers, curl |
-| 2 | [REST Fundamentals](./02_rest_fundamentals/rest_explained.md) | Roy Fielding's 6 constraints, resources, idempotency, statelessness |
-| 3 | [REST Best Practices](./03_rest_best_practices/patterns.md) | URL naming, versioning, pagination, error format standards |
-| 4 | [Data Formats](./04_data_formats/serialization_guide.md) | JSON types, Pydantic validation, schema evolution |
+| 1 | [What is an API?](./01_what_is_an_api/theory.md) | HTTP, request-response cycle, status codes, headers, curl |
+| 2 | [REST Fundamentals](./02_rest_fundamentals/theory.md) | Roy Fielding's 6 constraints, resources, idempotency, statelessness |
+| 3 | [REST Best Practices](./03_rest_best_practices/theory.md) | URL naming, versioning, pagination, error format standards |
+| 4 | [Data Formats](./04_data_formats/theory.md) | JSON types, Pydantic validation, schema evolution |
 | 5 | [FastAPI First Steps](./07_fastapi/first_api.md) | First endpoint, path params, query params, request bodies |
 | 6 | [FastAPI Basics](./07_fastapi/core_guide.md) | Pydantic models, dependency injection, routers, error handling |
 
@@ -81,12 +81,12 @@ A complete API mastery system — from understanding what an API is, through bui
 
 | Step | Module | What You'll Learn |
 |------|--------|-------------------|
-| 1 | [Authentication](./05_authentication/securing_apis.md) | API keys, OAuth2 flows, JWT lifecycle, refresh tokens, CORS |
+| 1 | [Authentication](./05_authentication/theory.md) | API keys, OAuth2 flows, JWT lifecycle, refresh tokens, CORS |
 | 2 | [FastAPI & Databases](./07_fastapi/database_guide.md) | SQLAlchemy, PostgreSQL, CRUD operations, Alembic migrations |
-| 3 | [Error Handling](./06_error_handling_standards/error_guide.md) | Consistent error format, validation errors, HTTP exceptions |
-| 4 | [API Versioning](./08_versioning_standards/versioning_strategy.md) | Breaking changes, URL vs header versioning, deprecation |
+| 3 | [Error Handling](./06_error_handling_standards/theory.md) | Consistent error format, validation errors, HTTP exceptions |
+| 4 | [API Versioning](./08_versioning_standards/theory.md) | Breaking changes, URL vs header versioning, deprecation |
 | 5 | [Testing & Docs](./10_testing_documentation/testing_apis.md) | TestClient, pytest fixtures, contract testing, OpenAPI |
-| 6 | [API Performance](./09_api_performance_scaling/performance_guide.md) | N+1 queries, caching, connection pooling, async endpoints |
+| 6 | [API Performance](./09_api_performance_scaling/theory.md) | N+1 queries, caching, connection pooling, async endpoints |
 
 **Prerequisite:** Beginner path complete.
 
@@ -99,12 +99,12 @@ A complete API mastery system — from understanding what an API is, through bui
 
 | Step | Module | What You'll Learn |
 |------|--------|-------------------|
-| 1 | [Security in Production](./11_api_security_production/security_hardening.md) | HTTPS, input validation, OWASP top 10, token security, audit logs |
-| 2 | [Production Deployment](./12_production_deployment/deployment_guide.md) | Docker + Gunicorn/Uvicorn, Kubernetes, CI/CD pipeline |
+| 1 | [Security in Production](./11_api_security_production/theory.md) | HTTPS, input validation, OWASP top 10, token security, audit logs |
+| 2 | [Production Deployment](./12_production_deployment/theory.md) | Docker + Gunicorn/Uvicorn, Kubernetes, CI/CD pipeline |
 | 3 | [FastAPI Advanced](./07_fastapi/advanced_guide.md) | WebSockets, file uploads, streaming, Celery + Redis |
-| 4 | [GraphQL](./13_graphql/graphql_story.md) | Schema-first design, queries, mutations, subscriptions, DataLoader |
-| 5 | [gRPC](./14_grpc/grpc_guide.md) | Protocol Buffers, 4 streaming modes, Python stub generation |
-| 6 | [API Gateway](./15_api_gateway/gateway_patterns.md) | Gateway patterns, auth offload, rate limiting, BFF |
+| 4 | [GraphQL](./13_graphql/theory.md) | Schema-first design, queries, mutations, subscriptions, DataLoader |
+| 5 | [gRPC](./14_grpc/theory.md) | Protocol Buffers, 4 streaming modes, Python stub generation |
+| 6 | [API Gateway](./15_api_gateway/gateway_theory.md) | Gateway patterns, auth offload, rate limiting, BFF |
 
 **Prerequisite:** Intermediate path complete.
 
@@ -117,10 +117,10 @@ A complete API mastery system — from understanding what an API is, through bui
 
 | Step | Module | What You'll Learn |
 |------|--------|-------------------|
-| 1 | [API Design Patterns](./16_api_design_patterns/design_guide.md) | Idempotency keys, long-running operations, bulk APIs, partial updates |
-| 2 | [WebSockets](./17_websockets/realtime_apis.md) | Full-duplex communication, scaling WebSocket connections |
-| 3 | [Real-World Architectures](./18_real_world_apis/architectures.md) | Payment API, social feed, ride-sharing, multi-tenant SaaS |
-| 4 | [OpenTelemetry](./19_opentelemetry/opentelemetry_guide.md) | Traces, metrics, logs — instrument your FastAPI app, OTEL Collector, Jaeger |
+| 1 | [API Design Patterns](./16_api_design_patterns/theory.md) | Idempotency keys, long-running operations, bulk APIs, partial updates |
+| 2 | [WebSockets](./17_websockets/theory.md) | Full-duplex communication, scaling WebSocket connections |
+| 3 | [Real-World Architectures](./18_real_world_apis/theory.md) | Payment API, social feed, ride-sharing, multi-tenant SaaS |
+| 4 | [OpenTelemetry](./19_opentelemetry/theory.md) | Traces, metrics, logs — instrument your FastAPI app, OTEL Collector, Jaeger |
 | 5 | [Interview Master](./99_interview_master/api_questions.md) | Design a URL shortener, design a rate limiter, senior-level Q&A |
 
 </details>
@@ -138,12 +138,12 @@ A complete API mastery system — from understanding what an API is, through bui
 
 | Module | Topic | Files |
 |--------|-------|-------|
-| 01 | [What is an API?](./01_what_is_an_api/story.md) | story.md |
-| 02 | [REST Fundamentals](./02_rest_fundamentals/rest_explained.md) | rest_explained.md |
-| 03 | [REST Best Practices](./03_rest_best_practices/patterns.md) | patterns.md |
-| 04 | [Data Formats & Serialization](./04_data_formats/serialization_guide.md) | serialization_guide.md |
-| 05 | [Authentication & Authorization](./05_authentication/securing_apis.md) | securing_apis.md |
-| 06 | [Error Handling & Standards](./06_error_handling_standards/error_guide.md) | error_guide.md |
+| 01 | [What is an API?](./01_what_is_an_api/theory.md) | story.md |
+| 02 | [REST Fundamentals](./02_rest_fundamentals/theory.md) | theory.md |
+| 03 | [REST Best Practices](./03_rest_best_practices/theory.md) | theory.md |
+| 04 | [Data Formats & Serialization](./04_data_formats/theory.md) | theory.md |
+| 05 | [Authentication & Authorization](./05_authentication/theory.md) | theory.md |
+| 06 | [Error Handling & Standards](./06_error_handling_standards/theory.md) | theory.md |
 
 </details>
 
@@ -167,11 +167,11 @@ All FastAPI topics are in `07_fastapi/` for focused navigation:
 
 | Module | Topic | Files |
 |--------|-------|-------|
-| 08 | [API Versioning](./08_versioning_standards/versioning_strategy.md) | versioning_strategy.md |
-| 09 | [API Performance & Scaling](./09_api_performance_scaling/performance_guide.md) | performance_guide.md |
+| 08 | [API Versioning](./08_versioning_standards/theory.md) | theory.md |
+| 09 | [API Performance & Scaling](./09_api_performance_scaling/theory.md) | theory.md |
 | 10 | [Testing & Documentation](./10_testing_documentation/testing_apis.md) | testing_apis.md · [docs_that_work.md](./10_testing_documentation/docs_that_work.md) |
-| 11 | [Security in Production](./11_api_security_production/security_hardening.md) | security_hardening.md |
-| 12 | [Production Deployment](./12_production_deployment/deployment_guide.md) | deployment_guide.md |
+| 11 | [Security in Production](./11_api_security_production/theory.md) | theory.md |
+| 12 | [Production Deployment](./12_production_deployment/theory.md) | theory.md |
 
 </details>
 
@@ -180,13 +180,13 @@ All FastAPI topics are in `07_fastapi/` for focused navigation:
 
 | Module | Topic | Files |
 |--------|-------|-------|
-| 13 | [GraphQL](./13_graphql/graphql_story.md) | graphql_story.md |
-| 14 | [gRPC](./14_grpc/grpc_guide.md) | grpc_guide.md |
-| 15 | [API Gateway](./15_api_gateway/gateway_patterns.md) | gateway_patterns.md |
-| 16 | [API Design Patterns](./16_api_design_patterns/design_guide.md) | design_guide.md |
-| 17 | [WebSockets](./17_websockets/realtime_apis.md) | realtime_apis.md |
-| 18 | [Real-World Architectures](./18_real_world_apis/architectures.md) | architectures.md |
-| 19 | [OpenTelemetry](./19_opentelemetry/opentelemetry_guide.md) | opentelemetry_guide.md |
+| 13 | [GraphQL](./13_graphql/theory.md) | theory.md |
+| 14 | [gRPC](./14_grpc/theory.md) | theory.md |
+| 15 | [API Gateway](./15_api_gateway/gateway_theory.md) | gateway_theory.md |
+| 16 | [API Design Patterns](./16_api_design_patterns/theory.md) | theory.md |
+| 17 | [WebSockets](./17_websockets/theory.md) | theory.md |
+| 18 | [Real-World Architectures](./18_real_world_apis/theory.md) | theory.md |
+| 19 | [OpenTelemetry](./19_opentelemetry/theory.md) | theory.md |
 
 </details>
 
@@ -286,17 +286,17 @@ with tracer.start_as_current_span("checkout.process") as span:
 
 </div>
 
-**New to APIs?** → [What is an API?](./01_what_is_an_api/story.md)
+**New to APIs?** → [What is an API?](./01_what_is_an_api/theory.md)
 
 **Ready to code?** → [FastAPI First API](./07_fastapi/first_api.md)
 
-**Need auth?** → [Authentication & Authorization](./05_authentication/securing_apis.md)
+**Need auth?** → [Authentication & Authorization](./05_authentication/theory.md)
 
-**Deploy to production?** → [Production Deployment](./12_production_deployment/deployment_guide.md)
+**Deploy to production?** → [Production Deployment](./12_production_deployment/theory.md)
 
 **Interview prep?** → [API Interview Master](./99_interview_master/api_questions.md)
 
-**Add observability?** → [OpenTelemetry Guide](./19_opentelemetry/opentelemetry_guide.md)
+**Add observability?** → [OpenTelemetry Guide](./19_opentelemetry/theory.md)
 
 **Back to root** → [../README.md](../README.md)
 

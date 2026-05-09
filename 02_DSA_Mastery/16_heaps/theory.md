@@ -20,25 +20,28 @@ Heaps are extremely important in interviews.
 
 ## 📖 Table of Contents
 
-1. [Real Life Story — School Assembly Line](#1-real-life-story)
-2. [What Is a Heap?](#2-what-is-a-heap)
-3. [Complete Binary Tree (Very Important)](#3-complete-binary-tree)
-4. [Heap Property](#4-heap-property)
-5. [Heap Stored as Array](#5-heap-stored-as-array)
-6. [Insert in Heap (Bubble Up)](#6-insert-in-heap)
-7. [Delete from Heap (Bubble Down)](#7-delete-from-heap)
-8. [Heapify (Build Heap Efficiently)](#8-heapify)
-9. [Why Heap Is Powerful](#9-why-heap-is-powerful)
-10. [Heaps in Python](#10-heaps-in-python)
-11. [Common Interview Patterns](#11-common-interview-patterns)
-12. [Heap vs BST](#12-heap-vs-bst)
-13. [Real-World Applications](#13-real-world-applications)
-14. [Mental Model](#14-mental-model)
-15. [Final Understanding](#15-final-understanding)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is a Heap?](#1-real-life-story)
+  - [Visual: The Hospital ER](#visual-hospital-er)
+- [2. Complete Binary Tree](#3-complete-binary-tree)
+- [3. Heap Property](#4-heap-property)
+  - [Min Heap](#min-heap)
+  - [Max Heap](#max-heap)
+- [4. Heap Stored as Array](#5-heap-stored-as-array)
+  - [Visual: The Array Mapping](#visual-array-mapping)
+- [5. Insert — Bubble Up](#6-insert-in-heap)
+  - [Visual: Step-by-Step Bubble Up](#visual-bubble-up)
+- [6. Delete — Bubble Down](#7-delete-from-heap)
+  - [Visual: Step-by-Step Extract Min](#visual-extract-min)
+- [7. Heapify — Build Heap Efficiently](#8-heapify)
+- [8. Heaps in Python](#10-heaps-in-python)
+- [9. Common Interview Patterns](#11-common-interview-patterns)
+  - [Visual: Top K Problem](#visual-top-k)
+  - [Visual: Two Heaps for Running Median](#visual-two-heaps)
+- [10. Heap vs BST](#12-heap-vs-bst)
+- [🔥 Summary](#summary)
 
 ## 📌 Learning Priority
-
-> 📝 **Practice:** [practice.md](./practice.md)
 
 **Must Learn** — Core concept, daily use, interview essential:
 heap property · complete binary tree · bubble up/down · Python heapq module
@@ -52,23 +55,12 @@ heap vs BST trade-offs · array storage indexing
 **Reference** — Know it exists, look up syntax when needed:
 D-ary heaps · Fibonacci heaps · binomial heaps
 
+Otto is a triage nurse in a hospital emergency room. Every few minutes, a new patient walks in. Otto does not care who arrived first — he cares who is most critical. His job: always know the most urgent patient instantly, even as new people keep arriving and treated patients keep leaving. He needs a system that gives him O(1) access to the highest priority patient and O(log n) updates when patients arrive or are treated. That system is a **heap** — the data structure of priority.
+
 <a id="1-real-life-story"></a>
-# 1. Real Life Story — School Assembly Line
+# 1. What Is a Heap?
 
-Imagine students standing in line for awards.
-
-You don't care about full ranking.
-You only care about:
-
-Who is the highest scorer?
-
-You want to quickly find the top student.
-
-Heap does exactly that.
-
-It guarantees:
-
-Top element always at root.
+Otto starts his shift. He explains to a new resident: "A heap answers one question with blazing speed: what is the most important thing RIGHT NOW? Not second most important. Not a sorted list. Just: what's next?"
 
 ## Visual: The Hospital ER — A Better Analogy
 
@@ -112,7 +104,9 @@ The heap is constantly asking: **"Among everyone here, who needs help most?"**
 > [↑ Back to Top](#top)
 
 <a id="2-what-is-a-heap"></a>
-# 2. What Is a Heap?
+# 2. Heap Definition
+
+Otto formalizes the structure: a heap is a complete binary tree where the root is always the min (or max). It is not fully sorted — only the top is guaranteed. That limited guarantee is exactly what makes it fast.
 
 > 📝 **Practice:** [Q1 · min-heap property](./practice.md#q1--min-heap-property-check) · [Q2 · max-heap property](./practice.md#q2--max-heap-property-check)
 
@@ -130,7 +124,7 @@ Two types:
 <a id="3-complete-binary-tree"></a>
 # 3. Complete Binary Tree (Very Important)
 
-Complete means:
+Otto's triage system has one structural rule: patients fill seats from left to right, level by level, with no gaps. This completeness guarantee is what allows the heap to be stored in a simple array — no pointers needed.
 
 - All levels filled
 - Last level filled from left to right
@@ -755,14 +749,15 @@ Choose wisely.
 > [↑ Back to Top](#top)
 
 <a id="13-real-world-applications"></a>
-# 13. Real-World Applications
+## Real-World Applications
 
-- CPU scheduling
-- Network packet priority
-- Event-driven simulation
-- Operating systems
-- Job schedulers
-- Load balancing
+- CPU scheduling (OS picks highest-priority process)
+- Network packet priority (QoS routing)
+- Event-driven simulation (next event by timestamp)
+- Job schedulers (Kubernetes pod priority)
+- Load balancing (assign to least-loaded server)
+- Dijkstra's shortest path algorithm
+- A* pathfinding (game AI)
 
 Heaps manage priorities in real systems.
 
@@ -770,63 +765,49 @@ Heaps manage priorities in real systems.
 
 > [↑ Back to Top](#top)
 
-<a id="14-mental-model"></a>
-# 14. Mental Model
+<a id="summary"></a>
+## 🔥 Summary
 
-Think of heap as:
+| Concept | Key Takeaway |
+|---------|-------------|
+| Heap | Complete binary tree with priority ordering |
+| Min-heap | Parent ≤ children. Root = minimum |
+| Max-heap | Parent ≥ children. Root = maximum |
+| Array storage | Left=2i+1, Right=2i+2, Parent=(i-1)//2 |
+| Insert | Append + bubble up — O(log n) |
+| Delete | Swap root with last + bubble down — O(log n) |
+| Peek | O(1) — just look at index 0 |
+| Heapify | Build from existing array — O(n) |
+| Top K | Min-heap of size K — O(n log k) |
+| Running median | Two heaps (max-heap lower + min-heap upper) |
 
-A mountain.
+**Mental model:** A heap is a mountain. The peak (root) is always the highest (max-heap) or lowest (min-heap). Everything else is somewhere below. You only guarantee the peak — and that constraint is what makes it fast.
 
-Top is highest (max heap)
-or lowest (min heap).
+When someone asks "what's the best/worst/most/least right now?" — that is a heap problem.
 
-Everything else is somewhere below.
+Mastering heaps prepares you for: Dijkstra, A*, scheduling problems, median maintenance, and advanced system design.
 
-You only guarantee peak.
+> 📝 **Practice:** [Q1 · min-heap property](./practice.md#q1--min-heap-property-check) · [Q2 · max-heap property](./practice.md#q2--max-heap-property-check) · [Q41 · heap-kth-largest](../dsa_practice_questions_100.md#q41--design--heap-kth-largest)
 
-The key insight to hold onto: a heap does NOT give you a fully sorted order. It only guarantees the min (or max) is instantly accessible. That constraint is exactly what makes it so fast. You're not doing more work than the problem requires.
-
-When someone asks "what's the best/worst/most/least right now?" — that's a heap problem.
-
-> [↑ Back to Top](#top)
-
-<a id="15-final-understanding"></a>
-# 15. Final Understanding
-
-> 📝 **Practice:** [Q41 · heap-kth-largest](../dsa_practice_questions_100.md#q41--design--heap-kth-largest)
-
-Heap is:
-
-- Complete binary tree
-- Maintains priority order
-- Efficient for top element access
-- O(log n) insert/delete
-- O(1) peek
-- Used in priority queue
-
-Heaps are essential for many advanced algorithms.
-
-Mastering heap prepares you for:
-
-- Dijkstra
-- A*
-- Scheduling problems
-- Median maintenance
-- Advanced system design
-
-# Navigation
-
-Previous:
-[15_binary_search_trees/interview.md](/02_DSA_Mastery/15_binary_search_trees/interview.md)
-
-Next:
-[16_heaps/interview.md](/02_DSA_Mastery/16_heaps/interview.md)
-[17_trie/theory.md](/02_DSA_Mastery/17_trie/theory.md)
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Binary Search Trees — Interview Q&A](../15_binary_search_trees/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [15_binary_search_trees → theory.md](../15_binary_search_trees/theory.md) |
+| ➡ Next Module | [17_trie → theory.md](../17_trie/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[15 BST →](../15_binary_search_trees/theory.md) · [17 Trie →](../17_trie/theory.md) · [09 Queue →](../09_queue/theory.md) · [25 Advanced Graphs →](../25_advanced_graphs/theory.md)
+
+**Jump to specific topics in other files:**
+- Priority queue basics → [09_queue § Priority Queue](../09_queue/theory.md#6-priority-queue)
+- Dijkstra uses heaps → [25_advanced_graphs § theory.md](../25_advanced_graphs/theory.md)
+- BST comparison → [15_binary_search_trees § theory.md](../15_binary_search_trees/theory.md)
+- Tree fundamentals → [14_trees § theory.md](../14_trees/theory.md)
 
 > [↑ Back to Top](#top)

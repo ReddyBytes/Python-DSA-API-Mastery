@@ -40,7 +40,7 @@
   - [Real-World System Example](#real-world-system-example)
   - [Senior-Level Mental Model](#senior-level-mental-model)
   - [Interview Questions You Should Now Answer Confidently](#interview-questions)
-  - [Final Understanding Check](#final-understanding-check)
+  - [🔥 Summary](#final-understanding-check)
 
 <a id="learning-priority"></a>
 ## 📌 Learning Priority
@@ -901,7 +901,7 @@ Think of memory as a warehouse:
 If you can answer these clearly, you are not a beginner anymore.
 
 <a id="final-understanding-check"></a>
-## Final Understanding Check
+## 🔥 Summary
 
 If someone says:
 

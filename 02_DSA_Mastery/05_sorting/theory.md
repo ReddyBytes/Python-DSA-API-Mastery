@@ -1,29 +1,43 @@
 <a id="top"></a>
-
-# 📘 Sorting in Python — Deep Conceptual Theory
-
-> Sorting is not about rearranging numbers.
-> It is about controlling order to unlock efficiency.
-> Many powerful algorithms assume sorted input.
-> Understanding sorting deeply improves your optimization skills.
+# 📘 05 – Sorting in Python
 
 ## 📖 Table of Contents
 
-1. [What Problem Does Sorting Actually Solve?](#what-problem-does-sorting-actually-solve)
-2. [Two Core Ways Sorting Algorithms Work](#two-core-ways-sorting-algorithms-work)
-3. [Bubble Sort — Adjacent Correction Strategy](#bubble-sort--adjacent-correction-strategy)
-4. [Selection Sort — Minimum Placement Strategy](#selection-sort--minimum-placement-strategy)
-5. [Insertion Sort — Build Sorted Portion](#insertion-sort--build-sorted-portion)
-6. [Merge Sort — Divide and Conquer Strategy](#merge-sort--divide-and-conquer-strategy)
-7. [Quick Sort — Partition Strategy](#quick-sort--partition-strategy)
-8. [Heap Sort — Structure-Based Sorting](#heap-sort--structure-based-sorting)
-9. [Why O(n log n) Is the Speed Limit](#why-on-log-n-is-the-speed-limit)
-10. [Stability Explained Clearly](#stability-explained-clearly)
-11. [Python's Built-in Sort — Timsort](#pythons-built-in-sort--timsort)
-12. [Comparison vs Non-Comparison Sorting](#comparison-vs-non-comparison-sorting)
-13. [Choosing Sorting Algorithm — Practical Thinking](#choosing-sorting-algorithm--practical-thinking)
-14. [Final Perspective](#final-perspective)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Problem Does Sorting Solve?](#1-what-problem-does-sorting-solve)
+- [2. Two Core Ways Sorting Algorithms Work](#2-two-core-ways)
+  - [Strategy A — Repeated Comparison and Swap](#strategy-a)
+  - [Strategy B — Divide, Reorganize, Rebuild](#strategy-b)
+- [3. Bubble Sort — Adjacent Correction](#3-bubble-sort)
+  - [Visual: One Full Pass](#visual-bubble-pass)
+- [4. Selection Sort — Minimum Placement](#4-selection-sort)
+  - [Visual: Selection Rounds](#visual-selection)
+- [5. Insertion Sort — Build Sorted Portion](#5-insertion-sort)
+  - [Visual: The Card Hand](#visual-insertion)
+- [6. Merge Sort — Divide and Conquer](#6-merge-sort)
+  - [Visual: The Split](#visual-merge-split)
+  - [Visual: The Merge](#visual-merge-up)
+  - [Visual: ASCII Tree — Complete View](#visual-merge-tree)
+- [7. Quick Sort — Partition Strategy](#7-quick-sort)
+  - [Visual: Partition](#visual-partition)
+- [8. Heap Sort — Structure-Based Sorting](#8-heap-sort)
+- [9. Why O(n log n) Is the Speed Limit](#9-speed-limit)
+  - [The Information Theory Argument](#info-theory)
+- [10. Stability Explained Clearly](#10-stability)
+  - [Visual: The Playing Card Story](#visual-stability)
+  - [Stability Summary Table](#stability-table)
+- [11. Python's Built-in Sort — Timsort](#11-timsort)
+  - [How Timsort Works](#how-timsort-works)
+  - [Galloping Mode](#galloping-mode)
+- [12. Comparison vs Non-Comparison Sorting](#12-non-comparison)
+  - [Counting Sort](#counting-sort)
+  - [Radix Sort](#radix-sort)
+- [13. Choosing the Right Algorithm](#13-choosing)
+  - [Decision Table](#decision-table)
+  - [Complete Complexity Reference](#complexity-reference)
+- [🔥 Summary](#summary)
 
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -38,15 +52,14 @@ insertion sort for nearly-sorted data · sorting stability trade-offs
 **Reference** — Know it exists, look up syntax when needed:
 shell sort · introsort · bucket sort
 
-<a id="what-problem-does-sorting-actually-solve"></a>
+Leo is an apprentice at a sorting factory. His job: take a mess of items and arrange them in order. But the factory has many stations — each teaching a different strategy. Some stations are slow but simple. Others are fast but tricky. Today Leo will visit every station, learn how each one works, and understand when to use which. By the end, he will know that sorting is not about rearranging numbers — it is about controlling order to unlock efficiency.
 
-# 1. What Problem Does Sorting Actually Solve?
+<a id="1-what-problem-does-sorting-solve"></a>
+# 1. What Problem Does Sorting Solve?
 
-Before we sort anything, let us ask why we even bother.
+Leo's first lesson at the factory: "Why do we even bother sorting?" His mentor shows him two shelves. On the unsorted shelf, finding a specific item requires checking every single one. On the sorted shelf, Leo can jump straight to the right area — like opening a dictionary to the right letter.
 
-Unsorted data forces you to scan everything.
-
-Sorted data allows:
+Unsorted data forces you to scan everything. Sorted data allows:
 
 - Binary search → O(log n)
 - Two pointers → O(n)
@@ -55,56 +68,44 @@ Sorted data allows:
 - Efficient merging
 - Database queries depend on sorted indexes
 
-Sorting is often a transformation step — it reshapes the problem space.
-Sorting is the foundation that makes everything else fast.
+Sorting is often a transformation step — it reshapes the problem space. Sorting is the foundation that makes everything else fast.
 
 > [↑ Back to Top](#top)
 
-<a id="two-core-ways-sorting-algorithms-work"></a>
-
+<a id="2-two-core-ways"></a>
 # 2. Two Core Ways Sorting Algorithms Work
 
-Every sorting algorithm follows one of these strategies:
+Leo learns that every sorting station in the factory follows one of two fundamental strategies — like two schools of martial arts. One relies on brute patience. The other relies on clever division.
 
-## Strategy A — Repeated Comparison & Swap
+<a id="strategy-a"></a>
+## Strategy A — Repeated Comparison and Swap
 
-Gradually push elements to correct positions.
+Gradually push elements to correct positions. Simple, intuitive, but slow for large inputs.
 
-Examples:
-- Bubble
-- Selection
-- Insertion
+Examples: Bubble, Selection, Insertion
 
+<a id="strategy-b"></a>
 ## Strategy B — Divide, Reorganize, Rebuild
 
-Break problem into smaller parts, then combine.
+Break the problem into smaller parts, solve each, then combine. Faster, but more complex.
 
-Examples:
-- Merge sort
-- Quick sort
-- Heap sort
+Examples: Merge sort, Quick sort, Heap sort
 
 Understanding the strategy helps remember behavior.
 
 > [↑ Back to Top](#top)
 
-<a id="bubble-sort--adjacent-correction-strategy"></a>
+<a id="3-bubble-sort"></a>
+# 3. Bubble Sort — Adjacent Correction
 
-# 3. Bubble Sort — Adjacent Correction Strategy
-
-Imagine a tank of water with bubbles of different sizes.
-When you shake it, the heaviest bubble slowly works its way to the top.
-Each pass, the largest unsorted element "bubbles up" to its final position.
+Leo arrives at the first station. Imagine a tank of water with bubbles of different sizes. When you shake it, the heaviest bubble slowly works its way to the top. Each pass, the largest unsorted element "bubbles up" to its final position.
 
 ## Core Idea
 
-Compare neighboring elements.
-Swap if they are in wrong order.
-Repeat until no swaps needed.
+Compare neighboring elements. Swap if they are in wrong order. Repeat until no swaps needed.
 
+<a id="visual-bubble-pass"></a>
 ## Visual: One Full Pass on [5, 3, 1, 4, 2]
-
-Compare adjacent pairs. If the left is bigger than the right, swap them.
 
 ```
 Start: [5, 3, 1, 4, 2]
@@ -127,8 +128,7 @@ End of pass 1: 5 is now in its correct position!
                            ↑ sorted zone growing from right
 ```
 
-After each pass, the sorted zone grows by one on the right.
-After n-1 passes, the entire array is sorted.
+After each pass, the sorted zone grows by one on the right. After n-1 passes, the entire array is sorted.
 
 ```
 Pass 1: [3, 1, 4, 2, | 5]
@@ -138,8 +138,6 @@ Pass 4: [1, | 2, 3, 4, 5]
 
 Done!
 ```
-
-Each pass pushes one maximum to its correct position.
 
 ```python
 def bubble_sort(arr):
@@ -156,11 +154,7 @@ def bubble_sort(arr):
 
 ## Complexity
 
-Worst Case: O(n²)
-
-Best Case (already sorted with optimization): O(n)
-
-With the early-exit optimization, it is O(n) on an already-sorted array.
+Worst Case: O(n²). Best Case (already sorted with optimization): O(n).
 
 ## When Useful?
 
@@ -173,14 +167,10 @@ Rarely used in real systems.
 
 > [↑ Back to Top](#top)
 
-<a id="selection-sort--minimum-placement-strategy"></a>
+<a id="4-selection-sort"></a>
+# 4. Selection Sort — Minimum Placement
 
-# 4. Selection Sort — Minimum Placement Strategy
-
-You are organizing a group photo. You want people sorted shortest to tallest.
-Your strategy: scan the entire line, find the shortest person, bring them to the front.
-Then scan the remaining people, find the shortest of those, bring them to position 2.
-And so on.
+Leo moves to the next station. You are organizing a group photo. You want people sorted shortest to tallest. Your strategy: scan the entire line, find the shortest person, bring them to the front. Then scan the remaining people, find the shortest of those, bring them to position 2. And so on.
 
 ## Core Idea
 
@@ -188,6 +178,7 @@ And so on.
 2. Swap it to front.
 3. Repeat for remaining array.
 
+<a id="visual-selection"></a>
 ## Visual: [5, 3, 1, 4, 2]
 
 ```
@@ -229,31 +220,22 @@ def selection_sort(arr):
 
 ## Important Observation
 
-Number of swaps = n (at most)
-
-Time complexity: O(n²) always — it always does the full scan regardless of input.
+Number of swaps = n (at most). Time complexity: O(n²) always — it always does the full scan regardless of input.
 
 Comparison with bubble sort: Selection makes fewer swaps (at most n swaps total). Bubble sort can make O(n²) swaps. If swapping is expensive, selection sort is better.
 
 > [↑ Back to Top](#top)
 
-<a id="insertion-sort--build-sorted-portion"></a>
-
+<a id="5-insertion-sort"></a>
 # 5. Insertion Sort — Build Sorted Portion
 
-You are playing cards. As each new card is dealt, you pick it up and slot it into
-the correct position among the cards already in your hand.
-Your hand is always sorted. You just keep inserting one card at a time.
+Leo picks up a deck of cards. As each new card is dealt, he picks it up and slots it into the correct position among the cards already in his hand. His hand is always sorted. He just keeps inserting one card at a time.
 
 ## Core Idea
 
-Divide array into:
+Divide array into sorted left portion and unsorted right portion. Insert each element from right into correct position in left.
 
-- Sorted left portion
-- Unsorted right portion
-
-Insert each element from right into correct position in left.
-
+<a id="visual-insertion"></a>
 ## Visual: [5, 3, 1, 4, 2]
 
 ```
@@ -272,8 +254,6 @@ Deal 4: 4 > 3 but 4 < 5 → slide 5 right, insert 4 before it
 Deal 2: 2 > 1 but 2 < 3 → slide 3,4,5 right, insert 2
         Hand = [1, 2, 3, 4, 5]
 ```
-
-Visualized on the array `[5, 3, 1, 4, 2]`:
 
 ```
 [5 | 3, 1, 4, 2]  ← sorted part | unsorted part
@@ -305,27 +285,16 @@ def insertion_sort(arr):
 
 ## Why It Is Powerful
 
-If array is nearly sorted: few shifts required.
+If array is nearly sorted: few shifts required. Best Case: O(n). Worst Case: O(n²).
 
-Best Case: O(n)
-
-Worst Case: O(n²)
-
-**Online algorithm:** Can sort data as it arrives, without seeing the full list first.
-
-Used in hybrid algorithms like Timsort.
+**Online algorithm:** Can sort data as it arrives, without seeing the full list first. Used in hybrid algorithms like Timsort.
 
 > [↑ Back to Top](#top)
 
-<a id="merge-sort--divide-and-conquer-strategy"></a>
+<a id="6-merge-sort"></a>
+# 6. Merge Sort — Divide and Conquer
 
-# 6. Merge Sort — Divide and Conquer Strategy
-
-You work at a casino. You have a shuffled deck of cards.
-You split the deck in half, give each half to a dealer.
-Each dealer splits their half again, and again, until each person holds just one card.
-Then everyone starts merging: take two sorted piles, merge them into one sorted pile.
-Repeat until you have one big sorted deck.
+Leo enters the casino station. He has a shuffled deck of cards. He splits the deck in half, gives each half to a dealer. Each dealer splits their half again, and again, until each person holds just one card. Then everyone starts merging: take two sorted piles, merge them into one sorted pile. Repeat until you have one big sorted deck.
 
 ## Core Idea
 
@@ -333,6 +302,7 @@ Repeat until you have one big sorted deck.
 2. Recursively sort halves.
 3. Merge sorted halves.
 
+<a id="visual-merge-split"></a>
 ## Visual: The Split
 
 ```
@@ -347,6 +317,7 @@ Repeat until you have one big sorted deck.
  [5]   [3]
 ```
 
+<a id="visual-merge-up"></a>
 ## Visual: The Merge — Going Back Up
 
 ```
@@ -385,6 +356,7 @@ Compare 5 vs 4: take 4   → [1, 2, 3, 4]
 [5] remains:    take 5   → [1, 2, 3, 4, 5] ✓
 ```
 
+<a id="visual-merge-tree"></a>
 ## Visual: ASCII Tree — Complete View
 
 ```
@@ -438,40 +410,26 @@ def merge(left, right):
 
 ## Why It Is Efficient
 
-At each level: you process all n elements once.
-
-Number of levels: log n
-
-Total: O(n log n) always — guaranteed.
+At each level: you process all n elements once. Number of levels: log n. Total: O(n log n) always — guaranteed.
 
 ## Trade-Off
 
-Space: O(n) extra memory
-
-Stable: Yes — equal elements maintain their original order.
-
-Excellent for large datasets where stability matters.
+Space: O(n) extra memory. Stable: Yes — equal elements maintain their original order. Excellent for large datasets where stability matters.
 
 > [↑ Back to Top](#top)
 
-<a id="quick-sort--partition-strategy"></a>
-
+<a id="7-quick-sort"></a>
 # 7. Quick Sort — Partition Strategy
 
-You are organizing a party seating chart.
-You pick one person as the "pivot" (say, the host).
-Everyone shorter than the host sits to the left.
-Everyone taller sits to the right.
-Now the host is in the right seat. Recursively do the same for the left and right groups.
+Leo arrives at the party station. He is organizing a seating chart. He picks one person as the "pivot" (say, the host). Everyone shorter than the host sits to the left. Everyone taller sits to the right. Now the host is in the right seat. Recursively do the same for the left and right groups.
 
 ## Core Idea
 
 1. Choose pivot.
-2. Rearrange so:
-   - Smaller elements left
-   - Larger elements right
+2. Rearrange so smaller elements go left, larger go right.
 3. Recursively sort partitions.
 
+<a id="visual-partition"></a>
 ## Visual: Partition [5, 3, 1, 4, 2] with pivot = 4
 
 ```
@@ -523,7 +481,7 @@ def quick_sort(arr, low, high):
         quick_sort(arr, pivot_idx + 1, high)
 
 def partition(arr, low, high):
-    pivot = arr[high]   # choose last element as pivot
+    pivot = arr[high]
     i = low - 1
     for j in range(low, high):
         if arr[j] <= pivot:
@@ -539,10 +497,7 @@ def partition(arr, low, high):
 - Cache friendly
 - Low constant factors
 
-Best/Average: O(n log n) — pivot splits array roughly in half each time.
-
-Worst: O(n²) — when pivot is always the smallest or largest element. This happens on already-sorted arrays with a bad pivot choice.
-
+Best/Average: O(n log n). Worst: O(n²) — when pivot is always smallest or largest.
 Space: O(log n) average (recursive call stack depth).
 
 ## Important Detail
@@ -552,37 +507,31 @@ Pivot selection matters:
 - Random pivot (better)
 - Median-of-three (more stable)
 
-Fix worst case: use random pivot or median-of-three.
-
 **Common mistake — bad pivot choice on sorted input:** Using the first or last element as pivot on an already-sorted array degrades quicksort to O(n²). Always use a random pivot or median-of-three in production.
 
 > [↑ Back to Top](#top)
 
-<a id="heap-sort--structure-based-sorting"></a>
-
+<a id="8-heap-sort"></a>
 # 8. Heap Sort — Structure-Based Sorting
+
+Leo reaches the structure station. Imagine a company hierarchy where the CEO (maximum value) is always at the top. To sort, Leo repeatedly removes the CEO, places them at the end of the sorted section, and promotes the next in line. That hierarchy is a **heap**.
 
 ## Core Idea
 
-Use heap (max heap):
-
-1. Build heap from array.
-2. Extract max repeatedly.
-3. Place at end.
+Use a max heap:
+1. Build heap from array — O(n)
+2. Extract max repeatedly — O(log n) each
+3. Place at end
 
 Heap property: Parent ≥ children.
 
 ## Complexity
 
-Build heap: O(n)
-
-Extraction: n times → O(log n) each
-
-Total: O(n log n)
+Build heap: O(n). Extraction: n times × O(log n) each. Total: O(n log n).
 
 ## Strength
 
-- In-place
+- In-place (no extra memory)
 - No worst-case degradation like quicksort
 - Guaranteed O(n log n) always
 
@@ -590,22 +539,17 @@ Weakness: Not stable.
 
 > [↑ Back to Top](#top)
 
-<a id="why-on-log-n-is-the-speed-limit"></a>
-
+<a id="9-speed-limit"></a>
 # 9. Why O(n log n) Is the Speed Limit
 
-This is a beautiful insight. Forget code for a moment.
+Leo asks his mentor: "Can any sorting algorithm be faster than O(n log n)?" The mentor smiles and explains using information theory — a beautiful proof that no comparison-based sort can ever beat this bound.
 
+<a id="info-theory"></a>
 ## The Information Theory Argument
 
-Imagine your sorting algorithm is having a conversation with the array.
-It can only ask one type of question: "Is element A greater than element B?"
+Imagine your sorting algorithm is having a conversation with the array. It can only ask one type of question: "Is element A greater than element B?" Each comparison gives you 1 bit of information: yes or no. After k comparisons, you know at most 2^k different things.
 
-Each comparison gives you 1 bit of information: yes or no.
-After k comparisons, you know at most 2^k different things.
-
-There are n! possible orderings of n elements.
-To uniquely identify which one you started with, you need:
+There are n! possible orderings of n elements. To uniquely identify which one you started with, you need:
 
 ```
 2^k ≥ n!
@@ -617,8 +561,7 @@ By Stirling's approximation:
 log₂(n!) ≈ n log₂(n)
 ```
 
-So any comparison-based sorting algorithm must make at least **Ω(n log n) comparisons**.
-No matter how clever you are, you cannot do better using only comparisons.
+So any comparison-based sorting algorithm must make at least **Ω(n log n) comparisons**. No matter how clever you are, you cannot do better using only comparisons.
 
 ```
 For n = 1000:
@@ -629,20 +572,17 @@ For n = 1000:
   Very close to the theoretical minimum!
 ```
 
-The algorithms that break O(n log n) — counting sort, radix sort, bucket sort —
-do so by using **more than just comparisons**. They exploit the actual values of elements.
+The algorithms that break O(n log n) — counting sort, radix sort, bucket sort — do so by using **more than just comparisons**. They exploit the actual values of elements.
 
 > [↑ Back to Top](#top)
 
-<a id="stability-explained-clearly"></a>
-
+<a id="10-stability"></a>
 # 10. Stability Explained Clearly
 
-Stable sort preserves order of equal elements.
+Leo encounters a subtle but critical concept. Two items can have the same "sort key" but be different items — like two 7s in a deck of cards. A **stable** sort preserves the original order of equal elements. An unstable sort may rearrange them unpredictably.
 
+<a id="visual-stability"></a>
 ## Visual: The Playing Card Story
-
-Suppose you have a hand of playing cards, some with the same number but different suits:
 
 ```
 Original order: [7♥, 3♦, 7♠, 5♣, 3♥]
@@ -668,36 +608,29 @@ Unstable result: [3♥, 3♦, 5♣, 7♠, 7♥]  ← order of equals flipped
 
 ## Why Stability Matters
 
-**Scenario:** You are sorting a list of employees first by department, then by name.
-
-Step 1: Sort by name (alphabetical).
-Step 2: Sort by department.
-
-If Step 2 is stable, employees within the same department remain alphabetically ordered.
-If Step 2 is unstable, the alphabetical ordering from Step 1 is destroyed.
+**Scenario:** Sorting employees first by name, then by department.
 
 ```
-After step 1 (sort by name):
+After sort by name:
 Alice - Engineering
 Bob   - Marketing
 Carol - Engineering
 Dave  - Marketing
 
-After step 2 with STABLE sort (sort by department):
-Alice - Engineering   ← Alice before Carol (original alpha order preserved)
+After STABLE sort by department:
+Alice - Engineering   ← original alpha order preserved
 Carol - Engineering
-Bob   - Marketing     ← Bob before Dave (original alpha order preserved)
+Bob   - Marketing
 Dave  - Marketing
 
-After step 2 with UNSTABLE sort (sort by department):
+After UNSTABLE sort by department:
 Carol - Engineering   ← order within department: anyone's guess
 Alice - Engineering
 Dave  - Marketing
 Bob   - Marketing
 ```
 
-Stability matters in multi-level sorting.
-
+<a id="stability-table"></a>
 ## Stability Summary
 
 ```
@@ -712,26 +645,22 @@ Heap Sort        No      ← heap operations ignore order of equals
 TimSort          Yes     ← designed to be stable
 ```
 
-**Common mistake — assuming stability without checking:** Java's `Arrays.sort` for primitive types uses dual-pivot quicksort which is NOT stable. Python's sort is always stable. When porting Java sorting logic to Python, do not add unnecessary compound keys to simulate stability — Python's stability makes extra compound keys potentially change the intended order.
+**Common mistake — assuming stability without checking:** Java's `Arrays.sort` for primitive types uses dual-pivot quicksort which is NOT stable. Python's sort is always stable.
 
 > [↑ Back to Top](#top)
 
-<a id="pythons-built-in-sort--timsort"></a>
-
+<a id="11-timsort"></a>
 # 11. Python's Built-in Sort — Timsort
 
-Python's built-in `sorted()` and `list.sort()` use **Timsort**, invented by Tim Peters in 2002.
+Leo discovers that Python does not use any single algorithm he learned — it uses a hybrid called **Timsort**, invented by Tim Peters in 2002. Timsort watched real-world data for patterns and realized something profound: real data is almost never fully random.
 
-Timsort is a hybrid of **merge sort and insertion sort**, engineered for real-world data.
+Python's `sorted()` and `list.sort()` use Timsort — a hybrid of **merge sort and insertion sort**, engineered for real-world data.
 
 ## The Key Insight: Real Data Is Not Random
 
-In the real world, data comes in partially sorted "runs."
-A list of timestamps, a list of names that was recently modified,
-a log file — these all have large stretches that are already sorted.
+A list of timestamps, a list of names, a log file — these all have large stretches that are already sorted. Random data is rare. Nearly-sorted data is common.
 
-Random data is rare. Nearly-sorted data is common.
-
+<a id="how-timsort-works"></a>
 ## How Timsort Works
 
 **Step 1: Find or create "runs"**
@@ -746,10 +675,7 @@ Run 2: [2, 4, 7, 8]       ← already ascending
 Run 3: [6]                ← singleton
 ```
 
-Reverse-sorted runs are reversed in-place (free O(n) win).
-
-If a run is shorter than `minrun` (typically 32-64 elements),
-it is extended using insertion sort — which is superfast on small arrays.
+Reverse-sorted runs are reversed in-place (free O(n) win). If a run is shorter than `minrun` (typically 32-64 elements), it is extended using insertion sort.
 
 **Step 2: Merge runs using merge sort strategy**
 
@@ -759,12 +685,6 @@ Merge [1,2,3,4,5,7,8] + [6]    → [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
 ## Why Timsort Is Fast on Nearly-Sorted Data
-
-If the array is already sorted, there is one run of length n.
-No merging needed. Timsort detects this and runs in O(n) — just checking, no work.
-
-Insertion sort is extremely cache-friendly and fast on small inputs.
-The merge step is only called when runs need to be combined.
 
 ```
 Data shape               TimSort behavior
@@ -777,30 +697,21 @@ Real-world (mixed)       O(n log n) but with very small constants
 ──────────────────────────────────────────────────────
 ```
 
+<a id="galloping-mode"></a>
 ## Galloping Mode — The Speed Boost
 
-When merging two runs and one side is "winning" many consecutive comparisons,
-Timsort switches to **binary search jumps** (galloping) to skip ahead faster.
+When merging two runs and one side is "winning" many consecutive comparisons, Timsort switches to **binary search jumps** (galloping) to skip ahead faster.
 
-If you are merging `[1,2,3,4,5,...]` and `[100,200,300,...]`,
-instead of comparing 1 vs 100, 2 vs 100, 3 vs 100, ...
-Timsort jumps: "is 1,2,4,8,16,32... of left still less than 100?"
-Then binary searches for the exact crossover point.
-
-This makes Timsort exceptional for lists that have "blocks" of already-ordered elements.
+If you are merging `[1,2,3,4,5,...]` and `[100,200,300,...]`, instead of comparing 1 vs 100, 2 vs 100, 3 vs 100, ... Timsort jumps: "is 1,2,4,8,16,32... of left still less than 100?" Then binary searches for the exact crossover point.
 
 ## Timsort: Key Facts
 
-Time: O(n log n) worst case, O(n) best case (already sorted)
+Time: O(n log n) worst case, O(n) best case. Stable: Yes. Always prefer built-in sort in production.
 
-Stable: Yes
-
-Always prefer built-in sort in production.
-
-**Common mistake — `sorted()` vs `.sort()` confusion:** `sorted()` returns a **new list** and leaves the original unchanged. `.sort()` modifies the list **in-place** and returns `None`. Mixing these up produces subtle bugs:
+**Common mistake — `sorted()` vs `.sort()` confusion:** `sorted()` returns a **new list** and leaves the original unchanged. `.sort()` modifies the list **in-place** and returns `None`.
 
 ```python
-# WRONG: rebinds local name only — caller's list is unchanged
+# WRONG: rebinds local name only — caller's list unchanged
 def sort_in_place_wrong(nums):
     nums = sorted(nums)
 
@@ -809,22 +720,22 @@ def sort_in_place_correct(nums):
     nums.sort()
 
 def get_sorted_correct(nums):
-    return sorted(nums)   # original untouched; new sorted list returned
+    return sorted(nums)   # original untouched
 ```
 
-| Function      | Modifies original | Returns         |
-|---------------|-------------------|-----------------|
-| `list.sort()` | YES               | `None`          |
-| `sorted()`    | NO                | new sorted list |
+| Function | Modifies original | Returns |
+|---|---|---|
+| `list.sort()` | YES | `None` |
+| `sorted()` | NO | new sorted list |
 
 > [↑ Back to Top](#top)
 
-<a id="comparison-vs-non-comparison-sorting"></a>
-
+<a id="12-non-comparison"></a>
 # 12. Comparison vs Non-Comparison Sorting
 
-Comparison-based sorts have a proven lower bound of O(n log n). Non-comparison sorts can beat this bound by exploiting element values directly.
+Leo learns that the O(n log n) speed limit only applies to sorts that compare elements. Some clever algorithms bypass comparisons entirely by exploiting the actual values — counting them or processing them digit by digit.
 
+<a id="counting-sort"></a>
 ## Counting Sort — O(n + k)
 
 **When to use:** Elements are integers in a known, small range [0, k].
@@ -849,9 +760,9 @@ def counting_sort(arr, max_val):
     return result
 ```
 
-**Time:** O(n + k). **Space:** O(k).
-**Limit:** Only works for non-negative integers. Impractical if k >> n.
+**Time:** O(n + k). **Space:** O(k). **Limit:** Only works for non-negative integers. Impractical if k >> n.
 
+<a id="radix-sort"></a>
 ## Radix Sort — O(d × n)
 
 **When to use:** Integers with d digits (or strings of length d). Sorts digit by digit.
@@ -872,7 +783,7 @@ Pass 3 (hundreds digit):
 **Key:** Each pass uses a stable sort (like counting sort).
 **Time:** O(d × n). For 32-bit ints, d=10 → effectively O(n).
 
-**Common mistake — sorting numeric strings lexicographically:** String comparison is character-by-character. `"10" < "2"` because `"1" < "2"`. When data is numeric strings, use `key=int` for correct ordering:
+**Common mistake — sorting numeric strings lexicographically:**
 
 ```python
 # WRONG: lexicographic order
@@ -887,20 +798,12 @@ print(correct)  # ['1', '2', '3', '10', '20']
 
 > [↑ Back to Top](#top)
 
-<a id="choosing-sorting-algorithm--practical-thinking"></a>
+<a id="13-choosing"></a>
+# 13. Choosing the Right Algorithm
 
-# 13. Choosing Sorting Algorithm — Practical Thinking
+Leo's final lesson: there is no single best algorithm. Each has its domain. His mentor teaches him to ask five questions before choosing: Data size? Memory budget? Stability needed? Nearly sorted? Worst-case guarantees required?
 
-Ask:
-
-- Data size?
-- Memory allowed?
-- Stability needed?
-- Nearly sorted?
-- Worst-case guarantees required?
-
-Engineering decision is contextual.
-
+<a id="decision-table"></a>
 ## Decision Table
 
 ```
@@ -920,15 +823,13 @@ Engineering decision is contextual.
 
 ## The Mental Model
 
-Merge sort is the **safe, reliable** choice — guaranteed O(n log n) always,
-but uses O(n) extra memory and has overhead from copying.
+Merge sort is the **safe, reliable** choice — guaranteed O(n log n) always, but uses O(n) extra memory.
 
-Quick sort is the **fast but risky** choice — blazing fast in practice,
-minimal memory, but catastrophic on bad pivots. Always randomize the pivot.
+Quick sort is the **fast but risky** choice — blazing fast in practice, minimal memory, but catastrophic on bad pivots.
 
-Timsort is the **wise, pragmatic** choice — it has seen the real world and
-knows that data is usually partially sorted. It adapts accordingly.
+Timsort is the **wise, pragmatic** choice — it has seen the real world and knows that data is usually partially sorted.
 
+<a id="complexity-reference"></a>
 ## Complete Complexity Reference
 
 ```
@@ -944,7 +845,7 @@ TimSort         O(n)      O(n logn)  O(n logn) O(n)    Yes
 ──────────────────────────────────────────────────────────────────
 ```
 
-**Common mistake — custom comparator returning True/False:** Python 3 removed the `cmp=` argument. A comparator passed to `cmp_to_key` must return negative/0/positive, not True/False. `True == 1` means "a comes after b" and `False == 0` means "equal" — "before" is never signalled:
+**Common mistake — custom comparator returning True/False:** Python 3's `cmp_to_key` must return negative/0/positive, not True/False.
 
 ```python
 from functools import cmp_to_key
@@ -963,7 +864,7 @@ def good_comparator_desc(a, b):
 result = sorted(nums, key=lambda x: -x)
 ```
 
-**Common mistake — Largest Number: sorting integers directly:** For LeetCode 179, naive descending sort by value fails for `[3, 30]` — `[30, 3]` gives `"303"` but `"330"` is correct. The fix is a custom comparator on string concatenation:
+**Common mistake — Largest Number problem:** For LeetCode 179, naive descending sort fails for `[3, 30]`. The fix is a custom comparator on string concatenation:
 
 ```python
 from functools import cmp_to_key
@@ -978,7 +879,7 @@ def largest_number(nums):
     return "0" if result[0] == "0" else result
 ```
 
-**Common mistake — modifying a list while iterating over it:** Removing elements during index-based iteration shifts everything left, causing elements to be skipped or raising IndexError. Always collect results into a new list:
+**Common mistake — modifying a list while iterating:**
 
 ```python
 # WRONG: index shifts corrupt traversal
@@ -986,7 +887,7 @@ def remove_duplicates_wrong(nums):
     nums.sort()
     for i in range(len(nums) - 1):
         if nums[i] == nums[i + 1]:
-            nums.pop(i)   # shifts everything — skips elements
+            nums.pop(i)
 
 # CORRECT: build new list
 def remove_duplicates_correct(nums):
@@ -996,41 +897,49 @@ def remove_duplicates_correct(nums):
         if not result or result[-1] != num:
             result.append(num)
     return result
-
-# CORRECT: use set
-def remove_duplicates_set(nums):
-    return sorted(set(nums))
 ```
 
 > [↑ Back to Top](#top)
 
-<a id="final-perspective"></a>
+<a id="summary"></a>
+## 🔥 Summary
 
-# 14. Final Perspective
+Sorting is foundational to searching, optimization patterns, and system-level operations. It is not one-size-fits-all. Understanding internal strategy is more important than memorizing the complexity table.
 
-Sorting is:
+| Concept | Key Takeaway |
+|---------|-------------|
+| Why sort? | Unlocks binary search, two pointers, duplicate detection |
+| O(n²) sorts | Simple but slow — bubble, selection, insertion |
+| Merge sort | Guaranteed O(n log n), stable, O(n) extra space |
+| Quick sort | Fast in practice, O(n²) worst case, use random pivot |
+| Heap sort | Guaranteed O(n log n), in-place, not stable |
+| O(n log n) limit | Proven by information theory for comparison sorts |
+| Non-comparison | Counting sort O(n+k), radix sort O(d×n) — bypass the limit |
+| Stability | Preserves order of equal elements — matters for multi-key sorts |
+| Timsort | Python's default — hybrid merge+insertion, O(n) on nearly-sorted |
+| Production rule | Always use `sorted()` / `.sort()` unless you have a specific reason not to |
 
-- Foundational to searching
-- Required for optimization patterns
-- Core to many system-level operations
-- Not one-size-fits-all
+Mastering sorting prepares Leo for binary search, two pointers, heaps, greedy algorithms, and graph algorithms. Sorting is a gateway topic in DSA.
 
-Understanding internal strategy
-is more important than memorizing complexity table.
-
-Mastering sorting prepares you for:
-- Binary search
-- Two pointers
-- Heaps
-- Greedy algorithms
-- Graph algorithms
-
-Sorting is a gateway topic in DSA.
-
-> [↑ Back to Top](#top)
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Recursion — Interview Q&A](../04_recursion/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [04_recursion → theory.md](../04_recursion/theory.md) |
+| ➡ Next Module | [06_searching → theory.md](../06_searching/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[04 Recursion →](../04_recursion/theory.md) · [06 Searching →](../06_searching/theory.md) · [16 Heaps →](../16_heaps/theory.md) · [01 Complexity Analysis →](../01_complexity_analysis/theory.md)
+
+**Jump to specific topics in other files:**
+- Binary search (requires sorted input) → [06_searching § theory.md](../06_searching/theory.md)
+- Heap data structure → [16_heaps § theory.md](../16_heaps/theory.md)
+- Two pointers on sorted arrays → [11_two_pointers § theory.md](../11_two_pointers/theory.md)
+- Quick sort partition = Dutch National Flag → [02_arrays § Dutch National Flag](../02_arrays/theory.md#dutch-national-flag)
+
+> [↑ Back to Top](#top)

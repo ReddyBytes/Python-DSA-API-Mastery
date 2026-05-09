@@ -14,22 +14,23 @@ It is one of the most important structures for string-based problems.
 
 ## 📖 Table of Contents
 
-1. [Real Life Story — Dictionary in Your Brain](#1-real-life-story)
-2. [What Is a Trie?](#2-what-is-a-trie)
-3. [Visual Example](#3-visual-example)
-4. [Why Trie Is Powerful](#4-why-trie-is-powerful)
-5. [How Trie Node Is Defined](#5-how-trie-node-is-defined)
-6. [Inserting Word Into Trie](#6-inserting-word-into-trie)
-7. [Searching Word in Trie](#7-searching-word-in-trie)
-8. [Searching Prefix](#8-searching-prefix)
-9. [Why Not Use Hashmap?](#9-why-not-use-hashmap)
-10. [Memory Usage](#10-memory-usage)
-11. [Common Trie Problems](#11-common-trie-problems)
-12. [Optimization — Using Array Instead of Dictionary](#12-optimization-array)
-13. [Real-World Applications](#13-real-world-applications)
-14. [Common Mistakes](#14-common-mistakes)
-15. [Mental Model](#15-mental-model)
-16. [Final Understanding](#16-final-understanding)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is a Trie?](#1-real-life-story)
+  - [Visual: The Filing System](#visual-filing-system)
+  - [Visual: Building the Library](#visual-building-library)
+- [2. Why Trie Is Powerful](#4-why-trie-is-powerful)
+- [3. How Trie Node Is Defined](#5-how-trie-node-is-defined)
+- [4. Inserting Word](#6-inserting-word-into-trie)
+  - [Visual: Insert — One Letter at a Time](#visual-insert)
+- [5. Searching Word](#7-searching-word-in-trie)
+  - [Visual: Search — Following the Breadcrumbs](#visual-search)
+- [6. Searching Prefix](#8-searching-prefix)
+  - [Visual: Prefix Search](#visual-prefix)
+- [7. Why Not Use Hashmap?](#9-why-not-use-hashmap)
+- [8. Common Trie Problems](#11-common-trie-problems)
+  - [Visual: Autocomplete](#visual-autocomplete)
+- [9. Optimization — Array vs Dictionary](#12-optimization-array)
+- [🔥 Summary](#summary)
 
 ## 📌 Learning Priority
 
@@ -44,6 +45,8 @@ trie vs hashmap trade-offs · deletion from trie
 
 **Reference** — Know it exists, look up syntax when needed:
 compressed trie · radix tree · patricia tree · DAWG
+
+Prim is a librarian building a special filing cabinet. Instead of storing each word as a whole (like a hash map would), she stores words letter by letter along branching paths. When someone types "app", Prim instantly shows all words that start with those letters — "apple", "application", "approach" — without scanning every word in the dictionary. That is a **Trie** (prefix tree): a tree where each path from root to a marked node spells out a word, and shared prefixes share the same path.
 
 <a id="1-real-life-story"></a>
 # 1. Real Life Story — Dictionary in Your Brain
@@ -599,80 +602,69 @@ For real-world applications with large or variable alphabets: use the dictionary
 > [↑ Back to Top](#top)
 
 <a id="13-real-world-applications"></a>
-# 13. Real-World Applications
+## Real-World Applications
 
-- Search engine autocomplete
-- Spell check
-- IP routing
-- Contact search
-- Predictive typing
-- DNA sequence matching
+- **Search engine autocomplete** — Google suggestions as you type
+- **Spell check** — "did you mean...?"
+- **IP routing** — longest prefix match in network routers
+- **Contact search** — phone T9 predictive text
+- **DNA sequence matching** — bioinformatics pattern search
+- **Predictive typing** — keyboard word prediction
 
 Search engines heavily use Trie-like structures.
 
-📝 **Practice:** [Q45 · trie-vs-hashmap](../dsa_practice_questions_100.md#q45--interview--trie-vs-hashmap) · [Q90 · design-autocomplete](../dsa_practice_questions_100.md#q90--design--design-autocomplete)
+> 📝 **Practice:** [Q45 · trie-vs-hashmap](../dsa_practice_questions_100.md#q45--interview--trie-vs-hashmap) · [Q90 · design-autocomplete](../dsa_practice_questions_100.md#q90--design--design-autocomplete)
 
 > [↑ Back to Top](#top)
 
-<a id="14-common-mistakes"></a>
-# 14. Common Mistakes
+<a id="summary"></a>
+## 🔥 Summary
 
-- Forgetting end-of-word marker
-- Confusing prefix with full word
-- Not handling empty string
-- Memory blowup with many nodes
-- Not cleaning up on deletion
+| Concept | Key Takeaway |
+|---------|-------------|
+| Trie | Tree for characters — each path from root spells a word |
+| Insert | O(L) — create nodes letter by letter |
+| Search | O(L) — follow path, check `is_end` |
+| startsWith | O(L) — follow path, `is_end` does not matter |
+| Why not hashmap | Hashmap cannot answer prefix queries efficiently |
+| Memory | High — one node per character per unique prefix |
+| Optimization | Array[26] instead of dict for lowercase-only input |
 
-Trie requires careful memory design.
+**Common mistakes:**
 
-**Common mistake — delete not pruning empty branches:** A naive delete that only clears `is_end` is logically correct but leaves dead nodes permanently allocated. A proper recursive delete must propagate `should_delete` upward: a node is safe to remove when `not node.is_end and len(node.children) == 0`. This is especially critical in production tries with frequent inserts and deletes, such as autocomplete systems that rotate vocabulary.
+- **Forgetting `is_end` flag:** Without marking end-of-word, the trie cannot distinguish "app" (stored word) from "app" (prefix of "apple"). Always set `is_end = True` on insertion.
+- **Not checking `is_end` during search:** The path exists but the word was never inserted. Check `is_end` at the final node.
+- **Confusing search vs startsWith:** `search` requires exact match (`is_end=True`). `startsWith` only requires path exists.
+- **Delete not pruning empty branches:** A naive delete only clears `is_end` but leaves dead nodes. Proper recursive delete checks `not node.is_end and len(node.children) == 0` and prunes upward.
+- **Not handling empty string:** `""` is a valid input. `root.is_end` should be `True` after inserting `""`.
 
-**Common mistake — not handling empty string:** The empty string `""` is a valid input. After inserting `""`, `search("")` should return `True` because `root.is_end` will be `True`. Always verify your insert/search loops handle zero-length words without special-casing.
+> 📝 **Practice:** [Q25 · common-mistake-gauntlet](./practice.md#q25--common-mistake-gauntlet) · [Q7 · handling-empty-string](./practice.md#q7--handling-the-empty-string)
 
-📝 **Practice:** [Q25 · common-mistake-gauntlet](./practice.md#q25--common-mistake-gauntlet) · [Q7 · handling-empty-string](./practice.md#q7--handling-the-empty-string)
+**Mental model:** A trie is an autocomplete engine. Every letter you type narrows the search. Shared prefixes share the same path. The trie never stores a word twice where prefixes overlap. Think of it as a word tree where each level = next character.
 
-> [↑ Back to Top](#top)
+Mastering Trie prepares Prim for advanced string algorithms, autocomplete systems, search engine internals, IP routing, and pattern matching.
 
-<a id="15-mental-model"></a>
-# 15. Mental Model
+> 📝 **Practice:** [Q43 · trie-implementation](../dsa_practice_questions_100.md#q43--critical--trie-implementation)
 
-Think of Trie as:
-
-A word tree.
-
-Each level = next character.
-
-All words sharing prefix share same path.
-
-Trie is prefix-sharing machine.
-
-> [↑ Back to Top](#top)
-
-<a id="16-final-understanding"></a>
-# 16. Final Understanding
-
-Trie is:
-
-- Tree for characters
-- Efficient for prefix search
-- O(L) search time
-- Memory-heavy
-- Powerful for dictionary-like problems
-
-Mastering Trie prepares you for:
-
-- Advanced string algorithms
-- Autocomplete systems
-- Search engine internals
-- Pattern matching
-
-Trie is less common than arrays,
-but very powerful in string-heavy problems.
-
-> [↑ Back to Top](#top)
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Heaps — Interview Q&A](../16_heaps/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [16_heaps → theory.md](../16_heaps/theory.md) |
+| ➡ Next Module | [18_graphs → theory.md](../18_graphs/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[16 Heaps →](../16_heaps/theory.md) · [18 Graphs →](../18_graphs/theory.md) · [03 Strings →](../03_strings/theory.md) · [10 Hashing →](../10_hashing/theory.md)
+
+**Jump to specific topics in other files:**
+- String pattern matching → [03_strings § Substring Search](../03_strings/theory.md#substring-search-kmp)
+- Hash map comparison → [10_hashing § theory.md](../10_hashing/theory.md)
+- Tree fundamentals → [14_trees § theory.md](../14_trees/theory.md)
+- Autocomplete design → system design modules
+
+> [↑ Back to Top](#top)

@@ -1,28 +1,39 @@
 <a id="top"></a>
-# Linked List — Deep Conceptual Theory (Zero to Advanced)
-
-> Linked Lists are about relationships, not positions.
->
-> Arrays think in terms of index.
-> Linked lists think in terms of connections.
->
-> To master linked lists, you must visualize memory and pointer flow clearly.
+# 📘 07 – Linked List in Python
 
 ## 📖 Table of Contents
 
-1. [The Core Problem Linked Lists Solve](#1-the-core-problem)
-2. [What Is a Linked List — Internally](#2-what-is-a-linked-list)
-3. [Why Linked Lists Cannot Provide O(1) Access](#3-no-random-access)
-4. [Types of Linked Lists — Detailed Understanding](#4-types-of-linked-lists)
-5. [Insertion — What Really Happens](#5-insertion)
-6. [Deletion — Detailed Mechanics](#6-deletion)
-7. [Why Linked Lists Use More Memory](#7-memory-overhead)
-8. [Cache Behavior and Performance](#8-cache-behavior)
-9. [Classic Linked List Problems — Why They Matter](#9-classic-problems)
-10. [When Linked Lists Are Actually Used in Real Systems](#10-real-systems)
-11. [When NOT to Use Linked Lists](#11-when-not-to-use)
-12. [Final Understanding](#12-final-understanding)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is a Linked List?](#1-what-is-a-linked-list)
+  - [Visual: Parking Lot vs Treasure Hunt](#visual-parking-treasure)
+  - [How Nodes Work in Memory](#nodes-in-memory)
+- [2. Why No Random Access](#2-no-random-access)
+  - [Visual: The Price of the Treasure Hunt](#visual-price)
+  - [Array vs Linked List Operations](#operations-table)
+- [3. Types of Linked Lists](#3-types)
+  - [Singly Linked List](#singly)
+  - [Doubly Linked List](#doubly)
+  - [Circular Linked List](#circular)
+- [4. Insertion — What Really Happens](#4-insertion)
+  - [Insert at Head](#insert-head)
+  - [Insert at End](#insert-end)
+  - [Insert in Middle — The Surgery](#insert-middle)
+- [5. Deletion — Detailed Mechanics](#5-deletion)
+  - [Delete Head](#delete-head)
+  - [Delete Middle Node](#delete-middle)
+  - [Visual: Deletion — The Reverse Surgery](#visual-deletion)
+- [6. Memory, Cache, and Performance](#6-memory-cache)
+  - [Why Linked Lists Use More Memory](#memory-overhead)
+  - [Cache Behavior](#cache-behavior)
+- [7. Classic Linked List Problems](#7-classic-problems)
+  - [Reverse Linked List — The 3-Pointer Dance](#reverse)
+  - [Detect Cycle — Floyd's Tortoise and Hare](#detect-cycle)
+  - [Find Middle Node — The Two-Speed Trick](#find-middle)
+  - [Merge Two Sorted Lists](#merge-sorted)
+- [8. Real-World Impact](#8-real-world)
+- [🔥 Summary](#summary)
 
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -37,55 +48,17 @@ sentinel nodes · copy list with random pointer
 **Reference** — Know it exists, look up syntax when needed:
 XOR linked list · skip list
 
-<a id="1-the-core-problem"></a>
-# 1. The Core Problem Linked Lists Solve
+Milo is a train conductor. His train is not like a normal rigid machine — each wagon is independent, parked somewhere in the rail yard, connected to the next wagon by a coupling hook. To add a wagon, Milo does not push every other wagon down the track. He just unhooks two wagons and hooks the new one between them. To remove a wagon, he unhooks it and reconnects its neighbors. But to find wagon number 47, he must walk from the engine through every wagon in order — there is no shortcut. That trade-off — easy coupling changes, slow lookups — is exactly what a linked list is.
 
-Before understanding linked lists, understand what arrays struggle with.
+<a id="1-what-is-a-linked-list"></a>
+# 1. What Is a Linked List?
 
-Imagine you have:
+Milo's first lesson: understand why his train works differently from a parking lot. In a parking lot (array), every space is numbered and adjacent — you walk straight to spot 7. In Milo's rail yard (linked list), wagons are scattered everywhere, connected only by coupling hooks (pointers). You must follow the hooks to find anything.
 
-```
-[10, 20, 30, 40]
-```
+Linked lists solve the problem arrays struggle with: **frequent insertions and deletions**. Instead of shifting every element, you just change connections.
 
-If you insert 5 at the beginning:
-
-```
-[5, 10, 20, 30, 40]
-```
-
-Every element must shift one position.
-
-If this happens repeatedly,
-cost becomes O(n) each time.
-
-Now imagine a system where:
-
-- New items are frequently added at the front
-- Elements are frequently removed from the middle
-- Size grows unpredictably
-
-In such scenarios,
-shifting entire blocks of memory becomes inefficient.
-
-Linked lists solve this by removing the idea of shifting.
-
-Instead of moving elements,
-we change connections.
-
-## Visual: The Parking Lot vs the Treasure Hunt
-
-Think of two ways to store your belongings.
-
-**Option A — The Parking Lot (Array):**
-You rent 10 parking spots in a row. Spot 1, Spot 2, Spot 3... all numbered, all
-side by side. To find your car in Spot 7, you just walk directly to Spot 7. Done.
-
-**Option B — The Treasure Hunt (Linked List):**
-Your belongings are scattered across the city. The first location is your friend's
-basement. Inside, there is a clue: "your next item is at the coffee shop on 5th Ave."
-At the coffee shop, there is another clue: "go to the library, third floor." And so on.
-Each location holds your item AND a clue pointing to the next location.
+<a id="visual-parking-treasure"></a>
+## Visual: Parking Lot vs Treasure Hunt
 
 ```
 ARRAY (parking lot):
@@ -100,9 +73,9 @@ LINKED LIST (treasure hunt):
 data    pointer to next node
 ```
 
-Each box in the linked list is called a **node**. Every node holds:
-1. A **value** (the data you actually care about)
-2. A **next pointer** (the clue to the next node)
+Each box is called a **node**. Every node holds:
+1. A **value** (the data)
+2. A **next pointer** (the coupling to the next wagon)
 
 ```python
 class Node:
@@ -111,28 +84,10 @@ class Node:
         self.next = None
 ```
 
-> [↑ Back to Top](#top)
+<a id="nodes-in-memory"></a>
+## How Nodes Work in Memory
 
-<a id="2-what-is-a-linked-list"></a>
-# 2. What Is a Linked List — Internally
-
-A linked list is a chain of nodes.
-
-Each node contains:
-
-- Data
-- Reference (pointer) to next node
-
-Important difference from array:
-
-Array:
-Memory is contiguous.
-
-Linked List:
-Nodes can be anywhere in memory.
-Only the pointer connects them.
-
-Visualization:
+Milo learns that his wagons are not lined up neatly — they are scattered across the rail yard. Only the coupling hooks connect them. In memory, nodes can be anywhere. The pointer is the address of the next node.
 
 ```
 Memory:
@@ -141,46 +96,22 @@ Address 200 → [20 | 350]
 Address 350 → [30 | None]
 ```
 
-The nodes are scattered.
-But connected via addresses.
-
-This is why:
-
+The nodes are scattered. But connected via addresses. This is why:
 - Indexing is impossible in O(1)
-- But insertion is cheap
+- But insertion is cheap (just change a coupling)
 
 > [↑ Back to Top](#top)
 
-<a id="3-no-random-access"></a>
-# 3. Why Linked Lists Cannot Provide O(1) Access
+<a id="2-no-random-access"></a>
+# 2. Why No Random Access
 
-In array:
+Milo needs wagon 5. In a parking lot, he would walk straight to spot 5. But in his rail yard, he must start at the engine and walk through wagons 1, 2, 3, 4 before reaching 5. Every. Single. Time.
 
-To get arr[3]:
-We calculate address directly.
+In an array, `arr[3]` calculates the address directly — O(1).
+In a linked list, reaching the 4th node requires traversal — O(n).
 
-In linked list:
-
-To get 4th node:
-We must traverse:
-
-```
-Head → 1 → 2 → 3 → 4
-```
-
-Each step follows next pointer.
-
-Traversal cost:
-O(n)
-
-This is fundamental limitation.
-
-Linked lists sacrifice direct access for flexibility.
-
+<a id="visual-price"></a>
 ## Visual: The Price of the Treasure Hunt
-
-Here is the catch with the treasure hunt: to find your item at location 5, you MUST
-follow every clue in order. You cannot teleport to location 5.
 
 ```
 Want to find the 5th node (index 4)?
@@ -193,12 +124,10 @@ Start → [12] → [5] → [33] → [18] → [7]
 No shortcuts. You must visit every node before it.
 ```
 
-- Array access by index: **O(1)** — just calculate the memory address
-- Linked list access by index: **O(n)** — must walk from the head
+Linked lists sacrifice direct access for flexibility.
 
-This is the fundamental tradeoff. Arrays are fast for access, slow for insertion
-(have to shift everything). Linked lists are slow for access, fast for insertion
-at a known location (just update a pointer).
+<a id="operations-table"></a>
+## Array vs Linked List Operations
 
 ```
 +--------------------------+----------+----------+
@@ -216,31 +145,15 @@ at a known location (just update a pointer).
 
 > [↑ Back to Top](#top)
 
-<a id="4-types-of-linked-lists"></a>
-# 4. Types of Linked Lists — Detailed Understanding
+<a id="3-types"></a>
+# 3. Types of Linked Lists
 
+Milo discovers his rail yard has three types of coupling systems. Some wagons only hook forward. Some hook both forward and backward. And some form a loop where the last wagon hooks back to the first.
+
+<a id="singly"></a>
 ## Singly Linked List
 
-Each node points forward only.
-
-Structure:
-
-```
-Head → [10 | • ] → [20 | • ] → [30 | None]
-```
-
-Advantages:
-- Simpler
-- Less memory overhead
-
-Limitation:
-Cannot move backward.
-
-> 📝 **Practice:** [Q26 · linked-list-operations](../dsa_practice_questions_100.md#q26--normal--linked-list-operations) · [Q30 · linked-list-tradeoffs](../dsa_practice_questions_100.md#q30--interview--linked-list-tradeoffs)
-
-## Visual: Singly — The One-Way Street
-
-Each node only knows where to go FORWARD. There is no going back.
+Each node points forward only. Like a one-way street — miss your turn, start over from the beginning.
 
 ```
 HEAD
@@ -251,31 +164,14 @@ Like a one-way street. You can only move right.
 Miss your turn? Start over from the beginning.
 ```
 
+Advantages: simpler, less memory. Limitation: cannot move backward.
+
+> 📝 **Practice:** [Q26 · linked-list-operations](../dsa_practice_questions_100.md#q26--normal--linked-list-operations) · [Q30 · linked-list-tradeoffs](../dsa_practice_questions_100.md#q30--interview--linked-list-tradeoffs)
+
+<a id="doubly"></a>
 ## Doubly Linked List
 
-> 📝 **Practice:** [Q2 · doubly-node](./practice.md#q2) · [Q25 · lru-cache](./practice.md#q25)
-
-Each node contains:
-
-- prev pointer
-- next pointer
-
-Structure:
-
-```
-None ← [10] ⇄ [20] ⇄ [30] → None
-```
-
-Advantages:
-- Bi-directional traversal
-- Easier deletion when node reference given
-
-Trade-off:
-Extra memory for prev pointer.
-
-## Visual: Doubly — The Two-Way Street
-
-Each node knows both its previous and next neighbor.
+Each node has both `prev` and `next` pointers — Milo can walk forward or backward along the train.
 
 ```
          ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
@@ -292,21 +188,17 @@ class DoublyNode:
     def __init__(self, val):
         self.val = val
         self.next = None
-        self.prev = None   # the extra pointer
+        self.prev = None
 ```
 
-When do you want doubly linked? When you need to:
-- Traverse backwards
-- Delete a node without knowing the previous node
-- Implement a browser's back/forward history
+Use doubly linked when you need to: traverse backwards, delete a node without knowing the previous node, implement browser back/forward history. Cost: one extra pointer per node.
 
-The cost: each node uses slightly more memory (one extra pointer).
+> 📝 **Practice:** [Q2 · doubly-node](./practice.md#q2) · [Q25 · lru-cache](./practice.md#q25)
 
+<a id="circular"></a>
 ## Circular Linked List
 
-> 📝 **Practice:** [Q13 · cycle-detection](./practice.md#q13) · [Q22 · cycle-start](./practice.md#q22)
-
-Last node points back to head.
+Last node points back to head — Milo's train forms a loop.
 
 ```
 1 → 2 → 3
@@ -314,80 +206,35 @@ Last node points back to head.
 ←←←←←←←←
 ```
 
-Used in:
-- Round-robin scheduling
-- Circular buffer systems
+Used in: round-robin scheduling, circular buffer systems. Must handle traversal carefully to avoid infinite loops.
 
-Important:
-Must handle traversal carefully to avoid infinite loops.
+> 📝 **Practice:** [Q13 · cycle-detection](./practice.md#q13) · [Q22 · cycle-start](./practice.md#q22)
 
 > [↑ Back to Top](#top)
 
-<a id="5-insertion"></a>
-# 5. Insertion — What Really Happens
+<a id="4-insertion"></a>
+# 4. Insertion — What Really Happens
 
-Let's analyze insertion deeply.
+Milo needs to add a new wagon to his train. Unlike a parking lot where every car must shift, Milo just unhooks two wagons and hooks the new one between them. The key: save the old coupling BEFORE cutting it, or the rest of the train rolls away.
 
-## Insert at Beginning
+<a id="insert-head"></a>
+## Insert at Head
 
-> 📝 **Practice:** [Q5 · insert-head](./practice.md#q5)
+Milo adds a wagon at the front — O(1). This is where linked lists crush arrays.
 
+```
 Before:
-
-```
-Head → 10 → 20 → 30
-```
-
-Insert 5:
-
-Step 1:
-Create new node (5)
-
-Step 2:
-Point new_node.next to current head
-
-Step 3:
-Update head to new_node
-
-After:
-
-```
-Head → 5 → 10 → 20 → 30
-```
-
-No shifting.
-Only pointer updates.
-
-Time:
-O(1)
-
-## Visual: Insert at Head — The Easy Win
-
-Inserting at the beginning of a linked list is O(1). This is one place where linked
-lists absolutely crush arrays (which need to shift every element right).
-
-**Before:**
-
-```
 HEAD
   ↓
 [5] →→→ [12] →→→ [33] →→→ None
-```
 
-**We want to insert 99 at the head.**
+Insert 99 at head:
 
-Step 1: Create the new node.
-Step 2: Point the new node's `next` to the current head.
-Step 3: Update HEAD to point to the new node.
-
-```
 Step 1: Create [99]
+Step 2: [99].next → [5]  (point new wagon to old engine)
+Step 3: HEAD → [99]      (new wagon becomes the engine)
 
-Step 2: [99] →→→ [5] →→→ [12] →→→ [33] →→→ None
-         ↑
-    new node's next points to old head
-
-Step 3:
+After:
 HEAD
   ↓
 [99] →→→ [5] →→→ [12] →→→ [33] →→→ None
@@ -397,60 +244,24 @@ HEAD
 def insert_at_head(head, val):
     new_node = Node(val)
     new_node.next = head
-    return new_node          # new head
+    return new_node
 ```
 
-Only 2 pointer updates. Always O(1), regardless of list size.
+Only 2 pointer updates. Always O(1).
 
+> 📝 **Practice:** [Q5 · insert-head](./practice.md#q5)
+
+<a id="insert-end"></a>
 ## Insert at End
+
+Without a tail pointer: traverse entire list → O(n). With a tail pointer maintained: O(1). This is why many implementations store both head and tail.
 
 > 📝 **Practice:** [Q6 · insert-tail](./practice.md#q6)
 
-If no tail pointer:
+<a id="insert-middle"></a>
+## Insert in Middle — The Surgery
 
-You must traverse entire list.
-
-Traversal cost:
-O(n)
-
-Then update last node's next pointer.
-
-If tail pointer maintained:
-
-Insert becomes O(1).
-
-This is why many implementations store both head and tail.
-
-## Insert in Middle
-
-> 📝 **Practice:** [Q9 · insert-after](./practice.md#q9)
-
-Suppose inserting after node with value 20.
-
-Steps:
-
-1. Traverse until node found
-2. Save next pointer
-3. Update current.next to new_node
-4. new_node.next = saved pointer
-
-Traversal makes it O(n).
-Pointer update itself is constant.
-
-## Visual: Insert in Middle — The Surgery
-
-Inserting in the middle is like performing surgery: you need to be careful not to
-drop any connections before making the new ones.
-
-**Before:** Insert 99 between node 12 and node 33.
-
-```
-[5] →→→ [12] →→→ [33] →→→ [44]
-          ↑
-    we want to insert after this node
-```
-
-**The 3-step surgery:**
+Milo performs surgery on the coupling chain. Insert 99 between node 12 and node 33:
 
 ```
 Step 1: Create the new node [99]
@@ -469,7 +280,7 @@ Step 3: Point [12].next → [99]  (now cut the old connection)
 [5] →→→ [12] →→→ [99] →→→ [33] →→→ [44]
 ```
 
-**Common mistake — wrong pointer order:** Do step 2 BEFORE step 3. If you do step 3 first, you lose the reference to [33] and the rest of the list is gone forever. Always save `new_node.next = prev_node.next` before setting `prev_node.next = new_node`.
+**Common mistake — wrong pointer order:** Do step 2 BEFORE step 3. If you do step 3 first, you lose the reference to [33] and the rest of the list is gone forever.
 
 ```python
 def insert_after(prev_node, val):
@@ -478,83 +289,52 @@ def insert_after(prev_node, val):
     prev_node.next = new_node        # Step 3 second
 ```
 
+> 📝 **Practice:** [Q9 · insert-after](./practice.md#q9)
+
 > [↑ Back to Top](#top)
 
-<a id="6-deletion"></a>
-# 6. Deletion — Detailed Mechanics
+<a id="5-deletion"></a>
+# 5. Deletion — Detailed Mechanics
 
-Deleting node is about bypassing it.
+Milo needs to remove a wagon. He cannot just yank it out — he must first connect the wagons on either side, then unhook the target. Deleting is bypassing: make the predecessor skip over the target and point directly to the successor.
 
+<a id="delete-head"></a>
 ## Delete Head
-
-> 📝 **Practice:** [Q7 · delete-head](./practice.md#q7)
 
 ```
 Head → 10 → 20 → 30
-```
-
-Move head:
-
-```
 Head = head.next
+→ Now 10 is disconnected. Time: O(1)
 ```
 
-Now 10 is disconnected.
-
-Time:
-O(1)
-
-**Common mistake — deleting head without a dummy node:** If a function might delete the head node (e.g., "remove all nodes with value X"), returning `head` at the end gives back the deleted node. Use a dummy node whose `.next` points to `head` as a stable return point regardless of what happens to head.
+**Common mistake — deleting head without a dummy node:** If a function might delete the head, use a dummy node as a stable anchor.
 
 ```python
 def remove_all_correct(head, val):
     dummy = ListNode(0)
-    dummy.next = head       # dummy is always stable — never deleted
+    dummy.next = head
     curr = dummy
-
     while curr.next:
         if curr.next.val == val:
-            curr.next = curr.next.next  # skip the matching node
+            curr.next = curr.next.next
         else:
             curr = curr.next
-
-    return dummy.next       # dummy.next is the new head (may differ from original head)
+    return dummy.next
 ```
 
-Use a dummy node whenever:
-- Deleting the first node based on a condition
-- Inserting at the beginning conditionally
-- Any operation where the returned head might not be the original head
+> 📝 **Practice:** [Q7 · delete-head](./practice.md#q7)
 
+<a id="delete-middle"></a>
 ## Delete Middle Node
+
+Need reference to previous node. Update: `prev.next = current.next`. If you lose the previous pointer, deletion becomes difficult in a singly linked list — this is exactly why doubly linked lists exist.
 
 > 📝 **Practice:** [Q10 · delete-val](./practice.md#q10) · [Q17 · nth-from-end](./practice.md#q17)
 
-Suppose deleting node 20.
-
-Need reference to previous node (10).
-
-Update:
-
-```
-prev.next = current.next
-```
-
-20 is removed from chain.
-
-Important:
-If you lose previous pointer,
-deletion becomes difficult in singly list.
-
+<a id="visual-deletion"></a>
 ## Visual: Deletion — The Reverse Surgery
 
-To delete node [33] from:
-
-```
-[5] →→→ [12] →→→ [33] →→→ [44] →→→ None
-```
-
-You need to make [12] skip over [33] and point directly to [44].
+Delete node [33] from the chain:
 
 ```
 Before:  [5] →→→ [12] →→→ [33] →→→ [44] →→→ None
@@ -567,142 +347,86 @@ After:   [5] →→→ [12] ────────────→ [44] →→�
 ```
 
 ```python
-# prev is the node BEFORE the one we want to delete
 prev.next = prev.next.next
 ```
 
-**Why do you need the previous node?**
-
-In a singly linked list, each node only knows where to go FORWARD. Node [33] has no
-idea who is pointing to it. So to remove it, you must tell its predecessor to stop
-pointing to it. No predecessor reference = stuck.
-
-This is exactly why doubly linked lists exist — each node knows its `prev`, so you
-can delete yourself in O(1) without needing the predecessor.
-
-**Common mistake — off-by-one in "Remove Nth Node From End":** The two-pointer technique requires the fast pointer to be exactly `n+1` steps ahead of slow, so that when fast reaches None, slow sits on the node BEFORE the target. Advancing fast only `n` times leaves slow pointing AT the target, making it impossible to unlink the node.
+**Common mistake — off-by-one in "Remove Nth From End":** The fast pointer must be `n+1` steps ahead of slow, so when fast reaches None, slow sits on the node BEFORE the target.
 
 ```python
 def remove_nth_from_end_correct(head, n):
     dummy = ListNode(0)
     dummy.next = head
-    fast = dummy
-    slow = dummy
-
-    # Advance fast n+1 times so slow.next is the node to delete when fast reaches None.
+    fast = slow = dummy
     for _ in range(n + 1):
         fast = fast.next
-
     while fast:
         fast = fast.next
         slow = slow.next
-
     slow.next = slow.next.next
     return dummy.next
 ```
 
 > [↑ Back to Top](#top)
 
-<a id="7-memory-overhead"></a>
-# 7. Why Linked Lists Use More Memory
+<a id="6-memory-cache"></a>
+# 6. Memory, Cache, and Performance
 
-Each node stores:
+Milo notices something: each of his wagons carries not just cargo but also a heavy coupling mechanism. An array is like a flatbed truck — pure cargo, tightly packed. A linked list is like Milo's train — each wagon needs its own coupling hardware on top of the cargo.
 
-- Data
-- Pointer(s)
+<a id="memory-overhead"></a>
+## Why Linked Lists Use More Memory
 
-If data is 4 bytes,
-pointer might also be 8 bytes.
+Each node stores data AND pointer(s). If data is 4 bytes, the pointer is 8 bytes — the overhead can exceed the actual data.
 
-Memory overhead is significant.
+Compared to arrays: arrays store only data contiguously. Linked lists trade memory for flexibility.
 
-Compared to array:
-
-Array stores only data (contiguous).
-
-Linked list trades memory for flexibility.
-
-**Common mistake — shallow copy shares nodes:** A shallow copy creates new `ListNode` objects but copies the `.next` reference directly, so the "copy" and the original share the same chain of nodes. Mutating one mutates the other. Always create a new `ListNode` for every node in a deep copy.
+**Common mistake — shallow copy shares nodes:** A shallow copy creates new node wrappers but copies `.next` references directly, so both lists share the same chain. Always create a new `ListNode` for every node.
 
 ```python
-def copy_list_simple(head):
+def copy_list(head):
     if not head:
         return None
     new_head = ListNode(head.val)
     new_curr = new_head
     curr = head.next
     while curr:
-        new_curr.next = ListNode(curr.val)   # always create a NEW node
+        new_curr.next = ListNode(curr.val)
         new_curr = new_curr.next
         curr = curr.next
     return new_head
 ```
 
-> [↑ Back to Top](#top)
+<a id="cache-behavior"></a>
+## Cache Behavior
 
-<a id="8-cache-behavior"></a>
-# 8. Cache Behavior and Performance
+Arrays: elements stored sequentially. CPU loads nearby elements automatically (spatial locality). Linked lists: nodes scattered in memory. Each pointer jump may cause a cache miss.
 
-Arrays:
-Elements stored sequentially.
-
-CPU loads nearby elements automatically (spatial locality).
-
-Linked lists:
-Nodes scattered in memory.
-
-Each pointer jump may cause cache miss.
-
-Even if time complexity looks similar,
-arrays often perform faster in practice.
-
-This is important in system design discussions.
+Even when time complexity looks similar, arrays often perform faster in practice. This matters in system design discussions.
 
 > [↑ Back to Top](#top)
 
-<a id="9-classic-problems"></a>
-# 9. Classic Linked List Problems — Why They Matter
+<a id="7-classic-problems"></a>
+# 7. Classic Linked List Problems
 
-Linked lists test:
+Milo faces four challenges that every train conductor must master. These problems test pointer manipulation, careful state tracking, and logical precision — the core skills that make linked lists tricky.
 
-- Pointer manipulation
-- Careful state tracking
-- Logical precision
+<a id="reverse"></a>
+## Reverse Linked List — The 3-Pointer Dance
 
-Common problems:
+Milo needs to reverse his entire train — the last wagon becomes the engine. He uses three hands: one holding the previous wagon, one on the current wagon, and one saving the next wagon before he flips the coupling.
 
-## Reverse Linked List
-
-Requires reassigning next pointers one-by-one.
-
-You must maintain:
-
-- previous
-- current
-- next_node
-
-Mismanaging pointer order causes data loss.
-
-> 📝 **Practice:** [Q28 · linked-list-reversal](../dsa_practice_questions_100.md#q28--logical--linked-list-reversal)
-
-## Visual: Reversing a Linked List — The 3-Pointer Dance
-
-This is one of the most commonly asked interview questions. The trick is using three
-pointers: `prev`, `curr`, and `next`.
-
-**Starting state:** `[1] → [2] → [3] → [4] → [5] → None`
-
+Starting: `[1] → [2] → [3] → [4] → [5] → None`
 Goal: `None ← [1] ← [2] ← [3] ← [4] ← [5]`
 
 ```
 Initial:
-prev=None  curr=[1]  (next will be assigned in loop)
+prev=None  curr=[1]
   ↓          ↓
 None      [1] →→→ [2] →→→ [3] →→→ [4] →→→ [5] →→→ None
 
 --- Step 1 ---
-next = curr.next = [2]     (save [2] before we break the pointer)
-curr.next = prev = None    (reverse the arrow: [1] now points backward to None)
+next = curr.next = [2]     (save before breaking)
+curr.next = prev = None    (reverse the coupling)
 prev = curr = [1]          (advance prev)
 curr = next = [2]          (advance curr)
 
@@ -712,23 +436,12 @@ None ←←← [1]    [2] →→→ [3] →→→ [4] →→→ [5] →→→ No
 
 --- Step 2 ---
 next = [3]
-curr.next = prev = [1]     (reverse: [2] now points to [1])
-prev = [2]
-curr = [3]
+curr.next = prev = [1]
+prev = [2], curr = [3]
 
 None ←←← [1] ←←← [2]    [3] →→→ [4] →→→ [5] →→→ None
-                    ↑      ↑
-                   prev   curr
 
---- Step 3 ---
-None ←←← [1] ←←← [2] ←←← [3]    [4] →→→ [5] →→→ None
-                              ↑     ↑
-                             prev  curr
-
---- Step 4 ---
-None ←←← [1] ←←← [2] ←←← [3] ←←← [4]    [5] →→→ None
-
---- Step 5 ---
+--- Steps 3-5 ---
 None ←←← [1] ←←← [2] ←←← [3] ←←← [4] ←←← [5]    None
                                                ↑      ↑
                                               prev   curr
@@ -742,38 +455,20 @@ def reverse_linked_list(head):
     curr = head
     while curr:
         next_node = curr.next   # save next
-        curr.next = prev        # reverse the arrow
+        curr.next = prev        # reverse the coupling
         prev = curr             # advance prev
         curr = next_node        # advance curr
     return prev                 # prev is the new head
 ```
 
-**Common mistake — losing the next pointer during reversal:** You must save `curr.next` BEFORE changing any pointers. The moment you write `curr.next = prev`, you lose access to the rest of the list. Memory aid: "Save, Reverse, Advance, Advance" — always 4 lines inside the while loop. If you only have 3 lines, you forgot to save `next_node` first.
+**Common mistake — losing the next pointer:** Save `curr.next` BEFORE changing any pointers. Memory aid: "Save, Reverse, Advance, Advance" — always 4 lines inside the loop.
 
-## Detect Cycle
+> 📝 **Practice:** [Q28 · linked-list-reversal](../dsa_practice_questions_100.md#q28--logical--linked-list-reversal)
 
-Two-pointer approach:
+<a id="detect-cycle"></a>
+## Detect Cycle — Floyd's Tortoise and Hare
 
-- Slow moves 1 step
-- Fast moves 2 steps
-
-If they meet → cycle exists.
-
-Why it works:
-Fast pointer eventually laps slow pointer in cycle.
-
-Elegant mathematical reasoning.
-
-> 📝 **Practice:** [Q27 · linked-list-cycle](../dsa_practice_questions_100.md#q27--thinking--linked-list-cycle) · [Q96 · debug-cycle-detection](../dsa_practice_questions_100.md#q96--debug--debug-cycle-detection)
-
-## Visual: Floyd's Cycle Detection — The Tortoise and the Hare
-
-Imagine a circular running track. You put a slow tortoise and a fast hare on the
-track at the same starting point. The hare runs at twice the tortoise's speed.
-
-Will they ever meet again? Yes, always — somewhere on the loop.
-
-This is Floyd's algorithm. Use it to detect cycles in a linked list.
+Milo suspects his track loops back on itself. He sends two inspectors: a slow tortoise (1 wagon per step) and a fast hare (2 wagons per step). If the track loops, the hare will lap the tortoise and they will meet. If not, the hare reaches the end.
 
 ```
 Linked list with a cycle:
@@ -782,22 +477,13 @@ Linked list with a cycle:
                   ↑                 ↓
                   └←←←←←←←←← [6] ←┘
 
-Tortoise moves 1 step at a time.
-Hare moves 2 steps at a time.
-```
-
-```
 Start: both at [1]
 
 Step 1: Tortoise=[2], Hare=[3]
 Step 2: Tortoise=[3], Hare=[5]
-Step 3: Tortoise=[4], Hare=[3]  (hare lapped around the cycle!)
+Step 3: Tortoise=[4], Hare=[3]  (hare lapped!)
 Step 4: Tortoise=[5], Hare=[5]  ← they meet!
 ```
-
-Once the hare enters the cycle, it is running in circles. The tortoise will eventually
-enter the cycle too. At that point, the hare gains 1 step per iteration on the tortoise.
-It will close the gap and catch up. If there is no cycle, the hare reaches `None` first.
 
 ```python
 def has_cycle(head):
@@ -806,42 +492,27 @@ def has_cycle(head):
         slow = slow.next
         fast = fast.next.next
         if slow == fast:
-            return True       # they met — cycle exists
-    return False              # fast hit None — no cycle
+            return True
+    return False
 ```
 
-**Common mistake — not guarding fast.next:** Floyd's cycle detection uses `fast.next.next`. If `fast.next` is `None`, accessing `fast.next.next` raises `AttributeError`. The guard must check BOTH `fast` and `fast.next`. Python short-circuits left to right: if `fast` is None, `fast.next` is never evaluated.
+**Common mistake — not guarding fast.next:** `fast.next.next` crashes if `fast.next` is `None`. Guard must check BOTH `fast` and `fast.next`.
 
-## Find Middle Node
+> 📝 **Practice:** [Q27 · linked-list-cycle](../dsa_practice_questions_100.md#q27--thinking--linked-list-cycle) · [Q96 · debug-cycle-detection](../dsa_practice_questions_100.md#q96--debug--debug-cycle-detection)
 
-> 📝 **Practice:** [Q14 · find-middle](./practice.md#q14)
+<a id="find-middle"></a>
+## Find Middle Node — The Two-Speed Trick
 
-Using slow/fast pointer:
-
-When fast reaches end,
-slow is at midpoint.
-
-Avoids counting nodes first.
-
-## Visual: Finding the Middle — The Two-Speed Trick
-
-Same two-pointer idea: one pointer moves 1 step, one moves 2 steps. When the fast
-pointer hits the end, the slow pointer is at the middle.
-
-Why? When fast has traveled distance `n`, slow has traveled `n/2`. So slow is at the midpoint.
-
-Let's trace this on `[1] → [2] → [3] → [4] → [5] → None`:
+Milo sends two inspectors again: slow (1 step) and fast (2 steps). When fast hits the end, slow is at the midpoint. Why? When fast has traveled distance `n`, slow has traveled `n/2`.
 
 ```
-Start:  slow=[1], fast=[1]
-Step 1: slow=[2], fast=[3]   (fast=fast.next.next)
-Step 2: slow=[3], fast=[5]
-Step 3: Check: fast.next = None → stop!
-        slow = [3] ← this is the middle!
-
 [1] →→→ [2] →→→ [3] →→→ [4] →→→ [5] →→→ None
-                  ↑
-                middle (slow stopped here)
+
+Start:  slow=[1], fast=[1]
+Step 1: slow=[2], fast=[3]
+Step 2: slow=[3], fast=[5]
+Step 3: fast.next = None → stop!
+        slow = [3] ← middle!
 ```
 
 ```python
@@ -850,43 +521,36 @@ def find_middle(head):
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
-    return slow   # middle node
+    return slow
 ```
 
-For even-length lists like `[1,2,3,4]`, this returns the second of the two middle
-nodes. Adjust the stopping condition if you need the first.
+For even-length lists, this returns the second of the two middle nodes.
 
-**Common mistake — forgetting to set prev.next = None when splitting a list:** When you split a list at a midpoint (common in Merge Sort on linked lists), you must set the tail of the first half to `None`. If you don't, the first half still points into the second half — they're not actually separate lists, causing infinite recursion.
+**Common mistake — not cutting the link when splitting:** When splitting at midpoint for merge sort, set the tail of the first half to `None`. Otherwise both halves still share nodes — infinite recursion.
 
 ```python
-def split_list_correct(head):
+def split_list(head):
     if not head or not head.next:
         return head, None
-    slow = head
-    fast = head
-    prev = None
+    slow, fast, prev = head, head, None
     while fast and fast.next:
         prev = slow
         slow = slow.next
         fast = fast.next.next
-    prev.next = None    # CRITICAL: cut the link so the two halves are independent
-    return head, slow   # head = first half, slow = second half
+    prev.next = None    # CRITICAL: cut the link
+    return head, slow
 ```
 
+> 📝 **Practice:** [Q14 · find-middle](./practice.md#q14)
+
+<a id="merge-sorted"></a>
 ## Merge Two Sorted Lists
 
-Compare head nodes,
-attach smaller one,
-move pointer forward.
-
-Time:
-O(n + m)
-
-Used in merge sort.
+Milo merges two sorted trains into one. Compare head wagons, attach the smaller one, advance that pointer. Time: O(n + m). Used in merge sort on linked lists.
 
 > 📝 **Practice:** [Q29 · merge-sorted-lists](../dsa_practice_questions_100.md#q29--normal--merge-sorted-lists)
 
-Key patterns:
+Key patterns summary:
 ```
   Reverse a list    → 3-pointer dance (prev, curr, next)
   Detect a cycle    → Floyd's tortoise and hare
@@ -896,86 +560,76 @@ Key patterns:
 
 > [↑ Back to Top](#top)
 
-<a id="10-real-systems"></a>
-# 10. When Linked Lists Are Actually Used in Real Systems
+<a id="8-real-world"></a>
+# 8. Real-World Impact
 
-Linked lists are rarely used alone.
-
-They are usually part of larger structures.
-
-Examples:
+Milo graduates from the rail yard and discovers that linked lists are rarely used alone in production — they are usually part of larger structures that combine their strengths with other data structures.
 
 ## LRU Cache
 
+Uses a hash map for O(1) lookup AND a doubly linked list for O(1) insert/delete. Combines fast access and fast removal — the best of both worlds.
+
 > 📝 **Practice:** [Q25 · lru-cache](./practice.md#q25)
-
-Uses:
-
-- Hash map for O(1) lookup
-- Doubly linked list for O(1) insert/delete
-
-Combines fast access and fast removal.
 
 ## Graph Representation
 
-Adjacency list uses linked lists.
-
-Efficient for sparse graphs.
+Adjacency lists use linked lists. Efficient for sparse graphs where most nodes connect to few neighbors.
 
 ## Memory Allocators
 
-Free memory blocks maintained in linked lists.
+Free memory blocks are maintained in linked lists. The OS allocator (`malloc`/`free`) uses free lists to track available memory chunks.
 
 ## Operating Systems
 
-Process queues and scheduling systems.
+Process queues and scheduling systems use linked lists. Round-robin scheduling uses circular linked lists.
 
 > [↑ Back to Top](#top)
 
-<a id="11-when-not-to-use"></a>
-# 11. When NOT to Use Linked Lists
+<a id="summary"></a>
+## 🔥 Summary
 
-Avoid when:
+| Concept | Key Takeaway |
+|---------|-------------|
+| What it is | Chain of nodes connected by pointers — not contiguous |
+| Random access | O(n) — must traverse from head |
+| Insert at head | O(1) — just update pointers |
+| Insert at tail | O(1) with tail pointer, O(n) without |
+| Delete | O(1) if you have prev pointer, O(n) to find it |
+| Memory | Higher per-element overhead (data + pointer) |
+| Cache | Poor — nodes scattered in memory |
+| Singly | One direction only, simpler |
+| Doubly | Both directions, easier deletion |
+| Circular | Last points to first — scheduling/buffers |
 
-- Frequent indexing required
-- Random access needed
-- Cache performance critical
-- Memory limited
+**When NOT to use linked lists:**
+- Frequent indexing required (use array)
+- Random access needed (use array)
+- Cache performance critical (arrays win)
+- Memory limited (pointer overhead too high)
 
-In many real-world systems,
-arrays outperform linked lists.
+In many real-world systems, arrays outperform linked lists. Linked lists shine when insertions/deletions at known positions are frequent and access patterns are sequential.
 
-> [↑ Back to Top](#top)
+Linked lists are foundational for stacks, queues, hash tables (chaining), LRU caches, and graph algorithms. To master them, think in terms of pointer flow, not index arithmetic.
 
-<a id="12-final-understanding"></a>
-# 12. Final Understanding
-
-Linked lists are:
-
-- Pointer-based structures
-- Flexible for insertion/deletion
-- Poor for indexing
-- Memory-heavy compared to arrays
-
-They are foundational for:
-
-- Stacks
-- Queues
-- Hash tables (chaining)
-- LRU caches
-- Graph algorithms
-
-To master linked lists,
-you must think in terms of pointer flow,
-not index arithmetic.
-
-Once pointer manipulation becomes intuitive,
-advanced data structures become much easier.
-
-> [↑ Back to Top](#top)
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Searching — Interview Q&A](../06_searching/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [06_searching → theory.md](../06_searching/theory.md) |
+| ➡ Next Module | [08_stack → theory.md](../08_stack/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[06 Searching →](../06_searching/theory.md) · [08 Stack →](../08_stack/theory.md) · [09 Queue →](../09_queue/theory.md) · [10 Hashing →](../10_hashing/theory.md)
+
+**Jump to specific topics in other files:**
+- Stack using linked list → [08_stack § theory.md](../08_stack/theory.md)
+- Queue using linked list → [09_queue § theory.md](../09_queue/theory.md)
+- Hash table chaining → [10_hashing § theory.md](../10_hashing/theory.md)
+- Graph adjacency list → [18_graphs § theory.md](../18_graphs/theory.md)
+
+> [↑ Back to Top](#top)

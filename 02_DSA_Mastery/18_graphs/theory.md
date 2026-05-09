@@ -23,22 +23,30 @@ Graphs are everywhere.
 
 ## 📖 Table of Contents
 
-1. [Real Life Story — City Map](#1-real-life-story)
-2. [What Is a Graph?](#2-what-is-a-graph)
-3. [Types of Graphs](#3-types-of-graphs)
-4. [Graph Representation](#4-graph-representation)
-5. [Graph Traversal](#5-graph-traversal)
-6. [BFS — Level by Level](#6-bfs-level-by-level)
-7. [DFS — Go Deep First](#7-dfs-go-deep-first)
-8. [When to Use BFS vs DFS](#8-when-to-use-bfs-vs-dfs)
-9. [Cycle Detection](#9-cycle-detection)
-10. [Connected Components](#10-connected-components)
-11. [Shortest Path (Unweighted)](#11-shortest-path-unweighted)
-12. [Shortest Path (Weighted)](#12-shortest-path-weighted)
-13. [Topological Sort — Ordering Dependencies](#13-topological-sort)
-14. [Real-World Applications](#14-real-world-applications)
-15. [Mental Model](#15-mental-model)
-16. [Final Understanding](#16-final-understanding)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is a Graph?](#1-real-life-story)
+- [2. Types of Graphs](#3-types-of-graphs)
+  - [Undirected Graph](#undirected-graph)
+  - [Directed Graph](#directed-graph)
+  - [Weighted Graph](#weighted-graph)
+- [3. Graph Representation](#4-graph-representation)
+  - [Adjacency List](#adjacency-list)
+  - [Adjacency Matrix](#adjacency-matrix)
+  - [Visual: Three Representations](#visual-representations)
+- [4. BFS — Level by Level](#6-bfs)
+  - [Visual: BFS Wave Expansion](#visual-bfs)
+- [5. DFS — Go Deep First](#7-dfs)
+  - [Visual: DFS Dive Deep](#visual-dfs)
+- [6. When to Use BFS vs DFS](#8-when-to-use-bfs-vs-dfs)
+  - [Visual: Side by Side](#visual-bfs-vs-dfs)
+- [7. Cycle Detection](#9-cycle-detection)
+  - [Visual: Cycle Detection](#visual-cycle)
+- [8. Connected Components](#10-connected-components)
+  - [Visual: Connected Components](#visual-components)
+- [9. Shortest Path](#11-shortest-path-unweighted)
+- [10. Topological Sort](#13-topological-sort)
+  - [Visual: Kahn's Algorithm](#visual-topological)
+- [🔥 Summary](#summary)
 
 ## 📌 Learning Priority
 
@@ -54,17 +62,12 @@ shortest path unweighted · directed vs undirected implications
 **Reference** — Know it exists, look up syntax when needed:
 Dijkstra · Bellman-Ford · MST (covered in 25_advanced_graphs)
 
+Atlas is a city planner. His job: map the roads between neighborhoods, figure out the fastest route from one place to another, detect traffic loops, and determine which neighborhoods are isolated. Every intersection is a **node**. Every road is an **edge**. The city itself is a **graph** — and today Atlas will learn the fundamental algorithms that navigate these structures.
+
 <a id="1-real-life-story"></a>
-# 1. Real Life Story — City Map
+# 1. What Is a Graph?
 
-Imagine a city.
-
-Intersections = Nodes
-Roads = Edges
-
-You can travel from one intersection to another.
-
-That structure is a graph.
+Atlas looks at his city map. Intersections are nodes. Roads connecting them are edges. Some roads are one-way (directed). Some have tolls (weighted). The entire city — with all its connections — is a graph.
 
 > [↑ Back to Top](#top)
 
@@ -193,7 +196,7 @@ O(V + E)
        3 ──── 4 ──── 5
 ```
 
-### Edge List
+## Edge List
 
 ```python
 edges = [
@@ -207,7 +210,7 @@ edges = [
 # Simple, but slow to look up neighbors: O(E)
 ```
 
-### Adjacency List (Python dict) — MOST COMMON
+## Adjacency List (Python dict) — MOST COMMON
 
 ```python
 graph = {
@@ -221,7 +224,7 @@ graph = {
 # Space: O(V + E)
 ```
 
-### Adjacency Matrix
+## Adjacency Matrix
 
 ```
      1  2  3  4  5
@@ -236,7 +239,7 @@ graph = {
 # Space: O(V^2) — bad for sparse graphs
 ```
 
-### When to use which:
+## When to Use Which
 
 ```
   Edge list       → when you just need to store edges (e.g. Kruskal's)
@@ -848,40 +851,55 @@ Graph thinking is about connectivity.
 > [↑ Back to Top](#top)
 
 <a id="16-final-understanding"></a>
-# 16. Final Understanding
+<a id="summary"></a>
+## 🔥 Summary
 
-Graph is:
+| Concept | Key Takeaway |
+|---------|-------------|
+| Graph | Set of nodes (vertices) + edges (connections) |
+| Directed vs Undirected | One-way vs two-way roads |
+| Weighted | Edges have costs (distances, prices) |
+| Adjacency List | Most common — O(V+E) space, good for sparse graphs |
+| Adjacency Matrix | O(V²) space — good for dense graphs, O(1) edge lookup |
+| BFS | Level by level (queue) — shortest path in unweighted |
+| DFS | Go deep first (stack/recursion) — cycle detection, topological sort |
+| Cycle Detection | Directed: track visiting state. Undirected: parent check |
+| Connected Components | Count isolated subgraphs via BFS/DFS |
+| Topological Sort | Linear order respecting dependencies — only for DAGs |
 
-- Set of nodes and edges
-- Directed or undirected
-- Weighted or unweighted
-- Explored using BFS/DFS
-- Foundation for many algorithms
+**Real-world applications:**
+- Social networks (friends = edges)
+- Maps/navigation (roads = weighted edges)
+- Task scheduling (dependencies = directed edges)
+- Internet routing (routers = nodes)
+- Compilers (dependency resolution)
+- Game AI (pathfinding)
 
-Mastering graphs prepares you for:
+**Mental model:** A graph is a city map. Nodes are intersections. Edges are roads. BFS finds the shortest route (fewest turns). DFS explores one path completely before trying another. Topological sort orders tasks so you never start something before its prerequisites are done.
 
-- Dijkstra
-- Topological sort
-- Strongly connected components
-- Minimum spanning tree
-- Network flow
-- Advanced system design
+Mastering graphs prepares Atlas for: Dijkstra, strongly connected components, minimum spanning tree, network flow, and advanced system design.
 
-Graphs are one of the most important topics in DSA.
-
-> [↑ Back to Top](#top)
-
-## 🔁 Navigation
-
-Previous:
-[17_trie/interview.md](/02_DSA_Mastery/17_trie/interview.md)
-
-Next:
-[18_graphs/interview.md](/02_DSA_Mastery/18_graphs/interview.md)
-[19_greedy/theory.md](/02_DSA_Mastery/19_greedy/theory.md)
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Trie — Interview Q&A](../17_trie/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [17_trie → theory.md](../17_trie/theory.md) |
+| ➡ Next Module | [19_greedy → theory.md](../19_greedy/theory.md) |
+
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[17 Trie →](../17_trie/theory.md) · [19 Greedy →](../19_greedy/theory.md) · [20 Backtracking →](../20_backtracking/theory.md) · [25 Advanced Graphs →](../25_advanced_graphs/theory.md)
+
+**Jump to specific topics in other files:**
+- Dijkstra/Bellman-Ford → [25_advanced_graphs § theory.md](../25_advanced_graphs/theory.md)
+- BFS in trees → [14_trees § Level-Order](../14_trees/theory.md#level-order)
+- DFS with explicit stack → [08_stack § DFS](../08_stack/theory.md#6-dfs-stack)
+- Union-Find for components → [24_disjoint_set_union § theory.md](../24_disjoint_set_union/theory.md)
+
+> [↑ Back to Top](#top)
 
 **Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

@@ -1,35 +1,71 @@
+<a id="top"></a>
+
 # API Design Patterns
 
-> 📝 **Practice:** [Q72 · async-job-api](../api_practice_questions_100.md#q72--design--async-job-api)
+<a id="toc"></a>
 
-> 📝 **Practice:** [Q60 · event-driven-api](../api_practice_questions_100.md#q60--normal--event-driven-api)
+## Table of Contents
 
-> 📝 **Practice:** [Q55 · circuit-breaker-pattern](../api_practice_questions_100.md#q55--normal--circuit-breaker-pattern)
+- [1. The Patterns That Separate Good APIs from Great Ones](#1-the-patterns-that-separate-good-apis-from-great-ones)
+- [2. Learning Priority](#2-learning-priority)
+- [3. Idempotency — The Most Important Pattern](#3-idempotency--the-most-important-pattern)
+  - [The Idempotency Key Pattern](#the-idempotency-key-pattern)
+  - [Implementation](#implementation)
+  - [When Is Idempotency Required](#when-is-idempotency-required)
+- [4. Handling Long-Running Operations](#4-handling-long-running-operations)
+  - [The Async Polling Pattern](#the-async-polling-pattern)
+  - [Webhook Callbacks — Call Me When Done](#webhook-callbacks--call-me-when-done)
+- [5. Bulk Operations](#5-bulk-operations)
+  - [Bulk Create](#bulk-create)
+  - [All-or-Nothing vs Best-Effort](#all-or-nothing-vs-best-effort)
+- [6. Partial Updates with PATCH](#6-partial-updates-with-patch)
+  - [JSON Merge Patch (the simple one)](#json-merge-patch-the-simple-one)
+  - [JSON Patch (the powerful one)](#json-patch-the-powerful-one)
+  - [The null vs omit distinction](#the-null-vs-omit-distinction)
+- [7. Soft Delete vs Hard Delete](#7-soft-delete-vs-hard-delete)
+  - [Soft Delete](#soft-delete)
+  - [Hard Delete](#hard-delete)
+- [8. Versioning a Running API Without Breaking Clients](#8-versioning-a-running-api-without-breaking-clients)
+  - [Safe (additive) changes — no new version needed](#safe-additive-changes--no-new-version-needed)
+  - [Breaking changes — require a new version](#breaking-changes--require-a-new-version)
+  - [The Deprecation Header](#the-deprecation-header)
+  - [Versioning strategies](#versioning-strategies)
+- [9. Summary](#9-summary)
+- [10. Practice Questions](#10-practice-questions)
 
-> 📝 **Practice:** [Q73 · file-upload-api](../api_practice_questions_100.md#q73--normal--file-upload-api)
+[Back to Top](#top)
 
-## The Patterns That Separate Good APIs from Great Ones
+<a id="1-the-patterns-that-separate-good-apis-from-great-ones"></a>
 
-You've learned HTTP. You know REST. You understand auth, gateways, all of it.
+## 1. The Patterns That Separate Good APIs from Great Ones
 
-Now comes the part that separates an API that's technically correct from one that
-people actually enjoy building against. The patterns in this chapter are the
-things you learn from getting burned — from the support ticket saying "your API
-charged my customer twice," or the mobile app that grinds to a halt making 500
-API calls to load a single screen.
+Meet Anil, a senior API architect at a fintech startup in Hyderabad. He has seen APIs go from whiteboard sketch to production meltdown — the midnight PagerDuty alert saying "your API charged my customer twice," or the mobile team complaining about 500 API calls just to load a single screen. Over ten years of designing APIs at scale, Anil has distilled the patterns that separate an API that is technically correct from one that people actually enjoy building against.
 
-These are the patterns senior engineers reach for instinctively. Let's build that
-instinct.
+"These patterns are not in textbooks," Anil says. "You learn them from getting burned. From support tickets and post-mortems. Today I will teach you what took me years to learn."
 
----
+You have learned HTTP. You know REST. You understand auth, gateways, all of it. Now comes the part that separates an API that is technically correct from one that people actually enjoy building against. The patterns in this chapter are the things you learn from getting burned — from the support ticket saying "your API charged my customer twice," or the mobile app that grinds to a halt making 500 API calls to load a single screen.
 
-## 📌 Learning Priority
+These are the patterns senior engineers reach for instinctively. Let's build that instinct.
+
+> **Practice:** [Q72 - async-job-api](../api_practice_questions_100.md#q72--design--async-job-api)
+
+> **Practice:** [Q60 - event-driven-api](../api_practice_questions_100.md#q60--normal--event-driven-api)
+
+> **Practice:** [Q55 - circuit-breaker-pattern](../api_practice_questions_100.md#q55--normal--circuit-breaker-pattern)
+
+> **Practice:** [Q73 - file-upload-api](../api_practice_questions_100.md#q73--normal--file-upload-api)
+
+[Back to Top](#top)
+
+<a id="2-learning-priority"></a>
+
+## 2. Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-idempotency keys · long-running operations pattern
+idempotency keys, long-running operations pattern
 
 **Should Learn** — Important for real projects:
-bulk operations · partial update
+bulk operations, partial update
 
 **Good to Know** — Useful in specific situations:
 CQRS for APIs
@@ -37,22 +73,19 @@ CQRS for APIs
 **Reference** — Know it exists, look up syntax when needed:
 Event-carried state transfer
 
----
+[Back to Top](#top)
 
-## Idempotency — The Most Important Pattern
+<a id="3-idempotency--the-most-important-pattern"></a>
 
-It's 2 AM. A user clicks "Pay Now" on your checkout page. The request goes out.
-Three seconds pass. Nothing. The browser shows a spinner. The network is flaky.
-The mobile app's retry logic kicks in and sends the payment request again.
+## 3. Idempotency — The Most Important Pattern
+
+It's 2 AM. A user clicks "Pay Now" on your checkout page. The request goes out. Three seconds pass. Nothing. The browser shows a spinner. The network is flaky. The mobile app's retry logic kicks in and sends the payment request again.
 
 Two requests, one intent: charge the customer once.
 
-If your API isn't built for this, the customer gets charged twice. That's a support
-ticket, a chargeback, a lost customer, and depending on your industry, a regulatory
-problem.
+If your API isn't built for this, the customer gets charged twice. That's a support ticket, a chargeback, a lost customer, and depending on your industry, a regulatory problem.
 
-**Idempotency** means: the same operation, applied multiple times, produces the
-same result as applying it once.
+**Idempotency** means: the same operation, applied multiple times, produces the same result as applying it once.
 
 ```
 GET    /users/42     → idempotent by nature (read, no side effects)
@@ -64,16 +97,35 @@ POST   /orders       → NOT idempotent: two requests = two orders
 POST   /emails/send  → NOT idempotent: two requests = two emails sent
 ```
 
-For any operation with real-world side effects — charge a card, create an order,
-send a notification, provision infrastructure — you need an idempotency key.
+```
+         Idempotency at a Glance
+         ========================
 
-> 📝 **Practice:** [Q71 · idempotency-implementation](../api_practice_questions_100.md#q71--design--idempotency-implementation)
+  Client                         Server
+    |                              |
+    |--- POST /payments ---------->|
+    |    Idempotency-Key: abc123   |  [Execute payment]
+    |                              |  [Store: abc123 → result]
+    |<---- 201 Created ------------|
+    |                              |
+    |  (network drops response)    |
+    |                              |
+    |--- POST /payments ---------->|
+    |    Idempotency-Key: abc123   |  [Key exists! Return stored result]
+    |<---- 201 Created ------------|
+    |                              |
+    Result: Customer charged ONCE
+```
 
-### The Idempotency Key Pattern
+For any operation with real-world side effects — charge a card, create an order, send a notification, provision infrastructure — you need an idempotency key.
 
-The client generates a unique ID (typically a UUID) and sends it in a header.
-The server stores the result of the first execution. On any duplicate request
-with the same key, the server returns the stored result without re-executing.
+> **Practice:** [Q71 - idempotency-implementation](../api_practice_questions_100.md#q71--design--idempotency-implementation)
+
+<a id="the-idempotency-key-pattern"></a>
+
+**The Idempotency Key Pattern**
+
+The client generates a unique ID (typically a UUID) and sends it in a header. The server stores the result of the first execution. On any duplicate request with the same key, the server returns the stored result without re-executing.
 
 ```
 Client sends:
@@ -106,7 +158,9 @@ Server (seen this key before):
 
 The customer gets charged once. Both parties see a successful response.
 
-### Implementation
+<a id="implementation"></a>
+
+**Implementation**
 
 ```python
 import hashlib
@@ -182,7 +236,9 @@ async def create_payment(
     return response  # same response whether fresh or cached
 ```
 
-### When is idempotency required?
+<a id="when-is-idempotency-required"></a>
+
+**When Is Idempotency Required**
 
 ```
 REQUIRED:
@@ -201,27 +257,56 @@ NOT NEEDED:
   - DELETE (already idempotent)
 ```
 
-Stripe requires idempotency keys on all charge operations. It's a good model
-to follow for any API that handles money or irreversible actions.
+Stripe requires idempotency keys on all charge operations. It's a good model to follow for any API that handles money or irreversible actions.
 
----
+Common mistake: storing the idempotency key without considering TTL. If you keep keys forever, your storage grows unbounded. 24 hours is a sensible default for most payment APIs — Stripe uses 24 hours as well. If a client retries after 24 hours, they likely intend a new operation.
 
-## Handling Long-Running Operations
+[Back to Top](#top)
 
-Some operations just take time. Generating a 10,000-row CSV export. Processing a
-video. Running a machine learning inference. Re-computing analytics for an entire
-quarter. Sending 500,000 emails.
+<a id="4-handling-long-running-operations"></a>
 
-You can't make a client sit on an open HTTP connection for 5 minutes. Connections
-timeout, mobile apps go to the background, users close their laptops.
+## 4. Handling Long-Running Operations
+
+Some operations just take time. Generating a 10,000-row CSV export. Processing a video. Running a machine learning inference. Re-computing analytics for an entire quarter. Sending 500,000 emails.
+
+You can't make a client sit on an open HTTP connection for 5 minutes. Connections timeout, mobile apps go to the background, users close their laptops.
 
 The rule of thumb: **if it takes more than 5 seconds, it should be async.**
 
-### The Async Polling Pattern
+```
+         Sync vs Async Decision Tree
+         ============================
 
-> 📝 **Practice:** [Q83 · compare-sync-async-api](../api_practice_questions_100.md#q83--interview--compare-sync-async-api)
+  [Request arrives]
+        |
+        v
+  Takes < 5 seconds?
+       / \
+     YES   NO
+      |      |
+      v      v
+   Respond  Return 202 Accepted
+   inline   + job_id
+             |
+             v
+       [Background worker]
+             |
+        _____|_____
+       |           |
+       v           v
+   [Polling]   [Webhook]
+   Client       Server calls
+   checks       client URL
+   GET /job/id  when done
+```
 
-> 📝 **Practice:** [Q58 · webhooks-vs-polling](../api_practice_questions_100.md#q58--interview--webhooks-vs-polling)
+<a id="the-async-polling-pattern"></a>
+
+**The Async Polling Pattern**
+
+> **Practice:** [Q83 - compare-sync-async-api](../api_practice_questions_100.md#q83--interview--compare-sync-async-api)
+
+> **Practice:** [Q58 - webhooks-vs-polling](../api_practice_questions_100.md#q58--interview--webhooks-vs-polling)
 
 ```
 Step 1: Client submits the job
@@ -287,8 +372,7 @@ queued → processing → complete
                    └→ cancelled
 ```
 
-Return `200 OK` for all status checks — the status field tells you what state the
-job is in. Don't use different HTTP status codes for different job states.
+Return `200 OK` for all status checks — the status field tells you what state the job is in. Don't use different HTTP status codes for different job states.
 
 How often should the client poll? Include guidance in your API:
 
@@ -307,12 +391,13 @@ HTTP/1.1 200 OK
 Retry-After: 5
 ```
 
-> 📝 **Practice:** [Q85 · compare-webhook-vs-polling](../api_practice_questions_100.md#q85--interview--compare-webhook-vs-polling)
+> **Practice:** [Q85 - compare-webhook-vs-polling](../api_practice_questions_100.md#q85--interview--compare-webhook-vs-polling)
 
-### Webhook Callbacks — "Call Me When Done"
+<a id="webhook-callbacks--call-me-when-done"></a>
 
-Polling means the client wakes up every N seconds to ask "are you done yet?"
-That's inefficient when the job might take 20 minutes.
+**Webhook Callbacks — Call Me When Done**
+
+Polling means the client wakes up every N seconds to ask "are you done yet?" That's inefficient when the job might take 20 minutes.
 
 Webhooks flip the model: the client gives you a URL, and you call them when done.
 
@@ -353,21 +438,21 @@ Webhook best practices:
 - Include a timestamp — receivers can reject stale webhooks
 - The receiver should respond quickly (< 5 seconds) and process async
 
-Polling is simpler to implement. Webhooks are more efficient for long jobs.
-Offer both when possible — some clients can't receive webhooks (no public URL).
+Polling is simpler to implement. Webhooks are more efficient for long jobs. Offer both when possible — some clients can't receive webhooks (no public URL).
 
----
+[Back to Top](#top)
 
-## Bulk Operations
+<a id="5-bulk-operations"></a>
 
-Scenario: you're migrating a database. You need to create 50,000 users in your
-new system. Each user creation is one POST request. At 100ms round-trip latency,
-50,000 requests × 100ms = 83 minutes. That's before you even count per-request
-overhead on the server side.
+## 5. Bulk Operations
+
+Scenario: you're migrating a database. You need to create 50,000 users in your new system. Each user creation is one POST request. At 100ms round-trip latency, 50,000 requests x 100ms = 83 minutes. That's before you even count per-request overhead on the server side.
 
 **Don't make 1,000 API calls to create 1,000 users.**
 
-### Bulk Create
+<a id="bulk-create"></a>
+
+**Bulk Create**
 
 ```
 POST /users/bulk
@@ -383,13 +468,9 @@ Content-Type: application/json
 }
 ```
 
-What should the response look like? This is where most APIs get lazy and just
-return 200 or 400. A good bulk response tells you exactly which items succeeded
-and which failed.
+What should the response look like? This is where most APIs get lazy and just return 200 or 400. A good bulk response tells you exactly which items succeeded and which failed.
 
 ```json
-HTTP/1.1 207 Multi-Status
-
 {
   "summary": {
     "total": 3,
@@ -422,11 +503,11 @@ HTTP/1.1 207 Multi-Status
 }
 ```
 
-Notice: `207 Multi-Status` — not 200, not 400. Some succeeded, some failed. The
-status code reflects the mixed result. The client can process the array and know
-exactly which items need attention.
+HTTP status: `207 Multi-Status` — not 200, not 400. Some succeeded, some failed. The status code reflects the mixed result. The client can process the array and know exactly which items need attention.
 
-### All-or-Nothing vs Best-Effort
+<a id="all-or-nothing-vs-best-effort"></a>
+
+**All-or-Nothing vs Best-Effort**
 
 Two philosophies for handling partial failures:
 
@@ -451,19 +532,19 @@ If using best-effort, return 207 with per-item results.
 Expose this as a parameter when sensible:
 
 ```json
-POST /users/bulk
 {
-  "mode": "best_effort",   // or "transactional"
+  "mode": "best_effort",
   "users": [...]
 }
 ```
 
----
+[Back to Top](#top)
 
-## Partial Updates with PATCH
+<a id="6-partial-updates-with-patch"></a>
 
-You have a user with 15 fields. The user wants to update their email address.
-Should they send all 15 fields, or just the one that changed?
+## 6. Partial Updates with PATCH
+
+You have a user with 15 fields. The user wants to update their email address. Should they send all 15 fields, or just the one that changed?
 
 ```
 PUT /users/42               PATCH /users/42
@@ -478,13 +559,27 @@ PUT /users/42               PATCH /users/42
 }
 ```
 
-PUT replaces the entire resource. If you forget a field in a PUT, that field
-gets wiped. PATCH updates only what you send.
+PUT replaces the entire resource. If you forget a field in a PUT, that field gets wiped. PATCH updates only what you send.
 
-### JSON Merge Patch (the simple one)
+```
+         PUT vs PATCH Mental Model
+         ==========================
 
-RFC 7396. The simplest PATCH semantics. You send an object with only the
-fields you want to change. Null means "delete this field."
+  PUT = "Here is the COMPLETE new version of this resource"
+        (anything missing = gone)
+
+  PATCH = "Here are ONLY the fields I want to change"
+          (anything missing = leave as-is)
+
+  Analogy: PUT is rewriting an entire document.
+           PATCH is using a red pen on specific lines.
+```
+
+<a id="json-merge-patch-the-simple-one"></a>
+
+**JSON Merge Patch (the simple one)**
+
+RFC 7396. The simplest PATCH semantics. You send an object with only the fields you want to change. Null means "delete this field."
 
 ```
 Current state:
@@ -511,10 +606,11 @@ Result:
 }
 ```
 
-### JSON Patch (the powerful one)
+<a id="json-patch-the-powerful-one"></a>
 
-RFC 6902. An array of operation objects. Supports add, remove, replace, move,
-copy, and test operations. More expressive, more complex.
+**JSON Patch (the powerful one)**
+
+RFC 6902. An array of operation objects. Supports add, remove, replace, move, copy, and test operations. More expressive, more complex.
 
 ```
 PATCH /users/42
@@ -528,10 +624,11 @@ Content-Type: application/json-patch+json
 ]
 ```
 
-JSON Merge Patch is right for 95% of use cases. Use JSON Patch when you need
-atomic array operations or optimistic locking tests.
+JSON Merge Patch is right for 95% of use cases. Use JSON Patch when you need atomic array operations or optimistic locking tests.
 
-### The null vs omit distinction
+<a id="the-null-vs-omit-distinction"></a>
+
+**The null vs omit distinction**
 
 This trips up a lot of developers:
 
@@ -582,19 +679,19 @@ class UserPatch:
         return updates
 ```
 
----
+[Back to Top](#top)
 
-## Soft Delete vs Hard Delete
+<a id="7-soft-delete-vs-hard-delete"></a>
 
-A user clicks "delete account." Your `DELETE /users/42` endpoint runs.
-Six months later, a compliance team needs an audit trail. Six months later,
-the user calls customer support saying they deleted their account by mistake.
-Six months later, a financial regulator asks for all transactions made by
-that account.
+## 7. Soft Delete vs Hard Delete
+
+A user clicks "delete account." Your `DELETE /users/42` endpoint runs. Six months later, a compliance team needs an audit trail. Six months later, the user calls customer support saying they deleted their account by mistake. Six months later, a financial regulator asks for all transactions made by that account.
 
 If you hard deleted the row, that data is gone.
 
-### Soft Delete
+<a id="soft-delete"></a>
+
+**Soft Delete**
 
 Instead of removing the row, mark it as deleted:
 
@@ -657,7 +754,9 @@ Consider:
     (for GDPR compliance: "right to be forgotten")
 ```
 
-### Hard Delete
+<a id="hard-delete"></a>
+
+**Hard Delete**
 
 Actually removes the row. Use when:
 - GDPR "right to be forgotten" is exercised (you must hard delete PII)
@@ -669,16 +768,19 @@ For GDPR, you often implement a two-phase deletion:
 1. Soft delete immediately (hides the user, preserves data for compliance window)
 2. Hard delete after 30 days, or immediately on explicit erasure request
 
----
+[Back to Top](#top)
 
-## Versioning a Running API Without Breaking Clients
+<a id="8-versioning-a-running-api-without-breaking-clients"></a>
 
-Your API is live. Clients are using it in production. You need to change
-something. How do you do it without breaking existing integrations?
+## 8. Versioning a Running API Without Breaking Clients
+
+Your API is live. Clients are using it in production. You need to change something. How do you do it without breaking existing integrations?
 
 The key mental shift: **additive changes are safe, removal is a breaking change.**
 
-### Safe (additive) changes — no new version needed
+<a id="safe-additive-changes--no-new-version-needed"></a>
+
+**Safe (additive) changes — no new version needed**
 
 ```
 Adding a new field to a response:
@@ -700,7 +802,9 @@ Adding a new status code (that clients should handle gracefully):
   → Well-written clients handle unknown 4xx. Fine.
 ```
 
-### Breaking changes — require a new version
+<a id="breaking-changes--require-a-new-version"></a>
+
+**Breaking changes — require a new version**
 
 ```
 Removing a field from a response:
@@ -729,10 +833,11 @@ Changing required fields in a request:
   → Existing clients not sending phone get 400. Breaking.
 ```
 
-### The Deprecation Header
+<a id="the-deprecation-header"></a>
 
-When you do need to make a breaking change, give clients time to migrate. Use
-the standard deprecation headers (RFC 8594):
+**The Deprecation Header**
+
+When you do need to make a breaking change, give clients time to migrate. Use the standard deprecation headers (RFC 8594):
 
 ```
 HTTP/1.1 200 OK
@@ -743,8 +848,7 @@ Link: <https://docs.myapp.com/migration/v3>; rel="deprecation"
 {...response body...}
 ```
 
-Every response on a deprecated endpoint includes these headers. Good API clients
-log deprecation warnings. The `Sunset` date tells clients when the endpoint dies.
+Every response on a deprecated endpoint includes these headers. Good API clients log deprecation warnings. The `Sunset` date tells clients when the endpoint dies.
 
 In Python/FastAPI:
 
@@ -763,7 +867,9 @@ async def get_users_v2(response: Response):
     return {"users": [...]}
 ```
 
-### Versioning strategies
+<a id="versioning-strategies"></a>
+
+**Versioning strategies**
 
 There are two main camps:
 
@@ -788,17 +894,15 @@ Pros: clean URLs, base URL never changes
 Cons: harder to test without tooling, less visible
 ```
 
-Pick one and be consistent. URL versioning is more common for public APIs
-because it's more transparent. Header versioning is used by Stripe and is
-elegant when done well.
+Pick one and be consistent. URL versioning is more common for public APIs because it's more transparent. Header versioning is used by Stripe and is elegant when done well.
 
-The practical rule: you don't need v2 until you have a breaking change. Most
-APIs run on v1 for years with only additive changes. New versions are expensive —
-you're maintaining two codebases simultaneously. Avoid it as long as possible.
+The practical rule: you don't need v2 until you have a breaking change. Most APIs run on v1 for years with only additive changes. New versions are expensive — you're maintaining two codebases simultaneously. Avoid it as long as possible.
 
----
+[Back to Top](#top)
 
-## Summary
+<a id="9-summary"></a>
+
+## 9. Summary
 
 ```
 Idempotency
@@ -840,18 +944,22 @@ Versioning
   URL versioning (/v1/, /v2/) or header versioning — be consistent
 ```
 
----
+[Back to Top](#top)
 
-## 📝 Practice Questions
+<a id="10-practice-questions"></a>
 
-> 📝 **Practice:** [Q92 · predict-concurrent-idempotent](../api_practice_questions_100.md#q92--critical--predict-concurrent-idempotent)
+## 10. Practice Questions
 
-> 📝 **Practice:** [Q56 · retry-exponential-backoff](../api_practice_questions_100.md#q56--critical--retry-exponential-backoff)
+> **Practice:** [Q92 - predict-concurrent-idempotent](../api_practice_questions_100.md#q92--critical--predict-concurrent-idempotent)
 
----
+> **Practice:** [Q56 - retry-exponential-backoff](../api_practice_questions_100.md#q56--critical--retry-exponential-backoff)
 
-**[🏠 Back to README](../README.md)**
+[Back to Top](#top)
 
-**Prev:** [← API Gateway Patterns](../15_api_gateway/gateway_patterns.md) &nbsp;|&nbsp; **Next:** [WebSockets & Real-Time APIs →](../17_websockets/realtime_apis.md)
+**[Back to README](../README.md)**
 
-**Related Topics:** [API Gateway Patterns](../15_api_gateway/gateway_patterns.md) · [Real-World Architectures](../18_real_world_apis/architectures.md) · [API Versioning](../08_versioning_standards/versioning_strategy.md) · [REST Best Practices](../03_rest_best_practices/patterns.md)
+**Prev:** [API Gateway Patterns](../15_api_gateway/theory.md) | **Next:** [WebSockets and Real-Time APIs](../17_websockets/theory.md)
+
+**Related Topics:** [API Gateway Patterns](../15_api_gateway/theory.md) | [Real-World Architectures](../18_real_world_apis/architectures.md) | [API Versioning](../08_versioning_standards/versioning_strategy.md) | [REST Best Practices](../03_rest_best_practices/patterns.md)
+
+**Up:** [03_API_Mastery](../README.md)

@@ -1,51 +1,59 @@
+<a id="top"></a>
+
 # REST Best Practices
+
+## 📖 Table of Contents
+
+- [1. URL Naming Rules](#1-url-naming-rules)
+  - [Use Lowercase](#use-lowercase)
+  - [Use Hyphens, Not Underscores](#use-hyphens-not-underscores)
+  - [Use Plural Nouns for Collections](#use-plural-nouns-for-collections)
+  - [No Verbs in URLs](#no-verbs-in-urls)
+  - [Avoid Deeply Nested URLs](#avoid-deeply-nested-urls)
+  - [Version Your API in the URL](#version-your-api-in-the-url)
+- [2. Versioning — The Eternal Debate](#2-versioning--the-eternal-debate)
+  - [URL Versioning](#url-versioning)
+  - [Header Versioning](#header-versioning)
+  - [Recommendation](#recommendation)
+- [3. Pagination — Don't Return 1 Million Rows](#3-pagination--dont-return-1-million-rows)
+  - [Offset Pagination](#offset-pagination)
+  - [Cursor Pagination](#cursor-pagination)
+- [4. Filtering and Sorting](#4-filtering-and-sorting)
+  - [Filtering](#filtering)
+  - [Sorting](#sorting)
+  - [Sparse Fieldsets](#sparse-fieldsets)
+- [5. Error Response Design](#5-error-response-design)
+  - [Machine-Readable Error Code](#machine-readable-error-code)
+  - [Human-Readable Message](#human-readable-message)
+  - [Field-Level Details for Validation Errors](#field-level-details-for-validation-errors)
+- [6. Consistent Response Envelope](#6-consistent-response-envelope)
+- [7. Idempotency Keys — For Safe Retries](#7-idempotency-keys--for-safe-retries)
+- [8. HTTP Caching — How to Use It Correctly](#8-http-caching--how-to-use-it-correctly)
+  - [Cache-Control — The Directive](#cache-control--the-directive)
+  - [ETags — Conditional Requests](#etags--conditional-requests)
+  - [Last-Modified — Alternative to ETags](#last-modified--alternative-to-etags)
+  - [Where Caching Matters Most](#where-caching-matters-most)
+- [9. Rate Limiting](#9-rate-limiting)
+  - [What to Rate Limit On](#what-to-rate-limit-on)
+  - [Handling 429 in Client Code](#handling-429-in-client-code)
+- [10. Putting It All Together — A Well-Designed API](#10-putting-it-all-together--a-well-designed-api)
+- [11. Quick Reference Checklist](#11-quick-reference-checklist)
+- [Learning Priority](#learning-priority)
+- [Summary](#summary)
+
+<a id="1-url-naming-rules"></a>
+
+# 1. URL Naming Rules
+
+Arjun once joined a company where the same API had endpoints like `/getUsers`, `/Product_List`, and `/v2/FetchOrderById`. Three developers, three conventions, zero consistency. He spent his first sprint just renaming things — because URLs are the public face of your API. They're what developers type into their code, what shows up in logs, what gets bookmarked and shared. They should be clean, predictable, and boring.
 
 > 📝 **Practice:** [Q8 · rest-resource-naming](../api_practice_questions_100.md#q8--normal--rest-resource-naming)
 
-## The Gap Between "Works" and "Good"
-
-You can build an API that works while breaking every rule in this document. Requests
-come in, data goes out, everyone's happy. For a while.
-
-Then your API grows. Other teams start integrating with it. Mobile apps start depending
-on it. You try to make a change and realize you can't because you'll break the iOS app.
-You get a bug report: "your error messages are inconsistent and we can't tell what went
-wrong." You get a performance complaint: "your endpoint returns 50 fields but we only
-need 3."
-
-The rules in this document exist because people built APIs, those APIs got used, they
-discovered pain points, and they agreed on conventions to avoid those pain points. This
-isn't theory. These are scars.
-
-Let's go through them.
-
----
-
-## 📌 Learning Priority
-
-**Must Learn** — Core concept, daily use, interview essential:
-URL naming conventions (lowercase/hyphens/plural nouns) · pagination (offset vs cursor) · error response structure · versioning strategies
-
-**Should Learn** — Important for real projects, comes up regularly:
-filtering and sorting safety · idempotency keys · HTTP caching headers (ETag/Cache-Control)
-
-**Good to Know** — Useful in specific situations, not always tested:
-sparse fieldsets · rate limiting headers · response envelopes
-
-**Reference** — Know it exists, look up syntax when needed:
-request signing · response compression · backward compatibility testing
-
----
-
-## 1. URL Naming Rules
-
-URLs are the public face of your API. They're what developers type into their code,
-what shows up in logs, what gets bookmarked and shared. They should be clean,
-predictable, and boring.
-
 > 📝 **Practice:** [Q13 · url-path-vs-query](../api_practice_questions_100.md#q13--normal--url-path-vs-query)
 
-### Use lowercase
+<a id="use-lowercase"></a>
+
+## Use Lowercase
 
 ```
 Good:   GET /users/42
@@ -57,7 +65,9 @@ URLs are technically case-sensitive (RFC 3986). `/Users/42` and `/users/42` are
 different URLs. Use lowercase everywhere, always. No exceptions. You don't want your
 API to fail because someone Shift-typed a character.
 
-### Use hyphens, not underscores
+<a id="use-hyphens-not-underscores"></a>
+
+## Use Hyphens, Not Underscores
 
 ```
 Good:   GET /payment-methods
@@ -73,7 +83,9 @@ which matters for discoverability. Underscores read as a single token to search 
 Camel case is especially bad in URLs — it requires developers to remember capitalization,
 which is unnecessary cognitive load.
 
-### Use plural nouns for collections
+<a id="use-plural-nouns-for-collections"></a>
+
+## Use Plural Nouns for Collections
 
 ```
 Good:   GET /users
@@ -92,7 +104,9 @@ The one exception where people debate: singleton resources. If there's only ever
 of something per user, you might see `GET /me` or `GET /settings` (singular). This is
 acceptable.
 
-### No verbs in URLs
+<a id="no-verbs-in-urls"></a>
+
+## No Verbs in URLs
 
 ```
 Good:   DELETE /users/42
@@ -109,7 +123,11 @@ The HTTP method is the verb. The URL is the noun. When you put verbs in URLs, yo
 up with RPC-style APIs that aren't REST. You lose the predictability that makes REST
 valuable.
 
-### Avoid deeply nested URLs
+**Common mistake:** Creating `/api/createOrder` or `/api/deleteUser` — this is RPC disguised as REST. The HTTP method already tells you the action; let the URL describe the resource.
+
+<a id="avoid-deeply-nested-urls"></a>
+
+## Avoid Deeply Nested URLs
 
 ```
 Good:   GET /users/42/orders
@@ -130,7 +148,9 @@ Instead of:   GET /users/42/orders/7/items
 Use:          GET /items?order_id=7
 ```
 
-### Version your API in the URL
+<a id="version-your-api-in-the-url"></a>
+
+## Version Your API in the URL
 
 ```
 GET /v1/users/42
@@ -140,9 +160,13 @@ GET /v2/users/42
 More on versioning in the next section. The short answer: put `v1` at the start of
 every URL path.
 
----
+> [↑ Back to Top](#top)
 
-## 2. Versioning — The Eternal Debate
+<a id="2-versioning--the-eternal-debate"></a>
+
+# 2. Versioning — The Eternal Debate
+
+Arjun learned this lesson the hard way. His team shipped `/users` with a flat address field. Six months later, product wanted structured addresses (street, city, zip). But three mobile apps and two partner integrations depended on the flat string. He couldn't change it without breaking them. That's the day he became religious about versioning from day one.
 
 Your API will change. You will need to add fields, change behavior, rename things,
 break backwards compatibility. The question isn't whether you'll need to version your
@@ -150,7 +174,9 @@ API — it's how.
 
 There are two main approaches:
 
-### URL Versioning
+<a id="url-versioning"></a>
+
+## URL Versioning
 
 ```
 GET /v1/users/42
@@ -176,7 +202,9 @@ the URL is a stable identifier.
 The purists are not wrong. But pragmatism wins here. URL versioning is what most APIs
 use because it's the most practical.
 
-### Header Versioning
+<a id="header-versioning"></a>
+
+## Header Versioning
 
 ```
 GET /users/42
@@ -202,7 +230,9 @@ You can't test it in a browser by just typing a URL. You need to remember to inc
 the header in every single request. Caches don't differentiate by default (you have to
 use `Vary: Accept` to make it work correctly with CDNs). It's less visible.
 
-### Recommendation
+<a id="recommendation"></a>
+
+## Recommendation
 
 **Use URL versioning unless you have a strong reason not to.**
 
@@ -231,16 +261,24 @@ A few practical guidelines:
 one team, don't overthink it. If you're building a public API or an API shared across
 multiple teams, version from day one. It's much harder to add later.
 
----
+**Common mistake:** Thinking you can "just add fields" without a version bump. Adding fields is backward-compatible. Removing or renaming fields is not. Changing the type of a field (string to object) is not. Know the difference.
 
-## 3. Pagination — Don't Return 1 Million Rows
+> [↑ Back to Top](#top)
+
+<a id="3-pagination--dont-return-1-million-rows"></a>
+
+# 3. Pagination — Don't Return 1 Million Rows
+
+Arjun once watched a junior developer demo their new "list all customers" endpoint. It worked beautifully in dev with 50 test records. In staging, with 200,000 real records, the response took 47 seconds and the mobile app crashed trying to parse it. "Why didn't you paginate?" Arjun asked. "I thought pagination was optional," the dev replied. It's not.
 
 Never return an unbounded list. Ever. If your database has 500,000 users and someone
 calls `GET /users`, you do not return all 500,000 in one response.
 
 You return a page. And you tell the client how to get the next page.
 
-### Offset Pagination
+<a id="offset-pagination"></a>
+
+## Offset Pagination
 
 The simple approach:
 
@@ -288,14 +326,36 @@ duplicates across pages.
 
 This is the **page shift problem**. It's real and annoying.
 
-### Cursor Pagination
+```
+        Offset Pagination — Page Shift Problem
+
+  Time T1 (page 3 loaded):         Time T2 (3 new items added):
+  ┌────────────────────────┐       ┌────────────────────────┐
+  │ item 1                 │       │ NEW item A             │
+  │ item 2                 │       │ NEW item B             │
+  │ ...                    │       │ NEW item C             │
+  │ item 40               │       │ item 1                 │
+  ├────────────────────────┤       │ ...                    │
+  │ item 41  ← page 3     │       │ item 40               │
+  │ ...                    │       │ ...                    │
+  │ item 60               │       │ item 60               │
+  ├────────────────────────┤       ├────────────────────────┤
+  │ item 61  ← page 4     │       │ item 64  ← page 4!    │
+  │ ...                    │       │ ...                    │
+  │ item 80               │       │ items 61-63 SKIPPED    │
+  └────────────────────────┘       └────────────────────────┘
+```
+
+<a id="cursor-pagination"></a>
+
+## Cursor Pagination
 
 The scalable approach:
 
 ```
 GET /users?limit=20
-GET /users?after=eyJpZCI6MjB9&limit=20   ← second page
-GET /users?after=eyJpZCI6NDB9&limit=20   ← third page
+GET /users?after=eyJpZCI6MjB9&limit=20   <- second page
+GET /users?after=eyJpZCI6NDB9&limit=20   <- third page
 ```
 
 The `after` parameter is a **cursor** — an opaque token that encodes a position in the
@@ -338,11 +398,17 @@ The cursor is usually a base64-encoded JSON object containing the sort key:
 - Use **cursor pagination** for feeds, timelines, anywhere items are added frequently,
   or very large datasets (100k+ rows)
 
----
+> [↑ Back to Top](#top)
 
-## 4. Filtering and Sorting
+<a id="4-filtering-and-sorting"></a>
 
-### Filtering
+# 4. Filtering and Sorting
+
+Arjun's rule: "If you give someone a list endpoint without filters, they'll immediately ask for filters. Build them in from the start — but only for fields you've indexed."
+
+<a id="filtering"></a>
+
+## Filtering
 
 Filtering goes in query parameters:
 
@@ -362,13 +428,17 @@ Keep filter parameter names clear and consistent:
 efficiently queryable in your database. If you let users filter on an unindexed column,
 you'll get full table scans. Only expose filters you can back with proper indexes.
 
-### Sorting
+**Common mistake:** Exposing a filter like `?description=some+text` that hits an unindexed TEXT column. This causes full table scans in production. Only expose filters backed by proper indexes.
+
+<a id="sorting"></a>
+
+## Sorting
 
 ```
-GET /products?sort=price              → ascending by default
-GET /products?sort=price&order=asc    → explicitly ascending
-GET /products?sort=price&order=desc   → descending
-GET /products?sort=-price             → alternative: minus sign for descending
+GET /products?sort=price              -> ascending by default
+GET /products?sort=price&order=asc    -> explicitly ascending
+GET /products?sort=price&order=desc   -> descending
+GET /products?sort=-price             -> alternative: minus sign for descending
 ```
 
 There's no universal standard. Pick one convention and be consistent.
@@ -377,11 +447,13 @@ Others use `sort=created_at&order=desc`. Both work. Pick one.
 
 **Multiple sort fields:**
 ```
-GET /products?sort=category,price        → sort by category, then price
-GET /products?sort=category,-price       → sort by category asc, price desc
+GET /products?sort=category,price        -> sort by category, then price
+GET /products?sort=category,-price       -> sort by category asc, price desc
 ```
 
-### Sparse Fieldsets
+<a id="sparse-fieldsets"></a>
+
+## Sparse Fieldsets
 
 Return only the fields the client asked for:
 
@@ -400,11 +472,13 @@ It's extra implementation work on the server side (you need to parse the `fields
 parameter and selectively serialize), so it's optional for most APIs. But for large
 responses or high-traffic endpoints, it can meaningfully reduce bandwidth.
 
----
+> [↑ Back to Top](#top)
 
-## 5. Error Response Design
+<a id="5-error-response-design"></a>
 
-This is where many APIs get lazy, and it costs their users hours of debugging.
+# 5. Error Response Design
+
+"The quality of your error messages determines how much time other developers waste debugging your API," Arjun tells every new team member. He keeps a hall of shame — real error messages from production APIs: `{"error": "invalid input"}`, `{"message": "fail"}`, `{"status": "error"}`. None of them tell you what went wrong or how to fix it.
 
 Bad error response:
 
@@ -440,7 +514,9 @@ Good error response:
 
 The three layers of a good error response:
 
-### 1. Machine-readable error code
+<a id="machine-readable-error-code"></a>
+
+## Machine-Readable Error Code
 
 ```json
 "code": "VALIDATION_ERROR"
@@ -452,13 +528,13 @@ identifier for the error type.
 
 Common error codes:
 ```
-VALIDATION_ERROR        → request data failed validation
-AUTHENTICATION_REQUIRED → no valid token provided
-PERMISSION_DENIED       → authenticated but not authorized
-NOT_FOUND               → resource doesn't exist
-CONFLICT                → would create a duplicate (e.g., email already taken)
-RATE_LIMIT_EXCEEDED     → too many requests
-INTERNAL_ERROR          → something broke on our end
+VALIDATION_ERROR        -> request data failed validation
+AUTHENTICATION_REQUIRED -> no valid token provided
+PERMISSION_DENIED       -> authenticated but not authorized
+NOT_FOUND               -> resource doesn't exist
+CONFLICT                -> would create a duplicate (e.g., email already taken)
+RATE_LIMIT_EXCEEDED     -> too many requests
+INTERNAL_ERROR          -> something broke on our end
 ```
 
 Your clients can handle these in code:
@@ -471,7 +547,9 @@ elif error["code"] == "AUTHENTICATION_REQUIRED":
     retry()
 ```
 
-### 2. Human-readable message
+<a id="human-readable-message"></a>
+
+## Human-Readable Message
 
 ```json
 "message": "Request validation failed"
@@ -481,7 +559,11 @@ For developers reading logs and error messages. Should be clear and helpful. Can
 include context. But should not include internal system details (stack traces, SQL
 queries, server paths) in production.
 
-### 3. Field-level details for validation errors
+**Common mistake:** Leaking stack traces or SQL queries in error messages in production. Always sanitize — show helpful context for the caller, never internal implementation details.
+
+<a id="field-level-details-for-validation-errors"></a>
+
+## Field-Level Details for Validation Errors
 
 ```json
 "details": [
@@ -496,12 +578,13 @@ the right thing. This saves everyone time.
 
 The `field` name should match the field name in the request body exactly. No surprises.
 
----
+> [↑ Back to Top](#top)
 
-## 6. Consistent Response Envelope
+<a id="6-consistent-response-envelope"></a>
 
-Your API's response structure should be consistent. Every response should have the same
-shape. No surprises.
+# 6. Consistent Response Envelope
+
+Arjun enforces one rule above all others in API reviews: "Every response has the same shape." A client developer should never have to guess whether the data is at `response.data`, `response.results`, `response.items`, or at the root. One convention. Everywhere.
 
 Here's a simple convention:
 
@@ -553,14 +636,33 @@ a bare array without breaking the response structure. With the `data` wrapper, y
 always add `meta` or `pagination` fields alongside `data` without any changes for
 existing clients.
 
+```
+  Response Envelope Structure
+
+  Success (single):          Success (collection):        Error:
+  ┌──────────────────┐       ┌──────────────────┐       ┌──────────────────┐
+  │ {                │       │ {                │       │ {                │
+  │   "data": {      │       │   "data": [...], │       │   "error": {     │
+  │     id, name,    │       │   "meta": {      │       │     code,        │
+  │     email, ...   │       │     total, page, │       │     message,     │
+  │   }              │       │     limit        │       │     details      │
+  │ }                │       │   }              │       │   }              │
+  │                  │       │ }                │       │ }                │
+  └──────────────────┘       └──────────────────┘       └──────────────────┘
+```
+
 Pick a convention. Document it. Use it everywhere. Consistency dramatically reduces
 the number of questions and bugs from API consumers.
 
 > 📝 **Practice:** [Q25 · rest-response-envelope](../api_practice_questions_100.md#q25--normal--rest-response-envelope)
 
----
+> [↑ Back to Top](#top)
 
-## 7. Idempotency Keys — For Safe Retries on Non-Idempotent Operations
+<a id="7-idempotency-keys--for-safe-retries"></a>
+
+# 7. Idempotency Keys — For Safe Retries
+
+Arjun's team once had a production incident where a payment was charged three times because the client's network was flaky and it retried the POST request. The customer was furious. "We need idempotency keys on every payment endpoint," Arjun said in the postmortem. They shipped the fix that week.
 
 We established in the REST fundamentals module that POST is not idempotent. Call
 `POST /payments` twice, charge the customer twice. That's a real problem.
@@ -581,6 +683,24 @@ Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
 ```
 
 Here's how it works:
+
+```
+  Idempotency Key Flow
+
+  First request:                          Retry (same key):
+  ┌────────┐     POST /payments           ┌────────┐     POST /payments
+  │ Client │ ──────────────────────────>  │ Client │ ──────────────────────────>
+  │        │  Idempotency-Key: abc-123    │        │  Idempotency-Key: abc-123
+  └────────┘                              └────────┘
+       │                                       │
+       v                                       v
+  ┌────────┐                              ┌────────┐
+  │ Server │  1. Check key: NOT FOUND     │ Server │  1. Check key: FOUND
+  │        │  2. Process payment          │        │  2. Return stored response
+  │        │  3. Store response by key    │        │  3. NO re-processing
+  │        │  4. Return response          │        │  4. Same response as before
+  └────────┘                              └────────┘
+```
 
 ```
 1. Client generates a unique key (UUID) for this operation.
@@ -613,24 +733,27 @@ The customer is charged exactly once, regardless of how many times the client re
 - If you resend with the same key but a different body, most implementations return
   an error
 
----
+> [↑ Back to Top](#top)
 
-## 8. HTTP Caching — How to Use It Correctly
+<a id="8-http-caching--how-to-use-it-correctly"></a>
 
-HTTP has a built-in caching system. Most developers ignore it. That's a missed
-opportunity — caching is one of the highest-leverage performance tools you have.
+# 8. HTTP Caching — How to Use It Correctly
 
-### Cache-Control — The Directive
+"The fastest API call is the one you don't make," Arjun says. HTTP has a built-in caching system that most developers ignore. That's like having a turbocharger on your car but never turning it on. Caching is one of the highest-leverage performance tools you have.
+
+<a id="cache-control--the-directive"></a>
+
+## Cache-Control — The Directive
 
 Tell clients (and CDNs) how long a response is valid:
 
 ```
-Cache-Control: max-age=3600          → cache for 1 hour (3600 seconds)
-Cache-Control: max-age=0             → don't use cache without revalidating
-Cache-Control: no-store              → never cache this, ever
-Cache-Control: private               → browser can cache, CDNs cannot
-Cache-Control: public                → anyone (browser, CDN, proxy) can cache
-Cache-Control: public, max-age=86400 → CDNs can cache for 24 hours
+Cache-Control: max-age=3600          -> cache for 1 hour (3600 seconds)
+Cache-Control: max-age=0             -> don't use cache without revalidating
+Cache-Control: no-store              -> never cache this, ever
+Cache-Control: private               -> browser can cache, CDNs cannot
+Cache-Control: public                -> anyone (browser, CDN, proxy) can cache
+Cache-Control: public, max-age=86400 -> CDNs can cache for 24 hours
 ```
 
 **Practical guidelines:**
@@ -639,7 +762,9 @@ Cache-Control: public, max-age=86400 → CDNs can cache for 24 hours
 - Sensitive data (auth tokens, financial): `no-store`
 - Data that changes frequently: short `max-age` or `no-cache`
 
-### ETags — Conditional Requests
+<a id="etags--conditional-requests"></a>
+
+## ETags — Conditional Requests
 
 An ETag is a fingerprint (hash) of the response. The server includes it:
 
@@ -679,7 +804,9 @@ Cache-Control: private, max-age=300
 
 Full response with the new data and a new ETag.
 
-### Last-Modified — Alternative to ETags
+<a id="last-modified--alternative-to-etags"></a>
+
+## Last-Modified — Alternative to ETags
 
 Same concept, but uses a timestamp instead of a hash:
 
@@ -690,23 +817,29 @@ Last-Modified: Tue, 15 Jan 2024 09:30:00 GMT
 Next request:
 If-Modified-Since: Tue, 15 Jan 2024 09:30:00 GMT
 
-If unchanged → 304 Not Modified
-If changed   → 200 OK with new data
+If unchanged -> 304 Not Modified
+If changed   -> 200 OK with new data
 ```
 
 ETags are more precise (they detect any content change). Last-Modified is simpler to
 implement. Either works. ETags are generally preferred.
 
-### Where caching matters most
+<a id="where-caching-matters-most"></a>
+
+## Where Caching Matters Most
 
 - High-traffic read endpoints that return the same data to many users
 - Product listings, pricing, public content
 - Any data that doesn't change per-request
 - Mobile clients (where bandwidth and latency matter more)
 
----
+> [↑ Back to Top](#top)
 
-## 9. Rate Limiting Headers
+<a id="9-rate-limiting"></a>
+
+# 9. Rate Limiting
+
+Arjun's API once got hammered by a single client running an infinite loop in production — 50,000 requests in 2 minutes. Without rate limiting, it would have brought down the service for everyone. With rate limiting headers, the well-behaved clients backed off automatically and only the buggy one got throttled.
 
 Rate limiting controls how many requests a client can make in a given time window.
 Every public API has it. Your API should too.
@@ -714,9 +847,9 @@ Every public API has it. Your API should too.
 The convention for communicating rate limit status in response headers:
 
 ```
-X-RateLimit-Limit: 1000       → max requests per window
-X-RateLimit-Remaining: 842    → requests remaining in current window
-X-RateLimit-Reset: 1609459200 → Unix timestamp when window resets
+X-RateLimit-Limit: 1000       -> max requests per window
+X-RateLimit-Remaining: 842    -> requests remaining in current window
+X-RateLimit-Reset: 1609459200 -> Unix timestamp when window resets
 ```
 
 When the client is rate limited (429 Too Many Requests):
@@ -741,7 +874,9 @@ Retry-After: 60
 `Retry-After` tells the client exactly how many seconds to wait before trying again.
 A well-behaved client reads this and waits, rather than hammering your API.
 
-### What to rate limit on
+<a id="what-to-rate-limit-on"></a>
+
+## What to Rate Limit On
 
 There are several approaches:
 - Per API key / per authenticated user
@@ -752,7 +887,9 @@ There are several approaches:
 Most production systems use **per-user rate limiting** as the primary mechanism. This
 ensures one badly-behaved client can't take down the whole service for everyone.
 
-### Handling 429 in client code
+<a id="handling-429-in-client-code"></a>
+
+## Handling 429 in Client Code
 
 ```python
 import requests
@@ -776,9 +913,13 @@ def make_request_with_retry(url, headers, max_retries=3):
 Always handle 429 gracefully. Never retry immediately on a 429 — that just makes things
 worse and most APIs will penalize you for it.
 
----
+**Common mistake:** Retrying immediately on a 429 without reading the `Retry-After` header. This creates a thundering herd and can get your API key permanently banned.
 
-## Putting It All Together — A Well-Designed API
+> [↑ Back to Top](#top)
+
+<a id="10-putting-it-all-together--a-well-designed-api"></a>
+
+# 10. Putting It All Together — A Well-Designed API
 
 Here's what a well-designed endpoint looks like when you apply all these principles:
 
@@ -838,9 +979,11 @@ What makes this good:
 - Rate limit headers in response
 - Consistent `data` + `pagination` envelope
 
----
+> [↑ Back to Top](#top)
 
-## Quick Reference Checklist
+<a id="11-quick-reference-checklist"></a>
+
+# 11. Quick Reference Checklist
 
 Use this when reviewing an API design:
 
@@ -886,9 +1029,29 @@ Safety:
   [ ] Retry-After header on 429 responses
 ```
 
----
+> [↑ Back to Top](#top)
 
-## Summary
+<a id="learning-priority"></a>
+
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+URL naming conventions (lowercase/hyphens/plural nouns) · pagination (offset vs cursor) · error response structure · versioning strategies
+
+**Should Learn** — Important for real projects, comes up regularly:
+filtering and sorting safety · idempotency keys · HTTP caching headers (ETag/Cache-Control)
+
+**Good to Know** — Useful in specific situations, not always tested:
+sparse fieldsets · rate limiting headers · response envelopes
+
+**Reference** — Know it exists, look up syntax when needed:
+request signing · response compression · backward compatibility testing
+
+> [↑ Back to Top](#top)
+
+<a id="summary"></a>
+
+## 🔥 Summary
 
 ```
 URL Rules:
@@ -932,10 +1095,14 @@ Rate Limiting:
   429 + Retry-After header when exceeded
 ```
 
----
+> [↑ Back to Top](#top)
 
-**[🏠 Back to README](../README.md)**
+## 📂 Navigation
 
-**Prev:** [← REST Fundamentals](../02_rest_fundamentals/rest_explained.md) &nbsp;|&nbsp; **Next:** [Data Formats & Serialization →](../04_data_formats/serialization_guide.md)
+**[Back to README](../README.md)**
 
-**Related Topics:** [REST Fundamentals](../02_rest_fundamentals/rest_explained.md) · [API Versioning](../08_versioning_standards/versioning_strategy.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [API Design Patterns](../16_api_design_patterns/design_guide.md)
+| Prev | Next |
+|------|------|
+| [REST Fundamentals](../02_rest_fundamentals/theory.md) | [Data Formats](../04_data_formats/theory.md) |
+
+**Related Topics:** [REST Fundamentals](../02_rest_fundamentals/theory.md) · [API Versioning](../08_versioning_standards/theory.md) · [Error Handling Standards](../06_error_handling_standards/theory.md) · [API Design Patterns](../16_api_design_patterns/theory.md)

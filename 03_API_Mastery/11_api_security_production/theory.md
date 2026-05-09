@@ -1,34 +1,64 @@
-# 13 — API Security in Production
+<a id="top"></a>
 
-> 📝 **Practice:** [Q59 · webhook-security-hmac](../api_practice_questions_100.md#q59--thinking--webhook-security-hmac)
+# 11. API Security in Production
 
-> Stage 5 covered the fundamentals: JWT, OAuth2, API keys, rate limiting basics. This chapter goes deeper. These are the things that separate an API that's "pretty secure" from one that can stand up to real-world attackers, regulatory audits, and the slow entropy of a production system.
+> Harsha — a Telugu AppSec engineer — stares at the PagerDuty alert on her phone. Someone just made 14,000 login attempts against the company's API in under a minute. The credentials came from a breach dump posted on a Telegram channel three hours ago. Harsha opens her laptop, checks the rate limiter dashboards, and breathes out: the attack was already throttled at the edge. Zero accounts compromised. "This is why we harden before we ship," she says, pouring another cup of chai. "Security is not a launch-day checkbox — it is a living system that earns trust every single request."
 
-> 📝 **Practice:** [Q74 · api-security-owasp](../api_practice_questions_100.md#q74--interview--api-security-owasp)
+**Character: Harsha** — a Telugu AppSec engineer hardening production APIs. She has spent years learning the hard way that "works in staging" and "survives in production" are completely different standards.
 
----
+## Table of Contents
 
-## 📌 Learning Priority
+- [1. The Threat Model Has Changed](#1-the-threat-model-has-changed)
+- [2. HTTPS — Non-Negotiable](#2-https--non-negotiable)
+  - [TLS Termination at the Load Balancer](#tls-termination-at-the-load-balancer)
+  - [HSTS — Tell Browsers to Never Downgrade](#hsts--tell-browsers-to-never-downgrade)
+  - [Certificate Management with Let's Encrypt](#certificate-management-with-lets-encrypt)
+- [3. Input Validation and Sanitization](#3-input-validation-and-sanitization)
+  - [FastAPI + Pydantic: Your First Line of Defense](#fastapi--pydantic-your-first-line-of-defense)
+  - [SQL Injection: ORM as Defense](#sql-injection-orm-as-defense)
+  - [File Upload Validation](#file-upload-validation)
+- [4. Token Security](#4-token-security)
+  - [Short-Lived Access Tokens](#short-lived-access-tokens)
+  - [Refresh Token Rotation](#refresh-token-rotation)
+  - [Token Revocation List in Redis](#token-revocation-list-in-redis)
+  - [Store Tokens in httpOnly Cookies for Browser Apps](#store-tokens-in-httponly-cookies-for-browser-apps)
+- [5. Advanced Rate Limiting](#5-advanced-rate-limiting)
+  - [Per-User, Per-IP, Per-Endpoint](#per-user-per-ip-per-endpoint)
+  - [Sliding Window Rate Limiting](#sliding-window-rate-limiting)
+  - [DDoS Mitigation at the Edge](#ddos-mitigation-at-the-edge)
+  - [Bot Detection Signals](#bot-detection-signals)
+- [6. CORS Configuration in Production](#6-cors-configuration-in-production)
+- [7. Security Headers](#7-security-headers)
+- [8. Audit Logging](#8-audit-logging)
+  - [The Audit Log Middleware](#the-audit-log-middleware)
+  - [Structured Logging for Query-ability](#structured-logging-for-query-ability)
+  - [What to Log vs. What Never to Log](#what-to-log-vs-what-never-to-log)
+  - [Log Retention and Alerting](#log-retention-and-alerting)
+- [9. The Production Security Checklist](#9-the-production-security-checklist)
+- [10. Summary](#10-summary)
 
-**Must Learn** — Core concept, daily use, interview essential:
-HTTPS · input validation · rate limiting · auth security
+**Learning Priority:**
 
-**Should Learn** — Important for real projects:
-OWASP API Top 10 · JWT security
+- **Must Learn** — Core concept, daily use, interview essential: HTTPS, input validation, rate limiting, auth security
+- **Should Learn** — Important for real projects: OWASP API Top 10, JWT security
+- **Good to Know** — Useful in specific situations: API gateway WAF
+- **Reference** — Know it exists, look up syntax when needed: mTLS, certificate pinning
 
-**Good to Know** — Useful in specific situations:
-API gateway WAF
+> **Practice:** [Q59 - webhook-security-hmac](../api_practice_questions_100.md#q59--thinking--webhook-security-hmac) | [Q74 - api-security-owasp](../api_practice_questions_100.md#q74--interview--api-security-owasp)
 
-**Reference** — Know it exists, look up syntax when needed:
-mTLS · certificate pinning
+[Back to Top](#top)
 
----
+<a id="1-the-threat-model-has-changed"></a>
 
-## The Threat Model Has Changed
+# 1. The Threat Model Has Changed
+
+Stage 5 covered the fundamentals: JWT, OAuth2, API keys, rate limiting basics. This chapter goes deeper. These are the things that separate an API that is "pretty secure" from one that can stand up to real-world attackers, regulatory audits, and the slow entropy of a production system.
 
 In staging, the only people calling your API are you and your teammates. In production, the audience is everyone on the internet.
 
 Some of them are legitimate users. Some are bots running credential stuffing attacks. Some are researchers poking at your headers. Some are scrapers. A small number are actively trying to find a way in.
+
+"Think of your API like a bank vault," Harsha explains. "Staging is like having the vault in a private testing facility — only your team has access. Production is putting that vault on a public street corner. The vault itself might be the same, but the threat environment is completely different."
 
 This chapter is not about paranoia. It is about understanding exactly which controls exist at which layer, and making deliberate choices at each one.
 
@@ -55,13 +85,17 @@ Internet traffic arriving at your API:
 
 Every layer has a job. The mistake most teams make is expecting one layer to do all the work.
 
----
+[Back to Top](#top)
 
-## 1. HTTPS — Non-Negotiable
+<a id="2-https--non-negotiable"></a>
+
+# 2. HTTPS — Non-Negotiable
 
 You already know HTTPS matters. What is less obvious in production: exactly where TLS is terminated, and what happens to traffic after that point.
 
-### TLS Termination at the Load Balancer
+<a id="tls-termination-at-the-load-balancer"></a>
+
+## TLS Termination at the Load Balancer
 
 In most production deployments, your application servers never see raw TLS. The load balancer (NGINX, AWS ALB, GCP Load Balancer) terminates the TLS connection, decrypts the traffic, and forwards it to your app over plain HTTP on an internal private network.
 
@@ -103,7 +137,9 @@ server {
 }
 ```
 
-### HSTS — Tell Browsers to Never Downgrade
+<a id="hsts--tell-browsers-to-never-downgrade"></a>
+
+## HSTS — Tell Browsers to Never Downgrade
 
 HTTPS enforcement at the redirect level stops most accidental HTTP requests. HSTS (HTTP Strict Transport Security) tells browsers to never attempt HTTP to your domain, even if a link or redirect points there.
 
@@ -129,7 +165,9 @@ async def enforce_security_headers(request: Request, call_next):
     return response
 ```
 
-### Certificate Management with Let's Encrypt
+<a id="certificate-management-with-lets-encrypt"></a>
+
+## Certificate Management with Let's Encrypt
 
 Let's Encrypt provides free TLS certificates with 90-day validity. The tooling (Certbot) automates renewal.
 
@@ -147,20 +185,26 @@ sudo certbot renew --dry-run
 # and renews certificates when they have fewer than 30 days remaining
 ```
 
-In AWS, ACM (AWS Certificate Manager) handles this automatically for ALB-terminted traffic — certificates are issued and renewed without any manual steps.
+In AWS, ACM (AWS Certificate Manager) handles this automatically for ALB-terminated traffic — certificates are issued and renewed without any manual steps.
 
 The critical point: never let a certificate expire in production. Configure monitoring alerts at 30 days and 14 days before expiry.
 
----
+[Back to Top](#top)
 
-## 2. Input Validation and Sanitization
+<a id="3-input-validation-and-sanitization"></a>
+
+# 3. Input Validation and Sanitization
 
 Every byte arriving from a client should be treated as potentially hostile. Not because users are attackers, but because:
 - You don't know who is actually at the keyboard
 - Client-side validation is trivially bypassed
 - Bugs in client apps can produce unexpected payloads
 
-### FastAPI + Pydantic: Your First Line of Defense
+"I tell every new engineer the same thing," Harsha says. "Never trust the client. Not because users are evil — but because you have no idea who is actually holding the keys to that HTTP client. Validate everything as if a hostile script is on the other end."
+
+<a id="fastapi--pydantic-your-first-line-of-defense"></a>
+
+## FastAPI + Pydantic: Your First Line of Defense
 
 Pydantic handles most input validation automatically when you declare your request schemas. Type mismatches, missing required fields, and constraint violations all return `422 Unprocessable Entity` before your handler code runs.
 
@@ -197,9 +241,9 @@ def search(q: str = Query(..., min_length=1, max_length=100)):
     return results
 ```
 
-> 📝 **Practice:** [Q43 · cors-fastapi](../api_practice_questions_100.md#q43--critical--cors-fastapi)
+<a id="sql-injection-orm-as-defense"></a>
 
-### SQL Injection: ORM as Defense
+## SQL Injection: ORM as Defense
 
 String-concatenating user input into SQL is the classic path to injection attacks. SQLAlchemy's ORM prevents this automatically — query parameters are always passed as bind parameters, never interpolated into the query string.
 
@@ -227,7 +271,9 @@ result = db.execute(
 )
 ```
 
-### File Upload Validation
+<a id="file-upload-validation"></a>
+
+## File Upload Validation
 
 File uploads are a particularly dangerous input vector. Always validate:
 
@@ -271,13 +317,21 @@ async def upload_avatar(file: UploadFile = File(...)):
 
 Never store uploaded files in your app server's local filesystem. Use object storage (S3, GCS, Azure Blob). Never execute uploaded files. Rename files on the server side — never trust the original filename.
 
----
+> **Practice:** [Q43 - cors-fastapi](../api_practice_questions_100.md#q43--critical--cors-fastapi)
 
-## 3. Token Security
+[Back to Top](#top)
+
+<a id="4-token-security"></a>
+
+# 4. Token Security
 
 Stage 5 introduced JWTs and refresh tokens. Production systems need to harden the full token lifecycle.
 
-### Short-Lived Access Tokens
+"Tokens are like house keys," Harsha explains. "A short-lived access token is a visitor badge that expires at the end of the day. A refresh token is the master key — if someone steals it, they own everything until you change the locks."
+
+<a id="short-lived-access-tokens"></a>
+
+## Short-Lived Access Tokens
 
 Access tokens should expire in 15 minutes. This sounds inconvenient, but it is the right trade-off: a stolen access token is usable for at most 15 minutes before it expires.
 
@@ -299,7 +353,9 @@ def create_access_token(user_id: int, roles: list[str]) -> str:
     return jwt.encode(payload, settings.SECRET_KEY, algorithm="RS256")
 ```
 
-### Refresh Token Rotation
+<a id="refresh-token-rotation"></a>
+
+## Refresh Token Rotation
 
 Every time a refresh token is used to obtain a new access token, issue a new refresh token and invalidate the old one. This is called refresh token rotation.
 
@@ -360,7 +416,9 @@ def refresh_token(body: RefreshTokenRequest):
     }
 ```
 
-### Token Revocation List in Redis
+<a id="token-revocation-list-in-redis"></a>
+
+## Token Revocation List in Redis
 
 Access tokens are stateless: once issued, they are valid until expiry. But you need to be able to invalidate them immediately (user logs out, account compromised, admin revocation).
 
@@ -390,9 +448,11 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     return payload
 ```
 
-> 📝 **Practice:** [Q94 · debug-auth-middleware](../api_practice_questions_100.md#q94--debug--debug-auth-middleware)
+> **Practice:** [Q94 - debug-auth-middleware](../api_practice_questions_100.md#q94--debug--debug-auth-middleware)
 
-### Store Tokens in httpOnly Cookies for Browser Apps
+<a id="store-tokens-in-httponly-cookies-for-browser-apps"></a>
+
+## Store Tokens in httpOnly Cookies for Browser Apps
 
 If your API is consumed by a browser-based frontend, store tokens in `httpOnly` cookies rather than `localStorage`.
 
@@ -432,13 +492,17 @@ def login(response: Response, body: LoginRequest):
 
 The trade-off: `httpOnly` cookies require CSRF protection (handled automatically by `samesite="strict"`). For APIs consumed by mobile apps or non-browser clients, `Authorization: Bearer` headers remain appropriate.
 
----
+[Back to Top](#top)
 
-## 4. Advanced Rate Limiting
+<a id="5-advanced-rate-limiting"></a>
+
+# 5. Advanced Rate Limiting
 
 Stage 5 introduced rate limiting with a fixed-window Redis counter. Production systems need more nuance.
 
-### Per-User, Per-IP, Per-Endpoint
+<a id="per-user-per-ip-per-endpoint"></a>
+
+## Per-User, Per-IP, Per-Endpoint
 
 Different limits for different scenarios:
 
@@ -466,7 +530,9 @@ def rate_limit_key(request: Request, tier: RateLimitTier) -> str:
 
 Apply tighter limits to authentication endpoints specifically. Brute-force attacks against `/auth/login` are extremely common. Ten attempts per minute per IP is generous for real users and completely defeats automated credential stuffing.
 
-### Sliding Window Rate Limiting
+<a id="sliding-window-rate-limiting"></a>
+
+## Sliding Window Rate Limiting
 
 Fixed window has an edge case: a client can make 100 requests at 00:59 and 100 more at 01:00, effectively getting 200 requests in 2 seconds. Sliding window eliminates this.
 
@@ -503,7 +569,9 @@ def sliding_window_rate_limit(
 
 The memory cost is O(requests_in_window) rather than O(1) for fixed window. For most APIs this is acceptable. At very high scale, use a probabilistic approach or a counter-based approximation.
 
-### DDoS Mitigation at the Edge
+<a id="ddos-mitigation-at-the-edge"></a>
+
+## DDoS Mitigation at the Edge
 
 Your application should not be the thing that absorbs a volumetric DDoS attack. By the time 50,000 requests per second reach your FastAPI application, your infrastructure is already struggling.
 
@@ -527,7 +595,9 @@ Your Application
 
 Configure Cloudflare (or equivalent) to rate limit by IP before requests reach your origin servers. A rule like "block IPs making more than 500 requests per minute" costs Cloudflare nothing and saves your servers from the majority of volumetric attacks.
 
-### Bot Detection Signals
+<a id="bot-detection-signals"></a>
+
+## Bot Detection Signals
 
 Legitimate humans have recognizable behavioral patterns that bots typically do not:
 
@@ -563,13 +633,15 @@ def bot_detection_score(request: Request) -> int:
 
 This is heuristic. Production-grade bot detection (Cloudflare Bot Management, Akamai Bot Manager, DataDome) uses many more signals — TLS fingerprinting, mouse movement patterns, JavaScript execution analysis — and machine learning models trained on billions of requests.
 
----
+[Back to Top](#top)
 
-## 5. CORS Configuration in Production
+<a id="6-cors-configuration-in-production"></a>
 
-> 📝 **Practice:** [Q11 · cors-basics](../api_practice_questions_100.md#q11--normal--cors-basics)
+# 6. CORS Configuration in Production
 
 Wildcard CORS (`Access-Control-Allow-Origin: *`) is fine for public read-only APIs. It is wrong for any API that handles authentication or user data.
+
+"CORS misconfiguration is in the OWASP API Top 10 for a reason," Harsha notes. "I have seen production APIs that allowed any origin to make authenticated requests. That is essentially giving every website on the internet a master key to your users' data."
 
 ```python
 from fastapi.middleware.cors import CORSMiddleware
@@ -591,9 +663,6 @@ app.add_middleware(
     max_age=86400,                          # browser caches preflight for 24 hours
 )
 ```
-
-> 📝 **Practice:** [Q95 · debug-cors-prod](../api_practice_questions_100.md#q95--debug--debug-cors-prod)
-
 
 If you need to dynamically validate origins against a database allowlist (e.g., for a multi-tenant SaaS where each tenant has their own frontend domain):
 
@@ -628,9 +697,13 @@ async def dynamic_cors(request: Request, call_next):
     return response
 ```
 
----
+> **Practice:** [Q11 - cors-basics](../api_practice_questions_100.md#q11--normal--cors-basics) | [Q95 - debug-cors-prod](../api_practice_questions_100.md#q95--debug--debug-cors-prod)
 
-## 6. Security Headers
+[Back to Top](#top)
+
+<a id="7-security-headers"></a>
+
+# 7. Security Headers
 
 Every response from a production API should include a standard set of security headers. These cost nothing and defend against an entire class of browser-based attacks.
 
@@ -700,13 +773,19 @@ Strict-Transport-Security: max-age=31536000
 
 Validate your headers with securityheaders.com (a free tool that scores your headers and explains what is missing).
 
----
+[Back to Top](#top)
 
-## 7. Audit Logging
+<a id="8-audit-logging"></a>
+
+# 8. Audit Logging
 
 Every significant action in a production system should be logged with enough context to reconstruct what happened, who did it, and when. This is not optional in regulated industries — PCI-DSS, HIPAA, SOC 2, and GDPR all require audit trails.
 
-### The Audit Log Middleware
+"Audit logs are your black box recorder," Harsha says. "When something goes wrong — and it will — the first question everyone asks is 'what happened?' If you cannot answer that question from your logs, you have failed before the incident even started."
+
+<a id="the-audit-log-middleware"></a>
+
+## The Audit Log Middleware
 
 ```python
 import logging
@@ -738,7 +817,9 @@ async def audit_log(request: Request, call_next):
     return response
 ```
 
-### Structured Logging for Query-ability
+<a id="structured-logging-for-query-ability"></a>
+
+## Structured Logging for Query-ability
 
 Audit logs are only useful if you can query them. Use structured logging (JSON lines) so your log aggregator (Datadog, Elasticsearch, Splunk, CloudWatch Logs Insights) can parse and query them.
 
@@ -767,30 +848,34 @@ log.warning(
 )
 ```
 
-### What to Log vs. What Never to Log
+<a id="what-to-log-vs-what-never-to-log"></a>
+
+## What to Log vs. What Never to Log
 
 ```
 ALWAYS LOG:
-  ✓ Authentication events (login, logout, failed login)
-  ✓ Authorization failures (forbidden resource access attempts)
-  ✓ All write operations (POST, PUT, DELETE, PATCH) + who did them
-  ✓ Admin actions (permission changes, user role assignments)
-  ✓ Data export / bulk operations
-  ✓ Payment and billing events
-  ✓ Account changes (email, password, 2FA)
+  - Authentication events (login, logout, failed login)
+  - Authorization failures (forbidden resource access attempts)
+  - All write operations (POST, PUT, DELETE, PATCH) + who did them
+  - Admin actions (permission changes, user role assignments)
+  - Data export / bulk operations
+  - Payment and billing events
+  - Account changes (email, password, 2FA)
 
 NEVER LOG:
-  ✗ Passwords (raw or hashed)
-  ✗ Full credit card numbers, CVVs
-  ✗ Access tokens or API keys (even partial can be dangerous)
-  ✗ Session tokens or cookies
-  ✗ Social security numbers, passport numbers
-  ✗ Full PII in request bodies (log user_id, not the full address)
+  - Passwords (raw or hashed)
+  - Full credit card numbers, CVVs
+  - Access tokens or API keys (even partial can be dangerous)
+  - Session tokens or cookies
+  - Social security numbers, passport numbers
+  - Full PII in request bodies (log user_id, not the full address)
 ```
 
 A useful mental test: if this log file were to leak, what would an attacker learn from it? If the answer is "they could impersonate users" or "they could commit fraud," you are logging too much.
 
-### Log Retention and Alerting
+<a id="log-retention-and-alerting"></a>
+
+## Log Retention and Alerting
 
 Configure retention policies that match your compliance requirements:
 - PCI-DSS: 12 months with 3 months immediately available
@@ -803,16 +888,18 @@ Set up real-time alerts for security-relevant patterns:
 - A single user making DELETE requests at a rate that looks like a script
 - Any request that returns a 403 on an admin endpoint
 
----
+[Back to Top](#top)
 
-## 8. The Production Security Checklist
+<a id="9-the-production-security-checklist"></a>
+
+# 9. The Production Security Checklist
 
 Every API that reaches production should pass this checklist:
 
 ```
 TRANSPORT
   [ ] HTTPS enforced everywhere, HTTP redirects to HTTPS
-  [ ] HSTS header set (max-age ≥ 1 year)
+  [ ] HSTS header set (max-age >= 1 year)
   [ ] TLS 1.2 minimum, TLS 1.3 preferred
   [ ] Certificate auto-renewal configured and monitored
 
@@ -823,7 +910,7 @@ INPUT
   [ ] Request body size limits configured at load balancer level
 
 TOKENS
-  [ ] Access tokens expire in ≤ 15 minutes
+  [ ] Access tokens expire in <= 15 minutes
   [ ] Refresh token rotation implemented
   [ ] Token revocation via Redis jti blocklist
   [ ] Tokens in httpOnly cookies for browser clients (not localStorage)
@@ -832,7 +919,7 @@ TOKENS
 RATE LIMITING
   [ ] Per-IP limits on public endpoints
   [ ] Per-user limits on authenticated endpoints
-  [ ] Tight limits (≤ 10/min) on auth endpoints (login, password reset)
+  [ ] Tight limits (<=10/min) on auth endpoints (login, password reset)
   [ ] DDoS mitigation at CDN/edge layer, not just application layer
   [ ] 429 responses include Retry-After header
 
@@ -865,10 +952,27 @@ SECRETS
 
 Security is a continuous process, not a deployment step. Run this checklist on every significant release. Add it to your CI pipeline where you can automate the checks.
 
----
+[Back to Top](#top)
 
-**[🏠 Back to README](../README.md)**
+<a id="10-summary"></a>
 
-**Prev:** [← API Documentation](../10_testing_documentation/docs_that_work.md) &nbsp;|&nbsp; **Next:** [Production Deployment →](../12_production_deployment/deployment_guide.md)
+# 10. Summary
 
-**Related Topics:** [Authentication & Authorization](../05_authentication/securing_apis.md) · [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [API Gateway Patterns](../15_api_gateway/gateway_patterns.md)
+| Layer | Key Control | Harsha's Rule |
+|-------|-------------|---------------|
+| Transport | HTTPS + HSTS + cert monitoring | "Never let a cert expire. Set alerts at 30 and 14 days." |
+| Input | Pydantic + parameterized queries + magic-byte file checks | "Never trust the client. Validate as if a hostile script is calling." |
+| Tokens | 15-min access, rotation, Redis revocation, httpOnly cookies | "Short-lived tokens limit blast radius. Rotation detects theft." |
+| Rate Limiting | Per-IP, per-user, per-endpoint + edge DDoS | "Your app should never absorb a volumetric attack directly." |
+| CORS | Explicit allowlist, never wildcard for auth'd APIs | "Wildcard CORS on auth'd endpoints = giving every site a master key." |
+| Headers | nosniff, DENY, CSP, HSTS, no version leaks | "Free defenses. Zero cost, entire attack classes eliminated." |
+| Audit | Structured JSON logs, retention, real-time alerts | "Logs are your black box. If you cannot answer 'what happened?', you failed." |
+| Secrets | Env vars or secrets manager, rotation, least-privilege | "If it is in git, assume it is compromised." |
+
+[Back to Top](#top)
+
+**[Back to README](../README.md)**
+
+**Prev:** [Testing and Documentation](../10_testing_documentation/theory.md) | **Next:** [Production Deployment](../12_production_deployment/theory.md)
+
+**Related Topics:** [Authentication & Authorization](../05_authentication/theory.md) | [Error Handling Standards](../06_error_handling_standards/theory.md) | [Production Deployment](../12_production_deployment/theory.md) | [API Gateway Patterns](../15_api_gateway/theory.md)

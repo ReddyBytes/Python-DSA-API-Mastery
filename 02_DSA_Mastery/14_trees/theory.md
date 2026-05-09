@@ -1,42 +1,32 @@
 <a id="top"></a>
-# Trees — The Structure of Hierarchy
-
-> If arrays are straight roads,
-> trees are branching paths.
->
-> Trees represent relationships.
-> Parent → Child.
-> Root → Branch → Leaf.
->
-> Trees help us organize information in a structured way.
-
-Trees are everywhere.
-Not just in DSA.
-In life.
+# 📘 14 – Trees in Python
 
 ## 📖 Table of Contents
 
-1. [Real Life Story — Family Tree](#1-real-life-story)
-2. [Why Do We Need Trees?](#2-why-trees)
-3. [What Is a Tree (Definition)](#3-definition)
-4. [Basic Terminology](#4-terminology)
-5. [Binary Tree — Most Important Type](#5-binary-tree)
-6. [How Is Tree Stored in Python?](#6-python-storage)
-7. [Tree Traversal — Exploring the Tree](#7-traversal)
-8. [Visual Traversal Example](#8-visual-traversal)
-9. [Recursion and Trees](#9-recursion)
-10. [Height of Tree](#10-height)
-11. [Balanced vs Skewed Tree](#11-balanced-vs-skewed)
-12. [Why Trees Are Powerful](#12-why-powerful)
-13. [Real-World Applications](#13-real-world)
-14. [Mental Model to Remember](#14-mental-model)
-15. [Final Understanding](#15-final-understanding)
-16. [Level-Order Traversal — BFS on Trees](#16-level-order)
-17. [Tree Serialization — Store and Rebuild Any Tree](#17-serialization)
-18. [Top-Down vs Bottom-Up Thinking](#18-top-down-bottom-up)
-19. [Path Problems](#19-path-problems)
-20. [LCA — Lowest Common Ancestor](#20-lca)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is a Tree?](#1-what-is-a-tree)
+  - [Visual: Family Tree with Vocabulary](#visual-family-tree)
+  - [Why Trees?](#why-trees)
+- [2. Tree Terminology](#2-terminology)
+  - [Visual: Height vs Depth](#visual-height-depth)
+- [3. Binary Tree](#3-binary-tree)
+  - [Visual: Common Shapes](#visual-shapes)
+- [4. How Trees Are Stored in Python](#4-python-storage)
+- [5. Tree Traversal](#5-traversal)
+  - [Visual: All 4 Traversals Step by Step](#visual-all-traversals)
+  - [Level-Order Traversal (BFS)](#level-order)
+- [6. Recursion and Trees](#6-recursion)
+  - [Visual: Recursive Call Stack](#visual-call-stack)
+- [7. Height of Tree](#7-height)
+- [8. Balanced vs Skewed](#8-balanced-skewed)
+- [9. Tree Serialization](#9-serialization)
+- [10. Advanced Tree Patterns](#10-advanced)
+  - [Top-Down vs Bottom-Up](#top-down-bottom-up)
+  - [Path Problems](#path-problems)
+  - [LCA — Lowest Common Ancestor](#lca)
+- [🔥 Summary](#summary)
 
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -46,327 +36,267 @@ tree terminology · binary tree structure · inorder/preorder/postorder traversa
 recursion pattern for trees · tree serialization · height and depth · balanced vs skewed
 
 **Good to Know** — Useful in specific situations, not always tested:
-path sum problems · tree reconstruction from traversals
+path sum problems · tree reconstruction from traversals · LCA
 
 **Reference** — Know it exists, look up syntax when needed:
-Morris traversal · N-ary trees
+Morris traversal · N-ary trees · threaded binary trees
 
-<a id="1-real-life-story"></a>
-# 1. Real Life Story — Family Tree
+Rowan is a botanist. He studies real trees — not the ones with leaves and bark, but the abstract structures that mirror how nature organizes information. A tree starts at one root, branches into children, and spreads outward until it reaches leaves. No cycles. No shortcuts. Just a clean hierarchy from top to bottom. Today Rowan will learn why this structure is the backbone of file systems, databases, compilers, and nearly every interview problem involving hierarchical data.
 
-Imagine your family.
+<a id="1-what-is-a-tree"></a>
+# 1. What Is a Tree?
 
-You have:
-
-- Grandfather
-- His children
-- Their children
-- And so on
-
-It looks like:
+Rowan starts with the most natural tree he knows — his own family tree. Grandparents at the top (the root), parents in the middle (internal nodes), and himself and his siblings at the bottom (leaves). Each person has exactly one parent. No person is their own ancestor. That is a tree.
 
 ```
-        Grandfather
-        /        \
-    Father       Uncle
-    /    \           \
- You   Sister      Cousin
+Rowan's Family Tree:
+
+         Grandfather
+         /          \
+     Father        Uncle
+     /    \          |
+  Rowan  Sister   Cousin
 ```
 
-This is a tree.
-
-It has:
-
-- One root (Grandfather)
-- Branches (children)
-- Leaves (last generation)
-
-This is hierarchical structure.
-
+<a id="visual-family-tree"></a>
 ## Visual: Family Tree with Full Vocabulary
 
 ```
-                    [Grandparent]          ← ROOT (depth 0, level 1)
-                    /           \
-            [Parent A]        [Parent B]   ← depth 1
-            /       \              \
-        [Child1] [Child2]       [Child3]   ← depth 2 (LEAVES)
+           [A]  ← Root (no parent)
+          /   \
+        [B]   [C]  ← Children of A, Siblings of each other
+       / | \    |
+     [D][E][F] [G]  ← D,E,F are children of B; G is child of C
+         |
+        [H]  ← H is child of E, grandchild of B
+
+Vocabulary:
+  Root:     A (the topmost node, has no parent)
+  Parent:   B is parent of D, E, F
+  Child:    D, E, F are children of B
+  Leaf:     D, F, G, H (nodes with no children)
+  Subtree:  B and everything below it is a subtree
+  Siblings: B and C share the same parent (A)
+  Ancestor: A and B are ancestors of H
+  Depth:    Distance from root (A=0, B=1, E=2, H=3)
+  Height:   Distance from deepest leaf (H=0, E=1, B=2, A=3)
 ```
 
-**Vocabulary mapped to family tree:**
-```
-  ROOT        = Grandparent (no parent)
-  LEAF        = Child with no children
-  PARENT      = Any node with children below it
-  CHILD       = Any node with a parent above it
-  SIBLING     = Nodes sharing the same parent
-  SUBTREE     = A node + all its descendants
-  ANCESTOR    = Any node on path from node → root
-  DESCENDANT  = Any node reachable going downward
-```
+<a id="why-trees"></a>
+## Why Trees?
 
-> [↑ Back to Top](#top)
+Rowan asks: "Why not just use arrays or linked lists?" Because not everything is linear. Many real-world relationships are hierarchical:
 
-<a id="2-why-trees"></a>
-# 2. Why Do We Need Trees?
+- File systems (folders inside folders)
+- Organization charts (managers → reports)
+- HTML/XML documents (nested tags)
+- Decision making (yes/no branches)
+- Database indexes (B-trees for fast search)
 
-Not everything is linear.
+Trees represent **one-to-many** relationships. Arrays can only represent sequences. Trees model hierarchy.
 
-Examples:
-
-- Company structure
-- File system
-- Organization chart
-- Website DOM
-- Decision trees
-- Game states
-
-Linear structures cannot model branching relationships.
-
-Trees can.
-
-> [↑ Back to Top](#top)
-
-<a id="3-definition"></a>
-# 3. What Is a Tree (Definition)
+A tree is defined by these properties:
+- One root node (no parent)
+- Every other node has exactly one parent
+- No cycles (you can never loop back to an ancestor)
+- Connected (every node is reachable from the root)
 
 > 📝 **Practice:** [Q1 · tree-node-definition](./practice.md#q1--tree-node-definition)
 
-A tree is a hierarchical data structure consisting of:
-
-- Nodes
-- Edges
-- Root node
-- Parent-child relationships
-
-Properties:
-
-- One root
-- No cycles
-- Exactly one path between two nodes
-
-If there is a cycle → it becomes a graph.
-
 > [↑ Back to Top](#top)
 
-<a id="4-terminology"></a>
-# 4. Basic Terminology (Very Important)
+<a id="2-terminology"></a>
+# 2. Tree Terminology
 
-Let's understand deeply.
+Rowan memorizes the vocabulary that interviewers use constantly. Getting these wrong in an interview signals "has not studied trees."
 
-## Node
+| Term | Meaning |
+|---|---|
+| **Node** | A single element in the tree (holds data + references to children) |
+| **Root** | The topmost node (has no parent) |
+| **Parent** | The node directly above (every non-root node has exactly one) |
+| **Child** | A node directly below |
+| **Leaf** | A node with no children (terminal node) |
+| **Subtree** | A node and all its descendants |
+| **Height** | Distance from a node down to its deepest leaf |
+| **Depth** | Distance from the root down to a node |
+| **Level** | All nodes at the same depth |
+| **Degree** | Number of children a node has |
 
-Each element in tree.
-
-Example:
-
-```
-A
-```
-
-A is node.
-
-## Root
-
-Topmost node.
-
-Only one root.
-
-## Parent
-
-Node that has children.
-
-## Child
-
-Node connected below parent.
-
-## Leaf
-
-Node with no children.
-
-## Subtree
-
-Tree inside tree.
-
-## Height
-
-Number of edges from root to deepest leaf.
-
-## Depth
-
-Distance from root to a node.
-
+<a id="visual-height-depth"></a>
 ## Visual: Height vs Depth
 
+These are the most commonly confused terms. Height goes DOWN. Depth goes DOWN FROM ROOT.
+
 ```
-                    A           ← depth 0
-                   / \
-                  B   C         ← depth 1
-                 / \
-                D   E           ← depth 2
+            [A]        depth=0, height=3
+           /   \
+         [B]   [C]     depth=1, height=2 (B), height=1 (C)
+        /   \    \
+      [D]   [E]  [F]   depth=2, height=0 (D,F), height=1 (E)
+             |
+            [G]         depth=3, height=0
 
-  DEPTH of a node   = distance from ROOT to that node
-  HEIGHT of a node  = distance from that node to the DEEPEST LEAF below it
+Height of a node = longest path DOWN to a leaf
+Depth of a node = path from root DOWN to that node
 
-  Node   Depth   Height
-  ────   ─────   ──────
-  A        0       2      ← height of tree = height of root
-  B        1       1
-  C        1       0      ← C is a leaf, height = 0
-  D        2       0      ← leaf
-  E        2       0      ← leaf
-
-  Mental model:
-  DEPTH  = how far DOWN from the top am I?   (counting from root)
-  HEIGHT = how far DOWN can I still go?      (counting to deepest leaf)
+Height of TREE = height of root = 3
+Depth of TREE = maximum depth of any node = 3
 ```
 
-**Common mistake — depth vs height confusion:** Depth counts distance FROM the root DOWN to a node; height counts distance FROM a node DOWN to its deepest leaf. They run in opposite directions — depth increases going down, height decreases going down.
+```
+CRITICAL: height is measured from the BOTTOM up.
+          depth is measured from the TOP down.
+
+Think of it like a building:
+  - The HEIGHT of a building is measured from ground UP
+  - The DEPTH of a basement is measured from ground DOWN
+  - Root is the ground floor
+```
 
 > [↑ Back to Top](#top)
 
-<a id="5-binary-tree"></a>
-# 5. Binary Tree — Most Important Type
+<a id="3-binary-tree"></a>
+# 3. Binary Tree
 
-Binary Tree means:
+Rowan learns that the most important type of tree in DSA is the **binary tree** — where each node has at most 2 children (left and right). This constraint makes traversal patterns elegant and enables powerful algorithms.
 
-Each node has at most 2 children.
-
-Left child.
-Right child.
-
-Example:
+Binary Tree means: each node has at most 2 children.
 
 ```
-       1
-      / \
-     2   3
-    / \
-   4   5
+Binary (max 2 children):       Not binary (3 children):
+
+       [A]                          [A]
+      /   \                       / | \
+    [B]   [C]                   [B][C][D]
+   /   \
+ [D]   [E]
 ```
 
+<a id="visual-shapes"></a>
 ## Visual: Common Binary Tree Shapes
 
-### Perfect Binary Tree — Every level is completely full
-
 ```
-            1
-           / \
-          2   3
-         / \ / \
-        4  5 6  7
+Perfect Binary Tree — Every level is completely full:
 
-  All leaves at same depth.
-  Nodes = 2^(h+1) - 1  where h = height
-```
+           [1]
+          /   \
+        [2]   [3]
+       / \   / \
+     [4][5] [6][7]
 
-### Complete Binary Tree — All levels full except last; last level filled left-to-right
+Every non-leaf has exactly 2 children.
+All leaves are at the same level.
+n nodes in a perfect tree of height h: n = 2^(h+1) - 1
 
-```
-            1
-           / \
-          2   3
-         / \ /
-        4  5 6          ← last level filled LEFT to RIGHT
 
-  Used in heaps (can be stored as array efficiently).
-  NOT complete:       1
-                     / \
-                    2   3
-                   / \   \
-                  4   5   7   ← gap on left before filling right
-```
+Complete Binary Tree — All levels full except possibly last (filled left to right):
 
-### Degenerate (Skewed) Tree — Every node has at most 1 child
+           [1]
+          /   \
+        [2]   [3]
+       / \   /
+     [4][5] [6]
 
-```
-  Left-skewed:        Right-skewed:
-  1                         1
-   \                        \
-    2                        2
-     \                        \
-      3                        3
-       \                        \
-        4                        4
+Used in: heaps (always a complete binary tree).
 
-  Behaves like a linked list.
-  All operations degrade from O(log n) → O(n).
-  This is why balanced BSTs (AVL, Red-Black) exist.
+
+Full Binary Tree — Every node has either 0 or 2 children (never 1):
+
+           [1]
+          /   \
+        [2]   [3]
+             / \
+           [4] [5]
+
+
+Skewed Binary Tree — Every node has only one child:
+
+    [1]
+      \
+      [2]
+        \
+        [3]
+          \
+          [4]
+
+This is essentially a linked list — O(n) height.
 ```
 
 > [↑ Back to Top](#top)
 
-<a id="6-python-storage"></a>
-# 6. How Is Tree Stored in Python?
+<a id="4-python-storage"></a>
+# 4. How Trees Are Stored in Python
 
-Node structure:
+Rowan learns that Python does not have a built-in tree class. He builds one from scratch — each node is an object with a value and two pointers.
 
 ```python
 class TreeNode:
-    def __init__(self, val):
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 ```
 
-Each node stores:
-- Value
-- Left pointer
-- Right pointer
-
-Tree is connected through references.
-
-**Common mistake — null check order:** Always check `if node is None` before accessing `node.val`, `node.left`, or `node.right`. Accessing any attribute on `None` crashes with `AttributeError: 'NoneType' object has no attribute 'val'`.
+Building a tree:
 
 ```python
-# WRONG: accessing node.val BEFORE checking if node is None
-def search(node, target):
-    if node.val == target:        # CRASH when node is None
-        return True
+#       1
+#      / \
+#     2   3
+#    / \
+#   4   5
 
-# CORRECT: check None FIRST, before accessing any attribute
-def search(node, target):
-    if node is None:
-        return False              # base case: fell off the tree
-    if node.val == target:
-        return True
-    if node.val > target:
-        return search(node.left, target)
-    return search(node.right, target)
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
 ```
+
+Each node exists independently on the heap. They are connected only by `left` and `right` references — just like linked list nodes.
 
 > [↑ Back to Top](#top)
 
-<a id="7-traversal"></a>
-# 7. Tree Traversal — Exploring the Tree
+<a id="5-traversal"></a>
+# 5. Tree Traversal
 
-> 📝 **Practice:** [Q2–Q8 · all-traversals](./practice.md#q2--inorder-traversal-recursive) | [Q16 · dfs-vs-bfs](./practice.md#q16--dfs-vs-bfs-on-trees-when-to-use-each) | [Q17 · inorder-and-sorted](./practice.md#q17--when-does-inorder-give-sorted-output)
+Rowan needs to visit every node in his tree. But unlike a linear array where you just go left to right, a tree branches — you must choose a strategy. There are four fundamental orderings, and they determine the order in which nodes are visited.
 
-Traversal means:
-Visiting all nodes.
+**DFS (Depth-First Search)** — go deep before going wide:
+- **Inorder:** Left → Root → Right (gives sorted order for BSTs)
+- **Preorder:** Root → Left → Right (used for serialization)
+- **Postorder:** Left → Right → Root (used for deletion/evaluation)
 
-Three main types:
+**BFS (Breadth-First Search)** — go wide before going deep:
+- **Level-order:** Level by level, left to right
 
-> 📝 **Practice:** [Q35 · binary-tree-traversal](../dsa_practice_questions_100.md#q35--logical--binary-tree-traversal)
+```python
+# Inorder (Left → Root → Right)
+def inorder(node):
+    if not node: return
+    inorder(node.left)
+    print(node.val)
+    inorder(node.right)
 
-## Inorder (Left → Root → Right)
+# Preorder (Root → Left → Right)
+def preorder(node):
+    if not node: return
+    print(node.val)
+    preorder(node.left)
+    preorder(node.right)
 
+# Postorder (Left → Right → Root)
+def postorder(node):
+    if not node: return
+    postorder(node.left)
+    postorder(node.right)
+    print(node.val)
 ```
-Visit left
-Visit node
-Visit right
-```
 
-Used in BST to get sorted order.
+> 📝 **Practice:** [Q2–Q8 · all-traversals](./practice.md#q2--inorder-traversal-recursive)
 
-## Preorder (Root → Left → Right)
-
-Used for copying tree.
-
-## Postorder (Left → Right → Root)
-
-Used for deletion.
-
+<a id="visual-all-traversals"></a>
 ## Visual: All 4 Traversals Step by Step
 
 ```
@@ -379,7 +309,7 @@ Used for deletion.
                 4   5   6
 ```
 
-### DFS — Preorder (Root → Left → Right)
+## DFS — Preorder (Root → Left → Right)
 
 Visit the node BEFORE visiting children. "Check in first, explore later."
 
@@ -396,7 +326,7 @@ Step 8: 3 has no left child, go right, visit 6  →  [1, 2, 4, 5, 3, 6]
 Result:  1 → 2 → 4 → 5 → 3 → 6
 ```
 
-### DFS — Inorder (Left → Root → Right)
+## DFS — Inorder (Left → Root → Right)
 
 Visit left subtree, THEN node, THEN right. "Explore left, check in, explore right."
 **In a BST, inorder gives SORTED order!**
@@ -413,7 +343,7 @@ Step 7: go to 3's right, visit 6  →  [4, 2, 5, 1, 3, 6]
 Result:  4 → 2 → 5 → 1 → 3 → 6
 ```
 
-### DFS — Postorder (Left → Right → Root)
+## DFS — Postorder (Left → Right → Root)
 
 Visit children BEFORE the node itself. "Explore everything before checking in."
 **Used for: deleting trees, evaluating expression trees.**
@@ -432,7 +362,7 @@ Step 9: both children of 1 done, visit 1  →  [4, 5, 2, 6, 3, 1]
 Result:  4 → 5 → 2 → 6 → 3 → 1
 ```
 
-### BFS — Level-order (Level by Level)
+## BFS — Level-order (Level by Level)
 
 Use a queue. Visit all nodes at depth d before depth d+1.
 
@@ -446,7 +376,7 @@ Queue state:       Visited:
 Result:  1 → 2 → 3 → 4 → 5 → 6
 ```
 
-### Side-by-Side Summary
+## Side-by-Side Summary
 
 ```
            Tree:        1
@@ -460,371 +390,77 @@ Inorder:    [4,  2,  5,  1,  3,  6]   ← left first
 Postorder:  [4,  5,  2,  6,  3,  1]   ← root last
 Level-order:[1,  2,  3,  4,  5,  6]   ← breadth first
 ```
+  Go right from 2: visit 5 (leaf, backtrack)
+  Go right from 1: visit 3
+  Go right: visit 6
 
-> [↑ Back to Top](#top)
-
-<a id="8-visual-traversal"></a>
-# 8. Visual Traversal Example
-
-```
-       1
-      / \
-     2   3
-    / \
-   4   5
+Output: [1, 2, 4, 5, 3, 6]
 ```
 
-Inorder:
-4 2 5 1 3
+```
+DFS — Inorder (Left → Root → Right):
 
-Preorder:
-1 2 4 5 3
+Visit order: 4 → 2 → 5 → 1 → 3 → 6
 
-Postorder:
-4 5 2 3 1
+Process:
+  Go left from 1 → go left from 2 → hit 4 (leaf)
+  Visit 4
+  Back to 2: visit 2
+  Go right from 2: visit 5
+  Back to 1: visit 1
+  Go right from 1 → visit 3
+  Go right from 3: visit 6
 
-Traversal order changes meaning.
-
-> [↑ Back to Top](#top)
-
-<a id="9-recursion"></a>
-# 9. Recursion and Trees
-
-> 📝 **Practice:** [Q9 · tree-height](./practice.md#q9--tree-height) · [Q10 · count-nodes](./practice.md#q10--count-nodes) · [Q11 · symmetric](./practice.md#q11--check-symmetric-tree) · [Q12 · balanced](./practice.md#q12--check-balanced-tree)
-
-Trees are naturally recursive.
-
-Why?
-
-Each subtree is itself a tree.
-
-Recursive thinking fits perfectly.
-
-Example:
-
-```python
-def inorder(root):
-    if not root:
-        return
-    inorder(root.left)
-    print(root.val)
-    inorder(root.right)
+Output: [4, 2, 5, 1, 3, 6]
 ```
 
-Recursion mirrors structure.
-
-## Visual: Recursive Call Stack — Inorder Traversal
-
-Each function call either processes a node or returns immediately on None.
-
 ```
-inorder(1)
-├── inorder(2)
-│   ├── inorder(4)
-│   │   ├── inorder(None) → return   ← left of 4
-│   │   ├── VISIT 4  →  output: 4
-│   │   └── inorder(None) → return   ← right of 4
-│   ├── VISIT 2  →  output: 2
-│   └── inorder(5)
-│       ├── inorder(None) → return   ← left of 5
-│       ├── VISIT 5  →  output: 5
-│       └── inorder(None) → return   ← right of 5
-├── VISIT 1  →  output: 1
-└── inorder(3)
-    ├── inorder(None) → return        ← left of 3
-    ├── VISIT 3  →  output: 3
-    └── inorder(6)
-        ├── inorder(None) → return    ← left of 6
-        ├── VISIT 6  →  output: 6
-        └── inorder(None) → return    ← right of 6
+DFS — Postorder (Left → Right → Root):
 
-Call stack at deepest point:
-┌─────────────┐
-│ inorder(None)│  ← top (returns immediately)
-├─────────────┤
-│ inorder(4)  │
-├─────────────┤
-│ inorder(2)  │
-├─────────────┤
-│ inorder(1)  │  ← bottom (first call)
-└─────────────┘
+Visit order: 4 → 5 → 2 → 6 → 3 → 1
+
+Process:
+  Go all the way down-left: hit 4 → visit 4
+  Go right from 2: visit 5
+  Now visit 2 (both children done)
+  Go right from 1: go right from 3: visit 6
+  Visit 3 (children done)
+  Visit 1 (root last!)
+
+Output: [4, 5, 2, 6, 3, 1]
 ```
 
-**Common mistake — missing `return` in recursive calls:** If you forget `return` before a recursive call, the result is computed and immediately discarded — the function returns `None` implicitly. Every code path that produces a value must have an explicit `return` statement.
+```
+BFS — Level-order (Level by Level):
 
-```python
-# WRONG: result of recursion is discarded
-def find_node(node, target):
-    if node is None:
-        return None
-    if node.val == target:
-        return node
-    if node.val > target:
-        find_node(node.left, target)   # missing return — returns None
-    else:
-        find_node(node.right, target)  # missing return — returns None
+Level 0: [1]
+Level 1: [2, 3]
+Level 2: [4, 5, 6]
 
-# CORRECT: always return the result of recursive calls
-def find_node(node, target):
-    if node is None:
-        return None
-    if node.val == target:
-        return node
-    if node.val > target:
-        return find_node(node.left, target)
-    else:
-        return find_node(node.right, target)
+Output: [1, 2, 3, 4, 5, 6]
+
+Uses a QUEUE:
+  Queue: [1]      → dequeue 1, enqueue 2, 3
+  Queue: [2, 3]   → dequeue 2, enqueue 4, 5
+  Queue: [3, 4, 5]→ dequeue 3, enqueue 6
+  Queue: [4, 5, 6]→ dequeue all (leaves)
 ```
 
-> [↑ Back to Top](#top)
-
-<a id="10-height"></a>
-# 10. Height of Tree
-
-> 📝 **Practice:** [Q9 · tree-height](./practice.md#q9--tree-height) · [Q19 · min-depth](./practice.md#q19--minimum-depth)
-
-Height determines performance.
-
-If tree is balanced:
-
-Height ≈ log n
-
-If tree is skewed:
-
-Height ≈ n
-
-Performance depends on height.
-
-**Common mistake — off-by-one in height convention:** Two valid conventions exist and mixing them causes off-by-one errors. Pick one and stay consistent throughout the entire solution.
-
 ```
-CONVENTION 1 — Count NODES (height = number of nodes on longest path):
-  Height of null node = 0
-  Height of leaf node = 1
+Side-by-side summary:
 
-CONVENTION 2 — Count EDGES (height = number of edges on longest path):
-  Height of null node = -1
-  Height of leaf node = 0
-
-LeetCode problems typically use Convention 1 (null = 0).
+Traversal    Order              Output          Use Case
+──────────────────────────────────────────────────────────────
+Preorder     Root, Left, Right  [1,2,4,5,3,6]  Copy/serialize tree
+Inorder      Left, Root, Right  [4,2,5,1,3,6]  Sorted order (BST)
+Postorder    Left, Right, Root  [4,5,2,6,3,1]  Delete tree, eval expr
+Level-order  Level by level     [1,2,3,4,5,6]  BFS, shortest path
 ```
 
-```python
-# Convention 1: Counting NODES (null = 0)
-def height_by_nodes(node):
-    if node is None:
-        return 0
-    return max(height_by_nodes(node.left),
-               height_by_nodes(node.right)) + 1
+<a id="level-order"></a>
+## Level-Order Traversal (BFS)
 
-# Convention 2: Counting EDGES (null = -1)
-def height_by_edges(node):
-    if node is None:
-        return -1                         # null: -1 so that leaf = (-1+1) = 0
-    return max(height_by_edges(node.left),
-               height_by_edges(node.right)) + 1
-```
-
-**Common mistake — minimum depth counting non-leaf nodes:** Minimum depth is the distance to the nearest LEAF. A leaf has BOTH children as None. If a node has only one child, it is not a leaf — the minimum depth must go through that child.
-
-```python
-# WRONG: treats any node with a None child as a "leaf"
-def min_depth_wrong(root):
-    if root is None:
-        return 0
-    left = min_depth_wrong(root.left)
-    right = min_depth_wrong(root.right)
-    return min(left, right) + 1   # BUG: picks 0+1=1 for a node with no left child
-
-# CORRECT: skip the missing-child direction
-def min_depth(root):
-    if root is None:
-        return 0
-    if root.left is None:
-        return min_depth(root.right) + 1
-    if root.right is None:
-        return min_depth(root.left) + 1
-    return min(min_depth(root.left), min_depth(root.right)) + 1
-```
-
-> [↑ Back to Top](#top)
-
-<a id="11-balanced-vs-skewed"></a>
-# 11. Balanced vs Skewed Tree
-
-Balanced:
-
-```
-       4
-      / \
-     2   6
-    / \ / \
-   1  3 5  7
-```
-
-Height = 2
-
-Skewed:
-
-```
-1
- \
-  2
-   \
-    3
-     \
-      4
-```
-
-Height = 3
-
-Skewed behaves like linked list.
-
-> 📝 **Practice:** [Q39 · tree-height-balance](../dsa_practice_questions_100.md#q39--thinking--tree-height-balance)
-
-**Common mistake — diameter vs height confusion:** Tree diameter (the longest path between any two nodes) is NOT the same as height. At each node, diameter through it equals left_height + right_height — but you can only return one value from a recursive function. Use a `nonlocal` variable to track the diameter separately while returning height.
-
-```python
-# WRONG: this computes height, not diameter
-def diameter_wrong(node):
-    if node is None:
-        return 0
-    left = diameter_wrong(node.left)
-    right = diameter_wrong(node.right)
-    return max(left, right) + 1   # this is height
-
-# CORRECT: return height, but update diameter via nonlocal
-def diameter_of_binary_tree(root):
-    result = 0
-
-    def height(node):
-        nonlocal result
-        if node is None:
-            return 0
-        left_h = height(node.left)
-        right_h = height(node.right)
-        result = max(result, left_h + right_h)   # diameter through this node
-        return max(left_h, right_h) + 1          # height for parent
-
-    height(root)
-    return result
-```
-
-> [↑ Back to Top](#top)
-
-<a id="12-why-powerful"></a>
-# 12. Why Trees Are Powerful
-
-Trees enable:
-
-- Fast searching
-- Hierarchical modeling
-- Divide-and-conquer algorithms
-- Efficient storage
-- Decision making
-
-Trees form foundation for:
-
-- BST
-- Heap
-- Trie
-- Segment Tree
-- Graph algorithms
-
-> [↑ Back to Top](#top)
-
-<a id="13-real-world"></a>
-# 13. Real-World Applications
-
-- File system
-- HTML DOM
-- Database indexing
-- Routing tables
-- Game AI decision trees
-- Expression parsing
-
-Trees are everywhere.
-
-> [↑ Back to Top](#top)
-
-<a id="14-mental-model"></a>
-# 14. Mental Model to Remember
-
-Imagine a tree upside down.
-
-Root at top.
-Branches downward.
-
-Each node controls subtrees below it.
-
-When solving tree problems:
-
-Think:
-
-"If I know answer for left subtree and right subtree,
-how do I combine them?"
-
-That is tree thinking.
-
-## Visual: Mental Model Summary
-
-```
-┌────────────────────────────────────────────────────────────┐
-│  TREES — MENTAL MODELS                                     │
-├────────────────────────────────────────────────────────────┤
-│  Traversal    │ Think of it as...                          │
-│  ─────────── │ ────────────────────────────────────────── │
-│  Preorder     │ "Print the map BEFORE exploring"           │
-│  Inorder      │ "Read a BST like a sorted list"            │
-│  Postorder    │ "Bottom-up: children before parents"       │
-│  Level-order  │ "Flood fill, ripple outward"               │
-├────────────────────────────────────────────────────────────┤
-│  Problem Type  │ Use...                                    │
-│  ──────────── │ ──────────────────────────────────────── │
-│  Path sums     │ Bottom-up, pass max gain upward           │
-│  Max depth     │ Top-down or bottom-up both work           │
-│  Diameter      │ Bottom-up ONLY (need both subtree heights)│
-│  LCA           │ Bottom-up: bubble up found node           │
-│  Serialize     │ Preorder (root first = easy to rebuild)   │
-│  Validate BST  │ Inorder (should be sorted) OR top-down    │
-│                │ with min/max bounds                       │
-└────────────────────────────────────────────────────────────┘
-```
-
-> [↑ Back to Top](#top)
-
-<a id="15-final-understanding"></a>
-# 15. Final Understanding
-
-Tree is:
-
-- Hierarchical
-- Recursive
-- Branching
-- Powerful
-- Foundational
-
-Understanding trees deeply unlocks:
-
-- Binary Search Tree
-- Heap
-- Trie
-- Graph
-- Dynamic Programming on Trees
-
-Trees are not just another topic.
-They are a gateway to advanced DSA.
-
-> [↑ Back to Top](#top)
-
-<a id="16-level-order"></a>
-# 16. Level-Order Traversal — BFS on Trees
-
-> 📝 **Practice:** [Q8 · level-order-bfs](./practice.md#q8--level-order-traversal-bfs)
-
-> Imagine photographing a tree from above, capturing one row at a time — roots first, then their children, then grandchildren. That's level-order traversal.
-
-**Level-order traversal** visits nodes level by level using a queue (BFS). It is the go-to technique for any problem involving tree levels, width, or top-down relationships.
+Rowan uses a queue to visit each level completely before moving to the next:
 
 ```python
 from collections import deque
@@ -832,24 +468,19 @@ from collections import deque
 def level_order(root):
     if not root:
         return []
-
     result = []
-    queue = deque([root])          # ← start with root
-
+    queue = deque([root])
     while queue:
-        level_size = len(queue)    # ← snapshot: how many nodes at this level
         level = []
-
-        for _ in range(level_size):
+        for _ in range(len(queue)):
             node = queue.popleft()
             level.append(node.val)
-            if node.left:  queue.append(node.left)
-            if node.right: queue.append(node.right)
-
-        result.append(level)       # ← one sublist per level
-
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        result.append(level)
     return result
-
 
 # Tree:     1
 #          / \
@@ -859,10 +490,8 @@ def level_order(root):
 # Output: [[1], [2, 3], [4, 5]]
 ```
 
-> 📝 **Practice:** [Q36 · bfs-level-order](../dsa_practice_questions_100.md#q36--normal--bfs-level-order)
+## Common Level-Order Patterns
 
-
-**Common level-order patterns:**
 ```python
 # Right side view — last node at each level:
 def right_side_view(root):
@@ -894,19 +523,148 @@ def max_width(root):
 
 **Complexity:** O(n) time, O(n) space (queue holds up to n/2 nodes at widest level)
 
+> 📝 **Practice:** [Q36 · bfs-level-order](../dsa_practice_questions_100.md#q36--normal--bfs-level-order)
+
 > [↑ Back to Top](#top)
 
-<a id="17-serialization"></a>
-# 17. Tree Serialization — Store and Rebuild Any Tree
+<a id="6-recursion"></a>
+# 6. Recursion and Trees
+
+Rowan discovers that trees and recursion are natural partners. Every subtree is itself a tree — the perfect self-similar structure for recursive thinking. The pattern: solve for the current node, then recursively solve for left and right children.
+
+The recursive pattern for trees:
+1. Base case: if node is None, return
+2. Process current node (or recurse first, depending on order)
+3. Recurse on left subtree
+4. Recurse on right subtree
+
+<a id="visual-call-stack"></a>
+## Visual: Recursive Call Stack — Inorder Traversal
+
+```
+Tree:     1
+         / \
+        2   3
+
+inorder(1):
+  ├── inorder(2):
+  │   ├── inorder(None) → return
+  │   ├── VISIT 2 ✓
+  │   └── inorder(None) → return
+  ├── VISIT 1 ✓
+  └── inorder(3):
+      ├── inorder(None) → return
+      ├── VISIT 3 ✓
+      └── inorder(None) → return
+
+Output: [2, 1, 3]
+```
+
+```
+Call stack at deepest point (visiting node 2):
+
+  ┌────────────────────┐
+  │ inorder(None)      │ ← base case, returns
+  ├────────────────────┤
+  │ inorder(2)         │ ← about to visit 2
+  ├────────────────────┤
+  │ inorder(1)         │ ← waiting for left subtree
+  └────────────────────┘
+
+Space complexity: O(h) where h = height of tree
+  Balanced tree: O(log n)
+  Skewed tree:   O(n)
+```
+
+> 📝 **Practice:** [Q9 · tree-height](./practice.md#q9--tree-height)
+
+> [↑ Back to Top](#top)
+
+<a id="7-height"></a>
+# 7. Height of Tree
+
+Rowan learns that "height" is one of the most important tree properties — it determines the time complexity of most tree operations. But there is a subtle trap: two valid conventions exist, and mixing them causes bugs.
+
+```python
+# Convention 1: Counting NODES (null = 0, leaf = 1)
+def height_nodes(node):
+    if node is None:
+        return 0
+    return 1 + max(height_nodes(node.left), height_nodes(node.right))
+
+# Convention 2: Counting EDGES (null = -1, leaf = 0)
+def height_edges(node):
+    if node is None:
+        return -1
+    return 1 + max(height_edges(node.left), height_edges(node.right))
+```
+
+**Common mistake — mixing conventions:** If you use `return 0` for None (convention 1) but expect leaf height to be 0, your results will be off by 1 everywhere. Pick one convention and use it consistently.
+
+```
+Tree:     1
+         / \
+        2   3
+       /
+      4
+
+Convention 1 (nodes): height(1)=3, height(2)=2, height(4)=1
+Convention 2 (edges): height(1)=2, height(2)=1, height(4)=0
+```
+
+> [↑ Back to Top](#top)
+
+<a id="8-balanced-skewed"></a>
+# 8. Balanced vs Skewed
+
+Rowan learns that the shape of a tree determines its efficiency. A balanced tree gives O(log n) operations. A skewed tree degrades to O(n) — it is essentially a linked list.
+
+```
+Balanced (height = log n):          Skewed (height = n):
+
+         [1]                          [1]
+        /   \                           \
+      [2]   [3]                         [2]
+     / \   / \                            \
+   [4][5] [6][7]                          [3]
+                                            \
+                                            [4]
+
+Operations: O(log n)               Operations: O(n)
+```
+
+**Balanced** means: for every node, the height difference between left and right subtrees is at most 1. This is the AVL tree invariant.
+
+```python
+def is_balanced(root):
+    def check(node):
+        if not node:
+            return 0
+        left_h = check(node.left)
+        if left_h == -1:
+            return -1
+        right_h = check(node.right)
+        if right_h == -1:
+            return -1
+        if abs(left_h - right_h) > 1:
+            return -1
+        return 1 + max(left_h, right_h)
+
+    return check(root) != -1
+```
+
+> [↑ Back to Top](#top)
+
+<a id="9-serialization"></a>
+# 9. Tree Serialization
+
+Rowan needs to save a tree to a file and rebuild it later. He cannot just dump node values — the structure (which node is whose child) must be preserved. This is **serialization**: converting a tree to a string, and **deserialization**: rebuilding the tree from that string.
 
 > 📝 **Practice:** [Q21 · serialize-tree](./practice.md#q21--serialize-a-binary-tree) · [Q22 · deserialize-tree](./practice.md#q22--deserialize-a-binary-tree)
 
-> Like saving a game — serialization encodes the entire tree into a string you can store, transmit, or reconstruct exactly.
-
-**Serialization** converts a tree to a string. **Deserialization** rebuilds the exact tree from that string. The standard approach uses BFS (level-order) or preorder with null markers.
+## Preorder Serialization (with null markers)
 
 ```python
-# Preorder serialization — encodes structure via null markers
 class Codec:
     def serialize(self, root):
         """Preorder DFS — mark None as 'N'."""
@@ -937,21 +695,6 @@ class Codec:
             return node
 
         return build()
-
-# BFS serialization (LeetCode format):
-def serialize_bfs(root):
-    if not root: return ''
-    queue = deque([root])
-    vals = []
-    while queue:
-        node = queue.popleft()
-        if node:
-            vals.append(str(node.val))
-            queue.append(node.left)    # ← append even if None
-            queue.append(node.right)
-        else:
-            vals.append('N')
-    return ','.join(vals)
 ```
 
 **Why null markers matter:**
@@ -959,6 +702,46 @@ def serialize_bfs(root):
 Tree:     1        Preorder without nulls: "1,2,3" — AMBIGUOUS
          / \       Preorder with nulls:    "1,2,N,N,3,N,N" — UNIQUE ✓
         2   3
+
+Without nulls, "1,2,3" could be:
+    1           1         1
+   / \           \       /
+  2   3           2     2
+                   \     \
+                    3     3
+
+With null markers, the structure is unambiguous.
+```
+
+## BFS Serialization (LeetCode format)
+
+```python
+from collections import deque
+
+def serialize_bfs(root):
+    if not root:
+        return "[]"
+    result = []
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        if node:
+            result.append(str(node.val))
+            queue.append(node.left)    # ← append even if None
+            queue.append(node.right)
+        else:
+            result.append("null")
+    # Remove trailing nulls for cleaner output
+    while result and result[-1] == "null":
+        result.pop()
+    return "[" + ",".join(result) + "]"
+
+# Tree:     1
+#          / \
+#         2   3
+#            / \
+#           4   5
+# BFS: "[1,2,3,null,null,4,5]"
 ```
 
 **When this pattern appears:**
@@ -968,12 +751,15 @@ Tree:     1        Preorder without nulls: "1,2,3" — AMBIGUOUS
 
 > [↑ Back to Top](#top)
 
-<a id="18-top-down-bottom-up"></a>
-# 18. Top-Down vs Bottom-Up Thinking
+<a id="10-advanced"></a>
+# 10. Advanced Tree Patterns
 
-## Visual: Top-Down — Pass information DOWN to children (parameters carry state)
+Rowan tackles the three patterns that appear in every medium/hard tree interview problem: choosing between top-down and bottom-up thinking, solving path problems, and finding the lowest common ancestor.
 
-**Example: Max Depth**
+<a id="top-down-bottom-up"></a>
+## Top-Down vs Bottom-Up
+
+**Top-Down** — pass information DOWN to children (parameters carry state):
 
 ```
 maxDepth(node, current_depth):
@@ -996,10 +782,19 @@ Information flows DOWNWARD:
   returns 2         returns 2
 ```
 
-## Visual: Bottom-Up — Gather information FROM children (return values carry state)
+```python
+def has_path_sum(root, target):
+    def dfs(node, current_sum):
+        if not node:
+            return False
+        current_sum += node.val
+        if not node.left and not node.right:
+            return current_sum == target
+        return dfs(node.left, current_sum) or dfs(node.right, current_sum)
+    return dfs(root, 0)
+```
 
-**Example: Diameter of Tree**
-The diameter is the longest path between any two nodes. It may or may not pass through the root.
+**Bottom-Up** — collect information UP from children (return values carry state):
 
 ```
 At each node, ask: "what is the longest path through ME?"
@@ -1023,15 +818,23 @@ Answer = left_height + right_height
   Parent uses return values to compute its own answer.
 ```
 
+```python
+def max_depth(root):
+    if not root:
+        return 0
+    return 1 + max(max_depth(root.left), max_depth(root.right))
+```
+
 ```
   TOP-DOWN:  I know something → I tell my children
   BOTTOM-UP: My children know something → they tell me
+
+  Top-Down use cases:  path sum, root-to-leaf paths, depth tracking
+  Bottom-Up use cases: height, diameter, subtree count, balanced check
 ```
 
-> [↑ Back to Top](#top)
-
-<a id="19-path-problems"></a>
-# 19. Path Problems
+<a id="path-problems"></a>
+## Path Problems
 
 A path in a tree is a sequence of nodes where each consecutive pair is connected by an edge. **No node appears twice.**
 
@@ -1059,17 +862,25 @@ A path in a tree is a sequence of nodes where each consecutive pair is connected
 Key insight: In a tree, there is EXACTLY ONE path between any two nodes.
 ```
 
-## Visual: Maximum Path Sum — The classic bottom-up path problem
+## Maximum Path Sum — The Classic Bottom-Up Problem
 
 ```
 At each node:
   max_path_through_me = node.val + max(0, left_gain) + max(0, right_gain)
-  max_path_as_root    = node.val + max(0, best_single_branch)
+  max_path_as_extension = node.val + max(0, best_single_branch)
 
   Why max(0, ...)?  → We DROP a branch if it only makes the sum worse.
+
+Tree:    -10
+        /    \
+       9      20
+             /  \
+            15   7
+
+Best path: 15 → 20 → 7 = 42
 ```
 
-**Common mistake — max path sum missing cases:** The path can go through any node using EITHER or BOTH subtrees. Use `max(0, gain)` to exclude negative subtrees, and track the global maximum with a `nonlocal` variable or list — because the "bent" path through a node cannot be returned upward.
+**Common mistake — max path sum missing cases:** The path can use EITHER or BOTH subtrees at each node. Use `max(0, gain)` to exclude negative subtrees, and track the global maximum with a `nonlocal` variable or list — because the "bent" path through a node cannot be returned upward (parent can only extend one direction).
 
 ```python
 def max_path_sum(root):
@@ -1091,10 +902,8 @@ def max_path_sum(root):
     return max_sum[0]
 ```
 
-> [↑ Back to Top](#top)
-
-<a id="20-lca"></a>
-# 20. LCA — Lowest Common Ancestor
+<a id="lca"></a>
+## LCA — Lowest Common Ancestor
 
 The LCA of two nodes p and q is the deepest node that has BOTH p and q as descendants (a node is a descendant of itself).
 
@@ -1131,7 +940,7 @@ Case 3: LCA(6, 8)
   LCA = 3  ✓
 ```
 
-## Visual: The Recursive LCA Algorithm — Why it works
+## The Recursive LCA Algorithm — Why It Works
 
 ```python
 def lca(node, p, q):
@@ -1146,43 +955,85 @@ def lca(node, p, q):
     return left or right                # both on same side → bubble up the found one
 ```
 
-**Common mistake — using BST shortcut on a general tree:** The BST LCA shortcut (compare values to navigate left/right) only works when you KNOW the tree is a valid BST. On a general binary tree where node positions don't correlate with values, use the general algorithm that checks both subtrees.
+**For BST (sorted):** use the property that LCA is where p and q split:
 
 ```python
-# WRONG for general trees: assumes BST property
-def lca_wrong(root, p, q):
-    if p.val < root.val and q.val < root.val:
-        return lca_wrong(root.left, p, q)
-    if p.val > root.val and q.val > root.val:
-        return lca_wrong(root.right, p, q)
-    return root
-
-# CORRECT for general binary trees: check both subtrees
-def lca_general(root, p, q):
-    if root is None:
-        return None
-    if root == p or root == q:
-        return root
-    left  = lca_general(root.left,  p, q)
-    right = lca_general(root.right, p, q)
-    if left and right:
-        return root           # p and q in different subtrees
-    return left or right      # both in same subtree
+def lca_bst(root, p, q):
+    while root:
+        if p.val < root.val and q.val < root.val:
+            root = root.left      # both in left subtree
+        elif p.val > root.val and q.val > root.val:
+            root = root.right     # both in right subtree
+        else:
+            return root           # split point = LCA
 ```
+
+**Common mistake — using BST shortcut on a general tree:** The BST LCA shortcut (compare values to navigate left/right) only works when the tree is a valid BST. On a general binary tree, use the algorithm that checks both subtrees.
 
 > [↑ Back to Top](#top)
 
-# Navigation
+<a id="summary"></a>
+## 🔥 Summary
 
-Previous:
-[13_binary_search/interview.md](/02_DSA_Mastery/13_binary_search/interview.md)
+| Concept | Key Takeaway |
+|---------|-------------|
+| Tree | Hierarchical: one root, no cycles, one parent per node |
+| Binary tree | Each node has at most 2 children |
+| Height | Down to deepest leaf. Balanced=O(log n). Skewed=O(n) |
+| Traversals | Inorder (sorted BST), Preorder (copy), Postorder (delete), Level (BFS) |
+| Recursion | Trees are self-similar — subtree is itself a tree |
+| Balanced vs Skewed | Balanced=efficient. Skewed=linked list |
+| Serialization | Tree ↔ string for storage |
+| Top-Down | Pass state down via parameters |
+| Bottom-Up | Collect results up via return values |
+| LCA | Where paths to p and q diverge |
 
-Next:
-[14_trees/interview.md](/02_DSA_Mastery/14_trees/interview.md)
-[15_binary_search_trees/theory.md](/02_DSA_Mastery/15_binary_search_trees/theory.md)
+**Why trees are powerful:**
+- O(log n) search, insert, delete in balanced trees
+- Hierarchical representation of real-world data
+- Natural fit for recursive algorithms
+- Foundation for BSTs, heaps, tries, segment trees
+- Enable efficient range queries and ordered operations
+
+**Trees enable things that flat structures cannot:**
+- Fast search (balanced BST beats linear scan)
+- Fast insert + delete (unlike sorted arrays which shift)
+- Hierarchy modeling (file systems, org charts, DOM)
+- Priority-based access (heaps)
+- Prefix matching (tries)
+
+**Real-world applications:**
+- **File systems** — directory hierarchy (each folder is a subtree)
+- **DOM** — HTML document structure (nested tags)
+- **Database indexes** — B-trees, B+ trees (every SQL query you run)
+- **Compilers** — abstract syntax trees (parsing `2 + 3 * 4`)
+- **AI/ML** — decision trees, random forests
+- **Networking** — routing hierarchies, DNS tree
+- **Version control** — Git commit trees
+- **Operating systems** — process trees (parent/child processes)
+
+**Mental model:** A tree is an upside-down tree in nature. The root is at the top. Branches spread downward. Leaves are at the bottom. You can reach any node from the root by following exactly one path — no shortcuts, no cycles. Every algorithm on trees exploits this single-path property.
+
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Binary Search — Interview Q&A](../13_binary_search/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [13_binary_search → theory.md](../13_binary_search/theory.md) |
+| ➡ Next Module | [15_binary_search_trees → theory.md](../15_binary_search_trees/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[13 Binary Search →](../13_binary_search/theory.md) · [15 BST →](../15_binary_search_trees/theory.md) · [16 Heaps →](../16_heaps/theory.md) · [17 Trie →](../17_trie/theory.md)
+
+**Jump to specific topics in other files:**
+- BST operations → [15_binary_search_trees § theory.md](../15_binary_search_trees/theory.md)
+- Heap (complete binary tree) → [16_heaps § theory.md](../16_heaps/theory.md)
+- Trie (prefix tree) → [17_trie § theory.md](../17_trie/theory.md)
+- DFS/BFS in graphs → [18_graphs § theory.md](../18_graphs/theory.md)
+- Recursion patterns → [04_recursion § Common Patterns](../04_recursion/theory.md#7-common-patterns)
+
+> [↑ Back to Top](#top)

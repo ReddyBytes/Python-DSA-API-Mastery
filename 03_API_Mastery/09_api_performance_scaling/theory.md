@@ -1,16 +1,52 @@
-# 13 — API Performance and Scaling
+<a id="top"></a>
+
+# API Performance and Scaling
+
+> **Ravi** is a Telugu performance engineer at a fintech startup in Hyderabad. His team's payment API started life handling 200 requests per minute. Six months later, after a partnership with a major bank, they hit 20,000 requests per minute. Endpoints that once responded in 40ms now took 3 seconds. The database was on fire. Ravi spent a weekend dissecting every layer of the request lifecycle — and reduced p99 latency from 3200ms to 180ms without adding a single server. This chapter is Ravi's playbook.
 
 > 📝 **Practice:** [Q51 · api-caching-strategies](../api_practice_questions_100.md#q51--normal--api-caching-strategies)
-
+>
 > 📝 **Practice:** [Q24 · api-rate-limiting-headers](../api_practice_questions_100.md#q24--thinking--api-rate-limiting-headers)
-
-> "Fast by default, scalable by design."
-
+>
 > 📝 **Practice:** [Q75 · mobile-api-optimisation](../api_practice_questions_100.md#q75--design--mobile-api-optimisation)
 
----
+## Table of Contents
 
-## 📌 Learning Priority
+- [1. Where APIs Get Slow](#1-where-apis-get-slow)
+  - [Adding Timing to Find the Real Bottleneck](#adding-timing-to-find-the-real-bottleneck)
+  - [The N+1 Query Problem](#the-n1-query-problem)
+- [2. Response Caching — Redis Cache Patterns](#2-response-caching--redis-cache-patterns)
+  - [Cache-Aside for Single Resources](#cache-aside-for-single-resources)
+  - [Caching List Endpoints With Query Parameters](#caching-list-endpoints-with-query-parameters)
+  - [Cache TTL Strategy](#cache-ttl-strategy)
+- [3. Database Query Optimization](#3-database-query-optimization)
+  - [Add Indexes on Filtered Columns](#add-indexes-on-filtered-columns)
+  - [Select Only What You Need](#select-only-what-you-need)
+  - [Pagination — Cursor Over Offset for Large Datasets](#pagination--cursor-over-offset-for-large-datasets)
+  - [Batch Queries to Avoid N+1](#batch-queries-to-avoid-n1)
+- [4. Connection Pooling — Why Default Settings Kill You](#4-connection-pooling--why-default-settings-kill-you)
+  - [How It Works](#how-it-works)
+  - [The Default Settings Problem](#the-default-settings-problem)
+  - [Pool Sizing Formula](#pool-sizing-formula)
+  - [Connection Pool Anti-Patterns](#connection-pool-anti-patterns)
+- [5. Connection Pool Sizing](#5-connection-pool-sizing)
+- [6. FastAPI-Specific Optimizations](#6-fastapi-specific-optimizations)
+  - [Skip Serializing Null Fields](#skip-serializing-null-fields)
+  - [Faster JSON With orjson](#faster-json-with-orjson)
+  - [Use Async Routes for I/O-Bound Work](#use-async-routes-for-io-bound-work)
+- [7. Horizontal Scaling](#7-horizontal-scaling)
+  - [What Must Be Shared](#what-must-be-shared)
+  - [Read Replicas for Heavy Read Loads](#read-replicas-for-heavy-read-loads)
+- [8. Key Metrics to Monitor](#8-key-metrics-to-monitor)
+  - [Latency — Use Percentiles, Not Averages](#latency--use-percentiles-not-averages)
+  - [Error Rate](#error-rate)
+  - [Requests Per Second and Throughput](#requests-per-second-and-throughput)
+  - [Database Connection Pool Usage](#database-connection-pool-usage)
+- [9. Performance Optimization Checklist](#9-performance-optimization-checklist)
+- [10. Circuit Breaker — Stop Cascading Failures](#10-circuit-breaker--stop-cascading-failures)
+- [Summary](#summary)
+
+## Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
 N+1 query detection and fix · database indexes · connection pooling · percentile-based metrics (p50/p95/p99)
@@ -24,9 +60,15 @@ orjson · exclude_unset · async for I/O-bound paths
 **Reference** — Know it exists, look up syntax when needed:
 query plan analysis · multi-level caching · query cost modeling
 
----
+[Back to Top](#top)
 
-## The Problem With Performance Being an Afterthought
+<a id="1-where-apis-get-slow"></a>
+
+# 1. Where APIs Get Slow
+
+> 📝 **Practice:** [Q68 · load-testing-apis](../api_practice_questions_100.md#q68--normal--load-testing-apis)
+
+> "Ravi's first rule," he tells junior engineers on his team, "is never guess where the slowness lives. Your intuition is wrong 70% of the time. Measure first."
 
 Most APIs start life handling a few dozen requests per day. The code works. Tests pass.
 It ships.
@@ -38,34 +80,28 @@ The problem is almost never the language or the framework. It's the architecture
 requests themselves — N+1 queries nobody noticed, missing indexes, responses serialized
 with fields nobody uses, and a single database connection shared by four app servers.
 
-This chapter is a systematic walkthrough of where API latency comes from and what to do
+This section is a systematic walkthrough of where API latency comes from and what to do
 about each layer.
-
----
-
-## 1. Where APIs Get Slow — Profiling the Request Lifecycle
-
-> 📝 **Practice:** [Q68 · load-testing-apis](../api_practice_questions_100.md#q68--normal--load-testing-apis)
 
 Before optimizing anything, understand what you are actually optimizing. A request flows
 through several stages, and the slowness lives in a specific one:
 
 ```
 Client
-  │
-  ▼  Network round-trip to server (typically 1–50 ms)
-  │
-  ▼  Framework routing + middleware (< 1 ms in FastAPI)
-  │
-  ▼  Dependency injection / auth check (1–10 ms if DB-backed)
-  │
-  ▼  Business logic (near zero if no I/O)
-  │
-  ▼  Database query (5 ms to 5000 ms — this is usually the culprit)
-  │
-  ▼  Serialization — Pydantic model → JSON (1–50 ms at scale)
-  │
-  ▼  Network response to client
+  |
+  v  Network round-trip to server (typically 1-50 ms)
+  |
+  v  Framework routing + middleware (< 1 ms in FastAPI)
+  |
+  v  Dependency injection / auth check (1-10 ms if DB-backed)
+  |
+  v  Business logic (near zero if no I/O)
+  |
+  v  Database query (5 ms to 5000 ms -- this is usually the culprit)
+  |
+  v  Serialization -- Pydantic model -> JSON (1-50 ms at scale)
+  |
+  v  Network response to client
 ```
 
 In practice, **database query time is the dominant factor** in the vast majority of slow
@@ -74,7 +110,9 @@ noise.
 
 > 📝 **Practice:** [Q86 · production-api-slow](../api_practice_questions_100.md#q86--design--production-api-slow)
 
-### Adding Timing to Find the Real Bottleneck
+<a id="adding-timing-to-find-the-real-bottleneck"></a>
+
+## Adding Timing to Find the Real Bottleneck
 
 Don't guess. Measure. Add a simple timing middleware to understand where time is going:
 
@@ -114,7 +152,9 @@ For production profiling, use a proper APM tool (Datadog, New Relic, Sentry Perf
 They show you per-query timing with stack traces, so you can see exactly which endpoint
 calls which query and how long it takes.
 
-### The N+1 Query Problem
+<a id="the-n1-query-problem"></a>
+
+## The N+1 Query Problem
 
 The most common performance bug in database-backed APIs. It looks like this in
 SQLAlchemy:
@@ -155,15 +195,21 @@ def get_orders(db: Session = Depends(get_db)):
 One query instead of N+1. At 1000 orders, this is the difference between 1001 roundtrips
 to the database and a single roundtrip.
 
----
+> Common mistake: Assuming SQLAlchemy eager-loads by default. It does NOT. The default relationship loading strategy is "lazy" — meaning it fires a query only when you access the attribute. This is silent and deadly at scale. Always explicitly set `lazy="joined"` on relationships or use `.options(joinedload(...))` in queries.
 
-## 2. Response Caching — Redis Cache Patterns
+[Back to Top](#top)
+
+<a id="2-response-caching--redis-cache-patterns"></a>
+
+# 2. Response Caching — Redis Cache Patterns
 
 > 📝 **Practice:** [Q52 · redis-caching-pattern](../api_practice_questions_100.md#q52--design--redis-caching-pattern)
-
+>
 > 📝 **Practice:** [Q19 · pagination-response-format](../api_practice_questions_100.md#q19--critical--pagination-response-format)
-
+>
 > 📝 **Practice:** [Q12 · cache-control-header](../api_practice_questions_100.md#q12--thinking--cache-control-header)
+
+> "Think of caching like Ravi's grandmother storing leftover biryani in the fridge," he explains. "Making biryani takes two hours. Reheating takes two minutes. If you know someone will ask for biryani again tomorrow, you store it. That's cache-aside — check the fridge first, cook only on a miss."
 
 Caching is the highest-leverage optimization available. If the same data is requested
 frequently and changes infrequently, serving it from a memory store instead of recomputing
@@ -171,7 +217,9 @@ it on every request can reduce database load by orders of magnitude.
 
 > 📝 **Practice:** [Q53 · cache-invalidation](../api_practice_questions_100.md#q53--thinking--cache-invalidation)
 
-### Cache-Aside for Single Resources
+<a id="cache-aside-for-single-resources"></a>
+
+## Cache-Aside for Single Resources
 
 ```python
 import redis
@@ -191,9 +239,9 @@ async def get_product(product_id: int, db: Session = Depends(get_db)):
     # Step 1: Check cache
     cached = redis_client.get(cache_key)
     if cached:
-        return json.loads(cached)  # cache hit — no DB call
+        return json.loads(cached)  # cache hit -- no DB call
 
-    # Step 2: Cache miss — query the database
+    # Step 2: Cache miss -- query the database
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(404, "Product not found")
@@ -220,7 +268,9 @@ async def update_product(product_id: int, update: ProductUpdate, db: Session = D
     return product
 ```
 
-### Caching List Endpoints With Query Parameters
+<a id="caching-list-endpoints-with-query-parameters"></a>
+
+## Caching List Endpoints With Query Parameters
 
 List endpoints are trickier — the cache key must encode every filter parameter:
 
@@ -266,22 +316,24 @@ async def list_products(
     return result
 ```
 
-### Cache TTL Strategy
+<a id="cache-ttl-strategy"></a>
+
+## Cache TTL Strategy
 
 > 📝 **Practice:** [Q89 · production-rate-limit-good-users](../api_practice_questions_100.md#q89--design--production-rate-limit-good-users)
-
+>
 > 📝 **Practice:** [Q79 · explain-rate-limiting-pm](../api_practice_questions_100.md#q79--interview--explain-rate-limiting-pm)
-
+>
 > 📝 **Practice:** [Q54 · rate-limiting-algorithms](../api_practice_questions_100.md#q54--thinking--rate-limiting-algorithms)
 
 ```
 Type of data                        Recommended TTL
-────────────────────────────────────────────────────
-Product catalog, static content     5–60 minutes
-User profile data                   1–5 minutes
-Leaderboards, aggregates            30–60 seconds
-Inventory / stock counts            10–30 seconds
-Real-time pricing                   5–10 seconds
+----------------------------------------------------
+Product catalog, static content     5-60 minutes
+User profile data                   1-5 minutes
+Leaderboards, aggregates            30-60 seconds
+Inventory / stock counts            10-30 seconds
+Real-time pricing                   5-10 seconds
 Auth tokens, sessions               Match token expiry
 ```
 
@@ -291,20 +343,26 @@ data is stable.
 
 > 📝 **Practice:** [Q99 · design-rate-limiter](../api_practice_questions_100.md#q99--design--design-rate-limiter)
 
----
+[Back to Top](#top)
 
-## 3. Database Query Optimization
+<a id="3-database-query-optimization"></a>
+
+# 3. Database Query Optimization
 
 > 📝 **Practice:** [Q88 · production-stale-data](../api_practice_questions_100.md#q88--design--production-stale-data)
 
-### Add Indexes on Filtered Columns
+> "Ravi compares database optimization to organizing a library," he says. "Without an index, finding a book means scanning every shelf. With an index — the card catalog — you jump straight to the right shelf. The book was always there; you just made the path to it shorter."
+
+<a id="add-indexes-on-filtered-columns"></a>
+
+## Add Indexes on Filtered Columns
 
 The most impactful optimization you can make on a slow query is often adding a single
 index. Without an index, the database scans every row in the table. With an index, it
 jumps directly to matching rows.
 
 ```python
-# SQLAlchemy model — add Index to frequently filtered columns
+# SQLAlchemy model -- add Index to frequently filtered columns
 from sqlalchemy import Column, Integer, String, Index, Float
 from database import Base
 
@@ -344,7 +402,9 @@ EXPLAIN ANALYZE SELECT * FROM products WHERE category = 'electronics';
 -- After adding the index, you should see "Index Scan" instead.
 ```
 
-### Select Only What You Need
+<a id="select-only-what-you-need"></a>
+
+## Select Only What You Need
 
 `SELECT *` transfers every column across the network, even columns your code never reads.
 At scale this adds up.
@@ -379,7 +439,9 @@ def list_users(db: Session = Depends(get_db)):
     )
 ```
 
-### Pagination — Cursor Over Offset for Large Datasets
+<a id="pagination--cursor-over-offset-for-large-datasets"></a>
+
+## Pagination — Cursor Over Offset for Large Datasets
 
 Offset-based pagination (`LIMIT 20 OFFSET 10000`) gets slower as the offset grows.
 The database must count and skip 10,000 rows before returning the 20 you want.
@@ -392,14 +454,14 @@ from fastapi import Query
 from typing import Optional
 
 
-# Offset-based — simple but degrades at high page numbers
+# Offset-based -- simple but degrades at high page numbers
 @app.get("/users/offset")
 def list_users_offset(page: int = 1, limit: int = 20, db: Session = Depends(get_db)):
     return db.query(User).offset((page - 1) * limit).limit(limit).all()
-    # Problem: page=500 means OFFSET 9980 — DB must skip 9980 rows
+    # Problem: page=500 means OFFSET 9980 -- DB must skip 9980 rows
 
 
-# Cursor-based — fast at any depth
+# Cursor-based -- fast at any depth
 @app.get("/users")
 def list_users_cursor(
     cursor: Optional[int] = Query(None, description="Last seen user ID"),
@@ -425,12 +487,13 @@ def list_users_cursor(
 
 > 📝 **Practice:** [Q15 · pagination-strategies](../api_practice_questions_100.md#q15--normal--pagination-strategies)
 
-
 Cursor pagination requires a stable sort order (always sort by the cursor column) and
 is best suited for "infinite scroll" style UIs. Use offset pagination when users need
 to jump to arbitrary pages.
 
-### Batch Queries to Avoid N+1
+<a id="batch-queries-to-avoid-n1"></a>
+
+## Batch Queries to Avoid N+1
 
 When you need to load related data for a list of objects, fetch it in one query rather
 than one query per object:
@@ -451,49 +514,53 @@ for order in orders:
     customer = user_map[order.user_id]  # dict lookup, no DB call
 ```
 
----
+[Back to Top](#top)
 
-## Connection Pooling — Why Default Settings Kill You
+<a id="4-connection-pooling--why-default-settings-kill-you"></a>
+
+# 4. Connection Pooling — Why Default Settings Kill You
+
+> "Ravi explains connection pooling with a restaurant analogy: imagine a restaurant with only 5 tables. Without reservations (pooling), every customer waits in line while a table is cleared, set up fresh, and assigned. With reservations, tables are pre-set and customers sit immediately. The pool is your reservation system — connections are pre-established and reused."
 
 Every database call requires a connection. Creating a connection is expensive:
 
 ```
 Without pooling:
-  Request arrives → open TCP connection → authenticate → run query → close connection
+  Request arrives -> open TCP connection -> authenticate -> run query -> close connection
   Time cost:  ~10-50ms for connection setup  +  actual query time
 
 With pooling:
-  Request arrives → grab idle connection from pool → run query → return to pool
+  Request arrives -> grab idle connection from pool -> run query -> return to pool
   Time cost:  ~0.1ms (pool checkout) + actual query time
 ```
 
 A connection pool maintains a set of pre-established connections that are reused.
 
----
+<a id="how-it-works"></a>
 
-### How It Works
+## How It Works
 
 ```
 Connection Pool (max_size=10):
 
-┌─────────────────────────────────────────────────────┐
-│  conn_1  [IDLE]   conn_2  [IN USE]  conn_3  [IDLE]  │
-│  conn_4  [IDLE]   conn_5  [IN USE]  conn_6  [IDLE]  │
-│  conn_7  [IDLE]   conn_8  [IDLE]    conn_9  [IDLE]  │
-│  conn_10 [IDLE]                                     │
-└─────────────────────────────────────────────────────┘
++-----------------------------------------------------+
+|  conn_1  [IDLE]   conn_2  [IN USE]  conn_3  [IDLE]  |
+|  conn_4  [IDLE]   conn_5  [IN USE]  conn_6  [IDLE]  |
+|  conn_7  [IDLE]   conn_8  [IDLE]    conn_9  [IDLE]  |
+|  conn_10 [IDLE]                                     |
++-----------------------------------------------------+
 
-Request → checks out conn_1 (IDLE)
+Request -> checks out conn_1 (IDLE)
 Query runs using conn_1
-Request completes → returns conn_1 to pool (IDLE again)
+Request completes -> returns conn_1 to pool (IDLE again)
 ```
 
 If all connections are in use, the request **waits** in a queue until one is returned.
 If the wait exceeds `pool_timeout`, it raises a connection timeout error.
 
----
+<a id="the-default-settings-problem"></a>
 
-### The Default Settings Problem
+## The Default Settings Problem
 
 SQLAlchemy default pool size: **5 connections**.
 Django default: **no pooling** (new connection per request!).
@@ -501,21 +568,21 @@ Django default: **no pooling** (new connection per request!).
 **At scale:**
 
 ```
-1,000 concurrent requests → all waiting for 5 pool slots → timeouts → errors
+1,000 concurrent requests -> all waiting for 5 pool slots -> timeouts -> errors
 ```
 
----
+<a id="pool-sizing-formula"></a>
 
-### Pool Sizing Formula
+## Pool Sizing Formula
 
 The widely-used formula for databases (from HikariCP research):
 
 ```
-pool_size = (number_of_cores × 2) + 1
+pool_size = (number_of_cores x 2) + 1
 
 Examples:
-  4-core server: (4 × 2) + 1 = 9 connections
-  8-core server: (8 × 2) + 1 = 17 connections
+  4-core server: (4 x 2) + 1 = 9 connections
+  8-core server: (8 x 2) + 1 = 17 connections
 ```
 
 Why? A database thread spends ~50% of time waiting on I/O.
@@ -528,7 +595,7 @@ from sqlalchemy import create_engine
 
 engine = create_engine(
     "postgresql://user:pass@host/db",
-    pool_size=9,          # core_count × 2 + 1
+    pool_size=9,          # core_count x 2 + 1
     max_overflow=5,       # additional connections when pool is full (temporary)
     pool_timeout=30,      # seconds to wait before timeout
     pool_recycle=1800,    # recycle connections after 30 min (prevent stale)
@@ -549,31 +616,33 @@ engine = create_async_engine(
 )
 ```
 
----
+<a id="connection-pool-anti-patterns"></a>
 
-### Connection Pool Anti-Patterns
+## Connection Pool Anti-Patterns
 
 ```
-❌ Creating engine inside each request:
+WRONG: Creating engine inside each request:
    @app.get("/data")
    async def endpoint():
        engine = create_engine(...)   # new pool on every request!
        # Fix: create engine once at startup
 
-❌ Not returning connections:
+WRONG: Not returning connections:
    conn = pool.getconn()
    result = conn.execute(query)
-   # forgot conn.close() or return to pool → pool exhaustion
+   # forgot conn.close() or return to pool -> pool exhaustion
 
-❌ Pool too large:
+WRONG: Pool too large:
    pool_size = 1000
    # Databases have connection limits. PostgreSQL default: 100.
-   # 10 app servers × 100 pool = 1000 connections → exceeds DB limit
+   # 10 app servers x 100 pool = 1000 connections -> exceeds DB limit
 ```
 
----
+[Back to Top](#top)
 
-## 4. Connection Pool Sizing
+<a id="5-connection-pool-sizing"></a>
+
+# 5. Connection Pool Sizing
 
 Every database connection has a cost: memory on the DB server, a file descriptor on the
 app server, overhead in the DB's connection tracking. You need enough connections to
@@ -582,20 +651,20 @@ keep your workers busy, but not so many that you exhaust the database's capacity
 The math is straightforward:
 
 ```
-Workers × Connections per worker = Connection pool size needed
+Workers x Connections per worker = Connection pool size needed
 
 Example:
   4 Gunicorn workers
-  × 10 SQLAlchemy connections per worker (pool_size=10)
+  x 10 SQLAlchemy connections per worker (pool_size=10)
   = 40 connections to the database
 
 PostgreSQL default: max_connections=100
-Headroom for migrations, admin tools, monitoring: 10–20 connections
-Usable for app: 80–90 connections
+Headroom for migrations, admin tools, monitoring: 10-20 connections
+Usable for app: 80-90 connections
 
-For 4 workers with pool_size=10 → 40 connections. Safe.
-For 8 workers with pool_size=10 → 80 connections. At the limit.
-For 16 workers with pool_size=10 → 160 connections. Will fail.
+For 4 workers with pool_size=10 -> 40 connections. Safe.
+For 8 workers with pool_size=10 -> 80 connections. At the limit.
+For 16 workers with pool_size=10 -> 160 connections. Will fail.
 ```
 
 Configure the pool in SQLAlchemy:
@@ -617,11 +686,17 @@ If you are running many workers and hitting connection limits, use a connection 
 like **PgBouncer** in front of PostgreSQL. PgBouncer multiplexes thousands of app
 connections onto a smaller number of real database connections.
 
----
+[Back to Top](#top)
 
-## 5. FastAPI-Specific Optimizations
+<a id="6-fastapi-specific-optimizations"></a>
 
-### Skip Serializing Null Fields
+# 6. FastAPI-Specific Optimizations
+
+> "These are the quick wins," Ravi tells his team during code review. "Five minutes of work, measurable improvement on every response. No excuse not to do them from day one."
+
+<a id="skip-serializing-null-fields"></a>
+
+## Skip Serializing Null Fields
 
 By default, Pydantic serializes every field in your response model, including fields
 that are `None`. With `response_model_exclude_unset=True`, only fields that were
@@ -654,10 +729,12 @@ def get_user_slim(user_id: int):
 At scale, removing null fields from every response meaningfully reduces bandwidth and
 serialization time.
 
-### Faster JSON With `orjson`
+<a id="faster-json-with-orjson"></a>
+
+## Faster JSON With orjson
 
 The default `json` library in Python is implemented in pure Python. `orjson` is a
-Rust-based drop-in replacement that is roughly 5–10x faster for typical API payloads.
+Rust-based drop-in replacement that is roughly 5-10x faster for typical API payloads.
 
 ```python
 # pip install orjson
@@ -675,7 +752,9 @@ def large_dataset():
 The difference is negligible for small responses. For endpoints returning thousands of
 objects, the speedup is measurable.
 
-### Use Async Routes for I/O-Bound Work
+<a id="use-async-routes-for-io-bound-work"></a>
+
+## Use Async Routes for I/O-Bound Work
 
 As covered in chapter 11, async routes avoid thread pool overhead for I/O-bound
 operations. When your API makes outbound HTTP calls (to other services, external APIs),
@@ -687,7 +766,7 @@ import httpx
 @app.get("/aggregate")
 async def aggregate_data():
     async with httpx.AsyncClient(timeout=10.0) as client:
-        # Fire both requests concurrently — not sequentially
+        # Fire both requests concurrently -- not sequentially
         user_task = client.get("https://internal.service/users")
         order_task = client.get("https://internal.service/orders")
 
@@ -702,9 +781,13 @@ async def aggregate_data():
 Using `asyncio.gather` here fires both requests simultaneously. Sequential `await`
 calls would take twice as long.
 
----
+[Back to Top](#top)
 
-## 6. Horizontal Scaling
+<a id="7-horizontal-scaling"></a>
+
+# 7. Horizontal Scaling
+
+> "Vertical scaling is like making one chef cook faster," Ravi explains. "Horizontal scaling is hiring more chefs. There's a limit to how fast one person can cook, but you can always add another cook to the kitchen — as long as they don't need to share the same cutting board."
 
 Vertical scaling — bigger server, more RAM — has a ceiling. Horizontal scaling — more
 servers — does not.
@@ -715,27 +798,29 @@ session. Any server in the pool can handle any request.
 
 ```
               Internet
-                 │
-                 ▼
-        ┌────────────────┐
-        │  Load Balancer │  (nginx, ALB, Cloudflare)
-        │  Round-robin   │
-        └────────────────┘
-          │      │      │
-          ▼      ▼      ▼
-       [API 1] [API 2] [API 3]   ← stateless; any handles any request
-          │      │      │
-          └──────┴──────┘
-                 │
-        ┌────────┴────────┐
-        │                 │
-        ▼                 ▼
-    [Database]         [Redis]   ← shared state lives here
+                 |
+                 v
+        +----------------+
+        |  Load Balancer |  (nginx, ALB, Cloudflare)
+        |  Round-robin   |
+        +----------------+
+          |      |      |
+          v      v      v
+       [API 1] [API 2] [API 3]   <-- stateless; any handles any request
+          |      |      |
+          +------+------+
+                 |
+        +--------+--------+
+        |                 |
+        v                 v
+    [Database]         [Redis]   <-- shared state lives here
     (Primary +         (cache, rate limiting,
      Read Replicas)     sessions)
 ```
 
-### What Must Be Shared
+<a id="what-must-be-shared"></a>
+
+## What Must Be Shared
 
 When you add a second API server, anything that was stored in the first server's memory
 becomes inaccessible to the second server. Move it to Redis:
@@ -749,7 +834,9 @@ Stored in Redis (not in-process):
   - WebSocket state (with Redis pub/sub for cross-server broadcast)
 ```
 
-### Read Replicas for Heavy Read Loads
+<a id="read-replicas-for-heavy-read-loads"></a>
+
+## Read Replicas for Heavy Read Loads
 
 If 90% of your queries are reads (most APIs), you can add read replicas to distribute
 the load. Write to the primary; read from replicas:
@@ -794,24 +881,30 @@ def list_products(db: Session = Depends(get_read_db)):
     ...
 ```
 
----
+[Back to Top](#top)
 
-## 7. Key Metrics to Monitor
+<a id="8-key-metrics-to-monitor"></a>
 
-### Latency — Use Percentiles, Not Averages
+# 8. Key Metrics to Monitor
+
+> "You can't fix what you can't see," Ravi says. "These four metrics are your API's vital signs. If you monitor nothing else, monitor these."
+
+<a id="latency--use-percentiles-not-averages"></a>
+
+## Latency — Use Percentiles, Not Averages
 
 Averages hide the problem. An endpoint with a 50 ms average might be returning 200 ms to
 10% of users — that's the population you need to fix.
 
 ```
-p50 (median)   → 50% of requests are faster than this
-p95            → 95% of requests are faster than this
-p99            → 99% of requests are faster than this
+p50 (median)   -> 50% of requests are faster than this
+p95            -> 95% of requests are faster than this
+p99            -> 99% of requests are faster than this
 
 Example:
-  p50 = 45 ms    → half your users see 45 ms or better
-  p95 = 180 ms   → 5% see 180 ms or worse
-  p99 = 850 ms   → 1% see nearly a second — these users are churning
+  p50 = 45 ms    -> half your users see 45 ms or better
+  p95 = 180 ms   -> 5% see 180 ms or worse
+  p99 = 850 ms   -> 1% see nearly a second -- these users are churning
 
 Target (typical SaaS API):
   p50 < 100 ms
@@ -823,21 +916,25 @@ If your p99 is high but your p50 is fine, look for occasional slow queries (lock
 contention, cache misses, large payloads). If your p50 is slow, the problem is
 systematic.
 
-### Error Rate
+<a id="error-rate"></a>
+
+## Error Rate
 
 Track the percentage of requests returning 5xx (server errors) and 4xx (client errors).
 
 ```
-Error rate = (5xx responses / total responses) × 100
+Error rate = (5xx responses / total responses) x 100
 
 Thresholds to alert on:
-  5xx > 0.1%   → something is broken
-  5xx > 1%     → incident — page someone
-  429 spike    → a client is misbehaving (or you're under attack)
-  401/403 spike → authentication issue or credential stuffing attempt
+  5xx > 0.1%   -> something is broken
+  5xx > 1%     -> incident -- page someone
+  429 spike    -> a client is misbehaving (or you're under attack)
+  401/403 spike -> authentication issue or credential stuffing attempt
 ```
 
-### Requests Per Second (RPS) and Throughput
+<a id="requests-per-second-and-throughput"></a>
+
+## Requests Per Second and Throughput
 
 Track RPS over time. Sudden drops can indicate a deployment issue. Sudden spikes can
 indicate viral traffic or a DoS attack.
@@ -845,8 +942,6 @@ indicate viral traffic or a DoS attack.
 Know your capacity before you need it:
 
 ```bash
-
-
 # Quick load test with wrk
 wrk -t4 -c100 -d30s http://localhost:8000/products
 
@@ -857,8 +952,9 @@ locust -f locustfile.py --host=http://localhost:8000
 
 > 📝 **Practice:** [Q21 · etag-conditional-requests](../api_practice_questions_100.md#q21--thinking--etag-conditional-requests)
 
+<a id="database-connection-pool-usage"></a>
 
-### Database Connection Pool Usage
+## Database Connection Pool Usage
 
 ```python
 # Add this to your /health endpoint or expose as a metric
@@ -880,9 +976,11 @@ If `checked_out` is consistently near your `pool_size`, you are at capacity. Eit
 increase `pool_size`, add app servers, or optimize queries to hold connections for less
 time.
 
----
+[Back to Top](#top)
 
-## Performance Optimization Checklist
+<a id="9-performance-optimization-checklist"></a>
+
+# 9. Performance Optimization Checklist
 
 Work through these in order — they are roughly sorted by impact:
 
@@ -923,52 +1021,23 @@ MONITORING
   [ ] Slow query threshold set (alert if p99 > 1s)
 ```
 
----
+[Back to Top](#top)
 
-## Summary
+<a id="10-circuit-breaker--stop-cascading-failures"></a>
 
-```
-Where slowness comes from (most to least common):
-  1. Database — N+1 queries, missing indexes, no pagination
-  2. Serialization — unnecessary fields, slow JSON library
-  3. Network — nothing you can control on the server side
-  4. Framework overhead — negligible in FastAPI
+# 10. Circuit Breaker — Stop Cascading Failures
 
-High-impact fixes, in order:
-  1. Add indexes on filtered columns (5-minute fix, huge impact)
-  2. Eliminate N+1 queries with joinedload or batch fetching
-  3. Cache frequently-read data in Redis with a reasonable TTL
-  4. Use cursor pagination for large tables
-  5. Right-size your connection pool
-  6. Switch to orjson + response_model_exclude_unset=True
-
-Scaling pattern:
-  Stateless API servers behind a load balancer
-  Shared Redis for rate limits, cache, sessions
-  Read replicas for read-heavy workloads
-  PgBouncer when connection count becomes the bottleneck
-
-Metrics that matter:
-  p50, p95, p99 latency — not average
-  5xx error rate — alert above 0.1%
-  DB connection pool utilization
-  Cache hit rate
-```
-
----
-
-## 🔌 Circuit Breaker — Stop Cascading Failures
-
-> Imagine your house's electrical circuit breaker. When a wire overloads, the breaker trips to prevent fire spreading to the rest of the house. The software circuit breaker does the same: when a downstream service is failing, stop sending requests and fail fast — before the failure cascades everywhere.
+> "Imagine your house's electrical circuit breaker," Ravi tells new team members. "When a wire overloads, the breaker trips to prevent fire spreading to the rest of the house. The software circuit breaker does the same: when a downstream service is failing, stop sending requests and fail fast — before the failure cascades everywhere."
 
 The **circuit breaker pattern** wraps calls to external services and tracks failure rates. When failures exceed a threshold, the circuit "opens" and immediately returns an error without hitting the failing service — giving it time to recover.
 
 **Three states:**
+
 ```
-CLOSED  →  Normal operation. Requests pass through. Failures are counted.
-OPEN    →  Too many failures. Requests fail immediately (no network call).
-HALF-OPEN → After timeout, let a test request through. If it succeeds → CLOSED.
-                                                       If it fails   → OPEN again.
+CLOSED    ->  Normal operation. Requests pass through. Failures are counted.
+OPEN      ->  Too many failures. Requests fail immediately (no network call).
+HALF-OPEN ->  After timeout, let a test request through. If it succeeds -> CLOSED.
+                                                         If it fails   -> OPEN again.
 ```
 
 ```python
@@ -976,14 +1045,14 @@ import time
 from enum import Enum
 
 class CircuitState(Enum):
-    CLOSED    = "closed"      # normal — requests pass through
-    OPEN      = "open"        # tripped — fail fast
-    HALF_OPEN = "half_open"   # testing — one probe request allowed
+    CLOSED    = "closed"      # normal -- requests pass through
+    OPEN      = "open"        # tripped -- fail fast
+    HALF_OPEN = "half_open"   # testing -- one probe request allowed
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout=60):
-        self.failure_threshold = failure_threshold  # ← failures before opening
-        self.timeout = timeout                      # ← seconds before trying again
+        self.failure_threshold = failure_threshold  # failures before opening
+        self.timeout = timeout                      # seconds before trying again
         self.failure_count = 0
         self.last_failure_time = None
         self.state = CircuitState.CLOSED
@@ -991,9 +1060,9 @@ class CircuitBreaker:
     def call(self, func, *args, **kwargs):
         if self.state == CircuitState.OPEN:
             if time.time() - self.last_failure_time > self.timeout:
-                self.state = CircuitState.HALF_OPEN  # ← try probe request
+                self.state = CircuitState.HALF_OPEN  # try probe request
             else:
-                raise Exception("Circuit OPEN — service unavailable")
+                raise Exception("Circuit OPEN -- service unavailable")
 
         try:
             result = func(*args, **kwargs)
@@ -1005,13 +1074,13 @@ class CircuitBreaker:
 
     def _on_success(self):
         self.failure_count = 0
-        self.state = CircuitState.CLOSED    # ← reset on success
+        self.state = CircuitState.CLOSED    # reset on success
 
     def _on_failure(self):
         self.failure_count += 1
         self.last_failure_time = time.time()
         if self.failure_count >= self.failure_threshold:
-            self.state = CircuitState.OPEN  # ← trip the breaker
+            self.state = CircuitState.OPEN  # trip the breaker
 
 # Usage:
 cb = CircuitBreaker(failure_threshold=3, timeout=30)
@@ -1062,10 +1131,44 @@ Combine: Circuit Breaker wraps the function, Retry is inside.
 - Error rate before/after circuit opens
 - Response time distribution (circuit open = near-zero latency for failures)
 
----
+[Back to Top](#top)
 
-**[🏠 Back to README](../README.md)**
+<a id="summary"></a>
 
-**Prev:** [← API Versioning](../08_versioning_standards/versioning_strategy.md) &nbsp;|&nbsp; **Next:** [Testing APIs →](../10_testing_documentation/testing_apis.md)
+# Summary
 
-**Related Topics:** [FastAPI & Databases](../07_fastapi/database_guide.md) · [Testing APIs](../10_testing_documentation/testing_apis.md) · [Production Deployment](../12_production_deployment/deployment_guide.md) · [OpenTelemetry](../19_opentelemetry/opentelemetry_guide.md)
+```
+Where slowness comes from (most to least common):
+  1. Database -- N+1 queries, missing indexes, no pagination
+  2. Serialization -- unnecessary fields, slow JSON library
+  3. Network -- nothing you can control on the server side
+  4. Framework overhead -- negligible in FastAPI
+
+High-impact fixes, in order:
+  1. Add indexes on filtered columns (5-minute fix, huge impact)
+  2. Eliminate N+1 queries with joinedload or batch fetching
+  3. Cache frequently-read data in Redis with a reasonable TTL
+  4. Use cursor pagination for large tables
+  5. Right-size your connection pool
+  6. Switch to orjson + response_model_exclude_unset=True
+
+Scaling pattern:
+  Stateless API servers behind a load balancer
+  Shared Redis for rate limits, cache, sessions
+  Read replicas for read-heavy workloads
+  PgBouncer when connection count becomes the bottleneck
+
+Metrics that matter:
+  p50, p95, p99 latency -- not average
+  5xx error rate -- alert above 0.1%
+  DB connection pool utilization
+  Cache hit rate
+```
+
+## Navigation
+
+**[Back to README](../README.md)**
+
+**Prev:** [API Versioning](../08_versioning_standards/theory.md) | **Next:** [Testing and Documentation](../10_testing_documentation/theory.md)
+
+**Related Topics:** [FastAPI and Databases](../07_fastapi/theory.md) | [Testing APIs](../10_testing_documentation/theory.md) | [Production Deployment](../12_production_deployment/theory.md) | [OpenTelemetry](../19_opentelemetry/theory.md)

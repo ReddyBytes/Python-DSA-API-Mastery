@@ -1,26 +1,51 @@
-# API Security
+<a id="top"></a>
+# 5. Authentication and API Security
 
-## The Coffee Shop Scenario
-
-Picture this. You're a senior engineer at a fintech startup. A junior dev on your team
-just shipped a new `/payments` endpoint. Proud of the clean code, nice validation logic,
-solid tests.
-
-You pull up the PR and ask one question: "What happens if I call this from `curl` without
-any credentials?"
-
-Junior dev pauses. Pulls up a terminal. Runs it.
-
-The payment goes through.
-
-Anyone on the internet, with no credentials at all, can trigger a payment from your
-system. That's what an unsecured API looks like.
-
-This chapter is about making sure that never happens to you.
+> Meet **Karthik** -- a Telugu security engineer who guards API gateways at a fintech company. He's the person who reviews every PR that touches authentication, authorization, or input handling. He once caught an open payments endpoint in code review that would have let anyone on the internet trigger a wire transfer. That experience turned him into the team's security conscience. Karthik's motto: "If the door is open, someone will walk in."
 
 ---
 
-## 📌 Learning Priority
+## Table of Contents
+
+- [1. The Three Questions Every API Must Answer](#1-the-three-questions-every-api-must-answer)
+  - [Authentication vs Authorization vs Validation](#authentication-vs-authorization-vs-validation)
+- [2. API Keys — The Simplest Form of Machine Identity](#2-api-keys--the-simplest-form-of-machine-identity)
+  - [When to Use API Keys](#when-to-use-api-keys)
+  - [Sending API Keys](#sending-api-keys)
+  - [Storing API Keys on the Server Side](#storing-api-keys-on-the-server-side)
+- [3. OAuth 2.0 — The Delegation Protocol](#3-oauth-20--the-delegation-protocol)
+  - [Authorization Code Flow — For Web Apps With a User](#authorization-code-flow--for-web-apps-with-a-user)
+  - [Client Credentials Flow — For Machine-to-Machine](#client-credentials-flow--for-machine-to-machine)
+  - [Access Token and Refresh Token Lifecycle](#access-token-and-refresh-token-lifecycle)
+- [4. JWT — Stateless Auth Tokens](#4-jwt--stateless-auth-tokens)
+  - [Structure: header.payload.signature](#structure-headerpayloadsignature)
+  - [What Goes IN the Payload](#what-goes-in-the-payload)
+  - [What Does NOT Go in the Payload](#what-does-not-go-in-the-payload)
+  - [Validating a JWT — Three Checks Required](#validating-a-jwt--three-checks-required)
+  - [Generating a JWT](#generating-a-jwt)
+  - [The Refresh Token Pattern](#the-refresh-token-pattern)
+  - [JWT Pitfalls](#jwt-pitfalls)
+- [5. Rate Limiting — One Bad Actor Shouldn't Take Down Your API](#5-rate-limiting--one-bad-actor-shouldnt-take-down-your-api)
+  - [The Token Bucket Algorithm](#the-token-bucket-algorithm)
+  - [The Leaky Bucket Algorithm](#the-leaky-bucket-algorithm)
+  - [Fixed Window vs Sliding Window](#fixed-window-vs-sliding-window)
+  - [Implementing Rate Limiting With Redis](#implementing-rate-limiting-with-redis)
+  - [Rate Limit Response Headers](#rate-limit-response-headers)
+- [6. CORS — Why Can JavaScript on evil.com Call Your API?](#6-cors--why-can-javascript-on-evilcom-call-your-api)
+  - [The Same-Origin Policy](#the-same-origin-policy)
+  - [CORS: Relaxing the Same-Origin Policy](#cors-relaxing-the-same-origin-policy)
+  - [The Preflight Request](#the-preflight-request)
+  - [Wildcard vs Specific Origins](#wildcard-vs-specific-origins)
+- [7. Input Validation — Trust Nothing From the Client](#7-input-validation--trust-nothing-from-the-client)
+  - [SQL Injection — The Classic](#sql-injection--the-classic)
+  - [Schema Validation With Pydantic](#schema-validation-with-pydantic)
+  - [Other Injection Vectors to Know About](#other-injection-vectors-to-know-about)
+- [8. Common API Security Checklist](#8-common-api-security-checklist)
+- [9. Summary](#9-summary)
+
+---
+
+## Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
 API keys · JWT (structure/validation/refresh) · OAuth2 flows (authorization code/client credentials) · rate limiting algorithms
@@ -34,9 +59,24 @@ token bucket vs leaky bucket vs sliding window · CSRF protection
 **Reference** — Know it exists, look up syntax when needed:
 mTLS · FIDO2/WebAuthn · OAuth2 device flow · certificate pinning
 
+[Back to Top](#top)
+
 ---
 
-## The Three Questions Every API Must Answer
+<a id="1-the-three-questions-every-api-must-answer"></a>
+# 1. The Three Questions Every API Must Answer
+
+Karthik tells this story to every new hire on the team:
+
+"Picture this. You're a senior engineer at a fintech startup. A junior dev on your team just shipped a new `/payments` endpoint. Proud of the clean code, nice validation logic, solid tests.
+
+You pull up the PR and ask one question: 'What happens if I call this from `curl` without any credentials?'
+
+Junior dev pauses. Pulls up a terminal. Runs it.
+
+The payment goes through.
+
+Anyone on the internet, with no credentials at all, can trigger a payment from your system. That's what an unsecured API looks like."
 
 Before any request touches your business logic, your API needs to answer three questions:
 
@@ -55,6 +95,8 @@ Before any request touches your business logic, your API needs to answer three q
 └────────────────────────────────────────────────────────────────┘
 ```
 
+## Authentication vs Authorization vs Validation
+
 These three are distinct, and all three matter. Most security breaches come from
 getting one of them wrong — often the second one.
 
@@ -67,9 +109,14 @@ getting one of them wrong — often the second one.
 
 Let's build up each layer.
 
+[Back to Top](#top)
+
 ---
 
-## API Keys — The Simplest Form of Machine Identity
+<a id="2-api-keys--the-simplest-form-of-machine-identity"></a>
+# 2. API Keys — The Simplest Form of Machine Identity
+
+"Think of an API key like a badge at a corporate office," Karthik explains. "You flash it at the door. The door doesn't know your name or your job title — it just knows the badge is valid. Simple, effective, limited."
 
 API keys are the oldest trick in the book, and for a lot of use cases, still the
 right tool.
@@ -93,9 +140,9 @@ Client makes request:
               → checks permissions → serves the response
 ```
 
-> 📝 **Practice:** [Q35 · api-key-vs-jwt](../api_practice_questions_100.md#q35--interview--api-key-vs-jwt)
+> **Practice:** [Q35 · api-key-vs-jwt](../api_practice_questions_100.md#q35--interview--api-key-vs-jwt)
 
-### When to use API keys
+## When to Use API Keys
 
 API keys are the right choice when:
 - It's server-to-server communication (no human user involved)
@@ -108,7 +155,7 @@ API keys are the wrong choice when:
 - You need short-lived credentials that expire
 - The key might end up in a mobile app binary (that's dangerous — anyone can extract it)
 
-### Sending API keys
+## Sending API Keys
 
 The right way — in the Authorization header:
 
@@ -137,7 +184,7 @@ GET /data?api_key=sk-abc123xyz789   ← BAD: shows up in server logs, browser hi
 
 Never put an API key in a URL. It will end up in a log file somewhere, guaranteed.
 
-### Storing API keys on the server side
+## Storing API Keys on the Server Side
 
 Here's a critical point that many developers miss: **you should never store API keys
 in plain text on your server.**
@@ -173,11 +220,16 @@ Use `secrets.compare_digest()` instead of `==` to prevent timing attacks.
 
 Never log the raw key. Not in access logs, not in error logs, nowhere.
 
+[Back to Top](#top)
+
 ---
 
-## OAuth 2.0 — The Delegation Protocol
+<a id="3-oauth-20--the-delegation-protocol"></a>
+# 3. OAuth 2.0 — The Delegation Protocol
 
-> 📝 **Practice:** [Q31 · http-auth-schemes](../api_practice_questions_100.md#q31--normal--http-auth-schemes)
+> **Practice:** [Q31 · http-auth-schemes](../api_practice_questions_100.md#q31--normal--http-auth-schemes)
+
+"OAuth is like a hotel key card," Karthik says. "You check in at the front desk (the auth server), show your ID (your credentials), and you get a key card (access token) that opens only your room (scoped permissions), only for the duration of your stay (expiration). You never hand over your passport to the room door."
 
 Here's a scenario you've lived a hundred times: you click "Sign in with Google" on
 some app. You get redirected to Google, you approve the app's permissions, and you're
@@ -191,9 +243,9 @@ Spotify your Google password."
 
 OAuth 2.0 has several "flows" (officially called grant types). Two matter most:
 
-> 📝 **Practice:** [Q87 · production-auth-bug](../api_practice_questions_100.md#q87--design--production-auth-bug)
+> **Practice:** [Q87 · production-auth-bug](../api_practice_questions_100.md#q87--design--production-auth-bug)
 
-### Authorization Code Flow — for web apps with a user
+## Authorization Code Flow — For Web Apps With a User
 
 This is the flow behind "Sign in with Google," "Login with GitHub," every social
 login button you've ever clicked.
@@ -245,9 +297,9 @@ Key terms:
 - **access_token** — what you actually use to make API calls, short-lived (1 hour typ.)
 - **refresh_token** — long-lived token to get new access tokens without re-logging in
 
-> 📝 **Practice:** [Q34 · oauth2-authorization-code](../api_practice_questions_100.md#q34--normal--oauth2-authorization-code)
+> **Practice:** [Q34 · oauth2-authorization-code](../api_practice_questions_100.md#q34--normal--oauth2-authorization-code)
 
-### Client Credentials Flow — for machine-to-machine
+## Client Credentials Flow — For Machine-to-Machine
 
 No user involved. Your backend service needs to call another backend service.
 
@@ -276,7 +328,7 @@ No user involved. Your backend service needs to call another backend service.
 Simple. Trade your credentials for a token. Use the token. When it expires, get a
 new one.
 
-### Access token and refresh token lifecycle
+## Access Token and Refresh Token Lifecycle
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -305,19 +357,24 @@ Flow when access_token expires:
   6. User never noticed anything
 ```
 
-> 📝 **Practice:** [Q33 · jwt-access-refresh-tokens](../api_practice_questions_100.md#q33--thinking--jwt-access-refresh-tokens)
+> **Practice:** [Q33 · jwt-access-refresh-tokens](../api_practice_questions_100.md#q33--thinking--jwt-access-refresh-tokens)
+
+[Back to Top](#top)
 
 ---
 
-## JWT — Stateless Auth Tokens
+<a id="4-jwt--stateless-auth-tokens"></a>
+# 4. JWT — Stateless Auth Tokens
 
-> 📝 **Practice:** [Q91 · predict-jwt-expiry](../api_practice_questions_100.md#q91--logical--predict-jwt-expiry)
+> **Practice:** [Q91 · predict-jwt-expiry](../api_practice_questions_100.md#q91--logical--predict-jwt-expiry)
 
-> 📝 **Practice:** [Q82 · compare-jwt-vs-sessions](../api_practice_questions_100.md#q82--interview--compare-jwt-vs-sessions)
+> **Practice:** [Q82 · compare-jwt-vs-sessions](../api_practice_questions_100.md#q82--interview--compare-jwt-vs-sessions)
 
-> 📝 **Practice:** [Q78 · explain-jwt-vs-sessions](../api_practice_questions_100.md#q78--interview--explain-jwt-vs-sessions)
+> **Practice:** [Q78 · explain-jwt-vs-sessions](../api_practice_questions_100.md#q78--interview--explain-jwt-vs-sessions)
 
-> 📝 **Practice:** [Q32 · jwt-structure](../api_practice_questions_100.md#q32--normal--jwt-structure)
+> **Practice:** [Q32 · jwt-structure](../api_practice_questions_100.md#q32--normal--jwt-structure)
+
+"A JWT is like a signed letter from a king," Karthik explains. "Anyone can read what the letter says (the payload is not encrypted). But no one can forge the king's seal (the signature). If the seal is intact, you trust the message. If it's broken, you throw it out."
 
 Every time a user makes an API call, your server needs to verify who they are. The
 naive approach: store a session ID in a database, look it up on every request. Works
@@ -326,9 +383,9 @@ fine until you have 10 servers and need to share session state across all of the
 JWT (JSON Web Token, pronounced "jot") solves this differently: the token itself
 contains the user's identity. No database lookup needed.
 
-> 📝 **Practice:** [Q98 · design-jwt-vs-sessions-mobile](../api_practice_questions_100.md#q98--design--design-jwt-vs-sessions-mobile)
+> **Practice:** [Q98 · design-jwt-vs-sessions-mobile](../api_practice_questions_100.md#q98--design--design-jwt-vs-sessions-mobile)
 
-### Structure: header.payload.signature
+## Structure: header.payload.signature
 
 A JWT looks like this:
 
@@ -373,7 +430,7 @@ anyone tampered with the payload, the signature won't match.
 Important: the payload is **not encrypted**, it's just base64 encoded. Anyone can
 decode and read it. Don't put secrets in the payload.
 
-### What goes IN the payload
+## What Goes IN the Payload
 
 ```python
 # Standard claims (defined by the JWT spec)
@@ -396,7 +453,7 @@ decode and read it. Don't put secrets in the payload.
 }
 ```
 
-### What does NOT go in the payload
+## What Does NOT Go in the Payload
 
 ```
 NEVER put in JWT payload:
@@ -407,7 +464,7 @@ NEVER put in JWT payload:
   - Data that changes frequently (roles might be stale by the time token expires)
 ```
 
-### Validating a JWT — three checks required
+## Validating a JWT — Three Checks Required
 
 ```python
 import jwt  # PyJWT library: pip install PyJWT
@@ -442,7 +499,7 @@ The three checks in order:
 2. **Check expiration** (`exp`) — has the token expired?
 3. **Check issuer** (`iss`) — was this issued by who we expect?
 
-### Generating a JWT
+## Generating a JWT
 
 ```python
 import jwt
@@ -478,7 +535,7 @@ def create_refresh_token(user_id: int) -> str:
     return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 ```
 
-### The refresh token pattern
+## The Refresh Token Pattern
 
 ```
   Login:
@@ -510,7 +567,7 @@ The access token is short-lived so a stolen token has limited damage. The refres
 token is long-lived but only used in one endpoint, making it easier to monitor and
 invalidate.
 
-### JWT pitfalls
+## JWT Pitfalls
 
 **The `alg: none` attack**
 
@@ -550,9 +607,14 @@ In production with multiple services, use RS256. Publish your public key at a
 well-known URL (e.g., `/.well-known/jwks.json`). Each service fetches it and
 verifies tokens locally. Your auth server's private key never leaves it.
 
+[Back to Top](#top)
+
 ---
 
-## Rate Limiting — One Bad Actor Shouldn't Take Down Your API
+<a id="5-rate-limiting--one-bad-actor-shouldnt-take-down-your-api"></a>
+# 5. Rate Limiting — One Bad Actor Shouldn't Take Down Your API
+
+"Rate limiting is a bouncer with a counter," Karthik says. "You get in N times. After that, you wait outside until your turn resets. It doesn't matter if you're VIP — everyone gets a limit, some just get a higher one."
 
 Here's a real scenario: someone writes a scraper that hammers your `/search` endpoint
 10,000 times per minute. Maybe it's malicious, maybe it's just a while loop with no
@@ -560,7 +622,7 @@ sleep. Either way, your API falls over for everyone.
 
 Rate limiting says: "You get N requests per time window. After that, slow down."
 
-### The Token Bucket Algorithm
+## The Token Bucket Algorithm
 
 The most popular algorithm for rate limiting. Intuitive once you visualize it.
 
@@ -588,7 +650,7 @@ This is great for real users with occasional bursts — they can fire off severa
 quick requests (depleting the bucket), then the bucket refills for their next
 activity.
 
-### The Leaky Bucket Algorithm
+## The Leaky Bucket Algorithm
 
 Similar concept, different behavior.
 
@@ -616,7 +678,7 @@ traffic spikes.
 
 Token bucket allows bursts. Leaky bucket eliminates them.
 
-### Fixed Window vs Sliding Window
+## Fixed Window vs Sliding Window
 
 **Fixed window:** reset the counter every N seconds on a clock boundary.
 
@@ -655,7 +717,7 @@ Sliding window is more accurate and eliminates the edge case, but requires
 storing per-request timestamps (more memory, more complex). Redis sorted sets
 work well for this.
 
-### Implementing rate limiting with Redis
+## Implementing Rate Limiting With Redis
 
 ```python
 import redis
@@ -695,7 +757,7 @@ def get_rate_limit_status(user_id: str, limit: int = 100, window_seconds: int = 
     }
 ```
 
-### Rate limit response headers
+## Rate Limit Response Headers
 
 When you reject or allow a request, include these headers so the client knows
 what's happening:
@@ -705,9 +767,9 @@ HTTP/1.1 200 OK
 X-RateLimit-Limit: 100         → total requests allowed in this window
 X-RateLimit-Remaining: 47      → requests left in this window
 X-RateLimit-Reset: 1709900060  → Unix timestamp when window resets
+```
 
----
-
+```
 HTTP/1.1 429 Too Many Requests
 X-RateLimit-Limit: 100
 X-RateLimit-Remaining: 0
@@ -732,9 +794,14 @@ Rate limit by what makes sense for your API:
 - Per IP address (for public/unauthenticated endpoints)
 - Per endpoint (expensive endpoints get tighter limits)
 
+[Back to Top](#top)
+
 ---
 
-## CORS — Why Can JavaScript on evil.com Call Your API?
+<a id="6-cors--why-can-javascript-on-evilcom-call-your-api"></a>
+# 6. CORS — Why Can JavaScript on evil.com Call Your API?
+
+"CORS is like a guest list at a private event," Karthik explains. "Your server is the host. The browser is the bouncer. The bouncer checks every guest's invitation (Origin header) against the host's list. If you're not on the list, you don't get in — even if you physically walked up to the door."
 
 You've seen this error in the browser console:
 
@@ -747,7 +814,7 @@ Access to fetch at 'https://api.myapp.com/data' from origin
 That's CORS doing its job. Let's understand why it exists and how to configure it
 correctly.
 
-### The Same-Origin Policy
+## The Same-Origin Policy
 
 Browsers enforce the same-origin policy: JavaScript can only make requests to the
 same origin it was served from.
@@ -766,7 +833,7 @@ Why does this policy exist? Without it, if you visit `evil.com`, the malicious
 JavaScript there could silently call `https://your-bank.com/transfer` using your
 browser's session cookies. That would be very bad.
 
-### CORS: Relaxing the Same-Origin Policy
+## CORS: Relaxing the Same-Origin Policy
 
 CORS (Cross-Origin Resource Sharing) is the mechanism that lets a server say:
 "I trust requests from these other origins."
@@ -793,7 +860,7 @@ so it lets the JavaScript code access the response. If the header is missing or
 doesn't match, the browser blocks the response (the request still reaches the
 server — CORS is a browser enforcement mechanism, not a server-level block).
 
-### The Preflight Request
+## The Preflight Request
 
 For "non-simple" requests (anything with a custom header like `Authorization`,
 or methods other than GET/POST), the browser sends a preflight OPTIONS request
@@ -844,7 +911,7 @@ app.add_middleware(
 )
 ```
 
-### Wildcard vs specific origins
+## Wildcard vs Specific Origins
 
 ```
 Access-Control-Allow-Origin: *       ← allows any origin
@@ -863,9 +930,14 @@ you're dealing with cookies, sessions, or `Authorization` headers, use specific
 origins. You can dynamically validate the incoming `Origin` header against an
 allowlist and echo it back if it matches.
 
+[Back to Top](#top)
+
 ---
 
-## Input Validation — Trust Nothing From the Client
+<a id="7-input-validation--trust-nothing-from-the-client"></a>
+# 7. Input Validation — Trust Nothing From the Client
+
+"Every byte from a client is a potential attacker wearing a disguise," Karthik warns. "Your job is to frisk everything at the door. Type-check it, size-check it, pattern-check it. If it doesn't match your schema exactly, reject it before it gets anywhere near your database."
 
 Here's the mindset: every byte that comes from a client is potentially hostile.
 Not because your users are evil, but because:
@@ -873,7 +945,7 @@ Not because your users are evil, but because:
 2. Bugs in client apps can send malformed data
 3. Someone might be probing your API on purpose
 
-### SQL Injection — The Classic
+## SQL Injection — The Classic
 
 You have a search endpoint:
 
@@ -911,7 +983,7 @@ user = db.query(User).filter(User.username == username).first()
 With parameterized queries, the database treats the user input as data, not as
 SQL code. The injection attempt becomes a literal string search.
 
-### Schema Validation with Pydantic
+## Schema Validation With Pydantic
 
 The best defense against malformed input is declaring exactly what you expect
 and letting a schema validator enforce it:
@@ -950,7 +1022,7 @@ Pydantic validates the type, the shape, and the constraints all at once. If
 anything fails, FastAPI returns a `422 Unprocessable Entity` with a detailed
 error message before your code even runs.
 
-### Other injection vectors to know about
+## Other Injection Vectors to Know About
 
 ```
 SQL injection:        ''; DROP TABLE users; --
@@ -964,9 +1036,12 @@ The pattern to prevent all of them is the same: validate and sanitize all input,
 use parameterized queries or ORMs, never construct commands/queries by concatenating
 user input.
 
+[Back to Top](#top)
+
 ---
 
-## Common API Security Checklist
+<a id="8-common-api-security-checklist"></a>
+# 8. Common API Security Checklist
 
 A quick reference for every API you ship:
 
@@ -1024,9 +1099,12 @@ HEADERS
 Security is not a feature you add at the end. It's a set of decisions you make
 at every layer, from the first line of code.
 
+[Back to Top](#top)
+
 ---
 
-## Summary
+<a id="9-summary"></a>
+# 9. Summary
 
 ```
 Authentication  — who are you?  (API keys, OAuth2, JWT)
@@ -1063,10 +1141,12 @@ CORS:
   - Never use wildcard with authenticated APIs
 ```
 
+[Back to Top](#top)
+
 ---
 
-**[🏠 Back to README](../README.md)**
+**[Back to README](../README.md)**
 
-**Prev:** [← Data Formats & Serialization](../04_data_formats/serialization_guide.md) &nbsp;|&nbsp; **Next:** [Error Handling Standards →](../06_error_handling_standards/error_guide.md)
+**Prev:** [Data Formats & Serialization](../04_data_formats/theory.md) | **Next:** [Error Handling Standards](../06_error_handling_standards/theory.md)
 
-**Related Topics:** [Error Handling Standards](../06_error_handling_standards/error_guide.md) · [FastAPI Core Guide](../07_fastapi/core_guide.md) · [Security in Production](../11_api_security_production/security_hardening.md) · [API Gateway Patterns](../15_api_gateway/gateway_patterns.md)
+**Related Topics:** [Error Handling Standards](../06_error_handling_standards/theory.md) · [FastAPI Core Guide](../07_fastapi/theory.md) · [Security in Production](../11_api_security_production/theory.md) · [API Gateway Patterns](../15_api_gateway/theory.md)

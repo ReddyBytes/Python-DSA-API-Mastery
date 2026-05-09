@@ -1,18 +1,44 @@
-# Stage 19 — OpenTelemetry: Instrument Your Python APIs
+<a id="top"></a>
+
+# 19. OpenTelemetry: Instrument Your Python APIs
 
 > The universal language of observability — one SDK, any backend, zero vendor lock-in.
 
-> 📝 **Practice:** [Q69 · api-observability](../api_practice_questions_100.md#q69--normal--api-observability)
+> **Practice:** [Q69 - api-observability](../api_practice_questions_100.md#q69--normal--api-observability)
 
----
+<a id="toc"></a>
 
-## 📌 Learning Priority
+## Table of Contents
+
+- [1. Core Intuition](#core-intuition)
+- [2. The Problem OpenTelemetry Solves](#the-problem)
+- [3. Key Concepts Before You Write Any Code](#key-concepts)
+  - [Trace, Span, Trace ID, Span ID](#key-concepts)
+  - [Attributes, Context Propagation, OTEL Collector](#key-concepts)
+- [4. The Three Pillars of Observability](#three-pillars)
+- [5. OTEL Architecture](#otel-architecture)
+- [6. Install and Setup](#install-setup)
+- [7. Auto-Instrumentation — FastAPI](#auto-instrumentation)
+- [8. Manual Spans — Instrument Your Business Logic](#manual-spans)
+- [9. Distributed Tracing — Across Services](#distributed-tracing)
+- [10. Custom Metrics](#custom-metrics)
+- [11. Correlated Logs](#correlated-logs)
+- [12. OTEL Collector — docker-compose Setup](#otel-collector-setup)
+- [13. Sampling — Don't Trace Everything](#sampling)
+- [14. Complete FastAPI Example](#complete-example)
+- [15. Common Mistakes](#common-mistakes)
+- [16. Interview Perspective](#interview-perspective)
+- [17. Summary](#summary)
+
+<a id="learning-priority"></a>
+
+## Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-traces and spans · metric instruments · log correlation
+traces and spans, metric instruments, log correlation
 
 **Should Learn** — Important for real projects:
-OTEL collector config · exporters
+OTEL collector config, exporters
 
 **Good to Know** — Useful in specific situations:
 sampling strategies
@@ -20,9 +46,13 @@ sampling strategies
 **Reference** — Know it exists, look up syntax when needed:
 OpenMetrics format
 
----
+[Back to Top](#top)
+
+<a id="core-intuition"></a>
 
 ## 1. Core Intuition
+
+Meet **Chandra** — a Telugu observability engineer who traces every request through distributed systems. Before Chandra joined the team, debugging a slow checkout was like searching for a needle in five different haystacks blindfolded. After Chandra set up OpenTelemetry, every request tells its own story — start to finish, across every service.
 
 Your FastAPI service is getting slow. Users complain. You check logs — nothing obvious. You check CPU — looks fine. You have no idea where the 2 seconds are going.
 
@@ -39,6 +69,8 @@ POST /checkout  total: 1,847ms
 ```
 
 That's what **OpenTelemetry** gives you. Not just "the request took 2 seconds" — but *exactly where* those seconds went, across every function, every service, every database call.
+
+"I think of OTEL like a GPS tracker for your requests," Chandra explains to new engineers. "You put a tracker on a package at the warehouse — you see every hand-off, every delay, every reroute. Without it, you just know 'the package is late' but not *why*."
 
 **OpenTelemetry (OTEL)** = an open-source, vendor-neutral observability framework.
 - You instrument your code **once** with the OTEL SDK
@@ -58,7 +90,9 @@ The OTEL world:
                                ↘ → All three simultaneously
 ```
 
----
+[Back to Top](#top)
+
+<a id="the-problem"></a>
 
 ## 2. The Problem OpenTelemetry Solves
 
@@ -83,6 +117,8 @@ Grep through 5 log files             Click trace → see the full journey in 2 s
 Ask each team "did your service..."  See exactly which service caused the cascade
 ```
 
+"I've been on both sides," Chandra says. "At my first job, we had 12 microservices and zero tracing. Debugging a latency spike meant four engineers in a war room for three hours, each checking their own service. Now? I pull up a trace, click three times, and I know exactly which service and which query caused the issue."
+
 **Why not just add more logging?**
 
 Logs tell you *what* happened inside one service. They can't tell you *how* a request flowed *across* services, *where* time was spent, or *which* of 1,000 concurrent requests was the slow one. You need three complementary signals working together — and that's what OTEL gives you.
@@ -103,9 +139,13 @@ OpenTelemetry timeline:
            Every major vendor supports OTEL natively
 ```
 
----
+[Back to Top](#top)
+
+<a id="key-concepts"></a>
 
 ## 3. Key Concepts Before You Write Any Code
+
+Chandra draws this on every whiteboard during onboarding:
 
 **Trace:** The complete journey of one request through your system. Like following a single package from warehouse to your door — every hand-off recorded.
 
@@ -139,9 +179,13 @@ span = {
 }
 ```
 
----
+[Back to Top](#top)
+
+<a id="three-pillars"></a>
 
 ## 4. The Three Pillars of Observability
+
+"There are three questions I ask every time something goes wrong," Chandra teaches. "Where did time go? How is the system behaving? What happened? Traces, metrics, and logs answer those three questions respectively."
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -166,7 +210,9 @@ span = {
 
 OpenTelemetry provides a **unified SDK** that produces all three — and crucially, **correlates** them. A trace ID in your logs links to the exact span in your trace. A spike in your metrics links to the exact request that caused it.
 
----
+[Back to Top](#top)
+
+<a id="otel-architecture"></a>
 
 ## 5. OTEL Architecture
 
@@ -200,9 +246,28 @@ graph LR
     style Backends fill:#374151,color:#fff
 ```
 
----
+```
+Chandra's simplified mental model:
 
-## 6. Install & Setup
+  Your Code  ──OTLP──>  Collector  ──fan-out──>  Backend(s)
+  (SDK)                  (router)                (Jaeger, Prom, etc.)
+
+  Why the Collector?
+  ┌─────────────────────────────────────────────┐
+  │  Batching     — reduces network calls       │
+  │  Retry        — handles backend downtime    │
+  │  Filtering    — drop health check spans     │
+  │  Enrichment   — add env/region attributes   │
+  │  Fan-out      — send to 3 backends at once  │
+  │  Decoupling   — swap backends, no redeploy  │
+  └─────────────────────────────────────────────┘
+```
+
+[Back to Top](#top)
+
+<a id="install-setup"></a>
+
+## 6. Install and Setup
 
 ```bash
 # Core SDK
@@ -223,11 +288,15 @@ pip install opentelemetry-exporter-prometheus
 pip install prometheus-client
 ```
 
----
+[Back to Top](#top)
+
+<a id="auto-instrumentation"></a>
 
 ## 7. Auto-Instrumentation — FastAPI
 
 The fastest way to get value: auto-instrumentation wraps your entire app with zero changes to business logic.
+
+"This is always my first step on a new service," Chandra notes. "Ten minutes of setup, and you get HTTP spans for every endpoint, database query timing, Redis call tracing — all free. The manual spans come later when you need business-level visibility."
 
 ```python
 # telemetry.py — set up once, import everywhere
@@ -314,7 +383,9 @@ async def get_user(user_id: int):
     return user
 ```
 
----
+[Back to Top](#top)
+
+<a id="manual-spans"></a>
 
 ## 8. Manual Spans — Instrument Your Business Logic
 
@@ -395,15 +466,17 @@ async def check_inventory(items: list[dict]) -> bool:
     return True
 ```
 
----
+[Back to Top](#top)
+
+<a id="distributed-tracing"></a>
 
 ## 9. Distributed Tracing — Across Services
 
 The real power: trace a single user request as it flows through multiple services.
 
+"This is where OTEL becomes magical," Chandra says. "Service A starts a trace. It passes a tiny header — `traceparent` — to Service B. Service B sees that header and joins the same trace. Now you have one unified timeline showing both services, as if they were one app."
+
 ```python
-
-
 # Service A: Orders API — starts the trace
 import httpx
 from opentelemetry.propagate import inject
@@ -444,8 +517,7 @@ async def reserve_inventory(request: Request, data: dict):
         ...
 ```
 
-> 📝 **Practice:** [Q70 · distributed-tracing](../api_practice_questions_100.md#q70--thinking--distributed-tracing)
-
+> **Practice:** [Q70 - distributed-tracing](../api_practice_questions_100.md#q70--thinking--distributed-tracing)
 
 ```
 Resulting trace in Jaeger:
@@ -459,7 +531,9 @@ orders.create                    [==========================] 1,847ms
 └── notification.send            [==] 112ms
 ```
 
----
+[Back to Top](#top)
+
+<a id="custom-metrics"></a>
 
 ## 10. Custom Metrics
 
@@ -524,11 +598,15 @@ async def metrics_middleware(request: Request, call_next):
     return response
 ```
 
----
+[Back to Top](#top)
+
+<a id="correlated-logs"></a>
 
 ## 11. Correlated Logs
 
 Connect your logs to your traces — click a log line and jump directly to the trace:
+
+"This is the glue," Chandra insists. "Without trace IDs in your logs, you have two separate worlds — logs over here, traces over there. Correlate them and you can click from a log line in Grafana Loki straight into the trace in Jaeger. That's the dream."
 
 ```python
 import logging
@@ -580,7 +658,9 @@ async def process_order(order_id: str):
         #          "span_id": "00f067aa0ba902b7", "message": "Processing order abc"}
 ```
 
----
+[Back to Top](#top)
+
+<a id="otel-collector-setup"></a>
 
 ## 12. OTEL Collector — docker-compose Setup
 
@@ -673,7 +753,9 @@ service:
       exporters: [prometheus]
 ```
 
----
+[Back to Top](#top)
+
+<a id="sampling"></a>
 
 ## 13. Sampling — Don't Trace Everything
 
@@ -719,7 +801,11 @@ tracer_provider = TracerProvider(
 )
 ```
 
----
+"I always tell teams: sample success, never sample errors," Chandra advises. "A 5% sample rate for healthy requests gives you plenty of data for latency histograms. But you want 100% of errors — every single one — because those are the needles you're searching for."
+
+[Back to Top](#top)
+
+<a id="complete-example"></a>
 
 ## 14. Complete FastAPI Example
 
@@ -781,9 +867,31 @@ async def create_order(request: Request, cart_id: str, user_id: str):
             raise HTTPException(status_code=500, detail=str(e))
 ```
 
----
+[Back to Top](#top)
 
-## 15. Interview Perspective
+<a id="common-mistakes"></a>
+
+## 15. Common Mistakes
+
+Chandra has seen every OTEL anti-pattern in production. Here are the ones that bite most often:
+
+**Mistake: Forgetting to call shutdown() on exit** — Your app exits and the last batch of spans is lost forever. The BatchSpanProcessor buffers spans and exports them periodically. If you kill the process without flushing, those buffered spans vanish. Always call `tracer_provider.shutdown()` in your app's lifespan/shutdown hook.
+
+**Mistake: Tracing health check endpoints** — Your `/health` endpoint gets hit every 5 seconds by Kubernetes. That is 17,280 spans per day per pod — all noise. Always exclude health and metrics endpoints via `excluded_urls` in the instrumentor configuration.
+
+**Mistake: High-cardinality attributes** — Setting `span.set_attribute("user.email", email)` on every span creates millions of unique tag values. Your trace backend's index explodes, queries become slow, and storage costs skyrocket. Use low-cardinality attributes (status codes, service names, error types) on spans. Put high-cardinality data in logs instead — those are designed for full-text search.
+
+**Mistake: Not propagating context in async tasks** — You fire off a background task with `asyncio.create_task()` but the task runs outside the current span context. The child spans appear as orphaned root traces instead of children. Use `opentelemetry.context.attach()` to carry context into background tasks.
+
+**Mistake: Exporting directly to backends without a Collector** — It works in development but in production your app now has hard dependencies on every backend. If Jaeger is down, your export calls block or fail. The Collector provides retry, buffering, and isolation — always use it in production.
+
+**Mistake: Creating too many spans** — Wrapping every single function in a span creates massive traces that are hard to read and expensive to store. Instrument at meaningful boundaries: HTTP calls, DB queries, external service calls, and key business logic steps. A 10-span trace that tells a clear story is better than a 200-span trace that overwhelms.
+
+[Back to Top](#top)
+
+<a id="interview-perspective"></a>
+
+## 16. Interview Perspective
 
 **Q: What is OpenTelemetry and why is it important?**
 OpenTelemetry is a CNCF vendor-neutral observability framework that standardises how applications produce traces, metrics, and logs. Before OTEL, every vendor (Datadog, New Relic, Dynatrace) had its own proprietary SDK — switching vendors meant rewriting all instrumentation. With OTEL, you instrument once using the standard SDK and route telemetry to any backend via the Collector. This means infrastructure teams can change backends without touching application code, and developers write instrumentation once.
@@ -797,10 +905,34 @@ Auto-instrumentation (FastAPIInstrumentor, SQLAlchemyInstrumentor) captures all 
 **Q: What is the OTEL Collector and why use it instead of exporting directly?**
 You could export spans directly from your app to Jaeger or Datadog. The Collector sits between and adds: batching (reduces network calls), retry on backend failure, filtering (drop health check traces), enrichment (add env/region attributes), and fan-out (send to Jaeger AND Prometheus AND Datadog simultaneously). In production, the Collector also decouples your app from the backend — you can swap Jaeger for Grafana Tempo without redeploying the app.
 
----
+**Q: What sampling strategies would you use in production?**
+At high traffic, tracing 100% of requests is prohibitively expensive. I use `ParentBased` sampling with a custom root sampler: 100% of error responses are always traced (never miss a failure), 100% of slow requests (above p95 threshold) are traced, and 5-10% of successful requests are sampled for baseline latency data. The key insight is that ParentBased respects the upstream service's sampling decision — if Service A decides to trace a request, all downstream services honor that decision, keeping the trace complete.
 
-**[🏠 Back to README](../README.md)**
+[Back to Top](#top)
 
-**Prev:** [← Real-World Architectures](../18_real_world_apis/architectures.md) &nbsp;|&nbsp; **Next:** [API Interview Master →](../99_interview_master/api_questions.md)
+<a id="summary"></a>
 
-**Related Topics:** [Production Deployment](../12_production_deployment/deployment_guide.md) · [FastAPI Advanced](../07_fastapi/advanced_guide.md) · [API Performance & Scaling](../09_api_performance_scaling/performance_guide.md) · [Real-World Architectures](../18_real_world_apis/architectures.md)
+## 17. Summary
+
+| Concept | What It Does | When to Use |
+|---------|-------------|-------------|
+| OTEL SDK | Produces traces, metrics, logs | Every service — instrument once |
+| Auto-instrumentation | Captures HTTP, DB, cache spans automatically | First step on any new service |
+| Manual spans | Captures your business logic | Key business operations |
+| Distributed tracing | Links spans across services via traceparent | Multi-service architectures |
+| OTEL Collector | Routes telemetry to backends with batching/retry | Always in production |
+| Sampling | Reduces volume while keeping error visibility | High-traffic services |
+| Log correlation | Injects trace_id into log records | Linking logs to traces |
+| Custom metrics | Counters, histograms, gauges for business KPIs | Dashboards and alerting |
+
+Chandra's parting advice: "Start with auto-instrumentation and the Collector. You'll get 80% of the value in an afternoon. Add manual spans for your most critical business flows. Add custom metrics for your SLOs. And always, always correlate your logs — that's what turns three separate tools into one unified story."
+
+**[Back to README](../README.md)**
+
+**Prev:** [Real-World APIs](../18_real_world_apis/theory.md)
+
+**Next:** None (last module)
+
+**Related Topics:** [Production Deployment](../12_production_deployment/theory.md) | [FastAPI Advanced](../07_fastapi/theory.md) | [API Performance and Scaling](../09_api_performance_scaling/theory.md) | [Real-World Architectures](../18_real_world_apis/theory.md)
+
+**Up:** [03_API_Mastery README](../README.md)

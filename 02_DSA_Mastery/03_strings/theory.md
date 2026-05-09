@@ -1,38 +1,43 @@
 <a id="top"></a>
-# 📘 Strings in Python — Complete Theory (Zero to Advanced)
-
-> This file builds a deep understanding of strings from fundamentals
-> to advanced problem-solving perspective.
->  
-> Focus: memory behavior, performance implications, manipulation patterns,
-> and real-world engineering usage.
+# 📘 03 – Strings in Python
 
 ## 📖 Table of Contents
 
-1. [What Is a String?](#what-is-a-string)
-2. [String as an Array of Characters](#string-as-an-array-of-characters)
-3. [Why Strings Are Immutable](#why-strings-are-immutable)
-4. [What Happens When You Modify a String?](#what-happens-when-you-modify-a-string)
-5. [Time Complexity of String Operations](#time-complexity-of-string-operations)
-6. [Why Repeated Concatenation Is Dangerous](#why-repeated-concatenation-is-dangerous)
-7. [String Interning](#string-interning)
-8. [Memory Representation](#memory-representation)
-9. [Common String Operations](#common-string-operations)
-10. [String Comparison](#string-comparison)
-11. [String vs List of Characters](#string-vs-list-of-characters)
-12. [Important Interview Patterns with Strings](#important-interview-patterns-with-strings)
-13. [Anagram Detection](#anagram-detection)
-14. [Sliding Window — Longest No-Repeat Substring](#sliding-window--longest-no-repeat-substring)
-15. [Palindrome Checking](#palindrome-checking)
-16. [Substring Search](#substring-search)
-17. [Space Complexity Considerations](#space-complexity-considerations)
-18. [When NOT To Use Strings Directly](#when-not-to-use-strings-directly)
-19. [Real-World Usage of Strings](#real-world-usage-of-strings)
-20. [Performance Estimation](#performance-estimation)
-21. [Advanced Topics](#advanced-topics)
-22. [Complexity Cheat Sheet](#complexity-cheat-sheet)
-23. [Final Summary](#final-summary)
+- [📌 Learning Priority](#learning-priority)
+- [1. What Is a String?](#1-what-is-a-string)
+  - [String as an Array of Characters](#string-as-array)
+  - [Visual: The Telegraph Tape](#visual-telegraph-tape)
+- [2. Immutability — The Defining Feature](#2-immutability)
+  - [Visual: Carved in Stone](#visual-carved-in-stone)
+  - [What Happens When You "Modify" a String](#what-happens-modify)
+- [3. Time Complexity of String Operations](#3-time-complexity)
+  - [The Concatenation Trap](#concatenation-trap)
+- [4. Common String Operations](#4-common-operations)
+  - [Slicing](#slicing)
+  - [Visual: The Window on the Tape](#visual-window-tape)
+  - [Reverse](#reverse)
+  - [Split](#split)
+  - [Replace](#replace)
+- [5. String Internals](#5-string-internals)
+  - [Interning](#interning)
+  - [Memory Representation](#memory-representation)
+- [6. String Comparison](#6-string-comparison)
+  - [Visual: Lexicographic Order](#visual-lexicographic)
+  - [The ASCII Trap](#ascii-trap)
+  - [String vs List of Characters](#string-vs-list)
+- [7. Interview Patterns](#7-interview-patterns)
+  - [Anagram Detection](#anagram-detection)
+  - [Sliding Window — Longest No-Repeat Substring](#sliding-window)
+  - [Palindrome Checking](#palindrome-checking)
+  - [Substring Search and KMP](#substring-search-kmp)
+- [8. Space Complexity and When to Avoid Strings](#8-space-complexity)
+- [9. Real-World Impact](#9-real-world-impact)
+  - [Full-Text Search Engines](#full-text-search)
+  - [Log Parsing](#log-parsing)
+  - [URL Parsing and Routing](#url-routing)
+- [🔥 Summary](#summary)
 
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -47,33 +52,53 @@ palindrome checking patterns · basic substring search
 **Reference** — Know it exists, look up syntax when needed:
 KMP algorithm · rolling hash · Rabin-Karp · suffix arrays
 
-<a id="what-is-a-string"></a>
+Kai works at an intelligence agency, decoding intercepted messages. Every message is a sequence of characters — letters, digits, symbols — laid out in a precise order on a long tape. His job is to search for patterns, compare fragments, rearrange pieces, and detect hidden repetitions. But there is one rule that governs everything he does: once a message is printed on the tape, it cannot be changed. If Kai needs a different version, he must print an entirely new tape. That single constraint — **immutability** — shapes every technique he will learn today.
+
+<a id="1-what-is-a-string"></a>
 # 1. What Is a String?
 
-A string is a sequence of characters.
+Kai receives his first message: `"hello"`. It arrives on a strip of tape, each character in its own slot, numbered from left to right starting at zero. That strip — an ordered, indexed sequence of characters — is a string.
 
-In Python:
-
-```python
-s = "hello"
-```
-
-Internally, a string is an **ordered sequence of characters stored in memory**.
+An **array** stores elements by position. A **string** is an array of characters. Everything Kai learned about arrays applies here, with one critical twist: the tape is read-only.
 
 Important characteristics:
-
 - Ordered
-- Indexed
-- Immutable
+- Indexed (O(1) access)
+- Immutable (cannot be changed after creation)
 - Iterable
 
 That one word — **immutable** — defines most of its behavior.
 
+<a id="string-as-array"></a>
+## String as an Array of Characters
+
+```
+Index:   0   1   2   3   4
+Value:   h   e   l   l   o
+```
+
+```python
+s = "hello"
+s[0]   # 'h' — O(1), same as array indexing
+s[2]   # 'l'
+```
+
+Under the hood, `"hello"` is `[104, 101, 108, 108, 111]` — just integers. Python's `ord('h')` returns 104. `chr(104)` returns `'h'`.
+
+**Common mistake — ord/chr base confusion:** Subtract `ord('a')` for lowercase and `ord('A')` for uppercase. They are different: `ord('a') = 97`, `ord('A') = 65`. Using the wrong base gives an `IndexError` in a frequency array.
+
+```python
+# WRONG: forgetting which base
+idx = ord('h') - ord('A')   # 104 - 65 = 39 → IndexError on [0]*26
+
+# RIGHT: match the case
+idx = ord('h') - ord('a')   # 104 - 97 = 7 → correct
+```
+
+<a id="visual-telegraph-tape"></a>
 ## Visual: The Telegraph Tape
 
-In the early days of communication, messages were encoded as sequences of dots
-and dashes on a long paper tape. Each character had its position. The tape was
-read left to right, character by character.
+In the early days of communication, messages were encoded as sequences of dots and dashes on a long paper tape. Each character had its position. The tape was read left to right, character by character.
 
 A string is that tape.
 
@@ -89,78 +114,30 @@ Each slot holds one character.
 Each character maps to a number (its ASCII / Unicode value).
 ```
 
-Under the hood, `"hello"` is `[104, 101, 108, 108, 111]` — just integers.
-Python's `ord('h')` returns 104. `chr(104)` returns `'h'`.
-
-Strings are character arrays. Everything you know about arrays applies —
-with one critical twist.
-
-**Common mistake — ord/chr confusion:** Subtract `ord('a')` for lowercase letters and `ord('A')` for uppercase. They are different locker rooms: `ord('a') = 97`, `ord('A') = 65`. Using the wrong base gives indices in the range 32–57 instead of 0–25, causing an `IndexError` in a frequency array.
-
-```python
-# WRONG: forgetting which base
-idx = ord('h') - ord('A')   # 104 - 65 = 39 -> IndexError on [0]*26
-
-# RIGHT: match the case
-idx = ord('h') - ord('a')   # 104 - 97 = 7 -> correct
-```
-
 > 📝 **Practice:** [Q1 · string-immutability-explain](./practice.md#q1--string-immutability-explain----why-cant-you-modify-s0-)
 
 > [↑ Back to Top](#top)
 
-<a id="string-as-an-array-of-characters"></a>
-# 2. String as an Array of Characters
+<a id="2-immutability"></a>
+# 2. Immutability — The Defining Feature
 
-Conceptually:
-
-```
-Index:   0   1   2   3   4
-Value:   h   e   l   l   o
-```
-
-You can access:
-
-```python
-s[0]  # 'h'
-```
-
-Time complexity: O(1)
-
-Because string indexing works like array indexing.
-
-> [↑ Back to Top](#top)
-
-<a id="why-strings-are-immutable"></a>
-# 3. Why Strings Are Immutable
+Kai tries to fix a typo in a decoded message — he wants to change the first letter. But the tape is carved in stone. He cannot erase a character and write a new one. He must carve an entirely new stone tablet with the corrected message.
 
 In Python, once a string is created, it cannot be modified.
 
-Example:
-
 ```python
 s = "hello"
-s[0] = "H"   # Error
+s[0] = "H"   # TypeError: 'str' object does not support item assignment
 ```
 
 Why immutability?
-
 1. Memory safety
-2. Hashing stability (important for dictionaries)
+2. Hashing stability (strings can be dictionary keys because they never change)
 3. Thread safety
 4. Performance optimization (string interning)
 
-If strings were mutable, hashing and dictionary keys would break.
-
-## Visual: Strings Are Carved in Stone
-
-In Python, strings are **immutable**. Once created, they cannot be changed.
-The tape is set. You cannot erase a character and write a new one.
-
-```python
-s = "hello"
-s[0] = 'x'   # TypeError: 'str' object does not support item assignment
-```
+<a id="visual-carved-in-stone"></a>
+## Visual: Carved in Stone
 
 ```
 Attempt to change s[0]:
@@ -174,7 +151,23 @@ Attempt to change s[0]:
   Python refuses. The stone breaks.
 ```
 
-When you use `+`, you did NOT modify `"hello"`. You created a **brand new string** and pointed `s` at it. The old `"hello"` still exists in memory (until garbage collected).
+**Common mistake — forgetting strings are immutable:** Trying `s[0] = 'H'` raises a `TypeError`. The fix is to convert to a list, modify, then join back: `chars = list(s); chars[0] = 'H'; s = ''.join(chars)`.
+
+<a id="what-happens-modify"></a>
+## What Happens When You "Modify" a String
+
+When Kai writes `s = s + " world"`, he does NOT modify the original tape. He prints a brand new tape with the combined content and throws away the old one.
+
+```python
+s = "hello"
+s = s + " world"
+```
+
+Python:
+1. Creates a new string object `"hello world"`
+2. Copies old content `"hello"` into it
+3. Appends `" world"`
+4. Reassigns `s` to point to the new object
 
 ```
 Before:
@@ -182,91 +175,46 @@ Before:
 
 After s = s + " world":
   s ──→ "hello world"   (new object in memory)
-         "hello"        (old object, now unreferenced, will be garbage collected)
+         "hello"         (old object, unreferenced, garbage collected)
 ```
-
-**Common mistake — forgetting strings are immutable:** Trying `s[0] = 'H'` raises a `TypeError`. The fix is to convert to a list, modify the list, then join back: `chars = list(s); chars[0] = 'H'; s = ''.join(chars)`.
 
 > 📝 **Practice:** [Q1 · string-immutability-explain](./practice.md#q1--string-immutability-explain----why-cant-you-modify-s0-)
 
 > [↑ Back to Top](#top)
 
-<a id="what-happens-when-you-modify-a-string"></a>
-# 4. What Happens When You Modify a String?
+<a id="3-time-complexity"></a>
+# 3. Time Complexity of String Operations
 
-When you write:
+Kai needs to know how expensive each operation is on his message tapes. Some operations are instant — checking tape length. Others are deceptively expensive — what looks like a small edit actually copies the entire tape.
 
-```python
-s = "hello"
-s = s + " world"
-```
+| Operation | Complexity | Why |
+|------------|------------|-----|
+| Indexing `s[i]` | O(1) | Direct address jump |
+| Length `len(s)` | O(1) | Python stores length |
+| Slicing `s[i:j]` | O(k) | Creates new string of length k |
+| Concatenation `s + t` | O(n + m) | Creates new string |
+| `in` operator | O(n) | Scans sequentially |
+| Iteration | O(n) | Visits each character |
 
-Python does not modify the original string.
+Important insight: slicing creates a new string → O(k), not O(1).
 
-It:
+<a id="concatenation-trap"></a>
+## The Concatenation Trap
 
-1. Creates new string
-2. Copies old content
-3. Appends new content
-4. Reassigns reference
-
-So concatenation creates a new object.
-
-This is important for performance.
-
-> [↑ Back to Top](#top)
-
-<a id="time-complexity-of-string-operations"></a>
-# 5. Time Complexity of String Operations
-
-| Operation | Complexity |
-|------------|------------|
-| Indexing | O(1) |
-| Slicing | O(k) |
-| Concatenation | O(n + m) |
-| Length | O(1) |
-| Iteration | O(n) |
-| Searching (in operator) | O(n) |
-
-Important insight:
-Slicing creates new string → O(k), not O(1).
-
-> [↑ Back to Top](#top)
-
-<a id="why-repeated-concatenation-is-dangerous"></a>
-# 6. Why Repeated Concatenation Is Dangerous
-
-Example:
+Kai decodes a message one character at a time. He tries taping each new character onto the end of his growing message. But because the tape is immutable, he actually copies the entire message so far and creates a new tape — every single time.
 
 ```python
+# WRONG — O(n²)
 result = ""
 for char in data:
-    result += char
-```
+    result += char   # copies entire result each time
 
-Each concatenation:
-- Creates new string
-- Copies entire previous content
-
-If n characters:
-
-Total complexity becomes O(n²)
-
-Better approach:
-
-```python
+# RIGHT — O(n)
 result = []
 for char in data:
     result.append(char)
-
 final = "".join(result)
 ```
-
-join() builds string efficiently in O(n).
-
-This is a very common interview discussion.
-
-**Common mistake — concatenating strings in a loop:** Every `+=` copies the entire string so far. Building "hello" character by character writes 0+1+2+3+4 = 10 extra characters beyond the 5 you need — and that grows to O(n²) for length n. For n=50,000 characters, `''.join()` is roughly **700x faster** than `+=` in a loop.
 
 ```
 Building "hello" character by character:
@@ -283,73 +231,33 @@ For length n: n*(n+1)/2 = O(n²)
 
 The `''.join(iterable)` pattern allocates one final string in O(n). Collect parts into a list, join once at the end.
 
+**Common mistake — concatenating strings in a loop:** For n=50,000 characters, `''.join()` is roughly **700x faster** than `+=` in a loop.
+
 > 📝 **Practice:** [Q2 · build-string-join-vs-concat](./practice.md#q2--build-string-join-vs-concat----build-a-string-from-a-list-of-chars-)
 
 > [↑ Back to Top](#top)
 
-<a id="string-interning"></a>
-# 7. String Interning
+<a id="4-common-operations"></a>
+# 4. Common String Operations
 
-Python optimizes small strings.
+Kai's daily toolkit — the operations he reaches for on every message. Each one creates a new tape (because immutability), so understanding the cost matters.
 
-Example:
-
-```python
-a = "hello"
-b = "hello"
-```
-
-Sometimes both refer to same memory location.
-
-This is called **string interning**.
-
-It improves memory efficiency and speed.
-
-But never rely on it in logic.
-
-> [↑ Back to Top](#top)
-
-<a id="memory-representation"></a>
-# 8. Memory Representation
-
-Strings in Python are Unicode.
-
-Each character:
-- Can take different number of bytes
-- Optimized internally depending on character set
-
-Unlike C:
-Strings are not null-terminated arrays.
-
-Python stores:
-- Length
-- Hash
-- Character data
-
-Length retrieval is O(1).
-
-> [↑ Back to Top](#top)
-
-<a id="common-string-operations"></a>
-# 9. Common String Operations
-
-## 1. Slicing
+<a id="slicing"></a>
+## Slicing
 
 ```python
-s[1:4]
+s = "programming"
+s[3:7]   # "gram" — creates a new string, O(k)
 ```
 
-Creates new string.
+<a id="visual-window-tape"></a>
+## Visual: The Window on the Tape
 
-Time: O(k)
-
-## Visual: Substrings — The Window on the Tape
-
-A substring is just a portion of the tape.
+Kai places a magnifying window over a portion of his tape — he can read just that section.
 
 ```
 s = "programming"
-      0123456789...
+     0123456789...
 
      p r o g r a m m i n g
      0 1 2 3 4 5 6 7 8 9 10
@@ -366,33 +274,25 @@ s[3:7] → "gram"
 ```
 
 Python slicing: `s[start:end]` — includes start, excludes end.
-`s[3:7]` means "characters at indices 3, 4, 5, 6."
+Slicing creates a new string in O(k) time where k is the slice length.
 
-Slicing creates a new string in O(k) time where k is the length of the slice.
-
-## 2. Reverse String
+<a id="reverse"></a>
+## Reverse
 
 ```python
-s[::-1]
+s[::-1]   # creates new reversed string, O(n)
 ```
-
-Creates new reversed string.
-
-Time: O(n)
 
 > 📝 **Practice:** [Q3 · reverse-string](./practice.md#q3--reverse-string----reverse-a-string-in-place-no-extra-string-)
 
-## 3. Split
+<a id="split"></a>
+## Split
 
 ```python
-s.split(" ")
+s.split(" ")   # returns list of substrings, O(n)
 ```
 
-Returns list of substrings.
-
-Time: O(n)
-
-**Common mistake — split() vs split(' '):** `split()` with no argument is the smart scissors — it collapses any whitespace and never produces empty strings. `split(' ')` is the dumb scissors — it cuts at every single space, producing empty strings for leading, trailing, and consecutive spaces. For messy input like `"  hello   world  "`, `split()` gives `['hello', 'world']` while `split(' ')` gives `['', '', 'hello', '', '', 'world', '', '']`.
+**Common mistake — split() vs split(' '):** `split()` with no argument is the smart scissors — it collapses any whitespace and never produces empty strings. `split(' ')` is the dumb scissors — it cuts at every single space, producing empty strings for consecutive spaces.
 
 ```python
 s = "  hello   world  "
@@ -408,37 +308,81 @@ Use `split(delimiter)` only when you need a specific separator and want to prese
 
 > 📝 **Practice:** [Q6 · split-join-strip](./practice.md#q6--split-join-strip----know-your-string-methods-)
 
-## 4. Replace
+<a id="replace"></a>
+## Replace
 
 ```python
-s.replace("a", "b")
+s.replace("a", "b")   # creates new string, O(n)
 ```
 
-Creates new string.
-
-Time: O(n)
+All these operations return new strings — the original is never touched.
 
 > [↑ Back to Top](#top)
 
-<a id="string-comparison"></a>
-# 10. String Comparison
+<a id="5-string-internals"></a>
+# 5. String Internals
+
+Kai notices something strange — two copies of the same decoded message share the exact same memory address. His agency is saving resources by keeping only one copy of frequently used phrases. Python does the same thing.
+
+<a id="interning"></a>
+## Interning
+
+Python optimizes small strings by reusing them. If two variables hold the same short string, they may point to the exact same object in memory.
 
 ```python
-"abc" == "abc"
+a = "hello"
+b = "hello"
+print(a is b)   # True — same object (interned)
+
+a = "hello world!!"
+b = "hello world!!"
+print(a is b)   # False — not interned (contains special chars)
 ```
 
-Python compares lexicographically.
+This is called **string interning**. It improves memory efficiency and comparison speed (identity check `is` is O(1) vs value check `==` which is O(n)).
 
-Worst case complexity: O(n)
+But never rely on interning in your logic — it is a CPython implementation detail, not a language guarantee.
 
-Stops early if mismatch found.
+<a id="memory-representation"></a>
+## Memory Representation
 
-## Visual: Lexicographic Order — The Dictionary Game
+Kai's tapes are not simple byte arrays. Each character can be 1, 2, or 4 bytes depending on the character set — Python handles this transparently.
+
+Strings in Python are Unicode (UTF-8 internally in CPython 3.12+). Unlike C, strings are not null-terminated arrays.
+
+Python stores:
+- **Length** — retrieval is O(1)
+- **Hash** — cached after first computation, makes dict lookups O(1)
+- **Character data** — contiguous, encoding depends on widest character
+
+```
+Python string object layout:
+
+┌────────────────────────────────┐
+│  ob_refcnt    (reference count)│
+│  ob_type      (str type)       │
+│  ob_size      (length)         │
+│  hash         (cached hash)    │
+│  state        (encoding flags) │
+│  data[]       (character bytes)│
+└────────────────────────────────┘
+```
+
+> [↑ Back to Top](#top)
+
+<a id="6-string-comparison"></a>
+# 6. String Comparison
+
+Kai needs to determine which of two intercepted messages comes first in alphabetical order. He compares them character by character, left to right — the moment he finds a difference, he has his answer.
+
+```python
+"abc" == "abc"   # True — O(n) worst case, stops early on mismatch
+```
+
+<a id="visual-lexicographic"></a>
+## Visual: Lexicographic Order
 
 "Lexicographic" is just a fancy word for "dictionary order."
-
-When you compare two strings, Python compares them character by character,
-using each character's numerical value (ASCII / Unicode).
 
 ```
 Compare "apple" vs "banana":
@@ -467,7 +411,10 @@ All three characters match.
 Shorter string is "less than" — "app" < "apple"
 ```
 
-### The ASCII Trap
+<a id="ascii-trap"></a>
+## The ASCII Trap
+
+Kai discovers that uppercase and lowercase letters live in completely different neighborhoods on the ASCII chart.
 
 ```
 'Z' = 90
@@ -482,40 +429,47 @@ True
 
 Use `.lower()` when you want case-insensitive comparison.
 
-**Common mistake — case sensitivity in comparisons:** `'P'` (ASCII 80) is not equal to `'p'` (ASCII 112). Forgetting `.lower()` before comparison silently misses matches. Always normalize: `s1.lower() == s2.lower()` or use `sorted(s.lower())` for anagram checks.
+**Common mistake — case sensitivity in comparisons:** `'P'` (ASCII 80) is not equal to `'p'` (ASCII 112). Forgetting `.lower()` before comparison silently misses matches. Always normalize: `s1.lower() == s2.lower()`.
 
-**Common mistake — string comparison is lexicographic not numeric:** `sorted(["10", "9", "2"])` gives `['10', '2', '9']` because `'1' < '2' < '9'` by ASCII value. For numeric ordering, use `key=int`:
+**Common mistake — string comparison is lexicographic not numeric:** `sorted(["10", "9", "2"])` gives `['10', '2', '9']` because `'1' < '2' < '9'` by ASCII value.
 
 ```python
 # WRONG:
-sorted(["10", "9", "2"])         # ['10', '2', '9']
+sorted(["10", "9", "2"])          # ['10', '2', '9']
 
 # RIGHT:
 sorted(["10", "9", "2"], key=int) # ['2', '9', '10']
 ```
 
-> [↑ Back to Top](#top)
+<a id="string-vs-list"></a>
+## String vs List of Characters
 
-<a id="string-vs-list-of-characters"></a>
-# 11. String vs List of Characters
+Kai sometimes needs to modify individual characters. Since strings are immutable, he converts to a list, modifies, then joins back.
 
 | Feature | String | List of Characters |
 |----------|---------|------------------|
-| Mutable | ❌ | ✅ |
+| Mutable | No | Yes |
 | Indexing | O(1) | O(1) |
-| Concatenation | Expensive | Cheap |
+| Concatenation | Expensive (new object) | Cheap (append) |
 | Memory | Efficient | Slightly more |
 
-If frequent modifications needed:
-Convert to list.
+```python
+s = "hello"
+chars = list(s)      # ['h', 'e', 'l', 'l', 'o']
+chars[0] = 'H'       # modify freely
+s = ''.join(chars)   # "Hello"
+```
+
+If frequent modifications are needed, convert to list first.
 
 > [↑ Back to Top](#top)
 
-<a id="important-interview-patterns-with-strings"></a>
-# 12. Important Interview Patterns with Strings
+<a id="7-interview-patterns"></a>
+# 7. Interview Patterns
 
-Most string problems fall into patterns:
+Kai has decoded enough messages to recognize recurring patterns. Most string problems in interviews fall into a handful of categories — recognizing the pattern is half the battle.
 
+Key patterns:
 1. Two pointers
 2. Sliding window
 3. Frequency counting (hashing)
@@ -524,39 +478,28 @@ Most string problems fall into patterns:
 6. Anagram detection
 7. Prefix/suffix comparison
 
-Recognizing pattern is critical.
-
 > 📝 **Practice:** [Q9 · palindrome-two-pointer](./practice.md#q9--palindrome-two-pointer----check-if-a-string-is-a-palindrome-) · [Q11 · anagram-detection-counter](./practice.md#q11--anagram-detection-counter----are-two-strings-anagrams-) · [Q14 · longest-no-repeat-substring](./practice.md#q14--longest-no-repeat-substring----sliding-window-no-repeats-)
 
-> [↑ Back to Top](#top)
-
 <a id="anagram-detection"></a>
-# Anagram Detection
+## Anagram Detection
 
-Two words are anagrams if they use the same characters with the same frequencies.
-"listen" and "silent" are anagrams. "hello" and "world" are not.
+Kai intercepts two messages and needs to check if they use the exact same characters — just rearranged. "listen" and "silent" are anagrams. "hello" and "world" are not.
 
-## Visual: Anagram Detection — Two Strategies
+## Visual: Two Strategies
 
-### Strategy 1: Sort and Compare
+**Strategy 1 — Sort and Compare:**
 
 If two strings are anagrams, sorting them gives identical results.
 
 ```
-"listen" → sorted → ['e', 'i', 'l', 'n', 's', 't'] → "eilnst"
-"silent" → sorted → ['e', 'i', 'l', 'n', 's', 't'] → "eilnst"
-
-"eilnst" == "eilnst" → True, they're anagrams!
-
-"hello"  → sorted → ['e', 'h', 'l', 'l', 'o'] → "ehllo"
-"world"  → sorted → ['d', 'l', 'o', 'r', 'w'] → "dlorw"
-
-"ehllo" != "dlorw" → False, not anagrams.
+"listen" → sorted → "eilnst"
+"silent" → sorted → "eilnst"
+"eilnst" == "eilnst" → True!
 ```
 
 Time: O(n log n) for sorting. Simple, clean.
 
-### Strategy 2: Frequency Map
+**Strategy 2 — Frequency Map:**
 
 Build a character counter for each string. Compare the counters.
 
@@ -577,7 +520,7 @@ Both maps: {l:1, i:1, s:1, t:1, e:1, n:1}
 Maps are equal → anagrams!
 ```
 
-Time: O(n). Faster than sorting. Better for large strings.
+Time: O(n). Faster than sorting.
 
 ```python
 from collections import Counter
@@ -599,19 +542,15 @@ def is_anagram_manual(s, t):
     return True
 ```
 
-> [↑ Back to Top](#top)
+<a id="sliding-window"></a>
+## Sliding Window — Longest No-Repeat Substring
 
-<a id="sliding-window--longest-no-repeat-substring"></a>
-# Sliding Window — Longest No-Repeat Substring
+Kai scans a long intercepted message looking for the longest stretch of unique characters. He uses a sliding magnifying glass — expanding right as long as all characters inside are unique, shrinking from the left when a repeat is detected.
 
 Problem: find the longest substring without repeating characters.
 Input: `"abcabcbb"`. Answer: `"abc"` (length 3).
 
 ## Visual: Sliding Window
-
-Imagine a sliding magnifying glass over the tape.
-The window expands right as long as all characters inside are unique.
-When a repeat is detected, the left edge of the window slides right to remove it.
 
 ```
 s = "a b c a b c b b"
@@ -637,26 +576,24 @@ Step 4: Add 'c'. Window = "abc". No repeats. max_len=3.
 Step 5: Try to add 'a'. But 'a' is already in window!
     Shrink left until 'a' is removed.
     Remove 'a' at left=0 → left becomes 1.
-    Window = "bc". Now add 'a': window = "bca". max_len still 3.
+    Window = "bca". max_len still 3.
      a [b c a] b c b b
        ^    ^
     left=1, right=3
 
 Step 6: Try to add 'b'. 'b' is in window at index 1!
-    Shrink: remove 'b' at left=1 → left=2. Window = "ca".
-    Add 'b': window = "cab". max_len still 3.
+    Shrink: remove 'b' → left=2. Window = "cab". max_len still 3.
      a b [c a b] c b b
          ^    ^
     left=2, right=4
 
 Step 7: Try to add 'c'. 'c' is in window at index 2!
-    Shrink: remove 'c' → left=3. Window = "ab".
-    Add 'c': window = "abc". max_len still 3.
+    Shrink: remove 'c' → left=3. Window = "abc". max_len still 3.
      a b c [a b c] b b
            ^    ^
     left=3, right=5
 
-Step 8-9: Continue shrinking for repeated 'b' and 'b'. max_len stays 3.
+Step 8-9: Continue shrinking for repeated 'b'. max_len stays 3.
 
 Final answer: 3 ("abc")
 ```
@@ -678,7 +615,7 @@ def length_of_longest_substring(s):
 
 O(n) time, O(min(n, alphabet_size)) space.
 
-**Common mistake — sliding window missing update after shrink:** When the left pointer moves right and removes a character from the window, you must update the validity counter (`have`). Forgetting this means the loop keeps thinking the window satisfies all requirements even after it no longer does, producing incorrect minimum-window results.
+**Common mistake — sliding window missing update after shrink:** When the left pointer moves right and removes a character, you must update the validity counter. Forgetting this means the loop keeps thinking the window satisfies all requirements even after it no longer does.
 
 ```python
 # When shrinking, always update validity:
@@ -691,32 +628,18 @@ if left_char in need and window[left_char] < need[left_char]:
 
 > 📝 **Practice:** [Q14 · longest-no-repeat-substring](./practice.md#q14--longest-no-repeat-substring----sliding-window-no-repeats-)
 
-> [↑ Back to Top](#top)
-
 <a id="palindrome-checking"></a>
-# 13. Palindrome Checking
+## Palindrome Checking
 
-Efficient method:
-
-Two pointers:
+Kai receives a message that reads the same forwards and backwards — a palindrome. The most efficient check uses two pointers moving inward from both ends.
 
 ```python
 left = 0
 right = len(s) - 1
+# Move inward, comparing characters — O(n) time, O(1) space
 ```
 
-Move inward.
-
-Time: O(n)
-Space: O(1)
-
-Better than reversing string (extra memory).
-
-## Visual: Palindrome — The Mirror Check
-
-A palindrome reads the same forwards and backwards.
-
-### Two-Pointer Approach
+## Visual: The Mirror Check
 
 ```
 "racecar"
@@ -737,7 +660,7 @@ A palindrome reads the same forwards and backwards.
        left >= right → done! It's a palindrome.
 ```
 
-### Longest Palindromic Substring — Expand Around Center
+## Expand Around Center — Longest Palindromic Substring
 
 For each character, treat it as the center and expand outward.
 
@@ -761,7 +684,7 @@ Center at index 2 ('b'):
 Longest: "bab" or "aba", both length 3.
 ```
 
-**Common mistake — palindrome check with non-alphanumeric:** Most palindrome problems (e.g., "A man, a plan, a canal: Panama") require filtering out spaces and punctuation before checking. Without `isalnum()` and `.lower()`, the raw reversal comparison fails silently.
+**Common mistake — palindrome check with non-alphanumeric:** Most palindrome problems require filtering out spaces and punctuation first.
 
 ```python
 # WRONG:
@@ -775,32 +698,25 @@ return cleaned == cleaned[::-1]
 > 📝 **Practice:** [Q9 · palindrome-two-pointer](./practice.md#q9--palindrome-two-pointer----check-if-a-string-is-a-palindrome-) · [Q10 · palindrome-with-nonalnum](./practice.md#q10--palindrome-with-nonalnum----valid-palindrome-ignoring-punctuation-)
 > 📝 **Practice:** [Q8 · palindrome-check](../dsa_practice_questions_100.md#q8--thinking--palindrome-check)
 
-> [↑ Back to Top](#top)
+<a id="substring-search-kmp"></a>
+## Substring Search and KMP
 
-<a id="substring-search"></a>
-# 14. Substring Search
+Kai needs to find every occurrence of a code word inside a long intercepted message. The naive approach — checking every position — is O(nm). The KMP algorithm does it in O(n + m) by using the pattern itself to skip unnecessary comparisons.
 
-Basic method:
-Linear scan → O(nm)
+Basic method: Linear scan → O(nm)
 
 Optimized algorithms:
 - KMP → O(n + m)
-- Rabin-Karp
+- Rabin-Karp (rolling hash)
 - Boyer-Moore
-
-For senior roles, knowing at least KMP is expected.
 
 ## Visual: KMP Failure Function
 
-The KMP algorithm (Knuth-Morris-Pratt) searches for a pattern inside text efficiently.
-When a mismatch occurs, the pattern itself tells you how far to jump back.
-This information is encoded in the **failure function** (prefix function).
+When a mismatch occurs, the pattern itself tells you how far to jump back. This information is encoded in the **failure function** (prefix function).
 
-### Building the Failure Array
+## Building the Failure Array
 
-For each position in the pattern, we ask: "What is the longest proper prefix of this substring that is also a suffix?"
-
-Example pattern: `"ABABC"`
+For each position in the pattern, ask: "What is the longest proper prefix of this substring that is also a suffix?"
 
 ```
 Pattern: A B A B C
@@ -823,12 +739,9 @@ f[3]: "ABAB" → prefix "AB", suffix "AB" → match! length 2 → f[3] = 2
 f[4]: "ABABC" → no prefix-suffix overlap → f[4] = 0
 
 Failure array: [0, 0, 1, 2, 0]
-
-Pattern: A  B  A  B  C
-         0  0  1  2  0
 ```
 
-### Search Trace on "ABABDABABC"
+## Search Trace on "ABABDABABC"
 
 ```
 Text:    A B A B D A B A B C
@@ -854,10 +767,10 @@ Found at index 5!
 def build_failure(pattern):
     n = len(pattern)
     f = [0] * n
-    k = 0  # length of previous longest prefix-suffix
+    k = 0
     for i in range(1, n):
         while k > 0 and pattern[k] != pattern[i]:
-            k = f[k - 1]  # fall back
+            k = f[k - 1]
         if pattern[k] == pattern[i]:
             k += 1
         f[i] = k
@@ -866,7 +779,7 @@ def build_failure(pattern):
 def kmp_search(text, pattern):
     f = build_failure(pattern)
     matches = []
-    k = 0  # characters matched so far
+    k = 0
     for i, ch in enumerate(text):
         while k > 0 and pattern[k] != ch:
             k = f[k - 1]
@@ -879,61 +792,53 @@ def kmp_search(text, pattern):
 ```
 
 KMP runs in O(n + m) where n = text length, m = pattern length.
-The naive approach is O(nm). For large inputs, this is a massive difference.
 
-**Common mistake — using `in` for substring vs character check:** `"ab" in s` checks whether `"ab"` appears as a substring, not whether `'a'` or `'b'` is a character. Also: `find()` returns `-1` when the pattern is not found; `index()` raises `ValueError`. Use `find()` when the substring might be absent.
+**Common mistake — using `in` for substring vs character check:** `"ab" in s` checks substring, not individual characters. Also: `find()` returns `-1` when not found; `index()` raises `ValueError`.
 
 ```python
 pos = s.find("xyz")    # -1 if not found — safe
-pos = s.index("xyz")   # ValueError if not found — crashes without try/except
+pos = s.index("xyz")   # ValueError if not found — crashes
 ```
 
-**Common mistake — KMP failure function off-by-one:** When a mismatch occurs during lps construction, fall back to `lps[length - 1]`, not `lps[length]`. Using `lps[length]` over-falls and produces incorrect values for patterns with overlapping prefixes, making the search miss valid matches.
+**Common mistake — KMP failure function off-by-one:** When a mismatch occurs during lps construction, fall back to `lps[length - 1]`, not `lps[length]`.
 
 > 📝 **Practice:** [Q22 · kmp-lps-build](./practice.md#q22--kmp-lps-build----build-the-kmp-failure-lps-array-) · [Q23 · kmp-full-search](./practice.md#q23--kmp-full-search----full-kmp-pattern-search-)
-> 📝 **Practice:** [Q9 · substring-search](../dsa_practice_questions_100.md#q9--code--substring-search)
-
-> 📝 **Practice:** [Q71 · kmp-string-matching](../dsa_practice_questions_100.md#q71--thinking--kmp-string-matching)
+> 📝 **Practice:** [Q9 · substring-search](../dsa_practice_questions_100.md#q9--code--substring-search) · [Q71 · kmp-string-matching](../dsa_practice_questions_100.md#q71--thinking--kmp-string-matching)
 
 > [↑ Back to Top](#top)
 
-<a id="space-complexity-considerations"></a>
-# 15. Space Complexity Considerations
+<a id="8-space-complexity"></a>
+# 8. Space Complexity and When to Avoid Strings
 
-String of size n:
-Space = O(n)
+Kai realizes that every time he slices, concatenates, or reverses a tape, he is creating a brand new copy. For small messages this is fine. For a 10-million-character intercepted transmission, the copies add up fast.
 
-But operations like slicing:
-Create additional O(k) memory.
+A string of size n costs O(n) space. But operations silently create additional copies:
 
-Recursive string problems:
-Add stack space.
+| Operation | Extra Space |
+|---|---|
+| Slicing `s[i:j]` | O(j-i) — new string |
+| Concatenation `s + t` | O(n + m) — new string |
+| Reverse `s[::-1]` | O(n) — new string |
+| Recursive string problems | O(n) stack frames |
 
-> [↑ Back to Top](#top)
+**When to avoid strings directly:**
 
-<a id="when-not-to-use-strings-directly"></a>
-# 16. When NOT To Use Strings Directly
-
-Avoid direct string concatenation in loops.
-
-Avoid string-heavy processing for massive data:
-Consider:
-- Streaming
-- Byte arrays
-- Memory-efficient structures
+- **Repeated concatenation in loops** — use `list.append()` + `''.join()`
+- **Massive data processing** — consider byte arrays (`bytearray`) or streaming
+- **Character-level mutations** — convert to `list(s)`, modify, `''.join()`
+- **Binary data** — use `bytes` / `bytearray`, not `str`
 
 > [↑ Back to Top](#top)
 
-<a id="real-world-usage-of-strings"></a>
-# 17. Real-World Usage of Strings
+<a id="9-real-world-impact"></a>
+# 9. Real-World Impact
 
-Strings are everywhere in production systems. Three deep examples follow.
+Kai's string skills translate directly to production engineering. Every web request is a URL string. Every log line is a string. Every search query is a string. The patterns he learned — indexing, frequency counting, pattern matching — power the systems that run the internet.
 
-## Real-World: Full-Text Search Engines
+<a id="full-text-search"></a>
+## Full-Text Search Engines
 
-Google, Elasticsearch, and Lucene do not scan every document for every query.
-They preprocess documents into an **inverted index**: a hash map from term to list of document IDs.
-At query time, a word lookup is O(1) in the index rather than O(n * m) brute force.
+Google, Elasticsearch, and Lucene do not scan every document for every query. They preprocess documents into an **inverted index**: a hash map from term to list of document IDs. At query time, a word lookup is O(1) in the index rather than O(n * m) brute force.
 
 ```python
 from collections import defaultdict
@@ -948,7 +853,6 @@ def build_inverted_index(documents: list) -> dict:
     return dict(index)
 
 def search(index: dict, query: str) -> set:
-    """AND search across all query terms."""
     terms = query.lower().split()
     if not terms:
         return set()
@@ -967,49 +871,17 @@ docs = [
 index = build_inverted_index(docs)
 print(search(index, "python programming"))   # {0}
 print(search(index, "programming language")) # {0, 2}
-
-# KMP for single-pattern scan — used in grep, log scanners
-def kmp_search(text: str, pattern: str) -> list:
-    if not pattern:
-        return []
-    m = len(pattern)
-    fail = [0] * m
-    j = 0
-    for i in range(1, m):
-        while j > 0 and pattern[i] != pattern[j]:
-            j = fail[j - 1]
-        if pattern[i] == pattern[j]:
-            j += 1
-        fail[i] = j
-    matches = []
-    j = 0
-    for i, ch in enumerate(text):
-        while j > 0 and ch != pattern[j]:
-            j = fail[j - 1]
-        if ch == pattern[j]:
-            j += 1
-        if j == m:
-            matches.append(i - m + 1)
-            j = fail[j - 1]
-    return matches
-
-log_line = "2024-01-15 ERROR database connection failed ERROR retry"
-print(kmp_search(log_line, "ERROR"))  # [11, 47]
 ```
 
-Elasticsearch uses BM25 ranking on top of an inverted index.
-KMP is used in `grep`, `awk`, and every log analysis tool.
+Elasticsearch uses BM25 ranking on top of an inverted index. KMP is used in `grep`, `awk`, and every log analysis tool.
 
-## Real-World: Log Parsing
+<a id="log-parsing"></a>
+## Log Parsing
 
-Application logs are unstructured strings. Logstash, Fluent Bit, and CloudWatch Logs Insights
-use regex and substring matching to extract structured fields from raw log lines.
+Application logs are unstructured strings. Logstash, Fluent Bit, and CloudWatch Logs Insights use regex and substring matching to extract structured fields from raw log lines.
 
 ```python
 import re
-
-# Nginx access log format:
-# 192.168.1.1 - - [15/Jan/2024:10:22:35 +0000] "GET /api/users HTTP/1.1" 200 1234
 
 LOG_PATTERN = re.compile(
     r'(?P<ip>\d+\.\d+\.\d+\.\d+) '
@@ -1039,34 +911,25 @@ errors = [e for e in parsed if e and e["status"] >= 500]
 print(f"5xx errors: {len(errors)}")
 ```
 
-In production, Logstash's Grok filter expands named regex patterns like `%{COMBINEDAPACHELOG}`
-into the full nginx pattern shown above. Use KMP for fast fixed-string literal search;
-use regex for flexible structural patterns.
+<a id="url-routing"></a>
+## URL Parsing and Routing
 
-## Real-World: URL Parsing and Routing
-
-Every web framework (Flask, Django, FastAPI) routes incoming URLs to handler functions.
-URL routing is a string pattern matching problem. Flask's Werkzeug compiles URL rules
-into a regex automaton; FastAPI's Starlette matches path parameters with regex groups.
+Every web framework (Flask, Django, FastAPI) routes incoming URLs to handler functions. URL routing is a string pattern matching problem.
 
 ```python
 import re
 from typing import Callable
 
 class Router:
-    """Simplified URL router — similar to Flask/Express internals."""
-
     def __init__(self):
-        self.routes = []  # list of (compiled_regex, handler)
+        self.routes = []
 
     def add_route(self, pattern: str, handler: Callable):
-        """Register a URL pattern. :param syntax converted to named groups."""
         param_pattern = re.sub(r':(\w+)', r'(?P<\1>[^/]+)', pattern)
         regex = re.compile(f'^{param_pattern}$')
         self.routes.append((regex, handler))
 
     def dispatch(self, path: str):
-        """Find handler for incoming request path."""
         for regex, handler in self.routes:
             match = regex.match(path)
             if match:
@@ -1085,8 +948,9 @@ print(handler(params))  # User 42
 
 handler, params = router.dispatch("/users/7/posts/99")
 print(handler(params))  # Post 99 of user 7
+```
 
-# URL parsing — splits a URL into components
+```python
 from urllib.parse import urlparse, parse_qs
 
 url = "https://api.example.com/v1/search?q=python+strings&page=2&limit=10"
@@ -1098,39 +962,12 @@ params = parse_qs(parsed.query)
 print(f"Params: {params}")
 ```
 
-At scale, Nginx uses a radix tree (compressed trie) for O(m) URL routing
-where m is the URL length — more efficient than iterating all regex patterns.
+At scale, Nginx uses a radix tree (compressed trie) for O(m) URL routing where m is the URL length.
 
 > [↑ Back to Top](#top)
 
-<a id="performance-estimation"></a>
-# 18. Performance Estimation
-
-If string length = 10⁵:
-
-- O(n²) operations → too slow
-- O(n log n) → acceptable
-- O(n) → ideal
-
-Always check constraints before choosing approach.
-
-> [↑ Back to Top](#top)
-
-<a id="advanced-topics"></a>
-# 19. Advanced Topics (For Senior Roles)
-
-- KMP algorithm
-- Rolling hash
-- Trie-based prefix search
-- Suffix arrays (conceptual)
-- Memory-efficient streaming parsing
-
-These are expected for high-level product roles.
-
-> [↑ Back to Top](#top)
-
-<a id="complexity-cheat-sheet"></a>
-# Complexity Cheat Sheet
+<a id="summary"></a>
+## 🔥 Summary
 
 ```
 Operation                    Time                Notes
@@ -1150,42 +987,47 @@ Sliding window (no-repeat)   O(n)                Hash set / map
 ────────────────────────────────────────────────────────────────
 ```
 
-### The Key Intuitions
+| Concept | Key Takeaway |
+|---------|-------------|
+| Immutability | Every "modification" creates a new string — O(n) hidden cost |
+| Concatenation trap | `+=` in loop is O(n²) — use `''.join()` |
+| Two pointers | Palindromes in O(n) time, O(1) space |
+| Sliding window | Substring problems that would be O(n²) become O(n) |
+| Frequency maps | Anagram and character counting problems from O(n log n) to O(n) |
+| KMP | Find all pattern occurrences in O(n + m) instead of O(nm) |
 
-1. **Immutability** means operations that look O(1) might be O(n). Building strings with `+` in a loop is a classic trap.
-2. **Two pointers** solve many palindrome problems in O(n) with O(1) space.
-3. **Sliding window** solves substring problems that would otherwise be O(n²).
-4. **Frequency maps** (Counter/dict) turn many string comparison problems from O(n log n) to O(n).
-5. **KMP** is the go-to when you need to find all occurrences of a pattern quickly.
+**Performance estimation:**
+- If string length = 10⁵: O(n²) is too slow, O(n log n) acceptable, O(n) ideal
+- Always check constraints before choosing approach
 
-> [↑ Back to Top](#top)
+**Advanced topics for senior roles:**
+- KMP algorithm (covered above)
+- Rolling hash / Rabin-Karp
+- Trie-based prefix search
+- Suffix arrays
+- Memory-efficient streaming parsing
 
-<a id="final-summary"></a>
-# 📌 Final Summary
+> 📝 **Practice:** [Q72 · rabin-karp-hash](../dsa_practice_questions_100.md#q72--normal--rabin-karp-hash) · [Q7 · anagram-detection](../dsa_practice_questions_100.md#q7--code--anagram-detection)
 
-Strings are:
-
-- Immutable sequences of characters
-- Indexed and iterable
-- Backed by contiguous memory
-- Optimized for read-heavy operations
-
-They are powerful,
-but expensive for repeated modifications.
-
-Understanding immutability,
-memory behavior,
-and algorithmic patterns
-is essential for mastering string problems.
-
-> 📝 **Practice:** [Q72 · rabin-karp-hash](../dsa_practice_questions_100.md#q72--normal--rabin-karp-hash)
-
-> 📝 **Practice:** [Q7 · anagram-detection](../dsa_practice_questions_100.md#q7--code--anagram-detection)
-
-> [↑ Back to Top](#top)
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Arrays](../02_arrays/theory.md) | **Next:** [Recursion →](../04_recursion/theory.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [02_arrays → theory.md](../02_arrays/theory.md) |
+| ➡ Next Module | [04_recursion → theory.md](../04_recursion/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[02 Arrays →](../02_arrays/theory.md) · [04 Recursion →](../04_recursion/theory.md) · [10 Hashing →](../10_hashing/theory.md) · [17 Trie →](../17_trie/theory.md)
+
+**Jump to specific topics in other files:**
+- Two pointers pattern → [11_two_pointers § theory.md](../11_two_pointers/theory.md)
+- Sliding window pattern → [12_sliding_window § theory.md](../12_sliding_window/theory.md)
+- Hashing for frequency maps → [10_hashing § theory.md](../10_hashing/theory.md)
+- Trie for prefix search → [17_trie § theory.md](../17_trie/theory.md)
+
+> [↑ Back to Top](#top)
