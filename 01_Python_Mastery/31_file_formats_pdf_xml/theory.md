@@ -1,6 +1,5 @@
+<a id="top"></a>
 # 📄 File Formats — PDF, XML, JSON, CSV, Excel
-
----
 
 A government regulatory body sends you their annual compliance report as a 400-page PDF. A healthcare system exports patient records as XML. Your financial data vendor delivers daily feeds as CSV with unusual encodings. Your trading partner sends orders in Excel with merged cells and color-coded rows.
 
@@ -8,7 +7,15 @@ None of this data is in a clean pandas DataFrame yet. Getting it there is the jo
 
 Real-world data arrives in dozens of formats, each with its own parsing quirks, encoding gotchas, and structural surprises. The ability to handle any format Python can touch is a core data engineering skill.
 
----
+## 📖 Table of Contents
+
+- [1. JSON — JavaScript Object Notation](#json)
+- [2. CSV — Comma-Separated Values](#csv)
+- [3. Excel Files](#excel-files)
+- [4. PDF Extraction](#pdf-extraction)
+- [5. XML Parsing](#xml-parsing)
+- [6. High-Performance Formats](#high-performance-formats)
+  - [Common Mistakes to Avoid ⚠️](#common-mistakes-to-avoid)
 
 ## 📌 Learning Priority
 
@@ -24,9 +31,8 @@ Real-world data arrives in dozens of formats, each with its own parsing quirks, 
 **Reference** — Know it exists, look up when needed:
 `zarr` · HDF5 with `h5py` · Apache Arrow IPC format · `orjson` (faster JSON)
 
----
-
-## 1️⃣ JSON — JavaScript Object Notation
+<a id="json"></a>
+## 1. JSON — JavaScript Object Notation
 
 JSON is the universal format for APIs, configs, and semi-structured data.
 
@@ -64,9 +70,10 @@ print(df)
 
 > 📝 **Practice:** [Q1–Q4 — JSON](./practice.md#q1--json--jsonloads--jsondumps-)
 
----
+> [↑ Back to Top](#top)
 
-## 2️⃣ CSV — Comma-Separated Values
+<a id="csv"></a>
+## 2. CSV — Comma-Separated Values
 
 ```python
 import csv
@@ -102,9 +109,10 @@ df.to_csv("output.csv", index=False, encoding="utf-8")
 
 > 📝 **Practice:** [Q5–Q8 — CSV](./practice.md#q5--csv--csvreader-basics-)
 
----
+> [↑ Back to Top](#top)
 
-## 3️⃣ Excel Files
+<a id="excel-files"></a>
+## 3. Excel Files
 
 ```python
 import pandas as pd
@@ -149,9 +157,10 @@ wb.save("styled_output.xlsx")
 
 > 📝 **Practice:** [Q9–Q12 — Excel](./practice.md#q9--excel--openpyxl-read-cells-)
 
----
+> [↑ Back to Top](#top)
 
-## 4️⃣ PDF Extraction
+<a id="pdf-extraction"></a>
+## 4. PDF Extraction
 
 PDFs are the hardest format. They have no inherent structure — text can be anywhere.
 
@@ -193,9 +202,10 @@ doc.close()
 
 > 📝 **Practice:** [Q13–Q16 — PDF Extraction](./practice.md#q13--pdf--pdfplumber-text-extraction-)
 
----
+> [↑ Back to Top](#top)
 
-## 5️⃣ XML Parsing
+<a id="xml-parsing"></a>
+## 5. XML Parsing
 
 ```python
 import xml.etree.ElementTree as ET
@@ -244,9 +254,10 @@ print(products[0]["name"])
 
 > 📝 **Practice:** [Q17–Q20 — XML Parsing](./practice.md#q17--xml--elementtree-parse-from-string-)
 
----
+> [↑ Back to Top](#top)
 
-## 6️⃣ High-Performance Formats
+<a id="high-performance-formats"></a>
+## 6. High-Performance Formats
 
 ```python
 import pandas as pd
@@ -271,16 +282,15 @@ df = pd.read_feather("data.feather")
 
 > 📝 **Practice:** [Q21–Q25 — High-Performance Formats](./practice.md#q21--high-performance--parquet-readwrite-with-pandas-)
 
----
+> [↑ Back to Top](#top)
 
+<a id="common-mistakes-to-avoid"></a>
 ## Common Mistakes to Avoid ⚠️
 
 - **Wrong encoding**: if CSV has accented characters and `utf-8` fails, try `latin-1` or `cp1252`. Always specify encoding explicitly.
 - **Forgetting `index=False` in `to_csv`/`to_excel`**: default writes the index as an extra column, creating an unnamed column on re-read.
 - **Trying to parse PDFs like structured data**: PDFs are page layout, not data. Scanned PDFs need OCR (tesseract). Always inspect the raw text before writing extraction logic.
 - **Treating XML attributes and elements the same**: XML has both child elements (`<name>value</name>`) and attributes (`<tag attr="value">`). Use `.get("attr")` for attributes and `.findtext("element")` for element text.
-
----
 
 ## 🔁 Navigation
 
@@ -293,6 +303,6 @@ df = pd.read_feather("data.feather")
 | ⬅️ Prev Module | [../30_sql_with_python/theory.md](../30_sql_with_python/theory.md) |
 | ➡️ Next Module | [../32_streamlit_flask/theory.md](../32_streamlit_flask/theory.md) |
 
----
-
 **[🏠 Back to README](../README.md)**
+
+> [↑ Back to Top](#top)

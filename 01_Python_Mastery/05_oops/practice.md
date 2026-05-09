@@ -3083,7 +3083,7 @@ print(manager.pending())  # [Task(id=2, ...), Task(id=3, ...)]
 
 ## Navigation
 
-**[🏠 Back to README](./README.md)**
+**[🏠 Back to README](./theory.md)**
 
 **Related Topics:**
 [01_why_oop.md](./01_why_oop.md) · [05_inheritance.md](./05_inheritance.md) · [08_dunder_methods.md](./08_dunder_methods.md) · [13_mro_and_super.md](./13_mro_and_super.md) · [14_dataclasses.md](./14_dataclasses.md) · [16_metaclasses.md](./16_metaclasses.md) · [17_descriptors.md](./17_descriptors.md) · [18_mixins.md](./18_mixins.md) · [19_solid_principles.md](./19_solid_principles.md)

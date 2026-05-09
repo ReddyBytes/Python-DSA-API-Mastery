@@ -494,5 +494,5 @@ Auto-generate values                       | auto()
 ## Navigation
 
 - Previous: [14_dataclasses.md](14_dataclasses.md)
-- Parent: [05_oops — Theory](theory_part1.md)
+- Parent: [05_oops — Theory](theory.md)
 - Related: [14_dataclasses.md](14_dataclasses.md) | [14_type_hints_and_pydantic](../14_type_hints_and_pydantic/)

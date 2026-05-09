@@ -1,14 +1,18 @@
+<a id="top"></a>
 # 📊 Statistics and Probability for Data Science
 
----
+## 📖 Table of Contents
 
-You're building a spam classifier. Your model says an email is 70% likely to be spam. A colleague asks: "How confident are you that this model actually works and isn't just guessing?"
-
-You run a test. On 1000 emails, it catches 87% of spam. But is that luck, or is it real? If you ran the same test on a different 1000 emails, would you still get 87%? Or would you get 55%? Or 99%?
-
-These questions are statistics. And until you can answer them, you don't actually know if your model works.
-
-Statistics is the science of learning from data when the data is incomplete, noisy, and sampled — which describes every real dataset you will ever work with.
+- [Learning Priority](#-learning-priority)
+- [1. Descriptive Statistics — Summarizing Data](#1-descriptive-statistics--summarizing-data)
+- [2. Probability Distributions](#2-probability-distributions)
+- [3. The Normal Distribution and Why It's Everywhere](#3-the-normal-distribution-and-why-its-everywhere)
+- [4. Hypothesis Testing](#4-hypothesis-testing)
+- [5. Type I and Type II Errors](#5-type-i-and-type-ii-errors)
+- [6. Bayes' Theorem](#6-bayes-theorem)
+- [7. Correlation and Covariance](#7-correlation-and-covariance)
+- [Summary](#-summary)
+- [Navigation](#-navigation)
 
 ---
 
@@ -28,7 +32,12 @@ Moment generating functions · Characteristic functions · Cramér–Rao bound �
 
 ---
 
-## 1️⃣ Descriptive Statistics — Summarizing Data
+You're building a spam classifier. Your model says an email is 70% likely to be spam. A colleague asks: "How confident are you that this model actually works and isn't just guessing?" You run a test — on 1000 emails it catches 87% of spam. But is that luck, or is it real? These questions are statistics: the science of learning from data when the data is incomplete, noisy, and sampled — which describes every real dataset you will ever work with.
+
+---
+
+<a id="1-descriptive-statistics--summarizing-data"></a>
+# 1. Descriptive Statistics — Summarizing Data
 
 Before any model, you describe your data. The three things you always want to know:
 
@@ -65,11 +74,14 @@ print(s.describe())   # count, mean, std, min, 25%, 50%, 75%, max
 - Use **mean** when data is symmetric, no extreme outliers
 - Use **median** when data is skewed or has outliers (house prices, salaries, response times)
 
-> 📝 **Practice:** [Q1–Q5 — Descriptive Statistics](./practice.md#q1)
+📝 **Practice:** [Q1–Q5 — Descriptive Statistics](./practice.md#q1)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 2️⃣ Probability Distributions
+<a id="2-probability-distributions"></a>
+# 2. Probability Distributions
 
 A **probability distribution** describes how likely each outcome is.
 
@@ -113,15 +125,16 @@ print(binom.cdf(7))         # 0.945 — P(at most 7 heads)
 samples = stats.norm.rvs(loc=170, scale=10, size=1000)  # 1000 heights
 ```
 
-> 📝 **Practice:** [Q6–Q10 — Probability Distributions](./practice.md#q6)
+📝 **Practice:** [Q6–Q10 — Probability Distributions](./practice.md#q6)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 3️⃣ The Normal Distribution and Why It's Everywhere
+<a id="3-the-normal-distribution-and-why-its-everywhere"></a>
+# 3. The Normal Distribution and Why It's Everywhere
 
-The **normal distribution** (bell curve) appears naturally when:
-- Many independent random factors add together
-- Measurement errors accumulate
+The **normal distribution** (bell curve) appears naturally when many independent random factors add together, or when measurement errors accumulate.
 
 ```
 μ-3σ  μ-2σ  μ-σ    μ    μ+σ   μ+2σ  μ+3σ
@@ -139,6 +152,7 @@ The **normal distribution** (bell curve) appears naturally when:
 ```python
 # Demonstrate CLT: sampling from a skewed distribution
 import numpy as np
+from scipy import stats
 
 # Original: highly skewed exponential distribution
 population = np.random.exponential(scale=2, size=100000)
@@ -149,11 +163,14 @@ sample_means = [np.mean(np.random.choice(population, size=50)) for _ in range(10
 print(f"Sample means skewness: {stats.skew(sample_means):.2f}")   # ~0 — normal!
 ```
 
-> 📝 **Practice:** [Q11–Q13 — Normal Distribution](./practice.md#q11)
+📝 **Practice:** [Q11–Q13 — Normal Distribution](./practice.md#q11)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 4️⃣ Hypothesis Testing
+<a id="4-hypothesis-testing"></a>
+# 4. Hypothesis Testing
 
 You changed your recommendation algorithm. Click-through rate went from 3.2% to 3.8%. Is that a real improvement, or could it happen by chance with the old algorithm?
 
@@ -195,11 +212,14 @@ else:
 
 p-value of 0.03 means: only a 3% chance of seeing this result if nothing actually changed. We conclude something changed.
 
-> 📝 **Practice:** [Q14–Q19 — Hypothesis Testing](./practice.md#q14)
+📝 **Practice:** [Q14–Q19 — Hypothesis Testing](./practice.md#q14)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 5️⃣ Type I and Type II Errors
+<a id="5-type-i-and-type-ii-errors"></a>
+# 5. Type I and Type II Errors
 
 ```
                    Reality
@@ -218,6 +238,7 @@ Type II error (False Negative): missing a real improvement — lost revenue
 ```python
 # Sample size calculation for A/B test
 from statsmodels.stats.power import NormalIndPower
+import numpy as np
 
 effect_size = 0.2   # Cohen's d — small effect
 alpha = 0.05
@@ -228,11 +249,14 @@ n_required = analysis.solve_power(effect_size=effect_size, alpha=alpha, power=po
 print(f"Required sample size per group: {int(np.ceil(n_required))}")
 ```
 
-> 📝 **Practice:** [Q20–Q22 — Type I and Type II Errors](./practice.md#q20)
+📝 **Practice:** [Q20–Q22 — Type I and Type II Errors](./practice.md#q20)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 6️⃣ Bayes' Theorem
+<a id="6-bayes-theorem"></a>
+# 6. Bayes' Theorem
 
 **Bayes' theorem** updates your belief in a hypothesis given new evidence.
 
@@ -266,11 +290,14 @@ print(f"P(disease | positive test): {p_disease_given_positive:.3f}")
 
 This result — that a positive test from a rare disease still only gives ~50% probability — illustrates why Naive Bayes classifiers work despite their independence assumption: prior probability matters enormously.
 
-> 📝 **Practice:** [Q23–Q25 — Bayes' Theorem](./practice.md#q23)
+📝 **Practice:** [Q23–Q25 — Bayes' Theorem](./practice.md#q23)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 7️⃣ Correlation and Covariance
+<a id="7-correlation-and-covariance"></a>
+# 7. Correlation and Covariance
 
 **Correlation** measures the linear relationship between two variables.
 
@@ -302,16 +329,31 @@ print(f"Spearman: {corr:.3f}, p-value: {p_val:.3f}")
 - A third variable C causes both (confounding)
 - Pure coincidence (spurious correlation)
 
-> 📝 **Practice:** [Q26–Q28 — Correlation and Covariance](./practice.md#q26)
+📝 **Practice:** [Q26–Q28 — Correlation and Covariance](./practice.md#q26)
+
+[↑ Back to Top](#top)
 
 ---
 
-## Common Mistakes to Avoid ⚠️
+## 🔥 Summary
+
+Statistics is the discipline that separates "my model got 87% accuracy" from "my model reliably gets 87% accuracy." Every real dataset is incomplete, noisy, and sampled — statistics gives you the tools to reason about what you can and cannot conclude.
+
+**Common mistakes to avoid:**
 
 - **Ignoring p-value interpretation**: p < 0.05 means the result is statistically significant, not that the effect is practically important. A tiny effect with a huge sample will be statistically significant but useless.
 - **Using mean on skewed data**: always check the distribution shape. For salary analysis, median tells the truth; mean is misleading.
 - **Applying parametric tests to non-normal small samples**: t-tests assume normality. For n < 30 with non-normal data, use Mann-Whitney U or bootstrap methods.
 - **Ignoring multiple testing**: running 20 t-tests with α=0.05 means you'd expect 1 false positive by chance. Use Bonferroni correction or FDR control.
+
+| Concept | One-line summary |
+|---|---|
+| Mean / Median / Std | Describe center and spread — choose based on outliers |
+| Normal distribution | Bell curve; 68-95-99.7 rule; CLT makes it universal |
+| Hypothesis test | p-value: probability of this result assuming nothing changed |
+| Type I / II errors | False positive vs false negative — trade-off via α and power |
+| Bayes' theorem | Update belief with evidence; prior probability matters |
+| Correlation | Linear relationship strength — not causation |
 
 ---
 
@@ -323,9 +365,13 @@ print(f"Spearman: {corr:.3f}, p-value: {p_val:.3f}")
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.md](./practice.md) |
-| ⬅️ Prev Module | [../25_python_ai_ecosystem/theory.md](../25_python_ai_ecosystem/theory.md) |
-| ➡️ Next Module | [../27_matplotlib_seaborn/theory.md](../27_matplotlib_seaborn/theory.md) |
-
----
+| ⬅️ Prev Module | [← Python AI Ecosystem](../25_python_ai_ecosystem/theory.md) |
+| ➡️ Next Module | [→ EDA Workflow](../28_eda_workflow/theory.md) |
 
 **[🏠 Back to README](../README.md)**
+
+**Prev:** [← Python AI Ecosystem](../25_python_ai_ecosystem/theory.md) &nbsp;|&nbsp; **Next:** [EDA Workflow →](../28_eda_workflow/theory.md)
+
+**Related Topics:** [Cheatsheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+
+[↑ Back to Top](#top)

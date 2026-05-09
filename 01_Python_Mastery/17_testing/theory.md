@@ -1,35 +1,41 @@
+<a id="top"></a>
 # 🧪 Testing in Python — Deep Dive
 
 > Complete reference for Python testing: unit tests, pytest, mocking, fixtures,
 > parameterization, coverage, async testing, and production testing strategy.
 
----
+## 📖 Table of Contents
 
-## 📋 Contents
-
-```
-1.  Why testing? The safety net mental model
-2.  Test types and the testing pyramid
-3.  unittest — the stdlib framework
-4.  pytest — the modern way
-5.  Fixtures — setup, teardown, scope
-6.  Parametrize — data-driven tests
-7.  Mocking — unittest.mock in depth
-8.  Patching — where and how to patch
-9.  Test doubles — mock vs stub vs fake vs spy
-10. Testing exceptions and edge cases
-11. Testing classes and stateful objects
-12. Async testing — pytest-asyncio
-13. Coverage — measuring and interpreting
-14. Test organization and naming
-15. TDD — test-driven development workflow
-16. Property-based testing — hypothesis
-17. Integration and contract testing
-18. CI/CD and test pipelines
-19. Common pitfalls and antipatterns
-```
-
----
+- [1. Why Testing? The Safety Net Mental Model](#1-why-testing-the-safety-net-mental-model)
+- [2. Test Types and the Testing Pyramid](#2-test-types-and-the-testing-pyramid)
+- [3. `unittest` — The Standard Library Framework](#3-unittest--the-standard-library-framework)
+  - [Running unittest](#running-unittest)
+- [4. pytest — The Modern Way](#4-pytest--the-modern-way)
+  - [Running pytest](#running-pytest)
+  - [pytest Assertion Introspection](#pytest-assertion-introspection)
+- [5. Fixtures — The Heart of pytest](#5-fixtures--the-heart-of-pytest)
+  - [conftest.py — Shared Fixtures](#conftestpy--shared-fixtures)
+- [6. Parametrize — Data-Driven Tests](#6-parametrize--data-driven-tests)
+- [7. Mocking — `unittest.mock` in Depth](#7-mocking--unittestmock-in-depth)
+  - [The Problem Mocking Solves](#the-problem-mocking-solves)
+  - [Mock Object](#mock-object)
+  - [patch — The Standard Tool](#patch--the-standard-tool)
+  - [pytest's monkeypatch](#pytests-monkeypatch)
+- [8. Test Doubles — Mock vs Stub vs Fake vs Spy](#8-test-doubles--mock-vs-stub-vs-fake-vs-spy)
+- [9. Testing Exceptions and Edge Cases](#9-testing-exceptions-and-edge-cases)
+- [10. Testing Classes and Stateful Objects](#10-testing-classes-and-stateful-objects)
+- [11. Async Testing — pytest-asyncio](#11-async-testing--pytest-asyncio)
+- [12. Code Coverage](#12-code-coverage)
+- [13. Test Organization and Naming](#13-test-organization-and-naming)
+  - [File Structure](#file-structure)
+  - [Naming Conventions](#naming-conventions)
+  - [Marks](#marks)
+- [14. TDD — Test-Driven Development](#14-tdd--test-driven-development)
+- [15. Property-Based Testing — Hypothesis](#15-property-based-testing--hypothesis)
+- [16. Common Pitfalls and Anti-Patterns](#16-common-pitfalls-and-anti-patterns)
+- [17. CI/CD Integration](#17-cicd-integration)
+  - [📂 Subfolder Deep Dives](#-subfolder-deep-dives)
+  - [🔥 Summary](#-summary)
 
 ## 📌 Learning Priority
 
@@ -47,15 +53,12 @@
 
 ---
 
-## 1. Why Testing? The Safety Net Mental Model
+<a id="1-why-testing-the-safety-net-mental-model"></a>
+# 1. Why Testing? The Safety Net Mental Model
 
-> 📝 **Practice:** [Q1 — Write a test function](./practice.md#q1--pytest--write-a-test-function)
+Imagine a high-wire acrobat. Without a safety net, every step is terrifying — one slip means catastrophe. With a net, the act is still skillful, but a slip means recovery, not disaster. Code without tests is the same walk without a net: every change is a gamble, every deployment a prayer. Tests don't make your code perfect — they make your mistakes survivable.
 
-Imagine a high-wire acrobat. Without a safety net, every step is terrifying.
-With one: the act is still skillful, but the cost of a slip is recovery —
-not catastrophe.
-
-Tests are your safety net. Without them:
+Without tests:
 
 ```
 Change line 47 in payments.py
@@ -84,11 +87,18 @@ Change line 47 in payments.py
 | Design pressure | Hard-to-test code = badly designed code |
 | Deployment speed | CI gates prevent bad code reaching prod |
 
+💡 **Hint:** "Hard to test" is a design smell, not a testing problem. If a function is hard to test, it usually does too much, has hidden dependencies, or lacks clear inputs/outputs. Tests improve your code's design.
+
+📝 **Practice:** [Q1 — Write a test function](./practice.md#q1--pytest--write-a-test-function)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 2. Test Types and the Testing Pyramid
+<a id="2-test-types-and-the-testing-pyramid"></a>
+# 2. Test Types and the Testing Pyramid
 
-> 📝 **Practice:** [Q2 — assert with multiple types](./practice.md#q2--pytest--assert-with-multiple-types)
+Think of building a house inspection system. You inspect every individual nail and beam (unit tests — fast, many). Then you check that walls and floors connect properly (integration tests — fewer, slower). Finally, you walk through the finished house as a real person would (E2E tests — few, slowest). You don't do the walk-through for every nail — that would take forever and tell you nothing extra. The testing pyramid is just this common sense applied to software.
 
 ```
               /\
@@ -122,12 +132,22 @@ Integration: ~20% of tests  → catch wiring bugs
 E2E:         ~10% of tests  → smoke test critical user journeys
 ```
 
+⚠️ **Common Mistake:** Writing only E2E tests because "they test everything." They do test more, but they're 100x slower and break for unrelated reasons (network flakiness, timing). A slow test suite gets skipped — which defeats the entire purpose.
+
+💡 **Hint:** The "ice cream cone anti-pattern" is an inverted pyramid: many E2E, some integration, few unit. This is what teams end up with when they skip unit testing early. It leads to slow, flaky CI and painful debugging.
+
+📝 **Practice:** [Q2 — assert with multiple types](./practice.md#q2--pytest--assert-with-multiple-types)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 3. `unittest` — The Standard Library Framework
+<a id="3-unittest--the-standard-library-framework"></a>
+# 3. `unittest` — The Standard Library Framework
 
-> 📝 **Practice:** [Q10 — TestCase and setUp](./practice.md#q10--unittest--testcase-and-setup)  
-> 📝 **Deep dive →** [02_unittest/theory.md](./02_unittest/theory.md)
+Think of `unittest` like a formal office building — everything has its own assigned desk, there's a strict dress code (methods must start with `test_`), and you check in (`setUp`) and check out (`tearDown`) for every meeting. It's structured and reliable, and it comes built into Python with no extra install. Most modern teams reach for pytest instead, but `unittest` is everywhere in legacy codebases and still perfectly valid for simple projects.
+
+📖 **Deep dive →** [02_unittest/theory.md](./02_unittest/theory.md)
 
 ```python
 import unittest
@@ -143,12 +163,12 @@ class TestMath(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Runs ONCE before any tests in this class."""
-        cls.shared_resource = expensive_setup()
+        cls.shared_resource = "expensive_setup"
 
     @classmethod
     def tearDownClass(cls):
         """Runs ONCE after all tests in this class."""
-        cls.shared_resource.cleanup()
+        pass  # cleanup shared resource
 
     def setUp(self):
         """Runs before EACH test method."""
@@ -164,9 +184,6 @@ class TestMath(unittest.TestCase):
 
     def test_add_negative(self):
         self.assertEqual(add(-1, -1), -2)
-
-    def test_add_zero(self):
-        self.assertEqual(add(5, 0), 5)
 
     def test_divide_normal(self):
         self.assertAlmostEqual(divide(10, 3), 3.333, places=3)
@@ -194,7 +211,7 @@ class TestMath(unittest.TestCase):
 # self.assertAlmostEqual(a, b)    round(a-b, 7) == 0
 # self.assertGreater(a, b)        a > b
 # self.assertLess(a, b)           a < b
-# self.assertRaises(Exc)          [context manager](../12_context_managers/theory.md)
+# self.assertRaises(Exc)          context manager for exceptions
 # self.assertLogs(logger, level)  context manager for log output
 # self.assertRegex(text, regexp)  re.search(regexp, text)
 
@@ -202,7 +219,8 @@ if __name__ == "__main__":
     unittest.main()
 ```
 
-### Running unittest
+<a id="running-unittest"></a>
+## Running unittest
 
 ```bash
 python -m unittest test_module             # run one module
@@ -211,15 +229,34 @@ python -m unittest discover               # discover all test_*.py files
 python -m unittest -v                     # verbose output
 ```
 
+```
+┌────────────── unittest lifecycle per test ─────────────────────────┐
+│                                                                     │
+│  setUpClass()      ← runs ONCE for the class                       │
+│      │                                                              │
+│  setUp()           ← runs before EACH test method                  │
+│  test_method()     ← the actual test                               │
+│  tearDown()        ← runs after EACH test method                   │
+│      │                                                              │
+│  tearDownClass()   ← runs ONCE after all tests in class            │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+⚠️ **Common Mistake:** Putting expensive setup in `setUp()` (runs per-test) instead of `setUpClass()` (runs once). If you create a DB connection in `setUp`, you're creating it for every single test — potentially thousands of times.
+
+📝 **Practice:** [Q10 — TestCase and setUp](./practice.md#q10--unittest--testcase-and-setup)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 4. pytest — The Modern Way
+<a id="4-pytest--the-modern-way"></a>
+# 4. pytest — The Modern Way
 
-> 📝 **Practice:** [Q1 — Write a test function](./practice.md#q1--pytest--write-a-test-function)  
-> 📝 **Deep dive →** [01_pytest/theory.md](./01_pytest/theory.md)
+Think of pytest as a modern co-working space vs. `unittest`'s formal office. No dress code — plain functions work, no class required. No check-in forms — just write `assert`. When something goes wrong, the output tells you exactly what failed and why, not just "AssertionError." pytest is the industry standard for a reason: it's faster to write, easier to read, and the failure output is genuinely helpful.
 
-pytest is the industry standard. It's more expressive, has better output,
-and integrates with hundreds of plugins.
+📖 **Deep dive →** [01_pytest/theory.md](./01_pytest/theory.md)
 
 ```python
 # test_math.py  (no class needed!)
@@ -250,7 +287,8 @@ def test_approximate():
     assert divide(1, 3) == pytest.approx(0.333, abs=1e-3)
 ```
 
-### Running pytest
+<a id="running-pytest"></a>
+## Running pytest
 
 ```bash
 pytest                          # discover and run all tests
@@ -268,10 +306,10 @@ pytest --lf                     # rerun only last-failed tests
 pytest --ff                     # run failed tests first
 ```
 
-### pytest assertion introspection
+<a id="pytest-assertion-introspection"></a>
+## pytest Assertion Introspection
 
-One of pytest's killer features — when an assertion fails, it shows exactly
-what went wrong without any special assertion methods:
+One of pytest's killer features — when an assertion fails, it shows exactly what went wrong without any special assertion methods:
 
 ```python
 def test_list():
@@ -291,15 +329,20 @@ def test_dict():
 #   Right contains: {'b': 3}
 ```
 
+💡 **Hint:** Use `pytest.approx()` for floating-point comparisons — never `==` with floats. `assert 0.1 + 0.2 == 0.3` fails due to floating-point representation; `assert 0.1 + 0.2 == pytest.approx(0.3)` passes.
+
+📝 **Practice:** [Q1 — Write a test function](./practice.md#q1--pytest--write-a-test-function)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 5. Fixtures — The Heart of pytest
+<a id="5-fixtures--the-heart-of-pytest"></a>
+# 5. Fixtures — The Heart of pytest
 
-> 📝 **Practice:** [Q3 — Fixtures as setup](./practice.md#q3--pytest--fixtures-as-setup)  
-> 📝 **Deep dive →** [01_pytest/theory.md](./01_pytest/theory.md)
+Think of fixtures like a restaurant mise en place — before the chef starts cooking (the test runs), everything is prepared and in its place: chopped vegetables (sample data), clean pans (fresh DB connection), preheated oven (server started). When the dish is served (test finishes), cleanup happens automatically. Fixtures let you describe *what your test needs*, and pytest wires everything together — no manual setup/teardown in every test.
 
-Fixtures provide reusable setup/teardown. They're injected by name into test
-functions as parameters.
+Fixtures provide reusable setup/teardown. They're injected by name into test functions as parameters.
 
 ```python
 import pytest
@@ -390,7 +433,23 @@ def database(request):
         return PostgresDatabase(test_url)
 ```
 
-### conftest.py — Shared Fixtures
+```
+┌──────────── Fixture Scope — How Many Times Each Runs ──────────────┐
+│                                                                     │
+│  scope="function"  → once per test function  (default)             │
+│  scope="class"     → once per test class                           │
+│  scope="module"    → once per test file                            │
+│  scope="package"   → once per package directory                    │
+│  scope="session"   → once per entire pytest run                    │
+│                                                                     │
+│  Rule: wider scope = less teardown/setup = faster suite            │
+│  Risk: wider scope = shared state between tests = harder isolation │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<a id="conftestpy--shared-fixtures"></a>
+## conftest.py — Shared Fixtures
 
 ```
 project/
@@ -419,11 +478,20 @@ def client(app):
     return app.test_client()
 ```
 
+⚠️ **Common Mistake:** Using `scope="session"` for fixtures that modify shared state (like inserting DB rows). Session-scoped fixtures run once and are reused — if one test modifies the fixture's state, the next test sees dirty data. Use `scope="function"` for anything stateful.
+
+💡 **Hint:** Fixtures can depend on other fixtures — pytest handles the dependency graph automatically. `populated_db(db)` will automatically receive the `db` fixture, which will automatically set up and tear down in the right order.
+
+📝 **Practice:** [Q3 — Fixtures as setup](./practice.md#q3--pytest--fixtures-as-setup)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 6. Parametrize — Data-Driven Tests
+<a id="6-parametrize--data-driven-tests"></a>
+# 6. Parametrize — Data-Driven Tests
 
-> 📝 **Practice:** [Q4 — parametrize basics](./practice.md#q4--pytest--parametrize-basics)
+Imagine testing a calculator with 20 different input pairs. Without parametrize, you'd write 20 separate test functions with almost identical code. With parametrize, you write the test once and provide a table of inputs — pytest runs it once for each row, labels each run, and reports failures per row. One function, 20 test cases.
 
 ```python
 import pytest
@@ -443,7 +511,7 @@ def is_palindrome(s):
 def test_palindrome(word, expected):
     assert is_palindrome(word) == expected
 
-# Multiple axes — creates all combinations:
+# Multiple axes — creates all combinations (2×3 = 6 tests):
 @pytest.mark.parametrize("a", [1, 2, 3])
 @pytest.mark.parametrize("b", [10, 20])
 def test_multiply(a, b):
@@ -460,14 +528,25 @@ def test_add_cases(x, y, expected):
     assert x + y == expected
 ```
 
+⚠️ **Common Mistake:** Stacking too many `@parametrize` decorators creating a combinatorial explosion. Two decorators with 5 items each = 25 tests. Three = 125. Check whether you really need all combinations or just specific pairs.
+
+💡 **Hint:** Use `pytest.param(..., id="name")` to give meaningful names to complex test cases. Instead of `test_add_cases[1e308-1e308-inf]`, you get `test_add_cases[overflow]` in the output.
+
+📝 **Practice:** [Q4 — parametrize basics](./practice.md#q4--pytest--parametrize-basics)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 7. Mocking — `unittest.mock` in Depth
+<a id="7-mocking--unittestmock-in-depth"></a>
+# 7. Mocking — `unittest.mock` in Depth
 
-> 📝 **Practice:** [Q15 — Basic Mock and return_value](./practice.md#q15--mock--basic-mock-and-return_value)  
-> 📝 **Deep dive →** [03_mocking/theory.md](./03_mocking/theory.md)
+Think of mocking like a film set. The actors (your code) behave exactly as they would in real life, but the New York skyline behind them is a painted backdrop — not real. Mocks are the backdrops: they look and act like real databases, APIs, and services, but they're controlled fakes that never make network calls, never cost money, and always behave exactly as you program them. Without mocks, testing code that talks to external systems is slow, expensive, and unreliable.
 
-### The Problem Mocking Solves
+📖 **Deep dive →** [03_mocking/theory.md](./03_mocking/theory.md)
+
+<a id="the-problem-mocking-solves"></a>
+## The Problem Mocking Solves
 
 ```
 Your function calls:
@@ -480,7 +559,8 @@ Your function calls:
 Mocking replaces these with controllable fakes.
 ```
 
-### Mock Object
+<a id="mock-object"></a>
+## Mock Object
 
 ```python
 from unittest.mock import Mock, MagicMock, patch, call
@@ -501,7 +581,6 @@ m()   # raises ValueError
 # side_effect as list (returns next item each call):
 m = Mock(side_effect=[1, 2, 3])
 print(m(), m(), m())   # 1 2 3
-# m()  # StopIteration
 
 # side_effect as function:
 m = Mock(side_effect=lambda x: x * 2)
@@ -521,7 +600,6 @@ m.query("SELECT 1")
 m.connect.assert_called_once()
 m.connect.assert_called_once_with("localhost", 5432)
 m.query.assert_called_with("SELECT 1")
-m.query.assert_called()
 m.connect.call_count         # 1
 m.connect.call_args          # call("localhost", 5432)
 m.connect.call_args_list     # [call("localhost", 5432)]
@@ -530,7 +608,21 @@ m.connect.call_args_list     # [call("localhost", 5432)]
 m.close.assert_not_called()
 ```
 
-### `patch` — The Standard Tool
+```
+┌──────────────── Mock vs MagicMock ─────────────────────────────────┐
+│                                                                     │
+│  Mock          → basic mock, no magic methods pre-configured       │
+│  MagicMock     → Mock + all dunder methods pre-configured          │
+│                  (len, str, iter, getitem, enter/exit, etc.)        │
+│                                                                     │
+│  Use Mock when: you want explicit control, no implicit magic       │
+│  Use MagicMock when: the code under test calls len(), [], with, etc│
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<a id="patch--the-standard-tool"></a>
+## `patch` — The Standard Tool
 
 ```python
 from unittest.mock import patch
@@ -560,7 +652,7 @@ def test_get_user_error():
             get_user(1)
 
 # CRITICAL: patch WHERE IT'S USED, not where it's defined!
-# If your_module.py imports: from requests import get
+# If your_module.py has: from requests import get
 # Then patch: "your_module.get"  NOT "requests.get"
 
 # patch object attribute:
@@ -578,7 +670,10 @@ def test_multi(mock_b, mock_a):   # decorators applied bottom-up, args reversed!
     ...
 ```
 
-### pytest's `monkeypatch`
+⚠️ **Common Mistake:** Patching the wrong location. `patch("requests.get")` patches the `get` attribute on the `requests` module. But if your code did `from requests import get`, then the name `get` in your module is a separate reference — you must patch `"your_module.get"` instead.
+
+<a id="pytests-monkeypatch"></a>
+## pytest's `monkeypatch`
 
 ```python
 def test_with_monkeypatch(monkeypatch):
@@ -598,20 +693,31 @@ def test_with_monkeypatch(monkeypatch):
     # (No cleanup needed — unlike manual patch.stop())
 ```
 
+💡 **Hint:** Prefer `monkeypatch` over `patch` for simple attribute replacements in pytest tests. It's cleaner (no decorator), automatically cleaned up, and works well with fixtures. Use `patch` when you need the mock object reference (for assertions) or are writing unittest-style tests.
+
+📝 **Practice:** [Q15 — Basic Mock and return_value](./practice.md#q15--mock--basic-mock-and-return_value)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 8. Test Doubles — Mock vs Stub vs Fake vs Spy
+<a id="8-test-doubles--mock-vs-stub-vs-fake-vs-spy"></a>
+# 8. Test Doubles — Mock vs Stub vs Fake vs Spy
 
-> 📝 **Practice:** [Q25 — Mock vs Stub vs Fake](./practice.md#q25--doubles--mock-vs-stub-vs-fake)
+Think of test doubles like stunt doubles in film. You have five types: a dummy (just stands in a crowd scene — never used), a stub (says their line but does nothing else), a fake (acts the scene for real, but in a simplified way), a mock (acts AND checks that the director called on them correctly), and a spy (acts the real scene AND secretly films what happened). Each serves a different purpose and choosing the right one makes tests cleaner and more meaningful.
 
 These terms come from Gerard Meszaros's *xUnit Test Patterns*:
 
 ```
-Dummy    — passed but never used (just fills a parameter slot)
-Stub     — returns canned answers; doesn't verify interactions
-Fake     — real implementation, but simplified (in-memory DB)
-Mock     — pre-programmed with expectations; verifies calls
-Spy      — real implementation that records how it was called
+┌──────────────────────── Test Double Types ─────────────────────────┐
+│                                                                     │
+│  Dummy   → passed but never used (fills a parameter slot)          │
+│  Stub    → returns canned answers; doesn't verify interactions     │
+│  Fake    → real implementation, but simplified (in-memory DB)      │
+│  Mock    → pre-programmed with expectations; verifies calls        │
+│  Spy     → real implementation that records how it was called      │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
 
 ```python
@@ -654,11 +760,20 @@ def test_registration_sends_welcome_email():
     assert "Welcome" in spy.sent_messages[0]["subject"]
 ```
 
+💡 **Hint:** In practice, "mock" is used loosely to mean any test double. What matters is the intent: are you verifying that something was called (mock/spy), or just providing a substitute return value (stub/fake)? Choose the simplest double that makes your test pass.
+
+⚠️ **Common Mistake:** Using Mocks (which verify calls) when you just need a Stub (which provides data). Over-specifying call behavior (`assert_called_once_with` every method) makes tests fragile — they break when implementation details change even if behavior is correct.
+
+📝 **Practice:** [Q25 — Mock vs Stub vs Fake](./practice.md#q25--doubles--mock-vs-stub-vs-fake)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 9. Testing Exceptions and Edge Cases
+<a id="9-testing-exceptions-and-edge-cases"></a>
+# 9. Testing Exceptions and Edge Cases
 
-> 📝 **Practice:** [Q5 — pytest.raises](./practice.md#q5--pytest--pytestrasies)
+Think of edge cases like the corners of a table — most people never bump into them, but the ones who do really feel it. Testing only the "happy path" (valid inputs, normal flow) is like inspecting only the middle of a bridge. The failures happen at the edges: empty inputs, negative numbers, null values, maximum sizes, boundary conditions. A test suite that only tests success is only half a test suite.
 
 ```python
 import pytest
@@ -674,7 +789,7 @@ def test_value_error_message():
     with pytest.raises(ValueError, match=r"must be positive"):
         validate_age(-1)
 
-# Test exact exception:
+# Test exact exception details:
 def test_custom_exception():
     exc = pytest.raises(InsufficientFundsError, withdraw, amount=1000, balance=100)
     assert exc.value.shortfall == 900
@@ -691,9 +806,9 @@ def test_none_input():
         process(None)
 
 def test_boundary_values():
-    assert is_valid_age(0)    == True   # boundary
+    assert is_valid_age(0)    == True   # lower boundary
     assert is_valid_age(-1)   == False  # just below
-    assert is_valid_age(150)  == True   # high boundary
+    assert is_valid_age(150)  == True   # upper boundary
     assert is_valid_age(151)  == False  # just above
     assert is_valid_age(75)   == True   # middle
 
@@ -706,11 +821,38 @@ def test_overflow():
     assert result == float("inf")
 ```
 
+```
+┌─────────────── Edge Cases Checklist ───────────────────────────────┐
+│                                                                     │
+│  For any function, test:                                            │
+│  □ Empty input ([], "", None, 0)                                    │
+│  □ Single item ([x], "a")                                          │
+│  □ Maximum / minimum boundary values                               │
+│  □ Value just above / below boundaries                             │
+│  □ Wrong type (str where int expected)                             │
+│  □ None where object expected                                      │
+│  □ Duplicate values (sets, unique constraints)                     │
+│  □ Very large input (performance boundary)                         │
+│  □ Unicode / special characters (strings)                          │
+│  □ Negative numbers (when input should be positive)                │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+⚠️ **Common Mistake:** Writing `pytest.raises(Exception)` — the broad base class. This passes even if your code raises a completely different exception than expected. Always assert the specific exception type.
+
+💡 **Hint:** The `match=` parameter in `pytest.raises` takes a regex. Use it to verify not just the type but the message: `pytest.raises(ValueError, match=r"must be positive")` — this prevents tests from passing when the right exception type is raised for the wrong reason.
+
+📝 **Practice:** [Q5 — pytest.raises](./practice.md#q5--pytest--pytestrasies)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 10. Testing Classes and Stateful Objects
+<a id="10-testing-classes-and-stateful-objects"></a>
+# 10. Testing Classes and Stateful Objects
 
-> 📝 **Practice:** [Q35 — Capstone end-to-end suite](./practice.md#q35--capstone--end-to-end-test-suite)
+Think of testing a stateful class like testing a vending machine. You don't just test "does it accept money" — you test the full sequence: insert coins → select item → get change → item dispensed. Each state transition matters. For classes, this means testing initial state, valid transitions, invalid transitions, and interactions with dependencies (like a payment service).
 
 ```python
 import pytest
@@ -728,10 +870,7 @@ class ShoppingCart:
     def remove_item(self, name):
         before = len(self.items)
         self.items = [i for i in self.items if i["name"] != name]
-        removed = before - len(self.items)
-        self.total -= sum(i["price"] * i["qty"] for i in self.items
-                          if i["name"] == name)
-        if removed == 0:
+        if before == len(self.items):
             raise KeyError(f"Item not found: {name!r}")
 
     def checkout(self, payment_service):
@@ -787,11 +926,18 @@ class TestShoppingCart:
         mock_payment.charge.assert_not_called()
 ```
 
+💡 **Hint:** Use fixtures to set up initial state, then test each method independently. Never rely on test execution order — each test must be able to run in isolation. If `test_remove_item` depends on `test_add_item` having run first, you have a fragile test suite.
+
+📝 **Practice:** [Q35 — Capstone end-to-end suite](./practice.md#q35--capstone--end-to-end-test-suite)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 11. Async Testing — pytest-asyncio
+<a id="11-async-testing--pytest-asyncio"></a>
+# 11. Async Testing — pytest-asyncio
 
-> 📝 **Practice:** [Q9 — Async testing](./practice.md#q9--pytest--async-testing)
+Testing async code is like testing a restaurant kitchen where multiple dishes cook simultaneously. The challenge isn't the food itself — it's coordinating the timing. `pytest-asyncio` gives you an event loop for each test so you can `await` coroutines directly in tests, mock async functions with `AsyncMock`, and write async fixtures that set up and tear down async resources cleanly.
 
 ```bash
 pip install pytest-asyncio
@@ -832,11 +978,20 @@ async def test_async_with_mock():
 # asyncio_mode = auto    ← auto-marks all async tests (pytest-asyncio 0.19+)
 ```
 
+⚠️ **Common Mistake:** Using `Mock()` for async functions instead of `AsyncMock()`. A regular `Mock` returns a non-awaitable object — when your code tries to `await mock_function()`, it raises `TypeError: object Mock can't be used in 'await' expression`. Always use `AsyncMock` for async functions.
+
+💡 **Hint:** Set `asyncio_mode = auto` in `pytest.ini` so you don't need `@pytest.mark.asyncio` on every async test. This is the recommended setting for projects that use async throughout.
+
+📝 **Practice:** [Q9 — Async testing](./practice.md#q9--pytest--async-testing)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 12. Code Coverage
+<a id="12-code-coverage"></a>
+# 12. Code Coverage
 
-> 📝 **Practice:** [Q33 — Coverage analysis](./practice.md#q33--capstone--coverage-analysis)
+Think of code coverage like a heat map of your test suite — it shows you which lines of your code have been executed during tests and which have never been touched. A line that's never run could be hiding a bug that will only surface in production. Coverage doesn't guarantee your tests are good (they could execute a line without asserting anything useful), but it does tell you where you haven't looked at all.
 
 ```bash
 pip install pytest-cov
@@ -868,27 +1023,41 @@ Branch coverage:  was each if/else branch hit?  (more thorough)
 Condition:        was each boolean sub-expr True AND False?
 ```
 
-**Interpreting coverage numbers:**
-
 ```
-90% coverage is often a goal — but it's a proxy, not a guarantee.
-100% coverage can still miss:
-  - Wrong algorithm (passes tests but wrong logic)
-  - Missing edge cases (test doesn't cover all paths through logic)
-  - Race conditions (concurrent code hard to cover)
-
-Low coverage (<50%) is a clear warning sign.
-High coverage (>80%) is table stakes for production code.
-Coverage alone is not a quality metric — what matters is what you assert.
+┌─────────────── Interpreting Coverage Numbers ──────────────────────┐
+│                                                                     │
+│  <50%   → clear warning sign: most code untested                   │
+│  50-70% → getting started, needs significant work                  │
+│  70-80% → reasonable for many projects                             │
+│  80-90% → table stakes for production code                         │
+│  >90%   → high confidence, but diminishing returns above ~95%      │
+│                                                                     │
+│  100% coverage can still miss:                                      │
+│  - Wrong algorithm (tests pass but logic is incorrect)             │
+│  - Missing edge cases (path covered but not all inputs)            │
+│  - Race conditions (concurrent code hard to cover)                 │
+│                                                                     │
+│  Coverage is a proxy metric — what matters is what you ASSERT.     │
+└─────────────────────────────────────────────────────────────────────┘
 ```
+
+⚠️ **Common Mistake:** Chasing 100% coverage by writing "empty" tests that execute code without asserting anything. `def test_foo(): foo()` gives you line coverage but proves nothing. Coverage measures execution, not correctness.
+
+💡 **Hint:** Enable branch coverage (`--cov-branch`) alongside line coverage. A function with `if condition: return X` can show 100% line coverage if only the `return X` path is hit — but branch coverage reveals the `else` path was never tested.
+
+📝 **Practice:** [Q33 — Coverage analysis](./practice.md#q33--capstone--coverage-analysis)
+
+> [↑ Back to Top](#top)
 
 ---
 
-## 13. Test Organization and Naming
+<a id="13-test-organization-and-naming"></a>
+# 13. Test Organization and Naming
 
-> 📝 **Practice:** [Q34 — Test organization](./practice.md#q34--capstone--test-organization)
+Think of test organization like a well-labeled filing cabinet. When a test fails at 3am in CI, you need to find the relevant test file, understand what it's testing, and diagnose the failure — in under a minute. Good naming and structure make this possible. Bad naming (`test_1`, `test_func`, `test_misc`) means every CI failure starts with a scavenger hunt.
 
-### File structure
+<a id="file-structure"></a>
+## File Structure
 
 ```
 project/
@@ -915,19 +1084,28 @@ project/
 └── pytest.ini
 ```
 
-### Naming conventions
+<a id="naming-conventions"></a>
+## Naming Conventions
 
 ```python
 # File:     test_<module_name>.py
 # Class:    Test<ClassName>
 # Method:   test_<method>_<scenario>_<expected>
 
-def test_calculate_discount_zero_items_returns_zero():      # explicit
-def test_calculate_discount_above_threshold_applies_20():   # explicit
-def test_user_register_duplicate_email_raises_conflict():   # explicit
+# ❌ Bad names — tell you nothing:
+def test_discount(): ...
+def test_error(): ...
+def test_1(): ...
+
+# ✅ Good names — self-documenting:
+def test_calculate_discount_zero_items_returns_zero(): ...
+def test_calculate_discount_above_threshold_applies_20_percent(): ...
+def test_user_register_duplicate_email_raises_conflict(): ...
+def test_payment_process_insufficient_funds_raises_error(): ...
 ```
 
-### Marks
+<a id="marks"></a>
+## Marks
 
 ```python
 import pytest
@@ -945,18 +1123,38 @@ import pytest
 #     integration: marks tests as integration tests
 ```
 
+💡 **Hint:** Use marks to split your test suite into fast and slow runs. `pytest -m "not slow and not integration"` gives you a sub-second feedback loop during development. `pytest -m ""` (all tests) runs in CI before merge.
+
+📝 **Practice:** [Q34 — Test organization](./practice.md#q34--capstone--test-organization)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 14. TDD — Test-Driven Development
+<a id="14-tdd--test-driven-development"></a>
+# 14. TDD — Test-Driven Development
 
-> 📝 **Practice:** [Q29 — TDD Red-Green-Refactor](./practice.md#q29--patterns--tdd-red-green-refactor)
+Think of TDD like writing a recipe before cooking. You first write down exactly what the finished dish should taste like (the test), then you cook until it matches (the implementation), then you clean up the kitchen (refactor). The key discipline: you never write code without a failing test waiting for it. This forces you to think about the interface before the implementation — which almost always leads to better design.
 
 The Red-Green-Refactor cycle:
 
 ```
-RED:    Write a failing test for the feature you're about to build
-GREEN:  Write the MINIMUM code to make it pass
-REFACTOR: Clean up the code while keeping tests green
+┌──────────────────── TDD Cycle ──────────────────────────────────────┐
+│                                                                      │
+│  RED     → Write a failing test for the feature you're about to     │
+│            build. Run it. Confirm it fails (not errors).            │
+│               │                                                      │
+│               ▼                                                      │
+│  GREEN   → Write the MINIMUM code to make the test pass.            │
+│            Don't worry about elegance yet.                          │
+│               │                                                      │
+│               ▼                                                      │
+│  REFACTOR → Clean up the code while keeping all tests green.        │
+│             Extract duplication, improve names, simplify logic.     │
+│               │                                                      │
+│               └──────────────────────► back to RED for next feature │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ```python
@@ -990,18 +1188,24 @@ def fizzbuzz(n):
 
 **TDD benefits:**
 - Forces you to think about the interface before implementation
-- Each feature is testable by design (loosely coupled)
-- Provides a regression suite automatically
-- Small, incremental changes — easier to debug
+- Each feature is testable by design (loosely coupled by necessity)
+- Provides a regression suite automatically as a side effect
+- Small, incremental changes — easier to debug when something breaks
+
+⚠️ **Common Mistake:** Skipping the RED step — writing code first, then writing tests to pass it. This defeats the design benefit of TDD. The test must fail first to prove it's actually testing something.
+
+💡 **Hint:** TDD shines most for pure functions and business logic. For UI, database migrations, and infrastructure code, a lighter approach (write code, then test) is often more practical.
+
+📝 **Practice:** [Q29 — TDD Red-Green-Refactor](./practice.md#q29--patterns--tdd-red-green-refactor)
+
+> [↑ Back to Top](#top)
 
 ---
 
-## 15. Property-Based Testing — Hypothesis
+<a id="15-property-based-testing--hypothesis"></a>
+# 15. Property-Based Testing — Hypothesis
 
-> 📝 **Practice:** [Q32 — Property-based testing with Hypothesis](./practice.md#q32--patterns--property-based-testing-with-hypothesis)
-
-Standard tests use hand-picked examples. Hypothesis generates thousands of
-inputs automatically, finding edge cases you'd never think of.
+Standard tests use hand-picked examples — they're only as good as the examples you thought of. Hypothesis is a library that generates thousands of random inputs automatically, shrinks failures to the smallest reproducing example, and finds edge cases that no human would think to test. Instead of writing "test that sort([3,1,2]) == [1,2,3]", you write "for any list, the sorted output must be ordered and contain the same elements" — and Hypothesis tries to break it.
 
 ```bash
 pip install hypothesis
@@ -1033,7 +1237,7 @@ def test_sort_output_ordered(lst):
 @given(st.lists(st.integers()))
 def test_sort_contains_same_elements(lst):
     """Sorted list contains exact same elements."""
-    assert sorted(sort_list(lst)) == sorted(lst)   # order-independent compare
+    assert sorted(sort_list(lst)) == sorted(lst)
 
 # Strategies:
 st.integers(min_value=0, max_value=100)
@@ -1051,11 +1255,18 @@ def test_divide(a, b):
     assert result * b == pytest.approx(a)
 ```
 
+💡 **Hint:** Hypothesis remembers inputs that caused failures across runs (stored in a `.hypothesis/` directory). Once it finds a failing example, it will always re-test that specific case — even if you randomize everything else.
+
+📝 **Practice:** [Q32 — Property-based testing with Hypothesis](./practice.md#q32--patterns--property-based-testing-with-hypothesis)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 16. Common Pitfalls and Anti-Patterns
+<a id="16-common-pitfalls-and-anti-patterns"></a>
+# 16. Common Pitfalls and Anti-Patterns
 
-> 📝 **Practice:** [Q31 — Test isolation](./practice.md#q31--patterns--test-isolation)
+Every test suite accumulates bad habits over time. Tests that are too tightly coupled to implementation break when code is refactored correctly. Tests that share state fail randomly based on execution order. Tests with too many mocks prove nothing about real behavior. Recognizing these patterns early saves enormous debugging time later.
 
 ```python
 # ❌ ANTI-PATTERN 1: Testing implementation, not behavior
@@ -1124,11 +1335,18 @@ def test_scheduled_job():
         assert job_ran()
 ```
 
+⚠️ **Common Mistake:** Letting tests share mutable global state (module-level lists, dicts, singletons). Tests that pass individually but fail when run together are a nightmare — they pass in local dev but fail in CI because CI runs all tests.
+
+📝 **Practice:** [Q31 — Test isolation](./practice.md#q31--patterns--test-isolation)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 17. CI/CD Integration
+<a id="17-cicd-integration"></a>
+# 17. CI/CD Integration
 
-> 📝 **Practice:** [Q35 — End-to-end test suite](./practice.md#q35--capstone--end-to-end-test-suite)
+Think of CI as an automatic inspector who runs every time you propose a change. Before any code reaches production, the inspector runs the full test suite, checks coverage thresholds, and blocks the merge if anything fails. Without CI, tests only run when developers remember to run them — which is never under deadline pressure. CI makes the test suite automatically enforced.
 
 ```yaml
 # .github/workflows/test.yml
@@ -1174,25 +1392,83 @@ markers =
     e2e: marks end-to-end tests
 ```
 
+💡 **Hint:** Use `-x` (stop on first failure) in CI — there's no point running 500 more tests once one fails. Fix the first failure, then re-run. This also keeps CI feedback faster.
+
+🔍 **Good to Know:** `pytest --cov-fail-under=80` causes pytest to exit with a non-zero code if coverage drops below 80%. CI treats non-zero exit codes as failures — so coverage drops automatically block merges.
+
+📝 **Practice:** [Q35 — End-to-end test suite](./practice.md#q35--capstone--end-to-end-test-suite)
+
+> [↑ Back to Top](#top)
+
 ---
 
+<a id="-subfolder-deep-dives"></a>
+## 📂 Subfolder Deep Dives
+
+This theory file covers all topics at survey depth. Each subfolder contains a full deep-dive with advanced patterns, production examples, and edge cases:
+
+| Subfolder | What's Inside |
+|---|---|
+| [01_pytest/theory.md](./01_pytest/theory.md) | **pytest deep dive** — test discovery internals, conftest scoping rules, fixture factories, plugin ecosystem (`pytest-xdist`, `pytest-mock`, `pytest-benchmark`), custom marks, advanced parametrize patterns |
+| [02_unittest/theory.md](./02_unittest/theory.md) | **unittest deep dive** — TestCase lifecycle, all assertion methods, `subTest()`, `mock.patch` in unittest context, migrating from unittest to pytest |
+| [03_mocking/theory.md](./03_mocking/theory.md) | **Mocking deep dive** — `patch` vs `patch.object` vs `patch.dict`, `spec=` and `autospec=`, `AsyncMock`, call tracking, `create_autospec`, common pitfalls, `pytest-mock` plugin |
+
+---
+
+<a id="-summary"></a>
+## 🔥 Summary
+
+```
+┌──────────────────── Testing Mental Model ──────────────────────────┐
+│                                                                     │
+│  CHOOSE YOUR TOOL:                                                  │
+│  ─────────────────                                                  │
+│  pytest           → default choice for all new projects            │
+│  unittest         → legacy codebases, stdlib-only constraint       │
+│  hypothesis       → when you need to test invariants at scale      │
+│  pytest-asyncio   → any async code                                 │
+│  pytest-cov       → coverage tracking in CI                        │
+│                                                                     │
+│  CHOOSE YOUR DOUBLE:                                                │
+│  ──────────────────                                                 │
+│  Fake    → simplest: real logic, simplified storage                │
+│  Stub    → returns canned data, no verification                    │
+│  Mock    → verifies that specific calls were made                  │
+│  Spy     → wraps real impl, records what happened                  │
+│                                                                     │
+│  REMEMBER:                                                          │
+│  - Patch WHERE IT'S USED, not where it's defined                   │
+│  - Use AsyncMock for async functions, not Mock                     │
+│  - Coverage measures execution, not correctness                    │
+│  - Hard-to-test code is a design smell                             │
+│  - Each test must be independent — no shared mutable state         │
+│  - Test behavior, not implementation                               │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+<a id="-navigation"></a>
 ## 🔁 Navigation
+
+**This folder:**
+[theory.md](./theory.md) · [cheetsheet.md](./cheetsheet.md) · [interview.md](./interview.md) · [practice.md](./practice.md)
+
+**Subfolders:**
+[01_pytest/theory.md](./01_pytest/theory.md) · [02_unittest/theory.md](./02_unittest/theory.md) · [03_mocking/theory.md](./03_mocking/theory.md)
+
+**Related modules:**
+[16 — Design Patterns (DI pattern)](../16_design_patterns/theory.md) · [13 — Concurrency (async testing)](../13_concurrency/theory.md) · [12 — Context Managers (with in tests)](../12_context_managers/theory.md)
+
+**Jump to specific topics:**
+[pytest Fixtures](#5-fixtures--the-heart-of-pytest) · [Mock vs MagicMock](#mock-object) · [patch — WHERE it's used](#patch--the-standard-tool) · [Test Doubles comparison](#8-test-doubles--mock-vs-stub-vs-fake-vs-spy) · [TDD Cycle](#14-tdd--test-driven-development) · [Anti-Patterns](#16-common-pitfalls-and-anti-patterns)
+
+---
 
 | | |
 |---|---|
-| 🎯 Interview | [interview.md](./interview.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 📝 Practice (35 Qs) | [practice.md](./practice.md) |
-| 🧪 pytest Deep Dive | [01_pytest/theory.md](./01_pytest/theory.md) |
-| 🔬 unittest Deep Dive | [02_unittest/theory.md](./02_unittest/theory.md) |
-| 🎭 Mocking Deep Dive | [03_mocking/theory.md](./03_mocking/theory.md) |
-| ⬅️ Previous | [16 — Design Patterns](../16_design_patterns/theory.md) |
-| ➡️ Next | [18 — Performance Optimization](../18_performance_optimization/theory.md) |
+| ⬅ Prev Module | [16 — Design Patterns](../16_design_patterns/theory.md) |
+| ➡ Next Module | [18 — Performance Optimization](../18_performance_optimization/theory.md) |
 
----
+**[🏠 Back to README](../../README.md)**
 
-**[🏠 Back to README](../README.md)**
-
-**Prev:** [← Design Patterns — Interview Q&A](../16_design_patterns/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
-
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)

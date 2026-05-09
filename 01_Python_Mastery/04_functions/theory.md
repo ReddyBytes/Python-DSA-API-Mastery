@@ -1,11 +1,8 @@
+<a id="top"></a>
 # 🧩 Functions — The Complete Mastery Guide
 
 > *"A program without functions is like a city without streets —*
 > *every building exists, but nothing connects. Nothing scales."*
-
----
-
-## 🗺️ What You Will Master
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -19,7 +16,50 @@
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
----
+## 📖 Table of Contents
+
+- [The Problem Functions Solve](#the-problem-functions-solve)
+- [1. Anatomy of a Function](#1-anatomy-of-a-function)
+- [2. How Python Executes a Function](#2-how-python-executes-a-function)
+  - [The Call Stack — Visual Model](#call-stack-visual-model)
+  - [Stack Frame Contents](#stack-frame-contents)
+- [3. Parameters & Arguments — All 7 Types](#3-parameters-arguments--all-7-types)
+  - [The Mutable Default Argument Trap](#the-mutable-default-argument-trap)
+  - [Complete Parameter Order Rule](#complete-parameter-order-rule)
+- [4. The Return Statement — All Behaviors](#4-the-return-statement--all-behaviors)
+  - [Return vs Print](#return-vs-print)
+- [5. Scope — The LEGB Rule](#5-scope--the-legb-rule)
+  - [global and nonlocal](#global-and-nonlocal)
+  - [Memory Behavior by Scope](#memory-behavior-by-scope)
+- [6. Functions Are Objects](#6-functions-are-objects)
+  - [Higher-Order Functions](#higher-order-functions)
+  - [Function Composition](#function-composition)
+- [7. Lambda Functions](#7-lambda-functions)
+- [8. Closures — Functions That Remember](#8-closures--functions-that-remember)
+  - [The Late-Binding Trap](#the-late-binding-trap)
+  - [Closure Cell Internals](#closure-cell-internals)
+- [9. Decorators — Functions That Wrap Functions](#9-decorators--functions-that-wrap-functions)
+  - [@wraps — Preserving Metadata](#wraps--preserving-metadata)
+  - [Decorators with Arguments](#decorators-with-arguments)
+  - [Stacking Decorators](#stacking-decorators)
+  - [Real-World Decorator Patterns](#real-world-decorator-patterns)
+- [10. Recursion — Functions That Call Themselves](#10-recursion--functions-that-call-themselves)
+  - [Call Stack Visualization](#call-stack-visualization-recursion)
+  - [Recursion vs Iteration](#recursion-vs-iteration)
+- [11. Generator Functions](#11-generator-functions)
+- [12. Type Annotations](#12-type-annotations)
+- [13. Docstrings](#13-docstrings)
+- [14. Pure Functions & Side Effects](#14-pure-functions--side-effects)
+  - [Referential Transparency](#referential-transparency)
+- [15. Advanced functools](#15-advanced-functools)
+  - [lru_cache — Memoization](#lru-cache-memoization)
+  - [partial — Specializing Functions](#partial-specializing-functions)
+  - [reduce — Folding a Sequence](#reduce-folding-a-sequence)
+- [16. Function Attributes & Introspection](#16-function-attributes--introspection)
+- [17. The Complete Mental Model](#17-the-complete-mental-model)
+  - [When to Use What](#when-to-use-what)
+  - [The 10 Principles of Function Design](#the-10-principles)
+- [🎯 Final Summary](#final-summary)
 
 ## 📌 Learning Priority
 
@@ -35,11 +75,8 @@ Positional-only `/` and keyword-only `*` params · `functools.partial` · `funct
 **Reference** — Know it exists, look up when needed:
 Tail recursion (Python doesn't optimize it) · `functools.singledispatch` (see decorators module)
 
----
-
-# 📖 Chapter 1 — The Problem Functions Solve
-
-## 🎬 The Story
+<a id="the-problem-functions-solve"></a>
+# The Problem Functions Solve
 
 Imagine you're building a banking app.
 Every time a user makes a transaction, you need to:
@@ -78,9 +115,10 @@ send confirmation (there)          process_transaction()   ← reuse
 
 > 📝 **Practice:** [Q1 — Refactor duplicated code](./practice.md#q1--ch1--refactor-duplicated-code) · [Q2 — Function anatomy](./practice.md#q2--ch2--function-anatomy)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 2 — Anatomy of a Function
+<a id="1-anatomy-of-a-function"></a>
+# 1. Anatomy of a Function
 
 Every function has 5 possible parts.
 Not all are required, but understanding each one deeply matters.
@@ -115,9 +153,10 @@ def send_email(to, subject, body="No content"):
 
 > 📝 **Practice:** [Q2 — Function anatomy](./practice.md#q2--ch2--function-anatomy)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 3 — How Python Executes a Function
+<a id="2-how-python-executes-a-function"></a>
+# 2. How Python Executes a Function
 
 Understanding execution order is what separates beginners from professionals.
 Let's trace every step.
@@ -158,6 +197,7 @@ Step 6:  print(15)
 ─────────────────────────────────────────────────────────────
 ```
 
+<a id="call-stack-visual-model"></a>
 ## The Call Stack — Visual Model
 
 ```
@@ -187,8 +227,7 @@ After add() returns:
 > Variables in `add()` cannot accidentally affect variables in `main`.
 > This isolation is why functions are safe to reuse.
 
----
-
+<a id="stack-frame-contents"></a>
 ## What the Stack Frame Actually Contains
 
 Each stack frame holds more than just your variables:
@@ -228,9 +267,10 @@ print(x)            # [1, 2, 3, 4] — heap object was mutated
 
 > 📝 **Practice:** [Q3 — Call stack trace](./practice.md#q3--ch3--call-stack-trace)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 4 — Parameters & Arguments — All 7 Types
+<a id="3-parameters-arguments--all-7-types"></a>
+# 3. Parameters & Arguments — All 7 Types
 
 This is the chapter most people partially understand.
 By the end of this chapter, you'll know every type, every edge case.
@@ -259,8 +299,6 @@ ARGUMENT   = actual value passed during call        greet("Alice")     ← "Alic
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
----
-
 ## Type 1 — Positional Arguments
 
 Order is everything. First argument → first parameter. Always.
@@ -272,8 +310,6 @@ def describe(animal, action, place):
 describe("cat", "sleeps", "garden")   # The cat sleeps in the garden
 describe("sleeps", "cat", "garden")   # The sleeps cat in the garden ← wrong order!
 ```
-
----
 
 ## Type 2 — Keyword Arguments
 
@@ -289,8 +325,6 @@ describe(place="garden", animal="cat", action="sleeps")
 describe("cat", place="garden", action="sleeps")   # ✓ valid
 describe(animal="cat", "sleeps", "garden")          # ✗ SyntaxError — keyword before positional!
 ```
-
----
 
 ## Type 3 — Default Arguments
 
@@ -313,16 +347,13 @@ def f(a, b, c=10):    ✓  non-defaults first, then defaults
 def f(a=1, b, c=10):  ✗  SyntaxError — b (no default) after a (has default)
 ```
 
----
-
-## ⚠️ Type 3 Edge Case — THE MUTABLE DEFAULT ARGUMENT TRAP
+<a id="the-mutable-default-argument-trap"></a>
+## ⚠️ Type 3 Edge Case — The Mutable Default Argument Trap
 
 > This is the most famous Python gotcha. It has caused real production bugs.
 > Learn this deeply. You will be asked about it.
 
 ```python
-
-
 # What do you expect this to print?
 def add_item(item, cart=[]):
     cart.append(item)
@@ -332,9 +363,6 @@ print(add_item("apple"))    # Expected: ['apple']
 print(add_item("banana"))   # Expected: ['banana']
 print(add_item("cherry"))   # Expected: ['cherry']
 ```
-
-> 📝 **Practice:** [Q10 · mutable-default-argument](../python_practice_questions_100.md#q10--critical--mutable-default-argument) · [Q49 · mutable-default-fix](../python_practice_questions_100.md#q49--thinking--mutable-default-fix)
-
 
 **Actual output:**
 ```
@@ -393,7 +421,7 @@ def f(x, result=None):
     if result is None: result = []
 ```
 
----
+> 📝 **Practice:** [Q10 — Mutable default trap](../python_practice_questions_100.md#q10--critical--mutable-default-argument) · [Q5 — Spot and fix](./practice.md#q5--ch4--mutable-default-arg-trap)
 
 ## Type 4 — *args (Variable Positional Arguments)
 
@@ -416,8 +444,6 @@ nums = [1, 2, 3, 4, 5]
 total(*nums)    # same as total(1, 2, 3, 4, 5)
 ```
 
----
-
 ## Type 5 — **kwargs (Variable Keyword Arguments)
 
 When you don't know what key-value pairs will be passed.
@@ -429,23 +455,16 @@ def create_profile(**info):
         print(f"  {key}: {value}")
 
 create_profile(name="Alice", age=25, city="Mumbai")
-
-
 # name: Alice
 # age: 25
 # city: Mumbai
 ```
-
-> 📝 **Practice:** [Q11 · args-kwargs](../python_practice_questions_100.md#q11--normal--args-kwargs)
-
 
 **Unpacking a dict with `**` in a call:**
 ```python
 data = {"name": "Alice", "age": 25}
 create_profile(**data)    # same as create_profile(name="Alice", age=25)
 ```
-
----
 
 ## Type 6 — Keyword-Only Parameters (after `*`)
 
@@ -457,9 +476,9 @@ def connect(host, port, *, timeout, retries=3):
     #              bare * means: everything after this is keyword-only
     print(f"Connecting to {host}:{port}, timeout={timeout}")
 
-connect("localhost", 8080, timeout=30)           # ✓
+connect("localhost", 8080, timeout=30)            # ✓
 connect("localhost", 8080, timeout=30, retries=5) # ✓
-connect("localhost", 8080, 30)                   # ✗ TypeError: timeout must be keyword
+connect("localhost", 8080, 30)                    # ✗ TypeError: timeout must be keyword
 ```
 
 **Why is this useful?**
@@ -470,8 +489,6 @@ connect("localhost", 8080, 30, 5)   ← What is 30? What is 5? Unclear!
 With keyword-only:
 connect("localhost", 8080, timeout=30, retries=5)  ← Crystal clear!
 ```
-
----
 
 ## Type 7 — Positional-Only Parameters (before `/`)
 
@@ -484,14 +501,13 @@ def power(base, exponent, /):
     #   / means: everything before this is positional-only
     return base ** exponent
 
-power(2, 10)           # ✓  1024
-power(base=2, exponent=10)   # ✗ TypeError: must be positional
+power(2, 10)              # ✓  1024
+power(base=2, exponent=10)  # ✗ TypeError: must be positional
 ```
 
 **Real-world use:** The built-in `len()`, `abs()` etc. use positional-only.
 
----
-
+<a id="complete-parameter-order-rule"></a>
 ## The Complete Parameter Order Rule
 
 When combining all types, there is ONE valid ordering:
@@ -545,11 +561,12 @@ Is the number of values unknown?
                     └── Flexible → regular parameter  def f(x)
 ```
 
-> 📝 **Practice:** [Q4 — Positional/keyword args](./practice.md#q4--ch4--positional--keyword-args) · [Q5 — Mutable default trap](./practice.md#q5--ch4--mutable-default-arg-trap) · [Q6 — *args](./practice.md#q6--ch4--args) · [Q7 — **kwargs](./practice.md#q7--ch4--kwargs) · [Q8 — All 7 param types](./practice.md#q8--ch4--all-7-parameter-types)
+> 📝 **Practice:** [Q4 — Positional/keyword args](./practice.md#q4--ch4--positional--keyword-args) · [Q6 — *args](./practice.md#q6--ch4--args) · [Q7 — **kwargs](./practice.md#q7--ch4--kwargs) · [Q8 — All 7 param types](./practice.md#q8--ch4--all-7-parameter-types)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 5 — The Return Statement — All Behaviors
+<a id="4-the-return-statement--all-behaviors"></a>
+# 4. The Return Statement — All Behaviors
 
 ## Return Does Two Things
 
@@ -568,14 +585,12 @@ def add(a, b):
 result = add(3, 4)    # result = 7
 
 # Scenario 2: Return nothing (implicit None)
-
 def greet(name):
     print(f"Hello, {name}")
     # no return statement
 
 result = greet("Alice")    # prints "Hello, Alice"
 print(result)               # None  ← function returns None!
-
 
 # Scenario 3: Return early (guard clause)
 def divide(a, b):
@@ -598,9 +613,9 @@ def find_first(items, target):
     return -1                # ← only reached if not found
 ```
 
-> 📝 **Practice:** [Q12 · return-none](../python_practice_questions_100.md#q12--thinking--return-none)
+**Common mistake — None comparison:** Use `if result is None:` not `if result == None:`. The `is` operator checks identity. Some objects override `__eq__` such that `== None` can behave unexpectedly. `is None` always works correctly.
 
-
+<a id="return-vs-print"></a>
 ## ⚠️ The Return vs Print Confusion
 
 ```
@@ -630,14 +645,13 @@ print(total * 2)            # 14  ✓
 
 > 📝 **Practice:** [Q9 — Return with early returns](./practice.md#q9--ch5--return-with-early-returns) · [Q10 — Return vs Print](./practice.md#q10--ch5--return-vs-print)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 6 — Scope — The LEGB Rule
+<a id="5-scope--the-legb-rule"></a>
+# 5. Scope — The LEGB Rule
 
 > When Python encounters a variable name, it searches for it in this exact order.
 > Miss one level and you'll be confused for years.
-
-> 📝 **Practice:** [Q91 · predict-output-scope](../python_practice_questions_100.md#q91--logical--predict-output-scope)
 
 ## The LEGB Pyramid
 
@@ -696,9 +710,10 @@ module level:     L→ not found
                   G→ found "global"   → stop
 ```
 
----
+<a id="global-and-nonlocal"></a>
+## global and nonlocal
 
-## The `global` Keyword
+**`global` — reach the module-level scope:**
 
 Without `global`, a function cannot MODIFY a global variable (it can READ it).
 
@@ -727,20 +742,7 @@ increment()
 print(count)    # 2
 ```
 
-**The professional opinion on `global`:**
-```
-Using `global` is usually a design smell.
-If multiple functions need to share state, use a class or pass values explicitly.
-In production code, overuse of `global` is a red flag in code reviews.
-The ONE common exception: module-level configuration constants.
-```
-
----
-
-## The `nonlocal` Keyword
-
-`global` is for global scope.
-`nonlocal` is for enclosing (outer function) scope.
+**`nonlocal` — reach the enclosing (outer function) scope:**
 
 ```python
 def make_counter():
@@ -765,10 +767,6 @@ rst()
 print(inc())    # 1  ← reset worked!
 ```
 
-> 📝 **Practice:** [Q28 · nonlocal](../python_practice_questions_100.md#q28--normal--nonlocal)
-
-## Scope Summary Table
-
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  Variable  │  Where defined     │  Keyword needed to modify? │
@@ -780,8 +778,9 @@ print(inc())    # 1  ← reset worked!
 └──────────────────────────────────────────────────────────────┘
 ```
 
----
+**Common mistake — overusing global:** If multiple functions need to share state, use a class or pass values explicitly. `global` is a design smell — it makes functions harder to test and reason about. In production code reviews, unnecessary `global` is a red flag. The one common exception: module-level configuration constants.
 
+<a id="memory-behavior-by-scope"></a>
 ## Memory Behavior by Scope
 
 Scope isn't just about WHERE Python looks for names — it also determines WHERE the variables live in memory and HOW LONG they survive.
@@ -835,16 +834,14 @@ def make_adder(n):
 add5 = make_adder(5)
 # make_adder() returned — its stack frame is GONE
 # but 'n=5' still lives in a cell on the heap, referenced by add5.__closure__
-
 ```
-
-> 📝 **Practice:** [Q26 · closures](../python_practice_questions_100.md#q26--thinking--closures)
 
 > 📝 **Practice:** [Q11 — LEGB prediction](./practice.md#q11--ch6--legb-prediction) · [Q12 — global and nonlocal](./practice.md#q12--ch6--global-and-nonlocal)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 7 — Functions Are Objects (First-Class Citizens)
+<a id="6-functions-are-objects"></a>
+# 6. Functions Are Objects (First-Class Citizens)
 
 This is the concept that unlocks all advanced Python.
 
@@ -890,7 +887,11 @@ result = add    # forgot parentheses!
 print(result)   # <function add at 0x...>   ← prints the function, not the result!
 ```
 
-## Functions Can Be Passed as Arguments
+<a id="higher-order-functions"></a>
+## Higher-Order Functions
+
+A **higher-order function** is any function that takes a function as argument OR returns a function.
+This is the foundation for decorators, map/filter/reduce, and callback patterns.
 
 ```python
 def apply_twice(func, value):
@@ -901,13 +902,12 @@ def double(x):
 
 print(apply_twice(double, 3))    # double(double(3)) = double(6) = 12
 
-# With lambdas (next chapter):
+# With lambdas:
 print(apply_twice(lambda x: x + 10, 5))    # (5+10)+10 = 25
 ```
 
-## Functions Can Be Returned
-
 ```python
+# Returning a function — factory pattern:
 def make_multiplier(factor):
     def multiply(x):
         return x * factor      # uses 'factor' from outer scope
@@ -922,11 +922,48 @@ print(triple(5))    # 15
 print(times10(5))   # 50
 ```
 
+<a id="function-composition"></a>
+## Function Composition
+
+Combining small, focused functions to build more complex behavior — the output of one function becomes the input of the next.
+
+```python
+def double(x):
+    return x * 2
+
+def add_one(x):
+    return x + 1
+
+def to_string(x):
+    return f"Result: {x}"
+
+# Manual composition (right to left):
+result = to_string(add_one(double(5)))   # double→10, add_one→11, to_string→"Result: 11"
+
+# General compose function:
+def compose(*funcs):
+    """Apply functions right-to-left: compose(f, g)(x) = f(g(x))"""
+    def composed(x):
+        for f in reversed(funcs):
+            x = f(x)
+        return x
+    return composed
+
+transform = compose(to_string, add_one, double)
+print(transform(5))    # "Result: 11"
+```
+
+```
+COMPOSITION PIPELINE:
+  5 ──► double ──► 10 ──► add_one ──► 11 ──► to_string ──► "Result: 11"
+```
+
 > 📝 **Practice:** [Q13 — First-class functions](./practice.md#q13--ch7--first-class-functions) · [Q14 — apply_twice](./practice.md#q14--ch7--apply_twice) · [Q15 — compose()](./practice.md#q15--ch7--compose)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 8 — Lambda Functions
+<a id="7-lambda-functions"></a>
+# 7. Lambda Functions
 
 ## What Is a Lambda?
 
@@ -1014,18 +1051,20 @@ def sort_key(x):
 result = sorted(items, key=sort_key)
 ```
 
+**Common mistake — complex lambda:** Heavy logic in a lambda is a readability trap. If it doesn't fit in one clear expression, use `def`. Lambdas are for throwaway one-liners — sort keys, quick filters, callback slots.
+
 > 📝 **Practice:** [Q16 — Lambda sort](./practice.md#q16--ch8--lambda-sort) · [Q17 — Lambda map/filter](./practice.md#q17--ch8--lambda-with-mapfilter)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 9 — Closures — Functions That Remember
-
-## The Setup
+<a id="8-closures--functions-that-remember"></a>
+# 8. Closures — Functions That Remember
 
 A closure happens when an inner function uses a variable from its outer function,
 and the outer function returns the inner function.
 
-The inner function "closes over" those outer variables — it carries them with it.
+The inner function "closes over" those outer variables — it carries them with it,
+even after the outer function has finished and its stack frame is gone.
 
 ```python
 def make_greeting(language):
@@ -1083,13 +1122,12 @@ print(add5.__closure__)                     # (<cell at 0x...>,)
 print(add5.__closure__[0].cell_contents)    # 5  ← x is stored here!
 ```
 
+<a id="the-late-binding-trap"></a>
 ## ⚠️ The Late Binding Closure Trap
 
 > This is the #2 most famous Python gotcha. It appears in interviews constantly.
 
 ```python
-
-
 # You want 5 functions that each print their loop number:
 functions = []
 for i in range(5):
@@ -1103,9 +1141,6 @@ functions[2]()    # Expected: 2   Got: 4
 functions[3]()    # Expected: 3   Got: 4
 functions[4]()    # Expected: 4   Got: 4  (only this is "correct")
 ```
-
-> 📝 **Practice:** [Q27 · closure-loop-trap](../python_practice_questions_100.md#q27--critical--closure-loop-trap)
-
 
 **Why?**
 ```
@@ -1141,8 +1176,7 @@ functions = [lambda x=i: x for i in range(5)]
 functions[0]()    # 0  ✓
 ```
 
----
-
+<a id="closure-cell-internals"></a>
 ## Closure Cell Internals — How Captured Variables Actually Work
 
 When an inner function captures a variable from its enclosing scope, Python doesn't copy the value. It creates a **cell object** on the heap that both functions share.
@@ -1234,19 +1268,18 @@ inc()   # 1  — shared cell, reset worked
 
 > 📝 **Practice:** [Q18 — Basic closure](./practice.md#q18--ch9--basic-closure) · [Deep dive →](./02_closures_decorators/01_closures_theory.md)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 10 — Decorators — Functions That Wrap Functions
-
-## Building a Decorator From Scratch
-
-Let's understand the problem first.
+<a id="9-decorators--functions-that-wrap-functions"></a>
+# 9. Decorators — Functions That Wrap Functions
 
 You have 5 functions and you want to time how long each takes.
 Without decorators, you add timing code to every function — 5 places.
 Tomorrow you want to also log. That's 10 places.
 
 Decorators let you add behavior to a function without touching its code.
+
+## Building a Decorator From Scratch
 
 ```python
 # Step 1: The basic wrapper pattern
@@ -1311,7 +1344,17 @@ add(3, 4)         # add() took 0.000001s
 multiply(3, 4)    # multiply() took 0.000001s
 ```
 
-## ⚠️ Preserving Function Identity — `functools.wraps`
+```
+DECORATOR ANATOMY:
+  @timer            ← 1. Python sees this
+  def add(a, b):    ← 2. Reads the function definition
+      ...
+                    ← 3. Runs: add = timer(add)
+                    ← 4. 'add' now points to 'wrapper'
+```
+
+<a id="wraps--preserving-metadata"></a>
+## ⚠️ @wraps — Preserving Metadata
 
 ```python
 def timer(func):
@@ -1351,7 +1394,10 @@ print(add.__doc__)     # 'Adds two numbers.'  ✓
 
 > **Rule:** Always use `@wraps(func)` on your wrapper. Always. No exceptions.
 
-## Decorators With Arguments
+**Common mistake — forgetting @wraps:** Without `@wraps(func)`, every decorated function reports `__name__ = 'wrapper'`. This breaks logging, debugging, and `help()` output for your entire codebase.
+
+<a id="decorators-with-arguments"></a>
+## Decorators with Arguments
 
 What if you want `@timer(unit="ms")`?
 You need a decorator factory — a function that returns a decorator.
@@ -1389,6 +1435,7 @@ outer(arguments)                     # @timer(unit="ms")
                   └─ returns → wrapper(*args, **kwargs)  # runs each call
 ```
 
+<a id="stacking-decorators"></a>
 ## Stacking Multiple Decorators
 
 ```python
@@ -1423,6 +1470,7 @@ Equivalent to:  greet = bold(italic(greet))
 Execution order:  bold.wrapper → italic.wrapper → greet → back up
 ```
 
+<a id="real-world-decorator-patterns"></a>
 ## Real-World Decorator Patterns
 
 ```python
@@ -1458,16 +1506,15 @@ def retry(times=3):
 def fetch_data(url):
     ...    # might fail due to network
 
-# 3. Cache/Memoize decorator (next chapter shows functools.lru_cache)
+# 3. Cache/Memoize — see functools.lru_cache in Chapter 15
 ```
 
-> 📝 **Practice:** [Q19 — Basic decorator](./practice.md#q19--ch10--basic-decorator) · [Q31 — retry decorator](./practice.md#q31--mixed--retry-decorator) · [Deep dive →](./02_closures_decorators/02_decorators_theory.md)
+> 📝 **Practice:** [Q19 — Basic decorator](./practice.md#q19--ch10--basic-decorator) · [Q31 — retry decorator](./practice.md#q31--mixed--retry-decorator) · [Q32 — Decorator with arguments](./practice.md#q32--mixed--decorator-with-arguments) · [Deep dive →](./02_closures_decorators/02_decorators_theory.md)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 11 — Recursion — Functions That Call Themselves
-
-## The Mental Model
+<a id="10-recursion--functions-that-call-themselves"></a>
+# 10. Recursion — Functions That Call Themselves
 
 ```
 Recursion is not magic. It's just a function calling itself.
@@ -1503,6 +1550,9 @@ def factorial(n):
 print(factorial(5))    # 120
 ```
 
+**Common mistake — missing base case:** Every recursive function MUST have a base case. Without it, the function calls itself forever until Python raises `RecursionError: maximum recursion depth exceeded` (at ~1000 calls). Always write the base case FIRST before writing the recursive step.
+
+<a id="call-stack-visualization-recursion"></a>
 ## Call Stack Visualization
 
 ```
@@ -1537,6 +1587,7 @@ def deep(n):
 deep(0)    # RecursionError: maximum recursion depth exceeded
 ```
 
+<a id="recursion-vs-iteration"></a>
 ## Recursion vs Iteration — When to Use Which
 
 ```
@@ -1562,97 +1613,54 @@ deep(0)    # RecursionError: maximum recursion depth exceeded
 
 > 📝 **Practice:** [Q20 — Recursion: factorial](./practice.md#q20--ch11--recursion-factorial) · [Q21 — Fix broken recursion](./practice.md#q21--ch11--fix-broken-recursion)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 12 — Generator Functions
+<a id="11-generator-functions"></a>
+# 11. Generator Functions
 
-## The Problem With Regular Functions and Large Data
-
-```python
-# Imagine reading a 10GB log file:
-def read_all_lines(filename):
-    lines = []
-    with open(filename) as f:
-        for line in f:
-            lines.append(line)    # stores ALL 10GB in memory!
-    return lines
-
-# This would crash most systems!
-```
-
-## The Generator Solution
-
-A generator uses `yield` instead of `return`.
-It produces one value at a time, on demand. Memory-efficient.
+A **generator function** uses `yield` instead of `return`. It produces values one at a time — pausing execution at each `yield` and resuming when the caller asks for the next value. This gives O(1) memory regardless of how many values are generated.
 
 ```python
-def read_lines(filename):
-    with open(filename) as f:
-        for line in f:
-            yield line       # pauses here, gives one line, resumes next call
+# Regular function — builds entire list in memory:
+def squares(n):
+    return [x**2 for x in range(n)]   # 1 million items = 8MB
+
+# Generator function — produces one value at a time:
+def squares_lazy(n):
+    for x in range(n):
+        yield x**2                     # pauses here, resumes on next()
+
+gen = squares_lazy(1_000_000)
+print(next(gen))    # 0   ← runs until yield, pauses
+print(next(gen))    # 1   ← resumes, runs until next yield
+# 1 million items = 200 bytes (just the generator object!)
 ```
 
-## How `yield` Works
-
-```python
-def count_up(start, end):
-    current = start
-    while current <= end:
-        yield current       # pause, send value, wait for next()
-        current += 1        # resumes HERE after next() is called
-
-gen = count_up(1, 5)        # creates generator object — nothing runs yet!
-print(type(gen))            # <class 'generator'>
-
-print(next(gen))    # 1   ← runs until yield, pauses
-print(next(gen))    # 2   ← resumes, runs until yield again
-print(next(gen))    # 3
-print(next(gen))    # 4
-print(next(gen))    # 5
-print(next(gen))    # StopIteration exception ← no more values!
+```
+GENERATOR EXECUTION MODEL:
+  squares_lazy(5)
+       │
+  [start]──► yield 0 ──► [pause]
+                              │ next()
+  [resume]──► yield 1 ──► [pause]
+                              │ next()
+  [resume]──► yield 4 ──► [pause]  ...and so on
 ```
 
-## Generator Memory Advantage
+This is a major Python topic. The full depth — iterator protocol (`__iter__` / `__next__`), `yield from`, `send()`, generator pipelines, async generators — lives in the dedicated module.
 
-```
-REGULAR FUNCTION:
-[1][2][3][4][5]...[1000000]   ← ALL values in memory at once
-
-GENERATOR:
-[1]  →  processed  →  [2]  →  processed  →  [3]  → ...
-        only one value in memory at a time!
-```
-
-```python
-# Memory comparison:
-import sys
-
-regular = [x**2 for x in range(1_000_000)]    # list comprehension
-gen_ver = (x**2 for x in range(1_000_000))    # generator expression
-
-print(sys.getsizeof(regular))   # ~8,000,056 bytes (8 MB!)
-print(sys.getsizeof(gen_ver))   # 200 bytes (almost nothing!)
-```
-
-## yield vs return
-
-```
-┌──────────────────────────────────────────────────────────┐
-│  RETURN                        YIELD                     │
-│                                                          │
-│  Exits function completely     Pauses function           │
-│  All state destroyed           State preserved           │
-│  Called once                   Called many times         │
-│  Returns all data at once      Returns one item at time  │
-│  Memory: all data loaded       Memory: one item at time  │
-└──────────────────────────────────────────────────────────┘
-```
+**[→ Deep dive: 11_generators_iterators/theory.md](../11_generators_iterators/theory.md)**
+- Iterator protocol and lazy evaluation
+- `yield from` and delegation
+- `send()` — generators as coroutines
+- Generator pipelines for O(1) memory processing
 
 > 📝 **Practice:** [Q22 — Generator: lazy squares](./practice.md#q22--ch12--generator-lazy-squares) · [Q23 — Generator pipeline](./practice.md#q23--ch12--generator-pipeline)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 13 — Type Annotations
+<a id="12-type-annotations"></a>
+# 12. Type Annotations
 
 Python is dynamically typed — you don't have to declare types.
 But you CAN add type hints for readability, IDE support, and static analysis.
@@ -1710,9 +1718,10 @@ def find(x: int | None) -> str | None:
 
 > 📝 **Practice:** [Q24 — Type annotations](./practice.md#q24--ch13--type-annotations)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 14 — Docstrings
+<a id="13-docstrings"></a>
+# 13. Docstrings
 
 A docstring is a string literal as the very first statement in a function.
 It documents what the function does, its parameters, and return value.
@@ -1751,9 +1760,10 @@ help(calculate_tax)    # formatted output with full docstring
 
 > 📝 **Practice:** [Q25 — Google-style docstring](./practice.md#q25--ch14--google-style-docstring)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 15 — Pure Functions & Side Effects
+<a id="14-pure-functions--side-effects"></a>
+# 14. Pure Functions & Side Effects
 
 ## What Is a Pure Function?
 
@@ -1805,15 +1815,50 @@ CACHING:     pure functions can be safely memoized — same input → same outpu
 RELIABILITY: pure functions are predictable — no surprises
 ```
 
+<a id="referential-transparency"></a>
+## Referential Transparency
+
+A function is **referentially transparent** if you can replace any call to it with its return value anywhere in the program without changing the program's behavior.
+
+```python
+# Referentially transparent:
+def add(a, b):
+    return a + b
+
+result = add(3, 4)    # → 7
+# You can replace `add(3, 4)` with `7` everywhere — program behaves identically.
+# This is why pure functions are easy to reason about and cache.
+
+# NOT referentially transparent:
+def get_user_count():
+    return db.query("SELECT COUNT(*) FROM users")
+# Returns 5 now, 6 tomorrow — depends on external state.
+# Cannot substitute with a fixed value.
+```
+
+```
+REFERENTIALLY TRANSPARENT?
+                                        │
+  Same input → same output?  ──── YES ──┤
+  No external state read?    ──── YES ──┴──► YES → can memoize, parallelize, substitute
+                                        │
+  Any of the above fails? ──────────────┴──► NO  → must treat as effectful
+```
+
+Pure functions are always referentially transparent. This property is what makes `functools.lru_cache` safe — if a function isn't pure, caching its result would return stale data.
+
 > 📝 **Practice:** [Q26 — Pure vs impure](./practice.md#q26--ch15--pure-vs-impure) · [Deep dive →](./01_functional_programming/practice.md)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 16 — Advanced functools
+<a id="15-advanced-functools"></a>
+# 15. Advanced functools
 
+<a id="lru-cache-memoization"></a>
 ## `functools.lru_cache` — Memoization Made Easy
 
-Memoization = caching function results so repeated calls with same args are instant.
+**Memoization** = caching function results so repeated calls with same args are instant.
+Safe to use on pure (referentially transparent) functions only.
 
 ```python
 from functools import lru_cache
@@ -1826,7 +1871,7 @@ def fib(n):
 
 # fib(40) makes 2+ billion redundant calls!
 
-# With lru_cache — computed each value only once:
+# With lru_cache — each value computed only once:
 @lru_cache(maxsize=None)    # None = unlimited cache
 def fib_fast(n):
     if n < 2:
@@ -1858,7 +1903,10 @@ fib(5)                             fib(5)
 15 calls total                      5 calls total
 ```
 
-## `functools.partial` — Pre-filling Arguments
+<a id="partial-specializing-functions"></a>
+## `functools.partial` — Specializing Functions
+
+`partial` creates a new function with some arguments pre-filled. It's the tool for specializing a general function without writing a new one.
 
 ```python
 from functools import partial
@@ -1874,19 +1922,63 @@ print(square(5))    # 25
 print(cube(3))      # 27
 
 # Real use case — pre-configured print:
-from functools import partial
 debug_print = partial(print, "[DEBUG]", end="\n\n")
 debug_print("User logged in")    # [DEBUG] User logged in
                                   # (with double newline)
 ```
 
+<a id="reduce-folding-a-sequence"></a>
+## `functools.reduce` — Folding a Sequence
+
+`reduce` applies a function cumulatively to all items in a sequence, collapsing it into a single value — like "folding" a list from left to right.
+
+```python
+from functools import reduce
+
+# reduce(func, [a, b, c, d]) = func(func(func(a, b), c), d)
+
+# Sum using reduce:
+total = reduce(lambda acc, x: acc + x, [1, 2, 3, 4, 5])
+# → ((((1+2)+3)+4)+5) = 15
+
+# Product:
+product = reduce(lambda acc, x: acc * x, [1, 2, 3, 4, 5])
+# → 120
+
+# Find maximum:
+maximum = reduce(lambda a, b: a if a > b else b, [3, 1, 4, 1, 5, 9, 2])
+# → 9
+```
+
+```
+REDUCE VISUALIZATION:
+  [1, 2, 3, 4, 5]  with  lambda acc, x: acc + x
+
+  Step 1:  acc=1,  x=2  → 3
+  Step 2:  acc=3,  x=3  → 6
+  Step 3:  acc=6,  x=4  → 10
+  Step 4:  acc=10, x=5  → 15
+  Result: 15
+```
+
+**When to use reduce vs comprehension:**
+```python
+# Use reduce for custom fold operations:
+reduce(lambda d, kv: {**d, kv[0]: kv[1]}, [("a",1),("b",2)], {})  # dict from pairs
+
+# Prefer sum/max/min for standard aggregations (clearer):
+sum([1,2,3,4,5])          # ← prefer this over reduce for simple sums
+max([3,1,4,1,5,9])        # ← prefer this over reduce for max
+```
+
 > 📝 **Practice:** [Q27 — lru_cache](./practice.md#q27--ch16--lru_cache) · [Q28 — partial](./practice.md#q28--ch16--functools.partial) · [Itertools/Functools deep dive →](./03_itertools_functools/practice.md)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 17 — Function Attributes & Introspection
+<a id="16-function-attributes--introspection"></a>
+# 16. Function Attributes & Introspection
 
-Functions are objects and carry metadata you can inspect.
+Functions are objects and carry metadata you can inspect at runtime.
 
 ```python
 def greet(name: str, greeting: str = "Hello") -> str:
@@ -1899,21 +1991,46 @@ print(greet.__module__)       # '__main__'
 print(greet.__annotations__)  # {'name': <class 'str'>, 'greeting': <class 'str'>, 'return': <class 'str'>}
 print(greet.__defaults__)     # ('Hello',)
 print(greet.__code__.co_varnames)  # ('name', 'greeting')
+```
 
-# Inspect module for deeper introspection:
+**Deeper introspection with the `inspect` module:**
+
+```python
 import inspect
 
 sig = inspect.signature(greet)
 for name, param in sig.parameters.items():
     print(f"{name}: default={param.default}, kind={param.kind.name}")
+
+# name: default=<class 'inspect._empty'>, kind=POSITIONAL_OR_KEYWORD
+# greeting: default=Hello, kind=POSITIONAL_OR_KEYWORD
+```
+
+**Real-world use — building a framework that reads function signatures:**
+```python
+import inspect
+
+def auto_call(func, available_data: dict):
+    """Call func with only the arguments it needs from available_data."""
+    sig = inspect.signature(func)
+    needed = {k: v for k, v in available_data.items() if k in sig.parameters}
+    return func(**needed)
+
+def process(name, age):
+    return f"{name} is {age}"
+
+data = {"name": "Alice", "age": 30, "city": "Mumbai"}  # extra key ignored
+auto_call(process, data)    # "Alice is 30"
 ```
 
 > 📝 **Practice:** [Q29 — Introspection](./practice.md#q29--ch17--introspection)
 
----
+> [↑ Back to Top](#top)
 
-# 📖 Chapter 18 — The Complete Mental Model
+<a id="17-the-complete-mental-model"></a>
+# 17. The Complete Mental Model
 
+<a id="when-to-use-what"></a>
 ## When to Use What
 
 ```
@@ -1934,6 +2051,7 @@ for name, param in sig.parameters.items():
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
+<a id="the-10-principles"></a>
 ## The 10 Principles of Function Design
 
 ```
@@ -1949,39 +2067,9 @@ for name, param in sig.parameters.items():
 10. TYPE HINTS              Annotate for readability and tooling support
 ```
 
-## The Most Common Mistakes
+> [↑ Back to Top](#top)
 
-```python
-# ❌ Mistake 1: Mutable default argument
-def bad(items=[]):  ...                # USE: def bad(items=None):
-
-# ❌ Mistake 2: Late binding in closure
-funcs = [lambda: i for i in range(5)] # USE: lambda i=i: i
-
-# ❌ Mistake 3: Forgetting @wraps
-def my_decorator(func):
-    def wrapper(*args, **kwargs): ...  # USE: @wraps(func) on wrapper
-    return wrapper
-
-# ❌ Mistake 4: Calling vs referencing a function
-result = my_func                       # stores function — nothing runs
-result = my_func()                     # calls function — runs!
-
-# ❌ Mistake 5: Using global when you shouldn't
-global counter                         # use class or pass/return instead
-
-# ❌ Mistake 6: No base case in recursion
-def infinite(n): return infinite(n-1) # RecursionError! Missing base case
-
-# ❌ Mistake 7: Checking for None with ==
-if result == None: ...                 # USE: if result is None:
-
-# ❌ Mistake 8: Heavy logic in lambda
-f = lambda x: (x**2 if x>0 else abs(x)*3 + x/2)  # USE def for clarity
-```
-
----
-
+<a id="final-summary"></a>
 # 🎯 Final Summary
 
 ```
@@ -2007,56 +2095,32 @@ f = lambda x: (x**2 if x>0 else abs(x)*3 + x/2)  # USE def for clarity
 │  lru_cache             Cache results                "remember answers"   │
 │  partial               Pre-fill arguments           "specialize general" │
 │  Pure function         No side effects              "math function"      │
+│  Referential transp.   Replaceable by its value     "no surprises"       │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
 > 📝 **Practice:** [Q30 — Capstone](./practice.md#q30--ch18--capstone) · [Q34 — Debug TypeError](./practice.md#q34--mixed--debug-typeerror) · [Q35 — Rate limiter](./practice.md#q35--mixed--rate-limiter-using-closures)
 
----
-
-## ⚡ What's Next — Generator Functions
-
-A **generator function** is a special function that uses `yield` instead of `return`. Every concept you've learned here — closures, first-class functions, LEGB scope — applies directly to generators. The difference: a generator function returns a lazy iterator that produces values one at a time instead of all at once.
-
-```python
-# Regular function — returns all values at once
-def squares(n):
-    return [x**2 for x in range(n)]   # ← builds entire list in memory
-
-# Generator function — produces one value at a time
-def squares_lazy(n):
-    for x in range(n):
-        yield x**2                     # ← suspends here, resumes on next()
-
-# 1 million items: list = 8MB, generator = 200 bytes
-```
-
-This is a major Python topic — streaming ETL, infinite sequences, pipelines, async generators, and the full iterator protocol all live there.
-
-**[→ Deep dive: 11_generators_iterators](../11_generators_iterators/theory.md)**
-- Iterator protocol (`__iter__` / `__next__`)
-- `yield from` and delegation
-- `send()` — generators as coroutines
-- Generator pipelines for O(1) memory processing
-- 15 production patterns
-
----
-
 # 🔁 Navigation
-
-| | |
-|---|---|
-| ⬅️ Previous | [03 — Data Types](../03_data_types/theory.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🎤 Interview Prep | [interview.md](./interview.md) |
-| 💻 Practice | [practice.md](./practice.md) |
-| ➡️ Next | [05 — OOP](../05_oops/theory.md) |
-| 🏠 Home | [README](../README.md) |
-
----
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Data Types — Interview Q&A](../03_data_types/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [03_data_types → theory.md](../03_data_types/theory.md) |
+| ➡ Next Module | [05_oops → theory.md](../05_oops/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Functional Programming](./01_functional_programming/theory.md) · [Closures & Decorators](./02_closures_decorators/01_closures_theory.md) · [Itertools & Functools](./03_itertools_functools/theory.md) · [Generators & Iterators →](../11_generators_iterators/theory.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[11_generators_iterators →](../11_generators_iterators/theory.md) · [10_decorators →](../10_decorators/theory.md) · [13_concurrency →](../13_concurrency/theory.md)
+
+**Jump to specific topics in other files:**
+- Mutable default arg trap → [04_functions/theory.md#the-mutable-default-argument-trap](./theory.md#the-mutable-default-argument-trap)
+- LEGB scope → [04_functions/theory.md#5-scope--the-legb-rule](./theory.md#5-scope--the-legb-rule)
+- Late binding closure → [04_functions/theory.md#the-late-binding-trap](./theory.md#the-late-binding-trap)
+- Generators lazy evaluation → [11_generators_iterators/theory.md](../11_generators_iterators/theory.md)
+- GIL → [13_concurrency/theory.md](../13_concurrency/theory.md)
+
+> [↑ Back to Top](#top)

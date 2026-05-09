@@ -6,6 +6,24 @@
 
 ---
 
+## Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | basics — Verify a Method Was Called | 🟢 |
+| [Q2](#q2) | MagicMock vs Mock — Dunder Methods | 🟡 |
+| [Q3](#q3) | patch decorator — Mock a Function in Another Module | 🟡 |
+| [Q4](#q4) | return_value — Control What a Mock Returns | 🟡 |
+| [Q5](#q5) | side_effect — Raise an Exception from a Mock | 🟡 |
+| [Q6](#q6) | side_effect as list — Return Different Values Each Call | 🟡 |
+| [Q7](#q7) | patch.object — Patch a Method on a Class Instance | 🟡 |
+| [Q8](#q8) | assert_called_once_with — Verify Exact Arguments | 🟡 |
+| [Q9](#q9) | spec — Mock That Respects the Real Interface | 🟡 |
+| [Q10](#q10) | patch.dict — Mock os.environ Safely | 🟠 |
+| [Q11](#q11) | patch the right target — Where to Patch | 🟠 |
+| [Q12](#q12) | Capstone — Test a Payment Service with Mocked External API | 🟠 |
+
+<a id="q1"></a>
 ### Q1 🟢 · basics — Verify a Method Was Called
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
@@ -41,6 +59,7 @@ m.close.assert_not_called()                        # never called
 
 ---
 
+<a id="q2"></a>
 ### Q2 🟡 · MagicMock vs Mock — Dunder Methods
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
@@ -90,6 +109,7 @@ m.__exit__.assert_called_once()
 
 ---
 
+<a id="q3"></a>
 ### Q3 🟡 · patch decorator — Mock a Function in Another Module
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
@@ -138,6 +158,7 @@ def test_get_weather(mock_get):
 
 ---
 
+<a id="q4"></a>
 ### Q4 🟡 · return_value — Control What a Mock Returns
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
@@ -197,6 +218,7 @@ def test_notify_user():
 
 ---
 
+<a id="q5"></a>
 ### Q5 🟡 · side_effect — Raise an Exception from a Mock
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
@@ -238,6 +260,7 @@ def test_notify_user_propagates_db_error():
 
 ---
 
+<a id="q6"></a>
 ### Q6 🟡 · side_effect as list — Return Different Values Each Call
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
@@ -287,6 +310,7 @@ def test_welcome_emails_skips_missing_users():
 
 ---
 
+<a id="q7"></a>
 ### Q7 🟡 · patch.object — Patch a Method on a Class Instance
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
@@ -335,6 +359,7 @@ def test_patch_object():
 
 ---
 
+<a id="q8"></a>
 ### Q8 🟡 · assert_called_once_with — Verify Exact Arguments
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
@@ -391,6 +416,7 @@ def test_exact_arguments():
 
 ---
 
+<a id="q9"></a>
 ### Q9 🟡 · spec — Mock That Respects the Real Interface
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
@@ -449,6 +475,7 @@ def test_autospec_checks_signatures():
 
 ---
 
+<a id="q10"></a>
 ### Q10 🟠 · patch.dict — Mock os.environ Safely
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
@@ -502,6 +529,7 @@ def test_env_restored_after_test():
 
 ---
 
+<a id="q11"></a>
 ### Q11 🟠 · patch the right target — Where to Patch
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
@@ -563,6 +591,7 @@ def test_check_file_right(mock_exists):
 
 ---
 
+<a id="q12"></a>
 ### Q12 🟠 · Capstone — Test a Payment Service with Mocked External API
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)

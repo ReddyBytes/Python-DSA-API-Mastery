@@ -1,11 +1,54 @@
+<a id="top"></a>
 # 🧙 Advanced Python — Theory
 
 > *"Most developers use Python. Advanced Python engineers understand how it works.*
 > *Every operator, every built-in, every for-loop runs through a protocol.*
 > *Once you see those protocols, the language becomes transparent."*
 
+## 📖 Table of Contents
+
+- [1. Dunder Methods — Python's Protocol System](#1-dunder-methods--pythons-protocol-system)
+- [2. Representation — `__str__`, `__repr__`, `__format__`](#2-representation----__str__-__repr__-__format__)
+- [3. Comparison and Hashing](#3-comparison-and-hashing)
+  - [The Comparison Protocol](#the-comparison-protocol)
+  - [__hash__ and Its Relationship with __eq__](#__hash__-and-its-relationship-with-__eq__)
+- [4. Numeric and Operator Overloading](#4-numeric-and-operator-overloading)
+- [5. Container Protocol](#5-container-protocol)
+  - [__bool__ — Truthiness](#__bool__--truthiness)
+- [6. `__slots__` — Memory Optimization](#6-__slots__--memory-optimization)
+- [7. Descriptors — The Power Behind Properties](#7-descriptors--the-power-behind-properties)
+  - [Data vs Non-Data Descriptors](#data-vs-non-data-descriptors)
+  - [How @property Works Internally](#how-property-works-internally)
+  - [Custom Validation Descriptor](#custom-validation-descriptor)
+  - [How Functions Become Methods](#how-functions-become-methods)
+- [8. Metaclasses — Classes of Classes](#8-metaclasses--classes-of-classes)
+  - [Custom Metaclass — Registry Pattern](#custom-metaclass--registry-pattern)
+  - [Enforcing Interface with Metaclass](#enforcing-interface-with-metaclass)
+  - [__init_subclass__ — Modern Alternative](#__init_subclass__--modern-alternative)
+- [9. Dataclasses — Generated Boilerplate](#9-dataclasses--generated-boilerplate)
+- [10. Abstract Base Classes (ABCs)](#10-abstract-base-classes-abcs)
+- [11. Enums — Named Constants](#11-enums--named-constants)
+- [12. Introspection — Looking Inside Objects](#12-introspection--looking-inside-objects)
+- [13. Typing and Protocols](#13-typing-and-protocols)
+  - [🔥 Summary Table](#-summary-table)
+
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+Dunder methods (`__repr__`, `__str__`, `__eq__`, `__hash__`, `__len__`, `__getitem__`) · Descriptor protocol (`__get__`, `__set__`, `__delete__`) · `@property` internals
+
+**Should Learn** — Important for real projects, comes up regularly:
+`__getattr__` vs `__getattribute__` · `__init_subclass__` · `__slots__` deep dive · `type()` for dynamic class creation · ABCs and `@abstractmethod`
+
+**Good to Know** — Useful in specific situations:
+`__class_getitem__` · `__missing__` · `__reduce__` / pickle protocol · Virtual subclasses (`ABC.register()`) · `__sizeof__`
+
+**Reference** — Know it exists, look up when needed:
+`__prepare__` · Metaclass conflicts · Buffer protocol / `memoryview` · `linecache` · Code object introspection
+
 ---
 
+<a id="the-story-building-a-framework"></a>
 ## 🎬 The Story: Building a Framework
 
 Imagine you're building a data analysis library. Users should be able to write:
@@ -29,66 +72,77 @@ This is what advanced Python is: **understanding and using the protocols that po
 
 ---
 
-## 📌 Learning Priority
+<a id="1-dunder-methods--pythons-protocol-system"></a>
+# 1. Dunder Methods — Python's Protocol System
 
-**Must Learn** — Core concept, daily use, interview essential:
-Dunder methods (`__repr__`, `__str__`, `__eq__`, `__hash__`, `__len__`, `__getitem__`) · Descriptor protocol (`__get__`, `__set__`, `__delete__`) · `@property` internals
+Think of dunder methods like electrical sockets on a wall. The socket shape is fixed (`__add__`, `__len__`, `__str__`) — Python defines the shape. You decide what your class plugs in. Write `__add__` and suddenly your object can use the `+` operator, just like built-in numbers do. You're not overriding Python — you're extending it by honoring its contracts.
 
-**Should Learn** — Important for real projects, comes up regularly:
-`__getattr__` vs `__getattribute__` · `__init_subclass__` · `__slots__` deep dive · `type()` for dynamic class creation · ABCs and `@abstractmethod`
-
-**Good to Know** — Useful in specific situations:
-`__class_getitem__` · `__missing__` · `__reduce__` / pickle protocol · Virtual subclasses (`ABC.register()`) · `__sizeof__`
-
-**Reference** — Know it exists, look up when needed:
-`__prepare__` · Metaclass conflicts · Buffer protocol / `memoryview` · `linecache` · Code object introspection
-
----
-
-## 🔑 Chapter 1: Dunder Methods — Python's Protocol System
-
-> 📝 **Practice:** [Q1–Q10 · dunder methods](./practice.md#q1--repr-and-str) &nbsp;|&nbsp; **Deep dive:** [01_dunder_methods/theory.md](./01_dunder_methods/theory.md)
-
-**Dunder** = **D**ouble **under**score. Python's way of defining object behaviour through well-known method names that the interpreter calls automatically.
-
-### The Fundamental Insight
-
-When you write `a + b`, Python doesn't call a method named `add(a, b)`. Instead it calls `a.__add__(b)`. This means **any class can define what `+` means for its objects**.
+**Dunder** = **D**ouble **under**score. Python's way of defining object behaviour through well-known method names that the interpreter calls automatically. When you write `a + b`, Python doesn't call a method named `add(a, b)`. Instead it calls `a.__add__(b)`. This means **any class can define what `+` means for its objects**.
 
 ```
-PYTHON SYNTAX     →    DUNDER CALL
-──────────────────────────────────────────────────────────
-len(obj)          →    obj.__len__()
-obj[key]          →    obj.__getitem__(key)
-obj[key] = val    →    obj.__setitem__(key, val)
-del obj[key]      →    obj.__delitem__(key)
-x in obj          →    obj.__contains__(x)
-for x in obj      →    iter(obj).__next__() via obj.__iter__()
-obj + other       →    obj.__add__(other)
-obj == other      →    obj.__eq__(other)
-str(obj)          →    obj.__str__()
-repr(obj)         →    obj.__repr__()
-bool(obj)         →    obj.__bool__()
-obj()             →    obj.__call__()
-with obj          →    obj.__enter__(), obj.__exit__()
-abs(obj)          →    obj.__abs__()
-hash(obj)         →    obj.__hash__()
+┌──────────────────── Python Syntax → Dunder Call ─────────────────────┐
+│                                                                       │
+│  PYTHON SYNTAX       →    DUNDER CALL                                │
+│  ──────────────────────────────────────────────────────              │
+│  len(obj)            →    obj.__len__()                              │
+│  obj[key]            →    obj.__getitem__(key)                       │
+│  obj[key] = val      →    obj.__setitem__(key, val)                  │
+│  del obj[key]        →    obj.__delitem__(key)                       │
+│  x in obj            →    obj.__contains__(x)                        │
+│  for x in obj        →    iter(obj).__next__() via obj.__iter__()    │
+│  obj + other         →    obj.__add__(other)                         │
+│  obj == other        →    obj.__eq__(other)                          │
+│  str(obj)            →    obj.__str__()                              │
+│  repr(obj)           →    obj.__repr__()                             │
+│  bool(obj)           →    obj.__bool__()                             │
+│  obj()               →    obj.__call__()                             │
+│  with obj            →    obj.__enter__(), obj.__exit__()            │
+│  abs(obj)            →    obj.__abs__()                              │
+│  hash(obj)           →    obj.__hash__()                             │
+│                                                                       │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
 This table IS Python's object model. Learn it and Python becomes predictable.
 
+⚠️ **Common Mistake:** Naming a method `add()` instead of `__add__()`. Python never calls `add()` automatically — it only honors the exact dunder names.
+
+💡 **Hint:** When you're not sure which dunder Python calls for an operation, check `help(operator)` or the Python data model docs. Every operator has a documented dunder.
+
+🔍 [Visual: Python data model dunder methods map](https://www.google.com/search?q=python+data+model+dunder+methods+protocol+diagram)
+
+📝 **Practice:** [Q1–Q10 · dunder methods](./practice.md#q1--repr-and-str) | **Deep dive:** [01_dunder_methods/theory.md](./01_dunder_methods/theory.md)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 📝 Chapter 2: Representation — `__str__`, `__repr__`, `__format__`
+<a id="2-representation----__str__-__repr__-__format__"></a>
+# 2. Representation — `__str__`, `__repr__`, `__format__`
 
-> 📝 **Practice:** [Q1 · repr and str](./practice.md#q1--repr-and-str)
-
-These three serve different audiences:
+Imagine you have a box and you need to describe it to two different people. To a customer, you say "a red shoebox, size 10." To a warehouse technician, you say "SKU-4421, 30cm × 15cm × 12cm, color=red." Same box, two different descriptions for two different audiences. That's exactly the difference between `__str__` and `__repr__` — same object, different descriptions for users vs developers.
 
 ```
-__repr__  → developer-facing, unambiguous, should be copy-paste runnable
+__repr__  → developer-facing, unambiguous, ideally copy-paste runnable
 __str__   → user-facing, human-readable, doesn't need to be precise
 __format__ → how the object renders inside f-strings with format specs
+```
+
+The **fallback chain:**
+```
+┌────────────────────── Representation Fallback Chain ──────────────────┐
+│                                                                        │
+│  str(obj)   → obj.__str__()                                           │
+│               → if not defined: falls back to obj.__repr__()          │
+│               → if not defined: <ClassName at 0x...>                  │
+│                                                                        │
+│  repr(obj)  → obj.__repr__()                                          │
+│               → if not defined: <ClassName at 0x...>                  │
+│                                                                        │
+│  f"{obj}"   → obj.__format__("")                                      │
+│               → if not defined: falls back to str(obj)               │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
 ```python
@@ -100,19 +154,6 @@ repr(dt)    # datetime.datetime(2025, 3, 8, 14, 30)   ← copy-pasteable
 str(dt)     # 2025-03-08 14:30:00                      ← readable
 
 f"{dt:%Y/%m/%d}"   # 2025/03/08  ← custom format spec via __format__
-```
-
-**The fallback chain:**
-```
-str(obj)  → calls obj.__str__()
-           → if not defined: falls back to obj.__repr__()
-           → if not defined: falls back to object's default: <ClassName at 0x...>
-
-repr(obj) → calls obj.__repr__()
-           → if not defined: <ClassName at 0x...>
-
-f"{obj}"  → calls obj.__format__("")
-           → if not defined: falls back to str(obj)
 ```
 
 **Implementing all three:**
@@ -149,13 +190,23 @@ f"{v:polar}"      # "|5.00|∠53.1°"
 
 **Rule:** Always implement `__repr__`. Implement `__str__` only when a different user-facing format makes sense.
 
+⚠️ **Common Mistake:** Making `__repr__` the same as `__str__`. They serve different audiences. `repr` must be unambiguous and ideally eval-able; `str` should be readable.
+
+💡 **Hint:** In the REPL and `print()` on a list of objects, Python calls `__repr__` on the items inside — not `__str__`. So `repr` is what you see in `[v1, v2, v3]`.
+
+📝 **Practice:** [Q1 · repr and str](./practice.md#q1--repr-and-str)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## ⚖️ Chapter 3: Comparison and Hashing
+<a id="3-comparison-and-hashing"></a>
+# 3. Comparison and Hashing
 
-> 📝 **Practice:** [Q3 · eq and hash](./practice.md#q3--eq-and-hash) · [Q4 · ordering](./practice.md#q4--total-ordering)
+Think of comparing two employees at a company. HR says two employees are "the same" if they share the same employee ID — not the same name, same email, or same salary. How you define "same" is entirely up to you. Python lets you define exactly this: what makes two objects of your class equal, and how to generate a consistent fingerprint (hash) from that equality.
 
-### The Comparison Protocol
+<a id="the-comparison-protocol"></a>
+## The Comparison Protocol
 
 ```python
 class Temperature:
@@ -173,10 +224,6 @@ class Temperature:
         if not isinstance(other, Temperature):
             return NotImplemented
         return self.celsius < other.celsius
-
-    def __le__(self, other): ...
-    def __gt__(self, other): ...
-    def __ge__(self, other): ...
 ```
 
 **`functools.total_ordering` — define two, get all six:**
@@ -205,9 +252,12 @@ t1 <= t2   # True
 sorted([t2, t1])   # [Temperature(20), Temperature(30)]
 ```
 
-### `__hash__` and Its Relationship with `__eq__`
+⚠️ **Common Mistake:** Returning `False` instead of `NotImplemented` when the other operand is an unknown type. `NotImplemented` tells Python "try the other object's method." `False` silently says "they're not equal" — which can mask bugs.
 
-**The critical rule:** objects that compare equal must have the same hash.
+<a id="__hash__-and-its-relationship-with-__eq__"></a>
+## `__hash__` and Its Relationship with `__eq__`
+
+The **critical rule:** objects that compare equal must have the same hash.
 
 ```python
 # Python enforces this:
@@ -230,13 +280,33 @@ p = Point(1, 2)
 {p: "val"}    # ✅ usable as dict key
 ```
 
+```
+┌────────────────── __eq__ / __hash__ Compatibility Rules ──────────────┐
+│                                                                        │
+│  Define __eq__                    → __hash__ set to None (unhashable) │
+│  Define __eq__ + __hash__         → fully hashable, usable in set/dict│
+│  Define neither                   → uses default identity comparison  │
+│  @dataclass(frozen=True)          → auto-generates both               │
+│                                                                        │
+│  Rule: if a == b then hash(a) == hash(b)  MUST hold always           │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+💡 **Hint:** Hash from immutable fields only. If a field can change after construction, don't include it in `__hash__` — the object would disappear from a set after mutation.
+
+📝 **Practice:** [Q3 · eq and hash](./practice.md#q3--eq-and-hash) · [Q4 · ordering](./practice.md#q4--total-ordering)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## ➕ Chapter 4: Numeric and Operator Overloading
+<a id="4-numeric-and-operator-overloading"></a>
+# 4. Numeric and Operator Overloading
 
-> 📝 **Practice:** [Q6 · add/radd](./practice.md#q6--add-and-radd) · [Q7 · mul/rmul](./practice.md#q7--mul-and-rmul)
+Imagine a currency class. You want to write `$10 + $5` and get `$15`. But what about `10 + $5` — where the left side is a plain number? Python has a fallback system: if the left operand doesn't know how to handle the right one, Python flips the operation and tries the right operand's "reflected" method. This is why Python has `__add__` AND `__radd__` — the reflected version catches the cases where your object is on the right side.
 
-### The Arithmetic Protocol — Three Versions of Each
+**Three versions of each arithmetic operator:**
 
 ```
 __add__(self, other)    → self + other  (left operand)
@@ -289,13 +359,20 @@ v1 * 2     # Vector(2, 4)
 abs(v1)    # 2.236...
 ```
 
+⚠️ **Common Mistake:** Forgetting `__radd__` / `__rmul__`. If you only define `__add__`, then `3 + v` fails with `TypeError` even though `v + 3` works fine.
+
+💡 **Hint:** For commutative operations (addition, multiplication), `__radd__` just delegates to `__add__`. For non-commutative ones (subtraction, division), implement separate logic.
+
+📝 **Practice:** [Q6 · add/radd](./practice.md#q6--add-and-radd) · [Q7 · mul/rmul](./practice.md#q7--mul-and-rmul)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 📦 Chapter 5: Container Protocol
+<a id="5-container-protocol"></a>
+# 5. Container Protocol
 
-> 📝 **Practice:** [Q2 · len/bool](./practice.md#q2--len-and-bool) · [Q5 · contains/iter](./practice.md#q5--contains-and-iter) · [Q10 · getitem/setitem](./practice.md#q10--getitem-and-setitem)
-
-Make your class behave like a sequence or mapping:
+Think of a custom bookshelf class. You want users to ask "how many books?" with `len(shelf)`, find a book with `shelf[3]`, check membership with `"Python" in shelf`, and loop with `for book in shelf`. None of this requires inheriting from `list`. You just implement the right dunder methods and Python's built-in functions and syntax start working with your class automatically.
 
 ```python
 class Dataset:
@@ -337,15 +414,21 @@ ds[1:3]         # [20, 30]
 20 in ds        # True
 list(ds)        # [10, 20, 30, 40]
 for x in ds: print(x)
-
-# Python infers these from __len__ + __getitem__:
-# __iter__ (sequential integer indexing)
-# __contains__ (linear search)
-# __reversed__
-# Sequence protocol registration with collections.abc
 ```
 
-### `__bool__` — Truthiness
+**What Python infers automatically from `__len__` + `__getitem__` alone:**
+```
+__iter__      → sequential integer indexing (0, 1, 2, ...)
+__contains__  → linear search via iteration
+__reversed__  → reverse indexing
+```
+
+⚠️ **Common Mistake:** Defining `__iter__` that returns `self` without a `__next__` method. The object returned by `__iter__` must have `__next__`. Either return `iter(self._data)` (delegate to list's iterator) or implement `__next__` and return `self`.
+
+<a id="__bool__--truthiness"></a>
+## `__bool__` — Truthiness
+
+Python checks `__bool__` first. If not defined, it falls back to `__len__`. Only if neither exists does it default to `True`.
 
 ```python
 class Container:
@@ -360,15 +443,31 @@ class Container:
         return self._active and len(self) > 0
 ```
 
+```
+┌─────────── Truthiness Resolution Order ────────────┐
+│                                                     │
+│  bool(obj)                                          │
+│    1. obj.__bool__()    ← check first               │
+│    2. obj.__len__()     ← fallback: 0=False         │
+│    3. True              ← final fallback            │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
+
+💡 **Hint:** Empty containers should be falsy (`[]`, `{}`, `""` are all `False`). Your custom container should follow the same convention — implement `__len__` and Python handles the rest.
+
+📝 **Practice:** [Q2 · len/bool](./practice.md#q2--len-and-bool) · [Q5 · contains/iter](./practice.md#q5--contains-and-iter) · [Q10 · getitem/setitem](./practice.md#q10--getitem-and-setitem)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 🔧 Chapter 6: [`__slots__`](../05_oops/15_slots.md) — Memory Optimization
+<a id="6-__slots__--memory-optimization"></a>
+# 6. `__slots__` — Memory Optimization
 
-> 📝 **Practice:** [Q25 · slots memory](./practice.md#q25--slots-memory) · [Q26 · restriction](./practice.md#q26--slots-restriction) · [Q27 · inheritance](./practice.md#q27--slots-inheritance) &nbsp;|&nbsp; **Deep dive:** [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md)
+By default, every Python object is like a person carrying a big expandable suitcase (`__dict__`) that can hold any number of belongings added at any time. That's flexible, but the suitcase itself weighs 200+ bytes even when empty. `__slots__` replaces the suitcase with a fixed-size backpack — you declare upfront exactly what you'll carry, and Python packs it more efficiently. When you have a million of these objects, the difference is enormous.
 
-By default, every Python object stores its attributes in a `__dict__` (a hash table). This is flexible but uses ~200-300 bytes per instance.
-
-`__slots__` replaces `__dict__` with a fixed-size array of descriptors:
+By default, every Python object stores its attributes in a `__dict__` (a hash table). This is flexible but uses ~200-300 bytes per instance. `__slots__` replaces `__dict__` with a fixed-size array of descriptors:
 
 ```python
 # Without __slots__:
@@ -402,31 +501,41 @@ sys.getsizeof(ps)            # ~64 bytes — NO __dict__!
 #   with    __slots__: ~64 MB   ← 4.5x smaller
 ```
 
-> 📝 **Practice:** [Q62 · __new__-vs-__init__](../python_practice_questions_100.md#q62--thinking--__new__-vs-__init__)
-
-
-**Trade-offs:**
 ```
-__slots__ GIVES you:      __slots__ TAKES AWAY:
-  ✅ Memory savings          ❌ Dynamic attribute assignment
-  ✅ Faster attribute access  ❌ __dict__ (unless you add it to __slots__)
-  ✅ Prevents typos          ❌ __weakref__ (unless you add it)
-                             ❌ Multiple inheritance with other __slots__ classes
+┌─────────────────── __slots__ Trade-offs ────────────────────────────┐
+│                                                                      │
+│  __slots__ GIVES you:        __slots__ TAKES AWAY:                  │
+│  ─────────────────────       ────────────────────────               │
+│  ✅ Memory savings            ❌ Dynamic attribute assignment        │
+│  ✅ Faster attribute access   ❌ __dict__ (unless added to __slots__)│
+│  ✅ Prevents typos            ❌ __weakref__ (unless added)          │
+│                               ❌ Multiple inheritance with other     │
+│                                  __slots__ classes                   │
+└──────────────────────────────────────────────────────────────────────┘
 ```
+
+⚠️ **Common Mistake:** Using `__slots__` in a subclass when the parent doesn't use it. If the parent has `__dict__`, the child inherits it — and you lose all the memory savings.
+
+💡 **Hint:** Use `__slots__` when you'll create thousands (or millions) of instances of the same class. Good candidates: coordinate pairs, events, log entries, any small data-holder class.
+
+🔍 **Good to Know:** Adding `'__dict__'` to `__slots__` gives you both the fixed slots AND dynamic attribute assignment — a compromise when you need flexibility in a few instances but want to save memory in most.
+
+📝 **Practice:** [Q25 · slots memory](./practice.md#q25--slots-memory) · [Q26 · restriction](./practice.md#q26--slots-restriction) · [Q27 · inheritance](./practice.md#q27--slots-inheritance) | **Deep dive:** [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md)
+
+> [↑ Back to Top](#top)
 
 ---
 
-## 🔍 Chapter 7: Descriptors — The Power Behind Properties
+<a id="7-descriptors--the-power-behind-properties"></a>
+# 7. Descriptors — The Power Behind Properties
 
-> 📝 **Practice:** [Q11–Q14 · descriptors](./practice.md#q11--descriptor-basics) &nbsp;|&nbsp; **Deep dive:** [02_descriptors/theory.md](./02_descriptors/theory.md)
+Think of a descriptor like a smart lock on a door. When you turn the handle (read an attribute), the lock can run any code — check who you are, log the access, return a different key each time. When you set a new combination (write an attribute), the lock validates it before accepting. You program the lock once, attach it to any door (class attribute), and it watches over every access automatically.
 
-A **descriptor** is an object that defines how attribute access works. It implements one or more of: `__get__`, `__set__`, `__delete__`.
+A **descriptor** is any object that implements `__get__`, `__set__`, or `__delete__`. This protocol powers `@property`, `@classmethod`, `@staticmethod` — they're not special syntax. They're just descriptors.
 
-**This is how [`@property`](../05_oops/11_properties.md), [`@classmethod` / `@staticmethod`](../05_oops/09_class_instance_static_methods.md) are all implemented** — they're just descriptors.
+**The descriptor protocol:**
 
 ```python
-# Descriptor protocol:
-
 class MyDescriptor:
     def __get__(self, obj, objtype=None):
         """Called when attribute is READ.
@@ -443,21 +552,86 @@ class MyDescriptor:
 
 **When Python accesses `obj.attr`:**
 ```
-1. Look for 'attr' in type(obj).__mro__ (class and base classes)
-2. If found AND it's a data descriptor (__set__ or __delete__):
-   → call descriptor.__get__(obj, type(obj))
-3. Else look in obj.__dict__
-4. Else if found in class and it's non-data descriptor (__get__ only):
-   → call descriptor.__get__(obj, type(obj))
-5. Else raise AttributeError
+┌────────────── Python Attribute Lookup Order ─────────────────────┐
+│                                                                   │
+│  obj.attr                                                         │
+│    │                                                              │
+│    ▼                                                              │
+│  1. Look in type(obj).__mro__ for 'attr'                         │
+│    │                                                              │
+│    ├─► Found + data descriptor (__set__ or __delete__)           │
+│    │   → call descriptor.__get__(obj, type(obj))  ← wins always  │
+│    │                                                              │
+│    ├─► Not a data descriptor → check obj.__dict__['attr']        │
+│    │   → found in instance dict → return it                      │
+│    │                                                              │
+│    ├─► Not in instance dict + non-data descriptor (__get__ only) │
+│    │   → call descriptor.__get__(obj, type(obj))                 │
+│    │                                                              │
+│    └─► Nothing → raise AttributeError                            │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
 ```
 
-**Data descriptor** (has `__set__` or `__delete__`): takes priority over instance `__dict__`.
-**Non-data descriptor** (has only `__get__`): instance `__dict__` takes priority.
+<a id="data-vs-non-data-descriptors"></a>
+## Data vs Non-Data Descriptors
 
-> 📝 **Practice:** [Q63 · descriptors](../python_practice_questions_100.md#q63--normal--descriptors)
+```
+Non-data descriptor: implements __get__ only
+  → Instance __dict__ takes priority over it
+  → Examples: functions (methods are non-data descriptors)
 
-### Implementing `@property` from Scratch
+Data descriptor: implements __get__ AND __set__ (or __delete__)
+  → Takes priority OVER instance __dict__
+  → Examples: property, classmethod, staticmethod
+```
+
+**Why this matters:**
+
+```python
+class MyClass:
+    x = NonDataDescriptor()   # only __get__
+
+obj = MyClass()
+obj.__dict__['x'] = 42        # instance __dict__ wins
+print(obj.x)                  # 42 — instance dict, not descriptor
+
+class MyClass2:
+    x = DataDescriptor()      # __get__ + __set__
+
+obj2 = MyClass2()
+obj2.__dict__['x'] = 42       # this never gets stored in __dict__
+print(obj2.x)                 # descriptor's __get__ is called, not dict
+```
+
+<a id="how-property-works-internally"></a>
+## How @property Works Internally
+
+`property` is a built-in class that implements `__get__`, `__set__`, `__delete__`. When you write `@property`, Python creates a descriptor object and assigns it as a class attribute:
+
+```python
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+
+    @property
+    def area(self):
+        return 3.14159 * self._radius ** 2
+
+# Python translates the above to:
+class Circle:
+    def __init__(self, radius):
+        self._radius = radius
+
+    def _area_getter(self):
+        return 3.14159 * self._radius ** 2
+
+    area = property(_area_getter)   # ← property() creates a descriptor object
+```
+
+When you access `circle.area`, Python calls `area.__get__(circle, Circle)`.
+
+**The full `property` implementation (simplified):**
 
 ```python
 class property:
@@ -493,9 +667,8 @@ class property:
         return property(self.fget, self.fset, fdel)
 ```
 
-> 📝 **Practice:** [Q64 · property-decorator](../python_practice_questions_100.md#q64--thinking--property-decorator)
-
-### Custom Validation Descriptor
+<a id="custom-validation-descriptor"></a>
+## Custom Validation Descriptor
 
 ```python
 class ValidatedAttribute:
@@ -541,148 +714,12 @@ p.price = -1.0     # ValueError: price: -1.0 < minimum 0.0
 p.price = "free"   # TypeError: price: expected float, got str
 ```
 
----
+💡 **Hint:** `__set_name__` was added in Python 3.6. It's called automatically when the descriptor is assigned as a class attribute. Before it existed, you had to pass the attribute name explicitly in `__init__`.
 
----
+<a id="how-functions-become-methods"></a>
+## How Functions Become Methods
 
-## Descriptors — The Protocol Behind @property
-
-> 📝 **Practice:** [Q11–Q14 · descriptors](./practice.md#q11--descriptor-basics)
-
-A **descriptor** is any object that implements `__get__`, `__set__`, or `__delete__`.
-This protocol powers `@property`, `@classmethod`, `@staticmethod`, and more.
-
-> 📝 **Practice:** [Q65 · descriptor-vs-property](../python_practice_questions_100.md#q65--critical--descriptor-vs-property)
-
----
-
-### The Descriptor Protocol
-
-```python
-class Descriptor:
-    def __get__(self, obj, objtype=None):
-        # obj = the instance (None if accessed on the class)
-        # objtype = the class
-        pass
-
-    def __set__(self, obj, value):
-        # Called on attribute assignment: instance.attr = value
-        pass
-
-    def __delete__(self, obj):
-        # Called on: del instance.attr
-        pass
-```
-
-A class becomes a descriptor by implementing at least one of these.
-
----
-
-### @property Is Just a Descriptor
-
-When you write:
-
-```python
-class Circle:
-    def __init__(self, radius):
-        self._radius = radius
-
-    @property
-    def area(self):
-        return 3.14159 * self._radius ** 2
-```
-
-Python translates this to:
-
-```python
-class Circle:
-    def __init__(self, radius):
-        self._radius = radius
-
-    def _area_getter(self):
-        return 3.14159 * self._radius ** 2
-
-    area = property(_area_getter)   # ← property() creates a descriptor object
-```
-
-`property` is a built-in class that implements `__get__`, `__set__`, `__delete__`.
-When you access `circle.area`, Python calls `area.__get__(circle, Circle)`.
-
----
-
-### Data vs Non-Data Descriptors
-
-```
-Non-data descriptor: implements __get__ only
-  → Instance __dict__ takes priority
-  → Examples: functions (methods are non-data descriptors)
-
-Data descriptor: implements __get__ AND __set__ (or __delete__)
-  → Takes priority OVER instance __dict__
-  → Examples: property, classmethod, staticmethod
-```
-
-**Why this matters:**
-
-```python
-class MyClass:
-    x = NonDataDescriptor()   # only __get__
-
-obj = MyClass()
-obj.__dict__['x'] = 42        # instance __dict__ wins
-print(obj.x)                  # 42 — instance dict, not descriptor
-
-class MyClass2:
-    x = DataDescriptor()      # __get__ + __set__
-
-obj2 = MyClass2()
-obj2.__dict__['x'] = 42       # this never gets stored in __dict__
-print(obj2.x)                 # descriptor's __get__ is called, not dict
-```
-
----
-
-### Practical Example: Validated Attribute
-
-```python
-class PositiveNumber:
-    """Data descriptor: enforces positive values."""
-    def __set_name__(self, owner, name):
-        self.name = name                    # store attribute name
-
-    def __get__(self, obj, objtype=None):
-        if obj is None:
-            return self                     # accessed on class, return descriptor
-        return obj.__dict__.get(self.name)
-
-    def __set__(self, obj, value):
-        if value <= 0:
-            raise ValueError(f"{self.name} must be positive, got {value}")
-        obj.__dict__[self.name] = value
-
-class Product:
-    price = PositiveNumber()     # ← descriptor instance as class attribute
-    quantity = PositiveNumber()
-
-    def __init__(self, price, quantity):
-        self.price = price           # calls PositiveNumber.__set__
-        self.quantity = quantity
-
-p = Product(10, 5)    # works
-p.price = -1          # ValueError: price must be positive, got -1
-```
-
----
-
-### How Functions Become Methods
-
-Functions are non-data descriptors. When you access `obj.method`, Python calls:
-
-```python
-method.__get__(obj, type(obj))
-```
-
-This returns a **bound method** — the function with `obj` pre-filled as `self`.
+Functions are **non-data descriptors**. When you access `obj.method`, Python calls `method.__get__(obj, type(obj))`. This returns a **bound method** — the function with `obj` pre-filled as `self`. This is the mechanism behind every method call.
 
 ```python
 class Foo:
@@ -695,42 +732,46 @@ print(Foo.bar)          # <function Foo.bar at 0x...>
 print(foo.bar())        # <Foo object>    ← self = foo, auto-filled
 ```
 
-The descriptor protocol is why `foo.bar()` automatically passes `foo` as `self`.
+The descriptor protocol is exactly why `foo.bar()` automatically passes `foo` as `self`. Without descriptors, Python would need special-case logic for methods — instead, it's just a `__get__` call.
+
+⚠️ **Common Mistake:** Storing a descriptor as an instance attribute instead of a class attribute. Descriptors only work as class attributes. If you do `self.my_desc = ValidatedAttribute(...)` inside `__init__`, it's just a regular object stored in `__dict__` — the protocol never fires.
+
+🔍 [Visual: Python descriptor protocol __get__ __set__ flow](https://www.google.com/search?q=python+descriptor+protocol+get+set+flow+diagram)
+
+📝 **Practice:** [Q11–Q14 · descriptors](./practice.md#q11--descriptor-basics) | **Deep dive:** [02_descriptors/theory.md](./02_descriptors/theory.md)
+
+> [↑ Back to Top](#top)
 
 ---
 
-## 🏭 Chapter 8: Metaclasses — Classes of Classes
+<a id="8-metaclasses--classes-of-classes"></a>
+# 8. Metaclasses — Classes of Classes
 
-> 📝 **Practice:** [Q15–Q18 · metaclasses](./practice.md#q15--dynamic-class-creation) &nbsp;|&nbsp; **Deep dive:** [03_metaclasses/theory.md](./03_metaclasses/theory.md)
+In everyday life, a cookie cutter makes cookies. But what makes the cookie cutter? A machine at the factory. In Python, a class makes instances. But what makes the class? A metaclass. Most Python code never needs to worry about cookie-cutter factories — but if you're building a framework (like Django's ORM, or a plugin system), understanding the factory of factories gives you extraordinary power.
 
-**The mental model:** Everything in Python is an object. Functions are objects. Modules are objects. And classes are objects too. The "class" that creates class objects is called a **metaclass**.
+**Everything in Python is an object. Functions are objects. Modules are objects. And classes are objects too.** The "class" that creates class objects is called a **metaclass**.
 
 ```
-NORMAL:          int        creates    42
-                 str        creates    "hello"
-                 MyClass    creates    my_instance
-
-METACLASS:       type       creates    MyClass
-                 type       creates    int, str, list...
-                 MyMeta     creates    any class whose metaclass=MyMeta
+┌─────────────── Python's Class Hierarchy ──────────────────┐
+│                                                            │
+│  NORMAL CREATION:                                          │
+│  int        creates    42                                  │
+│  str        creates    "hello"                             │
+│  MyClass    creates    my_instance                         │
+│                                                            │
+│  METACLASS CREATION:                                       │
+│  type       creates    MyClass                             │
+│  type       creates    int, str, list, dict...             │
+│  MyMeta     creates    any class with metaclass=MyMeta     │
+│                                                            │
+│  type(42)         → <class 'int'>                          │
+│  type(int)        → <class 'type'>   (int made by type)   │
+│  type(type)       → <class 'type'>   (type made itself!)  │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
 ```
 
-```python
-
-
-# Verifying:
-type(42)         # <class 'int'>
-type(int)        # <class 'type'>    ← int was created by 'type'
-type(type)       # <class 'type'>    ← type created itself!
-
-class Foo: pass
-type(Foo)        # <class 'type'>    ← Foo was created by 'type'
-```
-
-> 📝 **Practice:** [Q60 · metaclass](../python_practice_questions_100.md#q60--interview--metaclass) · [Q61 · type-as-metaclass](../python_practice_questions_100.md#q61--logical--type-as-metaclass)
-
-
-**How `class` statement works internally:**
+**How the `class` statement works internally:**
 
 ```python
 class MyClass(Base):
@@ -747,7 +788,8 @@ MyClass = type('MyClass', (Base,), namespace)
 MyClass = MyMeta('MyClass', (Base,), namespace)
 ```
 
-### Custom Metaclass Example — Registry Pattern
+<a id="custom-metaclass--registry-pattern"></a>
+## Custom Metaclass — Registry Pattern
 
 ```python
 class PluginMeta(type):
@@ -780,7 +822,8 @@ plugin = PluginMeta.registry["CSVPlugin"]()
 plugin.run()   # "csv"
 ```
 
-### Metaclass for Enforcing Interface
+<a id="enforcing-interface-with-metaclass"></a>
+## Enforcing Interface with Metaclass
 
 ```python
 class InterfaceMeta(type):
@@ -797,27 +840,12 @@ class InterfaceMeta(type):
                     f"{name} must implement: {', '.join(missing)}"
                 )
         return cls
-
-class StorageBackend(metaclass=InterfaceMeta):
-    class Meta(InterfaceMeta):
-        REQUIRED = {'save', 'load', 'delete'}
-    metaclass = Meta
 ```
 
-**When to use metaclasses:**
-```
-USE metaclasses for:
-  - Framework/library internals (Django ORM uses them heavily)
-  - Class registration patterns (plugins, commands)
-  - Enforcing interface contracts
-  - Auto-generating class attributes at definition time
+<a id="__init_subclass__--modern-alternative"></a>
+## `__init_subclass__` — Modern Alternative
 
-DON'T use metaclasses when:
-  - A class decorator would work (simpler)
-  - __init_subclass__ would work (Python 3.6+, much simpler)
-```
-
-### `__init_subclass__` — The Modern Alternative
+Python 3.6+ introduced `__init_subclass__`, which handles the most common metaclass use case (subclass registration) with far less complexity:
 
 ```python
 class Plugin:
@@ -838,16 +866,44 @@ class JSONPlugin(Plugin, plugin_type="json"):
 Plugin._registry   # {'csv': CSVPlugin, 'json': JSONPlugin}
 ```
 
+```
+┌──────────────── When to Use Metaclasses ──────────────────────────┐
+│                                                                    │
+│  USE metaclasses for:                                              │
+│  - Framework/library internals (Django ORM uses them heavily)     │
+│  - Class registration + auto-discovery (plugin systems)           │
+│  - Enforcing interface contracts at class-definition time         │
+│  - Auto-generating class attributes at definition time            │
+│                                                                    │
+│  DON'T use metaclasses when:                                       │
+│  - A class decorator would work (simpler, more readable)          │
+│  - __init_subclass__ would work (Python 3.6+, much simpler)       │
+│  - ABCs cover the interface-enforcement need                       │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+⚠️ **Common Mistake:** Using a metaclass when `__init_subclass__` would do the job. Metaclass conflicts (when two bases have different metaclasses) are notoriously painful. Prefer `__init_subclass__` for registration patterns.
+
+💡 **Hint:** Django's `Model` class uses a metaclass to scan your model class definition and build SQL table schemas automatically. SQLAlchemy's `DeclarativeBase` does the same. Understanding metaclasses helps you understand these frameworks.
+
+🔍 [Visual: Python metaclass type hierarchy diagram](https://www.google.com/search?q=python+metaclass+type+hierarchy+diagram)
+
+📝 **Practice:** [Q15–Q18 · metaclasses](./practice.md#q15--dynamic-class-creation) | **Deep dive:** [03_metaclasses/theory.md](./03_metaclasses/theory.md)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 🗂️ Chapter 9: Dataclasses — Generated Boilerplate
+<a id="9-dataclasses--generated-boilerplate"></a>
+# 9. Dataclasses — Generated Boilerplate
 
-> 📝 **Practice:** [Q20–Q24 · dataclasses](./practice.md#q20--basic-dataclass) &nbsp;|&nbsp; **Deep dive:** [04_dataclasses/theory.md](./04_dataclasses/theory.md)
+Think of dataclasses like a house blueprint service. Instead of manually drawing out every detail of each room (writing `__init__`, `__repr__`, `__eq__` by hand for every class), you hand the service your list of rooms and materials (type annotations), and it generates a complete blueprint automatically. You focus on what the data is; Python handles the boilerplate of how to create, display, and compare it.
 
 `@dataclass` is a class decorator that inspects type annotations and auto-generates `__init__`, `__repr__`, `__eq__`, and optionally `__lt__`, `__hash__`, `__slots__`:
 
 ```python
-from dataclasses import dataclass, field, KW_ONLY
+from dataclasses import dataclass, field
 from typing import ClassVar
 
 @dataclass(order=True, frozen=True)
@@ -888,11 +944,35 @@ field(init=False)            # exclude from __init__
 field(kw_only=True)          # keyword-only argument
 ```
 
+```
+┌──────────── @dataclass Parameters ──────────────────────┐
+│                                                          │
+│  @dataclass(                                             │
+│      init=True,         ← generate __init__             │
+│      repr=True,         ← generate __repr__             │
+│      eq=True,           ← generate __eq__               │
+│      order=False,       ← generate __lt__, __le__, etc  │
+│      frozen=False,      ← make immutable (+ hashable)   │
+│      slots=False,       ← generate __slots__ (3.10+)    │
+│  )                                                       │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
+⚠️ **Common Mistake:** Using a mutable default (e.g., `items: list = []`) without `field(default_factory=list)`. Python will raise `ValueError: mutable default is not allowed`. Always use `field(default_factory=...)` for lists, dicts, and sets.
+
+💡 **Hint:** `frozen=True` makes the dataclass immutable AND hashable (it generates `__hash__`). Use this for value objects that should be safe to use as dict keys or set members.
+
+📝 **Practice:** [Q20–Q24 · dataclasses](./practice.md#q20--basic-dataclass) | **Deep dive:** [04_dataclasses/theory.md](./04_dataclasses/theory.md)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 🧭 Chapter 10: Abstract Base Classes (ABCs)
+<a id="10-abstract-base-classes-abcs"></a>
+# 10. Abstract Base Classes (ABCs)
 
-> 📝 **Practice:** [Q19 · ABCMeta](./practice.md#q19--abcmeta) · [Q33 · ABC interface](./practice.md#q33--abc-interface)
+Think of ABCs like a job contract. The contract says "to work here, you must be able to do X, Y, and Z." It doesn't tell you HOW to do them — that's up to you. But if you sign the contract (inherit from the ABC) without implementing all the required methods, you get an error the moment someone tries to hire you (instantiate your class). ABCs enforce the contract at the right moment: when someone tries to use an incomplete implementation.
 
 ABCs define interfaces — they declare what methods a class MUST implement:
 
@@ -932,7 +1012,7 @@ class S3Storage(Storage):
 storage = S3Storage()
 ```
 
-**Virtual subclasses (ABC registration):**
+**Virtual subclasses — register without modifying:**
 
 ```python
 from collections.abc import Mapping
@@ -943,13 +1023,34 @@ Mapping.register(MyLegacyDict)   # without modifying MyLegacyDict
 isinstance(MyLegacyDict(), Mapping)   # True
 ```
 
+```
+┌──────────────────── ABC vs Protocol ──────────────────────────────┐
+│                                                                    │
+│  ABC (Abstract Base Class)           Protocol (typing.Protocol)  │
+│  ──────────────────────────          ────────────────────────────│
+│  Requires explicit inheritance       No inheritance needed        │
+│  Checks at class-creation time       Structural (duck typing)     │
+│  Can provide default implementations No default implementations   │
+│  Part of collections.abc             Part of typing module        │
+│  Use for: framework contracts        Use for: type-checker hints  │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+```
+
+⚠️ **Common Mistake:** Forgetting that a subclass with all abstract methods implemented can still be abstract if it introduces new `@abstractmethod` methods. A class is concrete only when ALL inherited + new abstract methods are implemented.
+
+💡 **Hint:** `collections.abc` has ready-made ABCs for containers: `Sequence`, `Mapping`, `MutableMapping`, `Iterable`, `Iterator`, `Callable`. Inheriting from these gets you default method implementations for free.
+
+📝 **Practice:** [Q19 · ABCMeta](./practice.md#q19--abcmeta) · [Q33 · ABC interface](./practice.md#q33--abc-interface)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 🎭 Chapter 11: Enums — Named Constants
+<a id="11-enums--named-constants"></a>
+# 11. Enums — Named Constants
 
-> 📝 **Practice:** [Q31 · Enum](./practice.md#q31--enum-basics) · [Q32 · IntEnum and Flag](./practice.md#q32--intenum)
-
-Enums prevent magic strings and integers scattered throughout code:
+Imagine a traffic light system where the light state is stored as `0`, `1`, or `2`. Is `0` red or green? Is `2` yellow? Nobody remembers, and every bug looks like a mysterious number comparison. Enums replace magic numbers with named constants that read like plain English. Instead of `if state == 2`, you write `if state == TrafficLight.YELLOW` — and your code becomes self-documenting.
 
 ```python
 from enum import Enum, IntEnum, Flag, auto
@@ -985,25 +1086,30 @@ class Color(Enum):
     BLUE  = auto()   # 3
 
 # Flag — for bitmask/combination enums:
-from enum import Flag, auto
-
 class Permission(Flag):
     READ    = auto()   # 1
     WRITE   = auto()   # 2
     EXECUTE = auto()   # 4
 
 user_perm = Permission.READ | Permission.WRITE
-Permission.READ in user_perm   # True
+Permission.READ in user_perm     # True
 Permission.EXECUTE in user_perm  # False
 ```
 
+⚠️ **Common Mistake:** Comparing an `Enum` member with a raw string or int using `==`. `OrderStatus.PENDING == "pending"` is `False` (different types). Use `.value` if you need the raw value: `OrderStatus.PENDING.value == "pending"` is `True`. Exception: `IntEnum` members DO compare equal to plain ints.
+
+💡 **Hint:** Use `Enum` for status codes and categories. Use `IntEnum` when you need integer comparison (like priority levels). Use `Flag` for permission bits that can be combined.
+
+📝 **Practice:** [Q31 · Enum](./practice.md#q31--enum-basics) · [Q32 · IntEnum and Flag](./practice.md#q32--intenum)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 🔎 Chapter 12: Introspection — Looking Inside Objects
+<a id="12-introspection--looking-inside-objects"></a>
+# 12. Introspection — Looking Inside Objects
 
-> 📝 **Practice:** [Q28 · dir/callable](./practice.md#q28--dir-and-callable) · [Q29 · dynamic attributes](./practice.md#q29--dynamic-attributes) · [Q30 · inspect.signature](./practice.md#q30--inspect-signature) &nbsp;|&nbsp; **Deep dive:** [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md)
-
-Python lets you inspect and modify objects at runtime:
+Imagine you could X-ray any package delivered to you — see exactly what's inside, how it's structured, and where it came from — without opening it. Python's introspection tools are that X-ray machine. You can look at any object at runtime and find out its type, its attributes, its methods, its source code, and its call signature. This is how frameworks like pytest, Django, and FastAPI work their magic: they inspect your code at runtime to understand its structure.
 
 ```python
 import inspect
@@ -1048,13 +1154,39 @@ for name, param in sig.parameters.items():
     print(name, param.annotation, param.default)
 ```
 
+```
+┌──────────────────── Common Introspection Tools ──────────────────────┐
+│                                                                       │
+│  type(obj)              → what class created this object             │
+│  isinstance(obj, cls)   → is obj an instance of cls (or subclass)?   │
+│  issubclass(cls, base)  → is cls a subclass of base?                 │
+│  dir(obj)               → all attribute/method names (inherited too) │
+│  vars(obj)              → instance __dict__ only                     │
+│  hasattr(obj, name)     → does attribute exist?                      │
+│  getattr(obj, name)     → get attribute by string name               │
+│  setattr(obj, name, v)  → set attribute by string name               │
+│  inspect.signature(fn)  → parameter names, annotations, defaults     │
+│  inspect.getsource(obj) → source code as string                      │
+│                                                                       │
+└───────────────────────────────────────────────────────────────────────┘
+```
+
+⚠️ **Common Mistake:** Using `dir()` and assuming all listed attributes exist on the instance. `dir()` includes inherited attributes from parent classes. Use `vars(obj)` or `obj.__dict__` for only the instance's own attributes.
+
+💡 **Hint:** `getattr(obj, name, default)` accepts a third argument — the default value to return if the attribute doesn't exist. Use this instead of `hasattr` + `getattr` in sequence: `value = getattr(obj, "optional_field", None)`.
+
+📝 **Practice:** [Q28 · dir/callable](./practice.md#q28--dir-and-callable) · [Q29 · dynamic attributes](./practice.md#q29--dynamic-attributes) · [Q30 · inspect.signature](./practice.md#q30--inspect-signature) | **Deep dive:** [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md)
+
+> [↑ Back to Top](#top)
+
 ---
 
-## 📐 Chapter 13: Typing and Protocols
+<a id="13-typing-and-protocols"></a>
+# 13. Typing and Protocols
 
-> 📝 **Practice:** [Q34 · Protocol](./practice.md#q34--protocol)
+Think of a Protocol like a job posting that says "must know Python and SQL" — it doesn't care which university you went to or what companies you've worked for. It only cares about what you can DO. Any object that has the right methods satisfies a Protocol, regardless of inheritance. This is "structural typing" — shape matters, not lineage.
 
-**Protocol** enables structural subtyping (duck typing with type-checker support):
+**`Protocol` enables structural subtyping (duck typing with type-checker support):**
 
 ```python
 from typing import Protocol, runtime_checkable
@@ -1122,51 +1254,65 @@ s.push(42)
 x: int = s.pop()
 ```
 
+⚠️ **Common Mistake:** Adding `@runtime_checkable` to every Protocol "just in case." Runtime checks only verify that the required methods exist — they don't check signatures or return types. For performance-sensitive code, avoid runtime Protocol checks in hot paths.
+
+💡 **Hint:** Use `Protocol` instead of ABC when you don't control the classes that need to satisfy the interface. If you're writing a library and want users' existing classes to "just work," Protocol is more flexible than forcing inheritance from your ABC.
+
+📝 **Practice:** [Q34 · Protocol](./practice.md#q34--protocol)
+
+> [↑ Back to Top](#top)
+
 ---
 
+<a id="-summary-table"></a>
 ## 🔥 Summary Table
 
 ```
-FEATURE            WHAT IT IS                        WHEN TO USE
-────────────────────────────────────────────────────────────────────────────
-Dunder methods     Hooks into Python syntax          Always — define repr, eq, etc
-__repr__ / __str__ Object representation             Every custom class
-__eq__ + __hash__  Equality + hashability            When used in sets/dicts
-Operator overload  Define +, -, *, ==, etc.          Math/science classes
-Container protocol __len__, __getitem__, __iter__    Custom collection types
-__bool__           Truthiness                        When 0 ≠ False for your type
-__slots__          Memory optimization               10k+ instances of same class
-Descriptors        Managed attribute access          Validation, computed attrs
-@property          Computed attribute                Input validation, derived values
-Metaclass          Factory for classes               Frameworks, plugin systems
-__init_subclass__  Hook when class is subclassed     Simpler alternative to metaclass
-@dataclass         Auto-generated boilerplate        Data container classes
-ABC                Interface definition              Define contracts in libraries
-Enum               Named constants                   Status codes, flags, categories
-Protocol           Structural typing                 Duck typing with type safety
-Introspection      Runtime object inspection         Debug, frameworks, serialization
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  FEATURE              WHAT IT IS                      WHEN TO USE            │
+│  ──────────────────────────────────────────────────────────────────────────  │
+│  Dunder methods       Hooks into Python syntax         Always — repr, eq, etc│
+│  __repr__ / __str__   Object representation            Every custom class     │
+│  __eq__ + __hash__    Equality + hashability           Sets/dicts/sorting     │
+│  Operator overload    Define +, -, *, ==, etc.         Math/science classes   │
+│  Container protocol   __len__, __getitem__, __iter__   Custom collection types│
+│  __bool__             Truthiness                       When 0 ≠ False for you │
+│  __slots__            Memory optimization              10k+ small instances   │
+│  Descriptors          Managed attribute access         Validation, computed   │
+│  @property            Computed attribute               Input validation       │
+│  Metaclass            Factory for classes              Frameworks, plugins    │
+│  __init_subclass__    Hook when class is subclassed    Simpler than metaclass │
+│  @dataclass           Auto-generated boilerplate       Data container classes │
+│  ABC                  Interface definition             Contracts in libraries │
+│  Enum                 Named constants                  Status, flags, cats    │
+│  Protocol             Structural typing                Duck typing + safety   │
+│  Introspection        Runtime object inspection        Debug, frameworks      │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
+<a id="-navigation"></a>
 ## 🔁 Navigation
 
-| | |
-|---|---|
-| 📝 Practice | [practice.md](./practice.md) |
-| 🎯 Interview | [interview.md](./interview.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 📂 Dunder Methods | [01_dunder_methods/theory.md](./01_dunder_methods/theory.md) |
-| 📂 Descriptors | [02_descriptors/theory.md](./02_descriptors/theory.md) |
-| 📂 Metaclasses | [03_metaclasses/theory.md](./03_metaclasses/theory.md) |
-| 📂 Dataclasses | [04_dataclasses/theory.md](./04_dataclasses/theory.md) |
-| 📂 Advanced Patterns | [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md) |
-| ➡️ Next | [16 — Design Patterns](../16_design_patterns/theory.md) |
+**This folder:**
+[theory.md](./theory.md) · [cheetsheet.md](./cheetsheet.md) · [interview.md](./interview.md) · [practice.md](./practice.md)
+
+**Subfolders:**
+[01_dunder_methods/theory.md](./01_dunder_methods/theory.md) · [02_descriptors/theory.md](./02_descriptors/theory.md) · [03_metaclasses/theory.md](./03_metaclasses/theory.md) · [04_dataclasses/theory.md](./04_dataclasses/theory.md) · [05_advanced_patterns/theory.md](./05_advanced_patterns/theory.md)
+
+**Related modules:**
+[14 — Type Hints & Pydantic](../14_type_hints_and_pydantic/theory.md) · [05 — OOP](../05_oops/theory.md) · [10 — Decorators](../10_decorators/theory.md)
+
+**Jump to specific topics:**
+[Dunder Methods Table](#1-dunder-methods--pythons-protocol-system) · [Descriptor Protocol](#7-descriptors--the-power-behind-properties) · [How @property Works](#how-property-works-internally) · [Metaclass Registry](#custom-metaclass--registry-pattern) · [__init_subclass__](#__init_subclass__--modern-alternative)
 
 ---
 
-**[🏠 Back to README](../README.md)**
+| | |
+|---|---|
+| ⬅ Prev Module | [14 — Type Hints & Pydantic](../14_type_hints_and_pydantic/theory.md) |
+| ➡ Next Module | [16 — Design Patterns](../16_design_patterns/theory.md) |
 
-**Prev:** [← Type Hints And Pydantic — Interview Q&A](../14_type_hints_and_pydantic/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+**[🏠 Back to README](../../README.md)**
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Dunder Methods Guide](./dunder_guide.md) · [Metaclasses & Descriptors](./metaclasses_descriptors_guide.md) · [Interview Q&A](./interview.md)

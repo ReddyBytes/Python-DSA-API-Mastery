@@ -1,6 +1,5 @@
+<a id="top"></a>
 # 🗄️ SQL with Python
-
----
 
 Your ML pipeline trains on CSVs today.
 
@@ -10,7 +9,20 @@ The engineer who can't query SQL can't debug their own data. And 80% of bugs are
 
 This module teaches you how Python talks to databases — from the standard library's `sqlite3` all the way to SQLAlchemy's ORM, pandas integration, and DuckDB for modern analytics workflows.
 
----
+## 📖 Table of Contents
+
+- [1. The sqlite3 Module](#the-sqlite3-module)
+- [2. CRUD Operations](#crud-operations)
+- [3. SQL Query Patterns](#sql-query-patterns)
+- [4. Parameterized Queries — Why They Matter](#parameterized-queries)
+- [5. JOINs — Combining Tables](#joins-combining-tables)
+- [6. SQLAlchemy — Core vs ORM](#sqlalchemy-core-vs-orm)
+- [7. Pandas + SQL — Bidirectional Data Flow](#pandas-sql)
+- [8. DuckDB — Modern In-Process Analytics](#duckdb)
+- [9. Transactions and ACID](#transactions-and-acid)
+- [10. Indexes and Performance](#indexes-and-performance)
+- [11. Connection Pooling](#connection-pooling)
+  - [Summary](#summary)
 
 ## 📌 Learning Priority
 
@@ -26,9 +38,8 @@ DuckDB · connection pooling · ACID properties in depth · EXPLAIN/query planni
 **Reference** — Know it exists, look up when needed:
 Alembic migrations · async SQLAlchemy · geospatial extensions · partitioning strategies
 
----
-
-## 1️⃣ The sqlite3 Module
+<a id="the-sqlite3-module"></a>
+## 1. The sqlite3 Module
 
 `sqlite3` ships with Python. No install needed. It stores your entire database in a single `.db` file on disk — perfect for prototypes, scripts, and learning.
 
@@ -99,9 +110,10 @@ print(row["age"])
 
 > 📝 **Practice:** [Q1–Q3 — sqlite3 Module](./practice.md#q1)
 
----
+> [↑ Back to Top](#top)
 
-## 2️⃣ CRUD Operations
+<a id="crud-operations"></a>
+## 2. CRUD Operations
 
 **CRUD** is the four operations every database does: Create, Read, Update, Delete.
 
@@ -182,9 +194,10 @@ with sqlite3.connect("analytics.db") as conn:
 
 > 📝 **Practice:** [Q4–Q7 — CRUD Operations](./practice.md#q4)
 
----
+> [↑ Back to Top](#top)
 
-## 3️⃣ SQL Query Patterns
+<a id="sql-query-patterns"></a>
+## 3. SQL Query Patterns
 
 **WHERE — filter rows:**
 
@@ -274,9 +287,10 @@ with sqlite3.connect("analytics.db") as conn:
 
 > 📝 **Practice:** [Q8–Q10 — SQL Query Patterns](./practice.md#q8)
 
----
+> [↑ Back to Top](#top)
 
-## 4️⃣ Parameterized Queries — Why They Matter
+<a id="parameterized-queries"></a>
+## 4. Parameterized Queries — Why They Matter
 
 **SQL injection** is one of the most common security vulnerabilities in history. It happens when user input is concatenated directly into a SQL string.
 
@@ -310,9 +324,10 @@ For SQLAlchemy and other libraries, the placeholder syntax differs:
 
 > 📝 **Practice:** [Q11–Q13 — Parameterized Queries](./practice.md#q11)
 
----
+> [↑ Back to Top](#top)
 
-## 5️⃣ JOINs — Combining Tables
+<a id="joins-combining-tables"></a>
+## 5. JOINs — Combining Tables
 
 A **JOIN** lets you combine rows from two tables based on a matching condition. Understanding joins is the single most important SQL skill.
 
@@ -434,9 +449,10 @@ FULL OUTER  →  everything from both (union)
 
 > 📝 **Practice:** [Q14–Q16 — JOINs](./practice.md#q14)
 
----
+> [↑ Back to Top](#top)
 
-## 6️⃣ SQLAlchemy — Core vs ORM
+<a id="sqlalchemy-core-vs-orm"></a>
+## 6. SQLAlchemy — Core vs ORM
 
 **sqlite3** is low-level. You write raw SQL strings. Fine for scripts.
 
@@ -543,9 +559,10 @@ with Session(engine) as session:
 
 > 📝 **Practice:** [Q17–Q20 — SQLAlchemy](./practice.md#q17)
 
----
+> [↑ Back to Top](#top)
 
-## 7️⃣ Pandas + SQL — Bidirectional Data Flow
+<a id="pandas-sql"></a>
+## 7. Pandas + SQL — Bidirectional Data Flow
 
 **Pandas** and **SQL** are natural partners. Pandas lives in memory; SQL lives on disk. You move data between them constantly.
 
@@ -621,9 +638,10 @@ df_agg.to_sql("daily_revenue", engine, if_exists="append", index=False)
 
 > 📝 **Practice:** [Q21–Q23 — Pandas + SQL](./practice.md#q21)
 
----
+> [↑ Back to Top](#top)
 
-## 8️⃣ DuckDB — Modern In-Process Analytics
+<a id="duckdb"></a>
+## 8. DuckDB — Modern In-Process Analytics
 
 **DuckDB** is what SQLite would be if it was built for data analytics instead of transactional apps.
 
@@ -690,9 +708,10 @@ DuckDB is increasingly used in ML pipelines: run feature engineering SQL on Parq
 
 > 📝 **Practice:** [Q24–Q26 — DuckDB](./practice.md#q24)
 
----
+> [↑ Back to Top](#top)
 
-## 9️⃣ Transactions and ACID
+<a id="transactions-and-acid"></a>
+## 9. Transactions and ACID
 
 A **transaction** is a group of operations that either all succeed or all fail together. If your process crashes halfway, the database rolls back to its previous clean state.
 
@@ -747,9 +766,10 @@ The `with Session(engine) as session:` block rolls back automatically on unhandl
 
 > 📝 **Practice:** [Q27–Q29 — Transactions and ACID](./practice.md#q27)
 
----
+> [↑ Back to Top](#top)
 
-## 🔟 Indexes and Performance
+<a id="indexes-and-performance"></a>
+## 10. Indexes and Performance
 
 An **index** is a data structure that lets the database find rows without scanning the entire table. Like a book's index vs reading every page.
 
@@ -794,9 +814,10 @@ with sqlite3.connect("analytics.db") as conn:
 
 > 📝 **Practice:** [Q30–Q32 — Indexes and Performance](./practice.md#q30)
 
----
+> [↑ Back to Top](#top)
 
-## 1️⃣1️⃣ Connection Pooling
+<a id="connection-pooling"></a>
+## 11. Connection Pooling
 
 In production web applications, creating a new database connection for every request is expensive. A **connection pool** keeps a set of connections open and reuses them.
 
@@ -834,8 +855,9 @@ For sqlite3 (single-file, no concurrency), pooling isn't relevant. It matters fo
 
 > 📝 **Practice:** [Q33–Q35 — Connection Pooling](./practice.md#q33)
 
----
+> [↑ Back to Top](#top)
 
+<a id="summary"></a>
 ## Summary
 
 SQL is not optional for data engineers and ML engineers. It's where the data actually lives.
@@ -849,17 +871,15 @@ The progression:
 
 The engineer who combines Python + SQL + Pandas can debug any data bug, build any ETL pipeline, and understand exactly what data a model trains on.
 
----
-
 ## 🔁 Navigation
 
 Previous: `../29_web_scraping/theory.md`
 Next: `../31_file_formats_pdf_xml/theory.md`
-
----
 
 **[🏠 Back to README](../README.md)**
 
 **Prev:** [← Web Scraping](../29_web_scraping/theory.md) &nbsp;|&nbsp; **Next:** [File Formats: PDF & XML →](../31_file_formats_pdf_xml/theory.md)
 
 **Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md) · [Practice Local](./practice_local.py)
+
+> [↑ Back to Top](#top)

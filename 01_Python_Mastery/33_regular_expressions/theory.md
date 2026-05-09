@@ -1,6 +1,5 @@
+<a id="top"></a>
 # 🔤 Regular Expressions in Python
-
----
 
 You have a text file with 10,000 log lines. Some look like this:
 ```
@@ -14,7 +13,16 @@ You could write dozens of string split operations, index calculations, and condi
 
 **Regular expressions** (regex) are patterns that describe sets of strings. They're the universal tool for parsing, extracting, and transforming text.
 
----
+## 📖 Table of Contents
+
+- [1. The Core Functions](#the-core-functions)
+- [2. Pattern Building Blocks](#pattern-building-blocks)
+- [3. Common Patterns](#common-patterns)
+- [4. Named Groups and Complex Extraction](#named-groups-and-complex-extraction)
+- [5. Lookahead and Lookbehind](#lookahead-and-lookbehind)
+- [6. Flags](#flags)
+- [7. Pre-compiling for Performance](#pre-compiling-for-performance)
+  - [Common Mistakes to Avoid ⚠️](#common-mistakes-to-avoid)
 
 ## 📌 Learning Priority
 
@@ -30,9 +38,8 @@ Non-greedy quantifiers `+?`, `*?` · `re.fullmatch()` · `re.split()` · `re.DOT
 **Reference** — Know it exists, look up when needed:
 Atomic groups · Possessive quantifiers · `regex` module (third-party, more features) · POSIX character classes
 
----
-
-## 1️⃣ The Core Functions
+<a id="the-core-functions"></a>
+## 1. The Core Functions
 
 ```python
 import re
@@ -75,9 +82,10 @@ invalid = re.fullmatch(r"\d{5}", "1234")   # None — doesn't match fully
 
 > 📝 **Practice:** [Q1–Q5 — Core Functions](./practice.md#q1)
 
----
+> [↑ Back to Top](#top)
 
-## 2️⃣ Pattern Building Blocks
+<a id="pattern-building-blocks"></a>
+## 2. Pattern Building Blocks
 
 ```
 METACHARACTERS
@@ -119,9 +127,10 @@ GROUPS
 
 > 📝 **Practice:** [Q6–Q10 — Pattern Building Blocks](./practice.md#q6)
 
----
+> [↑ Back to Top](#top)
 
-## 3️⃣ Common Patterns
+<a id="common-patterns"></a>
+## 3. Common Patterns
 
 ```python
 import re
@@ -163,9 +172,10 @@ HTML_TAG = r"</?[a-zA-Z][a-zA-Z0-9]*(?:\s[^>]*)?\s*/?>"
 
 > 📝 **Practice:** [Q11–Q14 — Common Patterns](./practice.md#q11)
 
----
+> [↑ Back to Top](#top)
 
-## 4️⃣ Named Groups and Complex Extraction
+<a id="named-groups-and-complex-extraction"></a>
+## 4. Named Groups and Complex Extraction
 
 ```python
 import re
@@ -206,9 +216,10 @@ print(df)
 
 > 📝 **Practice:** [Q15–Q18 — Named Groups and Complex Extraction](./practice.md#q15)
 
----
+> [↑ Back to Top](#top)
 
-## 5️⃣ Lookahead and Lookbehind
+<a id="lookahead-and-lookbehind"></a>
+## 5. Lookahead and Lookbehind
 
 ```python
 import re
@@ -234,9 +245,10 @@ print(modern)   # ['python3']
 
 > 📝 **Practice:** [Q19–Q22 — Lookahead and Lookbehind](./practice.md#q19)
 
----
+> [↑ Back to Top](#top)
 
-## 6️⃣ Flags
+<a id="flags"></a>
+## 6. Flags
 
 ```python
 import re
@@ -267,9 +279,10 @@ re.findall(r"^\w+", text, re.MULTILINE | re.IGNORECASE)
 
 > 📝 **Practice:** [Q23–Q25 — Flags](./practice.md#q23)
 
----
+> [↑ Back to Top](#top)
 
-## 7️⃣ Pre-compiling for Performance
+<a id="pre-compiling-for-performance"></a>
+## 7. Pre-compiling for Performance
 
 ```python
 import re
@@ -286,8 +299,9 @@ for line in lines:
 
 > 📝 **Practice:** [Q26–Q28 — Pre-compiling for Performance](./practice.md#q26)
 
----
+> [↑ Back to Top](#top)
 
+<a id="common-mistakes-to-avoid"></a>
 ## Common Mistakes to Avoid ⚠️
 
 - **Greedy vs lazy**: `.*` is greedy — it matches as much as possible. `<(.*)>` on `<a>text</a>` matches `a>text</a`, not `a`. Use `<(.*?)>` (non-greedy) to match `a`.
@@ -295,8 +309,6 @@ for line in lines:
 - **Using `match` when you want `search`**: `re.match()` only matches at the START of the string. `re.search()` matches anywhere. Forgetting this is a common bug.
 - **Not using raw strings**: `\n` in a regex string means newline. `r"\n"` means the literal pattern `\n` (backslash-n). Always use `r"..."` for regex patterns.
 - **Catastrophic backtracking**: patterns like `(a+)+b` on long strings of 'a's without 'b' can take exponential time. Test performance on pathological inputs.
-
----
 
 ## 🔁 Navigation
 
@@ -309,6 +321,6 @@ for line in lines:
 | ⬅️ Prev Module | [../32_streamlit_flask/theory.md](../32_streamlit_flask/theory.md) |
 | ➡️ Next Module | [../99_interview_master/README.md](../99_interview_master/README.md) |
 
----
-
 **[🏠 Back to README](../README.md)**
+
+> [↑ Back to Top](#top)

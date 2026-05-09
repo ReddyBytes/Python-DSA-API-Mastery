@@ -1,33 +1,54 @@
-# 📦 Chapter 03: Data Types
+<a id="top"></a>
+# 📦 Data Types in Python
 
 > *"Before you can write programs, you need to understand what kind of information you're working with. Every piece of data in Python has a type — and that type determines everything about how you can use it."*
 
----
+Think about your phone's contact app. It stores a name (text), an age (whole number), a balance (decimal), notification status (yes/no), phone numbers (a list), and social links (labeled pairs). Python has a distinct type for each of these — because what you can do with a name is completely different from what you can do with a number.
 
-## 🌍 Why Do Data Types Exist?
+## 📖 Table of Contents
 
-Think about your phone's contact app. It stores:
+- [📌 Learning Priority](#learning-priority)
+- [Why Do Data Types Exist?](#why-do-data-types-exist)
+- [The Big Picture — All Data Types at a Glance](#the-big-picture--all-data-types-at-a-glance)
+- [1. int — Whole Numbers](#1-int--whole-numbers)
+  - [What Makes Python's int Special?](#what-makes-pythons-int-special)
+  - [int in Different Number Systems](#int-in-different-number-systems)
+  - [int Arithmetic](#int-arithmetic)
+  - [Useful int Operations](#useful-int-operations)
+- [2. float — Decimal Numbers](#2-float--decimal-numbers)
+  - [The Float Precision Problem](#the-float-precision-problem)
+  - [Important float Facts](#important-float-facts)
+  - [Float Rounding](#float-rounding)
+- [3. bool — True or False](#3-bool--true-or-false)
+  - [bool is an Integer!](#bool-is-an-integer)
+  - [Truthiness](#truthiness)
+- [4. str — Text](#4-str--text)
+- [5. list — Ordered Collection](#5-list--ordered-collection)
+- [6. tuple — The Sealed List](#6-tuple--the-sealed-list)
+- [7. set — Only Unique Items](#7-set--only-unique-items)
+- [8. dict — Key-Value Pairs](#8-dict--key-value-pairs)
+- [9. None — The Intentional Blank](#9-none--the-intentional-blank)
+  - [None vs Empty Values](#none-vs-empty-values)
+- [10. Type Conversion](#10-type-conversion)
+  - [Common Conversions](#common-conversions)
+  - [Input Conversion — The input() Trap](#input-conversion)
+- [How to Choose the Right Type](#how-to-choose-the-right-type)
+- [Chapter Summary](#chapter-summary)
+- [bytes and bytearray — Binary Data](#bytes-and-bytearray--binary-data)
+- [collections Module — Smarter Data Structures](#collections-module--smarter-data-structures)
+  - [defaultdict](#defaultdict)
+  - [Counter](#counter)
+  - [deque](#deque)
+  - [frozenset](#frozenset)
 
-- A person's **name** → that's text
-- Their **age** → that's a whole number
-- Their **balance** → that might need a decimal point
-- Whether notifications are **on or off** → that's just yes or no
-- A list of their **phone numbers** → multiple values together
-- Their **social links** → labeled pairs like `"instagram" → "@alice"`
-
-Now imagine Python has to store all of this. It can't treat all of them the same way. You can do math on a number, but math on someone's name makes no sense. You can search through a list, but a single number has nothing to search.
-
-**Data types tell Python: "what is this, and what can you do with it?"**
-
----
-
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
-`list` · `dict` · `str` · `int` / `float` / `bool` · Comprehensions · `collections.defaultdict` · `collections.Counter` · `collections.deque`
+`list` · `dict` · `str` · `int` / `float` / `bool` · Type conversion · `None` · Truthiness · `collections.defaultdict` · `collections.Counter` · `collections.deque`
 
 **Should Learn** — Important for real projects, comes up regularly:
-`tuple` · `set` · `bytes` / `bytearray` · `frozenset` · String methods (`.split`, `.join`, `.strip`, `.format`)
+`tuple` · `set` · `bytes` / `bytearray` · `frozenset` · Float precision trap · String methods (`.split`, `.join`, `.strip`, `.format`)
 
 **Good to Know** — Useful in specific situations:
 `collections.OrderedDict` · `str.encode()` / `bytes.decode()` · `slice()` objects · String validation methods (`.isdigit()`, `.isalpha()`)
@@ -35,9 +56,26 @@ Now imagine Python has to store all of this. It can't treat all of them the same
 **Reference** — Know it exists, look up when needed:
 `complex` type · `memoryview` · Old `%` string formatting
 
----
+<a id="why-do-data-types-exist"></a>
+# 🌍 Why Do Data Types Exist?
 
-## 🗺️ The Big Picture — All Data Types at a Glance
+Imagine Python has to store a person's name, their age, their account balance, whether they're active, their phone numbers, and their social links. It can't treat all of them the same way:
+
+- You can do math on an age — but math on a name makes no sense
+- You can search through a list of phone numbers — but a single number has nothing to search
+- A balance needs decimal precision — an age doesn't
+
+**Data types tell Python: "what is this, and what can you do with it?"**
+
+Every type has:
+- A **set of allowed values** (int: whole numbers; bool: only True or False)
+- A **set of operations** (you can sort a list, not a number; you can do arithmetic on a number, not a list)
+- A **memory representation** (int stores differently from str)
+
+> [↑ Back to Top](#top)
+
+<a id="the-big-picture--all-data-types-at-a-glance"></a>
+# 🗺️ The Big Picture — All Data Types at a Glance
 
 ```
 PYTHON DATA TYPES
@@ -74,6 +112,7 @@ PYTHON DATA TYPES
 ```
 
 **How to check the type of anything:**
+
 ```python
 print(type(42))         # <class 'int'>
 print(type(3.14))       # <class 'float'>
@@ -83,11 +122,10 @@ print(type([1,2,3]))    # <class 'list'>
 print(type(None))       # <class 'NoneType'>
 ```
 
----
+> [↑ Back to Top](#top)
 
-## 🔢 Part 1: `int` — Whole Numbers
-
-### What is it?
+<a id="1-int--whole-numbers"></a>
+# 1. int — Whole Numbers
 
 `int` stands for **integer** — a whole number with no decimal point. It can be positive, negative, or zero.
 
@@ -96,13 +134,15 @@ age       = 25
 floors    = -3        # basement floors
 score     = 0
 students  = 1000
-big_num   = 9_999_999 # you can use underscores to make big numbers readable
-                      # Python ignores them — they're just for your eyes!
+big_num   = 9_999_999 # underscores make big numbers readable — Python ignores them
 ```
 
-### What Makes Python's int Special?
+> 📝 **Practice:** [Q1 — Leap Year Check](./practice.md#q1--int--leap-year-check) · [Q2 — Even or Odd](./practice.md#q2--int--even-or-odd) · [Q3 — Floor Division](./practice.md#q3--int--floor-division-and-remainder) · [Q4 — Power & abs()](./practice.md#q4--int--power-and-absolute-value)
 
-In most languages (like C or Java), an integer has a size limit — usually about 2 billion. Go over that, and the program crashes or wraps around to a wrong number.
+<a id="what-makes-pythons-int-special"></a>
+## What Makes Python's int Special?
+
+In most languages (like C or Java), an integer has a size limit — usually about 2 billion. Go over that, and the program crashes or wraps around to the wrong number.
 
 **Python integers have no limit.** They can be as big as your RAM allows.
 
@@ -113,9 +153,18 @@ print(really_big + 1)
 # 1000000000000000000000000000000  ← no crash, no wrong answer!
 ```
 
-### int in Different Number Systems
+```
+C / Java int:           Python int:
+  ┌──────────────┐        ┌─────────────────────────────────────┐
+  │  max ~2 bil  │        │  any size — limited only by RAM     │
+  │  overflow!   │        │  9_999_999_999_999_999_999_999 ✓   │
+  └──────────────┘        └─────────────────────────────────────┘
+```
 
-Humans count in base 10 (decimal). But computers use base 2 (binary). Python lets you write numbers in different bases:
+<a id="int-in-different-number-systems"></a>
+## int in Different Number Systems
+
+Humans count in base 10 (decimal). Computers use base 2 (binary). Python lets you write numbers in different bases:
 
 ```python
 decimal = 255           # base 10  — normal numbers
@@ -123,7 +172,7 @@ binary  = 0b11111111   # base 2   — starts with 0b
 octal   = 0o377        # base 8   — starts with 0o
 hexa    = 0xFF         # base 16  — starts with 0x
 
-# All four of these are the same number — 255!
+# All four are the same number — 255:
 print(decimal == binary == octal == hexa)   # True
 
 # Convert TO different bases:
@@ -132,63 +181,73 @@ print(oct(255))    # '0o377'        → octal string
 print(hex(255))    # '0xff'         → hex string
 ```
 
-### int Arithmetic
+```
+255 in different bases:
+  decimal (base 10)  →  255
+  binary  (base 2)   →  11111111   (8 bits, all 1s = max for 1 byte)
+  octal   (base 8)   →  377
+  hex     (base 16)  →  FF
+```
+
+<a id="int-arithmetic"></a>
+## int Arithmetic
 
 ```python
 a = 17
 b = 5
 
-print(a + b)    # 22   → addition
-print(a - b)    # 12   → subtraction
-print(a * b)    # 85   → multiplication
-print(a ** b)   # 1419857 → power (17 to the power of 5)
+print(a + b)    # 22      → addition
+print(a - b)    # 12      → subtraction
+print(a * b)    # 85      → multiplication
+print(a ** b)   # 1419857 → power (17 to the 5th)
 
 # Division is where it gets interesting:
-print(a / b)    # 3.4  → TRUE division → always gives a float!
-print(a // b)   # 3    → FLOOR division → whole number only (cuts decimal off)
-print(a % b)    # 2    → MODULO → the remainder after dividing
+print(a / b)    # 3.4  → TRUE division  → always returns float
+print(a // b)   # 3    → FLOOR division → whole number, decimal cut off
+print(a % b)    # 2    → MODULO         → remainder after dividing
 ```
 
-**Understanding floor division and modulo — a real example:**
+**Floor division and modulo — a real example:**
 
 ```
-You have 17 apples. You want to pack them into boxes of 5.
+You have 17 apples. Pack them into boxes of 5.
 
-17 // 5 = 3   → you can fill 3 complete boxes
-17 %  5 = 2   → you'll have 2 apples left over (the remainder)
+17 // 5 = 3   → you fill 3 complete boxes
+17 %  5 = 2   → 2 apples left over
 
-Check: 3 boxes × 5 apples = 15 apples used + 2 leftover = 17 ✓
+Check: 3 × 5 = 15 used + 2 leftover = 17 ✓
 ```
 
 **Modulo is incredibly useful:**
+
 ```python
 # Is a number even or odd?
-print(10 % 2)   # 0  → 10 is EVEN (no remainder when divided by 2)
-print(11 % 2)   # 1  → 11 is ODD  (1 remainder)
+10 % 2   # 0 → even (no remainder)
+11 % 2   # 1 → odd
 
 # Does a number divide evenly?
-# If n % x == 0, then n is divisible by x
-print(100 % 4)  # 0  → 100 is divisible by 4
+100 % 4  # 0 → 100 is divisible by 4
 
 # What's the last digit of a number?
-print(12345 % 10)  # 5  → last digit is always: number % 10
+12345 % 10  # 5 → last digit is always: n % 10
+
+# Wrap around (circular indexing):
+index = (current + 1) % len(items)  # never goes out of bounds
 ```
 
-### Useful int Operations
+<a id="useful-int-operations"></a>
+## Useful int Operations
 
 ```python
-print(abs(-42))        # 42        → absolute value (makes negative positive)
-print(pow(2, 10))      # 1024      → same as 2**10
-print(divmod(17, 5))   # (3, 2)    → gives BOTH floor division AND remainder at once!
+abs(-42)         # 42     → absolute value (makes negative → positive)
+pow(2, 10)       # 1024   → same as 2**10
+divmod(17, 5)    # (3, 2) → both floor division AND remainder at once
 ```
 
-> 📝 **Practice:** [Q1 — Leap Year Check](./practice.md#q1--int--leap-year-check) · [Q2 — Even or Odd](./practice.md#q2--int--even-or-odd) · [Q3 — Floor Division](./practice.md#q3--int--floor-division-and-remainder) · [Q4 — Power & abs()](./practice.md#q4--int--power-and-absolute-value)
+> [↑ Back to Top](#top)
 
----
-
-## 🌊 Part 2: `float` — Decimal Numbers
-
-### What is it?
+<a id="2-float--decimal-numbers"></a>
+# 2. float — Decimal Numbers
 
 `float` is for numbers that have a decimal point — measurements, prices, percentages, coordinates, anything that isn't a whole number.
 
@@ -202,44 +261,57 @@ big         = 1.5e10        # scientific notation: 1.5 × 10¹⁰ = 15,000,000,0
 very_small  = 2.5e-4        # 2.5 × 10⁻⁴ = 0.00025
 ```
 
-### The Float Precision Problem — The Most Important Warning in Python
+<a id="the-float-precision-problem"></a>
+## The Float Precision Problem
 
 This is one of the first things that shocks every Python beginner. Try this:
 
 ```python
 print(0.1 + 0.2)
+# Expected: 0.3
+# Actual:   0.30000000000000004
 ```
-
-You'd expect `0.3`. But Python prints: `0.30000000000000004`
 
 **Why does this happen?**
 
-Your computer stores numbers in binary (base 2 — only 0s and 1s). The number `0.1` looks simple in decimal, but in binary it's an infinite repeating pattern:
+Computers store numbers in binary (base 2 — only 0s and 1s). The number `0.1` looks simple in decimal, but in binary it's an infinite repeating pattern:
 
 ```
-0.1 in binary = 0.00011001100110011001100110011...  (goes on forever!)
+0.1 in decimal:   0.1            (looks simple)
+
+0.1 in binary:    0.000110011001100110011...  (infinite repeating — like 1/3 in decimal)
+                          ┌────────────────┐
+stored as:        0.00011001100110011010    (truncated — tiny error locked in forever)
+
+When you add:
+  stored(0.1) ≈  0.1000000000000000055511...
+  stored(0.2) ≈  0.2000000000000000111022...
+               ─────────────────────────────
+  result      ≈  0.3000000000000000444089...
+  Python shows:  0.30000000000000004
 ```
 
-The computer can only store a limited number of digits, so it stores an approximation. When you do math on approximations, tiny errors appear.
-
-It's the same as `1/3` in decimal — you can't write it exactly, so you write `0.3333...` and there's always a tiny inaccuracy.
+It's the same reason you can't write `1/3` exactly in decimal — you write `0.333...` and there's always a tiny inaccuracy.
 
 **How to handle it:**
 
 ```python
-# ❌ Never compare floats directly with ==
-print(0.1 + 0.2 == 0.3)    # False  ← wrong!
+# Never compare floats directly with ==
+print(0.1 + 0.2 == 0.3)        # False  ← wrong!
 
-# ✅ Use round() when displaying
-print(round(0.1 + 0.2, 2))  # 0.3   ← correct display
+# Use round() when displaying
+print(round(0.1 + 0.2, 2))     # 0.3    ← correct display
 
-# ✅ Use round() for comparisons
+# Use round() for comparisons
 print(round(0.1 + 0.2, 10) == 0.3)   # True
 
-# ✅ For financial calculations — use the decimal module (later chapters)
+# For financial calculations — use the decimal module
+from decimal import Decimal
+print(Decimal("0.1") + Decimal("0.2"))   # 0.3 exactly
 ```
 
-### Important float Facts
+<a id="important-float-facts"></a>
+## Important float Facts
 
 ```python
 # Division always gives a float — even if the result is whole:
@@ -250,39 +322,42 @@ print(type(10/2)) # <class 'float'>
 print(5 + 2.0)    # 7.0  ← int + float = float
 
 # Check if a float is actually a whole number:
-print((7.0).is_integer())   # True   → 7.0 is a whole number
-print((7.5).is_integer())   # False  → 7.5 is not
+(7.0).is_integer()   # True
+(7.5).is_integer()   # False
 
 # Float limits:
-print(1.8e308)     # inf  → beyond float's maximum → becomes infinity
-print(-1.8e308)    # -inf → negative infinity
+print(1.8e308)     # inf   → beyond float's maximum → becomes infinity
+print(-1.8e308)    # -inf  → negative infinity
 
 # Special float values:
 positive_infinity = float('inf')
 negative_infinity = float('-inf')
-not_a_number      = float('nan')   # result of invalid operations like 0/0
+not_a_number      = float('nan')   # result of invalid operations
 ```
 
-### Float Rounding
+<a id="float-rounding"></a>
+## Float Rounding
 
 ```python
-print(round(3.14159, 2))    # 3.14       → round to 2 decimal places
-print(round(3.14159, 0))    # 3.0        → round to 0 decimal places (still float)
-print(round(2.5))           # 2          → Python uses banker's rounding!
-print(round(3.5))           # 4          → rounds to nearest EVEN number
+round(3.14159, 2)    # 3.14   → 2 decimal places
+round(3.14159, 0)    # 3.0    → 0 decimal places (still float)
+round(2.5)           # 2      → banker's rounding — rounds to nearest EVEN!
+round(3.5)           # 4      → rounds to nearest even (4 is even, 2 is even)
 
-# round() for negative decimal places:
-print(round(1234, -2))      # 1200       → round to nearest hundred
-print(round(1678, -2))      # 1700
+# Negative decimal places:
+round(1234, -2)      # 1200   → round to nearest hundred
+round(1678, -2)      # 1700
 ```
+
+**Common mistake — banker's rounding surprises:**
+`round(0.5)` returns `0`, not `1`. `round(2.5)` returns `2`, not `3`. Python rounds to the nearest **even** number to reduce statistical bias in accumulated rounding. Use `math.ceil()` or `math.floor()` if you need classic rounding.
 
 > 📝 **Practice:** [Q5 — Restaurant Bill](./practice.md#q5--float--restaurant-bill) · [Q6 — BMI Calculator](./practice.md#q6--float--bmi-calculator) · [Q7 — Precision Trap](./practice.md#q7--float--precision-trap) · [Q8 — Temperature](./practice.md#q8--float--temperature-conversion)
 
----
+> [↑ Back to Top](#top)
 
-## ✅ Part 3: `bool` — True or False
-
-### What is it?
+<a id="3-bool--true-or-false"></a>
+# 3. bool — True or False
 
 `bool` (short for Boolean) has exactly two values: `True` or `False`. It's used for yes/no decisions — is the user logged in? Is the password correct? Is the list empty?
 
@@ -293,28 +368,48 @@ has_permission  = True
 is_raining      = False
 ```
 
-### The Surprising Truth: bool is an Integer!
+<a id="bool-is-an-integer"></a>
+## bool is an Integer!
 
-This is a fascinating Python fact. `bool` is actually a **subtype of `int`**. Under the hood:
+This is a fascinating Python fact. `bool` is actually a **subtype of `int`**. Under the hood, `True == 1` and `False == 0`.
 
 ```python
 True  == 1    # True
 False == 0    # True
 
-print(True + True)      # 2   ← yes, you can add booleans!
+print(True + True)      # 2   ← you can add booleans!
 print(True + False)     # 1
 print(True * 10)        # 10
 print(False * 10)       # 0
+```
 
-# This is actually USEFUL:
+**This is actually useful — counting True values:**
+
+```python
 exam_results = [True, False, True, True, False, True]
 passed = sum(exam_results)   # counts True as 1, False as 0
 print(passed)                # 4  ← 4 students passed!
+
+# Count how many items pass a condition:
+scores = [85, 42, 90, 67, 55, 78]
+above_passing = sum(s >= 60 for s in scores)   # 4
 ```
 
-### Truthiness — What "Acts Like" True or False
+```
+bool inheritance:
+  int
+   └── bool
+         ├── True  (stores as 1)
+         └── False (stores as 0)
 
-Python doesn't just use the words `True` and `False`. Many values can act as truthy or falsy in a condition.
+isinstance(True, int)   # True  ← bool IS an int
+isinstance(True, bool)  # True
+```
+
+<a id="truthiness"></a>
+## Truthiness
+
+Python doesn't just use `True` and `False` literally. Any value can be used in a boolean context — Python checks its **truthiness**.
 
 ```
 ┌───────────────────────────────────────────────────────────┐
@@ -331,39 +426,41 @@ Python doesn't just use the words `True` and `False`. Many values can act as tru
 │   False    False itself                                 │
 │                                                           │
 │  TRUTHY — everything else, including:                     │
-│   1  -1  42   any non-zero number                        │
-│   "a"  " "    any non-empty string (even just a space!)  │
-│   [0]         a list with items (even if items are falsy)│
-│   {"a":1}     a non-empty dict                          │
+│   1  -1  42    any non-zero number                       │
+│   "a"  " "     any non-empty string (even just a space!) │
+│   [0]          a list with items (even if items are 0)   │
+│   {"a": 1}     a non-empty dict                          │
 └───────────────────────────────────────────────────────────┘
 ```
 
 ```python
-# In an 'if' condition, Python checks truthiness:
+# Python checks truthiness in if conditions:
 username = ""
 if username:
     print("Hello,", username)
 else:
-    print("Please enter a username")   # ← this runs, because "" is falsy
+    print("Please enter a username")   # ← runs, "" is falsy
 
 items = [1, 2, 3]
 if items:
-    print("Cart has items")    # ← this runs, because non-empty list is truthy
+    print("Cart has items")    # ← runs, non-empty list is truthy
 
-# Explicitly convert anything to bool:
-print(bool(0))       # False
-print(bool(42))      # True
-print(bool(""))      # False
-print(bool("hi"))    # True
-print(bool([]))      # False
-print(bool([0]))     # True  ← list has one item, even if that item is 0!
+# Explicitly convert to bool:
+bool(0)      # False
+bool(42)     # True
+bool("")     # False
+bool("hi")   # True
+bool([])     # False
+bool([0])    # True  ← list has one item — even if that item is 0!
 ```
 
 > 📝 **Practice:** [Q9 — Truthiness](./practice.md#q9--bool--truthiness) · [Q10 — Bool Arithmetic](./practice.md#q10--bool--bool-arithmetic) · [Q11 — and/or Shortcuts](./practice.md#q11--bool--and--or-shortcuts)
 
----
+> [↑ Back to Top](#top)
 
-# 🔤 Part 4: `str` — Text
+<a id="4-str--text"></a>
+# 4. str — Text
+
 > Full deep-dive: [01_str/theory.md](./01_str/theory.md)
 
 Strings are immutable sequences of characters. Key operations: indexing · slicing · f-strings · `.strip()` `.split()` `.join()` `.replace()` `.lower()` `.upper()`
@@ -374,9 +471,11 @@ Strings are immutable sequences of characters. Key operations: indexing · slici
 
 > 📝 **Practice:** [str/practice.md](./01_str/practice.md) · [Q12–Q18 in master practice](./practice.md#q12--str--string-methods)
 
----
+> [↑ Back to Top](#top)
 
-# 📋 Part 5: `list` — Ordered Collection
+<a id="5-list--ordered-collection"></a>
+# 5. list — Ordered Collection
+
 > Full deep-dive: [02_list/theory.md](./02_list/theory.md)
 
 Lists are ordered, mutable sequences. Key operations: indexing · slicing · `.append()` `.remove()` `.sort()` · list comprehensions · copy trap.
@@ -387,9 +486,15 @@ Lists are ordered, mutable sequences. Key operations: indexing · slicing · `.a
 
 > 📝 **Practice:** [list/practice.md](./02_list/practice.md) · [Q19–Q25 in master practice](./practice.md#q19--list--crud-operations)
 
----
+**Common mistake — assignment is not a copy:** `b = a` makes both `b` and `a` point to the same list. Changing `b` changes `a`. Use `b = a.copy()` or `b = list(a)` for a real copy.
 
-# 📦 Part 6: `tuple` — The Sealed List
+**Common mistake — sort() returns None:** `result = my_list.sort()` → `result` is `None`. `sort()` modifies the list in place and returns nothing. Use `sorted(my_list)` when you need a new sorted list.
+
+> [↑ Back to Top](#top)
+
+<a id="6-tuple--the-sealed-list"></a>
+# 6. tuple — The Sealed List
+
 > Full deep-dive: [03_tuple/theory.md](./03_tuple/theory.md)
 
 Tuples are ordered, immutable sequences. Use when data should never change: coordinates, RGB values, DB rows. Supports unpacking, can be used as dict keys and set members.
@@ -400,9 +505,13 @@ Tuples are ordered, immutable sequences. Use when data should never change: coor
 
 > 📝 **Practice:** [tuple/practice.md](./03_tuple/practice.md) · [Q26–Q30 in master practice](./practice.md#q26--tuple--immutability)
 
----
+**Common mistake — single-item tuple:** `(42)` is just the number 42 in parentheses — not a tuple. You must add a trailing comma: `(42,)` is a tuple.
 
-# 🎯 Part 7: `set` — Only Unique Items
+> [↑ Back to Top](#top)
+
+<a id="7-set--only-unique-items"></a>
+# 7. set — Only Unique Items
+
 > Full deep-dive: [04_set/theory.md](./04_set/theory.md)
 
 Sets are unordered collections of unique, hashable items. Use for: deduplication, fast membership checks (O(1)), set math (intersection, union, difference).
@@ -413,9 +522,13 @@ Sets are unordered collections of unique, hashable items. Use for: deduplication
 
 > 📝 **Practice:** [set/practice.md](./04_set/practice.md) · [Q31–Q35 in master practice](./practice.md#q31--set--remove-duplicates)
 
----
+**Common mistake — empty set:** `{}` creates an empty **dict**, not an empty set. Use `set()` to create an empty set.
 
-# 🗂️ Part 8: `dict` — Key-Value Pairs
+> [↑ Back to Top](#top)
+
+<a id="8-dict--key-value-pairs"></a>
+# 8. dict — Key-Value Pairs
+
 > Full deep-dive: [05_dict/theory.md](./05_dict/theory.md)
 
 Dicts are ordered (Python 3.7+) key-value stores. The most-used complex type in Python. Key operations: `.get()` · `.items()` · `.update()` · dict comprehensions · `collections.defaultdict`.
@@ -426,11 +539,10 @@ Dicts are ordered (Python 3.7+) key-value stores. The most-used complex type in 
 
 > 📝 **Practice:** [dict/practice.md](./05_dict/practice.md) · [Q36–Q42 in master practice](./practice.md#q36--dict--create-and-access)
 
----
+> [↑ Back to Top](#top)
 
-## ❓ Part 9: `None` — The Intentional Blank
-
-### What is it?
+<a id="9-none--the-intentional-blank"></a>
+# 9. None — The Intentional Blank
 
 `None` represents **the absence of a value** — not zero, not an empty string, not False. It's Python's way of saying "nothing here, intentionally."
 
@@ -438,63 +550,97 @@ Dicts are ordered (Python 3.7+) key-value stores. The most-used complex type in 
 result = None          # no result yet
 phone  = None          # person has no phone number on file
 
-# Checking for None — always use 'is', not '==':
+# Always check for None with 'is', not '==':
 if result is None:
     print("No result available")
 
 if phone is not None:
     print("Phone:", phone)
-else:
-    print("Phone not provided")
 ```
 
 **Why `is` instead of `==`?**
 
-`None` is a special singleton — there's only ONE `None` object in all of Python. `is` checks if it's that exact object. It's more precise and is the Pythonic way.
+`None` is a special **singleton** — there's only ONE `None` object in all of Python. `is` checks if two variables point to that exact same object. It's more precise and is the Pythonic convention.
 
 ```python
 # When does a variable become None?
+
 # 1. You set it explicitly:
 x = None
 
-# 2. A function that has no return statement returns None:
-result = print("hello")   # print() doesn't return anything
-print(result)              # None  ← because print() has no return value
+# 2. A function with no return statement returns None:
+result = print("hello")   # print() returns nothing
+print(result)              # None
 
 # 3. .get() on a missing dict key:
 d = {"a": 1}
-print(d.get("b"))   # None
+print(d.get("b"))   # None  ← no KeyError, just None
+```
+
+<a id="none-vs-empty-values"></a>
+## None vs Empty Values
+
+Beginners often confuse `None` with other "empty-looking" values. They are all different:
+
+```
+┌──────────┬──────────┬─────────────────────────────────────┐
+│  Value   │  Type    │  Meaning                            │
+├──────────┼──────────┼─────────────────────────────────────┤
+│  None    │ NoneType │ No value — intentionally absent     │
+│  False   │ bool     │ The boolean value "no / off"        │
+│  0       │ int      │ The number zero                     │
+│  ""      │ str      │ Empty text (text exists, just empty)│
+│  []      │ list     │ Empty list (list exists, no items)  │
+│  {}      │ dict     │ Empty dict (dict exists, no pairs)  │
+└──────────┴──────────┴─────────────────────────────────────┘
+```
+
+```python
+# All are falsy — but they are NOT equal to each other:
+bool(None) == bool(False) == bool(0) == bool("") == bool([])
+# True — all falsy
+
+None == False    # False   ← completely different things
+None == 0        # False
+None == ""       # False
+
+# Correct way to distinguish:
+x = None
+x is None        # True   ← correct None check
+x == None        # True   ← works but not idiomatic
+x is False       # False  ← None is not False
 ```
 
 > 📝 **Practice:** [Q43 — Identity Check](./practice.md#q43--none--identity-check) · [Q44 — Optional Value](./practice.md#q44--none--optional-value)
 
----
+> [↑ Back to Top](#top)
 
-## 🔄 Part 10: Type Conversion
+<a id="10-type-conversion"></a>
+# 10. Type Conversion
 
-### Why Convert Types?
+Sometimes data comes in one form and you need it in another. User types a number with `input()` → it comes as a string, you need an int. You want to display a number inside a sentence → number to string. A list has duplicates and you want them removed → list to set.
 
-Sometimes data comes in one form and you need it in another:
-- User types a number with `input()` → it comes as a string, you need an int
-- You want to display a number inside a sentence → number to string
-- A list has duplicates and you want them removed → list to set
+**Two kinds of conversion:**
+- **Explicit (casting)** — you call a function: `int("42")`, `str(3.14)`, `list({1,2,3})`
+- **Implicit (coercion)** — Python converts automatically: `5 + 2.0` → `7.0` (int promoted to float)
 
-### Common Conversions
+<a id="common-conversions"></a>
+## Common Conversions
 
 ```python
 # → int
-int("42")        # 42         string to int
-int(3.9)         # 3          float to int (TRUNCATES — cuts off decimal, doesn't round!)
-int(True)        # 1          bool to int
+int("42")        # 42    string to int
+int(3.9)         # 3     float to int — TRUNCATES (cuts, doesn't round!)
+int(True)        # 1     bool to int
 int(False)       # 0
 
-# ⚠️ These will CRASH:
+# These CRASH:
 # int("hello")   → ValueError: invalid literal
-# int("3.14")    → ValueError: use float("3.14") first!
+# int("3.14")    → ValueError — use float("3.14") first, then int()
 
 # → float
-float("3.14")    # 3.14       string to float
-float(42)        # 42.0       int to float
+float("3.14")    # 3.14  string to float
+float(42)        # 42.0  int to float
 float(True)      # 1.0
 
 # → str
@@ -512,9 +658,9 @@ bool([])         # False
 bool([1,2])      # True
 
 # → list
-list("Python")   # ['P','y','t','h','o','n']   string → list of chars
-list((1,2,3))    # [1, 2, 3]                   tuple → list
-list({1,2,3})    # [1, 2, 3]  (order may vary) set → list
+list("Python")   # ['P','y','t','h','o','n']  string → chars
+list((1,2,3))    # [1, 2, 3]                  tuple → list
+list({1,2,3})    # [1, 2, 3]  (order varies)  set → list
 
 # → tuple
 tuple([1,2,3])   # (1, 2, 3)   list → tuple
@@ -525,85 +671,77 @@ set([1,2,2,3])   # {1, 2, 3}
 set("hello")     # {'h','e','l','o'}
 ```
 
-### The Most Common Conversion — Input from User
+```
+Safe conversions (no data loss):      Lossy conversions:
+  int  →  float  →  str               float → int    (3.9 → 3, lost .9)
+  bool → int → float → str            str → int      (fails if not numeric)
+                                       set → list     (order not guaranteed)
+```
+
+<a id="input-conversion"></a>
+## Input Conversion — The input() Trap
+
+`input()` **always returns a string** — no matter what the user types. This is the #1 beginner bug.
 
 ```python
-# input() ALWAYS returns a string — no matter what the user types!
-name = input("Enter your name: ")   # string — correct, names are text
-age  = input("Enter your age: ")    # ← this is a string "25", not the number 25!
+age = input("Enter your age: ")   # user types 25 → age = "25" (string!)
 
-# This will CRASH:
-next_year = age + 1   # ❌ TypeError: can't add str and int
+# This CRASHES:
+next_year = age + 1   # TypeError: can't add str and int
 
-# FIX — convert immediately:
-age = int(input("Enter your age: "))   # ✅ now it's an integer
-next_year = age + 1   # ✅ works!
+# Fix — convert immediately:
+age = int(input("Enter your age: "))   # now it's an integer
+next_year = age + 1   # works!
+
+# Safe pattern — handle invalid input:
+try:
+    age = int(input("Enter your age: "))
+except ValueError:
+    print("Please enter a whole number")
 ```
 
 > 📝 **Practice:** [Q45 — int and float](./practice.md#q45--type-conversion--int-and-float) · [Q46 — input() Trap](./practice.md#q46--type-conversion--the-input-trap) · [Q47 — bool conversion](./practice.md#q47--type-conversion--bool-conversion)
 
----
+**Common mistake — int() truncates, it does not round:** `int(3.9)` returns `3`, not `4`. Use `round(3.9)` when you need rounding.
 
-## 🔄 How to Choose the Right Type
+> [↑ Back to Top](#top)
 
-```mermaid
-flowchart TD
-    A[What kind of data do I have?] --> B{Single value or many?}
-
-    B -->|Single value| C{What kind?}
-    C -->|Whole number| D[int]
-    C -->|Decimal number| E[float]
-    C -->|True or False| F[bool]
-    C -->|Text| G[str]
-    C -->|Nothing / blank| H[None]
-
-    B -->|Many values| I{What do I need?}
-    I -->|Order matters, can change| J[list]
-    I -->|Order matters, never changes| K[tuple]
-    I -->|Only unique items, fast search| L[set]
-    I -->|Look up by name/label| M[dict]
-```
-
----
-
-## ⚠️ The Most Important Gotchas
-
-```python
-# 1. {} is an empty DICT, not empty set
-empty_dict = {}       # dict!
-empty_set  = set()    # correct way for empty set
-
-# 2. Single-item tuple NEEDS a trailing comma
-just_42    = (42)     # this is the int 42, NOT a tuple
-real_tuple = (42,)    # this IS a tuple
-
-# 3. Copying a list
-b = a        # NOT a copy — both point to same list!
-b = a.copy() # actual copy
-
-# 4. int() truncates, doesn't round
-int(3.9)     # 3, not 4!
-int(3.1)     # 3
-round(3.9)   # 4  ← use round() when you want rounding
-
-# 5. input() always returns a string
-age = input("Age: ")    # "25"  → string!
-age = int(input("Age: ")) # 25 → int ✅
-
-# 6. Float comparison trap
-0.1 + 0.2 == 0.3   # False! Use round() or just avoid == with floats
-
-# 7. list.sort() vs sorted()
-lst.sort()       # changes the list, returns None
-sorted(lst)      # returns a new list, original untouched
-```
-
----
-
-## 🎬 Chapter Summary
+<a id="how-to-choose-the-right-type"></a>
+# 🔄 How to Choose the Right Type
 
 ```
-You now know all of Python's core data types:
+Is the data a single value?
+   │
+   ├── Whole number?                        → int
+   ├── Number with decimals?                → float
+   ├── Yes / No ?                           → bool
+   ├── Text?                                → str
+   └── "Nothing" / not set yet?             → None
+
+Is the data multiple values?
+   │
+   ├── Order matters AND you'll modify it?  → list
+   ├── Order matters, never changes?        → tuple  (can be dict key)
+   ├── Need unique items / fast O(1) check? → set
+   └── Need to look up by label/name?       → dict
+```
+
+```
+Quick cheat:
+  [1, 2, 3]         → list   (ordered, mutable)
+  (1, 2, 3)         → tuple  (ordered, fixed)
+  {1, 2, 3}         → set    (unique, unordered)
+  {"a": 1, "b": 2}  → dict   (labeled, key→value)
+  {}                → dict!  (NOT a set — empty {} is always dict)
+  set()             → empty set (you must write it this way)
+```
+
+> [↑ Back to Top](#top)
+
+<a id="chapter-summary"></a>
+# 🎬 Chapter Summary
+
+```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   int     Whole numbers, any size, floor div //, modulo %
   float   Decimals, precision trap, use round() wisely
@@ -617,9 +755,10 @@ You now know all of Python's core data types:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
----
+> [↑ Back to Top](#top)
 
-## 🔢 `bytes` and `bytearray` — Binary Data
+<a id="bytes-and-bytearray--binary-data"></a>
+# bytes and bytearray — Binary Data
 
 When you work with files, network sockets, or encoding text, you deal with **raw binary data** — not strings.
 
@@ -634,20 +773,20 @@ b3 = "hello".encode("utf-8")  # from string
 
 # Creating bytearray (mutable):
 ba = bytearray(b"hello")
-ba[0] = 72                  # can modify
-ba.append(33)               # can append
+ba[0] = 72    # can modify individual bytes
+ba.append(33) # can append
 
 # Key operations:
 b = b"hello world"
-b[0]          # 104  (int, not char)
-b[0:5]        # b'hello'
-len(b)        # 11
-b.decode("utf-8")   # "hello world"  ← back to string
+b[0]              # 104  (int, not char)
+b[0:5]            # b'hello'
+len(b)            # 11
+b.decode("utf-8") # "hello world"  ← back to string
+```
 
-# String ↔ bytes conversion (always specify encoding):
-text = "café"
-encoded = text.encode("utf-8")    # b'caf\xc3\xa9'
-decoded = encoded.decode("utf-8") # "café"
+```
+str  ──encode("utf-8")──►  bytes  ──decode("utf-8")──►  str
+"café"                     b'caf\xc3\xa9'               "café"
 ```
 
 **When you need this:**
@@ -667,64 +806,79 @@ with open("file", "rb") as f:
         print("This is a PNG file")
 ```
 
-**`bytes` vs `str` — the key difference:**
+**`bytes` vs `str` — you cannot mix them:**
 
 ```python
 type(b"hello")   # <class 'bytes'>
 type("hello")    # <class 'str'>
 
-# You cannot mix them:
-b"hello" + " world"    # TypeError — must use bytes + bytes
+b"hello" + " world"    # TypeError — must be bytes + bytes
 b"hello" + b" world"   # b'hello world' ✓
 ```
 
----
+> [↑ Back to Top](#top)
 
-## 🗂️ `collections` Module — Smarter Data Structures
+<a id="collections-module--smarter-data-structures"></a>
+# collections Module — Smarter Data Structures
 
 Python's `collections` module gives you specialized containers that solve common problems better than plain dicts and lists.
 
-### `defaultdict` — Dictionary That Never Raises KeyError
+```
+defaultdict  → grouping, counting, graph adjacency lists
+Counter      → frequency analysis, most common items, bag operations
+deque        → queues, BFS/DFS, sliding windows, recent-N items
+frozenset    → set as dict key, immutable set membership
+```
+
+<a id="defaultdict"></a>
+## defaultdict — Dictionary That Never Raises KeyError
+
+A regular dict raises `KeyError` when you access a missing key. `defaultdict` instead creates a default value automatically.
 
 ```python
 from collections import defaultdict
 
-
-# Regular dict — KeyError if key missing:
+# Regular dict — KeyError on missing key:
 counts = {}
 counts["apple"] += 1    # KeyError: 'apple'
 
 # defaultdict — creates default value automatically:
-counts = defaultdict(int)   # default value: 0
-counts["apple"] += 1        # works — starts at 0
+counts = defaultdict(int)   # default: 0 (int() returns 0)
+counts["apple"] += 1        # starts at 0, increments to 1
 counts["apple"] += 1
 print(counts["apple"])      # 2
-print(counts["banana"])     # 0 — created automatically
+print(counts["banana"])     # 0 — created automatically, no KeyError
 
-# Group items by key:
-from collections import defaultdict
+# Group items by key (common real-world use):
 groups = defaultdict(list)
 for item in ["a", "b", "a", "c", "b", "a"]:
     groups[item].append(item)
-# defaultdict(<class 'list'>, {'a': ['a', 'a', 'a'], 'b': ['b', 'b'], 'c': ['c']})
+# {'a': ['a', 'a', 'a'], 'b': ['b', 'b'], 'c': ['c']}
 ```
 
-> 📝 **Practice:** [Q82 · compare-dict-defaultdict](../python_practice_questions_100.md#q82--interview--compare-dict-defaultdict)
+```
+defaultdict(int)  → missing key starts at 0
+defaultdict(list) → missing key starts at []
+defaultdict(set)  → missing key starts at set()
+defaultdict(str)  → missing key starts at ""
+```
 
+<a id="counter"></a>
+## Counter — Frequency Counting
 
-### `Counter` — Frequency Counting
+`Counter` counts how many times each item appears. One line replaces a manual counting loop.
 
 ```python
 from collections import Counter
 
-# Count occurrences in one line:
+# Count in one line:
 words = ["apple", "banana", "apple", "cherry", "banana", "apple"]
 count = Counter(words)
 # Counter({'apple': 3, 'banana': 2, 'cherry': 1})
 
-count["apple"]      # 3
-count["missing"]    # 0  ← no KeyError (like defaultdict)
-count.most_common(2)  # [('apple', 3), ('banana', 2)]
+count["apple"]         # 3
+count["missing"]       # 0  ← no KeyError (like defaultdict)
+count.most_common(2)   # [('apple', 3), ('banana', 2)]
 
 # Counter arithmetic:
 c1 = Counter(a=3, b=2)
@@ -732,26 +886,29 @@ c2 = Counter(a=1, b=4)
 c1 + c2   # Counter({'b': 6, 'a': 4})
 c1 - c2   # Counter({'a': 2})  ← only positive counts kept
 
-# Count characters in a string:
+# Count characters:
 Counter("mississippi")
 # Counter({'s': 4, 'i': 4, 'p': 2, 'm': 1})
 ```
 
-### `deque` — Double-Ended Queue
+<a id="deque"></a>
+## deque — Double-Ended Queue
 
-A regular list is slow (`O(n)`) when inserting/removing at the front.
-`deque` is `O(1)` at BOTH ends.
+A regular list is slow (`O(n)`) when inserting or removing at the front. `deque` is `O(1)` at **both** ends.
 
 ```python
 from collections import deque
 
 d = deque([1, 2, 3])
-d.append(4)        # add to right:  [1, 2, 3, 4]
-d.appendleft(0)    # add to left:   [0, 1, 2, 3, 4]
-d.pop()            # remove right:  returns 4
-d.popleft()        # remove left:   returns 0
+d.append(4)        # add right:  [1, 2, 3, 4]
+d.appendleft(0)    # add left:   [0, 1, 2, 3, 4]
+d.pop()            # remove right: returns 4
+d.popleft()        # remove left:  returns 0
+```
 
-# Fixed-size sliding window (maxlen):
+**Fixed-size sliding window with `maxlen`:**
+
+```python
 recent = deque(maxlen=3)
 for x in range(6):
     recent.append(x)
@@ -764,50 +921,51 @@ for x in range(6):
 # [3, 4, 5]
 ```
 
-**Use `deque` when:** implementing queues, BFS algorithms, sliding windows, or any pattern needing fast front-insertion.
+Use `deque` when: implementing queues, BFS algorithms, sliding windows, or any pattern needing fast front-insertion.
 
-### `frozenset` — Immutable Set
+```
+list append/pop:              deque append/pop:
+  right end → O(1) ✓           right end → O(1) ✓
+  left end  → O(n) ✗           left end  → O(1) ✓
+```
+
+<a id="frozenset"></a>
+## frozenset — Immutable Set
+
+A `frozenset` is a set that cannot be modified after creation — it's hashable, which means it can be used as a dict key or placed inside another set (regular sets cannot).
 
 ```python
-# frozenset is hashable — can be used as dict key or in another set:
 fs = frozenset([1, 2, 3])
 fs.add(4)   # AttributeError — immutable
 
 # Use as dict key (regular set can't do this):
 cache = {}
-cache[frozenset([1, 2, 3])] = "result"
+cache[frozenset([1, 2, 3])] = "result"   # ✓
 
-# Use as set of sets:
+# Use as element in a set of sets:
 seen = set()
 seen.add(frozenset([1, 2]))   # frozenset is hashable, set is not
 ```
 
-**Quick reference — when to use each:**
+> [↑ Back to Top](#top)
 
-```
-defaultdict  → grouping, counting, graph adjacency lists
-Counter      → frequency analysis, most common items, bag operations
-deque        → queues, BFS/DFS, sliding windows, recent-N items
-frozenset    → set as dict key, immutable set membership
-```
-
----
-
-## 🧭 Navigation
-
-| | |
-|---|---|
-| ⬅️ Previous | [02 — Control Flow](../02_control_flow/README.md) |
-| 💻 Practice | [practice.md](./practice.md) |
-| 🎤 Interview | [interview.md](./interview.md) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| ➡️ Next | [04 — Functions](../04_functions/README.md) |
-| 🏠 Home | [01_Python_Mastery](../README.md) |
-
----
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Control Flow — Interview Q&A](../02_control_flow/interview.md) &nbsp;|&nbsp; **Next:** [Complexity Analysis →](./06_complexity/theory.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [02_control_flow → theory.md](../02_control_flow/theory.md) |
+| ➡ Next Module | [04_functions → theory.md](../04_functions/theory.md) |
 
-**Related Topics:** [Complexity Analysis](./06_complexity/theory.md) · [Cheat Sheet](./cheetsheet.md) · [Complexity Analysis Interview](./06_complexity/interview.md) · [Interview Q&A](./interview.md) · [Collections Module](./07_collections/theory.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[Control Flow →](../02_control_flow/theory.md) · [Functions →](../04_functions/theory.md) · [OOP →](../05_oops/theory.md) · [Memory Management →](../01.1_memory_management/theory.md)
+
+**Jump to specific topics in other files:**
+- Mutable default argument trap → [04_functions/theory.md](../04_functions/theory.md)
+- List comprehensions → [02_control_flow/theory.md#9-comprehensions](../02_control_flow/theory.md#9-comprehensions)
+- Reference counting (why immutables are safer) → [01.1_memory_management/theory.md#2-objects-and-references](../01.1_memory_management/theory.md#2-objects-and-references)
+- Generator expressions (lazy alternative to list) → [02_control_flow/theory.md#generator-expressions](../02_control_flow/theory.md#generator-expressions)

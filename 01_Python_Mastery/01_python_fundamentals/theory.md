@@ -1,7 +1,48 @@
+<a id="top"></a>
 # 🐍 Python Fundamentals
 
----
+## 📖 Table of Contents
 
+- [📌 Learning Priority](#learning-priority)
+- [1. print() and Basic I/O](#1-print-and-basic-io)
+  - [What Can You Print?](#what-can-you-print)
+  - [The sep= and end= Options](#the-sep-and-end-options)
+  - [The Most Common Beginner Mistake](#the-most-common-beginner-mistake)
+  - [Getting Input from the User](#getting-input-from-the-user)
+- [2. Programming vs Scripting](#2-programming-vs-scripting)
+  - [Where Does Python Sit?](#where-does-python-sit)
+  - [What Kind of Language Is Python?](#what-kind-of-language-is-python)
+- [3. Python's Key Features](#3-pythons-key-features)
+  - [1. You Just Run It — No Waiting Step](#you-just-run-it)
+  - [2. You Don't Declare Types](#you-dont-declare-types)
+  - [3. Everything Is an Object](#everything-is-an-object)
+  - [4. Python Cleans Up After Itself](#python-cleans-up-after-itself)
+  - [5. Python Comes With Tools Already Installed](#python-comes-with-tools)
+  - [6. Same Code Works Everywhere](#same-code-works-everywhere)
+  - [7. Code That Reads Like a Sentence](#code-that-reads-like-a-sentence)
+- [4. Python Basics — Comments, Quotes, and Indentation](#4-python-basics)
+  - [Comments — Notes for Humans, Ignored by Python](#comments)
+  - [String Quotes — Single, Double, and Triple](#string-quotes)
+  - [Indentation — The Rule That Makes Python Unique](#indentation)
+- [5. Variables & Memory Model in Python](#5-variables-memory-model)
+  - [The Biggest Lie Beginners Believe](#the-biggest-lie)
+  - [What a Variable REALLY Is](#what-a-variable-really-is)
+  - [The Juice Bottle Model (10-Year-Old Version)](#the-juice-bottle-model)
+  - [Let's See It in Code](#lets-see-it-in-code)
+  - [The Classic Production Bug](#the-classic-production-bug)
+  - [What Actually Exists in Memory?](#what-actually-exists-in-memory)
+  - [Rebinding (Very Important Concept)](#rebinding)
+  - [Mutable vs Immutable (Where Things Get Serious)](#mutable-vs-immutable)
+  - ["is" vs "==" (Interview Favorite)](#is-vs)
+  - [Small Integer Interning (Advanced Understanding)](#small-integer-interning)
+  - [Shallow Copy vs Deep Copy (Real Production Issue)](#shallow-copy-vs-deep-copy)
+  - [Garbage Collection (High-Level View)](#garbage-collection)
+  - [Real-World System Example](#real-world-system-example)
+  - [Senior-Level Mental Model](#senior-level-mental-model)
+  - [Interview Questions You Should Now Answer Confidently](#interview-questions)
+  - [Final Understanding Check](#final-understanding-check)
+
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -16,78 +57,10 @@ Integer caching · String interning · `pass` / `assert` · Augmented assignment
 **Reference** — Know it exists, look up when needed:
 `complex` type · Old-style `%` string formatting
 
----
+<a id="1-print-and-basic-io"></a>
+# 1. print() and Basic I/O
 
-# 1️⃣ What is Python?
-
-Imagine you want to talk to a computer.
-
-The computer only understands 0s and 1s. But we are humans — we think in English.
-
-Python is like a translator friend.
-
-You say:
-"Add two numbers"
-
-Python converts that into something the computer understands.
-
-That’s it.
-
-Python is:
-- High-level (human readable)
-- Interpreted (runs line by line)
-- Dynamically typed
-- Object-oriented
-- Very powerful
-
-Python was created by Guido van Rossum in 1991.
-
-> 📝 **Practice:** [Q23 · none-checks](../python_practice_questions_100.md#q23--thinking--none-checks)
-
----
-
-# 2️⃣ How Python Actually Runs Your Code
-
-Let’s say you write:
-
-print("Hello")
-
-Here’s what happens internally:
-
-1. You write code in `.py` file
-2. Python converts it to bytecode
-3. Bytecode runs inside Python Virtual Machine (PVM)
-4. Output is printed
-
-So Python is not directly running your code.
-It runs bytecode inside its virtual machine.
-
-Think of it like:
-
-You speak English → Translator converts → Computer understands
-
----
-
-# 3️⃣ Your First Line of Code — print()
-
-> Every Python journey starts here.
-
-When you want Python to show you something — a word, a number, a result — you use `print()`.
-
-That's it. That's the job. `print()` displays output on the screen.
-
-```python
-print("Hello, world!")
-```
-
-Run that. You will see:
-
-```
-Hello, world!
-```
-
----
-
+<a id="what-can-you-print"></a>
 ## What Can You Print?
 
 **Text:**
@@ -127,8 +100,7 @@ print("Name:", name, "Age:", age)
 
 When you use commas, Python automatically puts a space between each item.
 
----
-
+<a id="the-sep-and-end-options"></a>
 ## The sep= and end= Options
 
 By default, `print()` separates items with a space and adds a new line at the end.
@@ -163,15 +135,14 @@ print("World")
 You don't need to memorise these. Just know they exist.
 You'll reach for them naturally when you need them.
 
----
-
+<a id="the-most-common-beginner-mistake"></a>
 ## The Most Common Beginner Mistake
 
 ```python
 name = "Alice"
 
-print(name)     # ✅ prints the VALUE stored in name → Alice
-print("name")   # ❌ prints the WORD "name" → name
+print(name)     # prints the VALUE stored in name: Alice
+print("name")   # prints the WORD "name" literally
 ```
 
 When you write `print(name)` — no quotes — Python looks up the variable called `name` and prints its value.
@@ -183,8 +154,7 @@ No quotes = variable.
 
 This confusion trips up almost every beginner at least once.
 
----
-
+<a id="getting-input-from-the-user"></a>
 ## Getting Input from the User — input()
 
 So far your programs just run and finish.
@@ -211,7 +181,7 @@ Whatever they type gets stored in the variable.
 ```python
 age = input("How old are you? ")
 print(age)        # looks like a number
-print(type(age))  # <class 'str'>  ← but it's actually text!
+print(type(age))  # <class 'str'>  but it's actually text!
 ```
 
 Even if the user types `25`, Python stores it as `"25"` (text), not `25` (number).
@@ -220,7 +190,7 @@ To use it as a number, you must convert it:
 
 ```python
 age = input("How old are you? ")
-age = int(age)          # convert text → whole number
+age = int(age)          # convert text to whole number
 print(age + 1)          # now you can do maths with it
 ```
 
@@ -242,9 +212,10 @@ price = float(input("Enter price: "))  # decimal number
 You will use `input()` in almost every beginner exercise.
 Always remember: convert it before doing any maths.
 
----
+> [↑ Back to Top](#top)
 
-# 4️⃣ Programming vs Scripting — What's the Difference?
+<a id="2-programming-vs-scripting"></a>
+# 2. Programming vs Scripting — What's the Difference?
 
 > You've heard both words. Let's clear up the confusion once and for all.
 
@@ -263,6 +234,7 @@ That is a **scripter**. They automate tasks using tools someone else built.
 | **Difficulty** | Harder to learn | Easier to learn |
 | **Languages** | C, C++, Java | Bash, Python |
 
+<a id="where-does-python-sit"></a>
 ## Where Does Python Sit?
 
 Python is **both** — and that is very rare.
@@ -275,6 +247,7 @@ You can use Python to:
 
 Most languages force you to pick a lane. Python lets you do everything.
 
+<a id="what-kind-of-language-is-python"></a>
 ## What Kind of Language Is Python?
 
 Python is described in many ways. Here is what each label means in plain English:
@@ -289,19 +262,21 @@ Python is described in many ways. Here is what each label means in plain English
 
 Python is not the fastest language in the world. But it is the most versatile and readable. That is why it became the most popular language on earth.
 
----
+> [↑ Back to Top](#top)
 
-# 5️⃣ Python's Key Features — What Makes It Special
+<a id="3-pythons-key-features"></a>
+# 3. Python's Key Features — What Makes It Special
 
 > These are the things that make Python different from other languages.
 > You don't need to memorise them — just understand the ideas.
 
+<a id="you-just-run-it"></a>
 ## 1. You Just Run It — No Waiting Step
 
 With some languages like C or Java, you have to "build" your code before you can run it.
 It is like baking a cake before you can eat it.
 
-Python is different. You write code → you run it → you see the result. Immediately.
+Python is different. You write code, you run it, you see the result. Immediately.
 
 ```python
 print("Hello, world!")
@@ -309,6 +284,32 @@ print("Hello, world!")
 
 Save that in a file. Run it. Done. No build step.
 
+**How Python runs your code — what actually happens:**
+
+```
+  your_script.py
+       |
+       v
+  Python Interpreter reads source line by line
+       |
+       v
+  Compiles to Bytecode  (.pyc  stored in __pycache__/)
+       |
+       v
+  CPython VM executes bytecode instruction by instruction
+       |
+       v
+  Output / Result on your screen
+
+  Compare:
+  C/Java:  source --> [compile step: seconds/minutes] --> binary --> run
+  Python:  source -->                                               run
+                      (compile happens internally, invisibly)
+```
+
+This is what "interpreted" means: no separate compile step from your perspective.
+
+<a id="you-dont-declare-types"></a>
 ## 2. You Don't Declare Types
 
 In many languages, you must tell the computer: "this is a number" or "this is text".
@@ -323,6 +324,7 @@ score = 98.5     # Python knows this is a decimal number
 
 You never wrote "text" or "number" anywhere. Python understood on its own.
 
+<a id="everything-is-an-object"></a>
 ## 3. Everything Is an Object
 
 In Python, every piece of data is an **object** — a thing with properties and behaviours.
@@ -333,6 +335,7 @@ You don't need to understand this deeply right now. You will see it naturally as
 
 For now, just know: Python treats all data the same way. This makes the language consistent and predictable.
 
+<a id="python-cleans-up-after-itself"></a>
 ## 4. Python Cleans Up After Itself
 
 In some older languages, you manually had to tell the computer "I'm done with this data, delete it".
@@ -341,6 +344,7 @@ Python does this automatically. When data is no longer needed, Python removes it
 
 You never have to think about it. Python handles it.
 
+<a id="python-comes-with-tools"></a>
 ## 5. Python Comes With Tools Already Installed
 
 When you install Python, you get hundreds of built-in tools for free.
@@ -354,8 +358,9 @@ import datetime
 print(datetime.date.today())   # prints today's date — no extra install needed
 ```
 
-It is like buying a Swiss Army knife — it already has a blade, scissors, and a screwdriver. You didn't have to buy them separately.
+It is like buying a Swiss Army knife — it already has a blade, scissors, and a screwdriver.
 
+<a id="same-code-works-everywhere"></a>
 ## 6. Same Code Works Everywhere
 
 Write your Python code once on a Windows computer.
@@ -364,6 +369,7 @@ It runs exactly the same.
 
 No changes needed.
 
+<a id="code-that-reads-like-a-sentence"></a>
 ## 7. Code That Reads Like a Sentence
 
 Python was designed to look like plain English.
@@ -377,13 +383,15 @@ print("My name is", name, "and I am", age, "years old")
 You can almost read that out loud and it makes sense.
 That is not an accident — Python was built this way on purpose.
 
----
+> [↑ Back to Top](#top)
 
-# 6️⃣ Python Basics — Comments, Quotes, and Indentation
+<a id="4-python-basics"></a>
+# 4. Python Basics — Comments, Quotes, and Indentation
 
 > These are the three things you must understand before writing any Python code.
 > None of them are complicated. Let's go through them one by one.
 
+<a id="comments"></a>
 ## Comments — Notes for Humans, Ignored by Python
 
 A **comment** is a line in your code that Python completely ignores.
@@ -427,8 +435,7 @@ You can write as many lines as you want here.
 Note: You will learn more about these triple-quote blocks in the functions chapter.
 For now, just know they exist and Python skips them when they are not stored.
 
----
-
+<a id="string-quotes"></a>
 ## String Quotes — Single, Double, and Triple
 
 A **string** is how you write text in Python.
@@ -446,14 +453,8 @@ Single and double quotes do the same job. Use whichever you prefer.
 **But there is one practical difference — apostrophes and quote marks inside text:**
 
 ```python
-# If your text contains an apostrophe, use double quotes on the outside:
-msg = "It's a great day"       # ✅ clean and easy to read
-
-# If your text contains double quotes, use single quotes on the outside:
-msg = 'He said "hello"'        # ✅ clean and easy to read
-
-# If you use the same quote type inside and outside, you get an error:
-msg = 'It's a great day'       # ❌ Python gets confused — where does the string end?
+msg = "It's a great day"       # apostrophe inside: use double quotes outside
+msg = 'He said "hello"'        # quote inside: use single quotes outside
 ```
 
 **Triple quotes** — for text that spans multiple lines:
@@ -469,20 +470,14 @@ We are glad you are here.
 print(message)
 ```
 
-Use triple quotes when your text is long and needs to go across several lines — like an email, a paragraph, or a block of instructions.
-
 **Raw strings (r"...")** — when you need backslashes to be treated as normal characters:
 
 ```python
-# Normal string — backslash has special meaning:
-path = "C:
-ew_folder	asks"
-# Python reads 
- as "new line" and 	 as "tab" — not what you wanted!
+# Without raw string — backslash has special meaning:
+# \n = new line, \t = tab — NOT what you want for file paths
 
-# Raw string — backslash is just a backslash:
-path = r"C:
-ew_folder	asks"   # ← r before the quote = raw string
+# With raw string:
+path = r"C:\new_folder\tasks"   # r before the quote = raw string
 # Now Python reads it exactly as written
 ```
 
@@ -499,32 +494,28 @@ print("Hello " + name + ", you are " + str(age) + " years old")
 
 # With f-string (modern way, clean):
 print(f"Hello {name}, you are {age} years old")
-# → Hello Alice, you are 25 years old
+# Hello Alice, you are 25 years old
 ```
 
 Put an `f` before the opening quote. Then put any variable name inside `{ }`.
 Python will replace it with the actual value.
 
----
-
+<a id="indentation"></a>
 ## Indentation — The Rule That Makes Python Unique
 
 Most programming languages use `{` and `}` curly braces to group lines of code together.
 
-Python does something different. It uses **indentation** — how far a line is pushed to the right.
+Python uses **indentation** — how far a line is pushed to the right.
 
 ```
 x = 10
 
 if x > 5:
-    print("x is big")    ← this line is indented (pushed right by 4 spaces)
-    print("still big")   ← same indent = still inside the if block
+    print("x is big")    <- this line is indented (4 spaces)
+    print("still big")   <- same indent = still inside the if block
 
-print("always runs")     ← no indent = outside the if block, always runs
+print("always runs")     <- no indent = outside the if block
 ```
-
-The 4 spaces on lines 3 and 4 tell Python: "these lines belong to the `if` block".
-The line with no indent tells Python: "this is outside the block".
 
 **The rules are simple:**
 - Use **4 spaces** for each level of indent (most editors do this automatically)
@@ -534,57 +525,45 @@ The line with no indent tells Python: "this is outside the block".
 **What happens if you get it wrong:**
 
 ```python
-# ❌ Forgot to indent — Python expects it here:
 if x > 5:
 print("big")      # IndentationError: expected an indented block
 
-# ❌ Extra indent where Python didn't expect one:
 name = "Alice"
     age = 25      # IndentationError: unexpected indent
-
-# ❌ Mixed tabs and spaces — looks the same to your eyes, error to Python:
-if x > 5:
-	print("tab")       # ← pressed Tab key
-    print("spaces")    # ← pressed Space 4 times
-    # TabError: inconsistent use of tabs and spaces
 ```
 
 **Why does Python use indentation instead of braces?**
 
 Because indentation makes code easier to read at a glance.
-You can immediately see which lines belong together, just by looking at the shape of the code.
 Python's creator decided: if good programmers indent anyway, let's make it the rule.
 
----
+> [↑ Back to Top](#top)
 
-# 🧠 Variables & Memory Model in Python
+<a id="5-variables-memory-model"></a>
+# 5. Variables & Memory Model in Python
 
-> If you misunderstand this chapter, Python will confuse you for years.  
+> If you misunderstand this chapter, Python will confuse you for years.
 > If you understand this deeply, Python becomes predictable.
 
-This chapter is not about syntax.  
-It is about how Python *thinks*.
+This chapter is not about syntax. It is about how Python *thinks*.
 
 If you understand this once, clearly, you will avoid:
 - 70% of beginner confusion
 - 50% of production bugs
 - Most tricky interview traps
 
-Let’s build this properly.
+Let's build this properly.
 
 > 📝 **Practice:** [Q1 · variable-binding](../python_practice_questions_100.md#q1--normal--variable-binding)
 
----
-
-# 🚫 The Biggest Lie Beginners Believe
+<a id="the-biggest-lie"></a>
+## The Biggest Lie Beginners Believe
 
 Most people are taught:
 
-> “A variable is a box that stores a value.”
+> "A variable is a box that stores a value."
 
-This is wrong in Python.
-
-Python does NOT use a box model.
+This is wrong in Python. Python does NOT use a box model.
 
 If you continue thinking like that:
 - Lists will confuse you
@@ -594,27 +573,23 @@ If you continue thinking like that:
 
 So forget the box model.
 
----
-
-# 🏷 What a Variable REALLY Is
+<a id="what-a-variable-really-is"></a>
+## What a Variable REALLY Is
 
 In Python:
 
 > A variable is just a name that points to an object.
 
-It does not store data.  
-It does not contain data.  
+It does not store data.
+It does not contain data.
 It does not own data.
 
 It only references data.
 
----
+<a id="the-juice-bottle-model"></a>
+## The Juice Bottle Model (10-Year-Old Version)
 
-# 🧃 Story: The Juice Bottle Model (10-Year-Old Version)
-
-Imagine a table.
-
-On the table is a juice bottle.
+Imagine a table. On the table is a juice bottle.
 
 Now you put a sticker on it that says:
 
@@ -622,32 +597,19 @@ Now you put a sticker on it that says:
 mango
 ```
 
-That sticker is a variable.
+That sticker is a variable. Now you put another sticker: `drink`.
 
-Now you put another sticker:
+Both stickers are pointing to the SAME bottle. If someone drinks from the bottle, both stickers still point to that bottle. The bottle did not duplicate. The labels just refer to it.
+
+That is exactly how Python variables work:
 
 ```
-drink
+  Label  →  Variable
+  Bottle →  Object
 ```
 
-Both stickers are pointing to the SAME bottle.
-
-If someone drinks from the bottle,
-both stickers still point to that bottle.
-
-The bottle did not duplicate.
-The labels just refer to it.
-
-That is exactly how Python variables work.
-
-Label → Variable  
-Bottle → Object  
-
-Simple.
-
----
-
-# 🧪 Let’s See It in Code
+<a id="lets-see-it-in-code"></a>
+## Let's See It in Code
 
 ```python
 a = [1, 2, 3]
@@ -660,20 +622,14 @@ What happens internally?
 2. The name `a` points to that object.
 3. The name `b` also points to the same object.
 
-Check:
-
 ```python
 print(id(a))
 print(id(b))
+# Both print the SAME address — there is only ONE object
 ```
 
-The memory address (identity) will be the same.
-
-Because there is only ONE object.
-
----
-
-# 💥 The Classic Production Bug
+<a id="the-classic-production-bug"></a>
+## The Classic Production Bug
 
 ```python
 a = [1, 2, 3]
@@ -681,170 +637,139 @@ b = a
 
 b.append(4)
 
-print(a)
+print(a)   # [1, 2, 3, 4]  — why did a change?
 ```
 
-Output:
-```
-[1, 2, 3, 4]
-```
-
-Why did `a` change?
-
-Because:
-
-There were not two lists.  
-There were two names pointing to one list.
+Because there were not two lists. There were two names pointing to one list.
 
 This misunderstanding has caused real production outages.
 
----
+<a id="what-actually-exists-in-memory"></a>
+## What Actually Exists in Memory?
 
-# 🏗 What Actually Exists in Memory?
+```
+  NAMESPACE (variables)        HEAP (objects)
+  ---------------------        -------------------------
+  a  ----------------------->  [ list: 1, 2, 3 ]
+                               refcount = 2
+  b  ----------------------->  (same object, same address)
+
+  After: b.append(4)
+
+  a  ----------------------->  [ list: 1, 2, 3, 4 ]
+  b  ----------------------->  (still the same object — both see the change)
+```
 
 In Python:
-
 - Objects live in heap memory.
 - Variables live in namespaces.
 - Names map to object references.
 
-Internally it looks like:
-
-```
-Namespace:
-    a  →  0x103abc
-    b  →  0x103abc
-```
-
-Both names pointing to the same object in memory.
-
----
-
-# 🔁 Rebinding (Very Important Concept)
+<a id="rebinding"></a>
+## Rebinding (Very Important Concept)
 
 ```python
 x = 10
 x = 20
 ```
 
-Did Python change 10 into 20?
+Did Python change 10 into 20? No.
 
-No.
-
-It created a new object `20`.
-Then moved the label `x` to point to 20.
-
+It created a new object `20`, then moved the label `x` to point to 20.
 The object `10` still exists (if referenced elsewhere).
 
-Variables don’t modify objects.
-They rebind references.
+```
+  Before:   x --> [10]   refcount=1
 
-This is critical to understand.
-
----
-
-# 🧊 Mutable vs Immutable (Where Things Get Serious)
-
-Immutable objects:
-- int
-- float
-- str
-- tuple
-- bool
-- frozenset
-
-Mutable objects:
-- list
-- dict
-- set
-- most custom objects
-
-If object is immutable:
-Changing it creates a new object.
-
-If object is mutable:
-Changing it modifies the same object in memory.
-
-Example:
-
-```python
-x = 10
-y = x
-x = x + 1
+  After x=20:
+            x --> [20]   refcount=1
+                  [10]   refcount=0  <- eligible for garbage collection
 ```
 
-`y` is still 10.
+Variables don't modify objects. They rebind references.
 
-Because integers are immutable.
-`x + 1` created a new object.
+<a id="mutable-vs-immutable"></a>
+## Mutable vs Immutable (Where Things Get Serious)
 
-Now:
+**Immutable** — changing creates a NEW object: `int`, `float`, `str`, `tuple`, `bool`, `frozenset`
 
-```python
-a = [1, 2]
-b = a
-a.append(3)
+**Mutable** — changing modifies the SAME object: `list`, `dict`, `set`, custom objects
+
+```
+IMMUTABLE (int):
+  x = 10
+  y = x
+  x = x + 1
+
+  Before:  x --> [10] <-- y     (shared)
+  After:   x --> [11]
+                 [10] <-- y     (y unchanged, 10 still exists)
+
+MUTABLE (list):
+  a = [1, 2]
+  b = a
+  a.append(3)
+
+  Before:  a --> [1, 2] <-- b
+  After:   a --> [1, 2, 3] <-- b   (same object mutated, b sees the change)
 ```
 
-Both `a` and `b` change.
+<a id="is-vs"></a>
+## "is" vs "==" (Interview Favorite)
 
-Because list is mutable.
-
----
-
-# ⚖️ "is" vs "==" (Interview Favorite)
-
-`==` checks value.  
-`is` checks identity (memory location).
-
-Example:
+`==` checks **value**. `is` checks **identity** (memory address).
 
 ```python
 a = [1]
 b = [1]
 
-print(a == b)  # True
-print(a is b)  # False
+print(a == b)  # True  — same value
+print(a is b)  # False — different objects in memory
 ```
 
-Different objects.
-Same value.
+```
+  a --> [ list: 1 ]   address: 0x1000
+  b --> [ list: 1 ]   address: 0x2000
 
-Never use `is` for value comparison.
+  a == b  compares contents  --> True
+  a is b  compares addresses --> False
+```
 
-Use `==`.
+Never use `is` for value comparison. Use `==`.
+
+**Common mistake — using `is` for string/int equality:** `if x is "hello"` sometimes works due to interning, sometimes fails. Always use `==` for values.
 
 > 📝 **Practice:** [Q2 · identity-vs-equality](../python_practice_questions_100.md#q2--logical--identity-vs-equality) · [Q22 · type-conversion](../python_practice_questions_100.md#q22--normal--type-conversion)
 
----
-
-# 🔍 Small Integer Interning (Advanced Understanding)
+<a id="small-integer-interning"></a>
+## Small Integer Interning (Advanced Understanding)
 
 ```python
 a = 10
 b = 10
+print(a is b)  # True  — Python caches small ints (-5 to 256)
 
-print(a is b)  # True
-```
-
-Python pre-creates small integers (usually -5 to 256) for performance.
-
-So they share memory.
-
-But:
-
-```python
 a = 1000
 b = 1000
+print(a is b)  # False — large ints get separate objects
 ```
 
-May or may not be same object.
+```
+  Small integers (cached, shared):
+    a = 10 --> [10]  (pre-existing CPython object)
+    b = 10 --> [10]  (same pre-existing object)
+    a is b  --> True
 
-Never rely on this behavior.
+  Large integers (not cached):
+    a = 1000 --> [1000]  (new object)
+    b = 1000 --> [1000]  (another new object)
+    a is b  --> False
+```
 
----
+Never rely on this behavior in your code.
 
-# 📦 Shallow Copy vs Deep Copy (Real Production Issue)
+<a id="shallow-copy-vs-deep-copy"></a>
+## Shallow Copy vs Deep Copy (Real Production Issue)
 
 Copying an object seems simple until you hit the bug:
 you "copy" a list, modify the copy, and the original changes too.
@@ -857,155 +782,110 @@ b = copy.copy(a)      # shallow copy
 c = copy.deepcopy(a)  # deep copy
 
 b[0][0] = 999
-print(a)   # [[999, 2], [3, 4]]  ← original changed!
-print(c)   # [[1, 2], [3, 4]]   ← deep copy is independent
+print(a)   # [[999, 2], [3, 4]]  original changed!
+print(c)   # [[1, 2], [3, 4]]   deep copy is independent
 ```
 
-**Why does shallow copy change the original?**
-
 ```
-SHALLOW COPY — copies the outer container, shares inner objects:
+SHALLOW COPY — copies outer container, shares inner objects:
 
-  a ──► [ ref0, ref1 ]
-              │      │
-  b ──► [ ref0, ref1 ]   ← same inner list objects!
-              │
-            [1, 2]   ← modifying b[0][0] modifies THIS object
-                        which both a[0] and b[0] point to
+  a --> [ ref0, ref1 ]
+             |      |
+  b --> [ ref0, ref1 ]   <- same inner list objects!
+             |
+           [1, 2]   <- modifying b[0][0] modifies THIS shared object
 
 DEEP COPY — copies everything recursively:
 
-  a ──► [ ref0, ref1 ]
-              │      │
-            [1,2]  [3,4]
-
-  c ──► [ ref2, ref3 ]   ← completely new inner objects
-              │      │
-            [1,2]  [3,4]   ← independent copies
+  a --> [ ref0, ref1 ]          c --> [ ref2, ref3 ]
+             |      |                       |      |
+           [1,2]  [3,4]                   [1,2]  [3,4]   <- independent copies
 ```
 
 **Three ways to make a shallow copy:**
 
 ```python
-import copy
-
-original = [[1, 2], [3, 4]]
-
-b = copy.copy(original)      # explicit shallow copy
-c = original[:]              # slice syntax (lists only)
-d = list(original)           # list constructor
-e = original.copy()          # .copy() method (list, dict, set)
-
+b = copy.copy(original)  # explicit
+c = original[:]          # slice (lists only)
+d = list(original)       # constructor
+e = original.copy()      # .copy() method
 # All four are shallow — inner objects still shared
 ```
 
-**When you actually need deep copy:**
+**When you need deep copy:**
 
 ```python
 import copy
+base_config = {"limits": {"rate": 100, "burst": 200}}
 
-# Config that gets modified per-request:
-base_config = {"limits": {"rate": 100, "burst": 200}, "enabled": True}
-
-# Shallow copy — limits dict is still shared:
 request_config = copy.copy(base_config)
-request_config["limits"]["rate"] = 50   # modifies base_config too!
+request_config["limits"]["rate"] = 50   # also modifies base_config!
 
-# Deep copy — fully independent:
 request_config = copy.deepcopy(base_config)
 request_config["limits"]["rate"] = 50   # only affects request_config
 ```
 
-**Performance note:** `deepcopy` is significantly slower — it must recursively copy every nested object. Only use it when you actually need independence. For flat structures (no nesting), shallow copy is safe and fast.
+**Performance:** `deepcopy` is significantly slower. Use shallow copy for flat structures (no nested mutables).
 
-```python
-flat = [1, 2, 3, 4, 5]
-copy_flat = flat[:]    # shallow copy is fine — ints are immutable
-                       # no nested mutables to worry about
+<a id="garbage-collection"></a>
+## Garbage Collection (High-Level View)
+
+When no variable references an object anymore, Python deletes it from memory.
+
+Python uses two mechanisms:
+
+```
+Reference counting:
+
+  a = [1, 2, 3]   list refcount = 1
+  b = a           list refcount = 2
+  del a           list refcount = 1
+  b = None        list refcount = 0  <- Python frees memory immediately
+
+Cyclic references (refcounting alone cannot catch):
+
+  a = {}
+  b = {}
+  a["ref"] = b    b refcount = 2
+  b["ref"] = a    a refcount = 2
+  del a, b        both still refcount = 1 (cycle!)
+                  CPython's cyclic GC detects and clears these periodically
 ```
 
-This is extremely important in:
-- Data pipelines
-- API response manipulation
-- Configuration management
+Understanding this helps with memory leaks, large datasets, and long-running services.
 
----
+For a deep dive: [01.1_memory_management/theory.md](../01.1_memory_management/theory.md)
 
-# 🧹 Garbage Collection (High-Level View)
-
-When no variable references an object anymore,
-Python deletes it from memory.
-
-Python primarily uses:
-- Reference counting
-- Cyclic garbage collector
-
-Example:
-
-```python
-a = [1, 2, 3]
-a = None
-```
-
-The list now has no references.
-It becomes eligible for garbage collection.
-
-Understanding this helps when dealing with:
-- Memory leaks
-- Large datasets
-- Long-running services
-
----
-
-# 🚀 Real-World System Example
-
-Imagine you load default configuration:
+<a id="real-world-system-example"></a>
+## Real-World System Example
 
 ```python
 default_config = {"timeout": 30}
-user_config = default_config
-```
+user_config = default_config      # shared reference!
 
-Now modify:
-
-```python
 user_config["timeout"] = 60
+print(default_config)   # {"timeout": 60}  — oops!
 ```
 
-Suddenly:
-Default configuration changed globally.
+Shared reference silently modified the "default" config. This happens in real production code.
+Fix: `user_config = copy.deepcopy(default_config)` to make a fully independent copy.
 
-System behaves unpredictably.
+<a id="senior-level-mental-model"></a>
+## Senior-Level Mental Model
 
-Why?
+Think of memory as a warehouse:
 
-Shared reference.
+```
+  Objects  =  Boxes in warehouse
+  Variables =  Labels (stickers) attached to boxes
 
-This is not theory.
-This happens in real companies.
+  You can: add labels, remove labels, move labels to different boxes
+  But boxes stay until NO label points to them
+  Once no label exists: Garbage Collector removes the box
+```
 
----
-
-# 🧠 Senior-Level Mental Model
-
-Think of memory as a warehouse.
-
-Objects = Boxes in warehouse  
-Variables = Labels attached to boxes  
-
-You can:
-- Add labels
-- Remove labels
-- Move labels
-
-But boxes stay until no label points to them.
-
-Once no label exists,
-Garbage collector removes the box.
-
----
-
-# 🎯 Interview Questions You Should Now Answer Confidently
+<a id="interview-questions"></a>
+## Interview Questions You Should Now Answer Confidently
 
 1. What is a variable in Python?
 2. Do variables have types?
@@ -1018,43 +898,44 @@ Garbage collector removes the box.
 9. Why do small integers share memory?
 10. What happens when you pass a list to a function?
 
-If you can answer these clearly,
-you are not a beginner anymore.
+If you can answer these clearly, you are not a beginner anymore.
 
----
-
-# 🧠 Final Understanding Check
+<a id="final-understanding-check"></a>
+## Final Understanding Check
 
 If someone says:
 
-> “Python variables store values.”
+> "Python variables store values."
 
 You should confidently say:
 
-No.  
-Python variables store references to objects.
+No. Python variables store **references** to objects.
 
 That one sentence separates beginners from professionals.
 
----
+> [↑ Back to Top](#top)
 
 # 🔁 Navigation
 
-⬅ Previous: `01_python_fundamentals/theory.md`  
-➡ Next: `03_data_types/theory.md`
-
----
-
-## 📝 Practice Questions
-
-> 📝 **Practice:** [Q25 · unpacking](../python_practice_questions_100.md#q25--thinking--unpacking)
-
-> 📝 **Practice:** [Q24 · truthiness](../python_practice_questions_100.md#q24--normal--truthiness)
-
----
-
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Memory Management — Interview Q&A](../01.1_memory_management/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | *(first module — no previous)* |
+| ➡ Next Module | [02_control_flow → theory.md](../02_control_flow/theory.md) |
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[01.1 Memory Management →](../01.1_memory_management/theory.md) · [02 Control Flow →](../02_control_flow/theory.md) · [03 Data Types →](../03_data_types/theory.md)
+
+**Jump to specific topics in other files:**
+- Mutable default arg trap → [04_functions § Parameters — Type 3: Default Args](../04_functions/theory.md#4-parameters--arguments--all-7-types)
+- LEGB scope rules → [04_functions § Scope — The LEGB Rule](../04_functions/theory.md#6-scope--the-legb-rule)
+- Reference counting deep dive → [01.1_memory_management § Reference Counting](../01.1_memory_management/theory.md#3-reference-counting)
+- Garbage collection deep dive → [01.1_memory_management § Garbage Collector (GC)](../01.1_memory_management/theory.md#4-garbage-collector-gc)
+
+**Practice:** [Q25 · unpacking](../python_practice_questions_100.md#q25--thinking--unpacking) · [Q24 · truthiness](../python_practice_questions_100.md#q24--normal--truthiness)
+
+> [↑ Back to Top](#top)

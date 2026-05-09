@@ -6,6 +6,22 @@
 
 ---
 
+## Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | basics — Write a TestCase with assertEqual | 🟢 |
+| [Q2](#q2) | setUp/tearDown — File-Based Test | 🟡 |
+| [Q3](#q3) | assertRaises — Context Manager Form | 🟡 |
+| [Q4](#q4) | assertions — assertIn, assertIsNone, assertAlmostEqual | 🟡 |
+| [Q5](#q5) | setUpClass — Shared Expensive Resource | 🟡 |
+| [Q6](#q6) | skip and expectedFailure | 🟡 |
+| [Q7](#q7) | subTest — Loop Without Stopping on First Failure | 🟡 |
+| [Q8](#q8) | test suite — Run a Specific Subset of Tests | 🟠 |
+| [Q9](#q9) | migration — Rewrite a unittest TestCase as pytest | 🟠 |
+| [Q10](#q10) | Capstone — Full TestCase for a Stack Data Structure | 🟠 |
+
+<a id="q1"></a>
 ### Q1 🟢 · basics — Write a TestCase with assertEqual
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
@@ -51,6 +67,7 @@ if __name__ == "__main__":
 
 ---
 
+<a id="q2"></a>
 ### Q2 🟡 · setUp/tearDown — File-Based Test
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
@@ -100,6 +117,7 @@ class TestFileOperations(unittest.TestCase):
 
 ---
 
+<a id="q3"></a>
 ### Q3 🟡 · assertRaises — Context Manager Form
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
@@ -146,6 +164,7 @@ class TestValidateGrade(unittest.TestCase):
 
 ---
 
+<a id="q4"></a>
 ### Q4 🟡 · assertions — assertIn, assertIsNone, assertAlmostEqual
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
@@ -191,6 +210,7 @@ class TestAssertions(unittest.TestCase):
 
 ---
 
+<a id="q5"></a>
 ### Q5 🟡 · setUpClass — Shared Expensive Resource
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
@@ -251,6 +271,7 @@ class TestSharedDatabase(unittest.TestCase):
 
 ---
 
+<a id="q6"></a>
 ### Q6 🟡 · skip and expectedFailure
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
@@ -303,6 +324,7 @@ class TestSkippingExamples(unittest.TestCase):
 
 ---
 
+<a id="q7"></a>
 ### Q7 🟡 · subTest — Loop Without Stopping on First Failure
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
@@ -348,6 +370,7 @@ class TestWithSubtests(unittest.TestCase):
 
 ---
 
+<a id="q8"></a>
 ### Q8 🟠 · test suite — Run a Specific Subset of Tests
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
@@ -399,6 +422,7 @@ if __name__ == "__main__":
 
 ---
 
+<a id="q9"></a>
 ### Q9 🟠 · migration — Rewrite a unittest TestCase as pytest
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
@@ -449,6 +473,7 @@ def test_pop_empty_raises(stack):
 
 ---
 
+<a id="q10"></a>
 ### Q10 🟠 · Capstone — Full TestCase for a Stack Data Structure
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)

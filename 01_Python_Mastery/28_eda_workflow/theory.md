@@ -1,14 +1,19 @@
+<a id="top"></a>
 # 🔍 EDA — Exploratory Data Analysis Workflow
 
----
+## 📖 Table of Contents
 
-You get a new dataset. You're supposed to build a model. Where do you start?
-
-The junior engineer opens a notebook and immediately starts training. The senior engineer opens the same notebook and spends the first hour *understanding the data*. They check what columns exist. They look at distributions. They find the hidden column with 80% missing values. They discover that the target column has a data type error — dates stored as strings. They notice two columns that are almost perfectly correlated (probable data leakage).
-
-By the time the senior engineer starts modeling, they've avoided five different ways the model could silently fail. The junior engineer's model is already training — on corrupted data — and will produce a result that looks plausible but is wrong.
-
-**Exploratory Data Analysis (EDA)** is the systematic process of understanding a dataset before modeling.
+- [Learning Priority](#-learning-priority)
+- [1. The EDA Checklist](#1-the-eda-checklist)
+- [2. Phase 1 — Loading and Shape](#2-phase-1--loading-and-shape)
+- [3. Phase 2 — Missing Values](#3-phase-2--missing-values)
+- [4. Phase 3 — Distributions](#4-phase-3--distributions)
+- [5. Phase 4 — Categorical Features](#5-phase-4--categorical-features)
+- [6. Phase 5 — Target Variable](#6-phase-5--target-variable)
+- [7. Phase 6 — Correlations and Outliers](#7-phase-6--correlations-and-outliers)
+- [8. Automated EDA](#8-automated-eda)
+- [Summary](#-summary)
+- [Navigation](#-navigation)
 
 ---
 
@@ -28,28 +33,36 @@ By the time the senior engineer starts modeling, they've avoided five different 
 
 ---
 
-## 1️⃣ The EDA Checklist
+You get a new dataset. The junior engineer opens a notebook and immediately starts training. The senior engineer spends the first hour understanding the data — they find the column with 80% missing values, the target column with dates stored as strings, the two features that are almost perfectly correlated (probable data leakage). By the time the senior starts modeling, they've avoided five ways the model could silently fail. **Exploratory Data Analysis (EDA)** is that systematic process of understanding a dataset before modeling.
+
+---
+
+<a id="1-the-eda-checklist"></a>
+# 1. The EDA Checklist
 
 Every EDA follows roughly the same sequence:
 
 ```
-Step 1: Load and inspect shape
-Step 2: Column names, types, and basic info
-Step 3: Missing values
-Step 4: Duplicates
-Step 5: Distributions (numeric)
-Step 6: Cardinality and frequencies (categorical)
-Step 7: Target variable analysis
-Step 8: Correlation analysis
-Step 9: Outlier detection
+Step 1:  Load and inspect shape
+Step 2:  Column names, types, and basic info
+Step 3:  Missing values
+Step 4:  Duplicates
+Step 5:  Distributions (numeric)
+Step 6:  Cardinality and frequencies (categorical)
+Step 7:  Target variable analysis
+Step 8:  Correlation analysis
+Step 9:  Outlier detection
 Step 10: Feature-target relationships
 ```
 
-> 📝 **Practice:** [Q1–Q2 — EDA Checklist](./practice.md#q1)
+📝 **Practice:** [Q1–Q2 — EDA Checklist](./practice.md#q1)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 2️⃣ Phase 1 — Loading and Shape
+<a id="2-phase-1--loading-and-shape"></a>
+# 2. Phase 1 — Loading and Shape
 
 ```python
 import pandas as pd
@@ -72,11 +85,14 @@ print(df.describe())              # count, mean, std, quartiles — only numeric
 print(df.describe(include="all")) # include categoricals too
 ```
 
-> 📝 **Practice:** [Q3–Q6 — Loading & Shape](./practice.md#q3)
+📝 **Practice:** [Q3–Q6 — Loading & Shape](./practice.md#q3)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 3️⃣ Phase 2 — Missing Values
+<a id="3-phase-2--missing-values"></a>
+# 3. Phase 2 — Missing Values
 
 ```python
 # Missing value summary
@@ -101,11 +117,14 @@ msno.heatmap(df)           # correlation of missingness between columns
 # > 30% missing: consider dropping the column or creating missingness indicator
 ```
 
-> 📝 **Practice:** [Q7–Q10 — Missing Values](./practice.md#q7)
+📝 **Practice:** [Q7–Q10 — Missing Values](./practice.md#q7)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 4️⃣ Phase 3 — Distributions
+<a id="4-phase-3--distributions"></a>
+# 4. Phase 3 — Distributions
 
 ```python
 # Numeric columns — distribution overview
@@ -127,11 +146,14 @@ np.log1p(df["price"]).hist(bins=50, ax=ax2, color="coral")
 ax2.set_title("Log(1 + Price) Distribution")   # log transform often reveals structure
 ```
 
-> 📝 **Practice:** [Q11–Q14 — Distributions](./practice.md#q11)
+📝 **Practice:** [Q11–Q14 — Distributions](./practice.md#q11)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 5️⃣ Phase 4 — Categorical Features
+<a id="5-phase-4--categorical-features"></a>
+# 5. Phase 4 — Categorical Features
 
 ```python
 cat_cols = df.select_dtypes(include=["object", "category"]).columns
@@ -157,11 +179,14 @@ for col in cat_cols:
         plt.tight_layout()
 ```
 
-> 📝 **Practice:** [Q15–Q18 — Categorical Features](./practice.md#q15)
+📝 **Practice:** [Q15–Q18 — Categorical Features](./practice.md#q15)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 6️⃣ Phase 5 — Target Variable
+<a id="6-phase-5--target-variable"></a>
+# 6. Phase 5 — Target Variable
 
 ```python
 target = "price"
@@ -179,11 +204,14 @@ print(df[target].value_counts(normalize=True))
 # Imbalance > 10:1 ratio → need SMOTE or class weights
 ```
 
-> 📝 **Practice:** [Q19–Q21 — Target Variable](./practice.md#q19)
+📝 **Practice:** [Q19–Q21 — Target Variable](./practice.md#q19)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 7️⃣ Phase 6 — Correlations and Outliers
+<a id="7-phase-6--correlations-and-outliers"></a>
+# 7. Phase 6 — Correlations and Outliers
 
 ```python
 # Correlation matrix
@@ -210,11 +238,14 @@ outlier_counts = {col: flag_outliers(df[col]).sum()
 print(pd.Series(outlier_counts).sort_values(ascending=False))
 ```
 
-> 📝 **Practice:** [Q22–Q26 — Correlations & Outliers](./practice.md#q22)
+📝 **Practice:** [Q22–Q26 — Correlations & Outliers](./practice.md#q22)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 8️⃣ Automated EDA
+<a id="8-automated-eda"></a>
+# 8. Automated EDA
 
 ```python
 # ydata-profiling (formerly pandas-profiling)
@@ -233,17 +264,33 @@ compare_report = sv.compare([df_train, "Train"], [df_test, "Test"])
 compare_report.show_html("comparison.html")
 ```
 
-> 📝 **Practice:** [Q27–Q30 — Automated EDA](./practice.md#q27)
+📝 **Practice:** [Q27–Q30 — Automated EDA](./practice.md#q27)
+
+[↑ Back to Top](#top)
 
 ---
 
-## Common Mistakes to Avoid ⚠️
+## 🔥 Summary
+
+EDA is the discipline that separates engineers who build models on corrupted data from engineers who catch problems before they compound. Spend the first hour on understanding — it pays back in every hour of modeling that follows.
+
+**Common mistakes to avoid:**
 
 - **Skipping EDA and going straight to modeling**: EDA catches problems that silently poison models — missing values, wrong dtypes, data leakage, class imbalance.
 - **Not checking for duplicates**: duplicate rows inflate evaluation metrics and cause overfitting.
 - **Treating ID-like columns as features**: user_id, transaction_id have high cardinality and are not predictors — always check and drop them.
 - **Ignoring the target variable distribution**: a heavily skewed target (house prices) often needs a log transform before regression.
-- **Checking correlations but not checking for non-linear relationships**: scatter plots reveal U-shapes, thresholds, and interactions that correlation coefficients miss.
+- **Checking correlations but not non-linear relationships**: scatter plots reveal U-shapes, thresholds, and interactions that correlation coefficients miss.
+
+| Phase | Key operation |
+|---|---|
+| Load & Shape | `df.info()`, `df.describe()`, `df.sample()` |
+| Missing Values | `isnull().sum()`, missingness heatmap, threshold rules |
+| Distributions | Histograms per numeric column, log transform check |
+| Categorical | `nunique()`, `value_counts()`, cardinality classification |
+| Target Variable | Distribution plot, class balance check |
+| Correlations | Heatmap, IQR outlier flagging |
+| Automated | `ydata-profiling`, `sweetviz` |
 
 ---
 
@@ -255,9 +302,13 @@ compare_report.show_html("comparison.html")
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
 | 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.md](./practice.md) |
-| ⬅️ Prev Module | [../27_matplotlib_seaborn/theory.md](../27_matplotlib_seaborn/theory.md) |
-| ➡️ Next Module | [../29_web_scraping/theory.md](../29_web_scraping/theory.md) |
-
----
+| ⬅️ Prev Module | [← Matplotlib & Seaborn](../27_matplotlib_seaborn/README.md) |
+| ➡️ Next Module | [→ Web Scraping](../29_web_scraping/theory.md) |
 
 **[🏠 Back to README](../README.md)**
+
+**Prev:** [← Matplotlib & Seaborn](../27_matplotlib_seaborn/README.md) &nbsp;|&nbsp; **Next:** [Web Scraping →](../29_web_scraping/theory.md)
+
+**Related Topics:** [Cheatsheet](./cheetsheet.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+
+[↑ Back to Top](#top)

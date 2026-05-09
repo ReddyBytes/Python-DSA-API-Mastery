@@ -1,12 +1,8 @@
+<a id="top"></a>
 # 🛑 06 — Exceptions & Error Handling
-## From "Please Don't Crash" to Production-Grade Reliability
 
 > *"Writing code that works when everything goes right is easy.*
 > *Writing code that survives when everything goes wrong — that's engineering."*
-
----
-
-## 🎬 The Story
 
 It's 2 AM. Your company's payment API is down.
 Every failed payment costs real money and customer trust.
@@ -29,8 +25,56 @@ The difference between a resilient system and a fragile one is almost entirely i
 
 That's what this chapter is about.
 
----
+## 📖 Table of Contents
 
+- [📌 Learning Priority](#learning-priority)
+- [1. What Actually Happens When Python Raises an Exception](#1-what-actually-happens-when-python-raises-an-exception)
+- [2. The Exception Hierarchy](#2-the-exception-hierarchy)
+- [3. Full try/except/else/finally Anatomy](#3-full-tryexceptelsefinally-anatomy)
+  - [Why else Exists](#why-else-exists)
+  - [finally Edge Cases — Tricky Behavior](#finally-edge-cases)
+- [4. Handling Exceptions: Patterns and Pitfalls](#4-handling-exceptions-patterns-and-pitfalls)
+  - [Catching the Exception Object](#catching-the-exception-object)
+  - [Catching Multiple Exception Types](#catching-multiple-exception-types)
+- [5. raise: Throwing Exceptions](#5-raise-throwing-exceptions)
+  - [Exception Chaining — raise ... from](#exception-chaining)
+- [6. Custom Exceptions: Design Like a Pro](#6-custom-exceptions-design-like-a-pro)
+  - [Full Professional Exception Hierarchy](#full-professional-exception-hierarchy)
+- [7. Context Managers: The Right Way to Handle Resources](#7-context-managers-the-right-way-to-handle-resources)
+  - [with Statement — The Solution](#with-statement)
+  - [How It Works Internally](#how-it-works-internally)
+  - [contextlib.contextmanager — The Easy Way](#contextlib-contextmanager)
+  - [Multiple Context Managers](#multiple-context-managers)
+- [8. LBYL vs EAFP: Python's Philosophy](#8-lbyl-vs-eafp-pythons-philosophy)
+- [9. Retry & Exponential Backoff — The Full Picture](#9-retry-exponential-backoff)
+  - [The Math](#the-math)
+  - [Why Jitter Matters — The Thundering Herd Problem](#why-jitter-matters)
+  - [Hand-Rolled Implementation](#hand-rolled-implementation)
+  - [Production Approach — tenacity](#production-approach-tenacity)
+  - [Async Version](#async-version)
+  - [When NOT to Retry](#when-not-to-retry)
+- [10. Production Patterns](#10-production-patterns)
+  - [Pattern 1 — Retry with Exponential Backoff](#pattern-1-retry)
+  - [Pattern 2 — Circuit Breaker](#pattern-2-circuit-breaker)
+  - [Pattern 3 — Graceful Degradation](#pattern-3-graceful-degradation)
+  - [Pattern 4 — Exception Translation](#pattern-4-exception-translation)
+- [11. Logging Exceptions Correctly](#11-logging-exceptions-correctly)
+- [12. Anti-Patterns (Don't Do These)](#12-anti-patterns)
+  - [Anti-Pattern 1 — Bare except / Silent pass](#anti-pattern-1)
+  - [Anti-Pattern 2 — Catching Too Broadly](#anti-pattern-2)
+  - [Anti-Pattern 3 — Exceptions for Control Flow](#anti-pattern-3)
+  - [Anti-Pattern 4 — Losing the Original Exception](#anti-pattern-4)
+  - [Anti-Pattern 5 — except Exception Without Re-raise](#anti-pattern-5)
+- [13. Exceptions in Threads and Async](#13-exceptions-in-threads-and-async)
+  - [Threads — Exceptions Are Silently Lost!](#threads-exceptions-silently-lost)
+  - [concurrent.futures — The Better Way](#concurrent-futures)
+  - [Async — asyncio](#async-asyncio)
+- [14. Reading Tracebacks Like a Pro](#14-reading-tracebacks-like-a-pro)
+  - [Exception Propagation — How Exceptions Travel Up the Call Stack](#exception-propagation)
+- [15. warnings Module — Non-Fatal Alerts](#15-warnings-module)
+- [🎯 Key Takeaways](#key-takeaways)
+
+<a id="learning-priority"></a>
 ## 📌 Learning Priority
 
 **Must Learn** — Core concept, daily use, interview essential:
@@ -47,9 +91,8 @@ That's what this chapter is about.
 
 > 📝 **Practice:** [Q1 — Trace exception propagation](./practice.md#q1--call-stack--trace-exception-propagation-through-3-nested-calls)
 
----
-
-## 🧠 Chapter 1 — What Actually Happens When Python Raises an Exception
+<a id="1-what-actually-happens-when-python-raises-an-exception"></a>
+# 1. What Actually Happens When Python Raises an Exception
 
 When Python encounters an error (like dividing by zero), here's the exact sequence:
 
@@ -101,9 +144,10 @@ ZeroDivisionError: division by zero
 
 > 📝 **Practice:** [Q7 — Exception hierarchy matching](./practice.md#q7--exception-hierarchy--which-except-clause-catches-what) · [Deep dive →](./01_exception_mechanics/theory.md)
 
----
+> [↑ Back to Top](#top)
 
-## 🗺️ Chapter 2 — The Exception Hierarchy
+<a id="2-the-exception-hierarchy"></a>
+# 2. The Exception Hierarchy
 
 Understanding the tree tells you exactly what you're catching.
 
@@ -168,9 +212,10 @@ except (ValueError, TypeError) as e:   # ← specific, intentional
 
 > 📝 **Practice:** [Q2 — Full try/except anatomy](./practice.md#q2--tryexceptelsefinally--write-the-full-four-block-pattern) · [Q3 — When does else run?](./practice.md#q3--else-clause--when-does-it-run)
 
----
+> [↑ Back to Top](#top)
 
-## 🔧 Chapter 3 — Full try/except/else/finally Anatomy
+<a id="3-full-tryexceptelsefinally-anatomy"></a>
+# 3. Full try/except/else/finally Anatomy
 
 ```python
 try:
@@ -213,7 +258,10 @@ finally:
 
 > 📝 **Practice:** [Q19 · try-except-finally](../python_practice_questions_100.md#q19--normal--try-except-finally)
 
-### Why `else` Exists — It Matters
+<a id="why-else-exists"></a>
+## Why else Exists
+
+The `else` clause runs only when no exception was raised in the `try` block. It exists to separate "the code that might fail" from "the code that should run on success" — making it clear which line you're actually guarding against.
 
 ```python
 # WITHOUT else — ambiguous:
@@ -232,15 +280,12 @@ else:
     process(data)          # ← only runs if fetch succeeded
 ```
 
----
-
-## `finally` Edge Cases — Tricky Behavior
+<a id="finally-edge-cases"></a>
+## finally Edge Cases — Tricky Behavior
 
 `finally` always runs. But some edge cases surprise even experienced developers.
 
----
-
-### Edge Case 1: `return` Inside `finally` Swallows Exceptions
+**Edge Case 1: `return` Inside `finally` Swallows Exceptions**
 
 ```python
 def dangerous():
@@ -256,9 +301,7 @@ print(result)    # 42 — no exception raised, no error, nothing
 
 This is a silent bug. Never `return` from `finally` unless you intend to suppress exceptions.
 
----
-
-### Edge Case 2: `return` in `try` vs `return` in `finally`
+**Edge Case 2: `return` in `try` vs `return` in `finally`**
 
 ```python
 def which_return():
@@ -274,9 +317,7 @@ print(which_return())   # "from finally"
 The `finally` block always executes — even when `try` hits a `return`.
 `finally`'s `return` replaces the one from `try`.
 
----
-
-### Edge Case 3: `continue` and `break` in `finally`
+**Edge Case 3: `continue` and `break` in `finally`**
 
 ```python
 for i in range(3):
@@ -294,9 +335,7 @@ for i in range(3):
 # The loop CONTINUES because finally's continue beats except's break
 ```
 
----
-
-### Edge Case 4: `finally` Runs Even with `sys.exit()`
+**Edge Case 4: `finally` Runs Even with `sys.exit()`**
 
 ```python
 import sys
@@ -313,9 +352,7 @@ cleanup()
 
 The only way to prevent `finally` from running: `os._exit()` (hard kill, bypasses Python runtime).
 
----
-
-### The Safe Rule
+**The Safe Rule**
 
 ```
 ✓ Use finally for: cleanup, closing files, releasing locks — side effects
@@ -325,11 +362,15 @@ The only way to prevent `finally` from running: `os._exit()` (hard kill, bypasse
 
 > 📝 **Practice:** [Q5 — Catch specific types](./practice.md#q5--specific-exception-types--catch-each-with-different-messages) · [Q8 — Tuple syntax](./practice.md#q8--tuple-catch-syntax--multiple-exceptions-one-handler) · [Q9 — Order bug](./practice.md#q9--except-order-bug--broad-before-specific)
 
----
+> [↑ Back to Top](#top)
 
-## 🔧 Chapter 4 — Handling Exceptions: Patterns and Pitfalls
+<a id="4-handling-exceptions-patterns-and-pitfalls"></a>
+# 4. Handling Exceptions: Patterns and Pitfalls
 
-### Catching the Exception Object
+<a id="catching-the-exception-object"></a>
+## Catching the Exception Object
+
+The `as e` syntax binds the raised exception instance to a variable, letting you inspect its type, message, and args. This is how you get diagnostic detail — not just "something failed" but exactly what and why.
 
 ```python
 try:
@@ -342,7 +383,10 @@ except ValueError as e:
     print(repr(e))          # ValueError("invalid literal for int() with base 10: 'abc'")
 ```
 
-### Catching Multiple Exception Types
+<a id="catching-multiple-exception-types"></a>
+## Catching Multiple Exception Types
+
+There are two patterns: a tuple in a single `except` clause when both exceptions share the same recovery logic, and separate `except` clauses when each needs different handling. Use whichever makes the intent clearer.
 
 ```python
 
@@ -366,8 +410,7 @@ except ZeroDivisionError:
 
 > 📝 **Practice:** [Q21 · exception-types](../python_practice_questions_100.md#q21--critical--exception-types)
 
-
-### ⚠️ The Order of Except Clauses Matters
+**The Order of Except Clauses Matters**
 
 ```python
 # ❌ WRONG — parent before child catches everything:
@@ -387,11 +430,12 @@ except Exception:           # ← generic fallback
     print("some other error")
 ```
 
----
+> [↑ Back to Top](#top)
 
-## 🔥 Chapter 5 — `raise`: Throwing Exceptions
+<a id="5-raise-throwing-exceptions"></a>
+# 5. raise: Throwing Exceptions
 
-### Basic raise
+**Basic raise:**
 
 ```python
 def withdraw(balance: float, amount: float) -> float:
@@ -402,7 +446,7 @@ def withdraw(balance: float, amount: float) -> float:
     return balance - amount
 ```
 
-### Re-raise the Same Exception
+**Re-raise the same exception:**
 
 ```python
 try:
@@ -412,7 +456,8 @@ except ValueError as e:
     raise    # ← re-raises the SAME exception, preserves full traceback
 ```
 
-### ⭐ Exception Chaining — `raise ... from`
+<a id="exception-chaining"></a>
+## Exception Chaining — raise ... from
 
 This is one of Python's most underused but critical features.
 
@@ -440,7 +485,6 @@ def get_user(user_id: int):
 
 > 📝 **Practice:** [Q43 · exception-chaining](../python_practice_questions_100.md#q43--thinking--exception-chaining)
 
-
 ```python
 # To suppress the original exception chain (explicit suppression):
 raise NewError("context-free message") from None
@@ -448,13 +492,12 @@ raise NewError("context-free message") from None
 
 > 📝 **Practice:** [Q13 — Custom AppError](./practice.md#q13--custom-exceptions--define-apperror-with-message-and-code) · [Q14 — Hierarchy design](./practice.md#q14--exception-hierarchy--paymentinsufficientfunds-inheritance) · [Deep dive →](./02_custom_exceptions/theory.md)
 
----
+> [↑ Back to Top](#top)
 
-## 🏗️ Chapter 6 — Custom Exceptions: Design Like a Pro
+<a id="6-custom-exceptions-design-like-a-pro"></a>
+# 6. Custom Exceptions: Design Like a Pro
 
 > 📝 **Practice:** [Q42 · custom-exceptions](../python_practice_questions_100.md#q42--normal--custom-exceptions)
-
-### The Basics
 
 ```python
 # ❌ Don't do this — tells nothing about the domain:
@@ -465,7 +508,8 @@ class PaymentError(Exception): pass
 raise PaymentError("Card declined: insufficient funds")
 ```
 
-### Full Professional Exception Hierarchy
+<a id="full-professional-exception-hierarchy"></a>
+## Full Professional Exception Hierarchy
 
 ```python
 # ── Base domain exception ──────────────────────────────────────────
@@ -555,11 +599,12 @@ except Exception as e:
 
 > 📝 **Practice:** [Q15 — Why use with?](./practice.md#q15--context-managers--why-with-beats-tryfinally) · [Q16 — __enter__/__exit__](./practice.md#q16--context-manager-class--database-transaction-with-__enter__--__exit__) · [Q17 — @contextmanager](./practice.md#q17--contextlibcontextmanager--timing-context-manager)
 
----
+> [↑ Back to Top](#top)
 
-## 🔒 Chapter 7 — Context Managers: The Right Way to Handle Resources
+<a id="7-context-managers-the-right-way-to-handle-resources"></a>
+# 7. Context Managers: The Right Way to Handle Resources
 
-### The Problem Without Context Managers
+**The Problem Without Context Managers**
 
 ```python
 # ❌ DANGEROUS — what if an exception happens before file.close()?
@@ -569,7 +614,10 @@ process(data)        # ← if THIS raises, file.close() never runs → resource 
 file.close()
 ```
 
-### [`with` Statement](../12_context_managers/theory.md) — The Solution
+<a id="with-statement"></a>
+## with Statement — The Solution
+
+The `with` statement guarantees that `__exit__` is called on the context manager whether or not an exception occurs — so resources are always released cleanly without manual `try/finally` boilerplate.
 
 ```python
 # ✅ SAFE — always closes, even if an exception is raised:
@@ -579,7 +627,12 @@ with open("data.txt") as file:
 # file.close() called automatically here, exception or not
 ```
 
-### How It Works Internally
+For a full deep dive into context managers: [12_context_managers/theory.md](../12_context_managers/theory.md)
+
+<a id="how-it-works-internally"></a>
+## How It Works Internally
+
+`with` is syntactic sugar for the `__enter__` / `__exit__` protocol: Python calls `__enter__` before the block and `__exit__` after it, passing exception info if one was raised. Any class that implements both methods is a valid context manager.
 
 ```python
 # with block calls __enter__ and __exit__:
@@ -609,7 +662,10 @@ with ManagedResource() as r:
 # ValueError: oops  ← propagated (return False)
 ```
 
-### `contextlib.contextmanager` — The Easy Way
+<a id="contextlib-contextmanager"></a>
+## contextlib.contextmanager — The Easy Way
+
+Writing a full class with `__enter__` and `__exit__` is verbose for simple cases. The `@contextmanager` decorator lets you write a generator function instead — everything before `yield` is `__enter__`, everything after is `__exit__`.
 
 ```python
 from contextlib import contextmanager
@@ -645,7 +701,10 @@ with timer("Data processing"):
     process_large_dataset()    # Prints: "Data processing: 3.2415s"
 ```
 
-### Multiple Context Managers
+<a id="multiple-context-managers"></a>
+## Multiple Context Managers
+
+Python supports opening multiple context managers in a single `with` statement — they nest left-to-right on entry and close right-to-left on exit, the same as nested `with` blocks but without the indentation pyramid.
 
 ```python
 # Python 3.10+ — parenthesized:
@@ -662,9 +721,10 @@ with open("input.txt") as infile, open("output.txt", "w") as outfile:
 
 > 📝 **Practice:** [Q18 — LBYL → EAFP rewrite](./practice.md#q18--lbyl-vs-eafp--rewrite-the-lbyl-version-as-eafp)
 
----
+> [↑ Back to Top](#top)
 
-## 🐍 Chapter 8 — LBYL vs EAFP: Python's Philosophy
+<a id="8-lbyl-vs-eafp-pythons-philosophy"></a>
+# 8. LBYL vs EAFP: Python's Philosophy
 
 Two styles of handling potential errors:
 
@@ -706,9 +766,10 @@ EXAMPLE OF RACE CONDITION WITH LBYL:
 
 > 📝 **Practice:** [Q21 — Retry decorator](./practice.md#q21--retry-decorator--exponential-backoff-3-attempts) · [Deep dive →](./03_production_patterns/theory.md)
 
----
+> [↑ Back to Top](#top)
 
-## ⏱️ Retry & Exponential Backoff — The Full Picture
+<a id="9-retry-exponential-backoff"></a>
+# 9. Retry & Exponential Backoff — The Full Picture
 
 > You knock on a door. No answer. You wait 1 second and knock again. Still nothing.
 > You wait 2 seconds. Then 4. Then 8. You're not hammering the door down — you're
@@ -719,9 +780,8 @@ immediately in a tight loop — you'll overwhelm a struggling service and make t
 worse. **Exponential backoff** spaces retries out with increasing delays, giving
 the upstream system room to recover.
 
----
-
-### The Math
+<a id="the-math"></a>
+## The Math
 
 ```
 attempt 1 fails → wait base_delay * factor^0  = 1s
@@ -747,9 +807,8 @@ t=3.7s ───[attempt 3]──── FAIL   ← 2s + 0.7s random (delays over
 t=8.1s ───[attempt 4]──── OK ✓
 ```
 
----
-
-### Why Jitter Matters — The Thundering Herd Problem
+<a id="why-jitter-matters"></a>
+## Why Jitter Matters — The Thundering Herd Problem
 
 Without jitter, every client that hit the same failure retries at the exact same
 moment — 100 services all wake up at t=1s, hammer the API in sync, cause the same
@@ -765,9 +824,8 @@ WITH jitter (each client adds random(0, delay)):
     t=2.1-4.3s  ░█░░░█░░░░█░░░██░░░█░░░ (no spike)
 ```
 
----
-
-### Hand-Rolled Implementation
+<a id="hand-rolled-implementation"></a>
+## Hand-Rolled Implementation
 
 ```python
 import time
@@ -822,9 +880,8 @@ def fetch_user(user_id: int):
 # ConnectionError raised  ← caller handles it
 ```
 
----
-
-### Production Approach — `tenacity`
+<a id="production-approach-tenacity"></a>
+## Production Approach — tenacity
 
 For production code, use **`tenacity`** — battle-tested, handles edge cases,
 composable stop/wait/retry conditions.
@@ -851,9 +908,8 @@ def call_payment_api(payload: dict):
     return requests.post("https://api.stripe.com/v1/charges", data=payload)
 ```
 
----
-
-### Async Version
+<a id="async-version"></a>
+## Async Version
 
 When using `asyncio`, `time.sleep()` blocks the event loop — use `asyncio.sleep()`.
 
@@ -880,9 +936,8 @@ async def with_backoff(coro_func, *args, max_retries=5, base_delay=1.0):
 result = await with_backoff(fetch_user_async, user_id=42)
 ```
 
----
-
-### When NOT to Retry
+<a id="when-not-to-retry"></a>
+## When NOT to Retry
 
 Not every error is transient. Retrying these makes things worse, not better:
 
@@ -906,13 +961,15 @@ def should_retry(exc: Exception) -> bool:
 
 > 📝 **Practice:** [Q22 — Circuit breaker states](./practice.md#q22--circuit-breaker--explain-the-3-states) · [Q23 — Graceful degradation](./practice.md#q23--graceful-degradation--fallback-to-cache-on-failure) · [Deep dive →](./03_production_patterns/theory.md)
 
----
+> [↑ Back to Top](#top)
 
-## 🔄 Chapter 9 — Production Patterns
+<a id="10-production-patterns"></a>
+# 10. Production Patterns
 
-### Pattern 1 — Retry with Exponential Backoff
+<a id="pattern-1-retry"></a>
+## Pattern 1 — Retry with Exponential Backoff
 
-See the [dedicated section above](#️-retry--exponential-backoff--the-full-picture) for the complete treatment — math, jitter, hand-rolled implementation, `tenacity`, async, and when not to retry.
+See [# 9. Retry & Exponential Backoff](#9-retry-exponential-backoff) for the complete treatment — math, jitter, hand-rolled implementation, `tenacity`, async, and when not to retry.
 
 Quick reference:
 
@@ -924,9 +981,8 @@ def unreliable_api_call():
     return requests.get("https://api.example.com/data")
 ```
 
----
-
-### Pattern 2 — Circuit Breaker
+<a id="pattern-2-circuit-breaker"></a>
+## Pattern 2 — Circuit Breaker
 
 When a service is consistently failing, stop hammering it — wait for it to recover.
 
@@ -983,9 +1039,8 @@ def fetch_user(user_id):
     return breaker.call(requests.get, f"https://api.service.com/users/{user_id}")
 ```
 
----
-
-### Pattern 3 — Graceful Degradation
+<a id="pattern-3-graceful-degradation"></a>
+## Pattern 3 — Graceful Degradation
 
 When a non-critical feature fails, keep the core service running.
 
@@ -1014,9 +1069,8 @@ def get_product_page(product_id: int) -> dict:
     }
 ```
 
----
-
-### Pattern 4 — Exception Translation (Layered Architecture)
+<a id="pattern-4-exception-translation"></a>
+## Pattern 4 — Exception Translation (Layered Architecture)
 
 Translate low-level exceptions into domain exceptions at layer boundaries.
 
@@ -1063,9 +1117,10 @@ def get_user_endpoint(user_id: int):
 
 > 📝 **Practice:** [Q19 — logger.exception() vs logger.error()](./practice.md#q19--logging-exceptions--loggerexception-vs-loggererror)
 
----
+> [↑ Back to Top](#top)
 
-## 📋 Chapter 10 — Logging Exceptions Correctly
+<a id="11-logging-exceptions-correctly"></a>
+# 11. Logging Exceptions Correctly
 
 ```python
 import logging
@@ -1109,11 +1164,15 @@ except Exception as e:
 
 > 📝 **Practice:** [Q24 — Fix bare except](./practice.md#q24--anti-pattern--fix-bare-except-with-pass) · [Q25 — Catching too broadly](./practice.md#q25--anti-pattern--catching-too-broadly-masks-bugs) · [Deep dive →](./03_production_patterns/theory.md)
 
----
+> [↑ Back to Top](#top)
 
-## ⚠️ Chapter 11 — Anti-Patterns (Don't Do These)
+<a id="12-anti-patterns"></a>
+# 12. Anti-Patterns (Don't Do These)
 
-### ❌ Anti-Pattern 1 — Bare `except` / Silent `pass`
+<a id="anti-pattern-1"></a>
+## Anti-Pattern 1 — Bare except / Silent pass
+
+Silently swallowing every exception is the most dangerous pattern in Python — it hides bugs, prevents Ctrl+C from working, and makes debugging nearly impossible because you lose all information about what went wrong.
 
 ```python
 
@@ -1127,8 +1186,10 @@ except:          # catches SystemExit, KeyboardInterrupt, everything!
 
 > 📝 **Practice:** [Q44 · bare-except](../python_practice_questions_100.md#q44--critical--bare-except)
 
+<a id="anti-pattern-2"></a>
+## Anti-Pattern 2 — Catching Too Broadly
 
-### ❌ Anti-Pattern 2 — Catching Too Broadly
+Catching `Exception` across a large block makes it impossible to know which line actually failed or why — every error looks the same, and you can't write targeted recovery logic.
 
 ```python
 # BAD — which exception are you actually expecting?
@@ -1140,7 +1201,10 @@ except Exception as e:
     print("Error")   # you have no idea which of the 3 lines failed!
 ```
 
-### ❌ Anti-Pattern 3 — Using Exceptions for Normal Control Flow
+<a id="anti-pattern-3"></a>
+## Anti-Pattern 3 — Using Exceptions for Normal Control Flow
+
+Exceptions have overhead — they capture a full traceback on every raise. Using them for expected branching in a tight loop is measurably slower than a simple `if` check or `.get()` call.
 
 ```python
 
@@ -1159,8 +1223,10 @@ for item in large_list:
 
 > 📝 **Practice:** [Q20 · exception-flow](../python_practice_questions_100.md#q20--logical--exception-flow)
 
+<a id="anti-pattern-4"></a>
+## Anti-Pattern 4 — Losing the Original Exception
 
-### ❌ Anti-Pattern 4 — Losing the Original Exception
+Raising a new exception without `from e` destroys the original traceback — the root cause is permanently lost, leaving only the re-wrapped error with no context about what triggered it.
 
 ```python
 # BAD — original cause lost:
@@ -1176,7 +1242,10 @@ except ConnectionError as e:
     raise RuntimeError("Service failed") from e   # ← full chain preserved
 ```
 
-### ❌ Anti-Pattern 5 — `except Exception` Without Re-raise
+<a id="anti-pattern-5"></a>
+## Anti-Pattern 5 — except Exception Without Re-raise
+
+Catching broadly and returning `None` silently converts an error into unexpected behavior for the caller — they get back a `None` with no exception raised and no way to diagnose what went wrong.
 
 ```python
 # BAD — you caught it but gave no information:
@@ -1196,11 +1265,15 @@ except Exception:
 
 > 📝 **Practice:** [Q28 — Thread exception loss](./practice.md#q28--thread-exceptions--silently-swallowed-show-and-fix)
 
----
+> [↑ Back to Top](#top)
 
-## 🧵 Chapter 12 — Exceptions in Threads and Async
+<a id="13-exceptions-in-threads-and-async"></a>
+# 13. Exceptions in Threads and Async
 
-### Threads — Exceptions Are Silently Lost!
+<a id="threads-exceptions-silently-lost"></a>
+## Threads — Exceptions Are Silently Lost!
+
+Exceptions raised inside a thread do NOT propagate to the parent thread — they are printed to stderr and discarded unless you explicitly capture them. The main thread has no way to know the worker failed.
 
 ```python
 import threading   # → [13_concurrency](../13_concurrency/theory.md) for full threading guide
@@ -1230,7 +1303,10 @@ if result["error"]:
     raise result["error"]   # propagate to main thread
 ```
 
-### `concurrent.futures` — The Better Way
+<a id="concurrent-futures"></a>
+## concurrent.futures — The Better Way
+
+`ThreadPoolExecutor` solves the exception problem by storing exceptions inside `Future` objects — calling `future.result()` re-raises them in the calling thread, so errors are never silently lost.
 
 ```python
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -1254,7 +1330,10 @@ with ThreadPoolExecutor(max_workers=4) as executor:
             print(f"Task {n} raised: {e}")
 ```
 
-### Async — [`asyncio`](../13_concurrency/theory.md)
+<a id="async-asyncio"></a>
+## Async — asyncio
+
+In async code, exceptions in coroutines behave like synchronous ones — they propagate up the `await` chain normally. When using `asyncio.gather`, pass `return_exceptions=True` to prevent one task's failure from cancelling all other running tasks.
 
 ```python
 import asyncio
@@ -1292,9 +1371,10 @@ for r in results:
 
 > 📝 **Practice:** [Q29 — Read a traceback](./practice.md#q29--reading-tracebacks--identify-root-cause-and-propagation-path)
 
----
+> [↑ Back to Top](#top)
 
-## 🎯 Chapter 13 — Reading Tracebacks Like a Pro
+<a id="14-reading-tracebacks-like-a-pro"></a>
+# 14. Reading Tracebacks Like a Pro
 
 ```
 Traceback (most recent call last):     ← read from BOTTOM up for root cause
@@ -1323,8 +1403,7 @@ READING STRATEGY:
   4. Top of traceback = the entry point (where the call chain started)
 ```
 
----
-
+<a id="exception-propagation"></a>
 ## Exception Propagation — How Exceptions Travel Up the Call Stack
 
 When an exception is raised, Python unwinds the call stack frame by frame, looking for a handler (`try/except`). If none is found, the program crashes with a traceback.
@@ -1395,9 +1474,10 @@ Traceback (most recent call last):    ← this means BOTTOM is most recent
 ValueError: something went wrong
 ```
 
----
+> [↑ Back to Top](#top)
 
-## ⚠️ `warnings` Module — Non-Fatal Alerts
+<a id="15-warnings-module"></a>
+# 15. warnings Module — Non-Fatal Alerts
 
 Exceptions stop execution. But sometimes you want to **alert** the caller about a problem without crashing — a deprecated API, a performance issue, an unusual input.
 
@@ -1469,9 +1549,10 @@ def test_deprecation_warning():
         old_function(42)
 ```
 
----
+> [↑ Back to Top](#top)
 
-## 🎯 Key Takeaways
+<a id="key-takeaways"></a>
+# 🎯 Key Takeaways
 
 ```
 • Exceptions are OBJECTS — instances of exception classes, not just messages
@@ -1492,23 +1573,27 @@ def test_deprecation_warning():
 • Exceptions in threads are silently lost — use concurrent.futures instead
 ```
 
----
-
-## 🔁 Navigation
-
-| | |
-|---|---|
-| 💻 Practice | [practice.md](./practice.md) |
-| 🛠️ Practice Local | [practice_local.py](./practice_local.py) |
-| ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
-| 🎤 Interview | [interview.md](./interview.md) |
-| ⬅️ Previous | [05 — OOP](../05_oops/README.md) |
-| ➡️ Next | [07 — Modules & Packages](../07_modules_packages/theory.md) |
-
----
+<a id="navigation"></a>
+# 🔁 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← OOP](../05_oops/README.md) &nbsp;|&nbsp; **Next:** [07 — Modules & Packages →](../07_modules_packages/theory.md)
+| Direction | Module |
+|---|---|
+| ⬅ Prev Module | [05 — OOP → theory.md](../05_oops/theory.md) |
+| ➡ Next Module | [07 — Modules & Packages → theory.md](../07_modules_packages/theory.md) |
 
-**Related Topics:** [01 Exception Mechanics](./01_exception_mechanics/theory.md) · [02 Custom Exceptions](./02_custom_exceptions/theory.md) · [03 Production Patterns](./03_production_patterns/theory.md) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**This folder:**
+[theory.md](./theory.md) · [Practice](./practice.md) · [Practice Local](./practice_local.py) · [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+
+**Related modules:**
+[01 Exception Mechanics →](./01_exception_mechanics/theory.md) · [02 Custom Exceptions →](./02_custom_exceptions/theory.md) · [03 Production Patterns →](./03_production_patterns/theory.md) · [12 Context Managers →](../12_context_managers/theory.md) · [13 Concurrency →](../13_concurrency/theory.md)
+
+**Jump to specific topics:**
+- Exception chaining (`raise from`) → [#exception-chaining](#exception-chaining)
+- LBYL vs EAFP → [#8-lbyl-vs-eafp-pythons-philosophy](#8-lbyl-vs-eafp-pythons-philosophy)
+- Retry & backoff deep dive → [#9-retry-exponential-backoff](#9-retry-exponential-backoff)
+- Context managers deep dive → [12_context_managers/theory.md](../12_context_managers/theory.md)
+- Threading exceptions → [13_concurrency/theory.md](../13_concurrency/theory.md)
+
+> [↑ Back to Top](#top)

@@ -6,8 +6,51 @@
 
 ---
 
+## Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | pytest · Write a Test Function | 🟢 |
+| [Q2](#q2) | pytest · assert with Multiple Types | 🟢 |
+| [Q3](#q3) | pytest · Fixtures as Setup | 🟡 |
+| [Q4](#q4) | pytest · parametrize Basics | 🟡 |
+| [Q5](#q5) | pytest · pytest.raises | 🟡 |
+| [Q6](#q6) | pytest · Fixture Scope | 🟡 |
+| [Q7](#q7) | pytest · conftest.py | 🟡 |
+| [Q8](#q8) | pytest · Custom Markers and skip | 🟡 |
+| [Q9](#q9) | pytest · Async Testing | 🟡 |
+| [Q10](#q10) | unittest · TestCase and setUp | 🟡 |
+| [Q11](#q11) | unittest · assertRaises and assertRaisesRegex | 🟡 |
+| [Q12](#q12) | unittest · setUpClass for Expensive Resources | 🟡 |
+| [Q13](#q13) | unittest · subTest | 🟡 |
+| [Q14](#q14) | unittest · Migration to pytest | 🟡 |
+| [Q15](#q15) | mock · Basic Mock and return_value | 🟡 |
+| [Q16](#q16) | mock · @patch Decorator | 🟡 |
+| [Q17](#q17) | mock · return_value on Chained Calls | 🟡 |
+| [Q18](#q18) | mock · side_effect | 🟡 |
+| [Q19](#q19) | mock · assert_called_once_with | 🟡 |
+| [Q20](#q20) | mock · patch.object | 🟡 |
+| [Q21](#q21) | mock · spec for Type Safety | 🟡 |
+| [Q22](#q22) | mock · patch.dict for Config | 🟠 |
+| [Q23](#q23) | mock · AsyncMock | 🟠 |
+| [Q24](#q24) | mock · MagicMock as Context Manager | 🟠 |
+| [Q25](#q25) | doubles · Mock vs Stub vs Fake | 🟡 |
+| [Q26](#q26) | doubles · When Not to Mock | 🟡 |
+| [Q27](#q27) | doubles · Spy Pattern | 🟡 |
+| [Q28](#q28) | doubles · AAA Pattern | 🟡 |
+| [Q29](#q29) | patterns · TDD Red-Green-Refactor | 🟡 |
+| [Q30](#q30) | patterns · Testing Edge Cases | 🟡 |
+| [Q31](#q31) | patterns · Test Isolation | 🟡 |
+| [Q32](#q32) | patterns · Property-Based Testing with Hypothesis | 🟠 |
+| [Q33](#q33) | capstone · Coverage Analysis | 🟠 |
+| [Q34](#q34) | capstone · Test Organization | 🟠 |
+| [Q35](#q35) | capstone — End-to-End Test Suite | 🟠 |
+
+---
+
 ## pytest Basics (Q1–Q5)
 
+<a id="q1"></a>
 ### Q1 🟢 · pytest · Write a Test Function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
@@ -37,6 +80,7 @@ def test_add():
 
 ---
 
+<a id="q2"></a>
 ### Q2 🟢 · pytest · assert with Multiple Types
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
@@ -72,6 +116,7 @@ def test_various_assertions():
 
 ---
 
+<a id="q3"></a>
 ### Q3 🟡 · pytest · Fixtures as Setup
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
@@ -113,6 +158,7 @@ def test_add_item_updates_total(empty_cart):
 
 ---
 
+<a id="q4"></a>
 ### Q4 🟡 · pytest · parametrize Basics
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
@@ -156,6 +202,7 @@ def test_is_prime(n, expected):
 
 ---
 
+<a id="q5"></a>
 ### Q5 🟡 · pytest · pytest.raises
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
@@ -195,6 +242,7 @@ def test_divide_by_zero_message():
 
 ## pytest Advanced (Q6–Q9)
 
+<a id="q6"></a>
 ### Q6 🟡 · pytest · Fixture Scope
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
@@ -237,6 +285,7 @@ def app_server():
 
 ---
 
+<a id="q7"></a>
 ### Q7 🟡 · pytest · conftest.py
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
@@ -282,6 +331,7 @@ def test_user_in_db(sample_user, db):
 
 ---
 
+<a id="q8"></a>
 ### Q8 🟡 · pytest · Custom Markers and skip
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
@@ -331,6 +381,7 @@ def test_float_precision():
 
 ---
 
+<a id="q9"></a>
 ### Q9 🟡 · pytest · Async Testing
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
@@ -371,6 +422,7 @@ async def test_fetch_data():
 
 ## unittest (Q10–Q14)
 
+<a id="q10"></a>
 ### Q10 🟡 · unittest · TestCase and setUp
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
@@ -426,6 +478,7 @@ class TestBankAccount(unittest.TestCase):
 
 ---
 
+<a id="q11"></a>
 ### Q11 🟡 · unittest · assertRaises and assertRaisesRegex
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
@@ -465,6 +518,7 @@ class TestParseInt(unittest.TestCase):
 
 ---
 
+<a id="q12"></a>
 ### Q12 🟡 · unittest · setUpClass for Expensive Resources
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
@@ -509,6 +563,7 @@ class TestSharedSetup(unittest.TestCase):
 
 ---
 
+<a id="q13"></a>
 ### Q13 🟡 · unittest · subTest
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
@@ -550,6 +605,7 @@ class TestPalindrome(unittest.TestCase):
 
 ---
 
+<a id="q14"></a>
 ### Q14 🟡 · unittest · Migration to pytest
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
@@ -593,6 +649,7 @@ def test_div_zero(calc):
 
 ## Mock Basics (Q15–Q19)
 
+<a id="q15"></a>
 ### Q15 🟡 · mock · Basic Mock and return_value
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
@@ -625,6 +682,7 @@ m.find_user.assert_called_once_with(1)
 
 ---
 
+<a id="q16"></a>
 ### Q16 🟡 · mock · @patch Decorator
 
 > 🛠️ **Solve locally:** [practice_local.py → Q16](./practice_local.py)
@@ -661,6 +719,7 @@ def test_get_current_user():
 
 ---
 
+<a id="q17"></a>
 ### Q17 🟡 · mock · return_value on Chained Calls
 
 > 🛠️ **Solve locally:** [practice_local.py → Q17](./practice_local.py)
@@ -701,6 +760,7 @@ def test_fetch_user(mock_get):
 
 ---
 
+<a id="q18"></a>
 ### Q18 🟡 · mock · side_effect
 
 > 🛠️ **Solve locally:** [practice_local.py → Q18](./practice_local.py)
@@ -745,6 +805,7 @@ def test_side_effect_callable():
 
 ---
 
+<a id="q19"></a>
 ### Q19 🟡 · mock · assert_called_once_with
 
 > 🛠️ **Solve locally:** [practice_local.py → Q19](./practice_local.py)
@@ -793,6 +854,7 @@ def test_email_assertions():
 
 ## Mock Advanced (Q20–Q24)
 
+<a id="q20"></a>
 ### Q20 🟡 · mock · patch.object
 
 > 🛠️ **Solve locally:** [practice_local.py → Q20](./practice_local.py)
@@ -832,6 +894,7 @@ def test_patch_object():
 
 ---
 
+<a id="q21"></a>
 ### Q21 🟡 · mock · spec for Type Safety
 
 > 🛠️ **Solve locally:** [practice_local.py → Q21](./practice_local.py)
@@ -872,6 +935,7 @@ def test_spec_mock():
 
 ---
 
+<a id="q22"></a>
 ### Q22 🟠 · mock · patch.dict for Config
 
 > 🛠️ **Solve locally:** [practice_local.py → Q22](./practice_local.py)
@@ -914,6 +978,7 @@ def test_config_with_env_override():
 
 ---
 
+<a id="q23"></a>
 ### Q23 🟠 · mock · AsyncMock
 
 > 🛠️ **Solve locally:** [practice_local.py → Q23](./practice_local.py)
@@ -954,6 +1019,7 @@ async def test_process_items():
 
 ---
 
+<a id="q24"></a>
 ### Q24 🟠 · mock · MagicMock as Context Manager
 
 > 🛠️ **Solve locally:** [practice_local.py → Q24](./practice_local.py)
@@ -992,6 +1058,7 @@ def test_open_and_read():
 
 ## Test Doubles (Q25–Q28)
 
+<a id="q25"></a>
 ### Q25 🟡 · doubles · Mock vs Stub vs Fake
 
 > 🛠️ **Solve locally:** [practice_local.py → Q25](./practice_local.py)
@@ -1041,6 +1108,7 @@ mock_weather.get_temp.assert_called_once_with("London")
 
 ---
 
+<a id="q26"></a>
 ### Q26 🟡 · doubles · When Not to Mock
 
 > 🛠️ **Solve locally:** [practice_local.py → Q26](./practice_local.py)
@@ -1090,6 +1158,7 @@ def test_order_total():
 
 ---
 
+<a id="q27"></a>
 ### Q27 🟡 · doubles · Spy Pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q27](./practice_local.py)
@@ -1150,6 +1219,7 @@ def test_mock_spy():
 
 ---
 
+<a id="q28"></a>
 ### Q28 🟡 · doubles · AAA Pattern
 
 > 🛠️ **Solve locally:** [practice_local.py → Q28](./practice_local.py)
@@ -1198,6 +1268,7 @@ def test_checkout_charges_correct_amount():
 
 ## Testing Patterns (Q29–Q32)
 
+<a id="q29"></a>
 ### Q29 🟡 · patterns · TDD Red-Green-Refactor
 
 > 🛠️ **Solve locally:** [practice_local.py → Q29](./practice_local.py)
@@ -1254,6 +1325,7 @@ def validate_password(pwd):
 
 ---
 
+<a id="q30"></a>
 ### Q30 🟡 · patterns · Testing Edge Cases
 
 > 🛠️ **Solve locally:** [practice_local.py → Q30](./practice_local.py)
@@ -1304,6 +1376,7 @@ def test_invalid_quantity():
 
 ---
 
+<a id="q31"></a>
 ### Q31 🟡 · patterns · Test Isolation
 
 > 🛠️ **Solve locally:** [practice_local.py → Q31](./practice_local.py)
@@ -1352,6 +1425,7 @@ def test_add_another(cart):
 
 ---
 
+<a id="q32"></a>
 ### Q32 🟠 · patterns · Property-Based Testing with Hypothesis
 
 > 🛠️ **Solve locally:** [practice_local.py → Q32](./practice_local.py)
@@ -1403,6 +1477,7 @@ def test_sort_same_elements(lst):
 
 ## Capstone (Q33–Q35)
 
+<a id="q33"></a>
 ### Q33 🟠 · capstone · Coverage Analysis
 
 > 🛠️ **Solve locally:** [practice_local.py → Q33](./practice_local.py)
@@ -1457,6 +1532,7 @@ def test_invalid_amount():
 
 ---
 
+<a id="q34"></a>
 ### Q34 🟠 · capstone · Test Organization
 
 > 🛠️ **Solve locally:** [practice_local.py → Q34](./practice_local.py)
@@ -1526,6 +1602,7 @@ def test_create_user_missing_name_raises_validation_error(): ...
 
 ---
 
+<a id="q35"></a>
 ### Q35 🟠 · capstone — End-to-End Test Suite
 
 > 🛠️ **Solve locally:** [practice_local.py → Q35](./practice_local.py)

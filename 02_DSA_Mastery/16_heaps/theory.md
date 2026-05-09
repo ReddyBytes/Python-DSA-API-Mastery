@@ -1,4 +1,5 @@
-# 📘 Heaps — The Structure of Priority
+<a id="top"></a>
+# Heaps — The Structure of Priority
 
 > A heap is not about sorting everything.
 >
@@ -11,17 +12,33 @@ Heaps power:
 
 - Priority queues
 - Scheduling systems
-- Dijkstra’s algorithm
+- Dijkstra's algorithm
 - Top K problems
 - System resource management
 
 Heaps are extremely important in interviews.
 
-> 📝 **Practice:** [Q41 · heap-kth-largest](../dsa_practice_questions_100.md#q41--design--heap-kth-largest)
+## 📖 Table of Contents
 
----
+1. [Real Life Story — School Assembly Line](#1-real-life-story)
+2. [What Is a Heap?](#2-what-is-a-heap)
+3. [Complete Binary Tree (Very Important)](#3-complete-binary-tree)
+4. [Heap Property](#4-heap-property)
+5. [Heap Stored as Array](#5-heap-stored-as-array)
+6. [Insert in Heap (Bubble Up)](#6-insert-in-heap)
+7. [Delete from Heap (Bubble Down)](#7-delete-from-heap)
+8. [Heapify (Build Heap Efficiently)](#8-heapify)
+9. [Why Heap Is Powerful](#9-why-heap-is-powerful)
+10. [Heaps in Python](#10-heaps-in-python)
+11. [Common Interview Patterns](#11-common-interview-patterns)
+12. [Heap vs BST](#12-heap-vs-bst)
+13. [Real-World Applications](#13-real-world-applications)
+14. [Mental Model](#14-mental-model)
+15. [Final Understanding](#15-final-understanding)
 
 ## 📌 Learning Priority
+
+> 📝 **Practice:** [practice.md](./practice.md)
 
 **Must Learn** — Core concept, daily use, interview essential:
 heap property · complete binary tree · bubble up/down · Python heapq module
@@ -35,13 +52,12 @@ heap vs BST trade-offs · array storage indexing
 **Reference** — Know it exists, look up syntax when needed:
 D-ary heaps · Fibonacci heaps · binomial heaps
 
----
-
-# 🏆 1️⃣ Real Life Story — School Assembly Line
+<a id="1-real-life-story"></a>
+# 1. Real Life Story — School Assembly Line
 
 Imagine students standing in line for awards.
 
-You don’t care about full ranking.
+You don't care about full ranking.
 You only care about:
 
 Who is the highest scorer?
@@ -54,9 +70,51 @@ It guarantees:
 
 Top element always at root.
 
----
+## Visual: The Hospital ER — A Better Analogy
 
-# 🌳 2️⃣ What Is a Heap?
+Picture a hospital emergency room on a busy Saturday night.
+
+The old way: first come, first served. A guy with a paper cut walked in at 9pm. A woman having a heart attack walked in at 9:05pm. By the rules, paper cut goes first.
+
+Obviously, that's insane.
+
+So hospitals invented **triage**. Every patient gets a priority number. 1 = critical. 10 = "you're fine, sit down." The sickest person always goes next, no matter who arrived when.
+
+That's a heap. That's all it is.
+
+A heap answers one question with blazing speed:
+
+> "What's the most important thing right now?"
+
+Not second most important. Not a sorted list. Just: **what's next?**
+
+```
+Arrival order:          Priority:
+─────────────────────────────────────
+1. Bob (sprained ankle)     7
+2. Alice (chest pain)       2
+3. Carol (broken arm)       5
+4. Dave (stroke symptoms)   1
+5. Eve (bad headache)       4
+```
+
+In a regular queue (FIFO), the order of treatment would be:
+Bob → Alice → Carol → Dave → Eve
+
+In a min-heap (priority queue), the order is:
+Dave(1) → Alice(2) → Eve(4) → Carol(5) → Bob(7)
+
+Dave gets seen immediately even though he arrived 4th.
+Bob waits even though he arrived 1st.
+
+The heap is constantly asking: **"Among everyone here, who needs help most?"**
+
+> [↑ Back to Top](#top)
+
+<a id="2-what-is-a-heap"></a>
+# 2. What Is a Heap?
+
+> 📝 **Practice:** [Q1 · min-heap property](./practice.md#q1--min-heap-property-check) · [Q2 · max-heap property](./practice.md#q2--max-heap-property-check)
 
 A heap is:
 
@@ -67,9 +125,10 @@ Two types:
 - Min Heap
 - Max Heap
 
----
+> [↑ Back to Top](#top)
 
-# 📐 3️⃣ Complete Binary Tree (Very Important)
+<a id="3-complete-binary-tree"></a>
+# 3. Complete Binary Tree (Very Important)
 
 Complete means:
 
@@ -102,29 +161,26 @@ Because left child missing.
 
 Completeness is mandatory.
 
----
+**Common mistake — forgetting completeness:** A tree where the last level fills from right instead of left is not a valid heap structure. Always fill left-to-right on the bottom level, or the array indexing formulas break.
 
-# 🔼 4️⃣ Heap Property
+> [↑ Back to Top](#top)
+
+<a id="4-heap-property"></a>
+# 4. Heap Property
 
 > 📝 **Practice:** [Q40 · heap-property](../dsa_practice_questions_100.md#q40--normal--heap-property)
 
----
-
-## 🔹 Min Heap
+## Min Heap
 
 Parent ≤ children.
 
 Smallest element at root.
 
----
-
-## 🔹 Max Heap
+## Max Heap
 
 Parent ≥ children.
 
 Largest element at root.
-
----
 
 Example Min Heap:
 
@@ -138,9 +194,14 @@ Example Min Heap:
 
 Root always smallest.
 
----
+**Common mistake — confusing heap with sorted structure:** A heap is NOT a sorted array. In a min-heap, the root is the minimum, but the rest of the elements have no guaranteed order beyond the parent-child relationship. `heap[1]` is not necessarily the second smallest.
 
-# 📦 5️⃣ Heap Stored as Array
+> [↑ Back to Top](#top)
+
+<a id="5-heap-stored-as-array"></a>
+# 5. Heap Stored as Array
+
+> 📝 **Practice:** [Q3 · push and pop](./practice.md#q3--heapq-push-and-pop) · [Q4 · heapify](./practice.md#q4--heapq-heapify--on-batch-build)
 
 Very important:
 
@@ -150,17 +211,61 @@ No pointers needed.
 
 If index = i
 
-Left child = 2i + 1  
-Right child = 2i + 2  
-Parent = (i - 1) // 2  
+Left child = 2i + 1
+Right child = 2i + 2
+Parent = (i - 1) // 2
 
 This works because tree is complete.
 
 Efficient memory usage.
 
----
+## Visual: The Array Mapping
 
-# 🔁 6️⃣ Insert in Heap (Bubble Up)
+Here's where it gets cool. A heap looks like a tree when you draw it:
+
+```
+                 1
+               /   \
+              3     5
+             / \   / \
+            7   9 8   6
+```
+
+But it lives in a plain array:
+
+```
+Index:  [ 0   1   2   3   4   5   6 ]
+Value:  [ 1   3   5   7   9   8   6 ]
+```
+
+The mapping is pure math. No pointers needed.
+
+```
+For any node at index i:
+┌─────────────────────────────────────┐
+│  Left child  → index  2i + 1        │
+│  Right child → index  2i + 2        │
+│  Parent      → index  (i - 1) // 2  │
+└─────────────────────────────────────┘
+```
+
+Let's verify with the root's children:
+- Root is at index 0
+- Left child:  2(0)+1 = 1  → value 3  ✓
+- Right child: 2(0)+2 = 2  → value 5  ✓
+
+Let's check node 7 (index 3):
+- Parent: (3-1)//2 = 1  → value 3  ✓  (3 is above 7 in the tree)
+
+This is why heaps are so cache-friendly. It's just a contiguous block of memory.
+No tree node objects. No pointers chasing each other around RAM.
+
+**Common mistake — incorrect index calculations:** Off-by-one errors in index math (using `2i` instead of `2i+1` for left child, or `i // 2` instead of `(i-1) // 2` for parent in 0-based arrays) silently corrupt heap operations. Always double-check with a small example before coding.
+
+> [↑ Back to Top](#top)
+
+<a id="6-insert-in-heap"></a>
+# 6. Insert in Heap (Bubble Up)
 
 Steps:
 
@@ -202,9 +307,94 @@ O(log n)
 
 Because height ≈ log n.
 
----
+## Visual: Step-by-Step Bubble Up
 
-# 🔽 7️⃣ Delete from Heap (Bubble Down)
+A new patient walks in: Frank, priority 2 (second-most critical).
+
+**Step 1:** Frank is placed at the end of the array (the "bottom" of the tree).
+
+```
+Before:
+                 1
+               /   \
+              3     5
+             / \   / \
+            7   9 8   6
+
+Array: [1, 3, 5, 7, 9, 8, 6]
+
+After appending Frank (priority 2) at index 7:
+
+                 1
+               /   \
+              3     5
+             / \   / \
+            7   9 8   6
+           /
+          2  ← Frank just arrived here
+
+Array: [1, 3, 5, 7, 9, 8, 6, 2]
+```
+
+Frank (2) is smaller than his parent at index (7-1)//2 = 3, which is 7. The heap property is violated.
+
+**Step 2:** Bubble up. Compare Frank to his parent. If Frank is smaller, swap.
+
+```
+Frank (2) vs Parent (7) → Frank wins! Swap.
+
+                 1
+               /   \
+              3     5
+             / \   / \
+            2   9 8   6
+           /
+          7
+
+Array: [1, 3, 5, 2, 9, 8, 6, 7]
+```
+
+Frank is now at index 3. His new parent is at index (3-1)//2 = 1, which is 3.
+
+**Step 3:** Compare Frank (2) to parent (3). Frank is still smaller. Swap again.
+
+```
+Frank (2) vs Parent (3) → Frank wins! Swap.
+
+                 1
+               /   \
+              2     5
+             / \   / \
+            3   9 8   6
+           /
+          7
+
+Array: [1, 2, 5, 3, 9, 8, 6, 7]
+```
+
+Frank is now at index 1. His parent is the root at index 0, value 1.
+
+**Step 4:** Compare Frank (2) to root (1). Root wins. Stop.
+
+```
+Final state:
+                 1
+               /   \
+              2     5
+             / \   / \
+            3   9 8   6
+           /
+          7
+
+Array: [1, 2, 5, 3, 9, 8, 6, 7]
+```
+
+Frank found his place. The heap property is restored.
+
+> [↑ Back to Top](#top)
+
+<a id="7-delete-from-heap"></a>
+# 7. Delete from Heap (Bubble Down)
 
 Remove root.
 
@@ -237,9 +427,71 @@ Swap with smaller child.
 Time:
 O(log n)
 
----
+## Visual: Step-by-Step Extract Min (Heapify Down)
 
-# ⚡ 8️⃣ Heapify (Build Heap Efficiently)
+Dave (priority 1, root) gets called in. We need to remove the root.
+
+**Step 1:** Swap the root with the LAST element. Then remove the last element.
+
+```
+Before:
+                 1   ← Dave leaves
+               /   \
+              2     5
+             / \   / \
+            3   9 8   6
+           /
+          7
+
+Swap root (1) with last element (7):
+
+                 7   ← now temporarily at root
+               /   \
+              2     5
+             / \   / \
+            3   9 8   6
+
+Array: [7, 2, 5, 3, 9, 8, 6]   (1 is removed)
+```
+
+**Step 2:** Heapify down. 7 is at the root but is bigger than both its children (2 and 5). Find the smaller child and swap.
+
+```
+7 vs children: left=2, right=5. Smaller child is 2. Swap 7 and 2.
+
+                 2
+               /   \
+              7     5
+             / \   / \
+            3   9 8   6
+
+Array: [2, 7, 5, 3, 9, 8, 6]
+```
+
+**Step 3:** 7 is now at index 1. Its children: left=3 (index 3), right=9 (index 4). Smaller child is 3. 7 > 3, so swap.
+
+```
+                 2
+               /   \
+              3     5
+             / \   / \
+            7   9 8   6
+
+Array: [2, 3, 5, 7, 9, 8, 6]
+```
+
+**Step 4:** 7 is at index 3. Its children would be at index 7 and 8 — beyond the array. 7 is a leaf. Stop.
+
+The heap is restored. The new minimum (2) is at the root, ready to serve next.
+
+**Common mistake — heap[0] vs heappop():** `heap[0]` is O(1) peek without removing. `heappop()` is O(log n) and removes the minimum. Using `heappop()` when you only want to look causes silent logic bugs (and infinite loops if you rely on the element still being there). Use `heap[0]` to inspect, `heappop()` to consume.
+
+> [↑ Back to Top](#top)
+
+<a id="8-heapify"></a>
+# 8. Heapify (Build Heap Efficiently)
+
+> 📝 **Practice:** [Q4 · heapify O(n)](./practice.md#q4--heapq-heapify--on-batch-build) · [Q20 · heapify in loop mistake](./practice.md#q20--heapify-in-loop--on-mistake)
 
 Given array:
 
@@ -254,23 +506,69 @@ Heapify is O(n), not O(n log n).
 
 This surprises many.
 
----
+**Common mistake — calling heapify() on streaming data:** `heapify()` runs O(n) on a list that is already fully populated. Calling `heapify()` inside a loop after each new element does O(n) work every iteration — total cost O(n²) instead of O(n log n). For streaming data, always use `heappush()`.
 
-# 🧠 9️⃣ Why Heap Is Powerful
+```
+heapify(list)          O(n)        Use when ALL elements are already in a list
+heappush(heap, item)   O(log n)    Use when elements arrive one at a time (streaming)
+
+Building from scratch with n pushes = O(n log n)
+Building with heapify on complete list = O(n)
+
+If you have the data: heapify is 2-3x faster in practice.
+If data streams in: heappush is the only correct option.
+```
+
+> [↑ Back to Top](#top)
+
+<a id="9-why-heap-is-powerful"></a>
+# 9. Why Heap Is Powerful
 
 Operations:
 
-Insert → O(log n)  
-Delete → O(log n)  
+Insert → O(log n)
+Delete → O(log n)
 Peek → O(1)
 
 Always know min or max instantly.
 
-That’s powerful.
+That's powerful.
 
----
+## Visual: Quick Reference
 
-# 🔢 1️⃣0️⃣ Heaps in Python
+```
+┌──────────────────────────────────────────────────────────┐
+│  HEAP CHEAT SHEET                                        │
+├──────────────────────────────────────────────────────────┤
+│  Structure:  Complete binary tree stored as array        │
+│  Property:   Parent ≤ children (min-heap)                │
+│                                                          │
+│  Operations:                                             │
+│    insert(val)      → O(log n)   heapify up              │
+│    extract_min()    → O(log n)   heapify down            │
+│    peek_min()       → O(1)       just look at index 0    │
+│    heapify(array)   → O(n)       build from scratch      │
+│                                                          │
+│  Index math (0-based):                                   │
+│    left  = 2i + 1                                        │
+│    right = 2i + 2                                        │
+│    parent = (i - 1) // 2                                 │
+│                                                          │
+│  Classic patterns:                                       │
+│    Top K elements      → min-heap of size K              │
+│    K closest points    → max-heap of size K              │
+│    Running median      → two heaps                       │
+│    Merge K sorted      → min-heap of K elements          │
+│    Task scheduler      → max-heap of frequencies         │
+└──────────────────────────────────────────────────────────┘
+```
+
+> [↑ Back to Top](#top)
+
+<a id="10-heaps-in-python"></a>
+# 10. Heaps in Python
+
+> 📝 **Practice:** [Q3 · push/pop](./practice.md#q3--heapq-push-and-pop) · [Q5 · nlargest/nsmallest](./practice.md#q5--nlargest-and-nsmallest) · [Q6 · max-heap negation](./practice.md#q6--max-heap-via-negation) · [Q7 · peek](./practice.md#q7--peek-without-popping--heap0)
 
 Python provides:
 
@@ -287,9 +585,45 @@ Python has min heap by default.
 For max heap:
 Insert negative values.
 
----
+**Common mistake — Python heapq is min-heap only:** Using `heapq` directly for "find K largest elements" gives you the K smallest instead. You must negate values to simulate a max-heap. Common pattern: `heappush(heap, (-priority, item))` for priority queues. Negate on push, negate again on pop.
 
-# 🎯 1️⃣1️⃣ Common Interview Patterns
+```python
+import heapq
+
+# Wrong: gives smallest, not largest
+def k_largest_wrong(nums, k):
+    heap = []
+    for num in nums:
+        heapq.heappush(heap, num)    # BUG: min-heap
+    return [heapq.heappop(heap) for _ in range(k)]  # pops smallest
+
+# Correct: negate for max-heap behavior
+def k_largest_negate(nums, k):
+    heap = []
+    for num in nums:
+        heapq.heappush(heap, -num)   # store negated
+    return [-heapq.heappop(heap) for _ in range(k)]  # negate back
+```
+
+**Common mistake — tuple TypeError on equal priorities:** When two tuples have equal first elements, Python compares the second element. If the second element is a custom object (dict, custom class), Python raises `TypeError: '<' not supported`. Fix: add a unique counter as a tiebreaker.
+
+```python
+import heapq, itertools
+
+counter = itertools.count()   # unique, always-increasing integer
+heap = []
+
+# Safe pattern: (priority, unique_count, item)
+# count is always unique — Python never needs to compare item
+heapq.heappush(heap, (priority, next(counter), item))
+```
+
+> [↑ Back to Top](#top)
+
+<a id="11-common-interview-patterns"></a>
+# 11. Common Interview Patterns
+
+> 📝 **Practice:** [Q9 · kth largest](./practice.md#q9--kth-largest-element) · [Q11 · top-K](./practice.md#q11--top-k-largest-elements) · [Q13 · merge K sorted](./practice.md#q13--merge-k-sorted-lists) · [Q21 · median stream](./practice.md#q21--median-of-data-stream--two-heaps) · [Q15 · task scheduler](./practice.md#q15--task-scheduler-with-cooldown)
 
 Heaps are used in:
 
@@ -297,15 +631,108 @@ Heaps are used in:
 - Kth largest element
 - Merge k sorted lists
 - Median of stream
-- Dijkstra’s shortest path
+- Dijkstra's shortest path
 - Task scheduling
 - Priority queues
 
 Very common in medium-hard interviews.
 
----
+## Visual: Top K Problem — "Find the 5 Most Critical Patients from 1 Million Records"
 
-# ⚖️ 1️⃣2️⃣ Heap vs BST
+Imagine you have 1,000,000 patients in a database. You need the 5 most critical.
+
+**Bad approach:** Sort all 1 million. O(n log n). Slow. Wastes work on elements you'll never use.
+
+**Heap approach:** Keep a min-heap of size K=5.
+
+The trick is counterintuitive at first: to find the TOP 5 (highest priority), use a MIN-heap of size 5. The min-heap's root is the least important of your current top-5 candidates.
+
+Why? Because you want to quickly ask: "Is this new person MORE important than the least important person in my current top-5?" If yes, kick the weakest out, insert the new one.
+
+```
+Start: heap is empty. Process first 5 patients.
+
+Patients:  [7, 2, 5, 3, 9]  (priority numbers — lower is more urgent)
+
+After inserting all 5:
+         2
+        / \
+       3   5
+      / \
+     7   9
+
+Heap (top-5 so far): min=2
+```
+
+Now a new patient arrives: priority 1 (extremely critical).
+
+```
+New patient: 1
+Is 1 < heap's min (2)? YES.
+→ Pop 2 from heap, insert 1.
+
+         1
+        / \
+       3   5
+      / \
+     7   9
+```
+
+New patient: priority 8. Is 8 < heap's min (1)? No. Ignore.
+
+After all 1 million patients: heap contains exactly the 5 most critical, and we only ever stored 5 elements in memory at once.
+
+**Time:** O(n log k) where k=5. For n=1,000,000 and k=5, that's ~8x faster than sorting.
+
+**Common mistake — max-heap for top-K streaming:** Using a max-heap for top-K requires storing ALL n elements before extracting. A min-heap of size K processes each element in O(log k) and never stores more than K elements. Use `heapreplace` instead of pop+push for efficiency.
+
+```python
+import heapq
+
+def top_k_min_heap_correct(stream, k):
+    heap = []
+    for item in stream:
+        if len(heap) < k:
+            heapq.heappush(heap, item)
+        elif item > heap[0]:
+            heapq.heapreplace(heap, item)  # faster than pop+push
+    return sorted(heap, reverse=True)
+    # Space: O(k)   Time: O(n log k)
+```
+
+## Visual: Two Heaps for Running Median
+
+Your hospital wants to track the median patient priority at all times as new patients arrive.
+
+The median is the middle value. Split patients into two halves:
+- Lower half (smaller priorities) — store in a **max-heap** (biggest of the small ones at top)
+- Upper half (larger priorities) — store in a **min-heap** (smallest of the big ones at top)
+
+```
+Patients so far (sorted): [1, 2, 3, | 5, 7, 8, 9]
+                                     ↑ median boundary
+
+Max-heap (lower half):    Min-heap (upper half):
+        3                       5
+       / \                     / \
+      2   1                   7   8
+                              /
+                             9
+
+Lower half tops out at 3.   Upper half starts at 5.
+```
+
+The median is always one of the two tops:
+- If both halves equal size: median = average of both tops = (3+5)/2 = 4.0
+- If lower half is bigger by 1: median = lower half's max = 3
+- If upper half is bigger by 1: median = upper half's min = 5
+
+Every insertion is O(log n). Every median query is O(1).
+
+> [↑ Back to Top](#top)
+
+<a id="12-heap-vs-bst"></a>
+# 12. Heap vs BST
 
 Heap:
 Only root guaranteed min/max.
@@ -325,9 +752,10 @@ Choose wisely.
 
 > 📝 **Practice:** [Q42 · heap-vs-bst](../dsa_practice_questions_100.md#q42--interview--heap-vs-bst) · [Q83 · heap-vs-bst-compare](../dsa_practice_questions_100.md#q83--interview--heap-vs-bst-compare)
 
----
+> [↑ Back to Top](#top)
 
-# 🌍 1️⃣3️⃣ Real-World Applications
+<a id="13-real-world-applications"></a>
+# 13. Real-World Applications
 
 - CPU scheduling
 - Network packet priority
@@ -338,21 +766,12 @@ Choose wisely.
 
 Heaps manage priorities in real systems.
 
----
+**Common mistake — lazy deletion with wrong virtual size:** When using lazy deletion (marking elements as invalid instead of removing them, as in Dijkstra's), forgetting to track virtual size separately from real heap size corrupts any size-dependent logic like median finding. Always maintain a separate `_size` counter that reflects pending removals.
 
-# ⚠️ 1️⃣4️⃣ Common Mistakes
+> [↑ Back to Top](#top)
 
-- Forgetting completeness requirement
-- Confusing heap with sorted structure
-- Incorrect index calculations
-- Assuming heap gives sorted array
-- Not heapifying after deletion
-
-Heap is not fully sorted.
-
----
-
-# 🧠 1️⃣5️⃣ Mental Model
+<a id="14-mental-model"></a>
+# 14. Mental Model
 
 Think of heap as:
 
@@ -365,9 +784,16 @@ Everything else is somewhere below.
 
 You only guarantee peak.
 
----
+The key insight to hold onto: a heap does NOT give you a fully sorted order. It only guarantees the min (or max) is instantly accessible. That constraint is exactly what makes it so fast. You're not doing more work than the problem requires.
 
-# 📌 Final Understanding
+When someone asks "what's the best/worst/most/least right now?" — that's a heap problem.
+
+> [↑ Back to Top](#top)
+
+<a id="15-final-understanding"></a>
+# 15. Final Understanding
+
+> 📝 **Practice:** [Q41 · heap-kth-largest](../dsa_practice_questions_100.md#q41--design--heap-kth-largest)
 
 Heap is:
 
@@ -388,21 +814,19 @@ Mastering heap prepares you for:
 - Median maintenance
 - Advanced system design
 
----
+# Navigation
 
-# 🔁 Navigation
-
-Previous:  
+Previous:
 [15_binary_search_trees/interview.md](/02_DSA_Mastery/15_binary_search_trees/interview.md)
 
-Next:  
-[16_heaps/interview.md](/02_DSA_Mastery/16_heaps/interview.md)  
+Next:
+[16_heaps/interview.md](/02_DSA_Mastery/16_heaps/interview.md)
 [17_trie/theory.md](/02_DSA_Mastery/17_trie/theory.md)
-
----
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Binary Search Trees — Interview Q&A](../15_binary_search_trees/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+**Prev:** [← Binary Search Trees — Interview Q&A](../15_binary_search_trees/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
 
-**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)
+
+> [↑ Back to Top](#top)

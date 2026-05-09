@@ -1661,4 +1661,4 @@ The trees are all the same. It's the direction of information that changes every
 
 **Prev:** [← Cheat Sheet](./cheetsheet.md) &nbsp;|&nbsp; **Next:** [Real World Usage →](./real_world_usage.md)
 
-**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheetsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Theory](./theory.md) · [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheetsheet.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md) · [Practice](./practice.md)

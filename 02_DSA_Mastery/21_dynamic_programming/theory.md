@@ -1,4 +1,6 @@
-# 📘 Dynamic Programming — The Art of Remembering Smartly
+<a id="top"></a>
+
+# Dynamic Programming — The Art of Remembering Smartly
 
 > If backtracking tries everything,
 > Dynamic Programming avoids repeating work.
@@ -12,11 +14,26 @@ Dynamic Programming (DP) is:
 - One of the most confusing for beginners
 - One of the most important interview topics
 
-Let’s break it slowly and clearly.
+Let's break it slowly and clearly.
 
-> 📝 **Practice:** [Q79 · explain-dynamic-programming](../dsa_practice_questions_100.md#q79--interview--explain-dynamic-programming)
+## 📖 Table of Contents
 
----
+1. [Real Life Story — Climbing Stairs](#1-real-life-story)
+2. [Why Normal Recursion Is Slow](#2-why-normal-recursion-is-slow)
+3. [Core Idea of DP](#3-core-idea-of-dp)
+4. [Two Requirements for DP](#4-two-requirements-for-dp)
+5. [Two Ways to Implement DP](#5-two-ways-to-implement-dp)
+6. [How to Identify DP Problems](#6-how-to-identify-dp-problems)
+7. [Classic DP Problems](#7-classic-dp-problems)
+8. [Time and Space Complexity](#8-time-and-space-complexity)
+9. [DP vs Greedy](#9-dp-vs-greedy)
+10. [DP vs Backtracking](#10-dp-vs-backtracking)
+11. [Common DP Patterns](#11-common-dp-patterns)
+12. [DP Dimensions — Choosing the Right State](#12-dp-dimensions)
+13. [Mental Model](#13-mental-model)
+14. [Step-by-Step DP Thinking Strategy](#14-step-by-step-dp-thinking-strategy)
+15. [Real-World Applications](#15-real-world-applications)
+16. [Final Understanding](#16-final-understanding)
 
 ## 📌 Learning Priority
 
@@ -32,9 +49,9 @@ space optimization · edit distance (string DP) · bitmask DP intro
 **Reference** — Know it exists, look up syntax when needed:
 digit DP · DP on trees · convex hull trick · profile DP
 
----
+<a id="1-real-life-story"></a>
 
-# 🧠 1️⃣ Real Life Story — Climbing Stairs
+# 1. Real Life Story — Climbing Stairs
 
 Imagine you are climbing stairs.
 
@@ -64,11 +81,15 @@ You reuse previous answers.
 
 That is DP.
 
----
+> 📝 **Practice:** [Q79 · explain-dynamic-programming](../dsa_practice_questions_100.md#q79--interview--explain-dynamic-programming)
 
-# 🌳 2️⃣ Why Normal Recursion Is Slow
+> [↑ Back to Top](#top)
 
-Let’s solve climbing stairs recursively.
+<a id="2-why-normal-recursion-is-slow"></a>
+
+# 2. Why Normal Recursion Is Slow
+
+Let's solve climbing stairs recursively.
 
 ```
 f(n) = f(n-1) + f(n-2)
@@ -88,8 +109,8 @@ f(2)  f(1)
 
 Notice:
 
-f(3) computed multiple times  
-f(2) computed multiple times  
+f(3) computed multiple times
+f(2) computed multiple times
 
 Redundant work.
 
@@ -98,29 +119,82 @@ O(2^n)
 
 Very slow.
 
----
+## Visual: Call Tree Explosion
 
-# 💡 3️⃣ Core Idea of DP
+WITHOUT memoization — exponential work:
+
+```
+                        fib(5)
+                       /       \
+                   fib(4)       fib(3)
+                  /     \       /    \
+              fib(3)  fib(2) fib(2) fib(1)
+              /    \    /  \   /  \
+           fib(2) fib(1) fib(1) fib(0) fib(1) fib(0)
+           /   \
+        fib(1) fib(0)
+
+  Nodes marked * are DUPLICATE computations:
+  fib(3) computed 2×
+  fib(2) computed 3×
+  fib(1) computed 5×
+  fib(0) computed 3×
+
+  Total calls: 15  for fib(5)
+  For fib(n): O(2^n) — doubles with each step!
+```
+
+WITH memoization — linear work:
+
+```
+                        fib(5)
+                       /       \
+                   fib(4)    [fib(3)=2] ← CACHE HIT
+                  /     \
+              fib(3)   [fib(2)=1] ← CACHE HIT
+              /    \
+           fib(2)  [fib(1)=1] ← CACHE HIT
+           /    \
+        fib(1)  fib(0)
+
+  cache = {0:0, 1:1, 2:1, 3:2, 4:3, 5:5}
+
+  Total NEW calls: 5  (one per unique subproblem)
+  Time: O(n), Space: O(n)
+
+  KEY INSIGHT: Store answers to subproblems.
+               Never solve the same subproblem twice.
+```
+
+> [↑ Back to Top](#top)
+
+<a id="3-core-idea-of-dp"></a>
+
+# 3. Core Idea of DP
 
 If subproblem repeats,
 store result.
 
 Reuse it.
 
-That’s it.
+That's it.
 
 DP = Recursion + Memory
 
 > 📝 **Practice:** [Q93 · predict-dp-table](../dsa_practice_questions_100.md#q93--logical--predict-dp-table)
 
----
+> 📝 **Practice:** [Q6 — Two Requirements for DP](./practice.md#q6--identification--two-requirements-for-dp) · [Q7 — 6-Step Strategy](./practice.md#q7--dp-thinking--how-to-define-state)
 
-# 🧩 4️⃣ Two Requirements for DP
+> [↑ Back to Top](#top)
+
+<a id="4-two-requirements-for-dp"></a>
+
+# 4. Two Requirements for DP
 
 DP works when:
 
-1️⃣ Overlapping Subproblems  
-2️⃣ Optimal Substructure  
+1. Overlapping Subproblems
+2. Optimal Substructure
 
 Overlapping:
 Same subproblem solved multiple times.
@@ -130,13 +204,13 @@ Optimal solution built from optimal subsolutions.
 
 If these exist → use DP.
 
----
+> [↑ Back to Top](#top)
 
-# 🔁 5️⃣ Two Ways to Implement DP
+<a id="5-two-ways-to-implement-dp"></a>
 
----
+# 5. Two Ways to Implement DP
 
-## 🔹 Memoization (Top-Down)
+## Memoization (Top-Down)
 
 Use recursion + cache.
 
@@ -160,11 +234,13 @@ def climb(n):
 Time:
 O(n)
 
+**Common mistake — clearing the memo mid-computation:** Never call `memo.clear()` or delete entries while a recursive computation is in progress. Clearing the cache defeats memoization entirely and turns O(n) back into O(2^n). Use `@lru_cache(maxsize=None)` or a persistent dict that lives for the entire call.
+
 > 📝 **Practice:** [Q55 · dp-memoization-tabulation](../dsa_practice_questions_100.md#q55--normal--dp-memoization-tabulation) · [Q85 · memoization-vs-tabulation](../dsa_practice_questions_100.md#q85--interview--memoization-vs-tabulation)
 
----
+> 📝 **Practice:** [Q1 — Fibonacci Top-Down](./practice.md#q1--memoization--fibonacci-top-down)
 
-## 🔹 Tabulation (Bottom-Up)
+## Tabulation (Bottom-Up)
 
 Build solution from smallest case.
 
@@ -182,9 +258,84 @@ O(n)
 
 No recursion stack.
 
----
+**Common mistake — wrong base case initialization:** If you set `dp[0] = 0` and rely on `dp[i] = dp[i-1] + dp[i-2]`, then `dp[2] = dp[1] + dp[0] = 1 + 0 = 1` — wrong, the answer is 2. Either set `dp[2] = 2` explicitly, or use `dp[0] = 1` as the "empty path" sentinel. Write the state definition first; it forces the correct base value.
 
-# 🧠 6️⃣ How to Identify DP Problems
+> 📝 **Practice:** [Q2 — Climbing Stairs Bottom-Up](./practice.md#q2--tabulation--climbing-stairs-bottom-up) · [Q3 — O(1) Space](./practice.md#q3--space-optimization--climbing-stairs-o1-space)
+
+## Visual: Memoization vs Tabulation
+
+**Problem: Climbing stairs. n=5 stairs, take 1 or 2 steps at a time. How many ways?**
+
+Memoization (Top-Down) — Recursive + Cache:
+
+```
+  ways(5) = ways(4) + ways(3)          ← "how do I reach 5?"
+           ways(4) = ways(3) + ways(2)
+                    ways(3) = ways(2) + ways(1)
+                             ways(2) = ways(1) + ways(0)
+                                      ways(1) = 1
+                                      ways(0) = 1
+
+  Fill in bottom-up as recursion unwinds:
+  ways(0) = 1
+  ways(1) = 1
+  ways(2) = 2
+  ways(3) = 3
+  ways(4) = 5
+  ways(5) = 8
+
+  cache = {0:1, 1:1, 2:2, 3:3, 4:5, 5:8}
+```
+
+Tabulation (Bottom-Up) — Iterative + Table:
+
+```
+  Build the answer from the ground up, no recursion needed.
+
+  stair:  0    1    2    3    4    5
+  dp:    [1,   1,   ?,   ?,   ?,   ?]
+
+  Fill left to right: dp[i] = dp[i-1] + dp[i-2]
+
+  stair:  0    1    2    3    4    5
+  dp:    [1,   1,   2,   ?,   ?,   ?]
+                    ↑
+                 1+1=2
+
+  stair:  0    1    2    3    4    5
+  dp:    [1,   1,   2,   3,   ?,   ?]
+                         ↑
+                      1+2=3
+
+  stair:  0    1    2    3    4    5
+  dp:    [1,   1,   2,   3,   5,   ?]
+                              ↑
+                           2+3=5
+
+  stair:  0    1    2    3    4    5
+  dp:    [1,   1,   2,   3,   5,   8]  ← Answer: 8
+                                   ↑
+                                3+5=8
+```
+
+```
+┌─────────────────────┬─────────────────────────────┐
+│  Memoization        │  Tabulation                  │
+├─────────────────────┼─────────────────────────────┤
+│  Top-down           │  Bottom-up                   │
+│  Recursive          │  Iterative                   │
+│  Lazy (only solves  │  Eager (solves all           │
+│  needed subproblems)│  subproblems)                │
+│  Natural if problem │  Better space optimization   │
+│  structure is clear │  possible (rolling array)    │
+└─────────────────────┴─────────────────────────────┘
+```
+
+> [↑ Back to Top](#top)
+
+<a id="6-how-to-identify-dp-problems"></a>
+
+# 6. How to Identify DP Problems
 
 Look for:
 
@@ -198,25 +349,21 @@ Look for:
 
 If recursion has repeated calls → DP candidate.
 
----
+> [↑ Back to Top](#top)
 
-# 📚 7️⃣ Classic DP Problems
+<a id="7-classic-dp-problems"></a>
 
----
+# 7. Classic DP Problems
 
-## 🔹 Fibonacci
+## Fibonacci
 
 Base DP example.
 
----
-
-## 🔹 Climbing Stairs
+## Climbing Stairs
 
 Same pattern as Fibonacci.
 
----
-
-## 🔹 0/1 Knapsack
+## 0/1 Knapsack
 
 Max value with limited capacity.
 
@@ -225,11 +372,49 @@ dp[i][w] = best using first i items and capacity w.
 
 Important 2D DP.
 
+**Common mistake — forgetting the "not taking" branch:** The knapsack transition must compare taking item i against NOT taking it. Writing `dp[i][w] = values[i-1] + dp[i-1][w - weights[i-1]]` without the `max(dp[i-1][w], ...)` wrapper silently discards better solutions found by skipping the current item. Always set `dp[i][w] = dp[i-1][w]` first, then max it with the "take" option.
+
+## Visual: Knapsack DP Table
+
+```
+  Items:
+  ┌──────┬────────┬───────┐
+  │ Item │ Weight │ Value │
+  ├──────┼────────┼───────┤
+  │  1   │   1    │   1   │
+  │  2   │   3    │   4   │
+  │  3   │   4    │   5   │
+  │  4   │   5    │   7   │
+  └──────┴────────┴───────┘
+  Capacity W = 7
+
+  dp[i][w] = max value using first i items with capacity w
+
+  Rule:
+    don't take item i: dp[i][w] = dp[i-1][w]
+    take item i:       dp[i][w] = dp[i-1][w - weight[i]] + value[i]
+    take the max of both options (only if w >= weight[i])
+
+  Capacity:  0    1    2    3    4    5    6    7
+  No items: [0,   0,   0,   0,   0,   0,   0,   0]
+  Item 1:   [0,   1,   1,   1,   1,   1,   1,   1]
+            ↑ wt=1,val=1: fits starting at w=1
+  Item 2:   [0,   1,   1,   4,   5,   5,   5,   5]
+            ↑ wt=3,val=4: at w=3, take item2(4) > don't(1)
+  Item 3:   [0,   1,   1,   4,   5,   6,   6,   9]
+            ↑ wt=4,val=5: at w=7, take3(dp[2][3]+5=4+5=9)>don't(5)
+  Item 4:   [0,   1,   1,   4,   5,   7,   8,   9]
+            ↑ wt=5,val=7: at w=5, take4(7) > don't(6)
+
+  Answer: dp[4][7] = 9
+  (Take item 2 with value 4 + item 3 with value 5 = 9, total weight = 3+4 = 7)
+```
+
 > 📝 **Practice:** [Q56 · dp-01-knapsack](../dsa_practice_questions_100.md#q56--design--dp-01-knapsack)
 
----
+> 📝 **Practice:** [Q9 — 0/1 Knapsack 2D](./practice.md#q9--knapsack--01-knapsack-2d) · [Q10 — Space-Optimized](./practice.md#q10--knapsack--01-knapsack-space-optimized) · [Q17 — Partition Subset](./practice.md#q17--knapsack--partition-equal-subset-sum)
 
-## 🔹 Longest Common Subsequence (LCS)
+## Longest Common Subsequence (LCS)
 
 Compare two strings.
 
@@ -238,22 +423,103 @@ dp[i][j] = LCS of first i and j characters.
 
 Classic 2D DP.
 
+## Visual: LCS DP Table
+
+```
+  X = "ABCBDAB"   (rows)
+  Y = "BDCAB"     (cols)
+
+  Build dp[i][j] = length of LCS of X[0..i-1] and Y[0..j-1]
+
+  Rule:
+    if X[i-1] == Y[j-1]:  dp[i][j] = dp[i-1][j-1] + 1   ← diagonal + 1
+    else:                  dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+        ""   B    D    C    A    B
+   ""  [ 0,  0,   0,   0,   0,   0 ]
+   A   [ 0,  0,   0,   0,   1,   1 ]
+   B   [ 0,  1,   1,   1,   1,   2 ]
+   C   [ 0,  1,   1,   2,   2,   2 ]
+   B   [ 0,  1,   1,   2,   2,   3 ]
+   D   [ 0,  1,   2,   2,   2,   3 ]
+   A   [ 0,  1,   2,   2,   3,   3 ]
+   B   [ 0,  1,   2,   2,   3,   4 ]  ← LCS length = 4
+
+  Tracing back to find the actual LCS:
+  Start at dp[7][5] = 4
+    X[6]='B' == Y[4]='B' → take it, go diagonal to dp[6][4]
+    X[5]='A' == Y[3]='A' → take it, go diagonal to dp[5][3]
+    X[4]='D' == Y[1]='D' → take it, go diagonal to dp[4][1]
+    X[3]='B' == Y[0]='B' → take it, go diagonal to dp[3][0]
+
+  LCS = "BDAB"  (length 4)
+```
+
 > 📝 **Practice:** [Q57 · dp-lcs](../dsa_practice_questions_100.md#q57--normal--dp-lcs)
 
----
+> 📝 **Practice:** [Q13 — LCS](./practice.md#q13--sequence-dp--longest-common-subsequence) · [Q20 — LCS Space-Optimized](./practice.md#q20--space-optimization--rolling-array-lcs)
 
-## 🔹 Longest Increasing Subsequence (LIS)
+## Longest Increasing Subsequence (LIS)
 
 State:
 dp[i] = longest increasing subsequence ending at i.
 
 Advanced optimization possible.
 
+## Visual: LIS — Patience Sorting Analogy
+
+```
+  Sequence: [10, 9, 2, 5, 3, 7, 101, 18]
+
+  Patience Sorting Rules:
+  - Place each card on the leftmost pile whose top card is >= current card
+  - If no such pile exists, start a new pile
+
+  Card 10: [10]
+  Card  9: [9]          (9 < 10, replace 10)
+  Card  2: [2]          (2 < 9, replace 9)
+  Card  5: [2] [5]      (5 > 2, new pile)
+  Card  3: [2] [3]      (3 < 5, replace 5)
+  Card  7: [2] [3] [7]  (7 > 3, new pile)
+  Card101: [2] [3] [7] [101]   (new pile)
+  Card 18: [2] [3] [7] [18]    (18 < 101, replace)
+
+  Number of piles = length of LIS = 4
+  LIS = [2, 3, 7, 18] or [2, 3, 7, 101]
+
+  The pile tops always form an increasing sequence.
+  Binary search finds the right pile in O(log n).
+  Total time: O(n log n)
+```
+
+Standard DP approach for comparison (O(n^2)):
+
+```
+  Sequence: [10, 9, 2, 5, 3, 7, 101, 18]
+  Index:      0   1  2  3  4  5   6   7
+
+  dp[i] = length of LIS ending at index i
+
+  i=0: dp[0]=1               [10]→ LIS ending here: length 1
+  i=1: dp[1]=1               [9] → nothing before < 9 that matters
+  i=2: dp[2]=1               [2]
+  i=3: dp[3]=2        2<5    [2,5]
+  i=4: dp[4]=2        2<3    [2,3]
+  i=5: dp[5]=3     2<7,3<7   [2,3,7] or [2,5,7]
+  i=6: dp[6]=4  any<101      [2,3,7,101]
+  i=7: dp[7]=4  7<18         [2,3,7,18]
+
+  dp = [1, 1, 1, 2, 2, 3, 4, 4]
+  Answer = max(dp) = 4
+```
+
+**Common mistake — wrong state definition for LIS:** Initializing `dp = [0] * n` instead of `dp = [1] * n` produces an answer of 3 instead of 4 for `[10,9,2,5,3,7,101,18]`. The definition is "LIS ending AT index i" — every single element alone is a valid subsequence of length 1, so every base value must be 1, not 0. Write the definition before the code.
+
 > 📝 **Practice:** [Q58 · dp-lis](../dsa_practice_questions_100.md#q58--thinking--dp-lis)
 
----
+> 📝 **Practice:** [Q14 — LIS O(n²)](./practice.md#q14--sequence-dp--longest-increasing-subsequence-on2) · [Q15 — LIS O(n log n)](./practice.md#q15--sequence-dp--lis-onlogn-patience-sorting)
 
-## 🔹 Coin Change
+## Coin Change
 
 Minimum coins to make amount.
 
@@ -263,11 +529,17 @@ dp[amount] = minimum coins.
 Greedy fails here sometimes.
 DP required.
 
+**Common mistake — missing the "no solution" case:** When no combination of coins reaches the target, `dp[amount]` remains at `float('inf')`. Returning that directly gives the caller infinity instead of -1. Always guard: `return dp[amount] if dp[amount] != float('inf') else -1`.
+
 > 📝 **Practice:** [Q59 · dp-coin-change](../dsa_practice_questions_100.md#q59--logical--dp-coin-change)
 
----
+> 📝 **Practice:** [Q5 — Coin Change Min Coins](./practice.md#q5--linear-dp--coin-change-minimum-coins) · [Q8 — Count Ways](./practice.md#q8--linear-dp--coin-change-number-of-ways)
 
-# 📐 8️⃣ Time and Space Complexity
+> [↑ Back to Top](#top)
+
+<a id="8-time-and-space-complexity"></a>
+
+# 8. Time and Space Complexity
 
 DP often reduces:
 
@@ -283,9 +555,11 @@ O(nW)
 
 DP trades space for speed.
 
----
+> [↑ Back to Top](#top)
 
-# ⚖️ 9️⃣ DP vs Greedy
+<a id="9-dp-vs-greedy"></a>
+
+# 9. DP vs Greedy
 
 Greedy:
 Makes local decision.
@@ -296,9 +570,11 @@ Explores all options but stores results.
 If greedy fails,
 DP usually works.
 
----
+> [↑ Back to Top](#top)
 
-# 🔄 1️⃣0️⃣ DP vs Backtracking
+<a id="10-dp-vs-backtracking"></a>
+
+# 10. DP vs Backtracking
 
 Backtracking:
 Explores all combinations.
@@ -308,60 +584,117 @@ Avoids recomputing overlapping subproblems.
 
 DP is optimized backtracking.
 
----
+> [↑ Back to Top](#top)
 
-# 🧠 1️⃣1️⃣ Common DP Patterns
+<a id="11-common-dp-patterns"></a>
 
----
+# 11. Common DP Patterns
 
-## 🔹 1D DP
+## 1D DP
 
 Example:
 Climbing stairs.
 
----
+## Visual: 1D DP Dependency Arrows
 
-## 🔹 2D DP
+Each cell depends on the previous two cells:
+
+```
+  dp[i] = dp[i-1] + dp[i-2]
+
+  Index:   0    1    2    3    4    5    6    7
+  dp:     [1,   1,   2,   3,   5,   8,  13,  21]
+
+  Dependency arrows:
+          ┌────┐ ┌────┐
+          │    ↓ ↓    │
+  [1,  1,  2,  3,  5,  8,  13,  21]
+               ↑   ↑
+               └───┤
+                   │
+          [1,  1,  2,  3,  ...]
+                   ←  ←
+          (dp[i] comes from dp[i-1] and dp[i-2])
+
+  Space optimization: you only need the last 2 values!
+
+  BEFORE (space O(n)):  [1, 1, 2, 3, 5, 8, 13, 21]
+  AFTER  (space O(1)):  just keep prev=8, curr=13 → next=21
+```
+
+## 2D DP
 
 Example:
 LCS, knapsack.
 
----
+## DP on Strings
 
-## 🔹 DP on Strings
+Edit distance
+Palindrome partitioning
 
-Edit distance  
-Palindrome partitioning  
+> 📝 **Practice:** [Q16 — Edit Distance](./practice.md#q16--string-dp--edit-distance) · [Q25 — Palindrome Min Cuts](./practice.md#q25--string-dp--palindrome-minimum-cuts) · [Q29 — Word Break](./practice.md#q29--advanced--word-break)
 
----
+## DP on Grid
 
-## 🔹 DP on Grid
+Unique paths
+Minimum path sum
 
-Unique paths  
-Minimum path sum  
+## Visual: Grid DP — "Where Can I Come From?" Arrows
 
----
+Problem: Count unique paths from top-left to bottom-right.
+(Can only move right or down.)
 
-## 🔹 DP on Trees
+```
+  3×3 grid:
 
-Tree diameter  
-House robber III  
+  ┌─────┬─────┬─────┐
+  │  1  │  1  │  1  │   ← top row: only 1 way (always from left)
+  ├─────┼─────┼─────┤
+  │  1  │  2  │  3  │
+  ├─────┼─────┼─────┤
+  │  1  │  3  │  6  │
+  └─────┴─────┴─────┘
 
----
+  Filling dp[1][1]=2:         Filling dp[2][2]=6:
 
-## 🔹 DP on Subsequences
+    ←  from (1,0)               ←  from (2,1) = 3
+    ↑  from (0,1)               ↑  from (1,2) = 3
+                                         total = 6
+    [1] → [1] → [1]
+     ↓  ↘  ↓  ↘  ↓
+    [1] → [2] → [3]
+     ↓  ↘  ↓  ↘  ↓
+    [1] → [3] → [6]
 
-Subset sum  
-Partition equal subset  
+  Every cell = sum of cell above + cell to the left.
+  Arrows point FROM sources TO destination.
+  "To reach me, I could have come from above or from the left."
+```
 
----
+**Common mistake — missing boundary checks in grid DP:** Writing `dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])` without guards causes `dp[-1][j]` to silently wrap to the last row when `i=0`. Always check `if i > 0` and `if j > 0` before reading neighbors, or initialize with `float('inf')` and handle the top-left corner separately.
 
----
+> 📝 **Practice:** [Q11 — Unique Paths](./practice.md#q11--2d-dp--unique-paths-in-a-grid) · [Q12 — Minimum Path Sum](./practice.md#q12--2d-dp--minimum-path-sum)
 
-## DP Dimensions — Choosing the Right State
+## DP on Trees
+
+Tree diameter
+House robber III
+
+## DP on Subsequences
+
+Subset sum
+Partition equal subset
+
+> [↑ Back to Top](#top)
+
+<a id="12-dp-dimensions"></a>
+
+# 12. DP Dimensions — Choosing the Right State
 
 One of the hardest parts of DP is deciding how many dimensions your dp array needs.
 The rule: **one dimension per independently varying parameter**.
+
+> 📝 **Practice:** [Q9 — 2D Knapsack](./practice.md#q9--knapsack--01-knapsack-2d) · [Q10 — 1D Optimized](./practice.md#q10--knapsack--01-knapsack-space-optimized) · [Q11 — Grid DP](./practice.md#q11--2d-dp--unique-paths-in-a-grid)
 
 ```
 STATE DIMENSION GUIDE
@@ -417,6 +750,57 @@ for i in range(n):
         dp[w] = max(dp[w], values[i] + dp[w - weights[i]])
 ```
 
+**Common mistake — wrong loop order in knapsack space optimization:** Iterating the inner loop left-to-right in the 1D knapsack silently converts 0/1 knapsack into unbounded knapsack — each item can be selected multiple times. Memory aid: 0/1 = right to left. Unbounded = left to right.
+
+## Visual: Space Optimization — 2D Table to 1D Rolling Array
+
+For problems where dp[i][j] only depends on row i-1, compress to 1D:
+
+Before: 2D table (O(m×n) space):
+
+```
+  Unique paths, 3×4 grid:
+
+  Row 0: [1, 1, 1, 1]   ← base case
+  Row 1: [1, 2, 3, 4]   ← computed from row 0
+  Row 2: [1, 3, 6, 10]  ← computed from row 1
+
+  We keep all rows in memory, but we only ever
+  look at the PREVIOUS row when computing the current row.
+  Rows 0 and 1 are DEAD after row 2 is computed.
+```
+
+After: 1D rolling array (O(n) space):
+
+```
+  Use a single array, update it IN PLACE left-to-right:
+
+  Start:   dp = [1, 1, 1, 1]  ← row 0
+
+  Pass 1 (computing row 1):
+    dp[0] stays 1  (leftmost column always 1)
+    dp[1] = dp[1] + dp[0] = 1 + 1 = 2
+    dp[2] = dp[2] + dp[1] = 1 + 2 = 3
+    dp[3] = dp[3] + dp[2] = 1 + 3 = 4
+  dp = [1, 2, 3, 4]  ← now represents row 1
+
+  Pass 2 (computing row 2):
+    dp[0] stays 1
+    dp[1] = dp[1] + dp[0] = 2 + 1 = 3
+    dp[2] = dp[2] + dp[1] = 3 + 3 = 6
+    dp[3] = dp[3] + dp[2] = 4 + 6 = 10
+  dp = [1, 3, 6, 10]  ← answer is dp[-1] = 10
+
+  BEFORE optimization:  O(m × n) space
+  AFTER  optimization:  O(n) space    (just one row)
+
+  When can you do this?
+  Only when dp[i][j] depends ONLY on dp[i-1][...] and dp[i][j-1].
+  Does NOT work when you need values from 2+ rows back.
+```
+
+**Common mistake — rolling array overwrites needed values:** When the transition needs the diagonal value `dp[i-1][j-1]`, updating in place overwrites it before you read it. Save `prev = dp[j]` before the update and use `prev` wherever you need the old diagonal. This is required in edit distance space optimization but not in unique paths.
+
 **State Transition Diagram:**
 
 Think of the DP table as a directed graph where each cell depends on others:
@@ -430,22 +814,11 @@ Fill order: row by row, left to right
 → always fill cells before they are needed
 ```
 
----
+> [↑ Back to Top](#top)
 
-# ⚠️ 1️⃣2️⃣ Common Mistakes
+<a id="13-mental-model"></a>
 
-- Not defining state properly
-- Incorrect transition formula
-- Wrong base case
-- Index errors
-- Forgetting initialization
-- Mixing memoization and tabulation incorrectly
-
-DP requires careful state definition.
-
----
-
-# 🧠 1️⃣3️⃣ Mental Model
+# 13. Mental Model
 
 Think of DP as:
 
@@ -455,9 +828,47 @@ Small blocks combine to form bigger blocks.
 
 Each block stored for reuse.
 
----
+## Visual: Mental Model Summary
 
-# 🏗 1️⃣4️⃣ Step-by-Step DP Thinking Strategy
+```
+┌────────────────────────────────────────────────────────────────┐
+│  DYNAMIC PROGRAMMING — MENTAL MODELS                           │
+├─────────────────────┬──────────────────────────────────────────┤
+│  Recognition        │  Look for...                             │
+├─────────────────────┼──────────────────────────────────────────┤
+│  "Count ways"       │  Probably DP (add subproblem results)    │
+│  "Max/min value"    │  Probably DP (optimize subproblems)      │
+│  Overlapping        │  Memoize! Don't recompute                │
+│  subproblems        │                                          │
+│  Optimal            │  DP works if optimal solution is         │
+│  substructure       │  composed of optimal sub-solutions       │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Problem Type       │  DP Pattern                              │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Fibonacci/stairs   │  1D, dp[i] = f(dp[i-1], dp[i-2])        │
+│  Grid paths         │  2D, dp[i][j] = dp[i-1][j] + dp[i][j-1] │
+│  Two strings        │  2D grid (LCS, edit distance)            │
+│  Subset/knapsack    │  2D: items × capacity                    │
+│  Subsequence        │  1D or 2D depending on constraints       │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Optimization       │  How to apply                            │
+├─────────────────────┼──────────────────────────────────────────┤
+│  Memo → table       │  Eliminate recursion overhead            │
+│  2D → 1D array      │  Only if row i depends only on row i-1   │
+│  2 variables        │  Only if dp[i] depends on dp[i-1] only   │
+└─────────────────────┴─────────────────────────────────────────┘
+
+  The 3-step DP framework:
+  1. DEFINE: What does dp[i] or dp[i][j] represent?
+  2. TRANSITION: How does dp[i] relate to smaller subproblems?
+  3. BASE CASE: What are the smallest inputs with known answers?
+```
+
+> [↑ Back to Top](#top)
+
+<a id="14-step-by-step-dp-thinking-strategy"></a>
+
+# 14. Step-by-Step DP Thinking Strategy
 
 When solving DP problem:
 
@@ -470,9 +881,29 @@ When solving DP problem:
 
 Never start coding before defining state.
 
----
+**Common mistake — wrong state definition leads to wrong code:** A vague `dp[i]` definition means the base case initialization becomes guesswork. Write the state definition as one precise English sentence before writing any code. For LIS: "dp[i] = length of the longest increasing subsequence that ends at index i." That sentence forces `dp = [1] * n` (not 0), because every element alone is a length-1 subsequence.
 
-# 🌍 1️⃣5️⃣ Real-World Applications
+**Common mistake — transition accesses out-of-bounds index:** When a transition uses `dp[i-2]`, `dp[i-2]` is invalid at `i=1` and in Python silently accesses `dp[-1]` (the last element), corrupting the answer. Either handle the first `k-1` iterations as explicit base cases or guard with `if i >= k else 0`.
+
+**Common mistake — circular state dependency:** If your transition reads `dp[i]` while computing `dp[i]`, the recurrence is circular — there is no valid fill order. Redefine the state so it strictly depends on previously computed states (smaller i for 1D, previous row for 2D).
+
+**Pre-submission checklist:**
+
+- Can I write the state definition in one precise English sentence? If not, the state is wrong.
+- Are all base cases initialized correctly? Verify by hand for n=0, n=1, and a 1-cell grid.
+- Does the transition access any index that could be negative or out of bounds?
+- For knapsack: does the inner loop go right-to-left (0/1) or left-to-right (unbounded)?
+- If using a rolling array: do I cache the old `dp[j]` value before overwriting it?
+- Is the "no solution" case handled? Return -1 when `dp[n]` is still at its sentinel value.
+- Are all states computed in the correct topological order?
+
+> 📝 **Practice:** [Q7 — 6-Step Strategy Applied](./practice.md#q7--dp-thinking--how-to-define-state) · [Q30 — Design from Scratch](./practice.md#q30--advanced--design-a-dp-solution-from-scratch)
+
+> [↑ Back to Top](#top)
+
+<a id="15-real-world-applications"></a>
+
+# 15. Real-World Applications
 
 - Stock market prediction
 - Route optimization
@@ -483,9 +914,11 @@ Never start coding before defining state.
 
 DP widely used in advanced systems.
 
----
+> [↑ Back to Top](#top)
 
-# 📌 1️⃣6️⃣ Final Understanding
+<a id="16-final-understanding"></a>
+
+# 16. Final Understanding
 
 Dynamic Programming is:
 
@@ -506,11 +939,11 @@ Mastering DP prepares you for:
 DP is not about memorizing formulas.
 It is about learning to model problems correctly.
 
----
-
-## ✏️ DP on Strings — Edit Distance
+## DP on Strings — Edit Distance
 
 > Autocorrect works by measuring how "far apart" two words are. The edit distance (Levenshtein distance) counts the minimum operations to transform one string into another — a classic 2D DP problem.
+
+> 📝 **Practice:** [Q16 — Edit Distance](./practice.md#q16--string-dp--edit-distance) · [Q28 — Space-Optimized O(n)](./practice.md#q28--2d-dp--edit-distance-space-optimized-on)
 
 **Edit distance** counts the minimum number of single-character operations (insert, delete, replace) to transform string `s` into string `t`.
 
@@ -541,7 +974,38 @@ def edit_distance(s, t):
 edit_distance("kitten", "sitting")  # 3
 ```
 
-**Visualizing the DP table:**
+## Visual: Edit Distance Table
+
+```
+  word1 = "horse"  (rows)
+  word2 = "ros"    (cols)
+
+  dp[i][j] = edit distance between word1[0..i-1] and word2[0..j-1]
+
+  Rule:
+    if word1[i-1] == word2[j-1]:  dp[i][j] = dp[i-1][j-1]  (no op needed)
+    else: dp[i][j] = 1 + min(
+        dp[i-1][j],    ← DELETE from word1  (go up)
+        dp[i][j-1],    ← INSERT into word1  (go left)
+        dp[i-1][j-1]   ← REPLACE in word1   (go diagonal)
+    )
+
+         ""   r    o    s
+   ""  [ 0,   1,   2,   3 ]   ← cost to build word2 from empty string
+   h   [ 1,   1,   2,   3 ]   h≠r: 1+min(0,1,1)=1
+   o   [ 2,   2,   1,   2 ]   o==o: dp[1][1]=1
+   r   [ 3,   2,   2,   2 ]   r==r: dp[2][1]=2
+   s   [ 4,   3,   3,   2 ]   s==s: dp[3][2]=2
+   e   [ 5,   4,   4,   3 ]   e≠s: 1+min(2,3,2)=3
+
+  Answer: dp[5][3] = 3
+  Operations:
+    horse → rorse  (replace h with r)
+    rorse → rose   (delete r)
+    rose  → ros    (delete e)
+```
+
+**Visualizing the DP table for "kitten" → "sitting":**
 ```
     ""  s  i  t  t  i  n  g
 ""  [0, 1, 2, 3, 4, 5, 6, 7]
@@ -579,11 +1043,11 @@ def edit_distance_optimized(s, t):
 
 **Complexity:** O(m×n) time, O(m×n) space (or O(n) with optimization)
 
----
-
-## 🔲 Bitmask DP — Tracking Subsets as States
+## Bitmask DP — Tracking Subsets as States
 
 > Imagine assigning employees to tasks. Each assignment changes which employees are "available." A bitmask tracks exactly which subset is available — and DP finds the optimal assignment across all possible subsets.
+
+> 📝 **Practice:** [Q26 — Bitmask Task Assignment](./practice.md#q26--bitmask-dp--minimum-cost-task-assignment)
 
 **Bitmask DP** uses an integer whose bits represent whether each item in a small set is "included." It enables DP over subsets, turning problems with exponential naive complexity into O(2^n × n).
 
@@ -659,27 +1123,14 @@ def assignment(cost):
 
 **Complexity:** O(2^n × n) time, O(2^n × n) space — only feasible for n ≤ 20
 
----
-
-# 🔁 Navigation
-
-Previous:  
-[20_backtracking/interview.md](/02_DSA_Mastery/20_backtracking/interview.md)
-
-Next:  
-[21_dynamic_programming/interview.md](/02_DSA_Mastery/21_dynamic_programming/interview.md)  
-[22_bit_manipulation/theory.md](/02_DSA_Mastery/22_bit_manipulation/theory.md)
-
----
-
-## 📝 Practice Questions
-
 > 📝 **Practice:** [Q54 · dp-overlapping-subproblems](../dsa_practice_questions_100.md#q54--thinking--dp-overlapping-subproblems)
 
----
+> [↑ Back to Top](#top)
+
+## 📂 Navigation
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Backtracking — Interview Q&A](../20_backtracking/interview.md) &nbsp;|&nbsp; **Next:** [Visual Explanation →](./visual_explanation.md)
+**Prev:** [← Backtracking — Interview Q&A](../20_backtracking/interview.md) &nbsp;|&nbsp; **Next:** [Interview Q&A →](./interview.md)
 
-**Related Topics:** [Visual Explanation](./visual_explanation.md) · [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Common Mistakes](./common_mistakes.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Patterns](./patterns.md) · [Real World Usage](./real_world_usage.md) · [Interview Q&A](./interview.md)

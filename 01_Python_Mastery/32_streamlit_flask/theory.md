@@ -1,6 +1,5 @@
+<a id="top"></a>
 # 🖥️ Streamlit and Flask — Building AI Apps
-
----
 
 You trained a model that predicts house prices. It works beautifully in your Jupyter notebook. Your manager says: "Great, can other people use it?"
 
@@ -12,7 +11,15 @@ That's what Streamlit and Flask do.
 
 **Flask** is a lightweight web framework for building REST APIs and web applications. It gives you full control — ideal for production APIs, microservices, and backend services.
 
----
+## 📖 Table of Contents
+
+- [1. Streamlit — ML App in Minutes](#streamlit-ml-app)
+- [2. Streamlit Key Widgets](#streamlit-key-widgets)
+- [3. Streamlit Session State and Caching](#streamlit-session-state-and-caching)
+- [4. Flask — REST API](#flask-rest-api)
+- [5. Flask with Environment Config](#flask-with-environment-config)
+  - [Streamlit vs Flask Decision Guide](#streamlit-vs-flask-decision-guide)
+- [Common Mistakes to Avoid ⚠️](#common-mistakes-to-avoid)
 
 ## 📌 Learning Priority
 
@@ -28,9 +35,8 @@ Streamlit `st.columns` / `st.tabs` · Multi-page Streamlit apps · Flask bluepri
 **Reference** — Know it exists, look up when needed:
 FastAPI (better Flask alternative for modern APIs) · Gradio (alternative to Streamlit for ML demos) · Streamlit `st.experimental_fragment`
 
----
-
-## 1️⃣ Streamlit — ML App in Minutes
+<a id="streamlit-ml-app"></a>
+## 1. Streamlit — ML App in Minutes
 
 ```python
 # app.py — run with: streamlit run app.py
@@ -75,9 +81,10 @@ with col2:
 
 > 📝 **Practice:** [Q1–Q4 — Streamlit basics](./practice.md#q1--streamlit-basics--stwrite-and-stmarkdown-)
 
----
+> [↑ Back to Top](#top)
 
-## 2️⃣ Streamlit Key Widgets
+<a id="streamlit-key-widgets"></a>
+## 2. Streamlit Key Widgets
 
 ```python
 import streamlit as st
@@ -133,9 +140,10 @@ for i in range(100):
 
 > 📝 **Practice:** [Q5–Q8 — Streamlit widgets](./practice.md#q5--widgets--stslider-and-stnumber_input-)
 
----
+> [↑ Back to Top](#top)
 
-## 3️⃣ Streamlit Session State and Caching
+<a id="streamlit-session-state-and-caching"></a>
+## 3. Streamlit Session State and Caching
 
 ```python
 import streamlit as st
@@ -173,9 +181,10 @@ model = load_model()                     # cached after first load
 
 > 📝 **Practice:** [Q9–Q12 — Session state + caching](./practice.md#q9--session-state--counter-across-reruns-)
 
----
+> [↑ Back to Top](#top)
 
-## 4️⃣ Flask — REST API
+<a id="flask-rest-api"></a>
+## 4. Flask — REST API
 
 ```python
 # api.py — run with: python api.py (or flask run)
@@ -237,9 +246,10 @@ print(response.json())   # {"prediction": 800000, "currency": "USD", ...}
 
 > 📝 **Practice:** [Q13–Q17 — Flask REST API](./practice.md#q13--flask-rest-api--app-factory-and-health-route-)
 
----
+> [↑ Back to Top](#top)
 
-## 5️⃣ Flask with Environment Config
+<a id="flask-with-environment-config"></a>
+## 5. Flask with Environment Config
 
 ```python
 import os
@@ -262,8 +272,9 @@ def secure():
 
 > 📝 **Practice:** [Q18–Q21 — Flask config](./practice.md#q18--flask-config--osenviron-secrets-)
 
----
+> [↑ Back to Top](#top)
 
+<a id="streamlit-vs-flask-decision-guide"></a>
 ## Streamlit vs Flask Decision Guide
 
 ```
@@ -286,8 +297,9 @@ Use FastAPI (instead of Flask) when:
     async support, type validation (Pydantic)
 ```
 
----
+> [↑ Back to Top](#top)
 
+<a id="common-mistakes-to-avoid"></a>
 ## Common Mistakes to Avoid ⚠️
 
 - **Not using `st.cache_data`**: loading a large model on every rerun (triggered by any user interaction) will make your app painfully slow.
@@ -296,8 +308,6 @@ Use FastAPI (instead of Flask) when:
 - **Forgetting CORS in Flask APIs**: if a JavaScript frontend calls your Flask API from a different domain, you need `flask-cors` or the browser will block the requests.
 
 > 📝 **Practice:** [Q22–Q25 — Decision guide + common mistakes](./practice.md#q22--decision-guide--streamlit-vs-flask-)
-
----
 
 ## 🔁 Navigation
 
@@ -310,6 +320,6 @@ Use FastAPI (instead of Flask) when:
 | ⬅️ Prev Module | [../31_file_formats_pdf_xml/theory.md](../31_file_formats_pdf_xml/theory.md) |
 | ➡️ Next Module | [../33_regular_expressions/theory.md](../33_regular_expressions/theory.md) |
 
----
-
 **[🏠 Back to README](../README.md)**
+
+> [↑ Back to Top](#top)

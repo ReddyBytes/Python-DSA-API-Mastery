@@ -1,11 +1,46 @@
-# ⚡ Async Python for AI Engineering — Theory
+<a id="top"></a>
+# ⚡ Async Python for AI Engineering
 
-> *"The difference between a demo AI app and a production AI app is often not the model.*
-> *It's whether the Python code can handle 100 users asking questions at the same time."*
+## 📖 Table of Contents
+
+- [Learning Priority](#-learning-priority)
+- [1. Quick Recap — async/await in 60 Seconds](#1-quick-recap--asyncawait-in-60-seconds)
+- [2. Why AI Apps Specifically Need Async](#2-why-ai-apps-specifically-need-async)
+- [3. Streaming LLM Responses — Async Generators](#3-streaming-llm-responses--async-generators)
+- [4. Making Parallel LLM Calls — asyncio.gather and asyncio.create_task](#4-making-parallel-llm-calls--asynciogather-and-asynciocreate_task)
+- [5. Parallel Embeddings — Batch Processing with gather + Semaphore](#5-parallel-embeddings--batch-processing-with-gather--semaphore)
+- [6. Semaphores for Rate Limiting](#6-semaphores-for-rate-limiting)
+- [7. Async Context Managers — async with](#7-async-context-managers--async-with)
+- [8. Async Queues — Producer-Consumer for Document Pipelines](#8-async-queues--producer-consumer-for-document-pipelines)
+- [9. Error Handling in Async](#9-error-handling-in-async)
+- [10. Running Async from Sync Code](#10-running-async-from-sync-code)
+- [11. Async in FastAPI for AI Endpoints](#11-async-in-fastapi-for-ai-endpoints)
+- [12. Real Patterns: Production Async AI](#12-real-patterns-production-async-ai)
+- [Summary](#-summary)
+- [Navigation](#-navigation)
+
+---
+
+## 📌 Learning Priority
+
+**Must Learn** — Core concept, daily use, interview essential:
+`async def` / `await` · `asyncio.gather` · `asyncio.create_task` · Event loop basics · When to use async vs threads
+
+**Should Learn** — Important for real projects, comes up regularly:
+`asyncio.Semaphore` for rate limiting · `asyncio.Queue` · Task cancellation (`task.cancel()`) · `async with` / `async for` · `asyncio.timeout()`
+
+**Good to Know** — Useful in specific situations:
+`asyncio.TaskGroup` (Python 3.11+) · `asyncio.shield()` · Async generators · `aiofiles` · Debugging async code
+
+**Reference** — Know it exists, look up when needed:
+Event loop policies · `asyncio.Barrier` · Multiple event loops · Greenlets vs asyncio
 
 ---
 
 ## 🎬 The Problem: 100 Users, 3 Seconds Each
+
+> *"The difference between a demo AI app and a production AI app is often not the model.*
+> *It's whether the Python code can handle 100 users asking questions at the same time."*
 
 Your AI chatbot needs to handle 100 users at the same time. Each LLM call takes 3 seconds.
 
@@ -54,23 +89,8 @@ This module covers both: concurrency patterns for scale, and streaming patterns 
 
 ---
 
-## 📌 Learning Priority
-
-**Must Learn** — Core concept, daily use, interview essential:
-`async def` / `await` · `asyncio.gather` · `asyncio.create_task` · Event loop basics · When to use async vs threads
-
-**Should Learn** — Important for real projects, comes up regularly:
-`asyncio.Semaphore` for rate limiting · `asyncio.Queue` · Task cancellation (`task.cancel()`) · `async with` / `async for` · `asyncio.timeout()`
-
-**Good to Know** — Useful in specific situations:
-`asyncio.TaskGroup` (Python 3.11+) · `asyncio.shield()` · Async generators · `aiofiles` · Debugging async code
-
-**Reference** — Know it exists, look up when needed:
-Event loop policies · `asyncio.Barrier` · Multiple event loops · Greenlets vs asyncio
-
----
-
-## 1️⃣ Quick Recap — async/await in 60 Seconds
+<a id="1-quick-recap--asyncawait-in-60-seconds"></a>
+# 1. Quick Recap — async/await in 60 Seconds
 
 You covered asyncio fundamentals in module 13. Here is the core you need to carry into this module:
 
@@ -101,15 +121,18 @@ async def main():
 
 LLM API calls are pure I/O (you send an HTTP request and wait for the model server to respond). That is exactly where async shines.
 
-> 📝 **Practice:** [Q1–Q2 — async/await basics](./practice.md#q1)
+📝 **Practice:** [Q1–Q2 — async/await basics](./practice.md#q1)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 2️⃣ Why AI Apps Specifically Need Async
+<a id="2-why-ai-apps-specifically-need-async"></a>
+# 2. Why AI Apps Specifically Need Async
 
 Not every Python app needs async. AI apps almost always do. Here is why.
 
-### LLM API calls are I/O-bound
+## LLM API Calls Are I/O-Bound
 
 When your code calls the OpenAI API, your Python process is not doing any computation. It sends an HTTP request and **waits**. The LLM is running on a remote server. Your CPU is idle.
 
@@ -128,17 +151,17 @@ ASYNC (concurrent):
   Wall time: ~3s regardless of N users
 ```
 
-### Streaming responses
+## Streaming Responses
 
 LLMs generate tokens one by one. The API can stream them as they are produced. This means your user sees the first word in under 200ms instead of waiting 3 seconds for the full response.
 
 Streaming requires async generators — covered in section 3.
 
-### Parallel embeddings
+## Parallel Embeddings
 
 To embed 10,000 documents for a vector database, you call the embedding API 10,000 times. With sync code: ~10,000 × 0.5s = 83 minutes. With async: send all requests concurrently, complete in a few minutes. But there are rate limits — covered in section 5.
 
-### Why not just use threads?
+## Why Not Just Use Threads?
 
 You could. `ThreadPoolExecutor` with 100 threads would work. But:
 
@@ -158,15 +181,18 @@ ThreadPoolExecutor:
 
 For AI services, asyncio is the standard choice.
 
-> 📝 **Practice:** [Q3–Q4 — why AI needs async](./practice.md#q3)
+📝 **Practice:** [Q3–Q4 — why AI needs async](./practice.md#q3)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 3️⃣ Streaming LLM Responses — [Async Generators](../11_generators_iterators/theory.md#-chapter-12-async-generators-python-36)
+<a id="3-streaming-llm-responses--async-generators"></a>
+# 3. Streaming LLM Responses — Async Generators
 
 This is the feature that makes ChatGPT feel responsive. The model generates tokens one at a time, and instead of buffering them all, the API sends each token immediately.
 
-### What is an async generator?
+## What Is an Async Generator?
 
 A regular [generator](../11_generators_iterators/theory.md#-chapter-3-generator-functions--yield) uses `yield` to produce values lazily:
 
@@ -195,7 +221,7 @@ async def main():
         print(token, end=" ", flush=True)   # prints: Hello how are you (with pauses)
 ```
 
-### Real streaming pattern with the OpenAI SDK
+## Real Streaming Pattern with the OpenAI SDK
 
 ```python
 import asyncio
@@ -223,7 +249,7 @@ async def main():
     print()   # newline at end
 ```
 
-### Why `async for` instead of regular `for`?
+## Why `async for` Instead of Regular `for`?
 
 Regular `for` calls `__next__()` synchronously. `async for` calls `__anext__()` which can `await` — meaning the event loop can run other tasks between each token arriving.
 
@@ -237,7 +263,7 @@ async for token in some_async_generator():
     display(token)
 ```
 
-### Collecting the full stream into a string
+## Collecting the Full Stream into a String
 
 Sometimes you need the complete response but still want to yield tokens for display:
 
@@ -251,13 +277,16 @@ async def stream_and_collect(prompt: str):
     return "".join(full_response)
 ```
 
-> 📝 **Practice:** [Q5–Q7 — streaming LLM responses](./practice.md#q5)
+📝 **Practice:** [Q5–Q7 — streaming LLM responses](./practice.md#q5)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 4️⃣ Making Parallel LLM Calls — asyncio.gather and asyncio.create_task
+<a id="4-making-parallel-llm-calls--asynciogather-and-asynciocreate_task"></a>
+# 4. Making Parallel LLM Calls — asyncio.gather and asyncio.create_task
 
-### asyncio.gather — run N calls, wait for all
+## asyncio.gather — Run N Calls, Wait for All
 
 The most common pattern. You have a list of tasks and want all results before continuing:
 
@@ -296,7 +325,7 @@ async def parallel_calls_dynamic(prompts: list[str]) -> list[str]:
     return await asyncio.gather(*tasks)   # unpack the list with *
 ```
 
-### asyncio.create_task — fire and continue
+## asyncio.create_task — Fire and Continue
 
 `gather` waits for everything before moving on. `create_task` lets you start a coroutine and keep doing other work while it runs in the background:
 
@@ -315,7 +344,7 @@ async def main():
     print(result)
 ```
 
-### gather vs create_task — when to use which
+## gather vs create_task — When to Use Which
 
 ```
 asyncio.gather(*tasks):
@@ -335,11 +364,14 @@ Timing difference:
   result = await asyncio.gather(coro())  ← scheduled AND collected in one step
 ```
 
-> 📝 **Practice:** [Q8–Q10 — parallel LLM calls](./practice.md#q8)
+📝 **Practice:** [Q8–Q10 — parallel LLM calls](./practice.md#q8)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 5️⃣ Parallel Embeddings — Batch Processing with gather + Semaphore
+<a id="5-parallel-embeddings--batch-processing-with-gather--semaphore"></a>
+# 5. Parallel Embeddings — Batch Processing with gather + Semaphore
 
 Embedding 10,000 documents for a RAG (Retrieval-Augmented Generation) system is a common task. Here is the naive async approach and why it fails:
 
@@ -380,7 +412,7 @@ async def main():
     print(f"Embedded {len(embeddings)} documents")
 ```
 
-### Processing in batches with progress tracking
+## Processing in Batches with Progress Tracking
 
 ```python
 import asyncio
@@ -412,11 +444,14 @@ async def embed_in_batches(
     return all_embeddings
 ```
 
-> 📝 **Practice:** [Q11–Q13 — parallel embeddings](./practice.md#q11)
+📝 **Practice:** [Q11–Q13 — parallel embeddings](./practice.md#q11)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 6️⃣ Semaphores for Rate Limiting
+<a id="6-semaphores-for-rate-limiting"></a>
+# 6. Semaphores for Rate Limiting
 
 `asyncio.Semaphore` is the correct tool for controlling how many concurrent operations run at once. Think of it as a bouncer at a club: only N people inside at a time.
 
@@ -440,7 +475,7 @@ async def good_parallel(items, limit=10):
     return await asyncio.gather(*tasks)
 ```
 
-### The pattern in detail
+## The Pattern in Detail
 
 ```python
 semaphore = asyncio.Semaphore(10)   # internal counter starts at 10
@@ -457,7 +492,7 @@ async with semaphore:
 # Adjust based on your actual tier and observed 429 errors
 ```
 
-### Semaphore with retry on rate limit errors
+## Semaphore with Retry on Rate Limit Errors
 
 ```python
 import asyncio
@@ -480,11 +515,14 @@ async def call_with_retry(
                 await asyncio.sleep(wait)
 ```
 
-> 📝 **Practice:** [Q14–Q16 — Semaphore rate limiting](./practice.md#q14)
+📝 **Practice:** [Q14–Q16 — Semaphore rate limiting](./practice.md#q14)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 7️⃣ Async Context Managers — async with
+<a id="7-async-context-managers--async-with"></a>
+# 7. Async Context Managers — async with
 
 You have used `with` for regular context managers (files, locks). Async context managers add `await` to the enter and exit steps — essential for async HTTP clients.
 
@@ -500,7 +538,7 @@ async with httpx.AsyncClient() as client:
 # __aenter__ and __aexit__ are awaited — can do async setup/teardown
 ```
 
-### Using httpx.AsyncClient for LLM APIs
+## Using httpx.AsyncClient for LLM APIs
 
 `httpx` is the modern async HTTP client for Python. It is also used internally by the OpenAI SDK.
 
@@ -533,7 +571,7 @@ async def call_many(prompts: list[str], api_key: str) -> list[str]:
         return await asyncio.gather(*tasks)
 ```
 
-### Building your own async context manager
+## Building Your Own Async Context Manager
 
 ```python
 from contextlib import asynccontextmanager
@@ -554,11 +592,14 @@ async def main():
         result = await client.chat.completions.create(...)
 ```
 
-> 📝 **Practice:** [Q17–Q18 — async context managers](./practice.md#q17)
+📝 **Practice:** [Q17–Q18 — async context managers](./practice.md#q17)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 8️⃣ Async Queues — Producer-Consumer for Document Pipelines
+<a id="8-async-queues--producer-consumer-for-document-pipelines"></a>
+# 8. Async Queues — Producer-Consumer for Document Pipelines
 
 When processing a large collection of documents (for indexing, embedding, or summarization), you often have a pipeline: one part reads/downloads documents while another processes them. `asyncio.Queue` is the right tool.
 
@@ -605,7 +646,7 @@ async def process_pipeline(document_paths: list[str]) -> list[dict]:
     return results
 ```
 
-### Multiple consumers for higher throughput
+## Multiple Consumers for Higher Throughput
 
 ```python
 async def process_with_multiple_consumers(paths: list[str], num_consumers: int = 5):
@@ -626,15 +667,18 @@ async def process_with_multiple_consumers(paths: list[str], num_consumers: int =
     return results
 ```
 
-> 📝 **Practice:** [Q19–Q21 — async queues](./practice.md#q19)
+📝 **Practice:** [Q19–Q21 — async queues](./practice.md#q19)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 9️⃣ Error Handling in Async
+<a id="9-error-handling-in-async"></a>
+# 9. Error Handling in Async
 
 Error handling in async code follows the same `try/except` pattern as sync code, but there are a few places where async adds complexity.
 
-### try/except in coroutines
+## try/except in Coroutines
 
 ```python
 async def safe_llm_call(prompt: str) -> str | None:
@@ -651,7 +695,7 @@ async def safe_llm_call(prompt: str) -> str | None:
         raise   # re-raise unexpected errors
 ```
 
-### asyncio.gather with return_exceptions=True
+## asyncio.gather with return_exceptions=True
 
 By default, if any task in `gather` raises an exception, it propagates immediately and cancels the other tasks. This is often not what you want for batch processing:
 
@@ -681,7 +725,7 @@ for i, result in enumerate(results):
         print(f"Task {i} succeeded: {result[:50]}...")
 ```
 
-### Timeouts on individual calls
+## Timeouts on Individual Calls
 
 ```python
 import asyncio
@@ -702,7 +746,7 @@ async def batch_with_timeouts(prompts: list[str]) -> list[str]:
     return await asyncio.gather(*tasks, return_exceptions=True)
 ```
 
-### Task cancellation
+## Task Cancellation
 
 ```python
 async def process_with_deadline(prompts: list[str], total_timeout: float = 60.0):
@@ -715,15 +759,18 @@ async def process_with_deadline(prompts: list[str], total_timeout: float = 60.0)
         return []
 ```
 
-> 📝 **Practice:** [Q22–Q23 — error handling in async](./practice.md#q22)
+📝 **Practice:** [Q22–Q23 — error handling in async](./practice.md#q22)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 🔟 Running Async from Sync Code
+<a id="10-running-async-from-sync-code"></a>
+# 10. Running Async from Sync Code
 
 Sometimes you need to call async code from a sync context — the entry point of a script, a Django view, or a Jupyter notebook.
 
-### asyncio.run — the standard entry point
+## asyncio.run — The Standard Entry Point
 
 ```python
 import asyncio
@@ -744,7 +791,7 @@ async def good():
     await inner()
 ```
 
-### nest_asyncio for Jupyter notebooks
+## nest_asyncio for Jupyter Notebooks
 
 Jupyter runs its own event loop. `asyncio.run()` raises `RuntimeError` inside a notebook cell.
 
@@ -760,7 +807,7 @@ result = asyncio.run(my_async_function())
 result = await my_async_function()
 ```
 
-### Running async from sync code in production
+## Running Async from Sync Code in Production
 
 ```python
 import asyncio
@@ -780,15 +827,18 @@ def call_async_from_sync(coro):
     return future.result(timeout=60)
 ```
 
-> 📝 **Practice:** [Q24–Q25 — running async from sync code](./practice.md#q24)
+📝 **Practice:** [Q24–Q25 — running async from sync code](./practice.md#q24)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 1️⃣1️⃣ Async in FastAPI for AI Endpoints
+<a id="11-async-in-fastapi-for-ai-endpoints"></a>
+# 11. Async in FastAPI for AI Endpoints
 
 FastAPI is built on asyncio. Every request handler can be an `async def` function, and the framework handles concurrency automatically.
 
-### Why FastAPI + async = perfect for LLM APIs
+## Why FastAPI + Async = Perfect for LLM APIs
 
 ```
 FastAPI uses Starlette (ASGI framework) under the hood.
@@ -805,7 +855,7 @@ Compared to Flask/Django (WSGI, sync):
   FastAPI: 100 concurrent LLM calls = 1 process + event loop.
 ```
 
-### Basic async FastAPI endpoint
+## Basic Async FastAPI Endpoint
 
 ```python
 from fastapi import FastAPI
@@ -827,7 +877,7 @@ async def chat_endpoint(prompt: str) -> dict:
 # All 100 LLM calls are in-flight at once → responses in ~3s, not 300s
 ```
 
-### Streaming endpoint with Server-Sent Events
+## Streaming Endpoint with Server-Sent Events
 
 ```python
 from fastapi import FastAPI
@@ -860,7 +910,7 @@ async def stream_endpoint(prompt: str):
 # The client receives tokens as they arrive — the ChatGPT experience
 ```
 
-### Dependency injection for shared async clients
+## Dependency Injection for Shared Async Clients
 
 ```python
 from fastapi import FastAPI, Depends
@@ -883,13 +933,16 @@ async def summarize(text: str, client: AsyncOpenAI = Depends(get_llm_client)):
     return {"summary": response.choices[0].message.content}
 ```
 
-> 📝 **Practice:** [Q26–Q27 — async in FastAPI](./practice.md#q26)
+📝 **Practice:** [Q26–Q27 — async in FastAPI](./practice.md#q26)
+
+[↑ Back to Top](#top)
 
 ---
 
-## 1️⃣2️⃣ Real Patterns: Production Async AI
+<a id="12-real-patterns-production-async-ai"></a>
+# 12. Real Patterns: Production Async AI
 
-### Pattern 1 — Streaming chat endpoint
+## Pattern 1 — Streaming Chat Endpoint
 
 The classic ChatGPT-style pattern. Tokens appear as they are generated.
 
@@ -928,7 +981,7 @@ async def streaming_chat(prompt: str):
     return StreamingResponse(event_stream(), media_type="text/event-stream")
 ```
 
-### Pattern 2 — Parallel document embedding pipeline
+## Pattern 2 — Parallel Document Embedding Pipeline
 
 Process thousands of documents for a vector store with controlled concurrency.
 
@@ -972,7 +1025,7 @@ async def embed_corpus(documents: list[dict], max_concurrent: int = 20) -> list[
     return embedded
 ```
 
-### Pattern 3 — Rate-limited batch processing with retry
+## Pattern 3 — Rate-Limited Batch Processing with Retry
 
 Production-grade batch processing that respects API rate limits.
 
@@ -1012,7 +1065,9 @@ async def batch_process(prompts: list[str], max_concurrent: int = 10) -> list[st
     return [None if isinstance(r, Exception) else r for r in results]
 ```
 
-> 📝 **Practice:** [Q28–Q30 — production async patterns](./practice.md#q28)
+📝 **Practice:** [Q28–Q30 — production async patterns](./practice.md#q28)
+
+[↑ Back to Top](#top)
 
 ---
 
@@ -1020,14 +1075,14 @@ async def batch_process(prompts: list[str], max_concurrent: int = 10) -> list[st
 
 ```
 CORE CONCEPTS:
-  async def / await  — coroutine definition and suspension
-  asyncio.run()      — entry point: creates event loop, runs coroutine
-  asyncio.gather()   — run N coroutines concurrently, wait for all
+  async def / await     — coroutine definition and suspension
+  asyncio.run()         — entry point: creates event loop, runs coroutine
+  asyncio.gather()      — run N coroutines concurrently, wait for all
   asyncio.create_task() — schedule coroutine, collect result later
-  asyncio.Semaphore  — limit N concurrent operations (rate limiting)
-  asyncio.Queue      — producer-consumer between coroutines
-  async for          — iterate over async generators
-  async with         — async context managers (HTTP clients, etc.)
+  asyncio.Semaphore     — limit N concurrent operations (rate limiting)
+  asyncio.Queue         — producer-consumer between coroutines
+  async for             — iterate over async generators
+  async with            — async context managers (HTTP clients, etc.)
 
 AI-SPECIFIC PATTERNS:
   stream=True + async for chunk  → streaming LLM responses
@@ -1038,13 +1093,13 @@ AI-SPECIFIC PATTERNS:
   return_exceptions=True         → resilient batch processing
 
 DECISION GUIDE:
-  Need results from N LLM calls? → asyncio.gather
+  Need results from N LLM calls?    → asyncio.gather
   Need to start work and collect later? → asyncio.create_task
-  Need to respect rate limits? → asyncio.Semaphore
-  Need to stream tokens to user? → async generator + async for
-  Need to process pipeline? → asyncio.Queue
-  Running from Jupyter? → nest_asyncio or direct await
-  Building an API? → FastAPI with async def handlers
+  Need to respect rate limits?      → asyncio.Semaphore
+  Need to stream tokens to user?    → async generator + async for
+  Need to process pipeline?         → asyncio.Queue
+  Running from Jupyter?             → nest_asyncio or direct await
+  Building an API?                  → FastAPI with async def handlers
 ```
 
 ---
@@ -1053,15 +1108,17 @@ DECISION GUIDE:
 
 | | |
 |---|---|
-| 🎯 Interview | [interview.md](./interview.md) |
+| 📖 Theory | [theory.md](./theory.md) |
 | ⚡ Cheatsheet | [cheetsheet.md](./cheetsheet.md) |
+| 🎤 Interview | [interview.md](./interview.md) |
 | 💻 Practice | [practice.md](./practice.md) |
-| ⬅️ Prev | [13 — Concurrency](../13_concurrency/theory.md) |
-
----
+| ⬅️ Prev Module | [← Data Engineering Applications](../21_data_engineering_applications/theory.md) |
+| ➡️ Next Module | [→ Python AI Ecosystem](../25_python_ai_ecosystem/theory.md) |
 
 **[🏠 Back to README](../README.md)**
 
-**Prev:** [← Pandas For Ai — Interview Q&A](../23_pandas_for_ai/interview.md) &nbsp;|&nbsp; **Next:** [Cheat Sheet →](./cheetsheet.md)
+**Prev:** [← Data Engineering Applications](../21_data_engineering_applications/theory.md) &nbsp;|&nbsp; **Next:** [Python AI Ecosystem →](../25_python_ai_ecosystem/theory.md)
 
-**Related Topics:** [Cheat Sheet](./cheetsheet.md) · [Interview Q&A](./interview.md)
+**Related Topics:** [13 — Concurrency](../13_concurrency/theory.md) · [11 — Generators & Iterators](../11_generators_iterators/theory.md) · [Interview Q&A](./interview.md) · [Cheatsheet](./cheetsheet.md)
+
+[↑ Back to Top](#top)

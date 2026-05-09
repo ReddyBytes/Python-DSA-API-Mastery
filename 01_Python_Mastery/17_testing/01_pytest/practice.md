@@ -6,6 +6,27 @@
 
 ---
 
+## Quick Index
+
+| # | Concept | Level |
+|---|---------|-------|
+| [Q1](#q1) | basics — Write and Run a pytest Test Function | 🟢 |
+| [Q2](#q2) | assert — Test Multiple Conditions | 🟢 |
+| [Q3](#q3) | fixture — setUp Equivalent for a Database | 🟡 |
+| [Q4](#q4) | fixture scope — Module-Level Fixture | 🟡 |
+| [Q5](#q5) | parametrize — Test a Function with 5 Different Inputs | 🟡 |
+| [Q6](#q6) | parametrize ids — Readable Test Names | 🟡 |
+| [Q7](#q7) | pytest.raises — Assert an Exception Is Raised | 🟡 |
+| [Q8](#q8) | conftest.py — Share a Fixture Across Test Files | 🟡 |
+| [Q9](#q9) | skip and xfail — Mark Tests Appropriately | 🟡 |
+| [Q10](#q10) | tmp_path — Write and Read Test Files | 🟡 |
+| [Q11](#q11) | monkeypatch — Patch os.environ in a Test | 🟡 |
+| [Q12](#q12) | pytest-asyncio — Test an Async Function | 🟠 |
+| [Q13](#q13) | fixture teardown — yield vs return | 🟠 |
+| [Q14](#q14) | parametrize + fixture — Combined | 🟠 |
+| [Q15](#q15) | Capstone — Test a CSV Parser with Fixtures and parametrize | 🟠 |
+
+<a id="q1"></a>
 ### Q1 🟢 · basics — Write and Run a pytest Test Function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q1](./practice_local.py)
@@ -36,6 +57,7 @@ def test_add():
 
 ---
 
+<a id="q2"></a>
 ### Q2 🟢 · assert — Test Multiple Conditions
 
 > 🛠️ **Solve locally:** [practice_local.py → Q2](./practice_local.py)
@@ -69,6 +91,7 @@ def test_palindrome():
 
 ---
 
+<a id="q3"></a>
 ### Q3 🟡 · fixture — setUp Equivalent for a Database
 
 > 🛠️ **Solve locally:** [practice_local.py → Q3](./practice_local.py)
@@ -111,6 +134,7 @@ def test_insert_user(db):
 
 ---
 
+<a id="q4"></a>
 ### Q4 🟡 · fixture scope — Module-Level Fixture
 
 > 🛠️ **Solve locally:** [practice_local.py → Q4](./practice_local.py)
@@ -160,6 +184,7 @@ def test_email_lowercase(expensive_user):
 
 ---
 
+<a id="q5"></a>
 ### Q5 🟡 · parametrize — Test a Function with 5 Different Inputs
 
 > 🛠️ **Solve locally:** [practice_local.py → Q5](./practice_local.py)
@@ -197,6 +222,7 @@ def test_celsius_to_fahrenheit(celsius, fahrenheit):
 
 ---
 
+<a id="q6"></a>
 ### Q6 🟡 · parametrize ids — Readable Test Names
 
 > 🛠️ **Solve locally:** [practice_local.py → Q6](./practice_local.py)
@@ -229,6 +255,7 @@ def test_celsius_to_fahrenheit_named(celsius, fahrenheit):
 
 ---
 
+<a id="q7"></a>
 ### Q7 🟡 · pytest.raises — Assert an Exception Is Raised
 
 > 🛠️ **Solve locally:** [practice_local.py → Q7](./practice_local.py)
@@ -277,6 +304,7 @@ def test_out_of_range_message():
 
 ---
 
+<a id="q8"></a>
 ### Q8 🟡 · conftest.py — Share a Fixture Across Test Files
 
 > 🛠️ **Solve locally:** [practice_local.py → Q8](./practice_local.py)
@@ -323,6 +351,7 @@ def test_order_count(db):         # same fixture, no import
 
 ---
 
+<a id="q9"></a>
 ### Q9 🟡 · skip and xfail — Mark Tests Appropriately
 
 > 🛠️ **Solve locally:** [practice_local.py → Q9](./practice_local.py)
@@ -361,6 +390,7 @@ def test_unix_config_path():
 
 ---
 
+<a id="q10"></a>
 ### Q10 🟡 · tmp_path — Write and Read Test Files
 
 > 🛠️ **Solve locally:** [practice_local.py → Q10](./practice_local.py)
@@ -409,6 +439,7 @@ def test_empty_config(tmp_path):
 
 ---
 
+<a id="q11"></a>
 ### Q11 🟡 · monkeypatch — Patch os.environ in a Test
 
 > 🛠️ **Solve locally:** [practice_local.py → Q11](./practice_local.py)
@@ -448,6 +479,7 @@ def test_api_key_missing(monkeypatch):
 
 ---
 
+<a id="q12"></a>
 ### Q12 🟠 · pytest-asyncio — Test an Async Function
 
 > 🛠️ **Solve locally:** [practice_local.py → Q12](./practice_local.py)
@@ -486,6 +518,7 @@ async def test_fetch_user():
 
 ---
 
+<a id="q13"></a>
 ### Q13 🟠 · fixture teardown — yield vs return
 
 > 🛠️ **Solve locally:** [practice_local.py → Q13](./practice_local.py)
@@ -531,6 +564,7 @@ def test_append_to_managed_file(managed_file):
 
 ---
 
+<a id="q14"></a>
 ### Q14 🟠 · parametrize + fixture — Combined
 
 > 🛠️ **Solve locally:** [practice_local.py → Q14](./practice_local.py)
@@ -582,6 +616,7 @@ def test_invalid_deposit_raises(empty_account, amount):
 
 ---
 
+<a id="q15"></a>
 ### Q15 🟠 · Capstone — Test a CSV Parser with Fixtures and parametrize
 
 > 🛠️ **Solve locally:** [practice_local.py → Q15](./practice_local.py)
